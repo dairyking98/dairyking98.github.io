@@ -152,7 +152,7 @@
       crossorigin="anonymous"
     >
   {% endif %}
-  {% if page.images.slider %}
+  {% if page.images.slider or page.collection == 'typewriters' and page.gallery_images and page.gallery_images.size > 0 %}
     <!-- Image slider -->
     <link
       defer

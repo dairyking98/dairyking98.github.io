@@ -274,7 +274,7 @@
   {% if page.images.photoswipe %}
     <script defer src="{{ '/assets/js/photoswipe-setup.js' | relative_url }}" type="module"></script>
   {% endif %}
-  {% if page.images.slider %}
+  {% if page.images.slider or page.collection == 'typewriters' and page.gallery_images and page.gallery_images.size > 0 %}
     <script
       defer
       src="{{ site.third_party_libraries.swiper.url.js }}"

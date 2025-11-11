@@ -1,0 +1,57 @@
+{% comment %}
+  Typewriter Gallery Slider
+  
+  Usage:
+  {% include typewriter_gallery.liquid images=page.gallery_images %}
+  
+  Or define images in front matter:
+  gallery_images:
+    - path: assets/img/typewriters/bennett-1.jpg
+      title: Front view
+    - path: assets/img/typewriters/bennett-2.jpg
+      title: Side view
+    - path: assets/img/typewriters/bennett-3.jpg
+      title: Detail view
+  
+  Or use simple string paths:
+  gallery_images:
+    - assets/img/typewriters/bennett-1.jpg
+    - assets/img/typewriters/bennett-2.jpg
+    - assets/img/typewriters/bennett-3.jpg
+{% endcomment %}
+
+{% if include.images and include.images.size > 0 %}
+  <div class="typewriter-gallery mt-4 mb-4">
+    <h2>Gallery</h2>
+    <swiper-container 
+      keyboard="true" 
+      navigation="true" 
+      pagination="true" 
+      pagination-clickable="true" 
+      pagination-dynamic-bullets="true" 
+      rewind="true"
+      class="typewriter-swiper">
+      {% for image in include.images %}
+        <swiper-slide>
+          {% if image.path %}
+            {% assign image_path = image.path %}
+            {% assign image_title = image.title | default: page.title %}
+          {% elsif image contains '/' %}
+            {% assign image_path = image %}
+            {% assign image_title = page.title %}
+          {% else %}
+            {% assign image_path = image %}
+            {% assign image_title = page.title %}
+          {% endif %}
+          <a href="{{ image_path | relative_url }}" target="_blank" class="d-block">
+            {% include figure.liquid loading="lazy" path=image_path title=image_title class="img-fluid rounded z-depth-1" %}
+          </a>
+        </swiper-slide>
+      {% endfor %}
+    </swiper-container>
+    <div class="caption mt-2">
+      Click on any image to view in full size. Use the navigation arrows to browse through all photos.
+    </div>
+  </div>
+{% endif %}
+
