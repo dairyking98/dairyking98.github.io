@@ -51,6 +51,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/teaching/";
           },
+        },{id: "nav-typewriters",
+          title: "typewriters",
+          description: "My typewriter collection and related projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/typewriters/";
+          },
         },{id: "nav-people",
           title: "people",
           description: "members of the lab or group",
@@ -562,6 +569,166 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/al-folio/projects/9_project/";
+            },},{id: "typewriters-bennett-pocket-typewriter",
+          title: 'Bennett Pocket Typewriter',
+          description: "Bennett Pocket Typewriter (1910) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/bennett-pocket-typewriter-14682/";
+            },},{id: "typewriters-bennett-pocket-typewriter",
+          title: 'Bennett Pocket Typewriter',
+          description: "Bennett Pocket Typewriter (1910) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/bennett-pocket-typewriter-18627/";
+            },},{id: "typewriters-blickensderfer-no-5",
+          title: 'Blickensderfer no. 5',
+          description: "Blickensderfer no. 5 (1909) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/blickensderfer-no-5-133130/";
+            },},{id: "typewriters-blickensderfer-no-8",
+          title: 'Blickensderfer no. 8',
+          description: "Blickensderfer no. 8 (1909) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/blickensderfer-no-8-135255/";
+            },},{id: "typewriters-continental-standard",
+          title: 'Continental Standard',
+          description: "Continental Standard (1911) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/continental-standard-26277/";
+            },},{id: "typewriters-corona-3",
+          title: 'Corona 3',
+          description: "Corona 3 (1919) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/corona-3-231258/";
+            },},{id: "typewriters-facit-t1",
+          title: 'Facit T1',
+          description: "Facit T1 (1959) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/facit-t1-t1-123221/";
+            },},{id: "typewriters-facit-tp1",
+          title: 'Facit TP1',
+          description: "Facit TP1 (1961) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/facit-tp1-p287156/";
+            },},{id: "typewriters-facit-tp1",
+          title: 'Facit TP1',
+          description: "Facit TP1 (1965) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/facit-tp1-p411069/";
+            },},{id: "typewriters-hammond-model-1",
+          title: 'Hammond Model 1',
+          description: "Hammond Model 1 (1890) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/hammond-model-1-15058/";
+            },},{id: "typewriters-hammond-multiplex",
+          title: 'Hammond Multiplex',
+          description: "Hammond Multiplex (1913) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/hammond-multiplex-224478/";
+            },},{id: "typewriters-hammond-multiplex",
+          title: 'Hammond Multiplex',
+          description: "Hammond Multiplex (1915) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/hammond-multiplex-cc231416/";
+            },},{id: "typewriters-harris-visible-no-4",
+          title: 'Harris Visible no. 4',
+          description: "Harris Visible no. 4 (1912) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/harris-visible-no-4-19149/";
+            },},{id: "typewriters-ibm-model-04-executive",
+          title: 'IBM Model 04 Executive',
+          description: "IBM Model 04 Executive (1947) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/ibm-model-04-executive-180437/";
+            },},{id: "typewriters-junior-spain-model-58",
+          title: 'Junior (Spain) Model 58',
+          description: "Junior (Spain) Model 58 typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/junior-spain-model-58-c2492/";
+            },},{id: "typewriters-mignon-no-4",
+          title: 'Mignon No. 4',
+          description: "Mignon No. 4 (1925) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/mignon-no-4-352222/";
+            },},{id: "typewriters-olympia-sg1",
+          title: 'Olympia SG1',
+          description: "Olympia SG1 (1959) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/olympia-sg1-7-487163/";
+            },},{id: "typewriters-olympia-sm3",
+          title: 'Olympia SM3',
+          description: "Olympia SM3 (1958) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/olympia-sm3-1205390/";
+            },},{id: "typewriters-olympia-sm4",
+          title: 'Olympia SM4',
+          description: "Olympia SM4 (1954) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/olympia-sm4-490865/";
+            },},{id: "typewriters-postal-no-3",
+          title: 'Postal No. 3',
+          description: "Postal No. 3 (1901) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/postal-no-3-14550/";
+            },},{id: "typewriters-remington-17",
+          title: 'Remington 17',
+          description: "Remington 17 (1946) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/remington-17-j794385/";
+            },},{id: "typewriters-remington-portable-model-1",
+          title: 'Remington Portable Model 1',
+          description: "Remington Portable Model 1 typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/remington-portable-model-1-na13437/";
+            },},{id: "typewriters-royal-de-luxe",
+          title: 'Royal De Luxe',
+          description: "Royal De Luxe (1936) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/royal-de-luxe-a597665/";
+            },},{id: "typewriters-royal-quiet-de-luxe",
+          title: 'Royal Quiet De Luxe',
+          description: "Royal Quiet De Luxe (1939) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/royal-quiet-de-luxe-a-873792/";
+            },},{id: "typewriters-smith-corona-clipper",
+          title: 'Smith Corona Clipper',
+          description: "Smith Corona Clipper (1952) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/smith-corona-clipper-5c218668/";
+            },},{id: "typewriters-sun-no-2-standard",
+          title: 'Sun No. 2 Standard',
+          description: "Sun No. 2 Standard (1901) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/sun-no-2-standard-8278/";
+            },},{id: "typewriters-triumph-de-jur-perfekt",
+          title: 'Triumph De Jur Perfekt',
+          description: "Triumph De Jur Perfekt (1960) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/triumph-de-jur-perfekt-1228617/";
+            },},{id: "typewriters-underwood-4-bank",
+          title: 'Underwood 4 Bank',
+          description: "Underwood 4 Bank (1926) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/underwood-4-bank-4b7867/";
+            },},{id: "typewriters-underwood-champion-typemaster",
+          title: 'Underwood Champion Typemaster',
+          description: "Underwood Champion Typemaster (1938) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/underwood-champion-typemaster-g1130193/";
+            },},{id: "typewriters-underwood-no-3",
+          title: 'Underwood No. 3',
+          description: "Underwood No. 3 (1917) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/underwood-no-3-206803/";
+            },},{id: "typewriters-underwood-quiet-tab",
+          title: 'Underwood Quiet Tab',
+          description: "Underwood Quiet Tab (1953) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/underwood-quiet-tab-aa2730434/";
+            },},{id: "typewriters-woodstock-model-5n",
+          title: 'Woodstock Model 5N',
+          description: "Woodstock Model 5N (1927) typewriter details.",
+          section: "Typewriters",handler: () => {
+              window.location.href = "/al-folio/typewriters/woodstock-model-5n-n168116e/";
             },},{
         id: 'social-email',
         title: 'email',
