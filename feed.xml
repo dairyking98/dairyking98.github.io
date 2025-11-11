@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://dairyking98.github.io/al-folio/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dairyking98.github.io/al-folio/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-11-11T20:41:21+00:00</updated><id>https://dairyking98.github.io/al-folio/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Large Laser Cut Vernier Caliper</title><link href="https://dairyking98.github.io/al-folio/blog/2025/large-laser-cut-vernier-caliper/" rel="alternate" type="text/html" title="Large Laser Cut Vernier Caliper"/><published>2025-11-08T10:00:00+00:00</published><updated>2025-11-08T10:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/large-laser-cut-vernier-caliper</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/large-laser-cut-vernier-caliper/"><![CDATA[<p>I designed and built a large-format vernier caliper as an educational tool that demonstrates precision measurement concepts at a scale that’s easy to see and understand.</p> <h2 id="design-and-cad">Design and CAD</h2> <ul> <li>Created the caliper beam outline and bracket geometry in Fusion 360</li> <li>Exported brackets as STL for printing; caliper outline as DXF for laser cutting</li> </ul> <h2 id="fabrication">Fabrication</h2> <ul> <li>Laser-cut and 3D-printed the vernier parts in 1/4” MDF</li> <li>Printed the brackets in PETG for durability and stiffness</li> <li>Engraved the scales after cutting and completed assembly</li> </ul> <h2 id="scale-generation">Scale Generation</h2> <ul> <li>Wrote a short Python script to generate an inch rule with 0.1” main divisions</li> <li>Generated a matching vernier scale to achieve 0.01” measurement resolution</li> </ul> <h2 id="result">Result</h2> <ul> <li>Fully functional up to 33 inches</li> <li>Measures to 0.01”</li> <li>Highly effective as a hands-on instructional/learning tool</li> </ul>]]></content><author><name></name></author><category term="Personal"/><category term="Projects"/><category term="laser-cutting"/><category term="3d-printing"/><category term="fusion-360"/><category term="python"/><category term="measurement"/><category term="fabrication"/><category term="personal-project"/><category term="education"/><summary type="html"><![CDATA[Oversized, fully functional 33" vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01" resolution.]]></summary></entry><entry><title type="html">Senior Capstone - EV Battery Management and Swapping System</title><link href="https://dairyking98.github.io/al-folio/blog/2025/senior-capstone-ev-battery-management/" rel="alternate" type="text/html" title="Senior Capstone - EV Battery Management and Swapping System"/><published>2025-11-08T10:00:00+00:00</published><updated>2025-11-08T10:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/senior-capstone-ev-battery-management</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/senior-capstone-ev-battery-management/"><![CDATA[<p>This post tracks my ongoing senior capstone project: an electric vehicle battery management and swapping system designed to keep equipment running continuously through rapid battery exchange and robust state-of-health/state-of-charge monitoring.</p> <p>Project hub and documentation are maintained here: <a href="https://github.com/dairyking98/Team-O-Matic-2025">Team-O-Matic-2025 GitHub repository</a>.</p> <h2 id="project-scope">Project Scope</h2> <ul> <li>Develop a modular battery pack architecture with safe, tool-less swapping</li> <li>Implement battery management for real-time SoC/SoH estimation and fault detection</li> <li>Design the mechanical docking/exchange interface and operator workflow</li> <li>Integrate embedded control, power electronics, and safety interlocks</li> <li>Validate performance with prototype testing and iteration</li> </ul> <h2 id="timeline">Timeline</h2> <ul> <li>Fall 2025 → Spring 2026 (active, ongoing)</li> <li>First prototype window: November 6 – December 19, 2025 (per Gantt)</li> <li>Final deliverables due by end of Spring 2026</li> </ul> <h2 id="team-and-roles">Team and Roles</h2> <ul> <li>Ben — Hardware and control; hands-on build and integration</li> <li>Mohammed — SolidWorks and mechanical design</li> <li>Sam — Microcontroller processing and DSP; hands-on build</li> <li>Leonard — Fabrication (plastic/metal/welding), Fusion 360, circuitry and microcontrollers, and AI-assisted workflows</li> </ul> <h2 id="planned-deliverables">Planned Deliverables</h2> <ul> <li>Functional prototype battery pack and swap dock</li> <li>Embedded BMS firmware and data logging</li> <li>Safety and compliance review against relevant standards</li> <li>Bill of materials, budget, and manufacturability notes</li> <li>Demo showing continuous operation via battery swaps</li> </ul> <h2 id="status-as-of-nov-2025">Status (as of Nov 2025)</h2> <ul> <li>Repository set up with scope, standards, and planning artifacts (charter, WBS, Gantt)</li> <li>Early hardware and interface concepts under review; prototyping plans in progress</li> <li>Next: finalize requirements for first prototype, order long-lead components, and begin mechanical/firmware bring-up</li> </ul> <p>I’ll continue to update this post with milestones, links to design artifacts, test data, and demo media as the project progresses. For the most current documentation, check the repo: <a href="https://github.com/dairyking98/Team-O-Matic-2025">Team-O-Matic-2025</a>.</p>]]></content><author><name></name></author><category term="School"/><category term="Projects"/><category term="school-project"/><category term="electronics"/><category term="embedded-systems"/><category term="design"/><category term="mechanical-engineering"/><category term="portfolio"/><summary type="html"><![CDATA[Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.]]></summary></entry><entry><title type="html">a post with plotly.js</title><link href="https://dairyking98.github.io/al-folio/blog/2025/plotly/" rel="alternate" type="text/html" title="a post with plotly.js"/><published>2025-03-26T14:24:00+00:00</published><updated>2025-03-26T14:24:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/plotly</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/plotly/"><![CDATA[<p>This is an example post with some <a href="https://plotly.com/javascript/">plotly</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://dairyking98.github.io/al-folio/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dairyking98.github.io/al-folio/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-11-11T21:50:13+00:00</updated><id>https://dairyking98.github.io/al-folio/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with plotly.js</title><link href="https://dairyking98.github.io/al-folio/blog/2025/plotly/" rel="alternate" type="text/html" title="a post with plotly.js"/><published>2025-03-26T14:24:00+00:00</published><updated>2025-03-26T14:24:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/plotly</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/plotly/"><![CDATA[<p>This is an example post with some <a href="https://plotly.com/javascript/">plotly</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
 </span><span class="sb">{
   "data": [
     {
@@ -78,7 +78,7 @@
     }
   }
 }
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included plotly.js code could look like]]></summary></entry><entry><title type="html">Welcome to My Engineering Blog</title><link href="https://dairyking98.github.io/al-folio/blog/2025/welcome/" rel="alternate" type="text/html" title="Welcome to My Engineering Blog"/><published>2025-02-10T10:00:00+00:00</published><updated>2025-02-10T10:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/welcome</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/welcome/"><![CDATA[<p>Welcome to my engineering blog and portfolio!</p> <p>This site is built with <a href="https://jekyllrb.com/">Jekyll</a>, a static site generator. I’ll be using this space to:</p> <ul> <li>Share engineering projects and technical insights</li> <li>Document my learning journey</li> <li>Showcase portfolio work</li> <li>Write about topics that interest me</li> </ul> <h2 id="what-to-expect">What to Expect</h2> <p>You’ll find posts covering:</p> <ul> <li><strong>Software Engineering</strong>: Development practices, tools, and techniques</li> <li><strong>Projects</strong>: Detailed write-ups of personal and professional projects</li> <li><strong>Tutorials</strong>: Step-by-step guides and how-tos</li> <li><strong>Thoughts</strong>: Reflections on technology and engineering</li> </ul> <h2 id="getting-started">Getting Started</h2> <p>Feel free to explore the site using the navigation menu. You can:</p> <ul> <li>Browse posts by <a href="/blog/tag/">tags</a></li> <li>View the <a href="/blog/">blog</a> for all posts</li> <li>Check out my <a href="/projects/">projects</a> page</li> </ul> <p>Thanks for visiting, and I hope you find something interesting here!</p>]]></content><author><name></name></author><category term="General"/><category term="portfolio"/><category term="intro"/><summary type="html"><![CDATA[Welcome to my personal portfolio and engineering blog. This is where I'll share my projects, thoughts, and experiences.]]></summary></entry><entry><title type="html">Open-Ended Experiment - Tensile Testing of Acrylic with Geometric Discontinuities</title><link href="https://dairyking98.github.io/al-folio/blog/2024/acrylic-tensile-test/" rel="alternate" type="text/html" title="Open-Ended Experiment - Tensile Testing of Acrylic with Geometric Discontinuities"/><published>2024-12-20T09:00:00+00:00</published><updated>2024-12-20T09:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/acrylic-tensile-test</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/acrylic-tensile-test/"><![CDATA[<p>ENGR 302 – Experimental Analysis at San Francisco State University culminated in an open-ended lab where my teammates (Tom Boivin, Driss Hakkou, Denis Steffen) and I characterized how geometric discontinuities influence the tensile performance of 1/4-inch cast acrylic. We modeled and fabricated “dog bone” specimens with circular, notched, square, and diamond cut-outs, then compared their behavior against a control sample to understand how stress concentration factors translate into real failures.</p> <h2 id="project-overview">Project Overview</h2> <ul> <li><strong>Objective:</strong> quantify the impact of different discontinuity geometries on acrylic tensile strength and ductility, and compare the findings against theoretical stress concentration predictions.</li> <li><strong>My focus:</strong> coordinating specimen preparation, verifying the Instron 3369 test program, and consolidating the load–elongation data exported from Bluehill Universal into a clean dataset for team analysis.</li> <li><strong>Course context:</strong> ENGR 302 — Experimental Analysis, Fall 2024 (Instructor: Dr. Ed Cheng).</li> </ul> <h2 id="experimental-setup">Experimental Setup</h2> <p>We used an Instron 3369 tensile test frame with a 50 kN load cell and threaded side-action grips to maintain alignment and avoid slippage. Each test ran at 2 in/min while Bluehill Universal logged force and displacement. An initial calibration sweep checked the load cell and grip tension before every pair of specimens.</p> <p>Specimens were laser-cut from McMaster-Carr cast acrylic sheet (<code class="language-plaintext highlighter-rouge">4615T47</code>), sanded to remove machining marks, and measured to capture true cross-sectional areas. Control blanks retained the full gauge width, while the discontinuity specimens reduced the critical area to approximately 29.5 mm². Detailed dimensions and CAD sketches are included in the source report.</p> <h2 id="key-findings">Key Findings</h2> <ul> <li><strong>Control baseline:</strong> yielded at 11.1 MPa—roughly 80% lower than the manufacturer’s 55 MPa specification—highlighting how processing and environmental factors can degrade acrylic strength.</li> <li><strong>Circular vs. notched specimens:</strong> yielded at 18.96 MPa (Kt ≈ 1.71) and 21.56 MPa (Kt ≈ 1.94), respectively. The rounded notch distributed stress slightly better than the through-hole, aligning closely with handbook predictions.</li> <li><strong>Sharp corners matter:</strong> square and diamond cut-outs experienced brittle failures at 17.25 MPa and 20.51 MPa with minimal elongation (≤1.76 mm), confirming how angular geometry acts like pre-existing cracks.</li> <li><strong>Ductility loss:</strong> control specimens stretched to 10.2 mm before fracture, whereas discontinuity samples fractured almost immediately after yielding, showing how stress raisers strip away energy absorption capacity.</li> </ul> <h2 id="theoretical-vs-experimental-snapshot">Theoretical vs. Experimental Snapshot</h2> <table> <thead> <tr> <th>Specimen Type</th> <th>Theoretical Yield Stress (MPa)†</th> <th>Experimental Yield Stress (MPa)</th> <th>Ratio (Actual ÷ Theoretical)</th> </tr> </thead> <tbody> <tr> <td>Control</td> <td>11.11 (baseline)</td> <td>11.11</td> <td>1.00</td> </tr> <tr> <td>Circular Hole</td> <td>23.70</td> <td>18.96</td> <td>0.80 (Kt ≈ 1.71)</td> </tr> <tr> <td>Notched</td> <td>19.74</td> <td>21.56</td> <td>1.09 (Kt ≈ 1.94)</td> </tr> </tbody> </table> <p>†Derived using control yield stress as the nominal reference and handbook stress concentration factors.<br/> Note: We could not locate reliable theoretical data for the laser-cut square and diamond geometries—those specimens are discussed purely from experimental observations.</p> <h2 id="experimental-metrics-overview">Experimental Metrics Overview</h2> <table> <thead> <tr> <th>Specimen Type</th> <th style="text-align: right">Yield Force (N)</th> <th style="text-align: right">Yield Stress (MPa)</th> <th style="text-align: right">Ultimate Stress (MPa)</th> <th style="text-align: right">Fracture Stress (MPa)</th> <th style="text-align: right">Max Elongation (mm)</th> <th style="text-align: right">Modulus (MPa)</th> </tr> </thead> <tbody> <tr> <td>Control</td> <td style="text-align: right">750</td> <td style="text-align: right">11.11</td> <td style="text-align: right">57.04</td> <td style="text-align: right">51.84</td> <td style="text-align: right">10.20</td> <td style="text-align: right">1,743</td> </tr> <tr> <td>Circular Hole</td> <td style="text-align: right">580</td> <td style="text-align: right">18.96</td> <td style="text-align: right">50.27</td> <td style="text-align: right">50.27</td> <td style="text-align: right">1.63</td> <td style="text-align: right">4,116.5</td> </tr> <tr> <td>Notched</td> <td style="text-align: right">625</td> <td style="text-align: right">21.56</td> <td style="text-align: right">71.63</td> <td style="text-align: right">71.57</td> <td style="text-align: right">2.25</td> <td style="text-align: right">4,098.5</td> </tr> <tr> <td>Square Hole</td> <td style="text-align: right">500</td> <td style="text-align: right">17.25</td> <td style="text-align: right">54.77</td> <td style="text-align: right">54.77</td> <td style="text-align: right">1.76</td> <td style="text-align: right">3,483</td> </tr> <tr> <td>Diamond Hole</td> <td style="text-align: right">600</td> <td style="text-align: right">20.51</td> <td style="text-align: right">34.70</td> <td style="text-align: right">34.70</td> <td style="text-align: right">0.89</td> <td style="text-align: right">4,478</td> </tr> </tbody> </table> <p>Additional context:</p> <ul> <li><strong>Cross-sectional area:</strong> control blanks averaged 67.51 mm²; all discontinuity specimens clustered around 29–31 mm².</li> <li><strong>Elongation at yield:</strong> ranged from 0.39–0.55 mm, reinforcing the brittle response once discontinuities were introduced.</li> <li><strong>Stress concentration factors:</strong> experimentally back-calculated Kt values were 1.00 (control), 1.71 (circle), and 1.94 (notch); the square and diamond data did not yield stable Kt values because the failure location varied specimen-to-specimen.</li> </ul> <h2 id="discussion-and-recommendations">Discussion and Recommendations</h2> <p>The close agreement between theoretical and experimental stress concentration factors for simple shapes validated our analytical approach. However, the scatter in the square and diamond data underlined the limits of handbook solutions for complex geometries. We recommended:</p> <ul> <li>Slowing the crosshead speed to 0.5 in/min for more stable strain measurements on brittle plastics.</li> <li>Polishing laser-cut edges to reduce micro-crack initiation sites.</li> <li>Extending the study with finite element analysis to visualize stress fields around sharp corners.</li> <li>Repeating the experiment across temperatures to capture acrylic’s sensitivity to cold-induced embrittlement.</li> </ul> <h2 id="lessons-learned">Lessons Learned</h2> <ul> <li>Material datasheet values can diverge dramatically from lab-prepared specimens; surface finish and fabrication technique matter.</li> <li>Precise dimensional metrology is essential when small area changes drive stress calculations.</li> <li>Capturing full test context (fixture setup, calibration steps, environmental notes) makes post-lab analysis and reporting far easier.</li> </ul> <h2 id="source-document">Source Document</h2> <ul> <li><a href="/documents/2024/engr302/OEE-Final-Report-12-20-24.pdf">Open-Ended Experiment Report (PDF)</a></li> </ul> <hr/> <p><em>Completed December 2024 for ENGR 302 — Experimental Analysis (Professor Ed Cheng).</em></p>]]></content><author><name></name></author><category term="School"/><category term="Projects"/><category term="materials-testing"/><category term="mechanical-engineering"/><category term="stress-analysis"/><category term="school-project"/><summary type="html"><![CDATA[Investigated how cast acrylic specimens with holes and notches respond to tensile loading using Instron testing and stress concentration analysis.]]></summary></entry><entry><title type="html">Analog Voltmeter Clock - Time and Environmental Monitor</title><link href="https://dairyking98.github.io/al-folio/blog/2024/analog-voltmeter-clock/" rel="alternate" type="text/html" title="Analog Voltmeter Clock - Time and Environmental Monitor"/><published>2024-12-15T10:00:00+00:00</published><updated>2024-12-15T10:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/analog-voltmeter-clock</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/analog-voltmeter-clock/"><![CDATA[<p>This project was completed for Assignment 4 in Fall 2024, under Professor Jonathan Song. The challenge was to design and build a device that displays time using analog voltmeters, with the added functionality of monitoring pressure, temperature, and humidity.</p> <h2 id="project-overview">Project Overview</h2> <p>The device I built is a clock combined with a pressure, temperature, and humidity monitor using analog voltmeters for an engaging and unique display. The analog voltmeters feature custom legends that indicate the current hour, minute, and second, or pressure, temperature, and humidity on a graduated scale. I was inspired by the idea of using analog displays to show time, which has a classic and visually engaging aesthetic. To further challenge myself, I integrated environmental monitoring features, making the device multi-functional.</p> <p>All components and the encoder knob assembly are securely fastened to a custom 3D-printed enclosure made of PLA on an Ender 5 printer. Time adjustments are made using a homemade rotary encoder and a button. The display toggles with a short press of the button.</p> <h2 id="physical-design">Physical Design</h2> <p>For the physical design, I aimed to create something large and unique—a device that would instill curiosity at first glance. The analog voltmeters and vintage embossed labels provide a sense of nostalgia. The oversized rotary encoder is a deliberate design choice, serving both functional and educational purposes. The method of function of an incremental rotary encoder can now be felt, seen, and heard. It offers a satisfying, hands-on experience and acts as a demonstration tool to illustrate the inner workings of a rotary encoder.</p> <p>The analog voltmeter’s original 0-30V graduated display was modified with custom-designed and printed legends that indicate:</p> <ul> <li><strong>Hours</strong>: 0-12</li> <li><strong>Minutes and Seconds</strong>: 0-60</li> <li><strong>Pressure</strong>: 950-1030 hPa</li> <li><strong>Relative Humidity</strong>: 0-100%</li> </ul> <p>These values were chosen as the range at which this device is estimated to function. The voltmeters, originally rated for 30V, had to be further modified to operate at 5V by removing their internal resistors and installing adjustable potentiometers for calibration.</p> <h2 id="system-architecture">System Architecture</h2> <p>A DS3231 real-time clock module (RTC) is used to keep accurate time and maintain the time even when the Arduino is fully powered off, thanks to an external watch battery. It communicates with the Arduino via I2C protocol. The current time provided by the RTC is obtained constantly and stored as variables in the Arduino.</p> <p>The BMP180 pressure sensor also communicates via I2C, and the current pressure is stored as a variable. The DHT22 humidity sensor operates via pulse-width modulated input, which is handled by a library, and its variable is also stored.</p> <p>The time and environmental variables are converted to integers in the range of 0 to 255 to provide pulse-width modulated outputs for the voltmeters. When the display mode is set to TIME, the voltmeters display the current hour, minute, and second at quarter-second intervals to provide for a sweeping second hand, and the HOURS, MINUTES, and SECONDS LEDs remain on. When the display mode is set to PTH (pressure, temperature, and humidity), the voltmeters display the current pressure, temperature, and humidity, and the PRESSURE, TEMPERATURE, and HUMIDITY LEDs remain on.</p> <h2 id="user-interface">User Interface</h2> <p>The display mode is toggleable via a short press of a user-interaction arcade button. Upon a long press of the arcade button, a TIME CHANGE mode is entered, in which the rotary encoder is used to select the new HOUR, MINUTE, and SECOND. This is indicated by a blinking corresponding LED and isolated operation of the selected voltmeter. A new value is confirmed by pressing the arcade button until the last parameter, SECONDS, has been updated, returning to TIME display mode.</p> <p>The rotary encoder operates on two input signals that are treated as interrupts, performing interrupt service routines (ISRs) when their signal values change, providing for a responsive and effective incremental rotary encoder.</p> <h2 id="components-and-materials">Components and Materials</h2> <p>The device is built using the following components:</p> <ul> <li><strong>Arduino Nano</strong> (microcontroller)</li> <li><strong>Two limit switches</strong> (used for rotary encoder input)</li> <li><strong>One arcade button</strong> (for toggling the display and time adjustment)</li> <li><strong>One DHT22 sensor</strong> (for temperature and humidity sensing)</li> <li><strong>One BMP180 sensor</strong> (for pressure sensing)</li> <li><strong>Six 6V LEDs</strong> (for illumination and visual feedback)</li> <li><strong>One DS3231 RTC</strong> (Real-Time Clock) module (for accurate timekeeping)</li> <li><strong>Three analog voltmeters</strong> (to display time and environmental data)</li> <li><strong>Three 5kΩ potentiometers</strong> (for analog voltmeter calibration)</li> <li><strong>3D-printed PLA enclosure</strong> (custom-designed housing)</li> <li>Various resistors, wires, and mounting hardware</li> </ul> <h2 id="key-features">Key Features</h2> <ol> <li><strong>Dual Display Modes</strong>: Toggle between time display and environmental monitoring</li> <li><strong>Quarter-Second Updates</strong>: Smooth sweeping second hand using PWM interpolation</li> <li><strong>Custom Calibrated Voltmeters</strong>: Modified from 30V to 5V operation with custom legends</li> <li><strong>Homemade Rotary Encoder</strong>: Built from limit switches for educational demonstration</li> <li><strong>3D-Printed Enclosure</strong>: Custom-designed housing for all components</li> <li><strong>Real-Time Clock</strong>: Maintains accurate time even when powered off</li> </ol> <h2 id="technical-implementation">Technical Implementation</h2> <p>The Arduino code handles:</p> <ul> <li>Reading time from the DS3231 RTC module</li> <li>Reading environmental data from BMP180 and DHT22 sensors</li> <li>Converting values to PWM signals (0-255) for voltmeter control</li> <li>Managing rotary encoder interrupts for time adjustment</li> <li>Button press detection (short press for mode toggle, long press for time adjustment)</li> <li>LED control for visual feedback</li> <li>Quarter-second interpolation for smooth second hand movement</li> </ul> <h2 id="development-process">Development Process</h2> <p>The project involved several key development steps:</p> <ol> <li><strong>Conceptual Design</strong>: Initial idea for using analog voltmeters as displays</li> <li><strong>Component Selection</strong>: Choosing appropriate sensors and microcontroller</li> <li><strong>Voltmeter Modification</strong>: Removing internal resistors and adding potentiometers for 5V operation</li> <li><strong>Custom Legend Design</strong>: Creating and printing custom scales for each voltmeter</li> <li><strong>3D Enclosure Design</strong>: Designing and printing the housing in Fusion 360</li> <li><strong>Arduino Programming</strong>: Implementing the control logic and sensor interfaces</li> <li><strong>Calibration</strong>: Adjusting potentiometers to match voltmeter readings with actual values</li> <li><strong>Testing and Refinement</strong>: Iterative testing to ensure accuracy and reliability</li> </ol> <h2 id="lessons-learned">Lessons Learned</h2> <p>This project taught me valuable lessons about:</p> <ul> <li>Interfacing multiple sensors with Arduino (I2C and digital protocols)</li> <li>PWM signal generation and calibration</li> <li>Real-time clock integration and time management</li> <li>Rotary encoder implementation using interrupts</li> <li>3D printing considerations for electronics enclosures</li> <li>Analog display calibration and modification</li> <li>User interface design for embedded systems</li> </ul> <h2 id="source-documents">Source Documents</h2> <p>The following documents are available for reference:</p> <ul> <li><a href="/documents/2024/clock-project/Clock-Report.pdf">Clock Report</a> - Complete project report with detailed design, implementation, and analysis</li> <li><a href="/documents/2024/clock-project/Assignment-4-Project-Idea.pdf">Assignment 4 Project Idea</a> - Initial project proposal and concept</li> <li><a href="/documents/2024/clock-project/Arduino-Clock-Code.md">Arduino Clock Code</a> - Complete source code with detailed comments</li> <li><a href="/documents/2024/clock-project/Clock-Presentation.pdf">Clock Presentation</a> - Project presentation slides</li> </ul> <hr/> <p><em>This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework.</em></p>]]></content><author><name></name></author><category term="School"/><category term="Projects"/><category term="arduino"/><category term="electronics"/><category term="embedded-systems"/><category term="sensors"/><category term="3d-printing"/><category term="school-project"/><category term="personal-project"/><summary type="html"><![CDATA[A unique clock project combining analog voltmeters with environmental monitoring, featuring custom 3D-printed enclosure and Arduino-based control system.]]></summary></entry><entry><title type="html">a post with image galleries</title><link href="https://dairyking98.github.io/al-folio/blog/2024/photo-gallery/" rel="alternate" type="text/html" title="a post with image galleries"/><published>2024-12-04T01:59:00+00:00</published><updated>2024-12-04T01:59:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/photo-gallery</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/photo-gallery/"><![CDATA[<p>The images in this post are all zoomable, arranged into different mini-galleries using different libraries.</p> <h2 id="lightbox2"><a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a></h2> <p><a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p> <hr/> <h2 id="photoswipe"><a href="https://photoswipe.com/">PhotoSwipe</a></h2> <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started"> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669" data-pswp-height="2500" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt=""/> </a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" data-pswp-width="1875" data-pswp-height="2500" data-cropped="true" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt=""/> </a> <a href="https://unsplash.com" data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1666" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt=""/> </a> <div> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1667" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt=""/> </a> </div> </div> <hr/> <h2 id="spotlight-js"><a href="https://nextapps-de.github.io/spotlight/">Spotlight JS</a></h2> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/> </a> </div> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg"/> </a> </div> <hr/> <h2 id="venobox"><a href="https://veno.es/venobox/">Venobox</a></h2> <p><a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what included image galleries could look like]]></summary></entry><entry><title type="html">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</title><link href="https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/" rel="alternate" type="text/html" title="Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra"/><published>2024-05-14T00:00:00+00:00</published><updated>2024-05-14T00:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/"><![CDATA[<p>May 14, 2024 We’re introducing a series of updates across the Gemini family of models, including the new 1.5 Flash, our lightweight model for speed and efficiency, and Project Astra, our vision for the future of AI assistants. In December, we launched our first natively multimodal model Gemini 1.0 in three sizes: Ultra, Pro and Nano. Just a few months later we released 1.5 Pro, with enhanced performance and a breakthrough long context window of 1 million tokens.Developers and enterprise customers have been putting 1.5 Pro to use in incredible ways and finding its long context window, multimodal reasoning capabilities and impressive overall performance incredibly useful.We know from user feedback that some applications need lower latency and a lower cost to serve. This inspired us to keep innovating, so today, we’re introducing Gemini 1.5 Flash: a model that’s lighter-weight than 1.5 Pro, and designed to be fast and efficient to serve at scale.Both 1.5 Pro and 1.5 Flash are available in public preview with a 1 million token context window in Google AI Studio and Vertex AI. And now, 1.5 Pro is also available with a 2 million token context window via waitlist to developers using the API and to Google Cloud customers.We’re also introducing updates across the Gemini family of models, announcing our next generation of open models, Gemma 2, and sharing progress on the future of AI assistants, with Project Astra.Context lengths of leading foundation models compared with Gemini 1.5’s 2 million token capability1.5 Flash is the newest addition to the Gemini model family and the fastest Gemini model served in the API. It’s optimized for high-volume, high-frequency tasks at scale, is more cost-efficient to serve and features our breakthrough long context window.While it’s a lighter weight model than 1.5 Pro, it’s highly capable of multimodal reasoning across vast amounts of information and delivers impressive quality for its size.The new Gemini 1.5 Flash model is optimized for speed and efficiency, is highly capable of multimodal reasoning and features our breakthrough long context window.1.5 Flash excels at summarization, chat applications, image and video captioning, data extraction from long documents and tables, and more. This is because it’s been trained by 1.5 Pro through a process called “distillation,” where the most essential knowledge and skills from a larger model are transferred to a smaller, more efficient model.Read more about 1.5 Flash in our updated Gemini 1.5 technical report, on the Gemini technology page, and learn about 1.5 Flash’s availability and pricing.Over the last few months, we’ve significantly improved 1.5 Pro, our best model for general performance across a wide range of tasks.Beyond extending its context window to 2 million tokens, we’ve enhanced its code generation, logical reasoning and planning, multi-turn conversation, and audio and image understanding through data and algorithmic advances. We see strong improvements on public and internal benchmarks for each of these tasks.1.5 Pro can now follow increasingly complex and nuanced instructions, including ones that specify product-level behavior involving role, format and style. We’ve improved control over the model’s responses for specific use cases, like crafting the persona and response style of a chat agent or automating workflows through multiple function calls. And we’ve enabled users to steer model behavior by setting system instructions.We added audio understanding in the Gemini API and Google AI Studio, so 1.5 Pro can now reason across image and audio for videos uploaded in Google AI Studio. And we’re now integrating 1.5 Pro into Google products, including Gemini Advanced and in Workspace apps.Read more about 1.5 Pro in our updated Gemini 1.5 technical report and on the Gemini technology page.Gemini Nano is expanding beyond text-only inputs to include images as well. Starting with Pixel, applications using Gemini Nano with Multimodality will be able to understand the world the way people do — not just through text, but also through sight, sound and spoken language.Read more about Gemini 1.0 Nano on Android.Today, we’re also sharing a series of updates to Gemma, our family of open models built from the same research and technology used to create the Gemini models.We’re announcing Gemma 2, our next generation of open models for responsible AI innovation. Gemma 2 has a new architecture designed for breakthrough performance and efficiency, and will be available in new sizes.The Gemma family is also expanding with PaliGemma, our first vision-language model inspired by PaLI-3. And we’ve upgraded our Responsible Generative AI Toolkit with LLM Comparator for evaluating the quality of model responses.Read more on the Developer blog.As part of Google DeepMind’s mission to build AI responsibly to benefit humanity, we’ve always wanted to develop universal AI agents that can be helpful in everyday life. That’s why today, we’re sharing our progress in building the future of AI assistants with Project Astra (advanced seeing and talking responsive agent).To be truly useful, an agent needs to understand and respond to the complex and dynamic world just like people do — and take in and remember what it sees and hears to understand context and take action. It also needs to be proactive, teachable and personal, so users can talk to it naturally and without lag or delay.While we’ve made incredible progress developing AI systems that can understand multimodal information, getting response time down to something conversational is a difficult engineering challenge. Over the past few years, we’ve been working to improve how our models perceive, reason and converse to make the pace and quality of interaction feel more natural.Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.By leveraging our leading speech models, we also enhanced how they sound, giving the agents a wider range of intonations. These agents can better understand the context they’re being used in, and respond quickly, in conversation.With technology like this, it’s easy to envision a future where people could have an expert AI assistant by their side, through a phone or glasses. And some of these capabilities are coming to Google products, like the Gemini app and web experience, later this year.We’ve made incredible progress so far with our family of Gemini models, and we’re always striving to advance the state-of-the-art even further. By investing in a relentless production line of innovation, we’re able to explore new ideas at the frontier, while also unlocking the possibility of new and exciting Gemini use cases.Learn more about Gemini and its capabilities. Your information will be used in accordance with Google’s privacy policy.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      Done. Just one step more.
+</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included plotly.js code could look like]]></summary></entry><entry><title type="html">Welcome to My Engineering Blog</title><link href="https://dairyking98.github.io/al-folio/blog/2025/welcome/" rel="alternate" type="text/html" title="Welcome to My Engineering Blog"/><published>2025-02-10T10:00:00+00:00</published><updated>2025-02-10T10:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2025/welcome</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2025/welcome/"><![CDATA[<p>Welcome to my engineering blog and portfolio!</p> <p>This site is built with <a href="https://jekyllrb.com/">Jekyll</a>, a static site generator. I’ll be using this space to:</p> <ul> <li>Share engineering projects and technical insights</li> <li>Document my learning journey</li> <li>Showcase portfolio work</li> <li>Write about topics that interest me</li> </ul> <h2 id="what-to-expect">What to Expect</h2> <p>You’ll find posts covering:</p> <ul> <li><strong>Software Engineering</strong>: Development practices, tools, and techniques</li> <li><strong>Projects</strong>: Detailed write-ups of personal and professional projects</li> <li><strong>Tutorials</strong>: Step-by-step guides and how-tos</li> <li><strong>Thoughts</strong>: Reflections on technology and engineering</li> </ul> <h2 id="getting-started">Getting Started</h2> <p>Feel free to explore the site using the navigation menu. You can:</p> <ul> <li>Browse posts by <a href="/blog/tag/">tags</a></li> <li>View the <a href="/blog/">blog</a> for all posts</li> <li>Check out my <a href="/projects/">projects</a> page</li> </ul> <p>Thanks for visiting, and I hope you find something interesting here!</p>]]></content><author><name></name></author><category term="General"/><category term="portfolio"/><category term="intro"/><summary type="html"><![CDATA[Welcome to my personal portfolio and engineering blog. This is where I'll share my projects, thoughts, and experiences.]]></summary></entry><entry><title type="html">a post with image galleries</title><link href="https://dairyking98.github.io/al-folio/blog/2024/photo-gallery/" rel="alternate" type="text/html" title="a post with image galleries"/><published>2024-12-04T01:59:00+00:00</published><updated>2024-12-04T01:59:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/photo-gallery</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/photo-gallery/"><![CDATA[<p>The images in this post are all zoomable, arranged into different mini-galleries using different libraries.</p> <h2 id="lightbox2"><a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a></h2> <p><a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p> <hr/> <h2 id="photoswipe"><a href="https://photoswipe.com/">PhotoSwipe</a></h2> <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started"> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669" data-pswp-height="2500" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt=""/> </a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" data-pswp-width="1875" data-pswp-height="2500" data-cropped="true" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt=""/> </a> <a href="https://unsplash.com" data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1666" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt=""/> </a> <div> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1667" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt=""/> </a> </div> </div> <hr/> <h2 id="spotlight-js"><a href="https://nextapps-de.github.io/spotlight/">Spotlight JS</a></h2> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/> </a> </div> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg"/> </a> </div> <hr/> <h2 id="venobox"><a href="https://veno.es/venobox/">Venobox</a></h2> <p><a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what included image galleries could look like]]></summary></entry><entry><title type="html">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</title><link href="https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/" rel="alternate" type="text/html" title="Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra"/><published>2024-05-14T00:00:00+00:00</published><updated>2024-05-14T00:00:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/"><![CDATA[<p>May 14, 2024 We’re introducing a series of updates across the Gemini family of models, including the new 1.5 Flash, our lightweight model for speed and efficiency, and Project Astra, our vision for the future of AI assistants. In December, we launched our first natively multimodal model Gemini 1.0 in three sizes: Ultra, Pro and Nano. Just a few months later we released 1.5 Pro, with enhanced performance and a breakthrough long context window of 1 million tokens.Developers and enterprise customers have been putting 1.5 Pro to use in incredible ways and finding its long context window, multimodal reasoning capabilities and impressive overall performance incredibly useful.We know from user feedback that some applications need lower latency and a lower cost to serve. This inspired us to keep innovating, so today, we’re introducing Gemini 1.5 Flash: a model that’s lighter-weight than 1.5 Pro, and designed to be fast and efficient to serve at scale.Both 1.5 Pro and 1.5 Flash are available in public preview with a 1 million token context window in Google AI Studio and Vertex AI. And now, 1.5 Pro is also available with a 2 million token context window via waitlist to developers using the API and to Google Cloud customers.We’re also introducing updates across the Gemini family of models, announcing our next generation of open models, Gemma 2, and sharing progress on the future of AI assistants, with Project Astra.Context lengths of leading foundation models compared with Gemini 1.5’s 2 million token capability1.5 Flash is the newest addition to the Gemini model family and the fastest Gemini model served in the API. It’s optimized for high-volume, high-frequency tasks at scale, is more cost-efficient to serve and features our breakthrough long context window.While it’s a lighter weight model than 1.5 Pro, it’s highly capable of multimodal reasoning across vast amounts of information and delivers impressive quality for its size.The new Gemini 1.5 Flash model is optimized for speed and efficiency, is highly capable of multimodal reasoning and features our breakthrough long context window.1.5 Flash excels at summarization, chat applications, image and video captioning, data extraction from long documents and tables, and more. This is because it’s been trained by 1.5 Pro through a process called “distillation,” where the most essential knowledge and skills from a larger model are transferred to a smaller, more efficient model.Read more about 1.5 Flash in our updated Gemini 1.5 technical report, on the Gemini technology page, and learn about 1.5 Flash’s availability and pricing.Over the last few months, we’ve significantly improved 1.5 Pro, our best model for general performance across a wide range of tasks.Beyond extending its context window to 2 million tokens, we’ve enhanced its code generation, logical reasoning and planning, multi-turn conversation, and audio and image understanding through data and algorithmic advances. We see strong improvements on public and internal benchmarks for each of these tasks.1.5 Pro can now follow increasingly complex and nuanced instructions, including ones that specify product-level behavior involving role, format and style. We’ve improved control over the model’s responses for specific use cases, like crafting the persona and response style of a chat agent or automating workflows through multiple function calls. And we’ve enabled users to steer model behavior by setting system instructions.We added audio understanding in the Gemini API and Google AI Studio, so 1.5 Pro can now reason across image and audio for videos uploaded in Google AI Studio. And we’re now integrating 1.5 Pro into Google products, including Gemini Advanced and in Workspace apps.Read more about 1.5 Pro in our updated Gemini 1.5 technical report and on the Gemini technology page.Gemini Nano is expanding beyond text-only inputs to include images as well. Starting with Pixel, applications using Gemini Nano with Multimodality will be able to understand the world the way people do — not just through text, but also through sight, sound and spoken language.Read more about Gemini 1.0 Nano on Android.Today, we’re also sharing a series of updates to Gemma, our family of open models built from the same research and technology used to create the Gemini models.We’re announcing Gemma 2, our next generation of open models for responsible AI innovation. Gemma 2 has a new architecture designed for breakthrough performance and efficiency, and will be available in new sizes.The Gemma family is also expanding with PaliGemma, our first vision-language model inspired by PaLI-3. And we’ve upgraded our Responsible Generative AI Toolkit with LLM Comparator for evaluating the quality of model responses.Read more on the Developer blog.As part of Google DeepMind’s mission to build AI responsibly to benefit humanity, we’ve always wanted to develop universal AI agents that can be helpful in everyday life. That’s why today, we’re sharing our progress in building the future of AI assistants with Project Astra (advanced seeing and talking responsive agent).To be truly useful, an agent needs to understand and respond to the complex and dynamic world just like people do — and take in and remember what it sees and hears to understand context and take action. It also needs to be proactive, teachable and personal, so users can talk to it naturally and without lag or delay.While we’ve made incredible progress developing AI systems that can understand multimodal information, getting response time down to something conversational is a difficult engineering challenge. Over the past few years, we’ve been working to improve how our models perceive, reason and converse to make the pace and quality of interaction feel more natural.Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.By leveraging our leading speech models, we also enhanced how they sound, giving the agents a wider range of intonations. These agents can better understand the context they’re being used in, and respond quickly, in conversation.With technology like this, it’s easy to envision a future where people could have an expert AI assistant by their side, through a phone or glasses. And some of these capabilities are coming to Google products, like the Gemini app and web experience, later this year.We’ve made incredible progress so far with our family of Gemini models, and we’re always striving to advance the state-of-the-art even further. By investing in a relentless production line of innovation, we’re able to explore new ideas at the frontier, while also unlocking the possibility of new and exciting Gemini use cases.Learn more about Gemini and its capabilities. Your information will be used in accordance with Google’s privacy policy.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      Done. Just one step more.
     
       Check your inbox to confirm your subscription.
     You are already subscribed to our newsletter.
@@ -104,16 +104,16 @@ Content 2
 <span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
 
 <span class="cp">{%</span><span class="w"> </span><span class="nt">endtabs</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="ed7b8147-54cb-4c13-9e35-a9a95fe965fa" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="ed7b8147-54cb-4c13-9e35-a9a95fe965fa" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="4def520f-9bec-49b5-96ae-18dd7b6d522a" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="4def520f-9bec-49b5-96ae-18dd7b6d522a" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
 </code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pputs</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="d1385859-afeb-494f-abbb-65b071cc6179" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="d1385859-afeb-494f-abbb-65b071cc6179" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
+</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="a3f067e7-85f5-450e-838f-9a17e92e75c4" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="a3f067e7-85f5-450e-838f-9a17e92e75c4" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">whatsup"</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">hi"</span>
 </code></pre></div></div> </li> <li> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"hello"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"whatsup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="5d8c106a-00b3-499c-9a74-275c9f5369ab" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="5d8c106a-00b3-499c-9a74-275c9f5369ab" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://dairyking98.github.io/al-folio/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/typograms</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
+</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="125faa3c-2895-4bd5-9ecb-a1dead0c2cec" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="125faa3c-2895-4bd5-9ecb-a1dead0c2cec" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://dairyking98.github.io/al-folio/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/typograms</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
 </span><span class="sb">+----+
 |    |---&gt; My first diagram!
 +----+</span>
@@ -167,4 +167,500 @@ Content 2
 ||                      ||
 |+----------------------+|
 .------------------------.
-</code></pre> <p>For more examples, check out the <a href="https://google.github.io/typograms/#examples">typograms documentation</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included typograms code could look like]]></summary></entry></feed>
+</code></pre> <p>For more examples, check out the <a href="https://google.github.io/typograms/#examples">typograms documentation</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included typograms code could look like]]></summary></entry><entry><title type="html">a post that can be cited</title><link href="https://dairyking98.github.io/al-folio/blog/2024/post-citation/" rel="alternate" type="text/html" title="a post that can be cited"/><published>2024-04-28T15:06:00+00:00</published><updated>2024-04-28T15:06:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/post-citation</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/post-citation/"><![CDATA[<p>This is an example post that can be cited. The content of the post ends here, while the citation information is automatically provided below. The only thing needed is for you to set the <code class="language-plaintext highlighter-rouge">citation</code> key in the front matter to <code class="language-plaintext highlighter-rouge">true</code>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="citation"/><summary type="html"><![CDATA[this is what a post that can be cited looks like]]></summary></entry><entry><title type="html">a post with pseudo code</title><link href="https://dairyking98.github.io/al-folio/blog/2024/pseudocode/" rel="alternate" type="text/html" title="a post with pseudo code"/><published>2024-04-15T00:01:00+00:00</published><updated>2024-04-15T00:01:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/pseudocode</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/pseudocode/"><![CDATA[<p>This is an example post with some pseudo code rendered by <a href="https://github.com/SaswatPadhi/pseudocode.js">pseudocode</a>. The example presented here is the same as the one in the <a href="https://saswat.padhi.me/pseudocode.js/">pseudocode.js</a> documentation, with only one simple but important change: everytime you would use <code class="language-plaintext highlighter-rouge">$</code>, you should use <code class="language-plaintext highlighter-rouge">$$</code> instead. Also, note that the <code class="language-plaintext highlighter-rouge">pseudocode</code> key in the front matter is set to <code class="language-plaintext highlighter-rouge">true</code> to enable the rendering of pseudo code. As an example, using this code:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">pseudocode
+</span><span class="sb">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
+\begin{algorithm}
+\caption{Quicksort}
+\begin{algorithmic}
+\PROCEDURE{Quicksort}{$$A, p, r$$}
+    \IF{$$p &lt; r$$}
+        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
+        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
+        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
+    \ENDIF
+\ENDPROCEDURE
+\PROCEDURE{Partition}{$$A, p, r$$}
+    \STATE $$x = A[r]$$
+    \STATE $$i = p - 1$$
+    \FOR{$$j = p$$ \TO $$r - 1$$}
+        \IF{$$A[j] &lt; x$$}
+            \STATE $$i = i + 1$$
+            \STATE exchange
+            $$A[i]$$ with $$A[j]$$
+        \ENDIF
+        \STATE exchange $$A[i]$$ with $$A[r]$$
+    \ENDFOR
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}</span>
+<span class="p">```</span>
+</code></pre></div></div> <p>Generates:</p> <pre><code class="language-pseudocode">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
+\begin{algorithm}
+\caption{Quicksort}
+\begin{algorithmic}
+\PROCEDURE{Quicksort}{$$A, p, r$$}
+    \IF{$$p &lt; r$$}
+        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
+        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
+        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
+    \ENDIF
+\ENDPROCEDURE
+\PROCEDURE{Partition}{$$A, p, r$$}
+    \STATE $$x = A[r]$$
+    \STATE $$i = p - 1$$
+    \FOR{$$j = p$$ \TO $$r - 1$$}
+        \IF{$$A[j] &lt; x$$}
+            \STATE $$i = i + 1$$
+            \STATE exchange
+            $$A[i]$$ with $$A[j]$$
+        \ENDIF
+        \STATE exchange $$A[i]$$ with $$A[r]$$
+    \ENDFOR
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}
+</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included pseudo code could look like]]></summary></entry><entry><title type="html">a post with code diff</title><link href="https://dairyking98.github.io/al-folio/blog/2024/code-diff/" rel="alternate" type="text/html" title="a post with code diff"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/code-diff</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/code-diff/"><![CDATA[<p>You can display diff code by using the regular markdown syntax:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff
+</span><span class="gh">diff --git a/sample.js b/sample.js
+index 0000001..0ddf2ba
+</span><span class="gd">--- a/sample.js
+</span><span class="gi">+++ b/sample.js
+</span><span class="p">@@ -1 +1 @@</span>
+<span class="gd">-console.log("Hello World!")
+</span><span class="gi">+console.log("Hello from Diff2Html!")</span>
+<span class="p">```</span>
+</code></pre></div></div> <p>Which generates:</p> <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/sample.js b/sample.js
+index 0000001..0ddf2ba
+</span><span class="gd">--- a/sample.js
+</span><span class="gi">+++ b/sample.js
+</span><span class="p">@@ -1 +1 @@</span>
+<span class="gd">-console.log("Hello World!")
+</span><span class="gi">+console.log("Hello from Diff2Html!")
+</span></code></pre></div></div> <p>But this is difficult to read, specially if you have a large diff. You can use <a href="https://diff2html.xyz/">diff2html</a> to display a more readable version of the diff. For this, just use <code class="language-plaintext highlighter-rouge">diff2html</code> instead of <code class="language-plaintext highlighter-rouge">diff</code> for the code block language:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff2html
+</span><span class="sb">diff --git a/sample.js b/sample.js
+index 0000001..0ddf2ba
+--- a/sample.js
++++ b/sample.js
+@@ -1 +1 @@
+-console.log("Hello World!")
++console.log("Hello from Diff2Html!")</span>
+<span class="p">```</span>
+</code></pre></div></div> <p>If we use a longer example, for example <a href="https://github.com/rtfpessoa/diff2html/commit/c2c253d3e3f8b8b267f551e659f72b44ca2ac927">this commit from diff2html</a>, it will generate the following output:</p> <pre><code class="language-diff2html">From 2aaae31cc2a37bfff83430c2c914b140bee59b6a Mon Sep 17 00:00:00 2001
+From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
+Date: Sun, 9 Oct 2016 16:41:54 +0100
+Subject: [PATCH 1/2] Initial template override support
+
+---
+ scripts/hulk.js                    |  4 ++--
+ src/diff2html.js                   |  3 +--
+ src/file-list-printer.js           | 11 ++++++++---
+ src/hoganjs-utils.js               | 29 +++++++++++++++++------------
+ src/html-printer.js                |  6 ++++++
+ src/line-by-line-printer.js        |  6 +++++-
+ src/side-by-side-printer.js        |  6 +++++-
+ test/file-list-printer-tests.js    |  2 +-
+ test/hogan-cache-tests.js          | 18 +++++++++++++++---
+ test/line-by-line-tests.js         |  3 +--
+ test/side-by-side-printer-tests.js |  3 +--
+ 11 files changed, 62 insertions(+), 29 deletions(-)
+
+diff --git a/scripts/hulk.js b/scripts/hulk.js
+index 5a793c18..a4b1a4d5 100755
+--- a/scripts/hulk.js
++++ b/scripts/hulk.js
+@@ -173,11 +173,11 @@ function namespace(name) {
+ // write a template foreach file that matches template extension
+ templates = extractFiles(options.argv.remain)
+   .map(function(file) {
+-    var openedFile = fs.readFileSync(file, 'utf-8');
++    var openedFile = fs.readFileSync(file, 'utf-8').trim();
+     var name;
+     if (!openedFile) return;
+     name = namespace(path.basename(file).replace(/\..*$/, ''));
+-    openedFile = removeByteOrderMark(openedFile.trim());
++    openedFile = removeByteOrderMark(openedFile);
+     openedFile = wrap(file, name, openedFile);
+     if (!options.outputdir) return openedFile;
+     fs.writeFileSync(path.join(options.outputdir, name + '.js')
+diff --git a/src/diff2html.js b/src/diff2html.js
+index 21b0119e..64e138f5 100644
+--- a/src/diff2html.js
++++ b/src/diff2html.js
+@@ -7,7 +7,6 @@
+
+ (function() {
+   var diffParser = require('./diff-parser.js').DiffParser;
+-  var fileLister = require('./file-list-printer.js').FileListPrinter;
+   var htmlPrinter = require('./html-printer.js').HtmlPrinter;
+
+   function Diff2Html() {
+@@ -43,7 +42,7 @@
+
+     var fileList = '';
+     if (configOrEmpty.showFiles === true) {
+-      fileList = fileLister.generateFileList(diffJson, configOrEmpty);
++      fileList = htmlPrinter.generateFileListSummary(diffJson, configOrEmpty);
+     }
+
+     var diffOutput = '';
+diff --git a/src/file-list-printer.js b/src/file-list-printer.js
+index e408d9b2..1e0a2c61 100644
+--- a/src/file-list-printer.js
++++ b/src/file-list-printer.js
+@@ -8,11 +8,16 @@
+ (function() {
+   var printerUtils = require('./printer-utils.js').PrinterUtils;
+
+-  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
++  var hoganUtils;
++
+   var baseTemplatesPath = 'file-summary';
+   var iconsBaseTemplatesPath = 'icon';
+
+-  function FileListPrinter() {
++  function FileListPrinter(config) {
++    this.config = config;
++
++    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
++    hoganUtils = new HoganJsUtils(config);
+   }
+
+   FileListPrinter.prototype.generateFileList = function(diffFiles) {
+@@ -38,5 +43,5 @@
+     });
+   };
+
+-  module.exports.FileListPrinter = new FileListPrinter();
++  module.exports.FileListPrinter = FileListPrinter;
+ })();
+diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
+index 9949e5fa..0dda08d7 100644
+--- a/src/hoganjs-utils.js
++++ b/src/hoganjs-utils.js
+@@ -8,18 +8,19 @@
+ (function() {
+   var fs = require('fs');
+   var path = require('path');
+-
+   var hogan = require('hogan.js');
+
+   var hoganTemplates = require('./templates/diff2html-templates.js');
+
+-  var templatesPath = path.resolve(__dirname, 'templates');
++  var extraTemplates;
+
+-  function HoganJsUtils() {
++  function HoganJsUtils(configuration) {
++    this.config = configuration || {};
++    extraTemplates = this.config.templates || {};
+   }
+
+-  HoganJsUtils.prototype.render = function(namespace, view, params, configuration) {
+-    var template = this.template(namespace, view, configuration);
++  HoganJsUtils.prototype.render = function(namespace, view, params) {
++    var template = this.template(namespace, view);
+     if (template) {
+       return template.render(params);
+     }
+@@ -27,17 +28,16 @@
+     return null;
+   };
+
+-  HoganJsUtils.prototype.template = function(namespace, view, configuration) {
+-    var config = configuration || {};
++  HoganJsUtils.prototype.template = function(namespace, view) {
+     var templateKey = this._templateKey(namespace, view);
+
+-    return this._getTemplate(templateKey, config);
++    return this._getTemplate(templateKey);
+   };
+
+-  HoganJsUtils.prototype._getTemplate = function(templateKey, config) {
++  HoganJsUtils.prototype._getTemplate = function(templateKey) {
+     var template;
+
+-    if (!config.noCache) {
++    if (!this.config.noCache) {
+       template = this._readFromCache(templateKey);
+     }
+
+@@ -53,6 +53,7 @@
+
+     try {
+       if (fs.readFileSync) {
++        var templatesPath = path.resolve(__dirname, 'templates');
+         var templatePath = path.join(templatesPath, templateKey);
+         var templateContent = fs.readFileSync(templatePath + '.mustache', 'utf8');
+         template = hogan.compile(templateContent);
+@@ -66,12 +67,16 @@
+   };
+
+   HoganJsUtils.prototype._readFromCache = function(templateKey) {
+-    return hoganTemplates[templateKey];
++    return extraTemplates[templateKey] || hoganTemplates[templateKey];
+   };
+
+   HoganJsUtils.prototype._templateKey = function(namespace, view) {
+     return namespace + '-' + view;
+   };
+
+-  module.exports.HoganJsUtils = new HoganJsUtils();
++  HoganJsUtils.prototype.compile = function(templateStr) {
++    return hogan.compile(templateStr);
++  };
++
++  module.exports.HoganJsUtils = HoganJsUtils;
+ })();
+diff --git a/src/html-printer.js b/src/html-printer.js
+index 585d5b66..13f83047 100644
+--- a/src/html-printer.js
++++ b/src/html-printer.js
+@@ -8,6 +8,7 @@
+ (function() {
+   var LineByLinePrinter = require('./line-by-line-printer.js').LineByLinePrinter;
+   var SideBySidePrinter = require('./side-by-side-printer.js').SideBySidePrinter;
++  var FileListPrinter = require('./file-list-printer.js').FileListPrinter;
+
+   function HtmlPrinter() {
+   }
+@@ -22,5 +23,10 @@
+     return sideBySidePrinter.generateSideBySideJsonHtml(diffFiles);
+   };
+
++  HtmlPrinter.prototype.generateFileListSummary = function(diffJson, config) {
++    var fileListPrinter = new FileListPrinter(config);
++    return fileListPrinter.generateFileList(diffJson);
++  };
++
+   module.exports.HtmlPrinter = new HtmlPrinter();
+ })();
+diff --git a/src/line-by-line-printer.js b/src/line-by-line-printer.js
+index b07eb53c..d230bedd 100644
+--- a/src/line-by-line-printer.js
++++ b/src/line-by-line-printer.js
+@@ -11,7 +11,8 @@
+   var utils = require('./utils.js').Utils;
+   var Rematch = require('./rematch.js').Rematch;
+
+-  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
++  var hoganUtils;
++
+   var genericTemplatesPath = 'generic';
+   var baseTemplatesPath = 'line-by-line';
+   var iconsBaseTemplatesPath = 'icon';
+@@ -19,6 +20,9 @@
+
+   function LineByLinePrinter(config) {
+     this.config = config;
++
++    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
++    hoganUtils = new HoganJsUtils(config);
+   }
+
+   LineByLinePrinter.prototype.makeFileDiffHtml = function(file, diffs) {
+diff --git a/src/side-by-side-printer.js b/src/side-by-side-printer.js
+index bbf1dc8d..5e3033b3 100644
+--- a/src/side-by-side-printer.js
++++ b/src/side-by-side-printer.js
+@@ -11,7 +11,8 @@
+   var utils = require('./utils.js').Utils;
+   var Rematch = require('./rematch.js').Rematch;
+
+-  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
++  var hoganUtils;
++
+   var genericTemplatesPath = 'generic';
+   var baseTemplatesPath = 'side-by-side';
+   var iconsBaseTemplatesPath = 'icon';
+@@ -26,6 +27,9 @@
+
+   function SideBySidePrinter(config) {
+     this.config = config;
++
++    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
++    hoganUtils = new HoganJsUtils(config);
+   }
+
+   SideBySidePrinter.prototype.makeDiffHtml = function(file, diffs) {
+diff --git a/test/file-list-printer-tests.js b/test/file-list-printer-tests.js
+index a502a46f..60ea3208 100644
+--- a/test/file-list-printer-tests.js
++++ b/test/file-list-printer-tests.js
+@@ -1,6 +1,6 @@
+ var assert = require('assert');
+
+-var fileListPrinter = require('../src/file-list-printer.js').FileListPrinter;
++var fileListPrinter = new (require('../src/file-list-printer.js').FileListPrinter)();
+
+ describe('FileListPrinter', function() {
+   describe('generateFileList', function() {
+diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
+index 190bf6f8..3bb754ac 100644
+--- a/test/hogan-cache-tests.js
++++ b/test/hogan-cache-tests.js
+@@ -1,6 +1,6 @@
+ var assert = require('assert');
+
+-var HoganJsUtils = require('../src/hoganjs-utils.js').HoganJsUtils;
++var HoganJsUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)();
+ var diffParser = require('../src/diff-parser.js').DiffParser;
+
+ describe('HoganJsUtils', function() {
+@@ -21,16 +21,28 @@ describe('HoganJsUtils', function() {
+       });
+       assert.equal(emptyDiffHtml, result);
+     });
++
+     it('should render view without cache', function() {
+       var result = HoganJsUtils.render('generic', 'empty-diff', {
+         contentClass: 'd2h-code-line',
+         diffParser: diffParser
+       }, {noCache: true});
+-      assert.equal(emptyDiffHtml + '\n', result);
++      assert.equal(emptyDiffHtml, result);
+     });
++
+     it('should return null if template is missing', function() {
+-      var result = HoganJsUtils.render('generic', 'missing-template', {}, {noCache: true});
++      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)({noCache: true});
++      var result = hoganUtils.render('generic', 'missing-template', {});
+       assert.equal(null, result);
+     });
++
++    it('should allow templates to be overridden', function() {
++      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
++
++      var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
++      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
++      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
++      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
++    });
+   });
+ });
+diff --git a/test/line-by-line-tests.js b/test/line-by-line-tests.js
+index 1cd92073..8869b3df 100644
+--- a/test/line-by-line-tests.js
++++ b/test/line-by-line-tests.js
+@@ -14,7 +14,7 @@ describe('LineByLinePrinter', function() {
+         '            File without changes\n' +
+         '        &lt;/div&gt;\n' +
+         '    &lt;/td&gt;\n' +
+-        '&lt;/tr&gt;\n';
++        '&lt;/tr&gt;';
+
+       assert.equal(expected, fileHtml);
+     });
+@@ -422,7 +422,6 @@ describe('LineByLinePrinter', function() {
+         '        &lt;/div&gt;\n' +
+         '    &lt;/td&gt;\n' +
+         '&lt;/tr&gt;\n' +
+-        '\n' +
+         '                &lt;/tbody&gt;\n' +
+         '            &lt;/table&gt;\n' +
+         '        &lt;/div&gt;\n' +
+diff --git a/test/side-by-side-printer-tests.js b/test/side-by-side-printer-tests.js
+index 76625f8e..771daaa5 100644
+--- a/test/side-by-side-printer-tests.js
++++ b/test/side-by-side-printer-tests.js
+@@ -14,7 +14,7 @@ describe('SideBySidePrinter', function() {
+         '            File without changes\n' +
+         '        &lt;/div&gt;\n' +
+         '    &lt;/td&gt;\n' +
+-        '&lt;/tr&gt;\n';
++        '&lt;/tr&gt;';
+
+       assert.equal(expectedRight, fileHtml.right);
+       assert.equal(expectedLeft, fileHtml.left);
+@@ -324,7 +324,6 @@ describe('SideBySidePrinter', function() {
+         '        &lt;/div&gt;\n' +
+         '    &lt;/td&gt;\n' +
+         '&lt;/tr&gt;\n' +
+-        '\n' +
+         '                    &lt;/tbody&gt;\n' +
+         '                &lt;/table&gt;\n' +
+         '            &lt;/div&gt;\n' +
+
+From f3cadb96677d0eb82fc2752dc3ffbf35ca9b5bdb Mon Sep 17 00:00:00 2001
+From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
+Date: Sat, 15 Oct 2016 13:21:22 +0100
+Subject: [PATCH 2/2] Allow uncompiled templates
+
+---
+ README.md                 |  3 +++
+ src/hoganjs-utils.js      |  7 +++++++
+ test/hogan-cache-tests.js | 24 +++++++++++++++++++++++-
+ 3 files changed, 33 insertions(+), 1 deletion(-)
+
+diff --git a/README.md b/README.md
+index 132c8a28..46909f25 100644
+--- a/README.md
++++ b/README.md
+@@ -98,6 +98,9 @@ The HTML output accepts a Javascript object with configuration. Possible options
+   - `synchronisedScroll`: scroll both panes in side-by-side mode: `true` or `false`, default is `false`
+   - `matchWordsThreshold`: similarity threshold for word matching, default is 0.25
+   - `matchingMaxComparisons`: perform at most this much comparisons for line matching a block of changes, default is `2500`
++  - `templates`: object with previously compiled templates to replace parts of the html
++  - `rawTemplates`: object with raw not compiled templates to replace parts of the html
++  &gt; For more information regarding the possible templates look into [src/templates](https://github.com/rtfpessoa/diff2html/tree/master/src/templates)
+
+ ## Diff2HtmlUI Helper
+
+diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
+index 0dda08d7..b2e9c275 100644
+--- a/src/hoganjs-utils.js
++++ b/src/hoganjs-utils.js
+@@ -17,6 +17,13 @@
+   function HoganJsUtils(configuration) {
+     this.config = configuration || {};
+     extraTemplates = this.config.templates || {};
++
++    var rawTemplates = this.config.rawTemplates || {};
++    for (var templateName in rawTemplates) {
++      if (rawTemplates.hasOwnProperty(templateName)) {
++        if (!extraTemplates[templateName]) extraTemplates[templateName] = this.compile(rawTemplates[templateName]);
++      }
++    }
+   }
+
+   HoganJsUtils.prototype.render = function(namespace, view, params) {
+diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
+index 3bb754ac..a34839c0 100644
+--- a/test/hogan-cache-tests.js
++++ b/test/hogan-cache-tests.js
+@@ -36,7 +36,7 @@ describe('HoganJsUtils', function() {
+       assert.equal(null, result);
+     });
+
+-    it('should allow templates to be overridden', function() {
++    it('should allow templates to be overridden with compiled templates', function() {
+       var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
+
+       var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
+@@ -44,5 +44,27 @@ describe('HoganJsUtils', function() {
+       var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
+       assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
+     });
++
++    it('should allow templates to be overridden with uncompiled templates', function() {
++      var emptyDiffTemplate = '&lt;p&gt;&lt;/p&gt;';
++
++      var config = {rawTemplates: {'generic-empty-diff': emptyDiffTemplate}};
++      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
++      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
++      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
++    });
++
++    it('should allow templates to be overridden giving priority to compiled templates', function() {
++      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
++      var emptyDiffTemplateUncompiled = '&lt;p&gt;Not used!&lt;/p&gt;';
++
++      var config = {
++        templates: {'generic-empty-diff': emptyDiffTemplate},
++        rawTemplates: {'generic-empty-diff': emptyDiffTemplateUncompiled}
++      };
++      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
++      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
++      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
++    });
+   });
+ });
+</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is how you can display code diffs]]></summary></entry><entry><title type="html">a post with advanced image components</title><link href="https://dairyking98.github.io/al-folio/blog/2024/advanced-images/" rel="alternate" type="text/html" title="a post with advanced image components"/><published>2024-01-27T11:46:00+00:00</published><updated>2024-01-27T11:46:00+00:00</updated><id>https://dairyking98.github.io/al-folio/blog/2024/advanced-images</id><content type="html" xml:base="https://dairyking98.github.io/al-folio/blog/2024/advanced-images/"><![CDATA[<p>This is an example post with advanced image components.</p> <h2 id="image-slider">Image Slider</h2> <p>This is a simple image slider. It uses the <a href="https://swiperjs.com/">Swiper</a> library. Check the <a href="https://swiperjs.com/demos">examples page</a> for more information of what you can achieve with it.</p> <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true"> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/9-480.webp 480w,/al-folio/assets/img/9-800.webp 800w,/al-folio/assets/img/9-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/9.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/7-480.webp 480w,/al-folio/assets/img/7-800.webp 800w,/al-folio/assets/img/7-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/7.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/8-480.webp 480w,/al-folio/assets/img/8-800.webp 800w,/al-folio/assets/img/8-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/8.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/10-480.webp 480w,/al-folio/assets/img/10-800.webp 800w,/al-folio/assets/img/10-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/10.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/12-480.webp 480w,/al-folio/assets/img/12-800.webp 800w,/al-folio/assets/img/12-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/12.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> </swiper-container> <h2 id="image-comparison-slider">Image Comparison Slider</h2> <p>This is a simple image comparison slider. It uses the <a href="https://img-comparison-slider.sneas.io/">img-comparison-slider</a> library. Check the <a href="https://img-comparison-slider.sneas.io/examples.html">examples page</a> for more information of what you can achieve with it.</p> <img-comparison-slider> <figure slot="first"> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/prof_pic-480.webp 480w,/al-folio/assets/img/prof_pic-800.webp 800w,/al-folio/assets/img/prof_pic-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/prof_pic.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <figure slot="second"> <picture> <source class="responsive-img-srcset" srcset="/al-folio/assets/img/prof_pic_color-480.webp 480w,/al-folio/assets/img/prof_pic_color-800.webp 800w,/al-folio/assets/img/prof_pic_color-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/al-folio/assets/img/prof_pic_color.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </img-comparison-slider>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what advanced image components could look like]]></summary></entry></feed>

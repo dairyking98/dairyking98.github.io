@@ -30,6 +30,20 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/al-folio/personal-projects/";
               },
+            },{id: "dropdown-3d-type-elements",
+              title: "3d type elements",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/al-folio/3d-type-elements/";
+              },
+            },{id: "dropdown-photography",
+              title: "photography",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/al-folio/photography/";
+              },
             },{id: "nav-repositories",
           title: "repositories",
           description: "Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.",
@@ -44,36 +58,14 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/cv/";
           },
-        },{id: "nav-typewriters",
-          title: "typewriters",
-          description: "My typewriter collection and related projects.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/al-folio/typewriters/";
-          },
-        },{id: "post-senior-capstone-ev-battery-management-and-swapping-system",
-        
-          title: "Senior Capstone - EV Battery Management and Swapping System",
-        
-        description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/al-folio/blog/2025/senior-capstone-ev-battery-management/";
-          
-        },
-      },{id: "post-large-laser-cut-vernier-caliper",
-        
-          title: "Large Laser Cut Vernier Caliper",
-        
-        description: "Oversized, fully functional 33&quot; vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01&quot; resolution.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/al-folio/blog/2025/large-laser-cut-vernier-caliper/";
-          
-        },
-      },{id: "post-a-post-with-plotly-js",
+        },{id: "dropdown-typewriters",
+              title: "typewriters",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/al-folio/typewriter-collection/";
+              },
+            },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
         
@@ -93,28 +85,6 @@ ninja.data = [{
         handler: () => {
           
             window.location.href = "/al-folio/blog/2025/welcome/";
-          
-        },
-      },{id: "post-open-ended-experiment-tensile-testing-of-acrylic-with-geometric-discontinuities",
-        
-          title: "Open-Ended Experiment - Tensile Testing of Acrylic with Geometric Discontinuities",
-        
-        description: "Investigated how cast acrylic specimens with holes and notches respond to tensile loading using Instron testing and stress concentration analysis.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/al-folio/blog/2024/acrylic-tensile-test/";
-          
-        },
-      },{id: "post-analog-voltmeter-clock-time-and-environmental-monitor",
-        
-          title: "Analog Voltmeter Clock - Time and Environmental Monitor",
-        
-        description: "A unique clock project combining analog voltmeters with environmental monitoring, featuring custom 3D-printed enclosure and Arduino-based control system.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/al-folio/blog/2024/analog-voltmeter-clock/";
           
         },
       },{id: "post-a-post-with-image-galleries",
@@ -359,17 +329,6 @@ ninja.data = [{
             window.location.href = "/al-folio/blog/2022/giscus-comments/";
           
         },
-      },{id: "post-cad-project-self-propelled-wall-leaper",
-        
-          title: "CAD Project - Self-Propelled Wall Leaper",
-        
-        description: "A detailed CAD design project from my Intro to Engineering course, where I designed and built a self-propelled device that launches over a 3-foot wall using rubber band power and 3D printed components.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/al-folio/blog/2022/cad-project/";
-          
-        },
       },{id: "post-displaying-external-posts-on-your-al-folio-blog",
         
           title: 'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
@@ -496,71 +455,96 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "a project that redirects to another website",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/3_project/";
-            },},{id: "projects-project-4",
-          title: 'project 4',
-          description: "another without an image",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/4_project/";
-            },},{id: "projects-project-5",
-          title: 'project 5',
-          description: "a project with a background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/5_project/";
-            },},{id: "projects-project-6",
-          title: 'project 6',
-          description: "a project with no image",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/6_project/";
-            },},{id: "projects-project-7",
-          title: 'project 7',
-          description: "with background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/7_project/";
-            },},{id: "projects-project-8",
-          title: 'project 8',
-          description: "an other project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/8_project/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/9_project/";
-            },},{id: "projects-bennett-type-elements",
+          section: "News",},{id: "projects-bennett-type-elements",
           title: 'Bennett Type Elements',
           description: "3D-printed replacement type elements for Bennett Pocket Typewriters, restoring functionality to machines with damaged or lost original vulcanized rubber elements",
           section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/bennett-type-elements/";
+              window.location.href = "/al-folio/projects/3d-type-elements/bennett-type-elements/";
             },},{id: "projects-blickensderfer-typewheels",
           title: 'Blickensderfer Typewheels',
           description: "Brand-new 3D-printed replacement type elements for antique Blickensderfer typewriters, featuring typefaces never before available for these machines",
           section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/blickensderfer-typewheels/";
+              window.location.href = "/al-folio/projects/3d-type-elements/blickensderfer-typewheels/";
             },},{id: "projects-helios-klimax-type-elements",
           title: 'Helios Klimax Type Elements',
           description: "3D-printed replacement type elements for the unusual Helios Klimax Typewriter from Germany, developed through collaborative design and iteration with a collector friend",
           section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/helios-klimax-type-elements/";
+              window.location.href = "/al-folio/projects/3d-type-elements/helios-klimax-type-elements/";
             },},{id: "projects-ibm-selectric-type-elements",
           title: 'IBM Selectric Type Elements',
           description: "Parametric 3D-printed replacement type elements for IBM Selectric typewriters, with support for any keyboard layout, font, and key arrangement",
           section: "Projects",handler: () => {
-              window.location.href = "/al-folio/projects/ibm-selectric-type-elements/";
+              window.location.href = "/al-folio/projects/3d-type-elements/ibm-selectric-type-elements/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/fun/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/fun/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/fun/6_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/fun/9_project/";
+            },},{id: "projects-large-laser-cut-vernier-caliper",
+          title: 'Large Laser Cut Vernier Caliper',
+          description: "Oversized, fully functional 33&quot; vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01&quot; resolution.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/personal-project/large-laser-cut-vernier-caliper/";
+            },},{id: "projects-acrylic-tensile-testing",
+          title: 'Acrylic Tensile Testing',
+          description: "Investigated how cast acrylic specimens with holes and notches respond to tensile loading using Instron testing and stress concentration analysis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/school-project/acrylic-tensile-testing/";
+            },},{id: "projects-analog-voltmeter-clock",
+          title: 'Analog Voltmeter Clock',
+          description: "A unique clock project combining analog voltmeters with environmental monitoring, featuring custom 3D-printed enclosure and Arduino-based control system.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/school-project/analog-voltmeter-clock/";
+            },},{id: "projects-self-propelled-wall-leaper",
+          title: 'Self-Propelled Wall Leaper',
+          description: "A detailed CAD design project from my Intro to Engineering course, where I designed and built a self-propelled device that launches over a 3-foot wall using rubber band power and 3D printed components.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/school-project/cad-project-self-propelled-wall-leaper/";
+            },},{id: "projects-ev-battery-management-system",
+          title: 'EV Battery Management System',
+          description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/school-project/senior-capstone-ev-battery-management/";
+            },},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/work/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/work/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/work/3_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/work/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/work/8_project/";
             },},{id: "typewriters-bennett-pocket-typewriter",
           title: 'Bennett Pocket Typewriter',
           description: "Bennett Pocket Typewriter (1910) typewriter details.",
