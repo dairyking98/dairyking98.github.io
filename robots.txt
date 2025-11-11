@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://dairyking98.github.io/al-folio/sitemap.xml
