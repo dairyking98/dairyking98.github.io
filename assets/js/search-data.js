@@ -44,13 +44,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/cv/";
           },
-        },{id: "nav-teaching",
-          title: "teaching",
-          description: "Materials for courses you taught. Replace this text with your description.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/al-folio/teaching/";
-          },
         },{id: "nav-typewriters",
           title: "typewriters",
           description: "My typewriter collection and related projects.",
@@ -548,6 +541,26 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/al-folio/projects/9_project/";
+            },},{id: "projects-bennett-type-elements",
+          title: 'Bennett Type Elements',
+          description: "3D-printed replacement type elements for Bennett Pocket Typewriters, restoring functionality to machines with damaged or lost original vulcanized rubber elements",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/bennett-type-elements/";
+            },},{id: "projects-blickensderfer-typewheels",
+          title: 'Blickensderfer Typewheels',
+          description: "Brand-new 3D-printed replacement type elements for antique Blickensderfer typewriters, featuring typefaces never before available for these machines",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/blickensderfer-typewheels/";
+            },},{id: "projects-helios-klimax-type-elements",
+          title: 'Helios Klimax Type Elements',
+          description: "3D-printed replacement type elements for the unusual Helios Klimax Typewriter from Germany, developed through collaborative design and iteration with a collector friend",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/helios-klimax-type-elements/";
+            },},{id: "projects-ibm-selectric-type-elements",
+          title: 'IBM Selectric Type Elements',
+          description: "Parametric 3D-printed replacement type elements for IBM Selectric typewriters, with support for any keyboard layout, font, and key arrangement",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/ibm-selectric-type-elements/";
             },},{id: "typewriters-bennett-pocket-typewriter",
           title: 'Bennett Pocket Typewriter',
           description: "Bennett Pocket Typewriter (1910) typewriter details.",
