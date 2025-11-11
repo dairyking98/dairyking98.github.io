@@ -5,6 +5,8 @@ description: Olympia SG1 (1959) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/olympia-sg1-7-487163/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Olympia SG1

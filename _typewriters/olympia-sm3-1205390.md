@@ -5,6 +5,8 @@ description: Olympia SM3 (1958) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/olympia-sm3-1205390/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Olympia SM3

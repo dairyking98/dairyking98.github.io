@@ -5,6 +5,8 @@ description: Underwood No. 3 (1917) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/underwood-no-3-206803/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Underwood No. 3

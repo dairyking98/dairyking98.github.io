@@ -5,6 +5,8 @@ description: Hammond Model 1 (1890) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/hammond-model-1-15058/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Hammond Model 1

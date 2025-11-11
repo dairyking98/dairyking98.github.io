@@ -79,12 +79,30 @@ This page displays all typewriters in my collection.
   {% if type_class == '' %}
     {% assign type_class = 'Standard' %}
   {% endif %}
+  {% comment %} Find matching typewriter page to get img field {% endcomment %}
+  {% assign typewriter_page = nil %}
+  {% if typewriter.slug %}
+    {% for page in site.typewriters %}
+      {% assign page_slug = page.permalink | remove: '/typewriters/' | remove: '/' %}
+      {% if page_slug == typewriter.slug %}
+        {% assign typewriter_page = page %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
   <div class="card mb-3 mt-4 typewriter-card" 
        data-manufacturer="{{ typewriter.manufacturer | default: '' }}" 
-       data-model="{{ typewriter.model | default: '' }}" 
+       data-model="{{ typewriter.model | default: '' }}"
        data-year="{{ typewriter.year | default: '' }}"
        data-type="{{ type_class }}">
-    <div class="card-body">
+    <div class="row no-gutters">
+      {% if typewriter_page.img %}
+        <div class="col-md-6">
+          {% include figure.liquid loading="lazy" path=typewriter_page.img sizes="(min-width: 768px) 156px, 50vw" alt="typewriter thumbnail" class="card-img" %}
+        </div>
+      {% endif %}
+      <div class="{% if typewriter_page.img %}col-md-6{% else %}col-md-12{% endif %}">
+        <div class="card-body">
       <h3 class="card-title">
         {% if typewriter.year and typewriter.year != '' %}
           {{ typewriter.year }}
@@ -157,6 +175,8 @@ This page displays all typewriters in my collection.
         {% else %}
           <a href="{{ '/typewriters/' | append: typewriter.slug | append: '/' | relative_url }}" class="btn btn-secondary">View Details</a>
         {% endif %}
+      </div>
+        </div>
       </div>
     </div>
   </div>

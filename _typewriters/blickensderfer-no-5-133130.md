@@ -5,6 +5,8 @@ description: Blickensderfer no. 5 (1909) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/blickensderfer-no-5-133130/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Blickensderfer no. 5

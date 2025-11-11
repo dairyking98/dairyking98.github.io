@@ -5,6 +5,8 @@ description: Underwood 4 Bank (1926) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/underwood-4-bank-4b7867/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Underwood 4 Bank

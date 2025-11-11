@@ -5,6 +5,8 @@ description: Underwood Quiet Tab (1953) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/underwood-quiet-tab-aa2730434/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Underwood Quiet Tab

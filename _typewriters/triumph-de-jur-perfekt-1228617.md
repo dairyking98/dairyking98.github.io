@@ -5,6 +5,8 @@ description: Triumph De Jur Perfekt (1960) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/triumph-de-jur-perfekt-1228617/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Triumph De Jur Perfekt

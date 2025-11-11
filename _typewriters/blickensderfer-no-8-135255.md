@@ -5,6 +5,8 @@ description: Blickensderfer no. 8 (1909) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/blickensderfer-no-8-135255/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Blickensderfer no. 8

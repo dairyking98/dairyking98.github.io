@@ -5,6 +5,8 @@ description: Postal No. 3 (1901) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/postal-no-3-14550/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Postal No. 3

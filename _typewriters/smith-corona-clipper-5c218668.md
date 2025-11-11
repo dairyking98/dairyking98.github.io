@@ -5,6 +5,8 @@ description: Smith Corona Clipper (1952) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/smith-corona-clipper-5c218668/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Smith Corona Clipper

@@ -5,6 +5,8 @@ description: Hammond Multiplex (1913) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/hammond-multiplex-224478/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Hammond Multiplex

@@ -36,8 +36,3 @@ layout: default
     {% include giscus.liquid %}
   {% endif %}
 </div>
-
-{% if page.collection == 'typewriters' %}
-  <!-- Enable PhotoSwipe for typewriter pages -->
-  <script defer src="{{ '/assets/js/photoswipe-setup.js' | relative_url }}" type="module"></script>
-{% endif %}

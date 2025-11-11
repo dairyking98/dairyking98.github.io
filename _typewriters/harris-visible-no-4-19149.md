@@ -5,6 +5,8 @@ description: Harris Visible no. 4 (1912) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/harris-visible-no-4-19149/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Harris Visible no. 4

@@ -5,6 +5,8 @@ description: Sun No. 2 Standard (1901) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/sun-no-2-standard-8278/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Sun No. 2 Standard

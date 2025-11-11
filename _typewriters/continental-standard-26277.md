@@ -5,6 +5,8 @@ description: Continental Standard (1911) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/continental-standard-26277/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Continental Standard

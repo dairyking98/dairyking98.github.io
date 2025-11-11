@@ -5,6 +5,8 @@ description: IBM Model 04 Executive (1947) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/ibm-model-04-executive-180437/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## IBM Model 04 Executive

@@ -5,6 +5,8 @@ description: Junior (Spain) Model 58 typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/junior-spain-model-58-c2492/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Junior (Spain) Model 58

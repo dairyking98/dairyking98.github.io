@@ -5,6 +5,8 @@ description: Facit TP1 (1961) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/facit-tp1-p287156/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Facit TP1

@@ -5,6 +5,8 @@ description: Remington 17 (1946) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/remington-17-j794385/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Remington 17

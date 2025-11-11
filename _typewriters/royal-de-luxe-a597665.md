@@ -5,6 +5,8 @@ description: Royal De Luxe (1936) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/royal-de-luxe-a597665/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Royal De Luxe

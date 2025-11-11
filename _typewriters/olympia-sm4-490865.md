@@ -5,6 +5,8 @@ description: Olympia SM4 (1954) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/olympia-sm4-490865/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Olympia SM4

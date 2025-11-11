@@ -5,6 +5,8 @@ description: Underwood Champion Typemaster (1938) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/underwood-champion-typemaster-g1130193/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Underwood Champion Typemaster

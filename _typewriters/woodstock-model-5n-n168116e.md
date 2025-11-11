@@ -5,6 +5,8 @@ description: Woodstock Model 5N (1927) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/woodstock-model-5n-n168116e/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Woodstock Model 5N

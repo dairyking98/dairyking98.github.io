@@ -5,6 +5,8 @@ description: Royal Quiet De Luxe (1939) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/royal-quiet-de-luxe-a-873792/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Royal Quiet De Luxe

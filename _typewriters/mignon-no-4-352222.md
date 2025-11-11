@@ -5,6 +5,8 @@ description: Mignon No. 4 (1925) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/mignon-no-4-352222/
 collection: typewriters
+images:
+  photoswipe: true
 ---
 
 ## Mignon No. 4
