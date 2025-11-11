@@ -1,10 +1,10 @@
 ---
-layout: post
-title: Open-Ended Experiment - Tensile Testing of Acrylic with Geometric Discontinuities
-date: 2024-12-20 09:00:00
+layout: page
+title: Acrylic Tensile Testing
 description: Investigated how cast acrylic specimens with holes and notches respond to tensile loading using Instron testing and stress concentration analysis.
-tags: materials-testing mechanical-engineering stress-analysis school-project
-categories: School Projects
+img: assets/img/12.jpg
+importance: 4
+category: school-project
 ---
 
 ENGR 302 – Experimental Analysis at San Francisco State University culminated in an open-ended lab where my teammates (Tom Boivin, Driss Hakkou, Denis Steffen) and I characterized how geometric discontinuities influence the tensile performance of 1/4-inch cast acrylic. We modeled and fabricated "dog bone" specimens with circular, notched, square, and diamond cut-outs, then compared their behavior against a control sample to understand how stress concentration factors translate into real failures.
@@ -72,7 +72,7 @@ The close agreement between theoretical and experimental stress concentration fa
 
 ## Source Document
 
-- [Open-Ended Experiment Report (PDF)](/documents/2024/engr302/OEE-Final-Report-12-20-24.pdf)
+- [Open-Ended Experiment Report (PDF)](/assets/documents/2024/engr302/OEE-Final-Report-12-20-24.pdf)
 
 ---
 

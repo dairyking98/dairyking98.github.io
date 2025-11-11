@@ -4,7 +4,7 @@ title: Blickensderfer Typewheels
 description: Brand-new 3D-printed replacement type elements for antique Blickensderfer typewriters, featuring typefaces never before available for these machines
 img: assets/img/12.jpg
 importance: 1
-category: 3d-type-elements
+category: 3d type elements
 ---
 
 ## Overview
@@ -59,7 +59,7 @@ This work was [featured on Typewriter Revolution](https://typewriterrevolution.c
 
 ### Related Typewriters
 
-View my Blickensderfer typewriters in my [typewriter collection]({{ '/typewriters/collection/' | relative_url }}):
+View my Blickensderfer typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign blickensderfers = site.data.typewriters | where: "manufacturer", "Blickensderfer" %}
 {% for tw in blickensderfers %}
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})

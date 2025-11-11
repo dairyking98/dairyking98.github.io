@@ -4,7 +4,7 @@ title: Helios Klimax Type Elements
 description: 3D-printed replacement type elements for the unusual Helios Klimax Typewriter from Germany, developed through collaborative design and iteration with a collector friend
 img: assets/img/12.jpg
 importance: 1
-category: 3d-type-elements
+category: 3d type elements
 ---
 
 ## Overview

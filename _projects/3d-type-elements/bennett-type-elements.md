@@ -4,7 +4,7 @@ title: Bennett Type Elements
 description: 3D-printed replacement type elements for Bennett Pocket Typewriters, restoring functionality to machines with damaged or lost original vulcanized rubber elements
 img: assets/img/12.jpg
 importance: 1
-category: 3d-type-elements
+category: 3d type elements
 ---
 
 ## Overview
@@ -53,7 +53,7 @@ The parametric OpenSCAD approach allowed for precise control over the geometry, 
 
 ### Related Typewriters
 
-View my Bennett Pocket Typewriters in my [typewriter collection]({{ '/typewriters/collection/' | relative_url }}):
+View my Bennett Pocket Typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign bennetts = site.data.typewriters | where: "manufacturer", "Bennett" %}
 {% for tw in bennetts %}
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})

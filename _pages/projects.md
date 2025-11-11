@@ -1,6 +1,6 @@
 ---
 layout: page
-title: projects
+title: projects&works
 permalink: /projects/
 description: Projects dropdown
 nav: true
@@ -11,4 +11,8 @@ children:
     permalink: /school-projects/
   - title: personal projects
     permalink: /personal-projects/
+  - title: 3d type elements
+    permalink: /3d-type-elements/
+  - title: photography
+    permalink: /photography/
 ---

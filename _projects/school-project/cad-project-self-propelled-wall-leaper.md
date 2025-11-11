@@ -1,10 +1,10 @@
 ---
-layout: post
-title: CAD Project - Self-Propelled Wall Leaper
-date: 2022-11-29 10:00:00
+layout: page
+title: Self-Propelled Wall Leaper
 description: A detailed CAD design project from my Intro to Engineering course, where I designed and built a self-propelled device that launches over a 3-foot wall using rubber band power and 3D printed components.
-tags: cad design engineering school-project fusion360 3d-printing
-categories: School Projects
+img: assets/img/12.jpg
+importance: 2
+category: school-project
 ---
 
 This project was completed for my Intro to Engineering course in November 2022, under Professor Khandani. The challenge was to create a device from scratch that is self-propelled and launches from one point to another 8 feet away while overcoming a 3-foot vertical height in the center.
@@ -153,10 +153,10 @@ The project successfully demonstrated the engineering design process from proble
 
 The following documents are available for reference:
 
-- [CAD Project Final Report](/documents/2022/cad-project/CAD-Project-Final-Report.pdf) - Complete final report with design process, iterations, and analysis
-- [Progress Report 056](/documents/2022/cad-project/DesignProjectAssignment8ProgressReport056.pdf) - Early progress documentation
-- [Progress Report 057](/documents/2022/cad-project/DesignProjectAssignment8ProgressReport057.pdf) - Mid-project progress update
-- [Progress Report 058](/documents/2022/cad-project/DesignProjectAssignment8ProgressReport058.pdf) - Final progress documentation
+- [CAD Project Final Report](/assets/documents/2022/cad-project/CAD-Project-Final-Report.pdf) - Complete final report with design process, iterations, and analysis
+- [Progress Report 056](/assets/documents/2022/cad-project/DesignProjectAssignment8ProgressReport056.pdf) - Early progress documentation
+- [Progress Report 057](/assets/documents/2022/cad-project/DesignProjectAssignment8ProgressReport057.pdf) - Mid-project progress update
+- [Progress Report 058](/assets/documents/2022/cad-project/DesignProjectAssignment8ProgressReport058.pdf) - Final progress documentation
 
 ---
 

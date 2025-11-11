@@ -1,10 +1,10 @@
 ---
-layout: post
-title: Senior Capstone - EV Battery Management and Swapping System
-date: 2025-11-08 10:00:00
+layout: page
+title: EV Battery Management System
 description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation."
-tags: school-project electronics embedded-systems design mechanical-engineering portfolio
-categories: School Projects
+img: assets/img/12.jpg
+importance: 1
+category: school-project
 ---
 
 This post tracks my ongoing senior capstone project: an electric vehicle battery management and swapping system designed to keep equipment running continuously through rapid battery exchange and robust state-of-health/state-of-charge monitoring.

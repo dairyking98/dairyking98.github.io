@@ -1,14 +1,10 @@
 ---
 layout: page
 title: typewriter collection
-permalink: /typewriters/collection/
+permalink: /typewriter-collection/
 description: A comprehensive list of typewriters in my collection.
 nav: false
 ---
-
-## My Typewriter Collection
-
-This page displays all typewriters in my collection.
 
 #### Summary Statistics
 

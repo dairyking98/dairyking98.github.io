@@ -4,7 +4,7 @@ title: IBM Selectric Type Elements
 description: Parametric 3D-printed replacement type elements for IBM Selectric typewriters, with support for any keyboard layout, font, and key arrangement
 img: assets/img/12.jpg
 importance: 1
-category: 3d-type-elements
+category: 3d type elements
 ---
 
 ## Overview
@@ -86,7 +86,7 @@ This parametric approach means that creating a new type element is as simple as 
 
 ### Related Typewriters
 
-View my IBM Selectric typewriters in my [typewriter collection]({{ '/typewriters/collection/' | relative_url }}):
+View my IBM Selectric typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign ibm_selectrics = site.data.typewriters | where_exp: "tw", "tw.model contains 'Selectric'" %}
 {% for tw in ibm_selectrics %}
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})

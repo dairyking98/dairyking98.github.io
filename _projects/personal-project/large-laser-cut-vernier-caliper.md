@@ -1,10 +1,10 @@
 ---
-layout: post
+layout: page
 title: Large Laser Cut Vernier Caliper
-date: 2025-11-08 10:00:00
 description: Oversized, fully functional 33" vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01" resolution.
-tags: laser-cutting 3d-printing fusion-360 python measurement fabrication personal-project education
-categories: Personal Projects
+img: assets/img/12.jpg
+importance: 1
+category: personal-project
 ---
 
 I designed and built a large-format vernier caliper as an educational tool that demonstrates precision measurement concepts at a scale that's easy to see and understand.

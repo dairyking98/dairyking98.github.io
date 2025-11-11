@@ -1,10 +1,12 @@
 ---
-layout: post
-title: Analog Voltmeter Clock - Time and Environmental Monitor
-date: 2024-12-15 10:00:00
+layout: page
+title: Analog Voltmeter Clock
 description: A unique clock project combining analog voltmeters with environmental monitoring, featuring custom 3D-printed enclosure and Arduino-based control system.
-tags: arduino electronics embedded-systems sensors 3d-printing school-project personal-project
-categories: School Projects
+img: assets/img/12.jpg
+importance: 3
+importance_school-project: 3
+importance_personal-project: 2
+category: school-project, personal-project
 ---
 
 This project was completed for Assignment 4 in Fall 2024, under Professor Jonathan Song. The challenge was to design and build a device that displays time using analog voltmeters, with the added functionality of monitoring pressure, temperature, and humidity.
@@ -105,10 +107,10 @@ This project taught me valuable lessons about:
 
 The following documents are available for reference:
 
-- [Clock Report](/documents/2024/clock-project/Clock-Report.pdf) - Complete project report with detailed design, implementation, and analysis
-- [Assignment 4 Project Idea](/documents/2024/clock-project/Assignment-4-Project-Idea.pdf) - Initial project proposal and concept
-- [Arduino Clock Code](/documents/2024/clock-project/Arduino-Clock-Code.md) - Complete source code with detailed comments
-- [Clock Presentation](/documents/2024/clock-project/Clock-Presentation.pdf) - Project presentation slides
+- [Clock Report](/assets/documents/2024/clock-project/Clock-Report.pdf) - Complete project report with detailed design, implementation, and analysis
+- [Assignment 4 Project Idea](/assets/documents/2024/clock-project/Assignment-4-Project-Idea.pdf) - Initial project proposal and concept
+- [Arduino Clock Code](/assets/documents/2024/clock-project/Arduino-Clock-Code.md) - Complete source code with detailed comments
+- [Clock Presentation](/assets/documents/2024/clock-project/Clock-Presentation.pdf) - Project presentation slides
 
 ---
 
