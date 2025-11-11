@@ -7,9 +7,8 @@ permalink: /typewriters/triumph-de-jur-perfekt-1228617/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Triumph De Jur Perfekt
 
 **Year:** 1960
 

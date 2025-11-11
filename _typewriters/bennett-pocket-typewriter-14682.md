@@ -5,14 +5,16 @@ description: Bennett Pocket Typewriter (1910) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/bennett-pocket-typewriter-14682/
 collection: typewriters
-gallery_images:
-  - assets/img/1.jpg
-  - assets/img/3.jpg
-  - assets/img/5.jpg
+images:
+  slider: true
 ---
-
-## Bennett Pocket Typewriter
-
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/9.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/8.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/10.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/12.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+</swiper-container>
 **Year:** 1910
 
 **Serial Number:** 14682

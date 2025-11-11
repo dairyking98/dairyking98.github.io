@@ -7,9 +7,8 @@ permalink: /typewriters/postal-no-3-14550/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Postal No. 3
 
 **Year:** 1901
 

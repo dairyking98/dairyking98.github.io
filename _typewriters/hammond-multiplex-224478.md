@@ -7,9 +7,8 @@ permalink: /typewriters/hammond-multiplex-224478/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Hammond Multiplex
 
 **Year:** 1913
 

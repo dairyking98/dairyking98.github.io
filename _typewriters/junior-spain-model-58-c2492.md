@@ -7,9 +7,8 @@ permalink: /typewriters/junior-spain-model-58-c2492/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Junior (Spain) Model 58
 
 **Serial Number:** C2492
 

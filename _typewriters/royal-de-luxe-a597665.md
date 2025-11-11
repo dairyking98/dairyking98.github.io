@@ -7,9 +7,8 @@ permalink: /typewriters/royal-de-luxe-a597665/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Royal De Luxe
 
 **Year:** 1936
 

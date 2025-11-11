@@ -7,9 +7,8 @@ permalink: /typewriters/olympia-sm4-490865/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Olympia SM4
 
 **Year:** 1954
 

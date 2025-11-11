@@ -7,9 +7,8 @@ permalink: /typewriters/sun-no-2-standard-8278/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Sun No. 2 Standard
 
 **Year:** 1901
 

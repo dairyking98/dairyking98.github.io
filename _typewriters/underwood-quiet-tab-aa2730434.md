@@ -7,9 +7,8 @@ permalink: /typewriters/underwood-quiet-tab-aa2730434/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Underwood Quiet Tab
 
 **Year:** 1953
 

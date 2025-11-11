@@ -5,13 +5,9 @@ description: Bennett Pocket Typewriter (1910) typewriter details.
 img: assets/img/12.jpg
 permalink: /typewriters/bennett-pocket-typewriter-18627/
 collection: typewriters
-gallery_images:
-  - assets/img/6.jpg
-  - assets/img/7.jpg
-  - assets/img/8.jpg
+images:
+  slider: true
 ---
-
-## Bennett Pocket Typewriter
 
 **Year:** 1910
 

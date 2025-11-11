@@ -7,9 +7,8 @@ permalink: /typewriters/royal-quiet-de-luxe-a-873792/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Royal Quiet De Luxe
 
 **Year:** 1939
 

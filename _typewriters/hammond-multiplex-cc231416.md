@@ -7,9 +7,8 @@ permalink: /typewriters/hammond-multiplex-cc231416/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Hammond Multiplex
 
 **Year:** 1915
 

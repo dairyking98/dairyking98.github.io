@@ -7,9 +7,8 @@ permalink: /typewriters/continental-standard-26277/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Continental Standard
 
 **Year:** 1911
 

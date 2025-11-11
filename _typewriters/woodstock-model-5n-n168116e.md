@@ -7,9 +7,8 @@ permalink: /typewriters/woodstock-model-5n-n168116e/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Woodstock Model 5N
 
 **Year:** 1927
 

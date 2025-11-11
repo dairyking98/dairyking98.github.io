@@ -7,9 +7,8 @@ permalink: /typewriters/blickensderfer-no-8-135255/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Blickensderfer no. 8
 
 **Year:** 1909
 

@@ -7,9 +7,8 @@ permalink: /typewriters/underwood-no-3-206803/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Underwood No. 3
 
 **Year:** 1917
 

@@ -7,9 +7,8 @@ permalink: /typewriters/mignon-no-4-352222/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Mignon No. 4
 
 **Year:** 1925
 

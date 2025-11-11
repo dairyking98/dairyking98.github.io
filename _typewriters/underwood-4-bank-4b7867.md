@@ -7,9 +7,8 @@ permalink: /typewriters/underwood-4-bank-4b7867/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Underwood 4 Bank
 
 **Year:** 1926
 

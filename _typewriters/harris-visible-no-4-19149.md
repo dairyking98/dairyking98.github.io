@@ -7,9 +7,8 @@ permalink: /typewriters/harris-visible-no-4-19149/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Harris Visible no. 4
 
 **Year:** 1912
 

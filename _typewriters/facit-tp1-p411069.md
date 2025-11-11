@@ -7,9 +7,8 @@ permalink: /typewriters/facit-tp1-p411069/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Facit TP1
 
 **Year:** 1965
 

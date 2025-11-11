@@ -7,9 +7,8 @@ permalink: /typewriters/underwood-champion-typemaster-g1130193/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Underwood Champion Typemaster
 
 **Year:** 1938
 

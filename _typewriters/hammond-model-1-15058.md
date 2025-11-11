@@ -7,9 +7,8 @@ permalink: /typewriters/hammond-model-1-15058/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Hammond Model 1
 
 **Year:** 1890
 

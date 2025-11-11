@@ -7,9 +7,8 @@ permalink: /typewriters/olympia-sm3-1205390/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Olympia SM3
 
 **Year:** 1958
 

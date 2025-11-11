@@ -7,9 +7,8 @@ permalink: /typewriters/olympia-sg1-7-487163/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Olympia SG1
 
 **Year:** 1959
 

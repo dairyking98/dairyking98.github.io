@@ -7,9 +7,8 @@ permalink: /typewriters/ibm-model-04-executive-180437/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## IBM Model 04 Executive
 
 **Year:** 1947
 

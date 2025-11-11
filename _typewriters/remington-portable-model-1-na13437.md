@@ -7,9 +7,8 @@ permalink: /typewriters/remington-portable-model-1-na13437/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Remington Portable Model 1
 
 **Serial Number:** NA13437
 

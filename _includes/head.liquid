@@ -152,10 +152,9 @@
       crossorigin="anonymous"
     >
   {% endif %}
-  {% if page.images.slider or page.collection == 'typewriters' and page.gallery_images and page.gallery_images.size > 0 %}
+  {% if page.images.slider %}
     <!-- Image slider -->
     <link
-      defer
       rel="stylesheet"
       href="{{ site.third_party_libraries.swiper.url.css }}"
       integrity="{{ site.third_party_libraries.swiper.integrity.css }}"
@@ -186,4 +185,16 @@
 
 {% if page.tikzjax %}
   <link defer rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+{% endif %}
+
+{% comment %} Load Swiper script early in head for web components to register properly
+     This ensures the script starts loading early and web components are available
+     Works in both local development and GitHub Pages hosting {% endcomment %}
+{% if page.images.slider %}
+  <script
+    type="module"
+    src="{{ site.third_party_libraries.swiper.url.js }}"
+    integrity="{{ site.third_party_libraries.swiper.integrity.js }}"
+    crossorigin="anonymous"
+  ></script>
 {% endif %}

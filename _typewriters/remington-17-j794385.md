@@ -7,9 +7,8 @@ permalink: /typewriters/remington-17-j794385/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Remington 17
 
 **Year:** 1946
 

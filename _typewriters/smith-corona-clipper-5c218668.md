@@ -7,9 +7,8 @@ permalink: /typewriters/smith-corona-clipper-5c218668/
 collection: typewriters
 images:
   photoswipe: true
+  slider: true
 ---
-
-## Smith Corona Clipper
 
 **Year:** 1952
 

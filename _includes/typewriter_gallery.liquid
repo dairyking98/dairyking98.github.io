@@ -21,37 +21,17 @@
 {% endcomment %}
 
 {% if include.images and include.images.size > 0 %}
-  <div class="typewriter-gallery mt-4 mb-4">
-    <h2>Gallery</h2>
-    <swiper-container 
-      keyboard="true" 
-      navigation="true" 
-      pagination="true" 
-      pagination-clickable="true" 
-      pagination-dynamic-bullets="true" 
-      rewind="true"
-      class="typewriter-swiper">
-      {% for image in include.images %}
-        <swiper-slide>
-          {% if image.path %}
-            {% assign image_path = image.path %}
-            {% assign image_title = image.title | default: page.title %}
-          {% elsif image contains '/' %}
-            {% assign image_path = image %}
-            {% assign image_title = page.title %}
-          {% else %}
-            {% assign image_path = image %}
-            {% assign image_title = page.title %}
-          {% endif %}
-          <a href="{{ image_path | relative_url }}" target="_blank" class="d-block">
-            {% include figure.liquid loading="lazy" path=image_path title=image_title class="img-fluid rounded z-depth-1" %}
-          </a>
-        </swiper-slide>
-      {% endfor %}
-    </swiper-container>
-    <div class="caption mt-2">
-      Click on any image to view in full size. Use the navigation arrows to browse through all photos.
-    </div>
-  </div>
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+  {% for image in include.images %}
+    {% if image.path %}
+      {% assign image_path = image.path %}
+    {% elsif image contains '/' %}
+      {% assign image_path = image %}
+    {% else %}
+      {% assign image_path = image %}
+    {% endif %}
+    <swiper-slide>{% include figure.liquid loading="eager" path=image_path class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  {% endfor %}
+</swiper-container>
 {% endif %}
 
