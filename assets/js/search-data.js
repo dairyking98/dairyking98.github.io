@@ -58,28 +58,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/typewriters/";
           },
-        },{id: "nav-people",
-          title: "people",
-          description: "members of the lab or group",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/al-folio/people/";
-          },
-        },{id: "dropdown-bookshelf",
-              title: "bookshelf",
-              description: "",
-              section: "Dropdown",
-              handler: () => {
-                window.location.href = "/al-folio/books/";
-              },
-            },{id: "dropdown-blog",
-              title: "blog",
-              description: "",
-              section: "Dropdown",
-              handler: () => {
-                window.location.href = "/al-folio/blog/";
-              },
-            },{id: "post-senior-capstone-ev-battery-management-and-swapping-system",
+        },{id: "post-senior-capstone-ev-battery-management-and-swapping-system",
         
           title: "Senior Capstone - EV Battery Management and Swapping System",
         

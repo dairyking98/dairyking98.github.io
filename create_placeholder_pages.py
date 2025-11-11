@@ -61,6 +61,8 @@ def create_placeholder_pages(yaml_path, output_dir):
         content += "img: assets/img/12.jpg\n"
         content += f"permalink: /typewriters/{slug}/\n"
         content += "collection: typewriters\n"
+        content += "images:\n"
+        content += "  photoswipe: true\n"
         content += "---\n\n"
         
         # Add typewriter information
