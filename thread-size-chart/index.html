@@ -34,18 +34,39 @@
     // Find exact letter and/or number drill matches
     function findExactDrills(decimal) {
       const drills = [];
-      // Use tolerance of 0.0001 to account for values rounded to 4 decimal places
-      const tolerance = 0.0001;
+      // First check for exact matches with tight tolerance
+      const exactTolerance = 0.000001;
+      // Then check with looser tolerance for rounded values
+      const looseTolerance = 0.0001;
+      
       // Check letter drills
       for (const [letter, size] of Object.entries(letterDrillSizes)) {
-        if (Math.abs(size - decimal) < tolerance) {
+        const diff = Math.abs(size - decimal);
+        if (diff < exactTolerance) {
           drills.push(letter);
+        } else if (diff < looseTolerance) {
+          // Only add if no exact match found yet
+          if (drills.length === 0 || drills.every(d => {
+            const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
+            return Math.abs(drillSize - decimal) >= exactTolerance;
+          })) {
+            drills.push(letter);
+          }
         }
       }
       // Check number drills
       for (const [number, size] of Object.entries(numberDrillSizes)) {
-        if (Math.abs(size - decimal) < tolerance) {
+        const diff = Math.abs(size - decimal);
+        if (diff < exactTolerance) {
           drills.push(number);
+        } else if (diff < looseTolerance) {
+          // Only add if no exact match found yet
+          if (drills.length === 0 || drills.every(d => {
+            const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
+            return Math.abs(drillSize - decimal) >= exactTolerance;
+          })) {
+            drills.push(number);
+          }
         }
       }
       return drills.length > 0 ? drills : null;
@@ -375,7 +396,18 @@
               if (item.type === 'American') {
                 const tapDrillIn = item.tapDrillIn;
                 const drills = findExactDrills(tapDrillIn);
-                const fraction = decimalToFraction(tapDrillIn);
+                // Only check for fraction if no exact drill match (within 0.000001)
+                let fraction = null;
+                let hasExactDrillMatch = false;
+                if (drills) {
+                  hasExactDrillMatch = drills.some(d => {
+                    const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
+                    return Math.abs(drillSize - tapDrillIn) < 0.000001;
+                  });
+                }
+                if (!hasExactDrillMatch) {
+                  fraction = decimalToFraction(tapDrillIn);
+                }
                 
                 let topLine = [];
                 if (drills) {
@@ -417,7 +449,18 @@
               if (item.type === 'American') {
                 const clearanceIn = item.clearanceDrillIn;
                 const drills = findExactDrills(clearanceIn);
-                const fraction = decimalToFraction(clearanceIn);
+                // Only check for fraction if no exact drill match (within 0.000001)
+                let fraction = null;
+                let hasExactDrillMatch = false;
+                if (drills) {
+                  hasExactDrillMatch = drills.some(d => {
+                    const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
+                    return Math.abs(drillSize - clearanceIn) < 0.000001;
+                  });
+                }
+                if (!hasExactDrillMatch) {
+                  fraction = decimalToFraction(clearanceIn);
+                }
                 
                 let topLine = [];
                 if (drills) {
