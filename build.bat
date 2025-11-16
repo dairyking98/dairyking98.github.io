@@ -33,7 +33,7 @@ if not exist "Gemfile.lock" (
 )
 
 echo Building site...
-bundle exec jekyll build
+bundle exec bin/jekyll build
 
 if %ERRORLEVEL% EQU 0 (
     echo.

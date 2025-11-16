@@ -79,7 +79,7 @@ echo.
 echo Press Ctrl+C to stop the server
 echo.
 
-bundle exec jekyll serve --host=0.0.0.0
+bundle exec bin/jekyll serve --host=0.0.0.0
 
 pause
 

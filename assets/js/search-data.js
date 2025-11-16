@@ -520,6 +520,26 @@ ninja.data = [{
           description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/school-project/senior-capstone-ev-battery-management/";
+            },},{id: "projects-voltmeter-clock-arduino-code",
+          title: 'Voltmeter Clock Arduino Code',
+          description: "Complete Arduino source code for the Voltmeter Clock project with detailed comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/vmeter-clock/code/";
+            },},{id: "projects-voltmeter-clock-documentation",
+          title: 'Voltmeter Clock Documentation',
+          description: "Complete documentation for the Voltmeter Clock project including hardware setup, pin configuration, and functionality",
+          section: "Projects",handler: () => {
+              window.location.href = "/vmeter-clock/documentation/";
+            },},{id: "projects-voltmeter-clock-operation-guide",
+          title: 'Voltmeter Clock Operation Guide',
+          description: "Quick reference guide for operating the voltmeter clock",
+          section: "Projects",handler: () => {
+              window.location.href = "/vmeter-clock/operation-guide/";
+            },},{id: "projects-voltmeter-clock-technical-documentation",
+          title: 'Voltmeter Clock Technical Documentation',
+          description: "Detailed technical documentation including code architecture, algorithms, and implementation details",
+          section: "Projects",handler: () => {
+              window.location.href = "/vmeter-clock/technical/";
             },},{id: "projects-project-1",
           title: 'project 1',
           description: "with background image",
