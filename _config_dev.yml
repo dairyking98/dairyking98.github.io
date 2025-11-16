@@ -8,7 +8,6 @@ imagemagick:
 
 # Disable external source fetching (removes network calls)
 external_sources: []
-
 # Note: jekyll-terser is already disabled in main _config.yml
 # No need to disable it here again, but it won't run in dev builds
 

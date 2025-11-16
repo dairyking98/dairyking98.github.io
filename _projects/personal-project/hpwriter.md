@@ -2,7 +2,7 @@
 layout: page
 title: HPWriter - Silent Digital Typewriter
 description: A modern, silent typewriter that prints on plain paper using an HP45 inkjet cartridge. Features instant boot, USB keyboard input, USB flash drive support, and ultra-quiet operation.
-img: 
+img:
 importance: 1
 category: personal-project
 github: https://github.com/dairyking98/HPWriter
@@ -51,6 +51,7 @@ Traditional analog typewriters are too noisy and distracting for classroom use, 
 ## Advantages Over Existing Solutions
 
 Unlike digital-only typewriters (Freewrite Smart, Alpha Typewriter) or older thermal paper machines, HPWriter offers:
+
 - ✅ Real ink on paper (non-toxic, standard paper)
 - ✅ Modern, open-source design
 - ✅ File export capability
@@ -61,4 +62,3 @@ Unlike digital-only typewriters (Freewrite Smart, Alpha Typewriter) or older the
 ## Repository
 
 The complete source code, documentation, bill of materials, and project plans are available in the [HPWriter repository](https://github.com/dairyking98/HPWriter).
-
