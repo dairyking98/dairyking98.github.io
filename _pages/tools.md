@@ -9,4 +9,6 @@ dropdown: true
 children:
   - title: fraction inch millimeter chart
     permalink: /fraction-inch-mm-chart/
+  - title: thread size chart
+    permalink: /thread-size-chart/
 ---
