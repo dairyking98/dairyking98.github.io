@@ -14,6 +14,7 @@ FluorCam is a low-cost, open-source fluorescence and IR dark-field microscope sy
 ## Project Overview
 
 FluorCam adapts the RoboCam platform for fluorescence imaging:
+
 - **Coaxial Optics**: Specialized optical design for fluorescence imaging
 - **Raspberry Pi Imaging**: High-quality imaging using Raspberry Pi camera hardware
 - **Custom Python Automation**: Automated acquisition and control workflows
@@ -31,6 +32,7 @@ FluorCam adapts the RoboCam platform for fluorescence imaging:
 ## Technical Implementation
 
 FluorCam extends RoboCam with:
+
 - **Optical Filters**: Integration of excitation and emission filters for fluorescence
 - **Mounting Systems**: Custom gantry alignment and optical mounts
 - **Automated Acquisition**: Specialized workflows for fluorescence imaging experiments
@@ -39,6 +41,7 @@ FluorCam extends RoboCam with:
 ## Research Impact
 
 FluorCam demonstrates that high-quality fluorescence imaging can be achieved with:
+
 - Open-source hardware and software
 - Low-cost components
 - Custom design and fabrication

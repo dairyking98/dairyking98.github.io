@@ -14,6 +14,7 @@ github: https://github.com/E-Lab-SFSU/3D-Cam
 ## Project Overview
 
 3D-Cam provides a novel approach to depth imaging:
+
 - **Single Camera System**: Uses one camera with mirror geometry instead of dual cameras
 - **Z-Height Reconstruction**: Performs depth reconstruction from 2D images
 - **Cost-Effective Design**: Eliminates need for expensive dual-camera setups
@@ -30,6 +31,7 @@ github: https://github.com/E-Lab-SFSU/3D-Cam
 ## Technical Implementation
 
 The 3D-Cam system includes:
+
 - **Applications**: User-facing applications for depth imaging
 - **Calibration Files**: Calibration data for accurate depth reconstruction
 - **Libraries**: Core libraries for image processing and depth calculation
@@ -39,6 +41,7 @@ The 3D-Cam system includes:
 ## Repository Structure
 
 The project repository contains:
+
 - `apps/`: Application software
 - `calibrations/`: Calibration files and data
 - `lib/`: Core libraries and modules

@@ -14,6 +14,7 @@ StentorCam is an automated dark-field imaging platform based on the RoboCam syst
 ## Project Overview
 
 StentorCam builds upon the RoboCam foundation to provide:
+
 - **Well Plate Support**: Automated imaging of samples in standard well plate formats
 - **Dark-Field Imaging**: 3D-printed optics with infrared illumination for enhanced contrast
 - **Automatic Tracking**: Automated tracking and stimulation experiments
@@ -30,6 +31,7 @@ StentorCam builds upon the RoboCam foundation to provide:
 ## Research Applications
 
 StentorCam has been used for:
+
 - NSF-funded training programs
 - Team research projects
 - Automated behavioral studies
@@ -38,6 +40,7 @@ StentorCam has been used for:
 ## Technical Implementation
 
 StentorCam extends the RoboCam system with:
+
 - **Well Plate Support**: Custom motion profiles for well plate navigation
 - **Specialized Optics**: Dark-field illumination and infrared imaging capabilities
 - **Biological Imaging Workflows**: Optimized experiment templates for biological research

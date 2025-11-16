@@ -14,6 +14,7 @@ RoboCam is an automated camera control system that integrates Raspberry Pi camer
 ## Project Overview
 
 RoboCam provides a complete solution for automated imaging workflows, combining:
+
 - **Raspberry Pi Camera Integration**: High-resolution imaging with Picamera2
 - **3D Printer Motion Control**: G-code based positioning via serial communication
 - **Calibration System**: 4-corner calibration for precise positioning
@@ -32,6 +33,7 @@ RoboCam provides a complete solution for automated imaging workflows, combining:
 ## Technical Implementation
 
 The RoboCam system is built using:
+
 - **Python** for automation and control
 - **Picamera2** for Raspberry Pi camera interface
 - **Tkinter** for GUI applications
