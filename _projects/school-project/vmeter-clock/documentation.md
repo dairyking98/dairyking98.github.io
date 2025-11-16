@@ -1,3 +1,12 @@
+---
+layout: page
+title: Voltmeter Clock Documentation
+permalink: /vmeter-clock/documentation/
+description: Complete documentation for the Voltmeter Clock project including hardware setup, pin configuration, and functionality
+nav: true
+nav_order: 10
+---
+
 # Voltmeter Clock Project
 
 ## Overview
@@ -355,3 +364,4 @@ This project is provided as-is for educational and personal use.
 ## Author Notes
 
 This voltmeter clock project combines analog display aesthetics with modern sensor technology, creating a unique timepiece that also serves as an environmental monitoring station. The smooth analog movement of the voltmeters provides a classic watch-like experience while displaying both time and real-time environmental conditions.
+

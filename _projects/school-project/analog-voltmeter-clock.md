@@ -110,20 +110,21 @@ This project taught me valuable lessons about:
 
 The following documents are available for reference:
 
-- [Clock Report](/assets/documents/2024/clock-project/Clock-Report.pdf) - Complete project report with detailed design, implementation, and analysis
-- [Assignment 4 Project Idea](/assets/documents/2024/clock-project/Assignment-4-Project-Idea.pdf) - Initial project proposal and concept
-- [Clock Presentation](/assets/documents/2024/clock-project/Clock-Presentation.pdf) - Project presentation slides
+- [Clock Report](/assets/documents/vmeter-clock/Clock-Report.pdf) - Complete project report with detailed design, implementation, and analysis
+- [Assignment 4 Project Idea](/assets/documents/vmeter-clock/Assignment-4-Project-Idea.pdf) - Initial project proposal and concept
+- [Clock Presentation](/assets/documents/vmeter-clock/Clock-Presentation.pdf) - Project presentation slides
 
 ### Code Files
 
-- [Arduino Clock Code v1](/assets/documents/2024/clock-project/vmeter-clock.ino) - Original Arduino source code (v1)
-- [Arduino Clock Code v2](/assets/documents/2024/clock-project/vmeter-clock-v2.ino) - Enhanced version with play mode (v2)
+- [Arduino Clock Code v1](/projects/school-project/vmeter-clock/vmeter-clock.ino) - Original Arduino source code (v1)
+- [Arduino Clock Code v2](/projects/school-project/vmeter-clock/vmeter-clock-v2.ino) - Enhanced version with play mode (v2)
 
 ### Documentation
 
-- [README](/assets/documents/2024/clock-project/README.md) - Complete project documentation including hardware setup, pin configuration, and functionality
-- [Operation Guide](/assets/documents/2024/clock-project/OPERATION_GUIDE.md) - Quick reference guide for operating the voltmeter clock
-- [Technical Documentation](/assets/documents/2024/clock-project/TECHNICAL_DOCUMENTATION.md) - Detailed technical documentation including code architecture, algorithms, and implementation details
+- [Complete Documentation](/vmeter-clock/documentation/) - Complete project documentation including hardware setup, pin configuration, and functionality
+- [Operation Guide](/vmeter-clock/operation-guide/) - Quick reference guide for operating the voltmeter clock
+- [Technical Documentation](/vmeter-clock/technical/) - Detailed technical documentation including code architecture, algorithms, and implementation details
+- [Arduino Code Documentation](/vmeter-clock/code/) - Complete Arduino source code with detailed comments
 
 ---
 

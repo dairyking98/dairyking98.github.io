@@ -1,3 +1,12 @@
+---
+layout: page
+title: Voltmeter Clock Operation Guide
+permalink: /vmeter-clock/operation-guide/
+description: Quick reference guide for operating the voltmeter clock
+nav: true
+nav_order: 11
+---
+
 # Voltmeter Clock - Quick Operation Guide
 
 ## Quick Start
@@ -198,7 +207,7 @@
 │  ADJUSTMENT MODE                        │
 │  - Step 0: Adjust Hours (LED blinks)    │
 │  - Step 1: Adjust Minutes (LED blinks)  │
-│  - Step 2: Adjust Seconds (LED blinks)  │
+│  - Step 2: Adjust Seconds (LED blinks)   │
 │  - Action: Press to confirm each step   │
 └─────────────────────────────────────────┘
 ```
@@ -216,3 +225,4 @@
 | Decrease value  | Rotate encoder counter-clockwise               |
 | Confirm setting | Press button                                   |
 | Exit adjustment | Complete all 3 steps (hours, minutes, seconds) |
+

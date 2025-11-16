@@ -1,3 +1,12 @@
+---
+layout: page
+title: Voltmeter Clock Technical Documentation
+permalink: /vmeter-clock/technical/
+description: Detailed technical documentation including code architecture, algorithms, and implementation details
+nav: true
+nav_order: 12
+---
+
 # Voltmeter Clock - Technical Documentation
 
 ## Code Architecture
@@ -577,3 +586,4 @@ Install via Arduino Library Manager:
 - 24-hour format option
 - Date display mode
 - EEPROM settings storage
+
