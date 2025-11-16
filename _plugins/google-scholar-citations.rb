@@ -39,37 +39,48 @@ module Jekyll
           # Sleep for a random amount of time to avoid being blocked
           sleep(rand(1.5..3.5))
 
-          # Fetch the article page
-          doc = Nokogiri::HTML(URI.open(article_url, "User-Agent" => "Ruby/#{RUBY_VERSION}"))
+          # Fetch the article page with timeout
+          require 'timeout'
+          doc = nil
+          Timeout.timeout(5) do
+            doc = Nokogiri::HTML(URI.open(article_url, "User-Agent" => "Ruby/#{RUBY_VERSION}", read_timeout: 5))
+          end
 
           # Attempt to extract the "Cited by n" string from the meta tags
           citation_count = 0
 
-          # Look for meta tags with "name" attribute set to "description"
-          description_meta = doc.css('meta[name="description"]')
-          og_description_meta = doc.css('meta[property="og:description"]')
+          # Only process if doc was successfully fetched
+          if doc
+            # Look for meta tags with "name" attribute set to "description"
+            description_meta = doc.css('meta[name="description"]')
+            og_description_meta = doc.css('meta[property="og:description"]')
 
-          if !description_meta.empty?
-            cited_by_text = description_meta[0]['content']
-            matches = cited_by_text.match(/Cited by (\d+[,\d]*)/)
+            if !description_meta.empty?
+              cited_by_text = description_meta[0]['content']
+              matches = cited_by_text.match(/Cited by (\d+[,\d]*)/)
 
-            if matches
-              citation_count = matches[1].sub(",", "").to_i
-            end
+              if matches
+                citation_count = matches[1].sub(",", "").to_i
+              end
 
-          elsif !og_description_meta.empty?
-            cited_by_text = og_description_meta[0]['content']
-            matches = cited_by_text.match(/Cited by (\d+[,\d]*)/)
+            elsif !og_description_meta.empty?
+              cited_by_text = og_description_meta[0]['content']
+              matches = cited_by_text.match(/Cited by (\d+[,\d]*)/)
 
-            if matches
-              citation_count = matches[1].sub(",", "").to_i
+              if matches
+                citation_count = matches[1].sub(",", "").to_i
+              end
             end
           end
 
         citation_count = Helpers.number_to_human(citation_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })
 
+      rescue Timeout::Error => e
+        # Handle timeout errors
+        citation_count = "N/A"
+        puts "Timeout fetching citation count for #{article_id} in #{article_url}: #{e.class} - #{e.message}"
       rescue Exception => e
-        # Handle any errors that may occur during fetching
+        # Handle any other errors that may occur during fetching
         citation_count = "N/A"
 
         # Print the error message including the exception class and message
