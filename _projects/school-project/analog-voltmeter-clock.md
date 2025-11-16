@@ -109,10 +109,56 @@ The following documents are available for reference:
 
 - [Clock Report](/assets/documents/2024/clock-project/Clock-Report.pdf) - Complete project report with detailed design, implementation, and analysis
 - [Assignment 4 Project Idea](/assets/documents/2024/clock-project/Assignment-4-Project-Idea.pdf) - Initial project proposal and concept
-- [Arduino Clock Code](/assets/documents/2024/clock-project/Arduino-Clock-Code.md) - Complete source code with detailed comments
 - [Clock Presentation](/assets/documents/2024/clock-project/Clock-Presentation.pdf) - Project presentation slides
+
+### Code Files
+
+- [Arduino Clock Code v1](/assets/documents/2024/clock-project/vmeter-clock.ino) - Original Arduino source code (v1)
+- [Arduino Clock Code v2](/assets/documents/2024/clock-project/vmeter-clock-v2.ino) - Enhanced version with play mode (v2)
+
+### Documentation
+
+- [README](/assets/documents/2024/clock-project/README.md) - Complete project documentation including hardware setup, pin configuration, and functionality
+- [Operation Guide](/assets/documents/2024/clock-project/OPERATION_GUIDE.md) - Quick reference guide for operating the voltmeter clock
+- [Technical Documentation](/assets/documents/2024/clock-project/TECHNICAL_DOCUMENTATION.md) - Detailed technical documentation including code architecture, algorithms, and implementation details
 
 ---
 
-*This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework.*
+## Version 2 Improvements (November 16, 2025)
+
+The voltmeter clock has been enhanced with several new features in version 2:
+
+### Play Mode
+
+A new interactive "Play Mode" has been added that transforms the voltmeter clock into an interactive display:
+
+- **Triple-Click Activation**: Quickly triple-click the button to enter play mode
+- **Interactive Voltmeter Control**: Use the rotary encoder to manually control any of the three voltmeters through their full PWM range (0-255)
+- **Voltmeter Selection**: Press the button while in play mode to cycle through which voltmeter is active (Hour → Minute → Second)
+- **Dynamic LED Patterns**: All four LEDs cycle through binary patterns (0-15), displaying all possible combinations in a mesmerizing visual effect
+- **Automatic Timeout**: Play mode automatically exits after 15 seconds of inactivity, returning to normal time display
+
+### Enhanced User Experience
+
+- **Activity Detection**: Play mode tracks both button presses and encoder movements to reset the inactivity timer
+- **Seamless Mode Switching**: Time adjustment mode takes priority over play mode, allowing you to adjust the time even while in play mode
+- **Improved Encoder Handling**: Enhanced encoder counter management for play mode's full PWM range
+
+### Technical Improvements
+
+- **Triple-Click Detection**: Sophisticated algorithm that detects three button presses within a 500ms window
+- **LED Pattern Cycling**: Efficient binary pattern generation that cycles through all 16 possible LED combinations
+- **Non-Blocking Timeouts**: All timing operations use millis() for non-blocking delays, ensuring smooth operation
+
+### Use Cases
+
+Play mode is perfect for:
+- **Demonstrations**: Show off the voltmeter movement and PWM control
+- **Calibration**: Manually test voltmeter response across the full range
+- **Interactive Displays**: Create custom visual effects with the LED patterns
+- **Educational Purposes**: Demonstrate PWM control and voltmeter behavior
+
+---
+
+*This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework. Version 2 improvements were added on November 16, 2025.*
 
