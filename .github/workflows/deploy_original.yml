@@ -1,4 +1,4 @@
-name: Deploy site
+name: Deploy site (Original)
 
 on:
   push:
@@ -71,19 +71,16 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-      
       - name: Setup Ruby 💎
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
-      
       - name: Setup Python 🐍
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          cache: "pip"
-      
+          cache: "pip" # caching pip dependencies
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -91,47 +88,34 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
-      
-      - name: Install ImageMagick (cached) 📦
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: imagemagick
-          version: 1.0
-      
+      - name: Install ImageMagick 📦
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick
       - name: Install Python dependencies 🐍
         run: |
-          pip3 install --upgrade nbconvert --quiet
-      
-      - name: Disable slow features for fast build ⚡
-        run: |
-          # Save original config
-          cp _config.yml _config.yml.bak
-          # Disable external sources (removes network calls) using simple sed
-          sed -i '/^external_sources:/a\# DISABLED FOR FAST BUILD' _config.yml
-          sed -i '/^  - name: medium.com/s/^/#/' _config.yml
-          sed -i '/^  - name: Google Blog/s/^/#/' _config.yml
-          sed -i '/^    rss_url:/s/^/#/' _config.yml
-          sed -i '/^    posts:/s/^/#/' _config.yml
-          sed -i '/^      - url:/s/^/#/' _config.yml
-          sed -i '/^        published_date:/s/^/#/' _config.yml
-          echo "Fast build optimizations applied - external sources disabled"
-      
+          pip3 install --upgrade nbconvert
       - name: Build Jekyll site 🔧
         env:
           JEKYLL_ENV: production
+          # Disable external sources fetching if not needed (uncomment to disable)
+          # DISABLE_EXTERNAL_SOURCES: "true"
         run: |
-          echo "Building with optimizations (external sources disabled)..."
-          bundle exec jekyll build
-          # Restore original config
-          mv _config.yml.bak _config.yml || true
-      
+          # Skip external sources if DISABLE_EXTERNAL_SOURCES is set
+          if [ "$DISABLE_EXTERNAL_SOURCES" = "true" ]; then
+            echo "Disabling external sources for faster build..."
+            # Temporarily disable external sources
+            sed -i 's/^external_sources:/#external_sources:/' _config.yml || true
+            sed -i 's/^  - name:/#  - name:/' _config.yml || true
+          fi
+          bundle exec jekyll build --verbose
       - name: Purge unused CSS 🧹
         run: |
-          npm install -g purgecss --quiet
+          npm install -g purgecss
           purgecss -c purgecss.config.js
-      
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+

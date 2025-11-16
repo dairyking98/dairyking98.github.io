@@ -1,15 +1,14 @@
 @echo off
-REM Jekyll build script for al-folio
-REM Builds the site to _site/ directory (FULL BUILD - includes all features)
+REM Fast Jekyll build script for al-folio
+REM Optimized for development - skips slow operations
+REM Builds the site to _site/ directory
 
-echo Building Jekyll site (FULL BUILD - Production mode)...
+echo Building Jekyll site (FAST MODE - Development)...
 echo.
-echo This build includes all features:
-echo   - External source fetching
+echo NOTE: This build skips:
+echo   - External source fetching (RSS feeds, etc.)
 echo   - ImageMagick image processing
-echo   - All plugins enabled
-echo.
-echo For faster development builds, use: build-fast.bat
+echo   - Some slow plugins
 echo.
 
 REM Check if Ruby is installed
@@ -39,14 +38,20 @@ if not exist "Gemfile.lock" (
     echo.
 )
 
-echo Building site...
-set JEKYLL_ENV=production
-bundle exec bin/jekyll build
+echo Building site in FAST mode...
+echo.
+REM Use JEKYLL_ENV=development to potentially skip some optimizations
+REM Use --incremental for faster rebuilds (only processes changed files)
+REM Use _config_dev.yml to disable slow features like ImageMagick and external sources
+set JEKYLL_ENV=development
+bundle exec bin/jekyll build --incremental --config _config.yml,_config_dev.yml
 
 if %ERRORLEVEL% EQU 0 (
     echo.
-    echo Build completed successfully!
+    echo Build completed successfully (FAST MODE)!
     echo Site generated in _site/ directory
+    echo.
+    echo For production build with all features, use: build.bat
 ) else (
     echo.
     echo Build failed with error code %ERRORLEVEL%
