@@ -71,19 +71,19 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-      
+
       - name: Setup Ruby 💎
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
-      
+
       - name: Setup Python 🐍
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
           cache: "pip"
-      
+
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -91,17 +91,17 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
-      
+
       - name: Install ImageMagick (cached) 📦
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: imagemagick
           version: 1.0
-      
+
       - name: Install Python dependencies 🐍
         run: |
           pip3 install --upgrade nbconvert --quiet
-      
+
       - name: Disable slow features for fast build ⚡
         run: |
           # Save original config
@@ -115,7 +115,7 @@ jobs:
           sed -i '/^      - url:/s/^/#/' _config.yml
           sed -i '/^        published_date:/s/^/#/' _config.yml
           echo "Fast build optimizations applied - external sources disabled"
-      
+
       - name: Build Jekyll site 🔧
         env:
           JEKYLL_ENV: production
@@ -124,12 +124,12 @@ jobs:
           bundle exec jekyll build
           # Restore original config
           mv _config.yml.bak _config.yml || true
-      
+
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss --quiet
           purgecss -c purgecss.config.js
-      
+
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4

@@ -7,7 +7,6 @@ imagemagick:
 
 # Disable external source fetching (removes network calls)
 external_sources: []
-
 # Optionally disable publication badges to skip API calls
 # (Comment out if you need these during development)
 # enable_publication_badges:
