@@ -225,4 +225,3 @@ nav_order: 11
 | Decrease value  | Rotate encoder counter-clockwise               |
 | Confirm setting | Press button                                   |
 | Exit adjustment | Complete all 3 steps (hours, minutes, seconds) |
-

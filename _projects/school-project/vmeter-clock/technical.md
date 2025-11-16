@@ -586,4 +586,3 @@ Install via Arduino Library Manager:
 - 24-hour format option
 - Date display mode
 - EEPROM settings storage
-
