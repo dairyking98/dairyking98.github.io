@@ -5,11 +5,12 @@ description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electri
 img: assets/img/12.jpg
 importance: 1
 category: school-project
+github: https://github.com/dairyking98/Team-O-Matic-2025
 ---
 
 This post tracks my ongoing senior capstone project: an electric vehicle battery management and swapping system designed to keep equipment running continuously through rapid battery exchange and robust state-of-health/state-of-charge monitoring.
 
-Project hub and documentation are maintained here: [Team-O-Matic-2025 GitHub repository](https://github.com/dairyking98/Team-O-Matic-2025).
+Project hub and documentation are maintained here: [Team-O-Matic-2025 GitHub repository](https://github.com/dairyking98/Team-O-Matic-2025). The project website is hosted at [dairyking98.github.io/Team-O-Matic-2025](https://dairyking98.github.io/Team-O-Matic-2025/).
 
 ## Project Scope
 
@@ -46,4 +47,4 @@ Project hub and documentation are maintained here: [Team-O-Matic-2025 GitHub rep
 - Early hardware and interface concepts under review; prototyping plans in progress
 - Next: finalize requirements for first prototype, order long-lead components, and begin mechanical/firmware bring-up
 
-I'll continue to update this post with milestones, links to design artifacts, test data, and demo media as the project progresses. For the most current documentation, check the repo: [Team-O-Matic-2025](https://github.com/dairyking98/Team-O-Matic-2025).
+I'll continue to update this post with milestones, links to design artifacts, test data, and demo media as the project progresses. For the most current documentation, check the repo: [Team-O-Matic-2025](https://github.com/dairyking98/Team-O-Matic-2025) or visit the [project website](https://dairyking98.github.io/Team-O-Matic-2025/).

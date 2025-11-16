@@ -42,6 +42,6 @@ The RoboCam system is built using:
 
 ## Repository
 
-The complete source code, documentation, and setup instructions are available in the [RoboCam-Suite repository](https://github.com/dairyking98/RoboCam-Suite).
+The complete source code, documentation, and setup instructions are available in the [RoboCam-Suite repository](https://github.com/dairyking98/RoboCam-Suite). The project website is hosted at [dairyking98.github.io/RoboCam-Suite](https://dairyking98.github.io/RoboCam-Suite/).
 
 ---

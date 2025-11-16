@@ -50,6 +50,6 @@ The project repository contains:
 
 ## Repository
 
-The complete source code, documentation, and setup instructions are available in the [3D-Cam repository](https://github.com/E-Lab-SFSU/3D-Cam).
+The complete source code, documentation, and setup instructions are available in the [3D-Cam repository](https://github.com/E-Lab-SFSU/3D-Cam). The project website is hosted at [e-lab-sfsu.github.io/3D-Cam](https://e-lab-sfsu.github.io/3D-Cam/).
 
 ---
