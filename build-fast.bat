@@ -40,6 +40,12 @@ if not exist "Gemfile.lock" (
 
 echo Building site in FAST mode...
 echo.
+echo Optimizations enabled:
+echo   - ImageMagick disabled (no responsive images)
+echo   - External sources disabled (no network calls)
+echo   - Incremental build (only changed files)
+echo   - jekyll-terser disabled (no JS minification)
+echo.
 REM Use JEKYLL_ENV=development to potentially skip some optimizations
 REM Use --incremental for faster rebuilds (only processes changed files)
 REM Use _config_dev.yml to disable slow features like ImageMagick and external sources

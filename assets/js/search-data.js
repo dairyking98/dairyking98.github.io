@@ -65,6 +65,13 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/typewriter-collection/";
               },
+            },{id: "dropdown-fraction-inch-millimeter-chart",
+              title: "fraction inch millimeter chart",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/fraction-inch-mm-chart/";
+              },
             },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
