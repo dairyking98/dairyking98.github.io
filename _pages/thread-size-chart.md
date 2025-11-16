@@ -42,6 +42,13 @@ nav: false
           <span>Show TPI</span>
         </label>
       </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 1rem;">
+        <label for="drill-tolerance-slider" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span>Drill Size Tolerance:</span>
+          <input type="range" id="drill-tolerance-slider" min="0" max="5" step="1" value="0" style="width: 150px;">
+          <span id="drill-tolerance-value">0 (Exact)</span>
+        </label>
+      </div>
     </div>
     <div id="metric-thread-filters" style="display: none;">
       <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
@@ -135,47 +142,53 @@ nav: false
     };
     
     // Find exact letter and/or number drill matches
+    // Returns only the closest match(es) if multiple are within tolerance
     function findExactDrills(decimal) {
-      const drills = [];
-      // First check for exact matches with tight tolerance
-      const exactTolerance = 0.000001;
-      // Then check with looser tolerance for rounded values
-      const looseTolerance = 0.0001;
+      // Calculate tolerance based on slider value (0 = exact, 1-5 = increasing)
+      let tolerance;
+      if (drillTolerance === 0) {
+        tolerance = 0.000001; // Exact match only
+      } else {
+        // Map slider values 1-5 to tolerance values
+        const toleranceMap = [0.00001, 0.00005, 0.0001, 0.0005, 0.001];
+        tolerance = toleranceMap[drillTolerance - 1] || 0.0001;
+      }
       
-      // Check letter drills
+      let bestMatches = [];
+      let bestDiff = Infinity;
+      
+      // Check all drills and find the closest match(es)
       for (const [letter, size] of Object.entries(letterDrillSizes)) {
         const diff = Math.abs(size - decimal);
-        if (diff < exactTolerance) {
-          drills.push(letter);
-        } else if (diff < looseTolerance) {
-          // Only add if no exact match found yet
-          if (drills.length === 0 || drills.every(d => {
-            const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
-            return Math.abs(drillSize - decimal) >= exactTolerance;
-          })) {
-            drills.push(letter);
+        if (diff < tolerance) {
+          if (diff < bestDiff) {
+            bestDiff = diff;
+            bestMatches = [letter];
+          } else if (Math.abs(diff - bestDiff) < 0.000001) {
+            // Same difference - add to matches
+            bestMatches.push(letter);
           }
         }
       }
-      // Check number drills
+      
       for (const [number, size] of Object.entries(numberDrillSizes)) {
         const diff = Math.abs(size - decimal);
-        if (diff < exactTolerance) {
-          drills.push(number);
-        } else if (diff < looseTolerance) {
-          // Only add if no exact match found yet
-          if (drills.length === 0 || drills.every(d => {
-            const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
-            return Math.abs(drillSize - decimal) >= exactTolerance;
-          })) {
-            drills.push(number);
+        if (diff < tolerance) {
+          if (diff < bestDiff) {
+            bestDiff = diff;
+            bestMatches = [number];
+          } else if (Math.abs(diff - bestDiff) < 0.000001) {
+            // Same difference - add to matches
+            bestMatches.push(number);
           }
         }
       }
-      return drills.length > 0 ? drills : null;
+      
+      return bestMatches.length > 0 ? bestMatches : null;
     }
     
-    // Convert decimal to fraction (simple common fractions)
+    // Convert decimal to fraction (simple common fractions, including values > 1)
+    // Returns only the closest match if multiple are within tolerance
     function decimalToFraction(decimal) {
       const commonFractions = [
         [0, '0'], [1/64, '1/64'], [1/32, '1/32'], [3/64, '3/64'], [1/16, '1/16'],
@@ -190,17 +203,48 @@ nav: false
         [45/64, '45/64'], [23/32, '23/32'], [47/64, '47/64'], [3/4, '3/4'], [49/64, '49/64'],
         [25/32, '25/32'], [51/64, '51/64'], [13/16, '13/16'], [53/64, '53/64'], [27/32, '27/32'],
         [55/64, '55/64'], [7/8, '7/8'], [57/64, '57/64'], [29/32, '29/32'], [59/64, '59/64'],
-        [15/16, '15/16'], [61/64, '61/64'], [31/32, '31/32'], [63/64, '63/64'], [1, '1']
+        [15/16, '15/16'], [61/64, '61/64'], [31/32, '31/32'], [63/64, '63/64'], [1, '1'],
+        // Fractions greater than 1 (for tap drills > 1 inch)
+        [1 + 1/64, '1 1/64'], [1 + 1/32, '1 1/32'], [1 + 3/64, '1 3/64'], [1 + 1/16, '1 1/16'],
+        [1 + 5/64, '1 5/64'], [1 + 3/32, '1 3/32'], [1 + 7/64, '1 7/64'], [1 + 1/8, '1 1/8'],
+        [1 + 9/64, '1 9/64'], [1 + 5/32, '1 5/32'], [1 + 11/64, '1 11/64'], [1 + 3/16, '1 3/16'],
+        [1 + 13/64, '1 13/64'], [1 + 7/32, '1 7/32'], [1 + 15/64, '1 15/64'], [1 + 1/4, '1 1/4'],
+        [1 + 17/64, '1 17/64'], [1 + 9/32, '1 9/32'], [1 + 19/64, '1 19/64'], [1 + 5/16, '1 5/16'],
+        [1 + 21/64, '1 21/64'], [1 + 11/32, '1 11/32'], [1 + 23/64, '1 23/64'], [1 + 3/8, '1 3/8'],
+        [1 + 25/64, '1 25/64'], [1 + 13/32, '1 13/32'], [1 + 27/64, '1 27/64'], [1 + 7/16, '1 7/16'],
+        [1 + 29/64, '1 29/64'], [1 + 15/32, '1 15/32'], [1 + 31/64, '1 31/64'], [1 + 1/2, '1 1/2'],
+        [1 + 33/64, '1 33/64'], [1 + 17/32, '1 17/32'], [1 + 35/64, '1 35/64'], [1 + 9/16, '1 9/16'],
+        [1 + 37/64, '1 37/64'], [1 + 19/32, '1 19/32'], [1 + 39/64, '1 39/64'], [1 + 5/8, '1 5/8'],
+        [1 + 41/64, '1 41/64'], [1 + 21/32, '1 21/32'], [1 + 43/64, '1 43/64'], [1 + 11/16, '1 11/16'],
+        [1 + 45/64, '1 45/64'], [1 + 23/32, '1 23/32'], [1 + 47/64, '1 47/64'], [1 + 3/4, '1 3/4'],
+        [1 + 49/64, '1 49/64'], [1 + 25/32, '1 25/32'], [1 + 51/64, '1 51/64'], [1 + 13/16, '1 13/16'],
+        [1 + 53/64, '1 53/64'], [1 + 27/32, '1 27/32'], [1 + 55/64, '1 55/64'], [1 + 7/8, '1 7/8'],
+        [1 + 57/64, '1 57/64'], [1 + 29/32, '1 29/32'], [1 + 59/64, '1 59/64'], [1 + 15/16, '1 15/16'],
+        [1 + 61/64, '1 61/64'], [1 + 31/32, '1 31/32'], [1 + 63/64, '1 63/64'], [2, '2']
       ];
       
-      // Use tolerance of 0.0001 to account for values rounded to 4 decimal places
-      const tolerance = 0.0001;
+      // Calculate tolerance based on slider value (0 = exact, 1-5 = increasing)
+      let tolerance;
+      if (drillTolerance === 0) {
+        tolerance = 0.000001; // Exact match only
+      } else {
+        // Map slider values 1-5 to tolerance values
+        const toleranceMap = [0.00001, 0.00005, 0.0001, 0.0005, 0.001];
+        tolerance = toleranceMap[drillTolerance - 1] || 0.0001;
+      }
+      
+      let bestMatch = null;
+      let bestDiff = Infinity;
+      
       for (const [dec, frac] of commonFractions) {
-        if (Math.abs(dec - decimal) < tolerance) {
-          return frac;
+        const diff = Math.abs(dec - decimal);
+        if (diff < tolerance && diff < bestDiff) {
+          bestDiff = diff;
+          bestMatch = frac;
         }
       }
-      return null;
+      
+      return bestMatch;
     }
     
     // American (Unified) thread data
@@ -325,6 +369,7 @@ nav: false
     let enabledMetricTypes = ['coarse', 'fine']; // Which metric thread types to show
     let showInches = false; // Whether to show inches for metric threads
     let showTPI = true; // Whether to show TPI column (default true for American, false for Metric)
+    let drillTolerance = 0; // Drill size matching tolerance (0 = exact only, 1-5 = increasing tolerance)
 
     // Get all thread data
     function getThreadData() {
@@ -707,6 +752,19 @@ nav: false
     document.getElementById('cb-show-tpi-metric').addEventListener('change', (e) => {
       if (threadType === 'metric') {
         showTPI = e.target.checked;
+        renderChart();
+      }
+    });
+
+    // Event listener for drill tolerance slider
+    const toleranceSlider = document.getElementById('drill-tolerance-slider');
+    const toleranceValue = document.getElementById('drill-tolerance-value');
+    const toleranceLabels = ['0 (Exact)', '1 (0.00001)', '2 (0.00005)', '3 (0.0001)', '4 (0.0005)', '5 (0.001)'];
+    
+    toleranceSlider.addEventListener('input', (e) => {
+      drillTolerance = parseInt(e.target.value);
+      toleranceValue.textContent = toleranceLabels[drillTolerance] || `${drillTolerance}`;
+      if (threadType === 'american') {
         renderChart();
       }
     });
