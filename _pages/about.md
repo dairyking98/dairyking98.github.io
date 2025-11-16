@@ -47,7 +47,7 @@ A low-cost, open-source fluorescence and IR dark-field microscope.
 
 - Achieves fluorescence imaging comparable to commercial microscopes
 
-- ~$500 total cost vs. $20,000+ commercial systems
+- **~$500 total cost** vs. $20,000+ commercial systems
 
 - I led mechanical/optical design, integrating filters, mounts, gantry alignment, and automated acquisition
 
