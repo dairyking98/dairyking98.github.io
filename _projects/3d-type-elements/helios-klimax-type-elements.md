@@ -57,4 +57,3 @@ The back-and-forth design process highlights the importance of collaboration in 
 ## Contact
 
 For inquiries about custom Helios Klimax type elements or collaboration opportunities, contact me via email or social media.
-

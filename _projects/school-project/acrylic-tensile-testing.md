@@ -31,7 +31,7 @@ Specimens were laser-cut from McMaster-Carr cast acrylic sheet (`4615T47`), sand
 ## Theoretical vs. Experimental Snapshot
 
 | Specimen Type | Theoretical Yield Stress (MPa)† | Experimental Yield Stress (MPa) | Ratio (Actual ÷ Theoretical) |
-|---------------|---------------------------------|---------------------------------|------------------------------|
+| ------------- | ------------------------------- | ------------------------------- | ---------------------------- |
 | Control       | 11.11 (baseline)                | 11.11                           | 1.00                         |
 | Circular Hole | 23.70                           | 18.96                           | 0.80 (Kt ≈ 1.71)             |
 | Notched       | 19.74                           | 21.56                           | 1.09 (Kt ≈ 1.94)             |
@@ -42,12 +42,12 @@ Note: We could not locate reliable theoretical data for the laser-cut square and
 ## Experimental Metrics Overview
 
 | Specimen Type | Yield Force (N) | Yield Stress (MPa) | Ultimate Stress (MPa) | Fracture Stress (MPa) | Max Elongation (mm) | Modulus (MPa) |
-|---------------|----------------:|-------------------:|----------------------:|----------------------:|--------------------:|--------------:|
-| Control       | 750             | 11.11              | 57.04                 | 51.84                 | 10.20               | 1,743         |
-| Circular Hole | 580             | 18.96              | 50.27                 | 50.27                 | 1.63                | 4,116.5       |
-| Notched       | 625             | 21.56              | 71.63                 | 71.57                 | 2.25                | 4,098.5       |
-| Square Hole   | 500             | 17.25              | 54.77                 | 54.77                 | 1.76                | 3,483         |
-| Diamond Hole  | 600             | 20.51              | 34.70                 | 34.70                 | 0.89                | 4,478         |
+| ------------- | --------------: | -----------------: | --------------------: | --------------------: | ------------------: | ------------: |
+| Control       |             750 |              11.11 |                 57.04 |                 51.84 |               10.20 |         1,743 |
+| Circular Hole |             580 |              18.96 |                 50.27 |                 50.27 |                1.63 |       4,116.5 |
+| Notched       |             625 |              21.56 |                 71.63 |                 71.57 |                2.25 |       4,098.5 |
+| Square Hole   |             500 |              17.25 |                 54.77 |                 54.77 |                1.76 |         3,483 |
+| Diamond Hole  |             600 |              20.51 |                 34.70 |                 34.70 |                0.89 |         4,478 |
 
 Additional context:
 
@@ -76,5 +76,4 @@ The close agreement between theoretical and experimental stress concentration fa
 
 ---
 
-*Completed December 2024 for ENGR 302 — Experimental Analysis (Professor Ed Cheng).*
-
+_Completed December 2024 for ENGR 302 — Experimental Analysis (Professor Ed Cheng)._

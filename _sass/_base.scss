@@ -1153,12 +1153,12 @@ swiper-container {
   --swiper-navigation-color: var(--global-theme-color);
   --swiper-pagination-color: var(--global-theme-color);
   --swiper-pagination-bullet-inactive-color: var(--global-text-color);
-  
+
   // Ensure figures and images inside swiper have no extra margins affecting pagination spacing
   swiper-slide {
     figure {
       margin-bottom: 0;
-      
+
       img {
         margin-bottom: 0;
         display: block;
@@ -1169,7 +1169,7 @@ swiper-container {
 
 // Add spacing below swiper container to accommodate pagination
 swiper-container::after {
-  content: '';
+  content: "";
   display: block;
   height: 2.5rem;
   width: 100%;

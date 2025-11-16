@@ -15,4 +15,3 @@ This section showcases my typewriter collection, including restoration projects,
 ### Collection
 
 View my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}) for a detailed list of all typewriters I own, including specifications, restoration status, and related blog posts.
-

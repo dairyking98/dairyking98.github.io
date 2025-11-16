@@ -103,4 +103,3 @@ You can browse all personal project posts by the [personal-project tag](/blog/ta
   {% endif %}
 {% endif %}
 </div>
-

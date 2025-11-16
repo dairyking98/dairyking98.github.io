@@ -1,185 +1,185 @@
 - manufacturer: Hammond
   model: Model 1
   year: 1890
-  serial_number: '15058'
-  color: ''
-  typeface: '*'
+  serial_number: "15058"
+  color: ""
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: hammond-model-1-15058
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Sun
   model: No. 2 Standard
   year: 1901
-  serial_number: '8278'
+  serial_number: "8278"
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: machining work
   standard_portable: Portable
   slug: sun-no-2-standard-8278
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Blickensderfer
   model: no. 5
   year: 1909
-  serial_number: '133130'
+  serial_number: "133130"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: ink roller height
-  notes: ''
+  notes: ""
   standard_portable: Portable
   slug: blickensderfer-no-5-133130
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Blickensderfer
   model: no. 8
   year: 1909
-  serial_number: '135255'
+  serial_number: "135255"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: D keylever comb interference
-  notes: ''
+  notes: ""
   standard_portable: Portable
   slug: blickensderfer-no-8-135255
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Royal
   model: Model 5
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Tall Roman
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -needs cleaning and service
   standard_portable: Standard
   slug: royal-model-5
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Bennett
   model: Pocket Typewriter
   year: 1910
-  serial_number: '14682'
+  serial_number: "14682"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean, assess, repair
   notes: -platen crumbled -cleaning and service
   standard_portable: Portable
   slug: bennett-pocket-typewriter-14682
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Bennett
   model: Pocket Typewriter
   year: 1910
-  serial_number: '18627'
+  serial_number: "18627"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean, assess, repair
   notes: -element retaining clip -cleaning and service
   standard_portable: Portable
   slug: bennett-pocket-typewriter-18627
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Continental
   model: Standard
   year: 1911
-  serial_number: '26277'
+  serial_number: "26277"
   color: Black
   typeface: Italic
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -get spools from Pelicram
   standard_portable: Standard
   slug: continental-standard-26277
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Harris
   model: Visible no. 4
   year: 1912
-  serial_number: '19149'
+  serial_number: "19149"
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: fabricate and install flatter drawband to old hook
   notes: -fix drawband and drawband hook
   standard_portable: Standard
   slug: harris-visible-no-4-19149
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Hammond
   model: Multiplex
   year: 1913
-  serial_number: '224478'
+  serial_number: "224478"
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: hammond-multiplex-224478
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Hammond
   model: Multiplex
   year: 1915
   serial_number: CC231416
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: Need math shuttle, cleaning
-  notes: ''
+  notes: ""
   standard_portable: Standard
   slug: hammond-multiplex-cc231416
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Underwood
   model: No. 3
   year: 1917
-  serial_number: '206803'
+  serial_number: "206803"
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: underwood-no-3-206803
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Corona
-  model: '3'
+  model: "3"
   year: 1919
-  serial_number: '231258'
+  serial_number: "231258"
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: corona-3-231258
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Mignon
   model: No. 4
   year: 1925
-  serial_number: '352222'
+  serial_number: "352222"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: mignon-no-4-352222
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Woodstock
   model: Model 5N
   year: 1927
@@ -187,12 +187,12 @@
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: woodstock-model-5n-n168116e
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Royal
   model: De Luxe
   year: 1936
@@ -200,12 +200,12 @@
   color: Black
   typeface: Italic
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -cleaning and service, -backspace sticking
   standard_portable: Portable
   slug: royal-de-luxe-a597665
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Royal
   model: Quiet De Luxe
   year: 1939
@@ -213,25 +213,25 @@
   color: Black
   typeface: Royal Vogue
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: royal-quiet-de-luxe-a-873792
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Remington
-  model: '17'
+  model: "17"
   year: 1946
   serial_number: J794385
   color: Black
   typeface: Pin Point
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean
-  notes: ''
+  notes: ""
   standard_portable: Standard
   slug: remington-17-j794385
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Smith Corona
   model: Clipper
   year: 1952
@@ -239,12 +239,12 @@
   color: Brown
   typeface: Bulletin
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: smith-corona-clipper-5c218668
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Underwood
   model: Quiet Tab
   year: 1953
@@ -252,38 +252,38 @@
   color: Teal
   typeface: Continental
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: underwood-quiet-tab-aa2730434
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Olympia
   model: SM4
   year: 1954
-  serial_number: '490865'
+  serial_number: "490865"
   color: White
   typeface: Tall Script RaRo75
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: olympia-sm4-490865
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Olympia
   model: SM3
   year: 1958
-  serial_number: '1205390'
+  serial_number: "1205390"
   color: Cream (Gerren Repaint)
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: olympia-sm3-1205390
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Olympia
   model: SG1
   year: 1959
@@ -291,12 +291,12 @@
   color: Green
   typeface: Double Gothic
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean, adjust, new felt
   notes: -needs cleaning and service
   standard_portable: Standard
   slug: olympia-sg1-7-487163
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Facit
   model: T1
   year: 1959
@@ -304,12 +304,12 @@
   color: Gray
   typeface: arrow keys, brackets
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -source paper guides?
   standard_portable: Standard
   slug: facit-t1-t1-123221
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Facit
   model: TP1
   year: 1961
@@ -317,12 +317,12 @@
   color: Gray
   typeface: Esquire/Bruxelles
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean out gummyness
-  notes: ''
+  notes: ""
   standard_portable: Portable
   slug: facit-tp1-p287156
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Facit
   model: TP1
   year: 1965
@@ -330,90 +330,90 @@
   color: Gray
   typeface: Imperial
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: facit-tp1-p411069
-  blog_post: ''
+  blog_post: ""
 - manufacturer: IBM
   model: Selectric II
-  year: ''
+  year: ""
   serial_number: ???
   color: Green
-  typeface: '*'
+  typeface: "*"
   portable_manual: Electric
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -cracked drive hub
   standard_portable: Standard
   slug: ibm-selectric-ii
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Royal
   model: Quiet De Luxe
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: Parts Machine for Vogue
   standard_portable: Portable
   slug: royal-quiet-de-luxe
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Remington
   model: 17 Early
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean, repair and fabricate missing pieces, adjust
   notes: CLEAN+Fix
   standard_portable: Portable
   slug: remington-17-early
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Olympia
   model: SM9
-  year: ''
+  year: ""
   serial_number: ???
   color: White
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
+  date_of_acquisition: ""
   status: clean
   notes: CLEAN
   standard_portable: Portable
   slug: olympia-sm9
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Triumph
   model: De Jur Perfekt
   year: 1960
-  serial_number: '1228617'
+  serial_number: "1228617"
   color: Tan
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: triumph-de-jur-perfekt-1228617
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Underwood
   model: 3 Bank
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: underwood-3-bank
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Underwood
   model: Champion Typemaster
   year: 1938
@@ -421,38 +421,38 @@
   color: Black
   typeface: Italic
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: underwood-champion-typemaster-g1130193
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Mignon
   model: No. 4
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -needs major cleaning and service
   standard_portable: Portable
   slug: mignon-no-4
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Remington
   model: Super-Writer
-  year: ''
+  year: ""
   serial_number: ???
   color: Bare Metal
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -install remington emblem
   standard_portable: Standard
   slug: remington-super-writer
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Underwood
   model: 4 Bank
   year: 1926
@@ -460,308 +460,308 @@
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: -getting 3d slug swapped, owned by Leaf
   standard_portable: Portable
   slug: underwood-4-bank-4b7867
-  blog_post: ''
+  blog_post: ""
 - manufacturer: IBM
   model: Model 04 Executive
   year: 1947
-  serial_number: '180437'
+  serial_number: "180437"
   color: Black
   typeface: Proportional Modern
   portable_manual: Electric
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: clean assess, shift not working, slow cr
   standard_portable: Standard
   slug: ibm-model-04-executive-180437
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Urania
-  model: ''
-  year: ''
+  model: ""
+  year: ""
   serial_number: ???
   color: Black
   typeface: Italic
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: clean oil
   standard_portable: Standard
   slug: urania
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Fox
   model: no. 3
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: replace ribbon, fix ribbon reverse mech, clean oil
   standard_portable: Standard
   slug: fox-no-3
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Molle
-  model: ''
-  year: ''
+  model: ""
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: case fucked
   standard_portable: Standard
   slug: molle
-  blog_post: ''
+  blog_post: ""
 - manufacturer: New Yost
   model: no. 4
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: new-yost-no-4
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Oliver
   model: No. 3
-  year: ''
+  year: ""
   serial_number: ???
   color: Green
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: oliver-no-3
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Reliance
   model: Visible
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: needs right margin/bell assy
   standard_portable: Standard
   slug: reliance-visible
-  blog_post: ''
+  blog_post: ""
 - manufacturer: National
-  model: ''
-  year: ''
+  model: ""
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: hella fucked up sell it
   standard_portable: Standard
   slug: national
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Postal
   model: No. 3
   year: 1901
-  serial_number: '14550'
+  serial_number: "14550"
   color: Black
-  typeface: '*'
+  typeface: "*"
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: postal-no-3-14550
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Remington
   model: Junior
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: remington-junior
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Mercedes
   model: Modell 4
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Steile Zierschrift
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: cracked carriage rail casting top right awaiting repair
   standard_portable: Standard
   slug: mercedes-modell-4
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Junior (Spain)
   model: Model 58
-  year: ''
+  year: ""
   serial_number: C2492
   color: Gray-Blue
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: junior-spain-model-58-c2492
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Remington
   model: Portable Model 1
-  year: ''
+  year: ""
   serial_number: NA13437
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: remington-portable-model-1-na13437
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Olympia
   model: SM3
-  year: ''
+  year: ""
   serial_number: ???
   color: Gray
   typeface: Italic
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: olympia-sm3
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Everest
   model: K2
-  year: ''
+  year: ""
   serial_number: ???
   color: Gray (Gerren Repaint)
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: everest-k2
-  blog_post: ''
+  blog_post: ""
 - manufacturer: IBM
   model: Model 04 Executive
-  year: ''
+  year: ""
   serial_number: ???
   color: Black Crinkle
   typeface: Proportional Modern
   portable_manual: Electric
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: ibm-model-04-executive
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Alpina
   model: SK24
-  year: ''
+  year: ""
   serial_number: ???
   color: Gray/Cream
   typeface: Congressional
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: alpina-sk24
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Smith Corona
   model: Skywriter
-  year: ''
+  year: ""
   serial_number: ???
   color: Gray
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
-  standard_portable: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
+  standard_portable: ""
   slug: smith-corona-skywriter
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Hermes
   model: Baby
-  year: ''
+  year: ""
   serial_number: ???
   color: Green
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
+  date_of_acquisition: ""
+  status: ""
   notes: kinda fucked up
-  standard_portable: ''
+  standard_portable: ""
   slug: hermes-baby
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Antares
   model: Parva
-  year: ''
+  year: ""
   serial_number: ???
   color: Gray
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
-  standard_portable: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
+  standard_portable: ""
   slug: antares-parva
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Emerson
   model: No. 3
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: emerson-no-3
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Royal
   model: KMH
-  year: ''
+  year: ""
   serial_number: ???
   color: Hammertone Blue
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Standard
   slug: royal-kmh
-  blog_post: ''
+  blog_post: ""
 - manufacturer: Mercury (Consul)
   model: MBM (1511)
-  year: ''
+  year: ""
   serial_number: ???
   color: Black
   typeface: Standard
   portable_manual: Manual
-  date_of_acquisition: ''
-  status: ''
-  notes: ''
+  date_of_acquisition: ""
+  status: ""
+  notes: ""
   standard_portable: Portable
   slug: mercury-consul-mbm-1511
-  blog_post: ''
+  blog_post: ""

@@ -10,4 +10,3 @@ children:
   - title: typewriters
     permalink: /typewriter-collection/
 ---
-

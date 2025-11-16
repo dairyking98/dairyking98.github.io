@@ -62,8 +62,9 @@ This work was [featured on Typewriter Revolution](https://typewriterrevolution.c
 View my Blickensderfer typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign blickensderfers = site.data.typewriters | where: "manufacturer", "Blickensderfer" %}
 {% for tw in blickensderfers %}
+
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})
-{% endfor %}
+  {% endfor %}
 
 ## Impact
 
@@ -72,4 +73,3 @@ This project demonstrates how modern digital fabrication can preserve and enhanc
 ## Contact
 
 For inquiries about custom typewheels or collaboration opportunities, contact me via email, [Instagram (@blick_elements)](https://instagram.com/blick_elements), or Facebook.
-

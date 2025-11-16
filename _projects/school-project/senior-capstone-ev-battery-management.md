@@ -47,4 +47,3 @@ Project hub and documentation are maintained here: [Team-O-Matic-2025 GitHub rep
 - Next: finalize requirements for first prototype, order long-lead components, and begin mechanical/firmware bring-up
 
 I'll continue to update this post with milestones, links to design artifacts, test data, and demo media as the project progresses. For the most current documentation, check the repo: [Team-O-Matic-2025](https://github.com/dairyking98/Team-O-Matic-2025).
-

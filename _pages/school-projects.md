@@ -103,4 +103,3 @@ You can browse all school-related posts by the [school-project tag](/blog/tag/sc
   {% endif %}
 {% endif %}
 </div>
-

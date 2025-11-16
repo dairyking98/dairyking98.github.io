@@ -56,8 +56,9 @@ The parametric OpenSCAD approach allowed for precise control over the geometry, 
 View my Bennett Pocket Typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign bennetts = site.data.typewriters | where: "manufacturer", "Bennett" %}
 {% for tw in bennetts %}
+
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})
-{% endfor %}
+  {% endfor %}
 
 ## Impact
 
@@ -68,4 +69,3 @@ The iterative development process, while challenging, resulted in a solution tha
 ## Contact
 
 For inquiries about custom Bennett type elements or collaboration opportunities, contact me via email or social media.
-

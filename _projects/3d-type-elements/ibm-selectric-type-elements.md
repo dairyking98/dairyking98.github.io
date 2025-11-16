@@ -30,11 +30,13 @@ My friend and collector in Finland obtained a rare **IBM Selectric Composer**, w
 This project represents a unique challenge in distributed design and manufacturing. Working with my friend and collector in Finland, we established an iterative development process that spanned thousands of miles. I designed the type elements in OpenSCAD and generated STL files, which I would send to Finland. My friend would then print the iterations on his resin printer, test them in his IBM Selectric Composer, and provide feedback with photos and detailed observations.
 
 This remote collaboration required careful communication and trust, as I didn't have direct access to:
+
 - The resin printer for immediate testing
 - The actual IBM Selectric Composer machine
 - The ability to physically inspect prints or test fitment
 
 Despite these limitations, we were able to dial in the design through multiple iterations. Each cycle involved:
+
 1. **Design refinement** - I would modify the OpenSCAD parameters based on feedback
 2. **STL generation** - Creating new files to send overseas
 3. **Remote printing** - My friend would print and test in Finland
@@ -89,8 +91,9 @@ This parametric approach means that creating a new type element is as simple as 
 View my IBM Selectric typewriters in my [typewriter collection]({{ '/typewriter-collection/' | relative_url }}):
 {% assign ibm_selectrics = site.data.typewriters | where_exp: "tw", "tw.model contains 'Selectric'" %}
 {% for tw in ibm_selectrics %}
+
 - [{{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}]({% if tw.blog_post %}{{ tw.blog_post | relative_url }}{% else %}{{ '/typewriters/' | append: tw.slug | append: '/' | relative_url }}{% endif %})
-{% endfor %}
+  {% endfor %}
 
 ## Impact
 
@@ -101,4 +104,3 @@ The remote collaboration aspect of this project also highlights how modern digit
 ## Contact
 
 For inquiries about custom IBM Selectric type elements or collaboration opportunities, contact me via email or social media.
-

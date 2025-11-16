@@ -66,4 +66,3 @@ This section showcases my photographic work and projects.
   {% endif %}
 {% endif %}
 </div>
-

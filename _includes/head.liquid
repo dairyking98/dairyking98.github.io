@@ -187,9 +187,11 @@
   <link defer rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
 {% endif %}
 
-{% comment %} Load Swiper script early in head for web components to register properly
-     This ensures the script starts loading early and web components are available
-     Works in both local development and GitHub Pages hosting {% endcomment %}
+{% comment %}
+  Load Swiper script early in head for web components to register properly
+  This ensures the script starts loading early and web components are available
+  Works in both local development and GitHub Pages hosting
+{% endcomment %}
 {% if page.images.slider %}
   <script
     type="module"

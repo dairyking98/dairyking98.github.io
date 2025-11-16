@@ -67,15 +67,15 @@ A javelin-like shaft is attached to and protruding through a spring. Spring is h
 
 ### Decision Matrix
 
-| Criteria | Weight % | Design 1 | Design 2 | Design 3 | Design 4 | Design 5 |
-|----------|----------|----------|----------|----------|----------|----------|
-| Safety | 10 | 6 | 4 | 2 | 6 | 5 |
-| Predictability | 20 | 2 | 8 | 2 | 3 | 6 |
-| Build Time | 20 | 3 | 7 | 4 | 3 | 8 |
-| Trigger | 10 | 4 | 8 | 3 | 4 | 4 |
-| Simplicity | 20 | 3 | 6 | 5 | 4 | 8 |
-| 3D Printability | 20 | 3 | 8 | 4 | 2 | 4 |
-| **Total** | **100** | **320** | **800** | **350** | **340** | **610** |
+| Criteria        | Weight % | Design 1 | Design 2 | Design 3 | Design 4 | Design 5 |
+| --------------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| Safety          | 10       | 6        | 4        | 2        | 6        | 5        |
+| Predictability  | 20       | 2        | 8        | 2        | 3        | 6        |
+| Build Time      | 20       | 3        | 7        | 4        | 3        | 8        |
+| Trigger         | 10       | 4        | 8        | 3        | 4        | 4        |
+| Simplicity      | 20       | 3        | 6        | 5        | 4        | 8        |
+| 3D Printability | 20       | 3        | 8        | 4        | 2        | 4        |
+| **Total**       | **100**  | **320**  | **800**  | **350**  | **340**  | **610**  |
 
 **Design 2, the stick-leaper (in bold), is the design that has the most weight in the decision matrix above.**
 
@@ -87,7 +87,7 @@ I began designing with Autodesk Fusion 360, which I am most familiar with and us
 
 ### First Prototype
 
-My first prototype was made exactly how I envisioned it, and I quickly found issues that presented themselves and would impede efficient operation of the leaper. 
+My first prototype was made exactly how I envisioned it, and I quickly found issues that presented themselves and would impede efficient operation of the leaper.
 
 Firstly, the slotted pin trigger release had too much friction to release with one hand quickly. Secondly, the linkages were arranged in such a way that energy would be lost at the launch. The linkages were inefficiently placed, and was probably overall a weaker and power-inefficient design.
 
@@ -120,6 +120,7 @@ For the final launch, 10 rubber bands were used for tensioning, and 4 were used 
 ## Final Design Specifications
 
 The final design features:
+
 - **Launch angle**: 60 degrees
 - **Power source**: 10 rubber bands for tensioning, 4 for retention
 - **Mass**: Lead scraps affixed to the arms
@@ -128,19 +129,20 @@ The final design features:
 
 ## List of Materials
 
-| Material | Amount | Cost |
-|----------|--------|------|
-| 3D Printed PLA | 107.79 grams (final design only) | $2.16 |
-| M4x0.7x10mm Screw | 8 pieces | $2.00 |
-| Rubber Bands | 14 pieces | $1.00 |
-| 1/16" copper rod | 12 inches | $1.00 |
-| Silly Putty | 1 pack | $1.00 |
-| Lead Scraps | 4 ounces | $1.00 |
-| **Total** | | **$8.16** |
+| Material          | Amount                           | Cost      |
+| ----------------- | -------------------------------- | --------- |
+| 3D Printed PLA    | 107.79 grams (final design only) | $2.16     |
+| M4x0.7x10mm Screw | 8 pieces                         | $2.00     |
+| Rubber Bands      | 14 pieces                        | $1.00     |
+| 1/16" copper rod  | 12 inches                        | $1.00     |
+| Silly Putty       | 1 pack                           | $1.00     |
+| Lead Scraps       | 4 ounces                         | $1.00     |
+| **Total**         |                                  | **$8.16** |
 
 ## Lessons Learned
 
 This project taught me valuable lessons about:
+
 - Iterative design and prototyping
 - The importance of testing and refinement
 - Working within constraints (budget, materials, safety)
@@ -160,5 +162,4 @@ The following documents are available for reference:
 
 ---
 
-*This project was completed in November 2022 for Intro to Engineering (Professor Khandani) as part of my personal engineering coursework.*
-
+_This project was completed in November 2022 for Intro to Engineering (Professor Khandani) as part of my personal engineering coursework._

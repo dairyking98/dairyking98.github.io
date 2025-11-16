@@ -22,6 +22,7 @@ All components and the encoder knob assembly are securely fastened to a custom 3
 For the physical design, I aimed to create something large and unique—a device that would instill curiosity at first glance. The analog voltmeters and vintage embossed labels provide a sense of nostalgia. The oversized rotary encoder is a deliberate design choice, serving both functional and educational purposes. The method of function of an incremental rotary encoder can now be felt, seen, and heard. It offers a satisfying, hands-on experience and acts as a demonstration tool to illustrate the inner workings of a rotary encoder.
 
 The analog voltmeter's original 0-30V graduated display was modified with custom-designed and printed legends that indicate:
+
 - **Hours**: 0-12
 - **Minutes and Seconds**: 0-60
 - **Pressure**: 950-1030 hPa
@@ -71,6 +72,7 @@ The device is built using the following components:
 ## Technical Implementation
 
 The Arduino code handles:
+
 - Reading time from the DS3231 RTC module
 - Reading environmental data from BMP180 and DHT22 sensors
 - Converting values to PWM signals (0-255) for voltmeter control
@@ -95,6 +97,7 @@ The project involved several key development steps:
 ## Lessons Learned
 
 This project taught me valuable lessons about:
+
 - Interfacing multiple sensors with Arduino (I2C and digital protocols)
 - PWM signal generation and calibration
 - Real-time clock integration and time management
@@ -153,6 +156,7 @@ A new interactive "Play Mode" has been added that transforms the voltmeter clock
 ### Use Cases
 
 Play mode is perfect for:
+
 - **Demonstrations**: Show off the voltmeter movement and PWM control
 - **Calibration**: Manually test voltmeter response across the full range
 - **Interactive Displays**: Create custom visual effects with the LED patterns
@@ -160,5 +164,4 @@ Play mode is perfect for:
 
 ---
 
-*This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework. Version 2 improvements were added on November 16, 2025.*
-
+_This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework. Version 2 improvements were added on November 16, 2025._

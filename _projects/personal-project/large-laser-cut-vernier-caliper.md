@@ -30,4 +30,3 @@ I designed and built a large-format vernier caliper as an educational tool that 
 - Fully functional up to 33 inches
 - Measures to 0.01"
 - Highly effective as a hands-on instructional/learning tool
-

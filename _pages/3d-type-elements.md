@@ -66,4 +66,3 @@ These projects showcase my work creating custom 3D-printed replacement type elem
   {% endif %}
 {% endif %}
 </div>
-

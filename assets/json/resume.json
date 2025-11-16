@@ -44,11 +44,7 @@
       "startDate": "2019-04-01",
       "endDate": "2022-04-01",
       "summary": "Interpreted technical drawings to prepare, assemble, and finish metal components with tight tolerances. Produced high-quality TIG weldments on aluminum and steel alloys for both structural and aesthetic applications. Used jigs and fixturing to maintain alignment and consistency. Coordinated fabrication steps across multiple simultaneous jobs to support fast production cycles.",
-      "highlights": [
-        "TIG welding on aluminum and steel",
-        "Precision fabrication with tight tolerances",
-        "Multi-job coordination and quality control"
-      ]
+      "highlights": ["TIG welding on aluminum and steel", "Precision fabrication with tight tolerances", "Multi-job coordination and quality control"]
     },
     {
       "name": "Exploratorium",
@@ -57,11 +53,7 @@
       "startDate": "2025-09-01",
       "endDate": "2025-09-01",
       "summary": "Collaborated with peers to design and present a public demonstration highlighting the natural bioluminescence of dinoflagellates. Engineered an interactive system that used a vibration transducer to convert music into mechanical stimulation, triggering light emission in real time. Communicated biological mechanisms and engineering design to attendees.",
-      "highlights": [
-        "Public science communication",
-        "Interactive system design",
-        "Biological and mechanical integration"
-      ]
+      "highlights": ["Public science communication", "Interactive system design", "Biological and mechanical integration"]
     }
   ],
   "volunteer": [],
@@ -101,16 +93,7 @@
       "startDate": "2016-09-01",
       "endDate": "2023-05-01",
       "score": "",
-      "courses": [
-        "Engineering Drawing",
-        "Engineering Materials",
-        "Calculus",
-        "Physics",
-        "MATLAB",
-        "Chemistry",
-        "Biology",
-        "Business"
-      ]
+      "courses": ["Engineering Drawing", "Engineering Materials", "Calculus", "Physics", "MATLAB", "Chemistry", "Biology", "Business"]
     },
     {
       "institution": "Las Positas College",
@@ -121,11 +104,7 @@
       "startDate": "2018-09-01",
       "endDate": "2019-05-01",
       "score": "",
-      "courses": [
-        "Metallurgy",
-        "Print Reading",
-        "Welding Processes"
-      ]
+      "courses": ["Metallurgy", "Print Reading", "Welding Processes"]
     }
   ],
   "awards": [
@@ -244,14 +223,7 @@
       "name": "Programming",
       "level": "Intermediate",
       "icon": "fa-solid fa-code",
-      "keywords": [
-        "Python",
-        "MATLAB",
-        "C++",
-        "Git/GitHub",
-        "Serial communication",
-        "I2C communication"
-      ]
+      "keywords": ["Python", "MATLAB", "C++", "Git/GitHub", "Serial communication", "I2C communication"]
     }
   ],
   "languages": [
@@ -265,22 +237,12 @@
     {
       "name": "Reverse Engineering",
       "icon": "fa-solid fa-wrench",
-      "keywords": [
-        "Antique restoration",
-        "Obsolete part reconstruction",
-        "Parametric modeling",
-        "Digital fabrication"
-      ]
+      "keywords": ["Antique restoration", "Obsolete part reconstruction", "Parametric modeling", "Digital fabrication"]
     },
     {
       "name": "Bioengineering",
       "icon": "fa-solid fa-dna",
-      "keywords": [
-        "Microscopy systems",
-        "Automated imaging",
-        "Biological research",
-        "Low-cost instrumentation"
-      ]
+      "keywords": ["Microscopy systems", "Automated imaging", "Biological research", "Low-cost instrumentation"]
     }
   ],
   "references": [],
@@ -329,12 +291,7 @@
     {
       "name": "Tensegrity Structures",
       "summary": "Contributed to exploratory research on the design and mechanical behavior of tensegrity structures. Developed both experimental prototypes and display-quality models, beginning with a modular tensegrity system constructed from wooden dowels, rubber bands, and 3D-printed joints. Transitioned to advanced prototypes using stainless steel tubing, Kevlar cord, and precision-drilled fasteners, producing high-tension architectural forms now exhibited on the SFSU campus.",
-      "highlights": [
-        "Tensegrity design",
-        "Experimental prototyping",
-        "Stainless steel fabrication",
-        "Campus exhibition"
-      ],
+      "highlights": ["Tensegrity design", "Experimental prototyping", "Stainless steel fabrication", "Campus exhibition"],
       "startDate": "2024-09-01",
       "endDate": "2024-12-01",
       "url": ""

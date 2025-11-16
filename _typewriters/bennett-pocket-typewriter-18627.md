@@ -15,7 +15,7 @@ images:
 
 **Color:** Black
 
-**Typeface:** *
+**Typeface:** \*
 
 **Type:** Manual
 
@@ -25,4 +25,4 @@ images:
 
 ---
 
-*This is a placeholder page. A detailed blog post about this typewriter may be added in the future.*
+_This is a placeholder page. A detailed blog post about this typewriter may be added in the future._

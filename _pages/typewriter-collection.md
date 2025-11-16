@@ -71,21 +71,22 @@ nav: false
 <div id="typewriter-list">
 
 {% for typewriter in site.data.typewriters %}
-  {% assign type_class = typewriter.standard_portable | default: 'Standard' %}
-  {% if type_class == '' %}
-    {% assign type_class = 'Standard' %}
-  {% endif %}
-  {% comment %} Find matching typewriter page to get img field {% endcomment %}
-  {% assign typewriter_page = nil %}
-  {% if typewriter.slug %}
-    {% for page in site.typewriters %}
-      {% assign page_slug = page.permalink | remove: '/typewriters/' | remove: '/' %}
-      {% if page_slug == typewriter.slug %}
-        {% assign typewriter_page = page %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
+{% assign type_class = typewriter.standard_portable | default: 'Standard' %}
+{% if type_class == '' %}
+{% assign type_class = 'Standard' %}
+{% endif %}
+{% comment %} Find matching typewriter page to get img field {% endcomment %}
+{% assign typewriter_page = nil %}
+{% if typewriter.slug %}
+{% for page in site.typewriters %}
+{% assign page_slug = page.permalink | remove: '/typewriters/' | remove: '/' %}
+{% if page_slug == typewriter.slug %}
+{% assign typewriter_page = page %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
   <div class="card mb-3 mt-4 typewriter-card" 
        data-manufacturer="{{ typewriter.manufacturer | default: '' }}" 
        data-model="{{ typewriter.model | default: '' }}"
@@ -227,4 +228,3 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
