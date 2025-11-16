@@ -500,6 +500,11 @@ ninja.data = [{
           description: "Oversized, fully functional 33&quot; vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01&quot; resolution.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/personal-project/large-laser-cut-vernier-caliper/";
+            },},{id: "projects-3d-cam",
+          title: '3D-Cam',
+          description: "E-Lab SFSU project for 3D camera applications",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/school-project/3d-cam/";
             },},{id: "projects-acrylic-tensile-testing",
           title: 'Acrylic Tensile Testing',
           description: "Investigated how cast acrylic specimens with holes and notches respond to tensile loading using Instron testing and stress concentration analysis.",
@@ -515,11 +520,26 @@ ninja.data = [{
           description: "A detailed CAD design project from my Intro to Engineering course, where I designed and built a self-propelled device that launches over a 3-foot wall using rubber band power and 3D printed components.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/school-project/cad-project-self-propelled-wall-leaper/";
+            },},{id: "projects-fluorcam",
+          title: 'FluorCam',
+          description: "FluorCam system based on RoboCam, adapted for fluorescence imaging applications",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/school-project/fluorcam/";
+            },},{id: "projects-robocam",
+          title: 'RoboCam',
+          description: "RoboCam system for automated camera control and 3D printer integration",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/school-project/robocam/";
             },},{id: "projects-ev-battery-management-system",
           title: 'EV Battery Management System',
           description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/school-project/senior-capstone-ev-battery-management/";
+            },},{id: "projects-stentorcam",
+          title: 'StentorCam',
+          description: "StentorCam system based on RoboCam, with well plate support for biological imaging applications",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/school-project/stentorcam/";
             },},{id: "projects-voltmeter-clock-arduino-code",
           title: 'Voltmeter Clock Arduino Code',
           description: "Complete Arduino source code for the Voltmeter Clock project with detailed comments",
