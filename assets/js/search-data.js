@@ -72,6 +72,13 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/fraction-inch-mm-chart/";
               },
+            },{id: "dropdown-thread-size-chart",
+              title: "thread size chart",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/thread-size-chart/";
+              },
             },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
