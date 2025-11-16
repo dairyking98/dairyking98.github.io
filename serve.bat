@@ -76,10 +76,13 @@ if !IP_FOUND! EQU 0 (
 endlocal
 
 echo.
+echo Starting in FAST MODE (ImageMagick disabled, no external sources)...
 echo Press Ctrl+C to stop the server
 echo.
 
-bundle exec bin/jekyll serve --host=0.0.0.0
+REM Use dev config and incremental builds for faster local development
+set JEKYLL_ENV=development
+bundle exec bin/jekyll serve --host=0.0.0.0 --config _config.yml,_config_dev.yml --incremental
 
 pause
 

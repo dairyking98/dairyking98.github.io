@@ -1,5 +1,6 @@
 # Development configuration override
 # Use with: bundle exec jekyll build --config _config.yml,_config_dev.yml
+# Or: bundle exec jekyll serve --config _config.yml,_config_dev.yml
 
 # Disable ImageMagick for faster builds during development
 imagemagick:
@@ -7,10 +8,7 @@ imagemagick:
 
 # Disable external source fetching (removes network calls)
 external_sources: []
-# Optionally disable publication badges to skip API calls
-# (Comment out if you need these during development)
-# enable_publication_badges:
-#   altmetric: false
-#   dimensions: false
-#   inspirehep: false
+
+# Note: jekyll-terser is already disabled in main _config.yml
+# No need to disable it here again, but it won't run in dev builds
 
