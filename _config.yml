@@ -214,7 +214,7 @@ plugins:
   - jekyll/scholar
   - jekyll-sitemap
   - jekyll-tabs
-  - jekyll-terser
+  # - jekyll-terser  # Disabled - redundant with PurgeCSS, causes hangs on .map files
   - jekyll-toc
   - jekyll-twitter-plugin
   - jemoji
@@ -234,16 +234,16 @@ sass:
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
-  compress_javascript: false # set to false since we are using terser as the js minifier
+  compress_javascript: false # set to false since we are using PurgeCSS for JS minification
   exclude: ["robots.txt", "assets/js/search/*.js"]
 
 # -----------------------------------------------------------------------------
-# Terser
+# Terser (DISABLED - using PurgeCSS instead)
 # -----------------------------------------------------------------------------
 
-terser:
-  compress:
-    drop_console: true
+# terser:
+#   compress:
+#     drop_console: true
 
 # -----------------------------------------------------------------------------
 # Jekyll Archives
