@@ -473,6 +473,11 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/fun/9_project/";
+            },},{id: "projects-hpwriter-silent-digital-typewriter",
+          title: 'HPWriter - Silent Digital Typewriter',
+          description: "A modern, silent typewriter that prints on plain paper using an HP45 inkjet cartridge. Features instant boot, USB keyboard input, USB flash drive support, and ultra-quiet operation.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/personal-project/hpwriter/";
             },},{id: "projects-large-laser-cut-vernier-caliper",
           title: 'Large Laser Cut Vernier Caliper',
           description: "Oversized, fully functional 33&quot; vernier caliper designed in Fusion 360, laser-cut in MDF with PETG brackets, and Python-generated scales achieving 0.01&quot; resolution.",
