@@ -23,10 +23,20 @@ module ExternalPosts
     end
 
     def fetch_from_rss(site, src)
-      xml = HTTParty.get(src['rss_url']).body
-      return if xml.nil?
-      feed = Feedjira.parse(xml)
-      process_entries(site, src, feed.entries)
+      require 'timeout'
+      begin
+        xml = nil
+        Timeout.timeout(10) do
+          xml = HTTParty.get(src['rss_url'], timeout: 10).body
+        end
+        return if xml.nil?
+        feed = Feedjira.parse(xml)
+        process_entries(site, src, feed.entries)
+      rescue Timeout::Error => e
+        puts "Timeout fetching RSS feed from #{src['rss_url']}: #{e.message}"
+      rescue Exception => e
+        puts "Error fetching RSS feed from #{src['rss_url']}: #{e.class} - #{e.message}"
+      end
     end
 
     def process_entries(site, src, entries)
@@ -87,23 +97,36 @@ module ExternalPosts
     end
 
     def fetch_content_from_url(url)
-      html = HTTParty.get(url).body
-      parsed_html = Nokogiri::HTML(html)
+      require 'timeout'
+      begin
+        html = nil
+        Timeout.timeout(10) do
+          html = HTTParty.get(url, timeout: 10).body
+        end
+        return { title: '', content: '', summary: '' } if html.nil?
+        parsed_html = Nokogiri::HTML(html)
 
-      title = parsed_html.at('head title')&.text.strip || ''
-      description = parsed_html.at('head meta[name="description"]')&.attr('content')
-      description ||= parsed_html.at('head meta[name="og:description"]')&.attr('content')
-      description ||= parsed_html.at('head meta[property="og:description"]')&.attr('content')
+        title = parsed_html.at('head title')&.text.strip || ''
+        description = parsed_html.at('head meta[name="description"]')&.attr('content')
+        description ||= parsed_html.at('head meta[name="og:description"]')&.attr('content')
+        description ||= parsed_html.at('head meta[property="og:description"]')&.attr('content')
 
-      body_content = parsed_html.search('p').map { |e| e.text }
-      body_content = body_content.join() || ''
+        body_content = parsed_html.search('p').map { |e| e.text }
+        body_content = body_content.join() || ''
 
-      {
-        title: title,
-        content: body_content,
-        summary: description
-        # Note: The published date is now added in the fetch_from_urls method.
-      }
+        {
+          title: title,
+          content: body_content,
+          summary: description
+          # Note: The published date is now added in the fetch_from_urls method.
+        }
+      rescue Timeout::Error => e
+        puts "Timeout fetching content from #{url}: #{e.message}"
+        { title: '', content: '', summary: '' }
+      rescue Exception => e
+        puts "Error fetching content from #{url}: #{e.class} - #{e.message}"
+        { title: '', content: '', summary: '' }
+      end
     end
 
   end
