@@ -121,7 +121,7 @@ jobs:
           JEKYLL_ENV: production
         run: |
           echo "Building with optimizations (external sources disabled)..."
-          bundle exec jekyll build
+          bundle exec jekyll build --verbose
           # Restore original config
           mv _config.yml.bak _config.yml || true
 
