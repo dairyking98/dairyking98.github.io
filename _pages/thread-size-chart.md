@@ -6,7 +6,7 @@ description: Interactive thread size chart for American (Unified) and Metric thr
 nav: false
 ---
 
-<div style="margin-bottom: 1rem; padding: 1rem; background-color: #f8f9fa; border-left: 4px solid #007bff; font-size: 0.9rem;">
+<div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--global-card-bg-color); border-left: 4px solid var(--global-theme-color); font-size: 0.9rem; color: var(--global-text-color);">
   <strong>Data Source:</strong> Thread size data is based on information from 
   <a href="https://www.sizes.com/tools/thread_american.htm" target="_blank" rel="noopener noreferrer">American Thread Standards</a> and 
   <a href="https://www.sizes.com/tools/thread_metric.htm" target="_blank" rel="noopener noreferrer">Metric Thread Standards</a> 
@@ -90,11 +90,11 @@ nav: false
   #thread-chart td {
     padding: 0.5rem;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid var(--global-divider-color);
   }
 
   #thread-chart th {
-    background-color: #f8f9fa;
+    background-color: var(--global-card-bg-color);
     font-weight: bold;
     position: sticky;
     top: 0;
@@ -102,11 +102,17 @@ nav: false
   }
 
   #thread-chart tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: var(--global-card-bg-color);
   }
 
   #thread-chart tbody tr:hover {
-    background-color: #e9ecef;
+    background-color: var(--global-divider-color);
+    opacity: 0.5;
+  }
+  
+  html[data-theme="dark"] #thread-chart tbody tr:hover {
+    background-color: var(--global-divider-color);
+    opacity: 0.3;
   }
 </style>
 

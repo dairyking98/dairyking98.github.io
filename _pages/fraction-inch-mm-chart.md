@@ -7,30 +7,8 @@ nav: false
 ---
 
 <div id="chart-controls" style="margin-bottom: 2rem;">
-  <div style="margin-bottom: 1rem;">
-    <h3>Display Options</h3>
-    <div id="checkbox-container" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
-      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-fractions" value="fractions" checked>
-        <span>Fractions</span>
-      </label>
-      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-inches" value="inches" checked>
-        <span>Inches</span>
-      </label>
-      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-drill" value="drill" checked>
-        <span>Drill</span>
-      </label>
-      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-millimeters" value="millimeters" checked>
-        <span>Millimeters</span>
-      </label>
-    </div>
-  </div>
-  
   <div id="interval-controls" style="margin-bottom: 1rem;">
-    <h3>Interval Settings (First Column Only)</h3>
+    <h3>Interval Settings</h3>
     <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;">
       <div>
         <label for="interval-start">Start:</label>
@@ -91,11 +69,11 @@ nav: false
   #conversion-chart td {
     padding: 0.5rem;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid var(--global-divider-color);
   }
   
   #conversion-chart th {
-    background-color: #f8f9fa;
+    background-color: var(--global-card-bg-color);
     font-weight: bold;
     position: sticky;
     top: 0;
@@ -103,11 +81,17 @@ nav: false
   }
   
   #conversion-chart tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: var(--global-card-bg-color);
   }
   
   #conversion-chart tbody tr:hover {
-    background-color: #e9ecef;
+    background-color: var(--global-divider-color);
+    opacity: 0.5;
+  }
+  
+  html[data-theme="dark"] #conversion-chart tbody tr:hover {
+    background-color: var(--global-divider-color);
+    opacity: 0.3;
   }
   
   #interval-controls input[type="range"] {
@@ -294,8 +278,7 @@ nav: false
   }
   
   // State
-  let enabledColumns = ['fractions', 'inches', 'drill', 'millimeters'];
-  let columnCheckOrder = ['fractions', 'inches', 'drill', 'millimeters']; // Track order of checking
+  let enabledColumns = ['millimeters', 'inches', 'fractions', 'drill'];
   let intervalStart = 0;
   let intervalEnd = 1;
   let intervalStepDenom = 64; // Fraction denominator (e.g., 64 means 1/64)
@@ -539,7 +522,8 @@ nav: false
         }
         
         td.textContent = value;
-        if (shouldBold) {
+        // Don't bold dashes
+        if (shouldBold && value !== '—') {
           td.style.fontWeight = 'bold';
         }
         row.appendChild(td);
@@ -547,30 +531,6 @@ nav: false
       
       body.appendChild(row);
     });
-  }
-  
-  // Update column order based on checkbox check order
-  function updateColumnOrder(event) {
-    const checkbox = event.target;
-    const value = checkbox.value;
-    
-    if (checkbox.checked) {
-      // Add to check order if not already present
-      if (!columnCheckOrder.includes(value)) {
-        columnCheckOrder.push(value);
-      }
-    } else {
-      // Remove from check order
-      columnCheckOrder = columnCheckOrder.filter(col => col !== value);
-    }
-    
-    // Update enabled columns based on check order
-    enabledColumns = columnCheckOrder.filter(col => {
-      const cb = document.getElementById(`cb-${col}`);
-      return cb && cb.checked;
-    });
-    
-    renderChart();
   }
   
   // Update interval display
@@ -584,18 +544,6 @@ nav: false
     document.getElementById('interval-step-display').textContent = `= ${stepValue.toFixed(6)} in`;
     document.getElementById('interval-mm-step').value = intervalMMStep;
   }
-  
-  // Event listeners for checkboxes - track check order
-  document.querySelectorAll('#checkbox-container input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener('change', updateColumnOrder);
-  });
-  
-  // Initialize column check order based on initial checked state
-  document.querySelectorAll('#checkbox-container input[type="checkbox"]:checked').forEach(cb => {
-    if (!columnCheckOrder.includes(cb.value)) {
-      columnCheckOrder.push(cb.value);
-    }
-  });
   
   // Event listeners for interval sliders
   document.getElementById('interval-start').addEventListener('input', (e) => {
