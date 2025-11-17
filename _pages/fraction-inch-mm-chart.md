@@ -357,7 +357,7 @@ nav: false
     const maxMM = intervalEnd * 25.4;
     const mmStep = parseFloat(intervalMMStep);
     
-    for (let mm = Math.ceil(minMM / mmStep) * mmStep; mm <= Math.floor(maxMM); mm += mmStep) {
+    for (let mm = Math.ceil(minMM / mmStep) * mmStep; mm <= maxMM + mmStep / 1000; mm += mmStep) {
       const decimal = mm / 25.4;
       if (decimal >= intervalStart && decimal <= intervalEnd) {
         const key = decimal.toFixed(6);
