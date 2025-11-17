@@ -123,19 +123,25 @@
   }
   
   function decimalToFraction(decimal, isFractionInterval = false) {
+    // Only show proper fractions (0 < decimal < 1), not improper fractions or mixed numbers
+    if (decimal >= 1 || decimal < 0) {
+      return '—';
+    }
+    
     // Only show fractions for exact matches or fraction intervals
     if (isFractionInterval) {
       // For fraction intervals, calculate the exact fraction based on step denominator
       const numerator = Math.round(decimal * intervalStepDenom);
       const calculated = numerator / intervalStepDenom;
       
-      // Only return fraction if it's an exact match
+      // Only return fraction if it's an exact match and a proper fraction
       if (Math.abs(calculated - decimal) < 0.000001) {
         if (numerator === 0) {
           return '0';
         } else if (numerator === intervalStepDenom) {
           return '1';
-        } else {
+        } else if (numerator < intervalStepDenom) {
+          // Only show proper fractions (numerator < denominator)
           // Simplify the fraction
           const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
           const divisor = gcd(numerator, intervalStepDenom);
@@ -152,23 +158,31 @@
     
     if (entry) {
       const denom = getDenominatorFromFraction(entry.fraction);
-      // Only return if it's an exact match and compatible
+      // Only return if it's an exact match, compatible, and a proper fraction
       if (denom && isCompatibleDenominator(denom, intervalStepDenom)) {
         // Verify it's truly exact by recalculating the fraction
         let fractionDecimal;
         if (entry.fraction === '0') {
           fractionDecimal = 0;
         } else if (entry.fraction === '1') {
-          fractionDecimal = 1;
+          // Skip '1' since we're only showing proper fractions
+          return '—';
         } else {
           const parts = entry.fraction.split('/');
           if (parts.length === 2) {
-            fractionDecimal = parseInt(parts[0]) / parseInt(parts[1]);
+            const num = parseInt(parts[0]);
+            const den = parseInt(parts[1]);
+            // Only return if it's a proper fraction (numerator < denominator)
+            if (num < den) {
+              fractionDecimal = num / den;
+            } else {
+              return '—';
+            }
           } else {
             fractionDecimal = parseFloat(entry.fraction);
           }
         }
-        if (Math.abs(fractionDecimal - decimal) < 0.000001) {
+        if (fractionDecimal !== undefined && Math.abs(fractionDecimal - decimal) < 0.000001) {
           return entry.fraction;
         }
       }
