@@ -205,10 +205,33 @@ nav: false
   }
   
   function decimalToFraction(decimal, isFractionInterval = false) {
-    // Only show proper fractions (0 < decimal < 1), not improper fractions or mixed numbers
-    if (decimal >= 1 || decimal < 0) {
+    if (decimal < 0) {
       return '—';
     }
+    
+    // Helper function to simplify fractions
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+    
+    // Helper function to format as mixed number
+    const formatMixedNumber = (whole, num, den) => {
+      if (whole === 0) {
+        if (num === 0) return '0';
+        // Simplify the fractional part
+        const divisor = gcd(num, den);
+        const simpleNum = num / divisor;
+        const simpleDenom = den / divisor;
+        return `${simpleNum}/${simpleDenom}`;
+      } else {
+        if (num === 0) {
+          return whole.toString();
+        }
+        // Simplify the fractional part
+        const divisor = gcd(num, den);
+        const simpleNum = num / divisor;
+        const simpleDenom = den / divisor;
+        return `${whole} ${simpleNum}/${simpleDenom}`;
+      }
+    };
     
     // Only show fractions for exact matches or fraction intervals
     if (isFractionInterval) {
@@ -216,20 +239,14 @@ nav: false
       const numerator = Math.round(decimal * intervalStepDenom);
       const calculated = numerator / intervalStepDenom;
       
-      // Only return fraction if it's an exact match and a proper fraction
+      // Only return fraction if it's an exact match
       if (Math.abs(calculated - decimal) < 0.000001) {
         if (numerator === 0) {
           return '0';
-        } else if (numerator === intervalStepDenom) {
-          return '1';
-        } else if (numerator < intervalStepDenom) {
-          // Only show proper fractions (numerator < denominator)
-          // Simplify the fraction
-          const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
-          const divisor = gcd(numerator, intervalStepDenom);
-          const simpleNum = numerator / divisor;
-          const simpleDenom = intervalStepDenom / divisor;
-          return `${simpleNum}/${simpleDenom}`;
+        } else {
+          const whole = Math.floor(numerator / intervalStepDenom);
+          const remainder = numerator % intervalStepDenom;
+          return formatMixedNumber(whole, remainder, intervalStepDenom);
         }
       }
     }
@@ -240,32 +257,54 @@ nav: false
     
     if (entry) {
       const denom = getDenominatorFromFraction(entry.fraction);
-      // Only return if it's an exact match, compatible, and a proper fraction
+      // Only return if it's an exact match and compatible
       if (denom && isCompatibleDenominator(denom, intervalStepDenom)) {
         // Verify it's truly exact by recalculating the fraction
         let fractionDecimal;
         if (entry.fraction === '0') {
           fractionDecimal = 0;
         } else if (entry.fraction === '1') {
-          // Skip '1' since we're only showing proper fractions
-          return '—';
+          fractionDecimal = 1;
         } else {
           const parts = entry.fraction.split('/');
           if (parts.length === 2) {
             const num = parseInt(parts[0]);
             const den = parseInt(parts[1]);
-            // Only return if it's a proper fraction (numerator < denominator)
-            if (num < den) {
-              fractionDecimal = num / den;
-            } else {
-              return '—';
-            }
+            fractionDecimal = num / den;
           } else {
             fractionDecimal = parseFloat(entry.fraction);
           }
         }
         if (fractionDecimal !== undefined && Math.abs(fractionDecimal - decimal) < 0.000001) {
-          return entry.fraction;
+          // Convert to mixed number if >= 1
+          if (fractionDecimal >= 1) {
+            const whole = Math.floor(fractionDecimal);
+            const fractionalPart = fractionDecimal - whole;
+            if (fractionalPart === 0) {
+              return whole.toString();
+            }
+            // Find the fractional part in the lookup
+            const fracKey = Math.round(fractionalPart * 1000000) / 1000000;
+            const fracEntry = fractionLookup.get(fracKey);
+            if (fracEntry && fracEntry.fraction !== '0' && fracEntry.fraction !== '1') {
+              const parts = fracEntry.fraction.split('/');
+              if (parts.length === 2) {
+                const num = parseInt(parts[0]);
+                const den = parseInt(parts[1]);
+                return formatMixedNumber(whole, num, den);
+              }
+            }
+            // Fallback: calculate from decimal
+            const fracNum = Math.round(fractionalPart * intervalStepDenom);
+            const fracRemainder = fracNum % intervalStepDenom;
+            if (fracRemainder === 0) {
+              return whole.toString();
+            }
+            return formatMixedNumber(whole, fracRemainder, intervalStepDenom);
+          } else {
+            // Proper fraction (< 1)
+            return entry.fraction;
+          }
         }
       }
     }
