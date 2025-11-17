@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://dairyking98.github.io/sitemap.xml
+Sitemap: https://leonardchau.com/sitemap.xml
