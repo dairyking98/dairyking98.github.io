@@ -62,8 +62,8 @@ nav: false
         <select id="interval-mm-step" style="width: 120px; margin-left: 0.5rem;">
           <option value="0.01">0.01 mm</option>
           <option value="0.05">0.05 mm</option>
-          <option value="0.1" selected>0.1 mm</option>
-          <option value="0.5">0.5 mm</option>
+          <option value="0.1">0.1 mm</option>
+          <option value="0.5" selected>0.5 mm</option>
           <option value="1">1 mm</option>
           <option value="2">2 mm</option>
           <option value="5">5 mm</option>
@@ -299,7 +299,7 @@ nav: false
   let intervalStart = 0;
   let intervalEnd = 1;
   let intervalStepDenom = 64; // Fraction denominator (e.g., 64 means 1/64)
-  let intervalMMStep = 0.1; // Millimeter step (e.g., 0.1 means 0.1mm intervals)
+  let intervalMMStep = 0.5; // Millimeter step (e.g., 0.5 means 0.5mm intervals)
   
   // Get step value from denominator
   function getStepValue(denom) {
@@ -485,7 +485,8 @@ nav: false
       
       // Only bold fraction intervals and their decimals, and mm intervals
       const shouldBoldFraction = item.isFractionInterval;
-      const shouldBoldInches = item.isFractionInterval;
+      // Bold inches if it's a fraction interval OR if there's a drill match
+      const shouldBoldInches = item.isFractionInterval || item.letterDrill || item.numberDrill;
       const shouldBoldMM = isMMInterval;
       
       enabledColumns.forEach(col => {
@@ -514,8 +515,8 @@ nav: false
               drills.push(item.numberDrill);
             }
             value = drills.length > 0 ? drills.join(', ') : '—';
-            // Never bold drills
-            shouldBold = false;
+            // Bold drills
+            shouldBold = true;
             break;
           case 'millimeters':
             // Check if it's on the mm interval
