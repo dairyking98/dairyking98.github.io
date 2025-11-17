@@ -379,13 +379,51 @@
               break;
             case 'major-dia':
               if (item.type === 'American') {
-                if (showMillimeters) {
-                  td.innerHTML = `${item.majorDiaIn.toFixed(4)} in<br>${item.majorDiaMm.toFixed(2)} mm`;
-                  value = `${item.majorDiaIn.toFixed(4)} in\n${item.majorDiaMm.toFixed(2)} mm`;
-                } else {
-                  td.innerHTML = `${item.majorDiaIn.toFixed(4)} in`;
-                  value = `${item.majorDiaIn.toFixed(4)} in`;
+                const majorDiaIn = item.majorDiaIn;
+                const drills = findExactDrills(majorDiaIn);
+                // Only check for fraction if no exact drill match (within 0.000001)
+                let fraction = null;
+                let hasExactDrillMatch = false;
+                if (drills) {
+                  hasExactDrillMatch = drills.some(d => {
+                    const drillSize = letterDrillSizes[d] || numberDrillSizes[d];
+                    return Math.abs(drillSize - majorDiaIn) < 0.000001;
+                  });
                 }
+                if (!hasExactDrillMatch) {
+                  // Use exact matching for major diameter (drillTolerance = 0)
+                  const originalTolerance = drillTolerance;
+                  drillTolerance = 0;
+                  fraction = decimalToFraction(majorDiaIn);
+                  drillTolerance = originalTolerance;
+                }
+                
+                let topLine = [];
+                if (drills) {
+                  // Add drills with decimal and "in" in parentheses
+                  drills.forEach(drill => {
+                    topLine.push(`${drill} (${majorDiaIn.toFixed(4)} in)`);
+                  });
+                }
+                if (fraction) {
+                  // Add fraction with decimal and "in" in parentheses
+                  topLine.push(`${fraction} (${majorDiaIn.toFixed(4)} in)`);
+                }
+                
+                let htmlParts = [];
+                if (topLine.length > 0) {
+                  htmlParts.push(topLine.join(' / '));
+                } else {
+                  // No drill or fraction match, show plain decimal with "in" (no parentheses)
+                  htmlParts.push(`${majorDiaIn.toFixed(4)} in`);
+                }
+                
+                if (showMillimeters) {
+                  htmlParts.push(`${item.majorDiaMm.toFixed(2)} mm`);
+                }
+                
+                td.innerHTML = htmlParts.join('<br>');
+                value = htmlParts.join('\n');
               } else {
                 if (showInches) {
                   td.innerHTML = `${item.majorDiaMm.toFixed(2)} mm<br>${item.majorDiaIn.toFixed(4)} in`;
