@@ -28,10 +28,38 @@ table {
   th {
     font-size: 1rem;
     padding: 1px 1rem 1px 0;
+    color: var(--global-text-color);
+    border-color: var(--global-divider-color);
   }
 
   th {
     font-weight: bold;
+    background-color: var(--global-card-bg-color);
+  }
+  
+  // Border styling for tables with borders
+  &.table-bordered {
+    border: 1px solid var(--global-divider-color);
+    
+    td,
+    th {
+      border: 1px solid var(--global-divider-color);
+    }
+  }
+  
+  // Striped table rows
+  &.table-striped {
+    tbody tr:nth-child(even) {
+      background-color: var(--global-card-bg-color);
+    }
+  }
+  
+  // Hover effect for tables
+  &.table-hover {
+    tbody tr:hover {
+      background-color: var(--global-divider-color);
+      opacity: 0.5;
+    }
   }
 }
 
@@ -49,10 +77,71 @@ table.table a {
   }
 }
 
+// Enhanced dark mode table styling
 .table-dark {
   background-color: transparent;
+  color: var(--global-text-color);
+  
+  td,
+  th {
+    color: var(--global-text-color);
+    border-color: var(--global-divider-color);
+  }
+  
+  th {
+    background-color: var(--global-card-bg-color);
+  }
+  
   &.table-bordered {
     border: 1px solid var(--global-divider-color) !important;
+    
+    td,
+    th {
+      border: 1px solid var(--global-divider-color) !important;
+    }
+  }
+  
+  &.table-striped {
+    tbody tr:nth-child(even) {
+      background-color: var(--global-card-bg-color);
+    }
+  }
+  
+  &.table-hover {
+    tbody tr:hover {
+      background-color: var(--global-divider-color);
+      opacity: 0.3;
+    }
+  }
+}
+
+// Dark mode specific adjustments
+html[data-theme="dark"] {
+  table {
+    &.table-hover {
+      tbody tr:hover {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+// Info box styling for notices, data sources, and similar informational blurbs
+.info-box {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--global-card-bg-color);
+  border-left: 4px solid var(--global-theme-color);
+  font-size: 0.9rem;
+  color: var(--global-text-color);
+  
+  a {
+    color: var(--global-theme-color);
+    
+    &:hover {
+      color: var(--global-hover-color);
+      text-decoration: underline;
+    }
   }
 }
 

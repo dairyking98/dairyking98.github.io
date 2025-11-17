@@ -53,7 +53,7 @@ nav: false
 </div>
 
 <div id="chart-container" style="overflow-x: auto;">
-  <table id="conversion-chart" class="table table-striped" style="min-width: 100%;">
+  <table id="conversion-chart" class="table table-striped table-bordered" style="min-width: 100%;">
     <thead id="chart-header"></thead>
     <tbody id="chart-body"></tbody>
   </table>
@@ -69,29 +69,12 @@ nav: false
   #conversion-chart td {
     padding: 0.5rem;
     text-align: center;
-    border: 1px solid var(--global-divider-color);
   }
   
   #conversion-chart th {
-    background-color: var(--global-card-bg-color);
-    font-weight: bold;
     position: sticky;
     top: 0;
     z-index: 10;
-  }
-  
-  #conversion-chart tbody tr:nth-child(even) {
-    background-color: var(--global-card-bg-color);
-  }
-  
-  #conversion-chart tbody tr:hover {
-    background-color: var(--global-divider-color);
-    opacity: 0.5;
-  }
-  
-  html[data-theme="dark"] #conversion-chart tbody tr:hover {
-    background-color: var(--global-divider-color);
-    opacity: 0.3;
   }
   
   #interval-controls input[type="range"] {
