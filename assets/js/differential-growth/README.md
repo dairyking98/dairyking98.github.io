@@ -26,4 +26,3 @@ Or use the build script from the root: `build-differential-growth.bat`
 ## Usage
 
 After building, update `_includes/scripts.liquid` to load `differential-growth-bundled.js` instead of the simplified bundle.
-

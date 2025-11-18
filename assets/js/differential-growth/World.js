@@ -1,9 +1,9 @@
 /** @module World */
 
-let rbush = require('rbush'),
-    toPath = require('svg-points').toPath,
-    saveAs = require('file-saver').saveAs,
-    Defaults = require('./Defaults');
+let rbush = require("rbush"),
+  toPath = require("svg-points").toPath,
+  saveAs = require("file-saver").saveAs,
+  Defaults = require("./Defaults");
 
 /** Manages a set of Paths and provides some global control mechanisms, such as pausing the simulation. */
 class World {
@@ -23,18 +23,29 @@ class World {
     this.traceMode = this.settings.TraceMode;
     this.drawNodes = this.settings.DrawNodes;
     this.debugMode = this.settings.DebugMode;
-    this.invertedColors = this.settings.InvertedColors;
     this.fillMode = this.settings.FillMode;
     this.drawHistory = this.settings.DrawHistory;
     this.useBrownianMotion = this.settings.UseBrownianMotion;
     this.showBounds = this.settings.ShowBounds;
 
-    this.tree = rbush(9, ['.x','.y','.x','.y']);  // use custom accessor strings per https://github.com/mourner/rbush#data-format
+    this.tree = rbush(9, [".x", ".y", ".x", ".y"]); // use custom accessor strings per https://github.com/mourner/rbush#data-format
     this.buildTree();
 
     // Begin capturing path history
+    this.historyIntervalId = null;
+    this.startHistoryCapture();
+  }
+
+  /** Start or restart history capture with current interval setting */
+  startHistoryCapture() {
+    // Clear existing interval if it exists
+    if (this.historyIntervalId !== null) {
+      clearInterval(this.historyIntervalId);
+    }
+
+    // Start new interval
     let _this = this;
-    setInterval(function() {
+    this.historyIntervalId = setInterval(function () {
       _this.addToHistory();
     }, this.settings.HistoryCaptureInterval);
   }
@@ -64,18 +75,15 @@ class World {
 
   /** Draw the background to the canvas */
   drawBackground() {
-    if(!this.invertedColors) {
-      this.p5.background(255);
-    } else {
-      this.p5.background(0);
-    }
+    // Use transparent background to show webpage background
+    this.p5.clear();
   }
 
   /** Build an R-tree spatial index with all Nodes of all Paths in this World */
   buildTree() {
     this.tree.clear();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       this.tree.load(path.nodes);
     }
   }
@@ -90,7 +98,6 @@ class World {
     path.debugMode = this.debugMode;
     path.fillMode = this.fillMode;
     path.useBrownianMotion = this.useBrownianMotion;
-    path.setInvertedColors(this.invertedColors);
     path.setTraceMode(this.traceMode);
 
     this.paths.push(path);
@@ -101,15 +108,15 @@ class World {
    * @param {array} paths
    */
   addPaths(paths) {
-    for(let path of paths) {
+    for (let path of paths) {
       this.addPath(path);
     }
   }
 
   /** Add another snapshot to each Path */
   addToHistory() {
-    if(!this.paused) {
-      for(let path of this.paths) {
+    if (!this.paused) {
+      for (let path of this.paths) {
         path.addToHistory();
       }
     }
@@ -117,8 +124,8 @@ class World {
 
   /** Remove any Paths that have gotten too small */
   prunePaths() {
-    for(let i = 0; i < this.paths.length; i++) {
-      if(this.paths[i].nodes.length <= 1) {
+    for (let i = 0; i < this.paths.length; i++) {
+      if (this.paths[i].nodes.length <= 1) {
         this.paths.splice(i, 1);
       }
     }
@@ -126,31 +133,38 @@ class World {
 
   /** Generate an SVG file using the current canvas contents and open up a download prompt on the user's machine */
   export() {
-    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg');
-    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
-    svg.setAttribute('width', window.innerWidth);
-    svg.setAttribute('height', window.innerHeight);
-    svg.setAttribute('viewBox', '0 0 ' + window.innerWidth + ' ' + window.innerHeight);
+    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+    svg.setAttribute("width", window.innerWidth);
+    svg.setAttribute("height", window.innerHeight);
+    svg.setAttribute("viewBox", "0 0 " + window.innerWidth + " " + window.innerHeight);
+
+    // Add background rectangle based on current theme for SVG export
+    const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+    let bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bgRect.setAttribute("width", window.innerWidth);
+    bgRect.setAttribute("height", window.innerHeight);
+    bgRect.setAttribute("fill", isDarkMode ? "#000000" : "#ffffff");
+    svg.appendChild(bgRect);
 
     // Add a <path> node for every Path in this World
-    for(let path of this.paths) {
-
+    for (let path of this.paths) {
       // If history is enabled, create a new <path> node for each snapshot
-      if(this.drawHistory) {
-        for(let nodes of path.nodeHistory) {
-          svg.appendChild( this.createPathElFromNodes(nodes, path.isClosed) );
+      if (this.drawHistory) {
+        for (let nodes of path.nodeHistory) {
+          svg.appendChild(this.createPathElFromNodes(nodes, path.isClosed));
         }
       }
 
-      svg.appendChild( this.createPathElFromNodes(path.nodes), path.isClosed );
+      svg.appendChild(this.createPathElFromNodes(path.nodes), path.isClosed);
     }
 
     // Force download of SVG based on https://jsfiddle.net/ch77e7yh/1
     const svgDoctype = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
-    const serializedSvg = (new XMLSerializer()).serializeToString(svg);
-    const blob = new Blob([svgDoctype, serializedSvg], { type: 'image/svg+xml;' })
-    saveAs(blob, 'differential-growth-' + Date.now() + '.svg');
+    const serializedSvg = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([svgDoctype, serializedSvg], { type: "image/svg+xml;" });
+    saveAs(blob, "differential-growth-" + Date.now() + ".svg");
   }
 
   /**
@@ -160,28 +174,32 @@ class World {
    * @returns SVG path DOM node with a `d` attribute generated from the provided Nodes array.
    */
   createPathElFromNodes(nodes, isClosed) {
-    let pointsString = '';
+    let pointsString = "";
 
-    for(let [index, node] of nodes.entries()) {
-      pointsString += node.x + ',' + node.y;
+    for (let [index, node] of nodes.entries()) {
+      pointsString += node.x + "," + node.y;
 
-      if(index < nodes.length - 1) {
-        pointsString += ' ';
+      if (index < nodes.length - 1) {
+        pointsString += " ";
       }
     }
 
     let d = toPath({
-      type: 'polyline',
-      points: pointsString
+      type: "polyline",
+      points: pointsString,
     });
 
-    if(isClosed) {
-      d += ' Z';
+    if (isClosed) {
+      d += " Z";
     }
 
-    let pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    pathEl.setAttribute('d', d);
-    pathEl.setAttribute('style', 'fill: none; stroke: black; stroke-width: 1');
+    // Use current theme for stroke color in SVG export
+    const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+    const strokeColor = isDarkMode ? "white" : "black";
+
+    let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pathEl.setAttribute("d", d);
+    pathEl.setAttribute("style", `fill: none; stroke: ${strokeColor}; stroke-width: 1`);
 
     return pathEl;
   }
@@ -248,7 +266,7 @@ class World {
   setMinDistance(minDistance) {
     this.settings.MinDistance = minDistance;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setMinDistance(minDistance);
     }
   }
@@ -260,7 +278,7 @@ class World {
   setMaxDistance(maxDistance) {
     this.settings.MaxDistance = maxDistance;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setMaxDistance(maxDistance);
     }
   }
@@ -272,7 +290,7 @@ class World {
   setRepulsionRadius(repulsionRadius) {
     this.settings.RepulsionRadius = repulsionRadius;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setRepulsionRadius(repulsionRadius);
     }
   }
@@ -284,7 +302,7 @@ class World {
   setAttractionForce(attractionForce) {
     this.settings.AttractionForce = attractionForce;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setAttractionForce(attractionForce);
     }
   }
@@ -296,7 +314,7 @@ class World {
   setRepulsionForce(repulsionForce) {
     this.settings.RepulsionForce = repulsionForce;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setRepulsionForce(repulsionForce);
     }
   }
@@ -308,7 +326,7 @@ class World {
   setAlignmentForce(alignmentForce) {
     this.settings.AlignmentForce = alignmentForce;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.setAlignmentForce(alignmentForce);
     }
   }
@@ -352,7 +370,7 @@ class World {
   setFillMode(state) {
     this.drawBackground();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.fillMode = state;
       path.draw();
     }
@@ -368,7 +386,7 @@ class World {
   setDrawHistory(state) {
     this.drawBackground();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.drawHistory = state;
       path.draw();
     }
@@ -386,22 +404,8 @@ class World {
     this.settings.TraceMode = state;
     this.drawBackground();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.traceMode = state;
-    }
-  }
-
-  /**
-   * Set the state of the "invert colors" flag
-   * @param {boolean} state Next state for the "invert colors" flag
-   */
-  setInvertedColors(state) {
-    this.invertedColors = state;
-    this.settings.InvertedColors = state;
-    this.drawBackground();
-
-    for(let path of this.paths) {
-      path.invertedColors = state;
     }
   }
 
@@ -412,7 +416,7 @@ class World {
   setDrawBounds(state) {
     this.drawBackground();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.showBounds = state;
       path.draw();
     }
@@ -428,8 +432,29 @@ class World {
     this.useBrownianMotion = state;
     this.settings.UseBrownianMotion = state;
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.useBrownianMotion = state;
+    }
+  }
+
+  /**
+   * Set the history capture interval
+   * @param {number} interval Interval in milliseconds
+   */
+  setHistoryCaptureInterval(interval) {
+    this.settings.HistoryCaptureInterval = interval;
+    this.startHistoryCapture();
+  }
+
+  /**
+   * Set the maximum history size
+   * @param {number} size Maximum number of history snapshots to keep
+   */
+  setMaxHistorySize(size) {
+    this.settings.MaxHistorySize = size;
+
+    for (let path of this.paths) {
+      path.settings.MaxHistorySize = size;
     }
   }
 
@@ -443,20 +468,8 @@ class World {
     this.traceMode = !this.traceMode;
     this.drawBackground();
 
-    for(let path of this.paths) {
+    for (let path of this.paths) {
       path.toggleTraceMode();
-      path.draw();
-    }
-  }
-
-  /** Toggle the state of the "invert colors" flag */
-  toggleInvertedColors() {
-    this.invertedColors = !this.invertedColors;
-
-    this.drawBackground();
-
-    for(let path of this.paths) {
-      path.toggleInvertedColors();
       path.draw();
     }
   }
@@ -483,7 +496,7 @@ class World {
 
   /** Toggle the pause/unpause state of the simulation */
   togglePause() {
-    if(this.paused) {
+    if (this.paused) {
       this.unpause();
     } else {
       this.pause();

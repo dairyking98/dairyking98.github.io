@@ -37,9 +37,6 @@ differential_growth: true
             <code>Space</code> - pause or unpause the simulation
           </li>
           <li>
-            <code>i</code> - toggle inverting of colors
-          </li>
-          <li>
             <code>d</code> - toggle debug mode
           </li>
           <li>
@@ -154,11 +151,6 @@ differential_growth: true
               </div>
 
               <div class="control">
-                <input type="checkbox" id="inverted-colors" class="sr-only">
-                <label for="inverted-colors">Invert colors</label>
-              </div>
-
-              <div class="control">
                 <input type="checkbox" id="trace-mode" class="sr-only">
                 <label for="trace-mode">Trace effect</label>
               </div>
@@ -174,7 +166,7 @@ differential_growth: true
 
               <div class="control range" role="group">
                 <label for="history-capture-interval">History capture interval (in ms)</label>
-                <input type="range" min="10" max="500" step="1" id="history-capture-interval">
+                <input type="range" min="10" max="2000" step="10" id="history-capture-interval">
                 <span class="value" aria-hidden="true"></span>
               </div>
 
@@ -205,6 +197,7 @@ differential_growth: true
         <button class="apply last-focusable-element">Apply</button>
       </div>
     </div>
+
   </div>
 
   <aside class="left-menu toolbar">
@@ -251,6 +244,7 @@ differential_growth: true
         </button>
       </li>
     </ul>
+
   </aside>
 
   <div class="top-controls">
@@ -283,6 +277,7 @@ differential_growth: true
         </button>
       </li>
     </ul>
+
   </aside>
 
   <div id="canvas-container">

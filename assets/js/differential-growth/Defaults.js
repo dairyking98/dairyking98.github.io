@@ -14,22 +14,22 @@ module.exports = {
   MaxDistance: 30,
 
   /**
-   * Radius to search for nearby nodes for repulsion force 
+   * Radius to search for nearby nodes for repulsion force
    * @type {number}
    */
   RepulsionRadius: 20,
 
   /**
-   * Maximum velocity at which a node can move per frame 
+   * Maximum velocity at which a node can move per frame
    * @type {number}
    */
-  MaxVelocity: .1,
+  MaxVelocity: 0.1,
 
   /**
    * Maximum attraction force between connected nodes
    * @type {number}
    */
-  AttractionForce: .001,
+  AttractionForce: 0.001,
 
   /**
    * Maximum repulsion force between nearby nodes
@@ -41,7 +41,7 @@ module.exports = {
    * Maximum alignment force between connected nodes
    * @type {number}
    */
-  AlignmentForce: .001,
+  AlignmentForce: 0.001,
 
   /**
    * Interval (in ms) between call to node injection routine
@@ -60,12 +60,6 @@ module.exports = {
    * @type {boolean}
    */
   TraceMode: false,
-
-  /**
-   * Turn on/off inverted colors
-   * @type {boolean}
-   */
-  InvertedColors: false,
 
   /**
    * Turn on/off debug mode (per-edge colors)
@@ -113,5 +107,5 @@ module.exports = {
    * Draw all boundaries
    * @type {boolean}
    */
-  ShowBounds: true
-}
+  ShowBounds: true,
+};

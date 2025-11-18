@@ -1,17 +1,16 @@
 /** @module Node */
 
-let Vec2 = require('vec2'),
-    Defaults = require('./Defaults');
+let Vec2 = require("vec2"),
+  Defaults = require("./Defaults");
 
-
-/** 
- * Single point (node) within a Path, whose only job is to manage it's position and movement towards new position. 
+/**
+ * Single point (node) within a Path, whose only job is to manage it's position and movement towards new position.
  * @extends Vec2
  */
 class Node extends Vec2 {
   /**
    * Create a new Node object
-   * @param {object} p5 Reference to global instance of p5.js for drawing 
+   * @param {object} p5 Reference to global instance of p5.js for drawing
    * @param {number} x Initial X coordinate
    * @param {number} y Initial Y coordinate
    * @param {object} [settings] Object of local override Settings to merge with Defaults
@@ -20,7 +19,7 @@ class Node extends Vec2 {
    * @param {number} [repulsionRadius] Radius around Node that will affect movement of other Nodes
    */
   constructor(p5, x, y, settings = Defaults, isFixed = false, minDistance, repulsionRadius) {
-    super(x,y);
+    super(x, y);
 
     this.p5 = p5;
     this.isFixed = isFixed;
@@ -35,7 +34,7 @@ class Node extends Vec2 {
 
   /** Moves Node by one "step */
   iterate() {
-    if(!this.isFixed) {
+    if (!this.isFixed) {
       this.x = this.p5.lerp(this.x, this.nextPosition.x, this.settings.MaxVelocity);
       this.y = this.p5.lerp(this.y, this.nextPosition.y, this.settings.MaxVelocity);
     }

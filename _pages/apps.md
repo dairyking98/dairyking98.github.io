@@ -10,4 +10,3 @@ children:
   - title: differential growth
     permalink: /differential-growth/
 ---
-

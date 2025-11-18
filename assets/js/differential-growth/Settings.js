@@ -2,10 +2,10 @@ module.exports = {
   MinDistance: 2,
   MaxDistance: 5,
   RepulsionRadius: 15,
-  MaxVelocity: .1,
-  AttractionForce: .2,
-  RepulsionForce: .6,
-  AlignmentForce: .55,
+  MaxVelocity: 0.1,
+  AttractionForce: 0.2,
+  RepulsionForce: 0.6,
+  AlignmentForce: 0.55,
   NodeInjectionInterval: 100,
   DrawNodes: false,
   TraceMode: false,
@@ -15,5 +15,5 @@ module.exports = {
   DrawHistory: false,
   ShowBounds: true,
   UseBrownianMotion: true,
-  BrownianMotionRange: 0.01
-}
+  BrownianMotionRange: 0.01,
+};
