@@ -1,0 +1,1 @@
+let inside=require("point-in-polygon");class Bounds{constructor(o,t){this.p5=o,this.polygon=t}contains(o){return inside(o,this.polygon)}draw(){this.p5.beginShape();for(let o=0;o<this.polygon.length;o++)this.p5.vertex(this.polygon[o][0],this.polygon[o][1]);this.p5.vertex(this.polygon[0][0],this.polygon[0][1]),this.p5.endShape()}}module.exports=Bounds;

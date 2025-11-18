@@ -1,0 +1,1 @@
+module.exports={MinDistance:20,MaxDistance:30,RepulsionRadius:20,MaxVelocity:.1,AttractionForce:.001,RepulsionForce:500,AlignmentForce:.001,NodeInjectionInterval:100,DrawNodes:!1,TraceMode:!1,InvertedColors:!1,DebugMode:!1,FillMode:!1,DrawHistory:!1,HistoryCaptureInterval:1e3,MaxHistorySize:10,UseBrownianMotion:!0,BrownianMotionRange:.01,ShowBounds:!0};

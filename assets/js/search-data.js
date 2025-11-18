@@ -79,6 +79,13 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/thread-size-chart/";
               },
+            },{id: "dropdown-differential-growth",
+              title: "differential growth",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/differential-growth/";
+              },
             },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
