@@ -36,24 +36,24 @@ table {
     font-weight: bold;
     background-color: var(--global-card-bg-color);
   }
-  
+
   // Border styling for tables with borders
   &.table-bordered {
     border: 1px solid var(--global-divider-color);
-    
+
     td,
     th {
       border: 1px solid var(--global-divider-color);
     }
   }
-  
+
   // Striped table rows
   &.table-striped {
     tbody tr:nth-child(even) {
       background-color: var(--global-card-bg-color);
     }
   }
-  
+
   // Hover effect for tables
   &.table-hover {
     tbody tr:hover {
@@ -81,32 +81,32 @@ table.table a {
 .table-dark {
   background-color: transparent;
   color: var(--global-text-color);
-  
+
   td,
   th {
     color: var(--global-text-color);
     border-color: var(--global-divider-color);
   }
-  
+
   th {
     background-color: var(--global-card-bg-color);
   }
-  
+
   &.table-bordered {
     border: 1px solid var(--global-divider-color) !important;
-    
+
     td,
     th {
       border: 1px solid var(--global-divider-color) !important;
     }
   }
-  
+
   &.table-striped {
     tbody tr:nth-child(even) {
       background-color: var(--global-card-bg-color);
     }
   }
-  
+
   &.table-hover {
     tbody tr:hover {
       background-color: var(--global-divider-color);
@@ -134,10 +134,10 @@ html[data-theme="dark"] {
   border-left: 4px solid var(--global-theme-color);
   font-size: 0.9rem;
   color: var(--global-text-color);
-  
+
   a {
     color: var(--global-theme-color);
-    
+
     &:hover {
       color: var(--global-hover-color);
       text-decoration: underline;
