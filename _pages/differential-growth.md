@@ -2,7 +2,7 @@
 layout: page
 title: differential growth
 permalink: /differential-growth/
-description: Interactive 2D differential growth visualization
+description: Interactive 2D differential growth visualization. Original concept and implementation by Jason Webb.
 nav: false
 differential_growth: true
 ---
@@ -87,21 +87,21 @@ differential_growth: true
                 <label for="min-distance">Minimum distance</label>
                 <input type="range" min="1" max="20" id="min-distance" aria-describedby="min-distance-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="min-distance-description">Minimum distance between nodes. Lower values mean smoother curves, but slower performance.</div>
+                <div class="description" id="min-distance-description">Minimum allowed distance between adjacent nodes. Lower values create smoother, more detailed curves but reduce performance. Higher values create chunkier, less organic shapes.</div>
               </div>
 
               <div class="control range" role="group">
                 <label for="max-distance">Maximum distance</label>
                 <input type="range" min="1" max="20" id="max-distance" aria-describedby="max-distance-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="max-distance-description">Maximum distance between nodes before edge is split.</div>
+                <div class="description" id="max-distance-description">Maximum distance before a new node is inserted between two neighbors. Lower values create denser growth patterns with more nodes. Higher values allow looser, more sparse structures.</div>
               </div>
 
               <div class="control range" role="group">
                 <label for="repulsion-radius">Repulsion radius</label>
                 <input type="range" min="1" max="20" id="repulsion-radius" aria-describedby="repulsion-radius-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="repulsion-radius-description">Distance around each node </div>
+                <div class="description" id="repulsion-radius-description">How far each node can "sense" and push away from nearby nodes. Larger values prevent paths from overlapping but create more spread-out forms. Smaller values allow tighter, more compact growth.</div>
               </div>
             </fieldset>
 
@@ -112,89 +112,153 @@ differential_growth: true
                 <label for="attraction-force">Attraction force</label>
                 <input type="range" min=".01" max="1" step=".01" id="attraction-force" aria-describedby="attraction-force-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="attraction-force-description">How strongly each node will be pulled to it's <em>connected</em> neighbors.</div>
+                <div class="description" id="attraction-force-description">How strongly each node pulls toward its connected neighbors on the path. Higher values keep the path cohesive and prevent it from breaking apart. Lower values allow more flexible, wandering growth.</div>
               </div>
 
               <div class="control range" role="group">
                 <label for="repulsion-force">Repulsion force</label>
                 <input type="range" min=".01" max="1" step=".01" id="repulsion-force" aria-describedby="repulsion-force-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="repulsion-force-description">How strongly nodes will push each other away.</div>
+                <div class="description" id="repulsion-force-description">How strongly nodes push away from nearby nodes within the repulsion radius. Higher values create more dramatic undulations and prevent overlapping. Lower values allow tighter, more tangled structures.</div>
               </div>
 
               <div class="control range" role="group">
                 <label for="alignment-force">Alignment force</label>
                 <input type="range" min=".01" max="1" step=".01" id="alignment-force" aria-describedby="alignment-force-description">
                 <span class="value" aria-hidden="true"></span>
-                <div class="description" id="alignment-force-description">How strongly each node will try to form a straight line with it's <em>connected</em> neighbors.</div>
+                <div class="description" id="alignment-force-description">How strongly each node tries to align with its connected neighbors to form smoother curves. Higher values reduce sharp angles and create flowing lines. Lower values allow more erratic, jagged growth patterns.</div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="sr-only">Attraction force weights</legend>
+
+              <div class="control range" role="group">
+                <label for="attraction-connected-weight">Attraction: Connected weight (n=±1)</label>
+                <input type="range" min="0" max="2" step="0.1" id="attraction-connected-weight" aria-describedby="attraction-connected-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="attraction-connected-weight-description">Multiplier for attraction to immediately adjacent nodes (direct neighbors). Higher values create tighter, more uniform spacing along the path. Essential for maintaining path continuity.</div>
+              </div>
+
+              <div class="control range" role="group">
+                <label for="attraction-near-weight">Attraction: Near weight (n=±2-10)</label>
+                <input type="range" min="0" max="2" step="0.1" id="attraction-near-weight" aria-describedby="attraction-near-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="attraction-near-weight-description">Multiplier for attraction to nodes 2-10 positions away on the path. Higher values create smoother local curves and reduce small-scale undulations. Lower values allow more localized wavy patterns.</div>
+              </div>
+
+              <div class="control range" role="group">
+                <label for="attraction-far-weight">Attraction: Far weight (n=±11+)</label>
+                <input type="range" min="0" max="2" step="0.1" id="attraction-far-weight" aria-describedby="attraction-far-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="attraction-far-weight-description">Multiplier for attraction to nodes 11+ positions away on the path. Higher values encourage the path to fold back on itself and create dense, compact forms. Lower values allow more sprawling growth.</div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="sr-only">Repulsion force weights</legend>
+
+              <div class="control range" role="group">
+                <label for="repulsion-connected-weight">Repulsion: Connected weight (n=±1)</label>
+                <input type="range" min="0" max="2" step="0.1" id="repulsion-connected-weight" aria-describedby="repulsion-connected-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="repulsion-connected-weight-description">Multiplier for repulsion between immediately adjacent nodes. Keep LOW to avoid fighting with attraction force. High values can cause path instability or breakage. Usually leave near zero.</div>
+              </div>
+
+              <div class="control range" role="group">
+                <label for="repulsion-near-weight">Repulsion: Near weight (n=±2-10)</label>
+                <input type="range" min="0" max="2" step="0.1" id="repulsion-near-weight" aria-describedby="repulsion-near-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="repulsion-near-weight-description">Multiplier for repulsion from nearby non-adjacent nodes (2-10 positions away). HIGH values prevent the path from overlapping itself locally and create characteristic "ruffled" edges. The main driver of differential growth aesthetics.</div>
+              </div>
+
+              <div class="control range" role="group">
+                <label for="repulsion-far-weight">Repulsion: Far weight (n=±11+)</label>
+                <input type="range" min="0" max="2" step="0.1" id="repulsion-far-weight" aria-describedby="repulsion-far-weight-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="repulsion-far-weight-description">Multiplier for repulsion from distant nodes (11+ positions away). HIGH values prevent different parts of the path from crossing or merging. Creates more open, separated structures. Lower values allow paths to interweave.</div>
               </div>
             </fieldset>
           </div>
 
           <div class="column">
             <fieldset>
-              <legend class="sr-only">Modes and effects</legend>
+              <legend>Visual modes</legend>
 
               <div class="control">
                 <input type="checkbox" id="draw-nodes" class="sr-only">
-                <label for="draw-nodes">Draw nodes</label>
+                <label for="draw-nodes" title="Show individual nodes as small circles">Draw nodes</label>
               </div>
 
               <div class="control">
                 <input type="checkbox" id="fill-mode" class="sr-only">
-                <label for="fill-mode">Fill shapes</label>
+                <label for="fill-mode" title="Fill closed shapes with solid color">Fill shapes</label>
               </div>
 
               <div class="control">
                 <input type="checkbox" id="debug-mode" class="sr-only">
-                <label for="debug-mode">Debug mode</label>
+                <label for="debug-mode" title="Show colored lines between nodes for debugging">Debug mode</label>
               </div>
 
               <div class="control">
                 <input type="checkbox" id="trace-mode" class="sr-only">
-                <label for="trace-mode">Trace effect</label>
+                <label for="trace-mode" title="Don't clear the canvas each frame, creating trailing effect">Trace effect</label>
               </div>
             </fieldset>
 
             <fieldset>
-              <legend class="sr-only">History effect</legend>
+              <legend>History effect</legend>
 
               <div class="control">
                 <input type="checkbox" id="draw-history" class="sr-only">
-                <label for="draw-history">History effect</label>
+                <label for="draw-history" title="Show previous growth stages like tree rings">History effect</label>
               </div>
 
               <div class="control range" role="group">
                 <label for="history-capture-interval">History capture interval (in ms)</label>
-                <input type="range" min="10" max="2000" step="10" id="history-capture-interval">
+                <input type="range" min="10" max="2000" step="10" id="history-capture-interval" aria-describedby="history-interval-description">
                 <span class="value" aria-hidden="true"></span>
+                <div class="description" id="history-interval-description">How often to capture a snapshot (in milliseconds). Lower values create more densely packed history layers. Higher values show wider gaps between growth stages.</div>
               </div>
 
               <div class="control range" role="group">
                 <label for="max-history-size">Max history size</label>
-                <input type="range" min="1" max="20" step="1" id="max-history-size">
+                <input type="range" min="1" max="20" step="1" id="max-history-size" aria-describedby="max-history-description">
                 <span class="value" aria-hidden="true"></span>
+                <div class="description" id="max-history-description">Maximum number of historical snapshots to keep. More snapshots show more growth history but may impact performance.</div>
               </div>
             </fieldset>
 
             <fieldset>
-              <legend class="sr-only">Brownian motion</legend>
+              <legend>Brownian motion</legend>
 
               <div class="control">
                 <input type="checkbox" id="use-brownian-motion" class="sr-only">
-                <label for="use-brownian-motion">Use Brownian motion</label>
+                <label for="use-brownian-motion" title="Add random jitter to node positions for organic variation">Use Brownian motion</label>
               </div>
 
               <div class="control range" role="group">
                 <label for="brownian-motion-range">Displacement range</label>
-                <input type="range" min=".01" max=".1" step=".01" id="brownian-motion-range">
+                <input type="range" min=".01" max=".1" step=".01" id="brownian-motion-range" aria-describedby="brownian-motion-description">
                 <span class="value" aria-hidden="true"></span>
+                <div class="description" id="brownian-motion-description">Amount of random "jiggling" applied to each node. Higher values create more chaotic, irregular edges. Lower values produce smoother, more controlled growth. Adds organic imperfection.</div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Simulation speed</legend>
+
+              <div class="control range" role="group">
+                <label for="time-scale">Time scale</label>
+                <input type="range" min="1" max="50" step="1" id="time-scale" aria-describedby="time-scale-description">
+                <span class="value" aria-hidden="true"></span>
+                <div class="description" id="time-scale-description">Speed multiplier for the simulation. 1x is normal speed, higher values run the simulation faster by performing multiple growth iterations per frame. Useful for quickly exploring growth patterns.</div>
               </div>
             </fieldset>
           </div>
         </div>
 
-        <button class="apply last-focusable-element">Apply</button>
+        <button class="reset-params last-focusable-element">Reset to Defaults</button>
       </div>
     </div>
 
@@ -252,6 +316,10 @@ differential_growth: true
       <span class="icon fas fa-play" aria-hidden="true"></span>
       <span class="text sr-only">Play</span>
     </button>
+  </div>
+
+  <div class="speed-indicator">
+    <span class="speed-value">1x</span>
   </div>
 
   <aside class="right-menu toolbar">

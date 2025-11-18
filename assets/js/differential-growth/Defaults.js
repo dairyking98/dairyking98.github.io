@@ -44,6 +44,42 @@ module.exports = {
   AlignmentForce: 0.001,
 
   /**
+   * Attraction force weight for connected neighbors (n=±1)
+   * @type {number}
+   */
+  AttractionForceConnectedWeight: 1.0,
+
+  /**
+   * Attraction force weight for near neighbors (n=±2 to ±10)
+   * @type {number}
+   */
+  AttractionForceNearWeight: 0.5,
+
+  /**
+   * Attraction force weight for far neighbors (n=±11+)
+   * @type {number}
+   */
+  AttractionForceFarWeight: 0.1,
+
+  /**
+   * Repulsion force weight for connected neighbors (n=±1) - LOW to let attraction handle these
+   * @type {number}
+   */
+  RepulsionForceConnectedWeight: 0.1,
+
+  /**
+   * Repulsion force weight for non-connected near nodes (n=±2-10) - HIGH to prevent overlaps
+   * @type {number}
+   */
+  RepulsionForceNonConnectedNearWeight: 1.5,
+
+  /**
+   * Repulsion force weight for non-connected far nodes (n=±11+) - HIGH to prevent overlaps
+   * @type {number}
+   */
+  RepulsionForceNonConnectedFarWeight: 1.2,
+
+  /**
    * Interval (in ms) between call to node injection routine
    * @type {number}
    */
@@ -108,4 +144,10 @@ module.exports = {
    * @type {boolean}
    */
   ShowBounds: true,
+
+  /**
+   * Time scale multiplier for simulation speed (1x = normal, higher = faster)
+   * @type {number}
+   */
+  TimeScale: 1,
 };

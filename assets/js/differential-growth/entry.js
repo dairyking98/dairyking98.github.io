@@ -30,6 +30,9 @@ let modalEl = document.querySelector(".modal"),
   lastFocusableElement,
   backdropClickHandler = null;
 
+let speedIndicatorEl = document.querySelector(".speed-indicator .speed-value"),
+  speedIndicatorContainer = document.querySelector(".speed-indicator");
+
 /*
 =============================================================================
   p5.js sketch
@@ -68,6 +71,19 @@ const sketch = function (p5) {
       // Set up the Parameters window
       let paramPanel = new ParametersPanel(world);
       console.log("ParametersPanel created successfully");
+
+      // Update speed indicator with loaded value
+      if (speedIndicatorEl) {
+        speedIndicatorEl.innerHTML = world.settings.TimeScale + "x";
+        // Hide if speed is 1x
+        if (speedIndicatorContainer) {
+          if (world.settings.TimeScale === 1) {
+            speedIndicatorContainer.classList.add("hidden");
+          } else {
+            speedIndicatorContainer.classList.remove("hidden");
+          }
+        }
+      }
     } catch (err) {
       console.error("Error creating World or ParametersPanel:", err);
     }
@@ -109,9 +125,11 @@ const sketch = function (p5) {
       // Other functions ----------------
       const svgInput = document.querySelector(".svgImportInput");
       const startBtn = document.querySelector(".start");
+      const resetParamsBtn = document.querySelector(".reset-params");
 
       if (svgInput) svgInput.addEventListener("change", importSVG);
       if (startBtn) startBtn.addEventListener("click", closeModal);
+      if (resetParamsBtn) resetParamsBtn.addEventListener("click", resetParameters);
 
       console.log("Event listeners attached");
       console.log("Buttons found:", {
@@ -129,7 +147,11 @@ const sketch = function (p5) {
     if (!world) return;
 
     if (!world.paused) {
-      world.iterate();
+      // Apply time scale by iterating multiple times per frame
+      const iterations = Math.floor(world.timeScale);
+      for (let i = 0; i < iterations; i++) {
+        world.iterate();
+      }
       world.draw();
     }
   };
@@ -310,6 +332,15 @@ const sketch = function (p5) {
     if (triggeringEl) {
       triggeringEl.focus();
     }
+  }
+
+  // Reset parameters to defaults
+  function resetParameters() {
+    // Clear all saved settings from localStorage
+    localStorage.removeItem("differential-growth-timeScale");
+    
+    // Reload the page to reset everything
+    window.location.reload();
   }
 
   // Parse SVG file from user input and add to World

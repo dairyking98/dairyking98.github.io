@@ -20,6 +20,12 @@ class World {
     this.paused = false;
     this.settings = Object.assign({}, Defaults, settings);
 
+    // Load time scale from localStorage if available
+    const savedTimeScale = localStorage.getItem("differential-growth-timeScale");
+    if (savedTimeScale !== null) {
+      this.settings.TimeScale = parseFloat(savedTimeScale);
+    }
+
     this.traceMode = this.settings.TraceMode;
     this.drawNodes = this.settings.DrawNodes;
     this.debugMode = this.settings.DebugMode;
@@ -27,6 +33,7 @@ class World {
     this.drawHistory = this.settings.DrawHistory;
     this.useBrownianMotion = this.settings.UseBrownianMotion;
     this.showBounds = this.settings.ShowBounds;
+    this.timeScale = this.settings.TimeScale;
 
     this.tree = rbush(9, [".x", ".y", ".x", ".y"]); // use custom accessor strings per https://github.com/mourner/rbush#data-format
     this.buildTree();
@@ -332,6 +339,78 @@ class World {
   }
 
   /**
+   * Set the weight for attraction force applied to connected neighbors (n=±1)
+   * @param {number} weight Weight multiplier for attraction force
+   */
+  setAttractionForceConnectedWeight(weight) {
+    this.settings.AttractionForceConnectedWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.AttractionForceConnectedWeight = weight;
+    }
+  }
+
+  /**
+   * Set the weight for attraction force applied to near neighbors (n=±2-10)
+   * @param {number} weight Weight multiplier for attraction force
+   */
+  setAttractionForceNearWeight(weight) {
+    this.settings.AttractionForceNearWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.AttractionForceNearWeight = weight;
+    }
+  }
+
+  /**
+   * Set the weight for attraction force applied to far neighbors (n=±11+)
+   * @param {number} weight Weight multiplier for attraction force
+   */
+  setAttractionForceFarWeight(weight) {
+    this.settings.AttractionForceFarWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.AttractionForceFarWeight = weight;
+    }
+  }
+
+  /**
+   * Set the weight for repulsion force applied to connected neighbors (n=±1)
+   * @param {number} weight Weight multiplier for repulsion force
+   */
+  setRepulsionForceConnectedWeight(weight) {
+    this.settings.RepulsionForceConnectedWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.RepulsionForceConnectedWeight = weight;
+    }
+  }
+
+  /**
+   * Set the weight for repulsion force applied to non-connected near nodes (n=±2-10)
+   * @param {number} weight Weight multiplier for repulsion force
+   */
+  setRepulsionForceNonConnectedNearWeight(weight) {
+    this.settings.RepulsionForceNonConnectedNearWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.RepulsionForceNonConnectedNearWeight = weight;
+    }
+  }
+
+  /**
+   * Set the weight for repulsion force applied to non-connected far nodes (n=±11+)
+   * @param {number} weight Weight multiplier for repulsion force
+   */
+  setRepulsionForceNonConnectedFarWeight(weight) {
+    this.settings.RepulsionForceNonConnectedFarWeight = weight;
+
+    for (let path of this.paths) {
+      path.settings.RepulsionForceNonConnectedFarWeight = weight;
+    }
+  }
+
+  /**
    * Set the state of the Node visibility flag
    * @param {boolean} state Next state for the Node visibility flag
    */
@@ -456,6 +535,26 @@ class World {
     for (let path of this.paths) {
       path.settings.MaxHistorySize = size;
     }
+  }
+
+  /**
+   * Set the time scale for simulation speed
+   * @param {number} scale Speed multiplier (1 = normal, higher = faster)
+   */
+  setTimeScale(scale) {
+    this.timeScale = scale;
+    this.settings.TimeScale = scale;
+    
+    // Save to localStorage
+    localStorage.setItem("differential-growth-timeScale", scale.toString());
+  }
+
+  /**
+   * Get the current time scale
+   * @returns {number} Current time scale value
+   */
+  getTimeScale() {
+    return this.timeScale;
   }
 
   /** Toggle the state of the Node visibility flag */

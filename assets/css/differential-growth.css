@@ -223,7 +223,7 @@
 
 #differential-growth-container .modal.is-visible {
   display: flex;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 #differential-growth-container .modal.is-visible .modal-backdrop {
@@ -379,6 +379,13 @@
   border: none;
 }
 
+#differential-growth-container .modal .modal-content .parameters-content fieldset legend:not(.sr-only) {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: rgba(20, 20, 20, 0.95);
+}
+
 #differential-growth-container .modal .modal-content .parameters-content .control {
   margin-bottom: 8px;
 }
@@ -459,9 +466,9 @@
   color: rgba(50, 50, 50, 0.9);
 }
 
-/* Apply button */
+/* Action buttons */
 #differential-growth-container .modal .modal-content .about-content .start,
-#differential-growth-container .modal .modal-content .parameters-content .apply {
+#differential-growth-container .modal .modal-content .parameters-content .reset-params {
   border-radius: 5px;
   border: 2px solid rgba(50, 50, 50, 0.8);
   font-size: 18px;
@@ -472,15 +479,15 @@
 
 #differential-growth-container .modal .modal-content .about-content .start:hover,
 #differential-growth-container .modal .modal-content .about-content .start:focus,
-#differential-growth-container .modal .modal-content .parameters-content .apply:hover,
-#differential-growth-container .modal .modal-content .parameters-content .apply:focus {
+#differential-growth-container .modal .modal-content .parameters-content .reset-params:hover,
+#differential-growth-container .modal .modal-content .parameters-content .reset-params:focus {
   color: white;
   background-color: rgba(50, 50, 50, 0.9);
   text-decoration: none;
 }
 
 #differential-growth-container .modal .modal-content .about-content .start:focus,
-#differential-growth-container .modal .modal-content .parameters-content .apply:focus {
+#differential-growth-container .modal .modal-content .parameters-content .reset-params:focus {
   outline-offset: 4px;
 }
 
@@ -571,6 +578,10 @@ html[data-theme="dark"] #differential-growth-container .modal .modal-content .pa
   background-color: rgba(50, 50, 50, 0.4);
 }
 
+html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content fieldset legend:not(.sr-only) {
+  color: rgba(240, 240, 240, 0.95);
+}
+
 html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content fieldset input[type="checkbox"] + label:before {
   background-color: rgba(200, 200, 200, 0.9);
   color: black;
@@ -634,15 +645,15 @@ html[data-theme="dark"] #differential-growth-container input[type="range"]::-ms-
 }
 
 html[data-theme="dark"] #differential-growth-container .modal .modal-content .about-content .start,
-html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .apply {
+html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .reset-params {
   border-color: rgba(200, 200, 200, 0.8);
   color: rgba(220, 220, 220, 0.8);
 }
 
 html[data-theme="dark"] #differential-growth-container .modal .modal-content .about-content .start:hover,
 html[data-theme="dark"] #differential-growth-container .modal .modal-content .about-content .start:focus,
-html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .apply:hover,
-html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .apply:focus {
+html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .reset-params:hover,
+html[data-theme="dark"] #differential-growth-container .modal .modal-content .parameters-content .reset-params:focus {
   color: black;
   background-color: rgba(220, 220, 220, 0.9);
 }
@@ -765,4 +776,35 @@ html[data-theme="dark"] #differential-growth-container .modal .modal-content .pa
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/*
+| Speed indicator
+*/
+#differential-growth-container .speed-indicator {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  pointer-events: none;
+  background-color: rgba(240, 240, 240, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(30, 30, 30, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+}
+
+#differential-growth-container .speed-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Dark mode for speed indicator */
+html[data-theme="dark"] #differential-growth-container .speed-indicator {
+  background-color: rgba(30, 30, 30, 0.9);
+  color: rgba(220, 220, 220, 0.9);
 }
