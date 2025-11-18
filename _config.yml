@@ -623,6 +623,34 @@ third_party_libraries:
       css: "https://cdn.jsdelivr.net/npm/venobox@{{version}}/dist/venobox.min.css"
       js: "https://cdn.jsdelivr.net/npm/venobox@{{version}}/dist/venobox.min.js"
     version: "2.1.8"
+  p5js:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/p5@{{version}}/lib/p5.min.js"
+    version: "1.11.1"
+  file_saver:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/file-saver@{{version}}/dist/FileSaver.min.js"
+    version: "2.0.5"
+  rbush:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/rbush@{{version}}/rbush.min.js"
+    version: "3.0.1"
+  rbush_knn:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/rbush-knn@{{version}}/rbush-knn.min.js"
+    version: "3.0.0"
+  svg_points:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/svg-points@{{version}}/dist/svg-points.min.js"
+    version: "6.0.1"
+  vec2:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/vec2@{{version}}/lib/vec2.js"
+    version: "1.6.0"
+  point_in_polygon:
+    url:
+      js: "https://cdn.jsdelivr.net/npm/point-in-polygon@{{version}}/index.js"
+    version: "1.0.1"
 
 # -----------------------------------------------------------------------------
 # Get external JSON data

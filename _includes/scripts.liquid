@@ -317,3 +317,11 @@
 {% if site.newsletter.enabled %}
   <script defer src="{{ '/assets/js/newsletter.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
+
+{% if page.differential_growth %}
+  <script
+    src="https://cdn.jsdelivr.net/npm/p5@{{ site.third_party_libraries.p5js.version }}/lib/p5.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="{{ '/assets/js/differential-growth-bundle.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}
