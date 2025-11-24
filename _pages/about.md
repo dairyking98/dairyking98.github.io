@@ -25,6 +25,8 @@ latest_posts:
   limit: 3
 ---
 
+> **Note (November 2025):** This website is constantly being updated and maintained. A significant shift occurred this month as I began the construction of this website from the ground up. If the site appears small or under construction, that's because it is—I'm actively building and expanding it with new content, features, and improvements. Thank you for your patience as I continue to develop this space!
+
 Hi, I'm **Leonard Chau**—a mechanical engineer, maker, and researcher from the San Francisco Bay Area. I specialize in building practical, low-cost scientific instruments that combine mechanical design, optics, electronics, automation, and software. I love working at the intersection of old and new technology: restoring typewriters and film equipment, welding and machining metal assemblies, and designing intelligent robotic systems powered by modern software and AI.
 
 ## Education & Background
