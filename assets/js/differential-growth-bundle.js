@@ -48,19 +48,19 @@ module.exports = {
    * Minimum distance between nodes. Used in attraction, pruning, and injection
    * @type {number}
    */
-  MinDistance: 20,
+  MinDistance: 2,
 
   /**
    * Maximum distance between nodes before they are split
    * @type {number}
    */
-  MaxDistance: 30,
+  MaxDistance: 5,
 
   /**
    * Radius to search for nearby nodes for repulsion force
    * @type {number}
    */
-  RepulsionRadius: 20,
+  RepulsionRadius: 15,
 
   /**
    * Maximum velocity at which a node can move per frame
@@ -72,55 +72,19 @@ module.exports = {
    * Maximum attraction force between connected nodes
    * @type {number}
    */
-  AttractionForce: 0.001,
+  AttractionForce: 0.2,
 
   /**
    * Maximum repulsion force between nearby nodes
    * @type {number}
    */
-  RepulsionForce: 500,
+  RepulsionForce: 0.6,
 
   /**
    * Maximum alignment force between connected nodes
    * @type {number}
    */
-  AlignmentForce: 0.001,
-
-  /**
-   * Attraction force weight for connected neighbors (n=±1)
-   * @type {number}
-   */
-  AttractionForceConnectedWeight: 1.0,
-
-  /**
-   * Attraction force weight for near neighbors (n=±2 to ±10)
-   * @type {number}
-   */
-  AttractionForceNearWeight: 0.5,
-
-  /**
-   * Attraction force weight for far neighbors (n=±11+)
-   * @type {number}
-   */
-  AttractionForceFarWeight: 0.1,
-
-  /**
-   * Repulsion force weight for connected neighbors (n=±1) - LOW to let attraction handle these
-   * @type {number}
-   */
-  RepulsionForceConnectedWeight: 0.1,
-
-  /**
-   * Repulsion force weight for non-connected near nodes (n=±2-10) - HIGH to prevent overlaps
-   * @type {number}
-   */
-  RepulsionForceNonConnectedNearWeight: 1.5,
-
-  /**
-   * Repulsion force weight for non-connected far nodes (n=±11+) - HIGH to prevent overlaps
-   * @type {number}
-   */
-  RepulsionForceNonConnectedFarWeight: 1.2,
+  AlignmentForce: 0.55,
 
   /**
    * Interval (in ms) between call to node injection routine
@@ -302,28 +266,6 @@ class ParametersPanel {
 
     // ---
 
-    // Attraction force weights
-    this.attractionConnectedWeightRange = document.querySelector(".parameters-content #attraction-connected-weight");
-    this.attractionConnectedWeightValue = document.querySelector(".parameters-content #attraction-connected-weight + .value");
-
-    this.attractionNearWeightRange = document.querySelector(".parameters-content #attraction-near-weight");
-    this.attractionNearWeightValue = document.querySelector(".parameters-content #attraction-near-weight + .value");
-
-    this.attractionFarWeightRange = document.querySelector(".parameters-content #attraction-far-weight");
-    this.attractionFarWeightValue = document.querySelector(".parameters-content #attraction-far-weight + .value");
-
-    // Repulsion force weights
-    this.repulsionConnectedWeightRange = document.querySelector(".parameters-content #repulsion-connected-weight");
-    this.repulsionConnectedWeightValue = document.querySelector(".parameters-content #repulsion-connected-weight + .value");
-
-    this.repulsionNearWeightRange = document.querySelector(".parameters-content #repulsion-near-weight");
-    this.repulsionNearWeightValue = document.querySelector(".parameters-content #repulsion-near-weight + .value");
-
-    this.repulsionFarWeightRange = document.querySelector(".parameters-content #repulsion-far-weight");
-    this.repulsionFarWeightValue = document.querySelector(".parameters-content #repulsion-far-weight + .value");
-
-    // ---
-
     // Checkboxes
     this.drawNodesCheckbox = document.querySelector(".parameters-content #draw-nodes");
     this.fillModeCheckbox = document.querySelector(".parameters-content #fill-mode");
@@ -385,28 +327,6 @@ class ParametersPanel {
 
     // ---
 
-    // Attraction force weights
-    this.attractionConnectedWeightRange.value = this.world.settings.AttractionForceConnectedWeight;
-    this.attractionConnectedWeightValue.innerHTML = this.world.settings.AttractionForceConnectedWeight.toFixed(2);
-
-    this.attractionNearWeightRange.value = this.world.settings.AttractionForceNearWeight;
-    this.attractionNearWeightValue.innerHTML = this.world.settings.AttractionForceNearWeight.toFixed(2);
-
-    this.attractionFarWeightRange.value = this.world.settings.AttractionForceFarWeight;
-    this.attractionFarWeightValue.innerHTML = this.world.settings.AttractionForceFarWeight.toFixed(2);
-
-    // Repulsion force weights
-    this.repulsionConnectedWeightRange.value = this.world.settings.RepulsionForceConnectedWeight;
-    this.repulsionConnectedWeightValue.innerHTML = this.world.settings.RepulsionForceConnectedWeight.toFixed(2);
-
-    this.repulsionNearWeightRange.value = this.world.settings.RepulsionForceNonConnectedNearWeight;
-    this.repulsionNearWeightValue.innerHTML = this.world.settings.RepulsionForceNonConnectedNearWeight.toFixed(2);
-
-    this.repulsionFarWeightRange.value = this.world.settings.RepulsionForceNonConnectedFarWeight;
-    this.repulsionFarWeightValue.innerHTML = this.world.settings.RepulsionForceNonConnectedFarWeight.toFixed(2);
-
-    // ---
-
     this.drawNodesCheckbox.checked = this.world.settings.DrawNodes;
     this.fillModeCheckbox.checked = this.world.settings.FillMode;
     this.debugModeCheckbox.checked = this.world.settings.DebugMode;
@@ -443,14 +363,6 @@ class ParametersPanel {
     this.attractionForceRange.addEventListener("input", this.attractionForceChangeHandler.bind(this));
     this.repulsionForceRange.addEventListener("input", this.repulsionForceChangeHandler.bind(this));
     this.alignmentForceRange.addEventListener("input", this.alignmentForceChangeHandler.bind(this));
-
-    this.attractionConnectedWeightRange.addEventListener("input", this.attractionConnectedWeightChangeHandler.bind(this));
-    this.attractionNearWeightRange.addEventListener("input", this.attractionNearWeightChangeHandler.bind(this));
-    this.attractionFarWeightRange.addEventListener("input", this.attractionFarWeightChangeHandler.bind(this));
-
-    this.repulsionConnectedWeightRange.addEventListener("input", this.repulsionConnectedWeightChangeHandler.bind(this));
-    this.repulsionNearWeightRange.addEventListener("input", this.repulsionNearWeightChangeHandler.bind(this));
-    this.repulsionFarWeightRange.addEventListener("input", this.repulsionFarWeightChangeHandler.bind(this));
 
     this.drawNodesCheckbox.addEventListener("change", this.drawNodesChangeHandler.bind(this));
     this.fillModeCheckbox.addEventListener("change", this.fillModeChangeHandler.bind(this));
@@ -491,32 +403,6 @@ class ParametersPanel {
   alignmentForceChangeHandler(e) {
     this.alignmentForceValue.innerHTML = e.target.value;
     this.world.setAlignmentForce(e.target.value);
-  }
-
-  attractionConnectedWeightChangeHandler(e) {
-    this.attractionConnectedWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceConnectedWeight(parseFloat(e.target.value));
-  }
-  attractionNearWeightChangeHandler(e) {
-    this.attractionNearWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceNearWeight(parseFloat(e.target.value));
-  }
-  attractionFarWeightChangeHandler(e) {
-    this.attractionFarWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceFarWeight(parseFloat(e.target.value));
-  }
-
-  repulsionConnectedWeightChangeHandler(e) {
-    this.repulsionConnectedWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceConnectedWeight(parseFloat(e.target.value));
-  }
-  repulsionNearWeightChangeHandler(e) {
-    this.repulsionNearWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceNonConnectedNearWeight(parseFloat(e.target.value));
-  }
-  repulsionFarWeightChangeHandler(e) {
-    this.repulsionFarWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceNonConnectedFarWeight(parseFloat(e.target.value));
   }
 
   drawNodesChangeHandler(e) {
@@ -687,99 +573,36 @@ class Path {
    * @param {number} index Index of Node to apply forces to
    */
   applyAttraction(index) {
-    if (this.nodes[index].isFixed) return;
-
     let distance, leastMinDistance;
     let connectedNodes = this.getConnectedNodes(index);
 
-    // Apply weighted attraction to connected neighbors (n=±1)
     // Move towards next node, if there is one
-    if (connectedNodes.nextNode != undefined && connectedNodes.nextNode instanceof Node) {
+    if (connectedNodes.nextNode != undefined && connectedNodes.nextNode instanceof Node && !this.nodes[index].isFixed) {
       distance = this.nodes[index].distance(connectedNodes.nextNode);
       leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.nextNode.minDistance);
 
       if (distance > leastMinDistance) {
-        const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceConnectedWeight;
-        this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, connectedNodes.nextNode.x, weightedForce);
-        this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, connectedNodes.nextNode.y, weightedForce);
+        this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, connectedNodes.nextNode.x, this.settings.AttractionForce);
+        this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, connectedNodes.nextNode.y, this.settings.AttractionForce);
       }
     }
 
     // Move towards previous node, if there is one
-    if (connectedNodes.previousNode != undefined && connectedNodes.previousNode instanceof Node) {
+    if (connectedNodes.previousNode != undefined && connectedNodes.previousNode instanceof Node && !this.nodes[index].isFixed) {
       distance = this.nodes[index].distance(connectedNodes.previousNode);
       leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.previousNode.minDistance);
 
       if (distance > leastMinDistance) {
-        const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceConnectedWeight;
         this.nodes[index].nextPosition.x = this.p5.lerp(
           this.nodes[index].nextPosition.x,
           connectedNodes.previousNode.x,
-          weightedForce
+          this.settings.AttractionForce
         );
         this.nodes[index].nextPosition.y = this.p5.lerp(
           this.nodes[index].nextPosition.y,
           connectedNodes.previousNode.y,
-          weightedForce
+          this.settings.AttractionForce
         );
-      }
-    }
-
-    // Apply weighted attraction to near neighbors (n=±2 to ±10)
-    for (let offset = 2; offset <= 10; offset++) {
-      // Check forward neighbors
-      let forwardNode = this.getNodeAtDistance(index, offset);
-      if (forwardNode && forwardNode instanceof Node) {
-        distance = this.nodes[index].distance(forwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, forwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceNearWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, forwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, forwardNode.y, weightedForce);
-        }
-      }
-
-      // Check backward neighbors
-      let backwardNode = this.getNodeAtDistance(index, -offset);
-      if (backwardNode && backwardNode instanceof Node) {
-        distance = this.nodes[index].distance(backwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, backwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceNearWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, backwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, backwardNode.y, weightedForce);
-        }
-      }
-    }
-
-    // Apply weighted attraction to far neighbors (n=±11 to ±20)
-    for (let offset = 11; offset <= 20; offset++) {
-      // Check forward neighbors
-      let forwardNode = this.getNodeAtDistance(index, offset);
-      if (forwardNode && forwardNode instanceof Node) {
-        distance = this.nodes[index].distance(forwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, forwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceFarWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, forwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, forwardNode.y, weightedForce);
-        }
-      }
-
-      // Check backward neighbors
-      let backwardNode = this.getNodeAtDistance(index, -offset);
-      if (backwardNode && backwardNode instanceof Node) {
-        distance = this.nodes[index].distance(backwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, backwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceFarWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, backwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, backwardNode.y, weightedForce);
-        }
       }
     }
   }
@@ -798,42 +621,13 @@ class Path {
       undefined,
       undefined,
       this.nodes[index].repulsionRadius * this.nodes[index].repulsionRadius
-    ); // radius must be squared as per https://github.com/mourner/rbush-knn/issues=13
+    ); // radius must be squared as per https://github.com/mourner/rbush-knn/issues/13
 
-    // Move this node away from all nearby neighbors with weighted repulsion
+    // Move this node away from all nearby neighbors
+    // TODO: Make this proportional to distance?
     for (let node of neighbors) {
-      // Skip self
-      if (node === this.nodes[index]) continue;
-
-      // Calculate path distance to determine weight
-      let pathDistance = null;
-      let nodeIndex = this.nodes.indexOf(node);
-      
-      if (nodeIndex !== -1) {
-        // Node is part of this path, calculate path distance
-        pathDistance = this.getPathDistance(index, nodeIndex);
-      }
-
-      // Determine weight based on path distance
-      let weight;
-      if (pathDistance === null) {
-        // Node from different path or not found - treat as far non-connected
-        weight = this.settings.RepulsionForceNonConnectedFarWeight;
-      } else if (pathDistance === 1) {
-        // Connected neighbor (n=±1) - LOW weight to let attraction handle
-        weight = this.settings.RepulsionForceConnectedWeight;
-      } else if (pathDistance >= 2 && pathDistance <= 10) {
-        // Near non-connected (n=±2-10) - HIGH weight to prevent overlaps
-        weight = this.settings.RepulsionForceNonConnectedNearWeight;
-      } else {
-        // Far non-connected (n=±11+) - HIGH weight to prevent overlaps
-        weight = this.settings.RepulsionForceNonConnectedFarWeight;
-      }
-
-      // Apply weighted repulsion
-      const weightedForce = this.settings.RepulsionForce * weight;
-      this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].x, node.x, -weightedForce);
-      this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].y, node.y, -weightedForce);
+      this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].x, node.x, -this.settings.RepulsionForce);
+      this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].y, node.y, -this.settings.RepulsionForce);
     }
   }
 
@@ -1031,10 +825,10 @@ class Path {
   }
 
   /**
-   * Calculate the path distance between two nodes (how many steps along the path)
+   * Calculate the path distance between two nodes (n = number of nodes along the path, not pixels)
    * @param {number} fromIndex Starting node index
    * @param {number} toIndex Target node index
-   * @returns {number} Minimum path distance between nodes
+   * @returns {number} Minimum path distance in nodes (n) between nodes along the path
    */
   getPathDistance(fromIndex, toIndex) {
     if (fromIndex === toIndex) return 0;
@@ -1462,12 +1256,6 @@ module.exports = {
   AttractionForce: 0.2,
   RepulsionForce: 0.6,
   AlignmentForce: 0.55,
-  AttractionForceConnectedWeight: 1.0,
-  AttractionForceNearWeight: 0.5,
-  AttractionForceFarWeight: 0.1,
-  RepulsionForceConnectedWeight: 0.1,
-  RepulsionForceNonConnectedNearWeight: 1.5,
-  RepulsionForceNonConnectedFarWeight: 1.2,
   NodeInjectionInterval: 100,
   DrawNodes: false,
   TraceMode: false,
@@ -1478,6 +1266,7 @@ module.exports = {
   ShowBounds: true,
   UseBrownianMotion: true,
   BrownianMotionRange: 0.01,
+  TimeScale: 1,
 };
 
 },{}],8:[function(require,module,exports){
@@ -1818,78 +1607,6 @@ class World {
 
     for (let path of this.paths) {
       path.setAlignmentForce(alignmentForce);
-    }
-  }
-
-  /**
-   * Set the weight for attraction force applied to connected neighbors (n=±1)
-   * @param {number} weight Weight multiplier for attraction force
-   */
-  setAttractionForceConnectedWeight(weight) {
-    this.settings.AttractionForceConnectedWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.AttractionForceConnectedWeight = weight;
-    }
-  }
-
-  /**
-   * Set the weight for attraction force applied to near neighbors (n=±2-10)
-   * @param {number} weight Weight multiplier for attraction force
-   */
-  setAttractionForceNearWeight(weight) {
-    this.settings.AttractionForceNearWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.AttractionForceNearWeight = weight;
-    }
-  }
-
-  /**
-   * Set the weight for attraction force applied to far neighbors (n=±11+)
-   * @param {number} weight Weight multiplier for attraction force
-   */
-  setAttractionForceFarWeight(weight) {
-    this.settings.AttractionForceFarWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.AttractionForceFarWeight = weight;
-    }
-  }
-
-  /**
-   * Set the weight for repulsion force applied to connected neighbors (n=±1)
-   * @param {number} weight Weight multiplier for repulsion force
-   */
-  setRepulsionForceConnectedWeight(weight) {
-    this.settings.RepulsionForceConnectedWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.RepulsionForceConnectedWeight = weight;
-    }
-  }
-
-  /**
-   * Set the weight for repulsion force applied to non-connected near nodes (n=±2-10)
-   * @param {number} weight Weight multiplier for repulsion force
-   */
-  setRepulsionForceNonConnectedNearWeight(weight) {
-    this.settings.RepulsionForceNonConnectedNearWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.RepulsionForceNonConnectedNearWeight = weight;
-    }
-  }
-
-  /**
-   * Set the weight for repulsion force applied to non-connected far nodes (n=±11+)
-   * @param {number} weight Weight multiplier for repulsion force
-   */
-  setRepulsionForceNonConnectedFarWeight(weight) {
-    this.settings.RepulsionForceNonConnectedFarWeight = weight;
-
-    for (let path of this.paths) {
-      path.settings.RepulsionForceNonConnectedFarWeight = weight;
     }
   }
 

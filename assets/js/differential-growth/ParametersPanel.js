@@ -49,28 +49,6 @@ class ParametersPanel {
 
     // ---
 
-    // Attraction force weights
-    this.attractionConnectedWeightRange = document.querySelector(".parameters-content #attraction-connected-weight");
-    this.attractionConnectedWeightValue = document.querySelector(".parameters-content #attraction-connected-weight + .value");
-
-    this.attractionNearWeightRange = document.querySelector(".parameters-content #attraction-near-weight");
-    this.attractionNearWeightValue = document.querySelector(".parameters-content #attraction-near-weight + .value");
-
-    this.attractionFarWeightRange = document.querySelector(".parameters-content #attraction-far-weight");
-    this.attractionFarWeightValue = document.querySelector(".parameters-content #attraction-far-weight + .value");
-
-    // Repulsion force weights
-    this.repulsionConnectedWeightRange = document.querySelector(".parameters-content #repulsion-connected-weight");
-    this.repulsionConnectedWeightValue = document.querySelector(".parameters-content #repulsion-connected-weight + .value");
-
-    this.repulsionNearWeightRange = document.querySelector(".parameters-content #repulsion-near-weight");
-    this.repulsionNearWeightValue = document.querySelector(".parameters-content #repulsion-near-weight + .value");
-
-    this.repulsionFarWeightRange = document.querySelector(".parameters-content #repulsion-far-weight");
-    this.repulsionFarWeightValue = document.querySelector(".parameters-content #repulsion-far-weight + .value");
-
-    // ---
-
     // Checkboxes
     this.drawNodesCheckbox = document.querySelector(".parameters-content #draw-nodes");
     this.fillModeCheckbox = document.querySelector(".parameters-content #fill-mode");
@@ -132,28 +110,6 @@ class ParametersPanel {
 
     // ---
 
-    // Attraction force weights
-    this.attractionConnectedWeightRange.value = this.world.settings.AttractionForceConnectedWeight;
-    this.attractionConnectedWeightValue.innerHTML = this.world.settings.AttractionForceConnectedWeight.toFixed(2);
-
-    this.attractionNearWeightRange.value = this.world.settings.AttractionForceNearWeight;
-    this.attractionNearWeightValue.innerHTML = this.world.settings.AttractionForceNearWeight.toFixed(2);
-
-    this.attractionFarWeightRange.value = this.world.settings.AttractionForceFarWeight;
-    this.attractionFarWeightValue.innerHTML = this.world.settings.AttractionForceFarWeight.toFixed(2);
-
-    // Repulsion force weights
-    this.repulsionConnectedWeightRange.value = this.world.settings.RepulsionForceConnectedWeight;
-    this.repulsionConnectedWeightValue.innerHTML = this.world.settings.RepulsionForceConnectedWeight.toFixed(2);
-
-    this.repulsionNearWeightRange.value = this.world.settings.RepulsionForceNonConnectedNearWeight;
-    this.repulsionNearWeightValue.innerHTML = this.world.settings.RepulsionForceNonConnectedNearWeight.toFixed(2);
-
-    this.repulsionFarWeightRange.value = this.world.settings.RepulsionForceNonConnectedFarWeight;
-    this.repulsionFarWeightValue.innerHTML = this.world.settings.RepulsionForceNonConnectedFarWeight.toFixed(2);
-
-    // ---
-
     this.drawNodesCheckbox.checked = this.world.settings.DrawNodes;
     this.fillModeCheckbox.checked = this.world.settings.FillMode;
     this.debugModeCheckbox.checked = this.world.settings.DebugMode;
@@ -190,14 +146,6 @@ class ParametersPanel {
     this.attractionForceRange.addEventListener("input", this.attractionForceChangeHandler.bind(this));
     this.repulsionForceRange.addEventListener("input", this.repulsionForceChangeHandler.bind(this));
     this.alignmentForceRange.addEventListener("input", this.alignmentForceChangeHandler.bind(this));
-
-    this.attractionConnectedWeightRange.addEventListener("input", this.attractionConnectedWeightChangeHandler.bind(this));
-    this.attractionNearWeightRange.addEventListener("input", this.attractionNearWeightChangeHandler.bind(this));
-    this.attractionFarWeightRange.addEventListener("input", this.attractionFarWeightChangeHandler.bind(this));
-
-    this.repulsionConnectedWeightRange.addEventListener("input", this.repulsionConnectedWeightChangeHandler.bind(this));
-    this.repulsionNearWeightRange.addEventListener("input", this.repulsionNearWeightChangeHandler.bind(this));
-    this.repulsionFarWeightRange.addEventListener("input", this.repulsionFarWeightChangeHandler.bind(this));
 
     this.drawNodesCheckbox.addEventListener("change", this.drawNodesChangeHandler.bind(this));
     this.fillModeCheckbox.addEventListener("change", this.fillModeChangeHandler.bind(this));
@@ -238,32 +186,6 @@ class ParametersPanel {
   alignmentForceChangeHandler(e) {
     this.alignmentForceValue.innerHTML = e.target.value;
     this.world.setAlignmentForce(e.target.value);
-  }
-
-  attractionConnectedWeightChangeHandler(e) {
-    this.attractionConnectedWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceConnectedWeight(parseFloat(e.target.value));
-  }
-  attractionNearWeightChangeHandler(e) {
-    this.attractionNearWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceNearWeight(parseFloat(e.target.value));
-  }
-  attractionFarWeightChangeHandler(e) {
-    this.attractionFarWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setAttractionForceFarWeight(parseFloat(e.target.value));
-  }
-
-  repulsionConnectedWeightChangeHandler(e) {
-    this.repulsionConnectedWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceConnectedWeight(parseFloat(e.target.value));
-  }
-  repulsionNearWeightChangeHandler(e) {
-    this.repulsionNearWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceNonConnectedNearWeight(parseFloat(e.target.value));
-  }
-  repulsionFarWeightChangeHandler(e) {
-    this.repulsionFarWeightValue.innerHTML = parseFloat(e.target.value).toFixed(2);
-    this.world.setRepulsionForceNonConnectedFarWeight(parseFloat(e.target.value));
   }
 
   drawNodesChangeHandler(e) {

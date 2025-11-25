@@ -129,56 +129,6 @@ differential_growth: true
                 <div class="description" id="alignment-force-description">How strongly each node tries to align with its connected neighbors to form smoother curves. Higher values reduce sharp angles and create flowing lines. Lower values allow more erratic, jagged growth patterns.</div>
               </div>
             </fieldset>
-
-            <fieldset>
-              <legend class="sr-only">Attraction force weights</legend>
-
-              <div class="control range" role="group">
-                <label for="attraction-connected-weight">Attraction: Connected weight (n=±1)</label>
-                <input type="range" min="0" max="2" step="0.1" id="attraction-connected-weight" aria-describedby="attraction-connected-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="attraction-connected-weight-description">Multiplier for attraction to immediately adjacent nodes (direct neighbors). Higher values create tighter, more uniform spacing along the path. Essential for maintaining path continuity.</div>
-              </div>
-
-              <div class="control range" role="group">
-                <label for="attraction-near-weight">Attraction: Near weight (n=±2-10)</label>
-                <input type="range" min="0" max="2" step="0.1" id="attraction-near-weight" aria-describedby="attraction-near-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="attraction-near-weight-description">Multiplier for attraction to nodes 2-10 positions away on the path. Higher values create smoother local curves and reduce small-scale undulations. Lower values allow more localized wavy patterns.</div>
-              </div>
-
-              <div class="control range" role="group">
-                <label for="attraction-far-weight">Attraction: Far weight (n=±11+)</label>
-                <input type="range" min="0" max="2" step="0.1" id="attraction-far-weight" aria-describedby="attraction-far-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="attraction-far-weight-description">Multiplier for attraction to nodes 11+ positions away on the path. Higher values encourage the path to fold back on itself and create dense, compact forms. Lower values allow more sprawling growth.</div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend class="sr-only">Repulsion force weights</legend>
-
-              <div class="control range" role="group">
-                <label for="repulsion-connected-weight">Repulsion: Connected weight (n=±1)</label>
-                <input type="range" min="0" max="2" step="0.1" id="repulsion-connected-weight" aria-describedby="repulsion-connected-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="repulsion-connected-weight-description">Multiplier for repulsion between immediately adjacent nodes. Keep LOW to avoid fighting with attraction force. High values can cause path instability or breakage. Usually leave near zero.</div>
-              </div>
-
-              <div class="control range" role="group">
-                <label for="repulsion-near-weight">Repulsion: Near weight (n=±2-10)</label>
-                <input type="range" min="0" max="2" step="0.1" id="repulsion-near-weight" aria-describedby="repulsion-near-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="repulsion-near-weight-description">Multiplier for repulsion from nearby non-adjacent nodes (2-10 positions away). HIGH values prevent the path from overlapping itself locally and create characteristic "ruffled" edges. The main driver of differential growth aesthetics.</div>
-              </div>
-
-              <div class="control range" role="group">
-                <label for="repulsion-far-weight">Repulsion: Far weight (n=±11+)</label>
-                <input type="range" min="0" max="2" step="0.1" id="repulsion-far-weight" aria-describedby="repulsion-far-weight-description">
-                <span class="value" aria-hidden="true"></span>
-                <div class="description" id="repulsion-far-weight-description">Multiplier for repulsion from distant nodes (11+ positions away). HIGH values prevent different parts of the path from crossing or merging. Creates more open, separated structures. Lower values allow paths to interweave.</div>
-              </div>
-            </fieldset>
           </div>
 
           <div class="column">

@@ -6,12 +6,6 @@ module.exports = {
   AttractionForce: 0.2,
   RepulsionForce: 0.6,
   AlignmentForce: 0.55,
-  AttractionForceConnectedWeight: 1.0,
-  AttractionForceNearWeight: 0.5,
-  AttractionForceFarWeight: 0.1,
-  RepulsionForceConnectedWeight: 0.1,
-  RepulsionForceNonConnectedNearWeight: 1.5,
-  RepulsionForceNonConnectedFarWeight: 1.2,
   NodeInjectionInterval: 100,
   DrawNodes: false,
   TraceMode: false,
@@ -22,4 +16,5 @@ module.exports = {
   ShowBounds: true,
   UseBrownianMotion: true,
   BrownianMotionRange: 0.01,
+  TimeScale: 1,
 };

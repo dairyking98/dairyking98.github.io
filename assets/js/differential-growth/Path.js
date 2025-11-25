@@ -109,99 +109,36 @@ class Path {
    * @param {number} index Index of Node to apply forces to
    */
   applyAttraction(index) {
-    if (this.nodes[index].isFixed) return;
-
     let distance, leastMinDistance;
     let connectedNodes = this.getConnectedNodes(index);
 
-    // Apply weighted attraction to connected neighbors (n=±1)
     // Move towards next node, if there is one
-    if (connectedNodes.nextNode != undefined && connectedNodes.nextNode instanceof Node) {
+    if (connectedNodes.nextNode != undefined && connectedNodes.nextNode instanceof Node && !this.nodes[index].isFixed) {
       distance = this.nodes[index].distance(connectedNodes.nextNode);
       leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.nextNode.minDistance);
 
       if (distance > leastMinDistance) {
-        const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceConnectedWeight;
-        this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, connectedNodes.nextNode.x, weightedForce);
-        this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, connectedNodes.nextNode.y, weightedForce);
+        this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, connectedNodes.nextNode.x, this.settings.AttractionForce);
+        this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, connectedNodes.nextNode.y, this.settings.AttractionForce);
       }
     }
 
     // Move towards previous node, if there is one
-    if (connectedNodes.previousNode != undefined && connectedNodes.previousNode instanceof Node) {
+    if (connectedNodes.previousNode != undefined && connectedNodes.previousNode instanceof Node && !this.nodes[index].isFixed) {
       distance = this.nodes[index].distance(connectedNodes.previousNode);
       leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.previousNode.minDistance);
 
       if (distance > leastMinDistance) {
-        const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceConnectedWeight;
         this.nodes[index].nextPosition.x = this.p5.lerp(
           this.nodes[index].nextPosition.x,
           connectedNodes.previousNode.x,
-          weightedForce
+          this.settings.AttractionForce
         );
         this.nodes[index].nextPosition.y = this.p5.lerp(
           this.nodes[index].nextPosition.y,
           connectedNodes.previousNode.y,
-          weightedForce
+          this.settings.AttractionForce
         );
-      }
-    }
-
-    // Apply weighted attraction to near neighbors (n=±2 to ±10)
-    for (let offset = 2; offset <= 10; offset++) {
-      // Check forward neighbors
-      let forwardNode = this.getNodeAtDistance(index, offset);
-      if (forwardNode && forwardNode instanceof Node) {
-        distance = this.nodes[index].distance(forwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, forwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceNearWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, forwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, forwardNode.y, weightedForce);
-        }
-      }
-
-      // Check backward neighbors
-      let backwardNode = this.getNodeAtDistance(index, -offset);
-      if (backwardNode && backwardNode instanceof Node) {
-        distance = this.nodes[index].distance(backwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, backwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceNearWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, backwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, backwardNode.y, weightedForce);
-        }
-      }
-    }
-
-    // Apply weighted attraction to far neighbors (n=±11 to ±20)
-    for (let offset = 11; offset <= 20; offset++) {
-      // Check forward neighbors
-      let forwardNode = this.getNodeAtDistance(index, offset);
-      if (forwardNode && forwardNode instanceof Node) {
-        distance = this.nodes[index].distance(forwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, forwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceFarWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, forwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, forwardNode.y, weightedForce);
-        }
-      }
-
-      // Check backward neighbors
-      let backwardNode = this.getNodeAtDistance(index, -offset);
-      if (backwardNode && backwardNode instanceof Node) {
-        distance = this.nodes[index].distance(backwardNode);
-        leastMinDistance = Math.min(this.nodes[index].minDistance, backwardNode.minDistance);
-        
-        if (distance > leastMinDistance) {
-          const weightedForce = this.settings.AttractionForce * this.settings.AttractionForceFarWeight;
-          this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, backwardNode.x, weightedForce);
-          this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, backwardNode.y, weightedForce);
-        }
       }
     }
   }
@@ -220,42 +157,13 @@ class Path {
       undefined,
       undefined,
       this.nodes[index].repulsionRadius * this.nodes[index].repulsionRadius
-    ); // radius must be squared as per https://github.com/mourner/rbush-knn/issues=13
+    ); // radius must be squared as per https://github.com/mourner/rbush-knn/issues/13
 
-    // Move this node away from all nearby neighbors with weighted repulsion
+    // Move this node away from all nearby neighbors
+    // TODO: Make this proportional to distance?
     for (let node of neighbors) {
-      // Skip self
-      if (node === this.nodes[index]) continue;
-
-      // Calculate path distance to determine weight
-      let pathDistance = null;
-      let nodeIndex = this.nodes.indexOf(node);
-      
-      if (nodeIndex !== -1) {
-        // Node is part of this path, calculate path distance
-        pathDistance = this.getPathDistance(index, nodeIndex);
-      }
-
-      // Determine weight based on path distance
-      let weight;
-      if (pathDistance === null) {
-        // Node from different path or not found - treat as far non-connected
-        weight = this.settings.RepulsionForceNonConnectedFarWeight;
-      } else if (pathDistance === 1) {
-        // Connected neighbor (n=±1) - LOW weight to let attraction handle
-        weight = this.settings.RepulsionForceConnectedWeight;
-      } else if (pathDistance >= 2 && pathDistance <= 10) {
-        // Near non-connected (n=±2-10) - HIGH weight to prevent overlaps
-        weight = this.settings.RepulsionForceNonConnectedNearWeight;
-      } else {
-        // Far non-connected (n=±11+) - HIGH weight to prevent overlaps
-        weight = this.settings.RepulsionForceNonConnectedFarWeight;
-      }
-
-      // Apply weighted repulsion
-      const weightedForce = this.settings.RepulsionForce * weight;
-      this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].x, node.x, -weightedForce);
-      this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].y, node.y, -weightedForce);
+      this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].x, node.x, -this.settings.RepulsionForce);
+      this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].y, node.y, -this.settings.RepulsionForce);
     }
   }
 
@@ -453,10 +361,10 @@ class Path {
   }
 
   /**
-   * Calculate the path distance between two nodes (how many steps along the path)
+   * Calculate the path distance between two nodes (n = number of nodes along the path, not pixels)
    * @param {number} fromIndex Starting node index
    * @param {number} toIndex Target node index
-   * @returns {number} Minimum path distance between nodes
+   * @returns {number} Minimum path distance in nodes (n) between nodes along the path
    */
   getPathDistance(fromIndex, toIndex) {
     if (fromIndex === toIndex) return 0;
