@@ -23,11 +23,13 @@ The source code uses CommonJS modules and needs to be bundled for browser use.
 ### Quick Build
 
 From the project root, run:
+
 ```bash
 build-differential-growth.bat
 ```
 
 Or use Node.js directly:
+
 ```bash
 node build-bundle.js
 ```
@@ -58,16 +60,19 @@ The bundled output will be `assets/js/differential-growth-bundle.js`
 All parameters can be adjusted via the UI parameters panel. Default values are in `Settings.js`:
 
 ### Distance Parameters
+
 - **MinDistance** (default: 2): Minimum allowed distance between adjacent nodes
 - **MaxDistance** (default: 5): Maximum distance before a new node is inserted
 - **RepulsionRadius** (default: 15): Spatial radius (in pixels) for repulsion detection
 
 ### Force Parameters
+
 - **AttractionForce** (default: 0.2): Strength of attraction to connected neighbors
 - **RepulsionForce** (default: 0.6): Strength of repulsion from nearby nodes
 - **AlignmentForce** (default: 0.55): Strength of alignment with connected neighbors
 
 ### Other Parameters
+
 - **MaxVelocity** (default: 0.1): Maximum movement speed per frame
 - **NodeInjectionInterval** (default: 100ms): Interval between automatic node injection
 - **UseBrownianMotion** (default: true): Enable random jittering for organic variation
