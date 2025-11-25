@@ -187,6 +187,11 @@
   <link defer rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
 {% endif %}
 
+{% if page.differential_growth %}
+  <!-- Differential Growth CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/differential-growth.css' | relative_url | bust_file_cache }}">
+{% endif %}
+
 {% comment %}
   Load Swiper script early in head for web components to register properly
   This ensures the script starts loading early and web components are available
