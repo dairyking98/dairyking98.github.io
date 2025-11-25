@@ -472,7 +472,7 @@ class World {
   setTimeScale(scale) {
     this.timeScale = scale;
     this.settings.TimeScale = scale;
-    
+
     // Save to localStorage
     localStorage.setItem("differential-growth-timeScale", scale.toString());
   }

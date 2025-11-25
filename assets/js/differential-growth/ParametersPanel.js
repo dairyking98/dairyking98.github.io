@@ -224,7 +224,7 @@ class ParametersPanel {
     const value = parseFloat(e.target.value);
     this.timeScaleValue.innerHTML = value + "x";
     this.world.setTimeScale(value);
-    
+
     // Update speed indicator on screen
     const speedIndicatorValue = document.querySelector(".speed-indicator .speed-value");
     const speedIndicatorContainer = document.querySelector(".speed-indicator");

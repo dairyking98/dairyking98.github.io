@@ -12,7 +12,7 @@ I've been working on a project called **HPWriter**—a silent digital typewriter
 
 ## The Problem That Started It All
 
-The inspiration for HPWriter came from a very specific frustration: I love typewriters, but they're loud. Really loud. And while that satisfying *clack-clack-clack* is part of the charm when you're typing at home, it becomes a problem in shared spaces—classrooms, libraries, coffee shops, anywhere you want to focus but don't want to disturb everyone around you.
+The inspiration for HPWriter came from a very specific frustration: I love typewriters, but they're loud. Really loud. And while that satisfying _clack-clack-clack_ is part of the charm when you're typing at home, it becomes a problem in shared spaces—classrooms, libraries, coffee shops, anywhere you want to focus but don't want to disturb everyone around you.
 
 There are quieter alternatives—thermal paper typewriters exist, and they're much quieter than mechanical typewriters. But they come with significant drawbacks: the paper can be hard to find, it's temperature-sensitive (text can fade or darken with heat), and most concerningly, thermal paper often contains BPA and other chemicals that can be toxic. Plus, thermal paper typewriters are outdated technology, built on systems that are no longer in active development.
 
@@ -86,4 +86,3 @@ The project is still very much in development. I'm working through the mechanica
 I'm excited to see where this goes. There's something appealing about building a tool that does one thing really well, and I think HPWriter has the potential to be exactly that—a silent, focused writing device that produces real, tangible output.
 
 If you're interested in following along, check out the [project page](/projects/) or the [GitHub repository](https://github.com/dairyking98/HPWriter). I'll be sharing updates as the project progresses.
-

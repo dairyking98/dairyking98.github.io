@@ -344,9 +344,9 @@ class Path {
    */
   getNodeAtDistance(index, offset) {
     if (offset === 0) return this.nodes[index];
-    
+
     let targetIndex = index + offset;
-    
+
     if (this.isClosed) {
       // Wrap around for closed paths
       targetIndex = ((targetIndex % this.nodes.length) + this.nodes.length) % this.nodes.length;
@@ -368,9 +368,9 @@ class Path {
    */
   getPathDistance(fromIndex, toIndex) {
     if (fromIndex === toIndex) return 0;
-    
+
     const directDistance = Math.abs(toIndex - fromIndex);
-    
+
     if (this.isClosed) {
       // For closed paths, consider wrap-around distance
       const wrapDistance = this.nodes.length - directDistance;

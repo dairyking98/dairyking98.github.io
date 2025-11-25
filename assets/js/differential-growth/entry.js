@@ -338,7 +338,7 @@ const sketch = function (p5) {
   function resetParameters() {
     // Clear all saved settings from localStorage
     localStorage.removeItem("differential-growth-timeScale");
-    
+
     // Reload the page to reset everything
     window.location.reload();
   }
