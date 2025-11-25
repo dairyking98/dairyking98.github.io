@@ -97,6 +97,17 @@ ninja.data = [{
             window.location.href = "/blog/2025/phd-applications/";
           
         },
+      },{id: "post-building-hpwriter-a-silent-digital-typewriter",
+        
+          title: "Building HPWriter - A Silent Digital Typewriter",
+        
+        description: "Why I&#39;m building HPWriter, a silent digital typewriter that prints on plain paper, and what inspired this project.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/hpwriter-project/";
+          
+        },
       },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
