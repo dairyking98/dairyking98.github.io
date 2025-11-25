@@ -38,17 +38,11 @@ With multiple applications, deadlines, and requirements, staying organized has b
 
 ### Contact Letter Writers Early
 
-This is one thing I wish I had done differently: I should have contacted my letter writers sooner. I reached out to them, but looking back, I could have given them even more advance notice. Letter writers are busy people, and they're doing you a huge favor. The more time you can give them, the better the letters will likely be, and the less stress you'll both experience. If I were to do this again, I'd contact them at least 3-4 months before deadlines, not just 2-3 months. It's one of those things that seems obvious in hindsight but easy to underestimate when you're in the middle of everything.
+This is one thing I wish I had done differently: I should have contacted my letter writers sooner. I only gave them about a week's notice, which is way too short. In hindsight, I realize this happened because I was indecisive about pursuing a PhD—I didn't actually start my applications until mid-November, which left me scrambling to get everything done in time. Looking back, I could have given them much more advance notice. Letter writers are busy people, and they're doing you a huge favor. The more time you can give them, the better the letters will likely be, and the less stress you'll both experience. If I were to do this again, I'd contact them at least 3-4 months before deadlines, not just a week. It's one of those things that seems obvious in hindsight but easy to underestimate when you're in the middle of everything.
 
 ### The Waiting Game
 
 Even though I haven't submitted everything yet, I'm already thinking about what comes next. The waiting period after submission is going to be tough. Most decisions come in February through April, which means months of uncertainty. I'm trying to prepare myself for that mentally.
-
-## What's Next
-
-My applications are due in December, and once those are submitted, I'll have some breathing room. I'm planning to use that time to update this website with more images and content. Right now, the site is fairly minimal, but once the application stress is behind me, I'll be able to focus on populating it with photos, project details, and other content that I've been putting off.
-
-So, if you're visiting this site and notice it's a bit sparse on images, that's why! Once I get through these December deadlines, you can expect to see the site filled out much more completely.
 
 ## Reflections
 
@@ -56,16 +50,14 @@ This process has been a journey of self-reflection. It's forced me to really thi
 
 I've also learned a lot about resilience and patience. PhD applications are a marathon, not a sprint, and there have been plenty of moments where I've felt overwhelmed or discouraged. But I've kept pushing forward, and I'm proud of the work I've put in.
 
-I'll be completely honest: even still, I'm not entirely sure that this is the path for me. There's a part of me that questions whether a PhD is really what I want or need. But a lot of my peers are encouraging me to pursue it, and I trust their judgment. They see something in me that makes them think this is a good fit, and I think I'm not too unwise to follow their guidance. When I think about it myself, I believe I will enjoy it—the research, the learning, the intellectual challenge. The uncertainty is there, but so is the excitement and the sense that this could be right for me.
+I'll be completely honest: I'm still not sure this is the path for me. There's a part of me that questions whether a PhD is really what I want or need. But a lot of my peers are encouraging me to pursue it, and I trust their judgment. They see something in me that makes them think this is a good fit, and I think I'm not too unwise to follow their guidance. When I think about it myself, I think it might be? The research, the learning, the intellectual challenge—there's something appealing about it. The uncertainty is definitely there, but so is a sense that this could be right for me. I'm going forward with the applications, and we'll see where this leads.
 
 ## Looking Forward
 
-Once December is over and my applications are submitted, I'll be able to breathe a bit easier. I'm looking forward to updating this site, sharing more about my projects and interests, and then waiting (impatiently, I'm sure) for decisions to come in.
+Once December is over and my applications are submitted, I'll be able to breathe a bit easier. I'm planning to use that time to update this website with more images and content—right now the site is fairly minimal, but once the application stress is behind me, I'll be able to focus on populating it with photos, project details, and other content I've been putting off.
 
-If you're also going through this process, know that you're not alone. It's stressful, time-consuming, and sometimes frustrating, but it's also an opportunity to really think about what you want and where you're going.
+I'm still not entirely sure this is for me, but I think it might be? I'm going to see what happens with these applications and take it from there. Maybe getting in (or not getting in) will help clarify things. Maybe the process of going through it will reveal more about what I actually want.
+
+If you're also going through this process, know that you're not alone. It's stressful, time-consuming, and sometimes frustrating, but it's also an opportunity to really think about what you want and where you're going. And it's okay to not be completely certain—I'm certainly not.
 
 I'll update this post once I have more to share—whether that's after submissions, after decisions, or whenever something interesting happens in this journey.
-
----
-
-*Update: Once my applications are submitted in December, I'll be updating this site with images and more content. Stay tuned!*
