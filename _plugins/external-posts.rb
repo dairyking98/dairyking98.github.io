@@ -30,11 +30,16 @@ module ExternalPosts
           xml = HTTParty.get(src['rss_url'], timeout: 10).body
         end
         return if xml.nil?
-        feed = Feedjira.parse(xml)
+        begin
+          feed = Feedjira.parse(xml)
+        rescue StandardError => e
+          puts "Error parsing RSS feed from #{src['rss_url']} - #{e.message}"
+          return
+        end
         process_entries(site, src, feed.entries)
       rescue Timeout::Error => e
         puts "Timeout fetching RSS feed from #{src['rss_url']}: #{e.message}"
-      rescue Exception => e
+      rescue StandardError => e
         puts "Error fetching RSS feed from #{src['rss_url']}: #{e.class} - #{e.message}"
       end
     end
