@@ -86,7 +86,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/differential-growth/";
               },
-            },{id: "post-a-post-with-plotly-js",
+            },{id: "post-my-phd-application-journey",
+        
+          title: "My PhD Application Journey",
+        
+        description: "An update on my PhD application process and what I&#39;ve learned along the way.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/phd-applications/";
+          
+        },
+      },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
         
@@ -443,16 +454,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
+            },},{id: "news-images-and-content-coming-soon-once-my-phd-applications-are-submitted-in-december-i-ll-be-populating-the-site-with-photos-project-details-and-more-content-the-site-is-actively-under-construction-thank-you-for-your-patience",
+          title: 'Images and content coming soon! Once my PhD applications are submitted in December,...',
           description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          section: "News",},{id: "news-i-ve-written-about-my-ongoing-phd-application-process-read-about-my-experience-reflections-and-what-s-next-my-phd-application-journey",
+          title: 'I’ve written about my ongoing PhD application process. Read about my experience, reflections,...',
           description: "",
           section: "News",},{id: "projects-bennett-type-elements",
           title: 'Bennett Type Elements',
