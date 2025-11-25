@@ -767,6 +767,13 @@ ninja.data = [{
           section: "Typewriters",handler: () => {
               window.location.href = "/typewriters/woodstock-model-5n-n168116e/";
             },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
