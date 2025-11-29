@@ -1,0 +1,2298 @@
+﻿<!-- Source: musicviz2/index.html - Update by copying from source repo and updating import paths -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Butterchurn Music Visualizer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+        background: #000;
+      }
+
+      body.hide-cursor {
+        cursor: none;
+      }
+
+      .bottom-controls.hidden,
+      #status.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+      }
+
+      #canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+      }
+
+      .control-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .control-section h3 {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 120px;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .file-label {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .file-label:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+      }
+
+      input[type="text"] {
+        padding: 10px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 14px;
+        width: 100%;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      input[type="text"]::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      select {
+        padding: 10px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 14px;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      select option {
+        background: #1a1a1a;
+        color: white;
+      }
+
+      .slider-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .slider-group label {
+        color: white;
+        font-size: 12px;
+        min-width: 80px;
+      }
+
+      input[type="range"] {
+        flex: 1;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.2);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+        border: none;
+      }
+
+      .status {
+        color: #4ade80;
+        font-size: 12px;
+        text-align: center;
+        padding: 5px;
+      }
+
+      .status.error {
+        color: #f87171;
+      }
+
+      .control-panel {
+        position: fixed;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        min-width: 350px;
+        max-width: 90vw;
+        transition: all 0.3s ease;
+      }
+
+      .control-panel.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+      }
+
+      .audio-source-panel {
+        top: 20px;
+        left: 20px;
+      }
+
+      .presets-panel {
+        top: 20px;
+        right: 20px;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .panel-header h3 {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0;
+      }
+
+      .minimize-btn {
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        min-width: auto;
+        width: auto;
+        flex: 0 0 auto;
+      }
+
+      .minimize-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #667eea;
+      }
+
+      .bottom-controls {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        display: flex;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 12px 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+
+      .bottom-controls button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+
+      .bottom-controls button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .bottom-controls button:active {
+        transform: translateY(0);
+      }
+
+      .conditional-controls {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .conditional-controls.active {
+        display: flex;
+      }
+
+      .playback-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .playback-controls button {
+        min-width: 40px;
+        padding: 8px 12px;
+        flex: 0 0 auto;
+      }
+
+      .track-info {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        text-align: center;
+        margin-top: 5px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 5px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .checkbox-group label {
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 0;
+      }
+
+      .preset-name-display {
+        color: #4ade80;
+        font-size: 14px;
+        text-align: center;
+        padding: 8px;
+        background: rgba(74, 222, 128, 0.1);
+        border-radius: 5px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .preset-name-display.show {
+        display: block;
+      }
+
+      .preset-name-overlay {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+        color: #4ade80;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        padding: 12px 24px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .preset-name-overlay.show {
+        opacity: 1;
+      }
+
+      @media (max-width: 768px) {
+        .control-panel {
+          min-width: 90vw;
+          padding: 15px;
+        }
+
+        .audio-source-panel {
+          top: 10px;
+          left: 10px;
+        }
+
+        .presets-panel {
+          top: 10px;
+          right: 10px;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <!-- Preset Name Overlay (on top of visualization) -->
+    <div class="preset-name-overlay" id="preset-name-overlay"></div>
+
+    <!-- Audio Source Panel -->
+    <div class="control-panel audio-source-panel" id="audio-source-panel">
+      <div class="panel-header">
+        <h3>Audio Source</h3>
+        <button class="minimize-btn" onclick="toggleAudioSourcePanel()">−</button>
+      </div>
+
+      <div class="control-section">
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Source Type</label>
+        <select id="audio-source-type" onchange="onAudioSourceTypeChange()">
+          <option value="internet-stream">Internet Stream</option>
+          <option value="system-audio">System Audio</option>
+          <option value="microphone">Microphone</option>
+          <option value="file-upload">File Upload</option>
+        </select>
+      </div>
+
+      <!-- Internet Stream Controls -->
+      <div id="internet-stream-controls" class="conditional-controls active">
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Radio Station</label>
+        <select id="station-select" onchange="onStationSelect()" style="width: 100%; margin-bottom: 10px">
+          <option value="">Select a station...</option>
+          <option value="bassdrive">🎵 Bassdrive Radio</option>
+          <option value="subfm">📻 Sub FM</option>
+          <option value="hardcorepower">⚡ Hardcore Power</option>
+          <option value="radio538-dance">📡 Radio 538 – Dance Department</option>
+          <option value="radio538-ibiza">📡 Radio 538 – Ibiza</option>
+          <option value="radio538-party">📡 Radio 538 – Party</option>
+          <option value="kissfm-nl">📡 Kiss FM NL – Dance / Club</option>
+          <option value="pinguin-radio">🎵 Pinguin Radio (Indie)</option>
+          <option value="dnbradio-main-mp3">🎧 DNBRadio - Main (320K MP3 US)</option>
+          <option value="dnbradio-plush">🎵 DNBRadio - Plush Recordings</option>
+          <option value="dnbradio-section8">⚡ DNBRadio - Section 8 Recordings</option>
+          <option value="dnbradio-darkstep">🌑 DNBRadio - Darkstep</option>
+          <option value="custom">Custom URL...</option>
+        </select>
+        <div id="station-homepage-link" style="display: none; margin-top: 8px; margin-bottom: 10px">
+          <a
+            id="station-homepage-btn"
+            href="#"
+            target="_blank"
+            style="
+              display: inline-block;
+              padding: 6px 12px;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              text-decoration: none;
+              border-radius: 4px;
+              font-size: 12px;
+              text-align: center;
+              width: 100%;
+            "
+            >🌐 Visit Station Homepage</a
+          >
+        </div>
+        <div id="custom-url-container" style="display: none; margin-bottom: 10px">
+          <div style="display: flex; gap: 10px">
+            <input type="text" id="stream-input" placeholder="http://example.com/stream.m3u or direct URL" style="flex: 1" />
+            <button onclick="loadStream()" style="min-width: 100px">Load</button>
+          </div>
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.6); font-size: 11px">Supports: M3U playlists, Icecast, Shoutcast, MP3 streams, PLS files</div>
+      </div>
+
+      <!-- System Audio Controls -->
+      <div id="system-audio-controls" class="conditional-controls">
+        <button id="start-system-audio-btn" onclick="useSystemAudio()" style="width: 100%">Start System Audio Capture</button>
+      </div>
+
+      <!-- Microphone Controls -->
+      <div id="microphone-controls" class="conditional-controls">
+        <button id="start-microphone-btn" onclick="useMicrophone()" style="width: 100%">Start Microphone</button>
+      </div>
+
+      <!-- File Upload Controls -->
+      <div id="file-upload-controls" class="conditional-controls">
+        <label for="file-input-hidden" class="file-label" style="width: 100%; text-align: center; display: block; cursor: pointer"
+          >Choose Audio File</label
+        >
+        <input type="file" id="file-input-hidden" accept="audio/*,.pls,.m3u,.m3u8" multiple style="display: none" />
+
+        <div style="margin-top: 15px; display: none" id="music-files-section">
+          <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
+            >Select Music File (<span id="music-file-count-display">0</span> available)</label
+          >
+          <input
+            type="text"
+            id="music-file-search"
+            placeholder="Search music files..."
+            style="margin-bottom: 10px; width: 100%"
+            oninput="onMusicFileSearchChange()"
+          />
+          <select id="music-file-select" onchange="onMusicFileSelectChange()" style="margin-bottom: 10px">
+            <option value="">No files selected...</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Playback Controls (shown when audio is playing) -->
+      <div id="playback-controls" class="conditional-controls">
+        <div class="playback-controls">
+          <button onclick="previousTrack()" id="prev-btn" style="min-width: 50px">⏮</button>
+          <button onclick="togglePlayPause()" id="play-pause-btn" style="flex: 1">⏸ Pause</button>
+          <button onclick="nextTrack()" id="next-btn" style="min-width: 50px">⏭</button>
+        </div>
+        <div class="slider-group">
+          <label style="min-width: 60px">Volume:</label>
+          <input type="range" id="volume-slider" min="0" max="100" step="1" value="100" oninput="updateVolume(this.value)" />
+          <span id="volume-value" style="color: white; min-width: 40px; text-align: right">100%</span>
+        </div>
+        <div class="slider-group" id="track-slider-group" style="display: none">
+          <label style="min-width: 60px">Track:</label>
+          <input type="range" id="track-slider" min="0" max="100" step="0.1" value="0" oninput="seekTrack(this.value)" />
+          <span id="track-time" style="color: white; min-width: 60px; text-align: right">0:00 / 0:00</span>
+        </div>
+        <div class="track-info" id="track-info"></div>
+      </div>
+
+      <button
+        id="stop-audio-btn"
+        onclick="stopAudio()"
+        style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 100%; margin-top: 10px"
+      >
+        Stop Audio
+      </button>
+    </div>
+
+    <!-- Presets Panel -->
+    <div class="control-panel presets-panel" id="presets-panel">
+      <div class="panel-header">
+        <h3>Presets</h3>
+        <button class="minimize-btn" onclick="togglePresetsPanel()">−</button>
+      </div>
+
+      <div class="control-section">
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
+          >Select Preset (<span id="preset-count-display">0</span> available)</label
+        >
+        <input
+          type="text"
+          id="preset-search"
+          placeholder="Search presets..."
+          style="margin-bottom: 10px; width: 100%"
+          oninput="onPresetSearchChange()"
+        />
+        <select id="preset-select" onchange="onPresetSelectChange()" style="margin-bottom: 10px">
+          <option value="">Loading presets...</option>
+        </select>
+
+        <div class="playback-controls">
+          <button onclick="previousPreset()" style="flex: 1">⏮ Previous</button>
+          <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">▶ Play</button>
+          <button onclick="nextPreset()" style="flex: 1">Next ⏭</button>
+        </div>
+
+        <div class="checkbox-group" style="margin-top: 10px">
+          <input type="checkbox" id="shuffle-checkbox" onchange="onShuffleChange()" checked />
+          <label for="shuffle-checkbox">Shuffle</label>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="show-preset-name-checkbox" onchange="onShowPresetNameChange()" />
+          <label for="show-preset-name-checkbox">Show Preset Name</label>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div class="slider-group">
+          <label>Blend Time:</label>
+          <input type="range" id="blend-slider" min="0" max="5" step="0.1" value="0.5" oninput="updateBlendTime(this.value)" />
+          <span id="blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
+        </div>
+        <div class="slider-group">
+          <label>Preset Duration:</label>
+          <input type="range" id="preset-duration-slider" min="1" max="60" step="1" value="10" oninput="updatePresetDuration(this.value)" />
+          <span id="preset-duration-value" style="color: white; min-width: 40px; text-align: right">10s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credits Panel -->
+    <div
+      class="control-panel presets-panel hidden"
+      id="credits-panel"
+      style="bottom: 20px; right: 20px; top: auto; max-height: 60vh; overflow-y: auto"
+    >
+      <div class="panel-header">
+        <h3>Credits</h3>
+        <button class="minimize-btn" onclick="toggleCreditsPanel()">−</button>
+      </div>
+
+      <div class="control-section">
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 13px; line-height: 1.6; margin: 0">
+          This visualizer is built with amazing open-source technology:
+        </p>
+        <ul style="color: rgba(255, 255, 255, 0.8); font-size: 13px; line-height: 1.8; margin: 10px 0; padding-left: 20px">
+          <li>
+            <strong>jberg</strong> - Creator of
+            <a href="https://github.com/jberg/butterchurn" target="_blank" style="color: #667eea; text-decoration: none">Butterchurn</a>, the WebGL
+            port of Milkdrop
+          </li>
+          <li><strong>Ryan Geiss</strong> - Original creator of Milkdrop</li>
+          <li><strong>Nullsoft</strong> - Creators of Winamp</li>
+          <li>
+            <strong>Preset creators</strong> - Special thanks to <strong>Flexi</strong> and all the amazing artists who created the visualizations
+          </li>
+        </ul>
+        <p style="color: rgba(255, 255, 255, 0.6); font-size: 12px; line-height: 1.6; margin: 10px 0 0 0; font-style: italic">
+          Thank you for making this incredible technology possible!
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Control Bar -->
+    <div class="bottom-controls">
+      <button onclick="toggleAudioSourcePanel()" id="audio-source-toggle-btn">Audio Source</button>
+      <button onclick="togglePresetsPanel()" id="presets-toggle-btn">Presets</button>
+      <button onclick="toggleCreditsPanel()" id="credits-toggle-btn">Credits</button>
+      <button onclick="toggleFullscreen()" id="fullscreen-btn">⛶ Fullscreen</button>
+    </div>
+
+    <div
+      class="status"
+      id="status"
+      style="
+        position: fixed;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        color: #f87171;
+        font-size: 12px;
+        text-align: center;
+        padding: 5px;
+        display: none;
+      "
+    ></div>
+
+    <script type="module">
+      // Import butterchurn from LOCAL file (NO CDN) - ES module format
+      // Load presets locally (NO CDN)
+      const butterchurnModule = await import("/assets/js/butterchurn.min.js");
+      const butterchurnPresets = await import("/assets/js/butterchurn-presets-wrapper.js");
+
+      // Get butterchurn default export
+      const butterchurnLib = butterchurnModule.default;
+
+      if (!butterchurnLib) {
+        console.error("Butterchurn not found! Make sure lib/butterchurn.min.js exists.");
+        alert(
+          "Butterchurn library not found!\n\nPlease ensure lib/butterchurn.min.js exists.\n\nIf not, run: cd butterchurn && npm run build && copy butterchurn/dist/butterchurn.min.js lib/butterchurn.min.js"
+        );
+        throw new Error("Butterchurn not loaded!");
+      }
+
+      let visualizer = null;
+      let audioContext = null;
+      let audioSource = null;
+      let audioNode = null;
+      let currentPresets = [];
+      let currentPresetIndex = 0;
+      let isPlaying = false;
+      let renderAnimationFrame = null;
+      let isShuffleEnabled = true; // Default: shuffle enabled
+      let isPresetAutoAdvance = true; // Default: auto-advance enabled
+      let presetAutoAdvanceInterval = null;
+      let presetDuration = 10; // seconds
+      let shuffledPresetHistory = []; // Track shuffled preset order
+      let shuffledHistoryIndex = -1; // Current position in shuffled history
+      let currentAudioFile = null;
+      let audioPlaylist = [];
+      let currentPlaylistIndex = -1;
+
+      const canvas = document.getElementById("canvas");
+      const statusEl = document.getElementById("status");
+      const streamInput = document.getElementById("stream-input");
+      const audioSourceTypeSelect = document.getElementById("audio-source-type");
+      const playbackControlsDiv = document.getElementById("playback-controls");
+      const playPauseBtn = document.getElementById("play-pause-btn");
+      const volumeSlider = document.getElementById("volume-slider");
+      const volumeValue = document.getElementById("volume-value");
+      const trackSlider = document.getElementById("track-slider");
+      const trackTime = document.getElementById("track-time");
+      const trackSliderGroup = document.getElementById("track-slider-group");
+      const trackInfo = document.getElementById("track-info");
+      const presetPlayPauseBtn = document.getElementById("preset-play-pause-btn");
+      const shuffleCheckbox = document.getElementById("shuffle-checkbox");
+      const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
+      const presetNameOverlay = document.getElementById("preset-name-overlay");
+      const presetSelect = document.getElementById("preset-select");
+      const presetSearch = document.getElementById("preset-search");
+      const presetCountDisplay = document.getElementById("preset-count-display");
+      const startSystemAudioBtn = document.getElementById("start-system-audio-btn");
+      const startMicrophoneBtn = document.getElementById("start-microphone-btn");
+      const stopAudioBtn = document.getElementById("stop-audio-btn");
+      // Music files dropdown elements
+      const musicFileSelect = document.getElementById("music-file-select");
+      const musicFileSearch = document.getElementById("music-file-search");
+      const musicFileCountDisplay = document.getElementById("music-file-count-display");
+      const musicFilesSection = document.getElementById("music-files-section");
+      // Playlist view elements (may not exist in DOM - playlist view not fully implemented)
+      const playlistView = document.getElementById("playlist-view");
+      const playlistItems = document.getElementById("playlist-items");
+      const playlistCount = document.getElementById("playlist-count");
+
+      // Allow Enter key to load stream
+      streamInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          loadStream();
+        }
+      });
+
+      // Audio source type change handler
+      window.onAudioSourceTypeChange = function () {
+        const sourceType = audioSourceTypeSelect.value;
+
+        // Auto-stop current audio when switching source types
+        if (audioSource) {
+          stopAudio();
+        }
+
+        // Hide all conditional controls
+        document.querySelectorAll(".conditional-controls").forEach((div) => {
+          div.classList.remove("active");
+        });
+
+        // Show relevant controls
+        switch (sourceType) {
+          case "internet-stream":
+            document.getElementById("internet-stream-controls").classList.add("active");
+            break;
+          case "system-audio":
+            document.getElementById("system-audio-controls").classList.add("active");
+            break;
+          case "microphone":
+            document.getElementById("microphone-controls").classList.add("active");
+            break;
+          case "file-upload":
+            document.getElementById("file-upload-controls").classList.add("active");
+            break;
+        }
+
+        // Update button states
+        updateButtonStates();
+      };
+
+      // Fullscreen toggle
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch((err) => {
+            console.error("Error entering fullscreen:", err);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      }
+
+      // Mouse inactivity tracking
+      let mouseInactivityTimeout = null;
+      const INACTIVITY_DELAY = 2000; // 2 seconds
+
+      function resetMouseInactivityTimer() {
+        // Clear existing timeout
+        if (mouseInactivityTimeout) {
+          clearTimeout(mouseInactivityTimeout);
+          mouseInactivityTimeout = null;
+        }
+
+        // Show UI immediately on mouse movement
+        showUI();
+
+        // Set timeout to hide UI after inactivity
+        mouseInactivityTimeout = setTimeout(() => {
+          hideUI();
+        }, INACTIVITY_DELAY);
+      }
+
+      function hideUI() {
+        // Hide cursor (only in fullscreen)
+        if (document.fullscreenElement) {
+          document.body.classList.add("hide-cursor");
+        }
+
+        // Hide bottom controls (always)
+        const bottomControls = document.querySelector(".bottom-controls");
+        if (bottomControls) {
+          bottomControls.classList.add("hidden");
+        }
+
+        // Hide status (only in fullscreen)
+        if (document.fullscreenElement) {
+          const status = document.getElementById("status");
+          if (status) {
+            status.classList.add("hidden");
+          }
+        }
+
+        // Hide GUI panels (fade out)
+        const audioPanel = document.getElementById("audio-source-panel");
+        const presetsPanel = document.getElementById("presets-panel");
+
+        if (audioPanel) {
+          // Store original state if not already stored
+          if (!audioPanel.dataset.wasHidden) {
+            audioPanel.dataset.wasHidden = audioPanel.classList.contains("hidden") ? "true" : "false";
+          }
+          audioPanel.classList.add("hidden");
+        }
+
+        if (presetsPanel) {
+          // Store original state if not already stored
+          if (!presetsPanel.dataset.wasHidden) {
+            presetsPanel.dataset.wasHidden = presetsPanel.classList.contains("hidden") ? "true" : "false";
+          }
+          presetsPanel.classList.add("hidden");
+        }
+
+        const creditsPanel = document.getElementById("credits-panel");
+        if (creditsPanel) {
+          if (!creditsPanel.dataset.wasHidden) {
+            creditsPanel.dataset.wasHidden = creditsPanel.classList.contains("hidden") ? "true" : "false";
+          }
+          creditsPanel.classList.add("hidden");
+        }
+      }
+
+      function showUI() {
+        // Show cursor
+        document.body.classList.remove("hide-cursor");
+
+        // Show bottom controls
+        const bottomControls = document.querySelector(".bottom-controls");
+        if (bottomControls) {
+          bottomControls.classList.remove("hidden");
+        }
+
+        // Show status (always visible for errors)
+        const status = document.getElementById("status");
+        if (status && status.textContent) {
+          status.classList.remove("hidden");
+        }
+
+        // Restore GUI panels to their original state
+        const audioPanel = document.getElementById("audio-source-panel");
+        const presetsPanel = document.getElementById("presets-panel");
+
+        if (audioPanel && audioPanel.dataset.wasHidden !== undefined) {
+          if (audioPanel.dataset.wasHidden === "false") {
+            audioPanel.classList.remove("hidden");
+          }
+          // Clear the stored state
+          delete audioPanel.dataset.wasHidden;
+        }
+
+        if (presetsPanel && presetsPanel.dataset.wasHidden !== undefined) {
+          if (presetsPanel.dataset.wasHidden === "false") {
+            presetsPanel.classList.remove("hidden");
+          }
+          // Clear the stored state
+          delete presetsPanel.dataset.wasHidden;
+        }
+
+        const creditsPanel = document.getElementById("credits-panel");
+        if (creditsPanel && creditsPanel.dataset.wasHidden !== undefined) {
+          if (creditsPanel.dataset.wasHidden === "false") {
+            creditsPanel.classList.remove("hidden");
+          }
+          delete creditsPanel.dataset.wasHidden;
+        }
+      }
+
+      // Track mouse movement
+      document.addEventListener("mousemove", resetMouseInactivityTimer);
+      document.addEventListener("mousedown", resetMouseInactivityTimer);
+
+      // Start inactivity timer on page load
+      resetMouseInactivityTimer();
+
+      // Update fullscreen button text based on state
+      document.addEventListener("fullscreenchange", () => {
+        const fullscreenBtn = document.getElementById("fullscreen-btn");
+        if (fullscreenBtn) {
+          if (document.fullscreenElement) {
+            fullscreenBtn.textContent = "⛶ Exit Fullscreen";
+          } else {
+            fullscreenBtn.textContent = "⛶ Fullscreen";
+          }
+        }
+        // Reset timer on fullscreen change
+        resetMouseInactivityTimer();
+      });
+
+      window.toggleFullscreen = toggleFullscreen;
+      window.toggleAudioSourcePanel = toggleAudioSourcePanel;
+      window.togglePresetsPanel = togglePresetsPanel;
+
+      // Toggle Credits panel
+      window.toggleCreditsPanel = function () {
+        const creditsPanel = document.getElementById("credits-panel");
+        creditsPanel.classList.toggle("hidden");
+      };
+
+      // Play/Pause toggle
+      window.togglePlayPause = function () {
+        if (!audioSource) return;
+
+        if (audioSource instanceof Audio) {
+          if (audioSource.paused) {
+            audioSource.play();
+            isPlaying = true;
+            playPauseBtn.textContent = "⏸ Pause";
+          } else {
+            audioSource.pause();
+            isPlaying = false;
+            playPauseBtn.textContent = "▶ Play";
+          }
+        }
+      };
+
+      // Volume control
+      window.updateVolume = function (value) {
+        if (audioSource instanceof Audio) {
+          audioSource.volume = value / 100;
+        }
+        volumeValue.textContent = value + "%";
+      };
+
+      // Track seeking (for file playback)
+      window.seekTrack = function (value) {
+        if (audioSource instanceof Audio && audioSource.duration) {
+          audioSource.currentTime = (value / 100) * audioSource.duration;
+        }
+      };
+
+      // Previous/Next track (playlist navigation)
+      window.previousTrack = function () {
+        if (audioPlaylist.length === 0) {
+          updateStatus("No playlist available", false);
+          return;
+        }
+        if (currentPlaylistIndex > 0) {
+          currentPlaylistIndex--;
+          loadPlaylistFile(audioPlaylist[currentPlaylistIndex], currentPlaylistIndex);
+        } else {
+          updateStatus("Already at first track", false);
+        }
+      };
+
+      window.nextTrack = function () {
+        if (audioPlaylist.length === 0) {
+          updateStatus("No playlist available", false);
+          return;
+        }
+        if (currentPlaylistIndex < audioPlaylist.length - 1) {
+          currentPlaylistIndex++;
+          loadPlaylistFile(audioPlaylist[currentPlaylistIndex], currentPlaylistIndex);
+        } else {
+          updateStatus("Already at last track", false);
+        }
+      };
+
+      // Preset play/pause (auto-advance toggle)
+      window.togglePresetPlayPause = function () {
+        isPresetAutoAdvance = !isPresetAutoAdvance;
+
+        if (isPresetAutoAdvance) {
+          presetPlayPauseBtn.textContent = "⏸ Pause";
+          // Auto-advance presets based on duration slider
+          presetAutoAdvanceInterval = setInterval(() => {
+            if (isShuffleEnabled) {
+              randomPreset();
+            } else {
+              nextPreset();
+            }
+          }, presetDuration * 1000);
+        } else {
+          presetPlayPauseBtn.textContent = "▶ Play";
+          if (presetAutoAdvanceInterval) {
+            clearInterval(presetAutoAdvanceInterval);
+            presetAutoAdvanceInterval = null;
+          }
+        }
+      };
+
+      // Shuffle checkbox handler
+      window.onShuffleChange = function () {
+        const wasShuffled = isShuffleEnabled;
+        isShuffleEnabled = shuffleCheckbox.checked;
+
+        if (isShuffleEnabled && !wasShuffled) {
+          // Starting shuffle - initialize history with current preset
+          shuffledPresetHistory = [currentPresetIndex];
+          shuffledHistoryIndex = 0;
+        } else if (!isShuffleEnabled && wasShuffled) {
+          // Disabling shuffle - clear history
+          shuffledPresetHistory = [];
+          shuffledHistoryIndex = -1;
+        }
+      };
+
+      // Show preset name checkbox handler - only controls overlay visibility
+      window.onShowPresetNameChange = function () {
+        const show = showPresetNameCheckbox.checked;
+        // Only control overlay visibility, not panel display
+        if (show && currentPresets[currentPresetIndex] && presetNameOverlay) {
+          // Show current preset name on overlay if checkbox is checked
+          presetNameOverlay.textContent = currentPresets[currentPresetIndex];
+          presetNameOverlay.classList.add("show");
+          setTimeout(() => {
+            if (presetNameOverlay) {
+              presetNameOverlay.classList.remove("show");
+            }
+          }, 3000);
+        } else if (presetNameOverlay) {
+          // Hide overlay if checkbox is unchecked
+          presetNameOverlay.classList.remove("show");
+        }
+      };
+
+      // Preset select dropdown handler
+      window.onPresetSelectChange = function () {
+        const selectedIndex = parseInt(presetSelect.value);
+        if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < currentPresets.length) {
+          loadPresetByIndex(selectedIndex);
+        }
+      };
+
+      // Preset search handler
+      window.onPresetSearchChange = function () {
+        if (!presetSearch || !presetSelect) return;
+
+        const searchTerm = presetSearch.value.toLowerCase().trim();
+
+        // Filter options
+        const options = presetSelect.querySelectorAll("option");
+        let visibleCount = 0;
+
+        options.forEach((option, index) => {
+          if (index === 0) return; // Skip first "Select a preset..." option
+          const presetName = option.textContent.toLowerCase();
+          if (searchTerm === "" || presetName.includes(searchTerm)) {
+            option.style.display = "";
+            visibleCount++;
+          } else {
+            option.style.display = "none";
+          }
+        });
+
+        // Update count display
+        if (presetCountDisplay) {
+          if (searchTerm) {
+            presetCountDisplay.textContent = `${visibleCount} (filtered)`;
+          } else {
+            presetCountDisplay.textContent = currentPresets.length;
+          }
+        }
+      };
+
+      // Music file select dropdown handler
+      window.onMusicFileSelectChange = function () {
+        const selectedIndex = parseInt(musicFileSelect.value);
+        if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < audioPlaylist.length) {
+          loadPlaylistFileAtIndex(selectedIndex);
+        }
+      };
+
+      // Music file search handler
+      window.onMusicFileSearchChange = function () {
+        if (!musicFileSearch || !musicFileSelect) return;
+
+        const searchTerm = musicFileSearch.value.toLowerCase().trim();
+
+        // Filter options
+        const options = musicFileSelect.querySelectorAll("option");
+        let visibleCount = 0;
+
+        options.forEach((option) => {
+          if (option.value === "") return; // Skip default "Select a music file..." option
+          const fileName = option.textContent.toLowerCase();
+          if (searchTerm === "" || fileName.includes(searchTerm)) {
+            option.style.display = "";
+            visibleCount++;
+          } else {
+            option.style.display = "none";
+          }
+        });
+
+        // Update count display
+        if (musicFileCountDisplay) {
+          if (searchTerm) {
+            musicFileCountDisplay.textContent = `${visibleCount} (filtered)`;
+          } else {
+            musicFileCountDisplay.textContent = audioPlaylist.length;
+          }
+        }
+      };
+
+      // Function to populate music files dropdown
+      function updateMusicFilesDropdown() {
+        if (!musicFileSelect || !musicFilesSection) return;
+
+        // Clear existing options
+        musicFileSelect.innerHTML = "";
+
+        if (audioPlaylist.length === 0) {
+          musicFileSelect.innerHTML = '<option value="">No files selected...</option>';
+          musicFilesSection.style.display = "none";
+          if (musicFileCountDisplay) {
+            musicFileCountDisplay.textContent = "0";
+          }
+          return;
+        }
+
+        // Show the section
+        musicFilesSection.style.display = "block";
+
+        // Add default option
+        musicFileSelect.innerHTML = '<option value="">Select a music file...</option>';
+
+        // Add options for each file
+        audioPlaylist.forEach((file, index) => {
+          const option = document.createElement("option");
+          option.value = index;
+          option.textContent = file.name;
+          if (index === currentPlaylistIndex) {
+            option.selected = true;
+          }
+          musicFileSelect.appendChild(option);
+        });
+
+        // Update count display
+        if (musicFileCountDisplay) {
+          musicFileCountDisplay.textContent = audioPlaylist.length;
+        }
+
+        // Reset search when updating dropdown
+        if (musicFileSearch) {
+          musicFileSearch.value = "";
+        }
+      }
+
+      // System Audio loader
+      window.useSystemAudio = async function () {
+        try {
+          stopAudio();
+          updateStatus("Requesting system audio access...", false);
+
+          // Ensure audio context is running
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+            throw new Error("System audio capture not available in this browser");
+          }
+
+          // Request system audio capture
+          // Note: Some browsers require video: true even for audio-only capture
+          const stream = await navigator.mediaDevices.getDisplayMedia({
+            audio: {
+              echoCancellation: false,
+              noiseSuppression: false,
+              autoGainControl: false,
+            },
+            video: true, // Required by some browsers, we'll only use audio tracks
+          });
+
+          // Check if audio tracks exist
+          const audioTracks = stream.getAudioTracks();
+          if (audioTracks.length === 0) {
+            // Stop video tracks if no audio
+            stream.getVideoTracks().forEach((track) => track.stop());
+            throw new Error("No audio tracks found in capture. Please ensure you select a tab/window with audio.");
+          }
+
+          // Stop video tracks since we only need audio
+          stream.getVideoTracks().forEach((track) => track.stop());
+
+          audioSource = stream;
+          audioNode = audioContext.createMediaStreamSource(stream);
+
+          // Connect to visualizer only (no audible output for system audio)
+          visualizer.connectAudio(audioNode);
+          // Do NOT connect to audioContext.destination - system audio should not play back
+
+          isPlaying = true;
+
+          // Set track info BEFORE updating controls visibility so detection works
+          trackInfo.textContent = "System Audio";
+          updatePlaybackControlsVisibility();
+          updateButtonStates();
+
+          // Handle stream ending (user stops sharing)
+          audioTracks[0].addEventListener("ended", () => {
+            stopAudio();
+            updateStatus("System audio capture stopped", false);
+          });
+
+          updateStatus("Using system audio input", false);
+        } catch (error) {
+          console.error("System audio error:", error);
+          const errorMsg =
+            error.name === "NotAllowedError"
+              ? "System audio access denied. Please allow access and try again."
+              : "System audio capture unavailable: " + error.message;
+          updateStatus(errorMsg, true);
+        }
+      };
+
+      // Update track slider for file playback
+      function updateTrackSlider() {
+        if (audioSource instanceof Audio && audioSource.duration) {
+          const progress = (audioSource.currentTime / audioSource.duration) * 100;
+          trackSlider.value = progress;
+
+          const current = formatTime(audioSource.currentTime);
+          const total = formatTime(audioSource.duration);
+          trackTime.textContent = `${current} / ${total}`;
+        }
+      }
+
+      function formatTime(seconds) {
+        if (!isFinite(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, "0")}`;
+      }
+
+      // Update playback controls visibility
+      function updatePlaybackControlsVisibility() {
+        // Check if system audio is active
+        const isSystemAudio = audioSource instanceof MediaStream && trackInfo && trackInfo.textContent === "System Audio";
+
+        if (audioSource && (audioSource instanceof Audio || audioSource instanceof MediaStream)) {
+          // Hide all playback controls for system audio (no playback controls needed)
+          if (isSystemAudio) {
+            playbackControlsDiv.classList.remove("active");
+            if (window.trackSliderInterval) {
+              clearInterval(window.trackSliderInterval);
+              window.trackSliderInterval = null;
+            }
+            return;
+          }
+
+          // Show controls for other audio sources
+          playbackControlsDiv.classList.add("active");
+
+          // Show track slider only for file playback (not streams or mic)
+          if (audioSource instanceof Audio && audioSource.duration && isFinite(audioSource.duration)) {
+            trackSliderGroup.style.display = "flex";
+            // Update track slider periodically
+            if (!window.trackSliderInterval) {
+              window.trackSliderInterval = setInterval(updateTrackSlider, 100);
+            }
+          } else {
+            trackSliderGroup.style.display = "none";
+            if (window.trackSliderInterval) {
+              clearInterval(window.trackSliderInterval);
+              window.trackSliderInterval = null;
+            }
+          }
+        } else {
+          playbackControlsDiv.classList.remove("active");
+          if (window.trackSliderInterval) {
+            clearInterval(window.trackSliderInterval);
+            window.trackSliderInterval = null;
+          }
+        }
+      }
+
+      // Check WebGL 2.0 support before initialization
+      // Based on Butterchurn's requirements: WebGL 2.0 is required
+      function checkWebGL2Support() {
+        try {
+          const canvas = document.createElement("canvas");
+          const gl = canvas.getContext("webgl2");
+          if (!gl) {
+            return false;
+          }
+          // Check for required WebGL 2.0 features
+          const requiredExtensions = ["EXT_color_buffer_float", "OES_texture_float_linear"];
+          // Basic check - WebGL 2.0 context exists
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function checkSupport() {
+        if (!checkWebGL2Support()) {
+          updateStatus("WebGL 2.0 is not supported in this browser. Please use a modern browser (Chrome, Firefox, Edge, Safari 15+).", true);
+          return false;
+        }
+        return true;
+      }
+
+      // Initialize
+      async function init() {
+        try {
+          // Check browser support
+          if (!checkSupport()) {
+            return;
+          }
+
+          // Set canvas to fullscreen
+          resizeCanvas();
+          window.addEventListener("resize", resizeCanvas);
+
+          // Load presets FIRST, before audio context initialization
+          updateStatus("Loading presets...", false);
+          try {
+            await loadPresets();
+          } catch (err) {
+            console.error("Preset loading failed:", err);
+            updateStatus("Preset loading failed. Check console.", true);
+            // Continue anyway - user can still use the app
+          }
+
+          // Create audio context (handle user interaction requirement)
+          try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Resume audio context if suspended (required for some browsers)
+            if (audioContext.state === "suspended") {
+              await audioContext.resume();
+            }
+          } catch (error) {
+            updateStatus("Failed to create audio context: " + error.message, true);
+            return;
+          }
+
+          // Create visualizer with proper configuration
+          try {
+            // butterchurn is loaded from local ES module, use default export
+            visualizer = butterchurnLib.createVisualizer(audioContext, canvas, {
+              width: canvas.width,
+              height: canvas.height,
+              pixelRatio: window.devicePixelRatio || 1,
+            });
+          } catch (error) {
+            updateStatus("Failed to create visualizer: " + error.message, true);
+            return;
+          }
+
+          // Start render loop
+          render();
+
+          // Load first preset if available
+          if (currentPresets.length > 0 && visualizer) {
+            try {
+              await loadPresetByIndex(0);
+            } catch (presetError) {
+              console.error("Error loading first preset:", presetError);
+            }
+          }
+
+          updateStatus("Ready - Select an audio source to begin", false);
+
+          // Initialize button states
+          updateButtonStates();
+
+          // Set default states for shuffle and auto-advance
+          if (shuffleCheckbox) {
+            shuffleCheckbox.checked = isShuffleEnabled;
+          }
+
+          // Start preset auto-advance if enabled by default
+          if (isPresetAutoAdvance && currentPresets.length > 0) {
+            // Initialize shuffle history if shuffle is enabled
+            if (isShuffleEnabled && currentPresetIndex >= 0) {
+              shuffledPresetHistory = [currentPresetIndex];
+              shuffledHistoryIndex = 0;
+            }
+            // Start auto-advance interval
+            if (presetPlayPauseBtn) {
+              presetPlayPauseBtn.textContent = "⏸ Pause";
+            }
+            presetAutoAdvanceInterval = setInterval(() => {
+              if (isShuffleEnabled) {
+                randomPreset();
+              } else {
+                nextPreset();
+              }
+            }, presetDuration * 1000);
+          }
+        } catch (error) {
+          console.error("Initialization error:", error);
+          updateStatus("Error: " + error.message, true);
+        }
+      }
+
+      function resizeCanvas() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        if (visualizer) {
+          visualizer.setRendererSize(width, height);
+        }
+      }
+
+      async function loadPresets() {
+        try {
+          console.log("Starting preset load...");
+
+          // Add timeout to prevent hanging (increased for large preset files)
+          const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Preset loading timeout")), 30000));
+
+          // Get all presets from butterchurn-presets package
+          // This loads from local JSON file
+          console.log("Calling butterchurnPresets.default.getPresets()...");
+          const presets = await Promise.race([butterchurnPresets.default.getPresets(), timeoutPromise]);
+          console.log("Presets received:", presets ? Object.keys(presets).length + " presets" : "null");
+
+          if (!presets || Object.keys(presets).length === 0) {
+            throw new Error("No presets found");
+          }
+
+          currentPresets = Object.keys(presets);
+          const presetCount = currentPresets.length;
+
+          console.log(`Loaded ${presetCount} presets`);
+          console.log(`[Preset Loader] Total presets in JSON: ${presetCount}`);
+
+          // Populate preset select dropdown (all presets, no limit)
+          if (presetSelect) {
+            presetSelect.innerHTML = '<option value="">Select a preset...</option>';
+            currentPresets.forEach((presetName, index) => {
+              const option = document.createElement("option");
+              option.value = index;
+              option.textContent = presetName;
+              presetSelect.appendChild(option);
+            });
+          }
+          if (presetCountDisplay) {
+            presetCountDisplay.textContent = presetCount;
+          }
+
+          if (presetCount < 500) {
+            console.warn(`[Preset Loader] Warning: Only ${presetCount} presets loaded. Expected ~555. The JSON file may need to be regenerated.`);
+          } else {
+            console.log(`[Preset Loader] ✓ Successfully loaded ${presetCount} presets`);
+          }
+        } catch (error) {
+          console.error("Error loading presets:", error);
+          console.error("Error details:", error.message);
+          console.error("Stack:", error.stack);
+          throw error; // Re-throw so init() can handle it
+        }
+      }
+
+      function loadPreset() {
+        // This function is kept for compatibility but not used with new UI
+      }
+
+      async function loadPresetByIndex(index) {
+        if (index < 0 || index >= currentPresets.length) {
+          console.warn(`Invalid preset index: ${index} (total: ${currentPresets.length})`);
+          return;
+        }
+
+        if (!visualizer) {
+          console.warn("Visualizer not ready yet");
+          updateStatus("Visualizer not ready. Please wait...", true);
+          return;
+        }
+
+        try {
+          console.log(`[Preset] Loading preset at index ${index}...`);
+          const presets = await butterchurnPresets.default.getPresets();
+          const presetName = currentPresets[index];
+          console.log(`[Preset] Preset name: ${presetName}`);
+
+          if (!presets[presetName]) {
+            throw new Error(`Preset "${presetName}" not found in presets object`);
+          }
+
+          const preset = presets[presetName];
+          console.log("[Preset] Preset data:", preset ? "found" : "missing");
+
+          const blendTime = parseFloat(document.getElementById("blend-slider").value);
+          console.log(`[Preset] Loading with blend time: ${blendTime}s`);
+
+          visualizer.loadPreset(preset, blendTime);
+
+          currentPresetIndex = index;
+
+          // Track shuffled preset history
+          if (isShuffleEnabled) {
+            // If we're going forward in history, remove any future items
+            if (shuffledHistoryIndex < shuffledPresetHistory.length - 1) {
+              shuffledPresetHistory = shuffledPresetHistory.slice(0, shuffledHistoryIndex + 1);
+            }
+            // Add current preset to history if it's not already the last one
+            if (shuffledPresetHistory.length === 0 || shuffledPresetHistory[shuffledPresetHistory.length - 1] !== index) {
+              shuffledPresetHistory.push(index);
+              shuffledHistoryIndex = shuffledPresetHistory.length - 1;
+            }
+          } else {
+            // Clear history when shuffle is disabled
+            shuffledPresetHistory = [];
+            shuffledHistoryIndex = -1;
+          }
+
+          // Update preset select dropdown
+          if (presetSelect) {
+            presetSelect.value = index;
+          }
+
+          // Show preset name on overlay (on top of visualization) if checkbox is enabled
+          if (presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
+            presetNameOverlay.textContent = presetName;
+            presetNameOverlay.classList.add("show");
+            // Hide overlay after 3 seconds
+            setTimeout(() => {
+              if (presetNameOverlay) {
+                presetNameOverlay.classList.remove("show");
+              }
+            }, 3000);
+          }
+
+          updateStatus(`Loaded: ${presetName}`, false);
+          console.log("[Preset] Preset loaded successfully");
+        } catch (error) {
+          console.error("[Preset] Error loading preset:", error);
+          console.error("[Preset] Error details:", error.message, error.stack);
+          updateStatus("Error loading preset: " + error.message, true);
+        }
+      }
+
+      function randomPreset() {
+        if (currentPresets.length === 0) return;
+        let randomIndex;
+        // Avoid repeating the same preset if possible
+        do {
+          randomIndex = Math.floor(Math.random() * currentPresets.length);
+        } while (randomIndex === currentPresetIndex && currentPresets.length > 1);
+        loadPresetByIndex(randomIndex);
+      }
+
+      function nextPreset() {
+        if (currentPresets.length === 0) return;
+        if (isShuffleEnabled) {
+          // Check if we can go forward in history
+          if (shuffledHistoryIndex < shuffledPresetHistory.length - 1) {
+            // Go forward in history
+            shuffledHistoryIndex++;
+            loadPresetByIndex(shuffledPresetHistory[shuffledHistoryIndex]);
+          } else {
+            // Generate new random preset and add to history
+            randomPreset();
+          }
+        } else {
+          const nextIndex = (currentPresetIndex + 1) % currentPresets.length;
+          loadPresetByIndex(nextIndex);
+        }
+      }
+
+      function previousPreset() {
+        if (currentPresets.length === 0) return;
+        if (isShuffleEnabled) {
+          // Go back in shuffled history
+          if (shuffledHistoryIndex > 0) {
+            shuffledHistoryIndex--;
+            loadPresetByIndex(shuffledPresetHistory[shuffledHistoryIndex]);
+          } else {
+            // Already at the beginning of history
+            console.log("[Preset] Already at the beginning of shuffled history");
+          }
+        } else {
+          const prevIndex = (currentPresetIndex - 1 + currentPresets.length) % currentPresets.length;
+          loadPresetByIndex(prevIndex);
+        }
+      }
+
+      function updateBlendTime(value) {
+        document.getElementById("blend-value").textContent = value + "s";
+      }
+
+      window.updatePresetDuration = function (value) {
+        presetDuration = parseFloat(value);
+        document.getElementById("preset-duration-value").textContent = value + "s";
+        // Restart interval with new duration if auto-advance is active
+        if (isPresetAutoAdvance && presetAutoAdvanceInterval) {
+          clearInterval(presetAutoAdvanceInterval);
+          presetAutoAdvanceInterval = setInterval(() => {
+            if (isShuffleEnabled) {
+              randomPreset();
+            } else {
+              nextPreset();
+            }
+          }, presetDuration * 1000);
+        }
+      };
+
+      async function useMicrophone() {
+        try {
+          stopAudio();
+          updateStatus("Requesting microphone access...", false);
+
+          // Ensure audio context is running
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error("Microphone access not available in this browser");
+          }
+
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          audioSource = stream;
+          audioNode = audioContext.createMediaStreamSource(stream);
+
+          visualizer.connectAudio(audioNode);
+          // Connect to destination for audible output (optional for mic, but good for monitoring)
+          audioNode.connect(audioContext.destination);
+          isPlaying = true;
+
+          updatePlaybackControlsVisibility();
+          playPauseBtn.textContent = "⏸ Pause";
+          trackInfo.textContent = "Microphone Input";
+          updateButtonStates();
+
+          updateStatus("Using microphone input", false);
+        } catch (error) {
+          console.error("Microphone error:", error);
+          const errorMsg =
+            error.name === "NotAllowedError"
+              ? "Microphone access denied. Please allow access and try again."
+              : "Microphone access unavailable: " + error.message;
+          updateStatus(errorMsg, true);
+        }
+      }
+
+      // Load internet stream (optimized for radio streams like Bassdrive)
+      async function loadStream() {
+        const url = streamInput.value.trim();
+        if (!url) {
+          updateStatus("Please enter a stream URL", true);
+          return;
+        }
+
+        await loadStreamFromURL(url);
+      }
+
+      // Radio stations configuration
+      const radioStations = {
+        bassdrive: {
+          name: "Bassdrive Radio",
+          url: "http://ice.bassdrive.net:80/stream",
+          homepage: "https://bassdrive.com/",
+        },
+        subfm: {
+          name: "Sub FM",
+          url: "https://streamlive1.hearthis.at:8000/9061142.ogg",
+          homepage: "https://sub.fm/",
+        },
+        hardcorepower: {
+          name: "Hardcore Power",
+          url: "https://hardcorepower.beheerstream.nl/8012/stream",
+          homepage: "https://www.hardcorepower.nl/",
+        },
+        "radio538-dance": {
+          name: "Radio 538 – Dance Department",
+          url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR01.mp3",
+          homepage: "https://www.538.nl/",
+        },
+        "radio538-ibiza": {
+          name: "Radio 538 – Ibiza",
+          url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR19.mp3",
+          homepage: "https://www.538.nl/",
+        },
+        "radio538-party": {
+          name: "Radio 538 – Party",
+          url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR16.mp3",
+          homepage: "https://www.538.nl/",
+        },
+        "kissfm-nl": {
+          name: "Kiss FM NL – Dance / Club",
+          url: "https://stream.kissfm.nl/kissfm",
+          homepage: "https://www.kissfm.nl/",
+        },
+        "pinguin-radio": {
+          name: "Pinguin Radio (Indie)",
+          url: "https://streams.pinguinradio.com/PinguinRadio320.mp3",
+          homepage: "https://pinguinradio.com/",
+        },
+        "dnbradio-main-mp3": {
+          name: "DNBRadio - Main Channel (320K MP3 US)",
+          url: "https://azura.drmnbss.org/listen/dnbradio/radio.mp3",
+          homepage: "https://dnbradio.com/",
+        },
+        "dnbradio-plush": {
+          name: "DNBRadio - Plush Recordings Channel",
+          url: "https://azura.drmnbss.org/listen/plushrecs/radio.mp3",
+          homepage: "https://dnbradio.com/",
+        },
+        "dnbradio-section8": {
+          name: "DNBRadio - Section 8 Recordings Channel",
+          url: "https://azura.drmnbss.org/listen/section8recs/radio.mp3",
+          homepage: "https://dnbradio.com/",
+        },
+        "dnbradio-darkstep": {
+          name: "DNBRadio - Darkstep Channel",
+          url: "https://azura.drmnbss.org/listen/darkstep/radio.mp3",
+          homepage: "https://dnbradio.com/",
+        },
+      };
+
+      // Station select handler
+      window.onStationSelect = function () {
+        const stationSelect = document.getElementById("station-select");
+        const customUrlContainer = document.getElementById("custom-url-container");
+        const streamInput = document.getElementById("stream-input");
+        const stationHomepageLink = document.getElementById("station-homepage-link");
+        const stationHomepageBtn = document.getElementById("station-homepage-btn");
+
+        const selectedValue = stationSelect.value;
+
+        if (selectedValue === "custom") {
+          customUrlContainer.style.display = "block";
+          stationHomepageLink.style.display = "none";
+        } else if (selectedValue && radioStations[selectedValue]) {
+          customUrlContainer.style.display = "none";
+          const station = radioStations[selectedValue];
+          streamInput.value = station.url;
+
+          // Show homepage link if available
+          if (station.homepage) {
+            stationHomepageBtn.href = station.homepage;
+            stationHomepageLink.style.display = "block";
+          } else {
+            stationHomepageLink.style.display = "none";
+          }
+
+          loadStreamFromURL(station.url, station.name);
+        } else {
+          customUrlContainer.style.display = "none";
+          stationHomepageLink.style.display = "none";
+        }
+      };
+
+      // Load Bassdrive stream (kept for backward compatibility)
+      async function loadBassdrive() {
+        const station = radioStations["bassdrive"];
+        const stationSelect = document.getElementById("station-select");
+        if (stationSelect) {
+          stationSelect.value = "bassdrive";
+        }
+        await loadStreamFromURL(station.url, station.name);
+      }
+
+      // Parse M3U playlist to get actual stream URL
+      async function parseM3UPlaylist(m3uUrl) {
+        try {
+          const response = await fetch(m3uUrl);
+          const text = await response.text();
+          const lines = text.split("\n");
+
+          // M3U format: #EXTINF followed by URL
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line && !line.startsWith("#") && line.startsWith("http")) {
+              return line;
+            }
+          }
+
+          // If no URL found, return original
+          return m3uUrl;
+        } catch (error) {
+          console.warn("Could not parse M3U playlist, using original URL:", error);
+          return m3uUrl;
+        }
+      }
+
+      // Parse PLS playlist to get actual stream URL
+      async function parsePLSPlaylist(plsUrl) {
+        try {
+          const response = await fetch(plsUrl);
+          const text = await response.text();
+          const lines = text.split("\n");
+
+          // PLS format: File1=http://...
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line.toLowerCase().startsWith("file1=")) {
+              const url = line.substring(6).trim();
+              if (url.startsWith("http")) {
+                return url;
+              }
+            }
+          }
+
+          // If no URL found, return original
+          return plsUrl;
+        } catch (error) {
+          console.warn("Could not parse PLS playlist, using original URL:", error);
+          return plsUrl;
+        }
+      }
+
+      // Generic stream loader with better error handling for streams
+      async function loadStreamFromURL(url, streamName = "Stream") {
+        try {
+          stopAudio();
+          updateStatus(`Connecting to ${streamName}...`, false);
+
+          // Ensure audio context is running
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          // Check if URL is a playlist file and parse it
+          let streamURL = url;
+          const urlLower = url.toLowerCase();
+          if (urlLower.endsWith(".m3u") || urlLower.endsWith(".m3u8")) {
+            updateStatus(`Parsing M3U playlist for ${streamName}...`, false);
+            streamURL = await parseM3UPlaylist(url);
+          } else if (urlLower.endsWith(".pls")) {
+            updateStatus(`Parsing PLS playlist for ${streamName}...`, false);
+            streamURL = await parsePLSPlaylist(url);
+          }
+
+          const audio = new Audio();
+
+          // For streams, we need to handle CORS and allow preload
+          // Note: Some streams may not support CORS, which will cause issues
+          audio.crossOrigin = "anonymous";
+          audio.preload = "auto";
+
+          // Set the stream URL
+          audio.src = streamURL;
+
+          // Handle stream loading
+          let loaded = false;
+
+          audio.addEventListener("loadstart", () => {
+            updateStatus(`Loading ${streamName}...`, false);
+          });
+
+          audio.addEventListener("loadedmetadata", () => {
+            updateStatus(`${streamName} metadata loaded`, false);
+          });
+
+          audio.addEventListener("canplay", async () => {
+            if (loaded) return;
+            loaded = true;
+
+            try {
+              audioSource = audio;
+              audioNode = audioContext.createMediaElementSource(audio);
+              visualizer.connectAudio(audioNode);
+              // Connect to destination for audible output (required when using createMediaElementSource)
+              audioNode.connect(audioContext.destination);
+              await audio.play();
+              isPlaying = true;
+
+              updatePlaybackControlsVisibility();
+              playPauseBtn.textContent = "⏸ Pause";
+              trackInfo.textContent = streamName;
+              updateButtonStates();
+
+              updateStatus(`Playing: ${streamName}`, false);
+            } catch (playError) {
+              console.error("Play error:", playError);
+              updateStatus("Error playing stream: " + playError.message, true);
+            }
+          });
+
+          audio.addEventListener("playing", () => {
+            updateStatus(`Playing: ${streamName}`, false);
+          });
+
+          audio.addEventListener("waiting", () => {
+            updateStatus(`Buffering ${streamName}...`, false);
+          });
+
+          audio.addEventListener("stalled", () => {
+            updateStatus(`Stream stalled, reconnecting...`, false);
+          });
+
+          audio.addEventListener("error", (e) => {
+            let errorMsg = "Error loading stream. ";
+            if (audio.error) {
+              errorMsg += `Error ${audio.error.code}: ${getAudioErrorText(audio.error.code)}. `;
+            }
+            errorMsg += "Note: Some streams may have CORS restrictions. Try a different stream URL or use a CORS proxy.";
+            updateStatus(errorMsg, true);
+            console.error("Stream error:", audio.error, e);
+          });
+
+          // Try to load the stream
+          audio.load();
+        } catch (error) {
+          console.error("Stream loading error:", error);
+          updateStatus("Error: " + error.message, true);
+        }
+      }
+
+      function getAudioErrorText(code) {
+        const errorCodes = {
+          1: "MEDIA_ERR_ABORTED",
+          2: "MEDIA_ERR_NETWORK",
+          3: "MEDIA_ERR_DECODE",
+          4: "MEDIA_ERR_SRC_NOT_SUPPORTED",
+        };
+        return errorCodes[code] || "Unknown error";
+      }
+
+      // File input handler with playlist support
+      const fileInput = document.getElementById("file-input-hidden");
+
+      function updatePlaylistView() {
+        // Update music files dropdown
+        updateMusicFilesDropdown();
+
+        // Playlist view UI not implemented - return early to prevent errors
+        if (!playlistItems || !playlistView || !playlistCount) {
+          return;
+        }
+
+        playlistItems.innerHTML = "";
+        if (audioPlaylist.length === 0) {
+          playlistView.style.display = "none";
+          return;
+        }
+        playlistView.style.display = "block";
+        playlistCount.textContent = audioPlaylist.length;
+
+        audioPlaylist.forEach((file, index) => {
+          const item = document.createElement("div");
+          item.style.cssText = "display: flex; align-items: center; gap: 10px; padding: 5px; background: rgba(255,255,255,0.05); border-radius: 4px;";
+          item.innerHTML = `
+                    <span style="flex: 1; color: ${
+                      index === currentPlaylistIndex ? "#4ade80" : "white"
+                    }; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
+                    <button onclick="removeFromPlaylist(${index})" style="padding: 4px 8px; background: rgba(255,0,0,0.3); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">×</button>
+                    <button onclick="loadPlaylistFileAtIndex(${index})" style="padding: 4px 8px; background: rgba(102,126,234,0.5); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Play</button>
+                `;
+          playlistItems.appendChild(item);
+        });
+      }
+
+      window.removeFromPlaylist = function (index) {
+        if (index === currentPlaylistIndex && audioSource instanceof Audio) {
+          stopAudio();
+        }
+        audioPlaylist.splice(index, 1);
+        if (currentPlaylistIndex >= audioPlaylist.length) {
+          currentPlaylistIndex = audioPlaylist.length - 1;
+        }
+        if (currentPlaylistIndex < 0) {
+          currentPlaylistIndex = -1;
+        }
+        updatePlaylistView();
+      };
+
+      window.loadPlaylistFileAtIndex = function (index) {
+        if (index >= 0 && index < audioPlaylist.length) {
+          loadPlaylistFile(audioPlaylist[index], index);
+        }
+      };
+
+      async function loadPlaylistFile(file, index) {
+        try {
+          stopAudio();
+          updateStatus("Loading audio file...", false);
+
+          // Ensure audio context is running
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          const url = URL.createObjectURL(file);
+          const audio = new Audio();
+          audio.src = url;
+
+          audio.addEventListener("canplay", async () => {
+            try {
+              audioSource = audio;
+              currentAudioFile = file;
+              currentPlaylistIndex = index;
+              audioNode = audioContext.createMediaElementSource(audio);
+              visualizer.connectAudio(audioNode);
+              // Connect to destination for audible output (required when using createMediaElementSource)
+              audioNode.connect(audioContext.destination);
+              await audio.play();
+              isPlaying = true;
+
+              updatePlaybackControlsVisibility();
+              playPauseBtn.textContent = "⏸ Pause";
+              trackInfo.textContent = file.name;
+              updateButtonStates();
+
+              // Set up track slider
+              audio.addEventListener("timeupdate", updateTrackSlider);
+              audio.addEventListener("loadedmetadata", () => {
+                trackSlider.max = 100;
+                updateTrackSlider();
+              });
+
+              // Auto-advance to next track when current track ends
+              audio.addEventListener("ended", () => {
+                URL.revokeObjectURL(url);
+                if (currentPlaylistIndex < audioPlaylist.length - 1) {
+                  nextTrack();
+                }
+              });
+
+              updatePlaylistView();
+              // Update dropdown selection
+              if (musicFileSelect) {
+                musicFileSelect.value = index;
+              }
+              updateStatus(`Playing: ${file.name}`, false);
+            } catch (playError) {
+              console.error("Play error:", playError);
+              updateStatus("Error playing audio: " + playError.message, true);
+            }
+          });
+
+          audio.addEventListener("error", (e) => {
+            const errorMsg = audio.error ? `Error ${audio.error.code}: ${getAudioErrorText(audio.error.code)}` : "Error loading audio file";
+            updateStatus(errorMsg, true);
+          });
+        } catch (error) {
+          console.error("File audio error:", error);
+          updateStatus("Error: " + error.message, true);
+        }
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener("change", async (e) => {
+          const files = Array.from(e.target.files);
+          if (files.length === 0) return;
+
+          // Check if any files are PLS/M3U playlist files
+          for (const file of files) {
+            const fileName = file.name.toLowerCase();
+            if (fileName.endsWith(".pls") || fileName.endsWith(".m3u") || fileName.endsWith(".m3u8")) {
+              // Load as playlist file (for radio streams)
+              const fileUrl = URL.createObjectURL(file);
+              try {
+                if (fileName.endsWith(".pls")) {
+                  const text = await file.text();
+                  const lines = text.split("\n");
+                  for (const line of lines) {
+                    const trimmed = line.trim();
+                    if (trimmed.toLowerCase().startsWith("file1=")) {
+                      const streamUrl = trimmed.substring(6).trim();
+                      if (streamUrl.startsWith("http")) {
+                        await loadStreamFromURL(streamUrl, file.name.replace(/\.(pls|m3u|m3u8)$/i, ""));
+                        URL.revokeObjectURL(fileUrl);
+                        // Reset file input so same file can be selected again
+                        e.target.value = "";
+                        return;
+                      }
+                    }
+                  }
+                } else {
+                  // M3U file
+                  const text = await file.text();
+                  const lines = text.split("\n");
+                  for (const line of lines) {
+                    const trimmed = line.trim();
+                    if (trimmed && !trimmed.startsWith("#") && trimmed.startsWith("http")) {
+                      await loadStreamFromURL(trimmed, file.name.replace(/\.(pls|m3u|m3u8)$/i, ""));
+                      URL.revokeObjectURL(fileUrl);
+                      // Reset file input so same file can be selected again
+                      e.target.value = "";
+                      return;
+                    }
+                  }
+                }
+              } catch (error) {
+                console.error("Error loading playlist file:", error);
+                updateStatus("Error loading playlist file: " + error.message, true);
+              }
+              URL.revokeObjectURL(fileUrl);
+              // Reset file input so same file can be selected again
+              e.target.value = "";
+              return;
+            }
+          }
+
+          // Add audio files to playlist
+          audioPlaylist = [...audioPlaylist, ...files];
+          updatePlaylistView();
+
+          // Load first file if playlist was empty
+          if (currentPlaylistIndex < 0 && audioPlaylist.length > 0) {
+            loadPlaylistFile(audioPlaylist[0], 0);
+          } else if (audioPlaylist.length === files.length) {
+            // If this is a new playlist (no existing files), load first file
+            loadPlaylistFile(audioPlaylist[0], 0);
+          }
+
+          // Reset file input value so same files can be selected again
+          e.target.value = "";
+        });
+      }
+
+      function stopAudio() {
+        if (audioSource) {
+          if (audioSource instanceof MediaStream) {
+            audioSource.getTracks().forEach((track) => track.stop());
+          } else if (audioSource instanceof Audio) {
+            audioSource.pause();
+            audioSource.currentTime = 0;
+            if (audioSource.src && audioSource.src.startsWith("blob:")) {
+              URL.revokeObjectURL(audioSource.src);
+            }
+            audioSource.src = "";
+          }
+          audioSource = null;
+        }
+
+        if (audioNode) {
+          try {
+            audioNode.disconnect();
+          } catch (e) {
+            // Node may already be disconnected
+          }
+          audioNode = null;
+        }
+
+        if (window.trackSliderInterval) {
+          clearInterval(window.trackSliderInterval);
+          window.trackSliderInterval = null;
+        }
+
+        isPlaying = false;
+        currentAudioFile = null;
+        currentPlaylistIndex = -1;
+        updatePlaybackControlsVisibility();
+        updateButtonStates(); // Update button states after stopping
+        updateStatus("Audio stopped", false);
+      }
+
+      // Update button states based on audio source
+      function updateButtonStates() {
+        const hasAudio = audioSource !== null;
+
+        // Gray out start buttons if audio is playing
+        if (startSystemAudioBtn) {
+          startSystemAudioBtn.disabled = hasAudio;
+          startSystemAudioBtn.style.opacity = hasAudio ? "0.5" : "1";
+          startSystemAudioBtn.style.cursor = hasAudio ? "not-allowed" : "pointer";
+        }
+
+        if (startMicrophoneBtn) {
+          startMicrophoneBtn.disabled = hasAudio;
+          startMicrophoneBtn.style.opacity = hasAudio ? "0.5" : "1";
+          startMicrophoneBtn.style.cursor = hasAudio ? "not-allowed" : "pointer";
+        }
+
+        // Gray out stop button if audio is stopped
+        if (stopAudioBtn) {
+          stopAudioBtn.disabled = !hasAudio;
+          stopAudioBtn.style.opacity = hasAudio ? "1" : "0.5";
+          stopAudioBtn.style.cursor = hasAudio ? "pointer" : "not-allowed";
+        }
+      }
+
+      function updateStatus(message, isError) {
+        // Always log to console
+        if (isError) {
+          console.error("[Status]", message);
+        } else {
+          console.log("[Status]", message);
+        }
+
+        // Only show error messages in the status element
+        if (isError) {
+          statusEl.textContent = message;
+          statusEl.className = "status error";
+          statusEl.style.display = "block";
+        } else {
+          // Hide status element for non-error messages
+          statusEl.style.display = "none";
+        }
+      }
+
+      function render() {
+        if (visualizer) {
+          try {
+            visualizer.render();
+          } catch (error) {
+            console.error("Render error:", error);
+          }
+        }
+        renderAnimationFrame = requestAnimationFrame(render);
+      }
+
+      // Cleanup on page unload
+      window.addEventListener("beforeunload", () => {
+        if (renderAnimationFrame) {
+          cancelAnimationFrame(renderAnimationFrame);
+        }
+        stopAudio();
+        if (visualizer) {
+          // Cleanup visualizer resources if needed
+        }
+      });
+
+      // Toggle Audio Source panel
+      function toggleAudioSourcePanel() {
+        const audioPanel = document.getElementById("audio-source-panel");
+        audioPanel.classList.toggle("hidden");
+      }
+
+      // Toggle Presets panel
+      function togglePresetsPanel() {
+        const presetsPanel = document.getElementById("presets-panel");
+        presetsPanel.classList.toggle("hidden");
+      }
+
+      // Toggle controls visibility (for both panels) - kept for keyboard shortcut
+      function toggleControls() {
+        toggleAudioSourcePanel();
+        togglePresetsPanel();
+      }
+
+      // Make functions globally available
+      // Assign after functions are defined
+      window.loadPreset = loadPreset;
+      window.randomPreset = randomPreset;
+      window.nextPreset = nextPreset;
+      window.previousPreset = previousPreset;
+      window.useMicrophone = useMicrophone;
+      window.loadStream = loadStream;
+      window.loadBassdrive = loadBassdrive;
+      window.stopAudio = stopAudio;
+      window.updateBlendTime = updateBlendTime;
+      window.toggleControls = toggleControls;
+
+      // Keyboard shortcut to toggle panels (H key)
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "h" || e.key === "H") {
+          if (!e.ctrlKey && !e.altKey && !e.metaKey) {
+            toggleControls();
+          }
+        }
+      });
+
+      // Initialize on load (with user interaction requirement for audio)
+      // Some browsers require user interaction before audio can play
+      document.addEventListener(
+        "click",
+        () => {
+          if (audioContext && audioContext.state === "suspended") {
+            audioContext.resume();
+          }
+        },
+        { once: true }
+      );
+
+      // Initialize on load
+      init();
+
+      // Initialize button states on page load
+      updateButtonStates();
+    </script>
+  </body>
+</html>

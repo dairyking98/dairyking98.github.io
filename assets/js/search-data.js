@@ -86,7 +86,25 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/differential-growth/";
               },
-            },{id: "post-my-phd-application-journey",
+            },{id: "dropdown-music-visualizer",
+              title: "music visualizer",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/music-visualizer/";
+              },
+            },{id: "post-music-visualizer-instant-milkdrop-in-your-browser",
+        
+          title: "Music Visualizer - Instant Milkdrop in Your Browser",
+        
+        description: "A browser-ready music visualizer powered by Butterchurn, bringing the classic Milkdrop experience to internet radio and your own music files.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/music-visualizer/";
+          
+        },
+      },{id: "post-my-phd-application-journey",
         
           title: "My PhD Application Journey",
         
