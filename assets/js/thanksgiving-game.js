@@ -80,7 +80,7 @@ const categories = {
     "with casual shoulder shrugs",
     "with rolling eyes",
     "with chaotic jazz hands",
-  
+
     // Medium
     "with unhinged giggling",
     "with sarcastic finger guns",
@@ -91,7 +91,7 @@ const categories = {
     "with fussy shirt tugging",
     "with dramatic hand flailing",
     "with intense nose-scrunching",
-  
+
     // Chaotic / R-lite
     "with feral hand gestures",
     "with zero-patience eyebrow raises",
@@ -101,9 +101,8 @@ const categories = {
     "with aggressive head shaking",
     "with exaggerated lip pursing",
     "with tense jaw clenching",
-    "with wild double-takes"
+    "with wild double-takes",
   ],
-  
 
   mundaneAction: [
     // Mild / basic physical actions
