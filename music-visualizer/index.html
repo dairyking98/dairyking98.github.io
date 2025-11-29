@@ -1,5 +1,4 @@
-﻿<!-- Source: musicviz2/index.html - Update by copying from source repo and updating import paths -->
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -508,7 +507,7 @@
       <!-- File Upload Controls -->
       <div id="file-upload-controls" class="conditional-controls">
         <label for="file-input-hidden" class="file-label" style="width: 100%; text-align: center; display: block; cursor: pointer"
-          >Choose Audio File</label
+          >Upload Audio Files</label
         >
         <input type="file" id="file-input-hidden" accept="audio/*,.pls,.m3u,.m3u8" multiple style="display: none" />
 
@@ -551,7 +550,7 @@
 
       <button
         id="stop-audio-btn"
-        onclick="stopAudio()"
+        onclick="handleStopPlayAudio()"
         style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 100%; margin-top: 10px"
       >
         Stop Audio
@@ -576,9 +575,19 @@
           style="margin-bottom: 10px; width: 100%"
           oninput="onPresetSearchChange()"
         />
-        <select id="preset-select" onchange="onPresetSelectChange()" style="margin-bottom: 10px">
-          <option value="">Loading presets...</option>
-        </select>
+        <div style="display: flex; gap: 5px; margin-bottom: 10px; align-items: center">
+          <select id="preset-select" onchange="onPresetSelectChange()" style="flex: 1">
+            <option value="">Loading presets...</option>
+          </select>
+          <button
+            onclick="toggleBlacklistCurrentPreset()"
+            id="blacklist-btn"
+            title="Disable/Enable preset in rotation"
+            style="padding: 10px 20px; font-size: 14px; flex-shrink: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          >
+            Disable
+          </button>
+        </div>
 
         <div class="playback-controls">
           <button onclick="previousPreset()" style="flex: 1">⏮ Previous</button>
@@ -690,6 +699,10 @@
       let audioContext = null;
       let audioSource = null;
       let audioNode = null;
+      let gainNode = null; // Gain node for volume control
+      let currentAudioElement = null; // Track current audio element for event handler validation
+      let lastStreamURL = null; // Store last stream URL for resume functionality
+      let lastStreamName = null; // Store last stream name for resume functionality
       let currentPresets = [];
       let currentPresetIndex = 0;
       let isPlaying = false;
@@ -703,6 +716,139 @@
       let currentAudioFile = null;
       let audioPlaylist = [];
       let currentPlaylistIndex = -1;
+      let presetLoaded = false; // Track if default preset has been loaded
+
+      // Presets removed from rotation - stored in localStorage
+      let presetsRemovedFromRotation = [];
+      const ROTATION_STORAGE_KEY = "butterchurn-preset-rotation";
+
+      // Initialize rotation list from localStorage
+      function initializeRotation() {
+        try {
+          const stored = localStorage.getItem(ROTATION_STORAGE_KEY);
+          if (stored) {
+            presetsRemovedFromRotation = JSON.parse(stored);
+          } else {
+            // Start with empty - all presets enabled by default
+            presetsRemovedFromRotation = [];
+          }
+          console.log(`[Rotation] Loaded ${presetsRemovedFromRotation.length} presets removed from rotation`);
+        } catch (error) {
+          console.error("[Rotation] Error loading rotation list:", error);
+          presetsRemovedFromRotation = [];
+        }
+      }
+
+      // Save rotation list to localStorage
+      function saveRotation() {
+        try {
+          localStorage.setItem(ROTATION_STORAGE_KEY, JSON.stringify(presetsRemovedFromRotation));
+        } catch (error) {
+          console.error("[Rotation] Error saving rotation list:", error);
+        }
+      }
+
+      // Export rotation list to console
+      window.exportRotation = function () {
+        console.log("=== PRESETS REMOVED FROM ROTATION ===");
+        console.log("Copy this array:");
+        console.log(JSON.stringify(presetsRemovedFromRotation, null, 2));
+        console.log(`Total presets removed from rotation: ${presetsRemovedFromRotation.length}`);
+        return presetsRemovedFromRotation;
+      };
+
+      // Toggle rotation status for current preset
+      window.toggleBlacklistCurrentPreset = async function () {
+        // Get current preset name - check dropdown first (most reliable)
+        let presetName = null;
+        if (presetSelect && presetSelect.value) {
+          presetName = presetSelect.value;
+        } else if (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+          presetName = currentPresets[currentPresetIndex];
+        } else {
+          // Try to get from all presets if current index is invalid
+          try {
+            const presets = await butterchurnPresets.default.getPresets();
+            const allPresets = Object.keys(presets);
+            // If preset is disabled, it won't be in currentPresets, so check all presets
+            if (currentPresetIndex >= 0) {
+              // Try to get from all presets using a stored name
+              const storedName = localStorage.getItem("lastLoadedPreset");
+              if (storedName && allPresets.includes(storedName)) {
+                presetName = storedName;
+              }
+            }
+          } catch (e) {
+            console.error("[Blacklist] Error getting preset name:", e);
+          }
+        }
+
+        if (!presetName) {
+          updateStatus("No preset selected", true);
+          return;
+        }
+
+        const index = presetsRemovedFromRotation.indexOf(presetName);
+
+        if (index === -1) {
+          // Remove from rotation
+          presetsRemovedFromRotation.push(presetName);
+          updateStatus(`Removed from rotation: ${presetName}`, false);
+          console.log(`[Rotation] Removed "${presetName}" from rotation`);
+        } else {
+          // Add back to rotation
+          presetsRemovedFromRotation.splice(index, 1);
+          updateStatus(`Added to rotation: ${presetName}`, false);
+          console.log(`[Rotation] Added "${presetName}" to rotation`);
+        }
+
+        saveRotation();
+
+        // Reload presets to update dropdown - but don't switch presets
+        await reloadPresetsWithRotation();
+
+        // Update button - keep current preset loaded
+        updateBlacklistButton();
+      };
+
+      // Update rotation button appearance
+      async function updateBlacklistButton() {
+        const blacklistBtn = document.getElementById("blacklist-btn");
+        if (!blacklistBtn) {
+          return;
+        }
+
+        // Get current preset name - check from select dropdown or currentPresets
+        let presetName = null;
+        if (presetSelect && presetSelect.value) {
+          presetName = presetSelect.value;
+        } else if (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+          presetName = currentPresets[currentPresetIndex];
+        }
+
+        if (!presetName) {
+          blacklistBtn.disabled = true;
+          blacklistBtn.style.opacity = "0.5";
+          blacklistBtn.title = "No preset selected";
+          blacklistBtn.textContent = "Enable";
+          return;
+        }
+
+        blacklistBtn.disabled = false;
+        blacklistBtn.style.opacity = "1";
+
+        const isRemovedFromRotation = presetsRemovedFromRotation.includes(presetName);
+
+        if (isRemovedFromRotation) {
+          blacklistBtn.style.background = "linear-gradient(135deg, #f5576c 0%, #f093fb 100%)";
+          blacklistBtn.textContent = "Enable";
+          blacklistBtn.title = `Enable in rotation: ${presetName}`;
+        } else {
+          blacklistBtn.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+          blacklistBtn.textContent = "Disable";
+          blacklistBtn.title = `Disable from rotation: ${presetName}`;
+        }
+      }
 
       const canvas = document.getElementById("canvas");
       const statusEl = document.getElementById("status");
@@ -710,6 +856,9 @@
       const audioSourceTypeSelect = document.getElementById("audio-source-type");
       const playbackControlsDiv = document.getElementById("playback-controls");
       const playPauseBtn = document.getElementById("play-pause-btn");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+      const playbackControlsRow = document.querySelector(".playback-controls"); // The row with prev/play/next buttons
       const volumeSlider = document.getElementById("volume-slider");
       const volumeValue = document.getElementById("volume-value");
       const trackSlider = document.getElementById("track-slider");
@@ -743,6 +892,13 @@
         }
       });
 
+      // Update button states when custom URL input changes
+      if (streamInput) {
+        streamInput.addEventListener("input", () => {
+          updateButtonStates();
+        });
+      }
+
       // Audio source type change handler
       window.onAudioSourceTypeChange = function () {
         const sourceType = audioSourceTypeSelect.value;
@@ -761,6 +917,13 @@
         switch (sourceType) {
           case "internet-stream":
             document.getElementById("internet-stream-controls").classList.add("active");
+            // Reset play/pause button for internet stream (will be shown when stream loads)
+            if (playPauseBtn) {
+              playPauseBtn.textContent = "▶ Play";
+              playPauseBtn.disabled = false;
+              playPauseBtn.style.opacity = "1";
+              playPauseBtn.style.cursor = "pointer";
+            }
             break;
           case "system-audio":
             document.getElementById("system-audio-controls").classList.add("active");
@@ -773,8 +936,14 @@
             break;
         }
 
-        // Update button states
+        // Update button states and playback controls visibility
         updateButtonStates();
+        updatePlaybackControlsVisibility();
+
+        // Ensure volume slider is visible for internet-stream on startup
+        if (sourceType === "internet-stream") {
+          updatePlaybackControlsVisibility();
+        }
       };
 
       // Fullscreen toggle
@@ -952,9 +1121,15 @@
 
       // Volume control
       window.updateVolume = function (value) {
-        if (audioSource instanceof Audio) {
-          audioSource.volume = value / 100;
+        const volume = value / 100;
+
+        // Use gain node if available, otherwise fall back to audio element volume
+        if (gainNode) {
+          gainNode.gain.value = volume;
+        } else if (audioSource instanceof Audio) {
+          audioSource.volume = volume;
         }
+
         volumeValue.textContent = value + "%";
       };
 
@@ -1000,6 +1175,13 @@
           presetPlayPauseBtn.textContent = "⏸ Pause";
           // Auto-advance presets based on duration slider
           presetAutoAdvanceInterval = setInterval(() => {
+            // Check if current preset is disabled - if so, don't auto-switch
+            const currentPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
+            if (currentPresetName && presetsRemovedFromRotation.includes(currentPresetName)) {
+              // Current preset is disabled - don't auto-switch away
+              return;
+            }
+
             if (isShuffleEnabled) {
               randomPreset();
             } else {
@@ -1051,12 +1233,69 @@
       };
 
       // Preset select dropdown handler
-      window.onPresetSelectChange = function () {
-        const selectedIndex = parseInt(presetSelect.value);
-        if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < currentPresets.length) {
-          loadPresetByIndex(selectedIndex);
-        }
+      window.onPresetSelectChange = async function () {
+        const selectedValue = presetSelect.value;
+        if (!selectedValue) return;
+
+        // Allow loading any preset by name (including blacklisted ones for manual selection)
+        const presetName = selectedValue; // Now stores actual preset name
+        await loadPresetByName(presetName);
+        updateBlacklistButton();
       };
+
+      // Load preset by name (allows any preset for manual selection, even if removed from rotation)
+      async function loadPresetByName(presetName) {
+        if (!visualizer) {
+          console.warn("Visualizer not ready yet");
+          updateStatus("Visualizer not ready. Please wait...", true);
+          return;
+        }
+
+        try {
+          console.log(`[Preset] Loading preset by name: ${presetName}...`);
+          const presets = await butterchurnPresets.default.getPresets();
+
+          if (!presets[presetName]) {
+            throw new Error(`Preset "${presetName}" not found in presets object`);
+          }
+
+          const preset = presets[presetName];
+          const blendTime = parseFloat(document.getElementById("blend-slider").value);
+
+          visualizer.loadPreset(preset, blendTime);
+
+          // Update current preset index if it's in currentPresets
+          const index = currentPresets.indexOf(presetName);
+          if (index >= 0) {
+            currentPresetIndex = index;
+          } else {
+            // Preset is removed from rotation, set index to -1 but keep the name
+            currentPresetIndex = -1;
+          }
+
+          // Update preset select dropdown
+          if (presetSelect) {
+            presetSelect.value = presetName; // Set value directly to preset name
+          }
+
+          // Show preset name on overlay if checkbox is enabled
+          if (presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
+            presetNameOverlay.textContent = presetName;
+            presetNameOverlay.classList.add("show");
+            setTimeout(() => {
+              if (presetNameOverlay) {
+                presetNameOverlay.classList.remove("show");
+              }
+            }, 3000);
+          }
+
+          updateStatus(`Loaded: ${presetName}`, false);
+          console.log("[Preset] Preset loaded successfully");
+        } catch (error) {
+          console.error("[Preset] Error loading preset:", error);
+          updateStatus("Error loading preset: " + error.message, true);
+        }
+      }
 
       // Preset search handler
       window.onPresetSearchChange = function () {
@@ -1070,7 +1309,9 @@
 
         options.forEach((option, index) => {
           if (index === 0) return; // Skip first "Select a preset..." option
-          const presetName = option.textContent.toLowerCase();
+          // Remove indicator prefix (🚫 or ✓) for search
+          const text = option.textContent;
+          const presetName = text.replace(/^[🚫✓]\s+/, "").toLowerCase();
           if (searchTerm === "" || presetName.includes(searchTerm)) {
             option.style.display = "";
             visibleCount++;
@@ -1079,7 +1320,7 @@
           }
         });
 
-        // Update count display
+        // Update count display (only count presets in rotation)
         if (presetCountDisplay) {
           if (searchTerm) {
             presetCountDisplay.textContent = `${visibleCount} (filtered)`;
@@ -1212,9 +1453,18 @@
           audioSource = stream;
           audioNode = audioContext.createMediaStreamSource(stream);
 
+          // Create gain node for volume control (even though we don't connect to destination)
+          gainNode = audioContext.createGain();
+          const sliderValue = volumeSlider ? parseFloat(volumeSlider.value) : 100;
+          const currentVolume = sliderValue / 100;
+          gainNode.gain.value = currentVolume;
+
+          // Connect audioNode to gainNode (but not gainNode to destination for system audio)
+          audioNode.connect(gainNode);
+
           // Connect to visualizer only (no audible output for system audio)
           visualizer.connectAudio(audioNode);
-          // Do NOT connect to audioContext.destination - system audio should not play back
+          // Do NOT connect gainNode to audioContext.destination - system audio should not play back
 
           isPlaying = true;
 
@@ -1261,8 +1511,57 @@
 
       // Update playback controls visibility
       function updatePlaybackControlsVisibility() {
+        const sourceType = audioSourceTypeSelect ? audioSourceTypeSelect.value : "";
+
         // Check if system audio is active
         const isSystemAudio = audioSource instanceof MediaStream && trackInfo && trackInfo.textContent === "System Audio";
+
+        // For file-upload: always show controls (persistent)
+        if (sourceType === "file-upload") {
+          playbackControlsDiv.classList.add("active");
+          if (playbackControlsRow) {
+            playbackControlsRow.style.display = "flex";
+          }
+          // Show track slider only if audio is loaded and has duration
+          if (audioSource && audioSource instanceof Audio && audioSource.duration && isFinite(audioSource.duration)) {
+            trackSliderGroup.style.display = "flex";
+            if (!window.trackSliderInterval) {
+              window.trackSliderInterval = setInterval(updateTrackSlider, 100);
+            }
+          } else {
+            trackSliderGroup.style.display = "none";
+            if (window.trackSliderInterval) {
+              clearInterval(window.trackSliderInterval);
+              window.trackSliderInterval = null;
+            }
+          }
+          return;
+        }
+
+        // For internet-stream: always show volume slider (persistent)
+        if (sourceType === "internet-stream") {
+          playbackControlsDiv.classList.add("active");
+          // Always show volume slider for internet stream
+          if (playbackControlsRow) {
+            playbackControlsRow.style.display = "none";
+          }
+          trackSliderGroup.style.display = "none";
+          if (window.trackSliderInterval) {
+            clearInterval(window.trackSliderInterval);
+            window.trackSliderInterval = null;
+          }
+          return;
+        }
+
+        // For microphone: hide all playback controls (no volume slider needed)
+        if (sourceType === "microphone") {
+          playbackControlsDiv.classList.remove("active");
+          if (window.trackSliderInterval) {
+            clearInterval(window.trackSliderInterval);
+            window.trackSliderInterval = null;
+          }
+          return;
+        }
 
         if (audioSource && (audioSource instanceof Audio || audioSource instanceof MediaStream)) {
           // Hide all playback controls for system audio (no playback controls needed)
@@ -1275,17 +1574,28 @@
             return;
           }
 
-          // Show controls for other audio sources
+          // Show controls for other audio sources (microphone, etc.)
           playbackControlsDiv.classList.add("active");
 
-          // Show track slider only for file playback (not streams or mic)
-          if (audioSource instanceof Audio && audioSource.duration && isFinite(audioSource.duration)) {
+          // Check if this is a file (has finite duration) or a stream (no finite duration)
+          const isFilePlayback = audioSource instanceof Audio && audioSource.duration && isFinite(audioSource.duration);
+
+          // Hide play/pause/prev/next buttons and track slider for streams (internet radio)
+          if (isFilePlayback) {
+            // Show all controls for file playback
+            if (playbackControlsRow) {
+              playbackControlsRow.style.display = "flex";
+            }
             trackSliderGroup.style.display = "flex";
             // Update track slider periodically
             if (!window.trackSliderInterval) {
               window.trackSliderInterval = setInterval(updateTrackSlider, 100);
             }
           } else {
+            // Hide playback controls (prev/play/next) and track slider for streams
+            if (playbackControlsRow) {
+              playbackControlsRow.style.display = "none";
+            }
             trackSliderGroup.style.display = "none";
             if (window.trackSliderInterval) {
               clearInterval(window.trackSliderInterval);
@@ -1293,10 +1603,13 @@
             }
           }
         } else {
-          playbackControlsDiv.classList.remove("active");
-          if (window.trackSliderInterval) {
-            clearInterval(window.trackSliderInterval);
-            window.trackSliderInterval = null;
+          // No audio source - hide controls unless it's file-upload or internet-stream
+          if (sourceType !== "file-upload" && sourceType !== "internet-stream") {
+            playbackControlsDiv.classList.remove("active");
+            if (window.trackSliderInterval) {
+              clearInterval(window.trackSliderInterval);
+              window.trackSliderInterval = null;
+            }
           }
         }
       }
@@ -1330,6 +1643,9 @@
       // Initialize
       async function init() {
         try {
+          // Initialize rotation list first
+          initializeRotation();
+
           // Check browser support
           if (!checkSupport()) {
             return;
@@ -1378,12 +1694,35 @@
           // Start render loop
           render();
 
-          // Load first preset if available
+          // Load default preset: "Geiss - Reaction Diffusion 2" immediately
           if (currentPresets.length > 0 && visualizer) {
             try {
-              await loadPresetByIndex(0);
+              // Ensure audio context is resumed
+              if (audioContext && audioContext.state === "suspended") {
+                await audioContext.resume();
+              }
+
+              // Try to find "Geiss - Reaction Diffusion 2"
+              const defaultPresetName = "Geiss - Reaction Diffusion 2";
+              // Search in all presets (not just currentPresets) to allow loading even if removed from rotation
+              const presets = await butterchurnPresets.default.getPresets();
+              const allPresets = Object.keys(presets);
+              const defaultIndex = allPresets.findIndex((name) => name.toLowerCase() === defaultPresetName.toLowerCase());
+
+              if (defaultIndex >= 0) {
+                await loadPresetByName(defaultPresetName);
+                console.log(`[Preset] Loaded default preset: ${defaultPresetName}`);
+                presetLoaded = true;
+              } else {
+                // Fallback to first preset if default not found
+                console.log(`[Preset] Default preset "${defaultPresetName}" not found, loading first preset`);
+                if (currentPresets.length > 0) {
+                  await loadPresetByIndex(0);
+                  presetLoaded = true;
+                }
+              }
             } catch (presetError) {
-              console.error("Error loading first preset:", presetError);
+              console.error("Error loading default preset:", presetError);
             }
           }
 
@@ -1391,6 +1730,15 @@
 
           // Initialize button states
           updateButtonStates();
+
+          // Log rotation info
+          if (presetsRemovedFromRotation.length > 0) {
+            console.log(
+              `[Rotation] ${presetsRemovedFromRotation.length} presets removed from rotation. Use exportRotation() in console to export the list.`
+            );
+          } else {
+            console.log("[Rotation] All presets are in rotation. Use the Remove button to remove presets from rotation.");
+          }
 
           // Set default states for shuffle and auto-advance
           if (shuffleCheckbox) {
@@ -1449,19 +1797,26 @@
             throw new Error("No presets found");
           }
 
-          currentPresets = Object.keys(presets);
+          // Get all presets
+          const allPresets = Object.keys(presets);
+          // Filter out presets removed from rotation for navigation
+          currentPresets = allPresets.filter((presetName) => !presetsRemovedFromRotation.includes(presetName));
           const presetCount = currentPresets.length;
+          const removedCount = allPresets.length - presetCount;
 
-          console.log(`Loaded ${presetCount} presets`);
-          console.log(`[Preset Loader] Total presets in JSON: ${presetCount}`);
+          console.log(`Loaded ${presetCount} presets in rotation (${removedCount} removed from rotation)`);
+          console.log(`[Preset Loader] Total presets in JSON: ${allPresets.length}, In rotation: ${presetCount}`);
 
-          // Populate preset select dropdown (all presets, no limit)
+          // Populate preset select dropdown (show ALL presets with indicators - all selectable)
           if (presetSelect) {
             presetSelect.innerHTML = '<option value="">Select a preset...</option>';
-            currentPresets.forEach((presetName, index) => {
+            allPresets.forEach((presetName) => {
               const option = document.createElement("option");
-              option.value = index;
-              option.textContent = presetName;
+              const isRemovedFromRotation = presetsRemovedFromRotation.includes(presetName);
+              const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
+              option.textContent = indicator + presetName;
+              option.value = presetName; // Store actual preset name
+              // All presets are selectable regardless of rotation status
               presetSelect.appendChild(option);
             });
           }
@@ -1470,7 +1825,11 @@
           }
 
           if (presetCount < 500) {
-            console.warn(`[Preset Loader] Warning: Only ${presetCount} presets loaded. Expected ~555. The JSON file may need to be regenerated.`);
+            console.warn(
+              `[Preset Loader] Warning: Only ${presetCount} presets in rotation. Expected ~555. ${
+                removedCount > 0 ? `${removedCount} are removed from rotation.` : "The JSON file may need to be regenerated."
+              }`
+            );
           } else {
             console.log(`[Preset Loader] ✓ Successfully loaded ${presetCount} presets`);
           }
@@ -1479,6 +1838,60 @@
           console.error("Error details:", error.message);
           console.error("Stack:", error.stack);
           throw error; // Re-throw so init() can handle it
+        }
+      }
+
+      // Reload presets with current rotation filter
+      async function reloadPresetsWithRotation() {
+        try {
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+          const previousPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
+          const wasCurrentPresetDisabled = previousPresetName && presetsRemovedFromRotation.includes(previousPresetName);
+
+          currentPresets = allPresets.filter((presetName) => !presetsRemovedFromRotation.includes(presetName));
+
+          // Update dropdown (show ALL presets with indicators - all selectable)
+          if (presetSelect) {
+            presetSelect.innerHTML = '<option value="">Select a preset...</option>';
+            allPresets.forEach((presetName) => {
+              const option = document.createElement("option");
+              const isRemovedFromRotation = presetsRemovedFromRotation.includes(presetName);
+              const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
+              option.textContent = indicator + presetName;
+              option.value = presetName; // Store actual preset name
+              // All presets are selectable regardless of rotation status
+              // Select current preset if it matches
+              if (previousPresetName === presetName) {
+                option.selected = true;
+              }
+              presetSelect.appendChild(option);
+            });
+          }
+
+          // Update count
+          if (presetCountDisplay) {
+            presetCountDisplay.textContent = currentPresets.length;
+          }
+
+          // If current preset was disabled, keep it loaded and don't change index
+          // This prevents auto-switching away from disabled presets
+          if (wasCurrentPresetDisabled && previousPresetName) {
+            // Keep the current preset loaded - don't change currentPresetIndex
+            // The preset will stay loaded even though it's not in currentPresets
+            console.log(`[Rotation] Current preset "${previousPresetName}" is disabled but will remain loaded`);
+            return previousPresetName;
+          }
+
+          // Adjust current preset index if it's out of bounds (only if current preset is in rotation)
+          if (currentPresetIndex >= currentPresets.length && currentPresets.length > 0) {
+            currentPresetIndex = Math.max(0, currentPresets.length - 1);
+          }
+
+          return previousPresetName;
+        } catch (error) {
+          console.error("[Rotation] Error reloading presets:", error);
+          return null;
         }
       }
 
@@ -1502,6 +1915,9 @@
           console.log(`[Preset] Loading preset at index ${index}...`);
           const presets = await butterchurnPresets.default.getPresets();
           const presetName = currentPresets[index];
+
+          // Note: currentPresets is already filtered to exclude presets removed from rotation,
+          // so we don't need to check here. This function is only used for navigation.
           console.log(`[Preset] Preset name: ${presetName}`);
 
           if (!presets[presetName]) {
@@ -1537,8 +1953,11 @@
 
           // Update preset select dropdown
           if (presetSelect) {
-            presetSelect.value = index;
+            presetSelect.value = presetName; // Set value to preset name (not index)
           }
+
+          // Update blacklist button
+          updateBlacklistButton();
 
           // Show preset name on overlay (on top of visualization) if checkbox is enabled
           if (presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
@@ -1617,6 +2036,13 @@
         if (isPresetAutoAdvance && presetAutoAdvanceInterval) {
           clearInterval(presetAutoAdvanceInterval);
           presetAutoAdvanceInterval = setInterval(() => {
+            // Check if current preset is disabled - if so, don't auto-switch
+            const currentPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
+            if (currentPresetName && presetsRemovedFromRotation.includes(currentPresetName)) {
+              // Current preset is disabled - don't auto-switch away
+              return;
+            }
+
             if (isShuffleEnabled) {
               randomPreset();
             } else {
@@ -1644,9 +2070,13 @@
           audioSource = stream;
           audioNode = audioContext.createMediaStreamSource(stream);
 
+          // Microphone: no volume control, no output to speakers, full volume to visualizer
+          // Connect directly to visualizer (full volume)
           visualizer.connectAudio(audioNode);
-          // Connect to destination for audible output (optional for mic, but good for monitoring)
-          audioNode.connect(audioContext.destination);
+          // Do NOT connect to destination - microphone should not output to speakers
+          // Do NOT create gain node - microphone doesn't need volume control
+          gainNode = null;
+
           isPlaying = true;
 
           updatePlaybackControlsVisibility();
@@ -1767,11 +2197,51 @@
           }
 
           loadStreamFromURL(station.url, station.name);
+          updateButtonStates(); // Update button states after station selection
         } else {
           customUrlContainer.style.display = "none";
           stationHomepageLink.style.display = "none";
+          updateButtonStates(); // Update button states when no station selected
         }
       };
+
+      // Resume last stream or start selected station
+      async function resumeLastStream() {
+        const stationSelect = document.getElementById("station-select");
+        const selectedValue = stationSelect ? stationSelect.value : "";
+
+        // If a station is selected, use that
+        if (selectedValue && selectedValue !== "custom" && radioStations[selectedValue]) {
+          const station = radioStations[selectedValue];
+          await loadStreamFromURL(station.url, station.name);
+        }
+        // Otherwise, use last stream URL if available
+        else if (lastStreamURL) {
+          await loadStreamFromURL(lastStreamURL, lastStreamName || "Stream");
+        }
+        // If custom URL is entered, use that
+        else {
+          const streamInput = document.getElementById("stream-input");
+          const url = streamInput ? streamInput.value.trim() : "";
+          if (url) {
+            await loadStreamFromURL(url);
+          }
+        }
+      }
+
+      // Handle stop/play audio button click
+      async function handleStopPlayAudio() {
+        if (audioSource) {
+          // If audio is playing, stop it
+          stopAudio();
+        } else {
+          // If no audio, try to play/resume stream
+          await resumeLastStream();
+        }
+      }
+
+      // Expose function to window
+      window.handleStopPlayAudio = handleStopPlayAudio;
 
       // Load Bassdrive stream (kept for backward compatibility)
       async function loadBassdrive() {
@@ -1836,6 +2306,11 @@
       async function loadStreamFromURL(url, streamName = "Stream") {
         try {
           stopAudio();
+
+          // Store stream info for resume functionality
+          lastStreamURL = url;
+          lastStreamName = streamName;
+
           updateStatus(`Connecting to ${streamName}...`, false);
 
           // Ensure audio context is running
@@ -1864,27 +2339,55 @@
           // Set the stream URL
           audio.src = streamURL;
 
+          // Store reference to this audio element
+          currentAudioElement = audio;
+
           // Handle stream loading
           let loaded = false;
 
           audio.addEventListener("loadstart", () => {
+            if (currentAudioElement !== audio) return;
             updateStatus(`Loading ${streamName}...`, false);
           });
 
           audio.addEventListener("loadedmetadata", () => {
+            if (currentAudioElement !== audio) return;
             updateStatus(`${streamName} metadata loaded`, false);
           });
 
           audio.addEventListener("canplay", async () => {
             if (loaded) return;
+            if (currentAudioElement !== audio) return; // Another source was loaded or stopped
             loaded = true;
 
             try {
+              // Double-check we're still the current source
+              if (currentAudioElement !== audio) {
+                return;
+              }
+
               audioSource = audio;
               audioNode = audioContext.createMediaElementSource(audio);
+
+              // Create gain node for volume control
+              gainNode = audioContext.createGain();
+              // Read actual slider value (defaults to 100 if slider doesn't exist)
+              const sliderValue = volumeSlider ? parseFloat(volumeSlider.value) : 100;
+              const currentVolume = sliderValue / 100;
+              gainNode.gain.value = currentVolume;
+
+              // Sync slider value display if it exists
+              if (volumeValue) {
+                volumeValue.textContent = Math.round(sliderValue) + "%";
+              }
+
+              // Connect: audioNode -> gainNode -> destination
+              audioNode.connect(gainNode);
+              gainNode.connect(audioContext.destination);
+
+              // Connect to visualizer (before gain node to maintain full signal)
               visualizer.connectAudio(audioNode);
-              // Connect to destination for audible output (required when using createMediaElementSource)
-              audioNode.connect(audioContext.destination);
+
               await audio.play();
               isPlaying = true;
 
@@ -1895,31 +2398,41 @@
 
               updateStatus(`Playing: ${streamName}`, false);
             } catch (playError) {
-              console.error("Play error:", playError);
-              updateStatus("Error playing stream: " + playError.message, true);
+              if (currentAudioElement === audio) {
+                console.error("Play error:", playError);
+                updateStatus("Error playing stream: " + playError.message, true);
+              }
             }
           });
 
           audio.addEventListener("playing", () => {
+            if (currentAudioElement !== audio) return;
             updateStatus(`Playing: ${streamName}`, false);
           });
 
           audio.addEventListener("waiting", () => {
+            if (currentAudioElement !== audio) return;
             updateStatus(`Buffering ${streamName}...`, false);
           });
 
           audio.addEventListener("stalled", () => {
+            if (currentAudioElement !== audio) return;
             updateStatus(`Stream stalled, reconnecting...`, false);
           });
 
           audio.addEventListener("error", (e) => {
+            if (currentAudioElement !== audio) return;
             let errorMsg = "Error loading stream. ";
-            if (audio.error) {
-              errorMsg += `Error ${audio.error.code}: ${getAudioErrorText(audio.error.code)}. `;
+            try {
+              if (audio.error) {
+                errorMsg += `Error ${audio.error.code}: ${getAudioErrorText(audio.error.code)}. `;
+              }
+            } catch (err) {
+              // Ignore errors accessing audio.error
             }
             errorMsg += "Note: Some streams may have CORS restrictions. Try a different stream URL or use a CORS proxy.";
             updateStatus(errorMsg, true);
-            console.error("Stream error:", audio.error, e);
+            console.error("Stream error:", e);
           });
 
           // Try to load the stream
@@ -2014,9 +2527,26 @@
               currentAudioFile = file;
               currentPlaylistIndex = index;
               audioNode = audioContext.createMediaElementSource(audio);
+
+              // Create gain node for volume control
+              gainNode = audioContext.createGain();
+              // Read actual slider value (defaults to 100 if slider doesn't exist)
+              const sliderValue = volumeSlider ? parseFloat(volumeSlider.value) : 100;
+              const currentVolume = sliderValue / 100;
+              gainNode.gain.value = currentVolume;
+
+              // Sync slider value display if it exists
+              if (volumeValue) {
+                volumeValue.textContent = Math.round(sliderValue) + "%";
+              }
+
+              // Connect: audioNode -> gainNode -> destination
+              audioNode.connect(gainNode);
+              gainNode.connect(audioContext.destination);
+
+              // Connect to visualizer (before gain node to maintain full signal)
               visualizer.connectAudio(audioNode);
-              // Connect to destination for audible output (required when using createMediaElementSource)
-              audioNode.connect(audioContext.destination);
+
               await audio.play();
               isPlaying = true;
 
@@ -2134,25 +2664,105 @@
       }
 
       function stopAudio() {
-        if (audioSource) {
-          if (audioSource instanceof MediaStream) {
-            audioSource.getTracks().forEach((track) => track.stop());
-          } else if (audioSource instanceof Audio) {
-            audioSource.pause();
-            audioSource.currentTime = 0;
-            if (audioSource.src && audioSource.src.startsWith("blob:")) {
-              URL.revokeObjectURL(audioSource.src);
+        // Clear current audio element reference first to prevent event handlers from running
+        const oldAudioSource = audioSource;
+        currentAudioElement = null;
+
+        if (oldAudioSource) {
+          if (oldAudioSource instanceof MediaStream) {
+            oldAudioSource.getTracks().forEach((track) => track.stop());
+          } else if (oldAudioSource instanceof Audio) {
+            // Pause and reset
+            try {
+              oldAudioSource.pause();
+              oldAudioSource.currentTime = 0;
+            } catch (e) {
+              // Ignore errors if audio is already stopped
             }
-            audioSource.src = "";
+
+            // Clean up blob URLs
+            try {
+              const oldSrc = oldAudioSource.src;
+              if (oldSrc && oldSrc.startsWith("blob:")) {
+                URL.revokeObjectURL(oldSrc);
+              }
+            } catch (e) {
+              // Ignore errors
+            }
+
+            // Clear src and reset the audio element
+            // Use careful cleanup to prevent MEDIA_ERR_SRC_NOT_SUPPORTED
+            try {
+              // First, pause and reset time
+              oldAudioSource.pause();
+              oldAudioSource.currentTime = 0;
+
+              // Remove event listeners by removing src (this clears the element state)
+              // Don't call load() immediately as it can cause errors
+              const wasBlob = oldAudioSource.src && oldAudioSource.src.startsWith("blob:");
+
+              // For blob URLs, we already revoked them, so just clear
+              // For other sources, we need to be more careful
+              if (!wasBlob) {
+                // For non-blob sources, try to suspend the element first
+                try {
+                  oldAudioSource.suspend();
+                } catch (suspendError) {
+                  // suspend() may not be available in all browsers
+                }
+              }
+
+              // Clear src - use removeAttribute which is safer than setting to ''
+              try {
+                oldAudioSource.removeAttribute("src");
+              } catch (attrError) {
+                // If removeAttribute fails, try setting src to empty
+                try {
+                  oldAudioSource.src = "";
+                } catch (srcError) {
+                  // If that also fails, just leave it - browser will handle cleanup
+                }
+              }
+
+              // Only call load() if we successfully cleared src
+              // This prevents MEDIA_ERR_SRC_NOT_SUPPORTED
+              if (!oldAudioSource.src || oldAudioSource.src === "") {
+                try {
+                  oldAudioSource.load();
+                } catch (loadError) {
+                  // load() may fail if element is in invalid state - this is okay
+                  console.debug("Audio load() during cleanup (expected):", loadError.message);
+                }
+              }
+            } catch (e) {
+              // Ignore errors during cleanup - element may be in invalid state
+              console.debug("Audio element cleanup (expected if already cleaned):", e.message);
+            }
           }
-          audioSource = null;
+        }
+
+        audioSource = null;
+
+        // Disconnect gain node first, then audio node
+        if (gainNode) {
+          try {
+            // Disconnect all connections from gain node
+            gainNode.disconnect();
+          } catch (e) {
+            // Node may already be disconnected or in invalid state - ignore
+            console.debug("Gain node disconnect (expected if already disconnected):", e.message);
+          }
+          gainNode = null;
         }
 
         if (audioNode) {
           try {
+            // Disconnect all connections from audio node
             audioNode.disconnect();
           } catch (e) {
-            // Node may already be disconnected
+            // Node may already be disconnected or in invalid state - ignore
+            // This can happen when switching from paused file to stream
+            console.debug("Audio node disconnect (expected if already disconnected):", e.message);
           }
           audioNode = null;
         }
@@ -2173,6 +2783,18 @@
       // Update button states based on audio source
       function updateButtonStates() {
         const hasAudio = audioSource !== null;
+        const sourceType = audioSourceTypeSelect ? audioSourceTypeSelect.value : "";
+        const stationSelect = document.getElementById("station-select");
+        const selectedStation = stationSelect ? stationSelect.value : "";
+        const streamInput = document.getElementById("stream-input");
+        const customUrl = streamInput ? streamInput.value.trim() : "";
+
+        // Check if we can play a stream (station selected or custom URL or last stream)
+        const canPlayStream =
+          sourceType === "internet-stream" &&
+          !hasAudio &&
+          ((selectedStation && selectedStation !== "" && (selectedStation === "custom" ? customUrl : radioStations[selectedStation])) ||
+            lastStreamURL);
 
         // Gray out start buttons if audio is playing
         if (startSystemAudioBtn) {
@@ -2187,11 +2809,35 @@
           startMicrophoneBtn.style.cursor = hasAudio ? "not-allowed" : "pointer";
         }
 
-        // Gray out stop button if audio is stopped
+        // Update stop/play button (hide for file-upload, show for other sources)
         if (stopAudioBtn) {
-          stopAudioBtn.disabled = !hasAudio;
-          stopAudioBtn.style.opacity = hasAudio ? "1" : "0.5";
-          stopAudioBtn.style.cursor = hasAudio ? "pointer" : "not-allowed";
+          if (sourceType === "file-upload") {
+            // Hide stop button for file upload
+            stopAudioBtn.style.display = "none";
+          } else {
+            // Show stop button for other source types
+            stopAudioBtn.style.display = "block";
+
+            if (hasAudio) {
+              // Audio is playing - show Stop Audio
+              stopAudioBtn.textContent = "Stop Audio";
+              stopAudioBtn.disabled = false;
+              stopAudioBtn.style.opacity = "1";
+              stopAudioBtn.style.cursor = "pointer";
+            } else if (canPlayStream) {
+              // No audio but can play stream - show Play Audio
+              stopAudioBtn.textContent = "▶ Play Audio";
+              stopAudioBtn.disabled = false;
+              stopAudioBtn.style.opacity = "1";
+              stopAudioBtn.style.cursor = "pointer";
+            } else {
+              // No audio and can't play - gray out
+              stopAudioBtn.textContent = "Stop Audio";
+              stopAudioBtn.disabled = true;
+              stopAudioBtn.style.opacity = "0.5";
+              stopAudioBtn.style.cursor = "not-allowed";
+            }
+          }
         }
       }
 
@@ -2280,9 +2926,29 @@
       // Some browsers require user interaction before audio can play
       document.addEventListener(
         "click",
-        () => {
+        async () => {
           if (audioContext && audioContext.state === "suspended") {
-            audioContext.resume();
+            await audioContext.resume();
+          }
+          // Load preset on first user interaction if not already loaded (fallback)
+          if (!presetLoaded && currentPresets.length > 0 && visualizer) {
+            presetLoaded = true;
+            try {
+              const defaultPresetName = "Geiss - Reaction Diffusion 2";
+              const presets = await butterchurnPresets.default.getPresets();
+              const allPresets = Object.keys(presets);
+              const defaultIndex = allPresets.findIndex((name) => name.toLowerCase() === defaultPresetName.toLowerCase());
+
+              if (defaultIndex >= 0) {
+                await loadPresetByName(defaultPresetName);
+                console.log(`[Preset] Loaded default preset on user interaction: ${defaultPresetName}`);
+              } else if (currentPresets.length > 0) {
+                await loadPresetByIndex(0);
+                console.log(`[Preset] Loaded first preset on user interaction`);
+              }
+            } catch (presetError) {
+              console.error("Error loading preset on user interaction:", presetError);
+            }
           }
         },
         { once: true }
@@ -2290,6 +2956,20 @@
 
       // Initialize on load
       init();
+
+      // Ensure playback controls visibility is set on startup
+      // This ensures volume slider is visible for internet-stream even before audio starts
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            updatePlaybackControlsVisibility();
+          }, 100);
+        });
+      } else {
+        setTimeout(() => {
+          updatePlaybackControlsVisibility();
+        }, 100);
+      }
 
       // Initialize button states on page load
       updateButtonStates();
