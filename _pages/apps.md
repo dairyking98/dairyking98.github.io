@@ -9,4 +9,6 @@ dropdown: true
 children:
   - title: differential growth
     permalink: /differential-growth/
+  - title: music visualizer
+    permalink: /music-visualizer/
 ---
