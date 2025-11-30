@@ -109,8 +109,13 @@
         box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
       }
 
+      .search-container {
+        position: relative;
+        width: 100%;
+      }
+
       input[type="text"] {
-        padding: 10px 15px;
+        padding: 10px 40px 10px 15px;
         border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.1);
@@ -126,6 +131,40 @@
 
       input[type="text"]::placeholder {
         color: rgba(255, 255, 255, 0.5);
+      }
+
+      .search-clear-btn {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 4px;
+        width: 28px;
+        height: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+        transition: all 0.2s ease;
+      }
+
+      .search-clear-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .search-clear-btn:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .search-clear-btn.hidden {
+        display: none;
       }
 
       select {
@@ -600,13 +639,10 @@
           <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
             >Select Music File (<span id="music-file-count-display">0</span> available)</label
           >
-          <input
-            type="text"
-            id="music-file-search"
-            placeholder="Search music files..."
-            style="margin-bottom: 10px; width: 100%"
-            oninput="onMusicFileSearchChange()"
-          />
+          <div class="search-container" style="margin-bottom: 10px">
+            <input type="text" id="music-file-search" placeholder="Search music files..." oninput="onMusicFileSearchChange()" />
+            <button class="search-clear-btn hidden" id="search-clear-btn" onclick="clearMusicFileSearch()" title="Clear search">×</button>
+          </div>
           <select id="music-file-select" onchange="onMusicFileSelectChange()" style="margin-bottom: 10px">
             <option value="">No files selected...</option>
           </select>
@@ -675,13 +711,10 @@
         <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
           >Select Preset (<span id="preset-count-display">0</span> available)</label
         >
-        <input
-          type="text"
-          id="preset-search"
-          placeholder="Search presets..."
-          style="margin-bottom: 10px; width: 100%"
-          oninput="onPresetSearchChange()"
-        />
+        <div class="search-container" style="margin-bottom: 10px">
+          <input type="text" id="preset-search" placeholder="Search presets..." oninput="onPresetSearchChange()" />
+          <button class="search-clear-btn hidden" id="preset-search-clear-btn" onclick="clearPresetSearch()" title="Clear search">×</button>
+        </div>
         <div style="display: flex; gap: 5px; margin-bottom: 10px; align-items: center">
           <select id="preset-select" onchange="onPresetSelectChange()" style="flex: 1">
             <option value="">Loading presets...</option>
@@ -1472,6 +1505,11 @@
           return; // Dropdown is open, don't hide UI
         }
 
+        // Don't hide if search box or any input field is active (has focus)
+        if (activeElement && activeElement.tagName === "INPUT") {
+          return; // Input field is active, don't hide UI
+        }
+
         // Hide cursor (only in fullscreen)
         if (document.fullscreenElement) {
           document.body.classList.add("hide-cursor");
@@ -1578,6 +1616,14 @@
           dropdown.addEventListener("mousedown", resetMouseInactivityTimer);
         }
       });
+
+      // Reset timer when search box gets focus or input (to prevent hiding while searching)
+      const searchBox = document.getElementById("music-file-search");
+      if (searchBox) {
+        searchBox.addEventListener("focus", resetMouseInactivityTimer);
+        searchBox.addEventListener("input", resetMouseInactivityTimer);
+        searchBox.addEventListener("keydown", resetMouseInactivityTimer);
+      }
 
       // Initialize auto-hide button text
       (function initializeAutoHideButton() {
@@ -1971,6 +2017,16 @@
 
         const searchTerm = presetSearch.value.toLowerCase().trim();
 
+        // Show/hide clear button based on whether there's text
+        const clearBtn = document.getElementById("preset-search-clear-btn");
+        if (clearBtn) {
+          if (presetSearch.value.trim() === "") {
+            clearBtn.classList.add("hidden");
+          } else {
+            clearBtn.classList.remove("hidden");
+          }
+        }
+
         // Filter options
         const options = presetSelect.querySelectorAll("option");
         let visibleCount = 0;
@@ -1998,6 +2054,14 @@
         }
       };
 
+      // Clear preset search
+      window.clearPresetSearch = function () {
+        if (!presetSearch) return;
+        presetSearch.value = "";
+        presetSearch.focus();
+        onPresetSearchChange();
+      };
+
       // Music file select dropdown handler
       window.onMusicFileSelectChange = function () {
         const selectedIndex = parseInt(musicFileSelect.value);
@@ -2011,6 +2075,16 @@
         if (!musicFileSearch || !musicFileSelect) return;
 
         const searchTerm = musicFileSearch.value.toLowerCase().trim();
+
+        // Show/hide clear button based on whether there's text
+        const clearBtn = document.getElementById("search-clear-btn");
+        if (clearBtn) {
+          if (musicFileSearch.value.trim() === "") {
+            clearBtn.classList.add("hidden");
+          } else {
+            clearBtn.classList.remove("hidden");
+          }
+        }
 
         // Filter options
         const options = musicFileSelect.querySelectorAll("option");
@@ -2035,6 +2109,14 @@
             musicFileCountDisplay.textContent = audioPlaylist.length;
           }
         }
+      };
+
+      // Clear music file search
+      window.clearMusicFileSearch = function () {
+        if (!musicFileSearch) return;
+        musicFileSearch.value = "";
+        musicFileSearch.focus();
+        onMusicFileSearchChange();
       };
 
       // Function to populate music files dropdown
@@ -2859,7 +2941,9 @@
             throw new Error("Microphone access not available in this browser");
           }
 
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
           audioSource = stream;
           audioNode = audioContext.createMediaStreamSource(stream);
 
