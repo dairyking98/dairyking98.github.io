@@ -747,15 +747,98 @@
       </div>
 
       <div class="control-section">
-        <div class="slider-group">
-          <label>Blend Time:</label>
-          <input type="range" id="blend-slider" min="0" max="30" step="0.1" value="0.5" oninput="updateBlendTime(this.value)" />
-          <span id="blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 8px; font-weight: 500">Transition Trigger:</label>
+        <select
+          id="transition-trigger-select"
+          onchange="onTransitionTriggerChange()"
+          style="
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 13px;
+          "
+        >
+          <option value="time">Time-based</option>
+          <option value="beat">Beat-based</option>
+        </select>
+
+        <!-- Time-based controls -->
+        <div id="time-mode-controls">
+          <div class="slider-group">
+            <label>Blend Time:</label>
+            <input type="range" id="blend-slider" min="0" max="30" step="0.1" value="0.5" oninput="updateBlendTime(this.value)" />
+            <span id="blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
+            <div id="blend-time-preset-warning" style="color: #ff6b6b; font-size: 10px; margin-top: 2px; display: none">
+              Must be less than Preset Duration
+            </div>
+          </div>
+          <div class="slider-group">
+            <label>Preset Duration:</label>
+            <input type="range" id="preset-duration-slider" min="1" max="60" step="1" value="10" oninput="updatePresetDuration(this.value)" />
+            <span id="preset-duration-value" style="color: white; min-width: 40px; text-align: right">10s</span>
+          </div>
         </div>
-        <div class="slider-group">
-          <label>Preset Duration:</label>
-          <input type="range" id="preset-duration-slider" min="1" max="60" step="1" value="10" oninput="updatePresetDuration(this.value)" />
-          <span id="preset-duration-value" style="color: white; min-width: 40px; text-align: right">10s</span>
+
+        <!-- Beat-based controls -->
+        <div id="beat-mode-controls" style="display: none">
+          <div class="slider-group">
+            <label>Blend Time:</label>
+            <input type="range" id="beat-blend-slider" min="0" max="30" step="0.1" value="0.5" oninput="updateBeatBlendTime(this.value)" />
+            <span id="beat-blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
+          </div>
+          <div class="slider-group">
+            <label>Beat Sensitivity:</label>
+            <input type="range" id="beat-sensitivity-slider" min="0.1" max="3.0" step="0.1" value="1.5" oninput="updateBeatSensitivity(this.value)" />
+            <span id="beat-sensitivity-value" style="color: white; min-width: 40px; text-align: right">1.5</span>
+            <div style="color: #aaa; font-size: 10px; margin-top: 2px">Higher = More Sensitive</div>
+          </div>
+          <div class="slider-group">
+            <label>Min Beat Interval:</label>
+            <input type="range" id="beat-interval-slider" min="100" max="15000" step="50" value="300" oninput="updateBeatInterval(this.value)" />
+            <span id="beat-interval-value" style="color: white; min-width: 40px; text-align: right">300ms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
+          >Transition Pattern (<span id="transition-count-display">9</span> available)</label
+        >
+        <div style="display: flex; gap: 5px; margin-bottom: 10px; align-items: center">
+          <select id="transition-select" onchange="onTransitionSelectChange()" style="flex: 1">
+            <option value="random">Random</option>
+            <option value="1">1 - Directional</option>
+            <option value="2">2 - Plasma</option>
+            <option value="3">3 - Radial</option>
+            <option value="4">4 - Square</option>
+            <option value="5">5 - Clock</option>
+            <option value="6">6 - Cross</option>
+            <option value="7">7 - Stars2</option>
+            <option value="8">8 - Nuclear</option>
+            <option value="9">9 - Arrow</option>
+          </select>
+          <button
+            onclick="toggleBlacklistCurrentTransition()"
+            id="blacklist-transition-btn"
+            title="Disable/Enable transition pattern in rotation"
+            style="
+              padding: 10px 20px;
+              font-size: 14px;
+              flex-shrink: 0;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              min-width: 100px;
+            "
+          >
+            Disable
+          </button>
         </div>
       </div>
     </div>
@@ -837,6 +920,12 @@
         PRESET_DURATION: 10, // seconds
         IS_SHUFFLE_ENABLED: true,
         IS_PRESET_AUTO_ADVANCE: true,
+
+        // Beat detection settings
+        USE_BEAT_DETECTION: false, // Use beat detection instead of time-based auto-advance
+        BEAT_SENSITIVITY: 1.5, // Sensitivity for beat detection (higher = more sensitive)
+        BEAT_MIN_INTERVAL: 300, // Minimum milliseconds between beats
+        BEAT_DECAY: 0.98, // Decay rate for energy history
 
         // Timing settings
         INACTIVITY_DELAY: 2000, // milliseconds (mouse inactivity before hiding controls)
@@ -959,6 +1048,16 @@
       let presetDuration = CONFIG.PRESET_DURATION; // seconds
       let presetNameHideTimeout = null; // timeout for hiding preset name before transition
       let isAutoTransition = false; // Flag to track if current transition is from auto-advance
+
+      // Beat detection state
+      let useBeatDetection = CONFIG.USE_BEAT_DETECTION;
+      let beatSensitivity = CONFIG.BEAT_SENSITIVITY;
+      let beatMinInterval = CONFIG.BEAT_MIN_INTERVAL;
+      let lastBeatTime = 0;
+      let energyHistory = [];
+      let energyHistorySize = 43; // Store last 43 samples (~1.5 seconds at 30fps)
+      let averageEnergy = 0;
+      let varianceEnergy = 0;
       let manualTransitionPending = false; // Flag to indicate a manual transition is in progress
       let isPresetLoading = false; // Flag to prevent multiple simultaneous preset loads
       let shuffledPresetHistory = []; // Track shuffled preset order
@@ -971,6 +1070,25 @@
       // Presets removed from rotation - stored in localStorage
       let presetsRemovedFromRotation = [];
       const ROTATION_STORAGE_KEY = CONFIG.ROTATION_STORAGE_KEY;
+
+      // Transition pattern state
+      let selectedTransitionPattern = "random"; // "random" or "1"-"9"
+      let transitionsRemovedFromRotation = []; // Patterns disabled from random rotation
+      const TRANSITION_ROTATION_STORAGE_KEY = "butterchurn-transition-rotation";
+      const ALL_TRANSITION_PATTERNS = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+      // Transition pattern names mapping
+      const TRANSITION_PATTERN_NAMES = {
+        1: "Directional",
+        2: "Plasma",
+        3: "Radial",
+        4: "Square",
+        5: "Clock",
+        6: "Cross",
+        7: "Stars2",
+        8: "Nuclear",
+        9: "Arrow",
+      };
 
       // Initialize rotation list from localStorage
       function initializeRotation() {
@@ -986,6 +1104,62 @@
         } catch (error) {
           console.error("[Rotation] Error loading rotation list:", error);
           presetsRemovedFromRotation = [];
+        }
+      }
+
+      // Initialize transition rotation list from localStorage
+      function initializeTransitionRotation() {
+        try {
+          const stored = localStorage.getItem(TRANSITION_ROTATION_STORAGE_KEY);
+          if (stored) {
+            transitionsRemovedFromRotation = JSON.parse(stored);
+          } else {
+            transitionsRemovedFromRotation = [];
+          }
+          console.log(`[Transition Rotation] Loaded ${transitionsRemovedFromRotation.length} patterns removed from rotation`);
+        } catch (error) {
+          console.error("[Transition Rotation] Error loading rotation list:", error);
+          transitionsRemovedFromRotation = [];
+        }
+
+        // Update transition count display
+        updateTransitionCountDisplay();
+      }
+
+      // Update transition count display
+      function updateTransitionCountDisplay() {
+        const countDisplay = document.getElementById("transition-count-display");
+        if (countDisplay) {
+          const enabledCount = ALL_TRANSITION_PATTERNS.length - transitionsRemovedFromRotation.length;
+          countDisplay.textContent = enabledCount;
+        }
+      }
+
+      // Update transition dropdown with check/X indicators
+      function updateTransitionDropdown() {
+        const transitionSelect = document.getElementById("transition-select");
+        if (!transitionSelect) return;
+
+        // Store current selection
+        const currentSelection = transitionSelect.value;
+
+        // Clear and rebuild dropdown
+        transitionSelect.innerHTML = '<option value="random">Random</option>';
+
+        // Add all transition patterns with indicators
+        ALL_TRANSITION_PATTERNS.forEach((patternId) => {
+          const option = document.createElement("option");
+          const isRemovedFromRotation = transitionsRemovedFromRotation.includes(patternId);
+          const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
+          const patternName = TRANSITION_PATTERN_NAMES[patternId] || patternId;
+          option.textContent = indicator + patternId + " - " + patternName;
+          option.value = patternId;
+          transitionSelect.appendChild(option);
+        });
+
+        // Restore selection if it still exists
+        if (currentSelection) {
+          transitionSelect.value = currentSelection;
         }
       }
 
@@ -1061,6 +1235,112 @@
         updateBlacklistButton();
       };
 
+      // Transition pattern handlers
+      window.onTransitionSelectChange = function () {
+        const selectedValue = transitionSelect.value;
+        selectedTransitionPattern = selectedValue;
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-selected-transition", selectedTransitionPattern);
+        } catch (error) {
+          console.warn("[Transition] Error saving selection:", error);
+        }
+
+        // Update butterchurn if visualizer exists
+        if (visualizer) {
+          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+          visualizer.setBlendPatternType(blendPatternType);
+
+          // Update enabled patterns for random selection
+          if (selectedTransitionPattern === "random") {
+            const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) => parseInt(p, 10));
+            visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
+          }
+        }
+
+        // Update button state
+        updateBlacklistTransitionButton();
+
+        console.log(
+          `[Transition] Selected pattern: ${selectedTransitionPattern === "random" ? "Random" : TRANSITION_PATTERN_NAMES[selectedTransitionPattern]}`
+        );
+      };
+
+      window.toggleBlacklistCurrentTransition = async function () {
+        const transitionSelect = document.getElementById("transition-select");
+        if (!transitionSelect || !transitionSelect.value || transitionSelect.value === "random") {
+          updateStatus("Cannot disable 'Random' pattern", false);
+          return;
+        }
+
+        const patternId = transitionSelect.value;
+
+        const index = transitionsRemovedFromRotation.indexOf(patternId);
+
+        if (index === -1) {
+          // Remove from rotation
+          transitionsRemovedFromRotation.push(patternId);
+          updateStatus(`Removed from rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`, false);
+          console.log(`[Transition Rotation] Removed "${patternId}" from rotation`);
+        } else {
+          // Add back to rotation
+          transitionsRemovedFromRotation.splice(index, 1);
+          updateStatus(`Added to rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`, false);
+          console.log(`[Transition Rotation] Added "${patternId}" to rotation`);
+        }
+
+        saveTransitionRotation();
+        updateTransitionCountDisplay();
+        updateTransitionDropdown(); // Update dropdown with check/X indicators
+        updateBlacklistTransitionButton();
+
+        // Update enabled patterns in butterchurn (only if random is selected)
+        if (visualizer && selectedTransitionPattern === "random") {
+          const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) => parseInt(p, 10));
+          visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
+        }
+      };
+
+      // Save transition rotation list to localStorage
+      function saveTransitionRotation() {
+        try {
+          localStorage.setItem(TRANSITION_ROTATION_STORAGE_KEY, JSON.stringify(transitionsRemovedFromRotation));
+        } catch (error) {
+          console.error("[Transition Rotation] Error saving rotation list:", error);
+        }
+      }
+
+      // Update transition blacklist button appearance
+      function updateBlacklistTransitionButton() {
+        const blacklistBtn = document.getElementById("blacklist-transition-btn");
+        if (!blacklistBtn) return;
+
+        const transitionSelect = document.getElementById("transition-select");
+        if (!transitionSelect || !transitionSelect.value || transitionSelect.value === "random") {
+          blacklistBtn.disabled = true;
+          blacklistBtn.style.opacity = "0.5";
+          blacklistBtn.textContent = "Disable";
+          return;
+        }
+
+        const patternId = transitionSelect.value;
+        blacklistBtn.disabled = false;
+        blacklistBtn.style.opacity = "1";
+
+        const isRemovedFromRotation = transitionsRemovedFromRotation.includes(patternId);
+
+        if (isRemovedFromRotation) {
+          blacklistBtn.style.background = "linear-gradient(135deg, #f5576c 0%, #f093fb 100%)";
+          blacklistBtn.textContent = "Enable";
+          blacklistBtn.title = `Enable in rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`;
+        } else {
+          blacklistBtn.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+          blacklistBtn.textContent = "Disable";
+          blacklistBtn.title = `Disable from rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`;
+        }
+      }
+
       // Update rotation button appearance
       async function updateBlacklistButton() {
         const blacklistBtn = document.getElementById("blacklist-btn");
@@ -1122,6 +1402,8 @@
       const presetSelect = document.getElementById("preset-select");
       const presetSearch = document.getElementById("preset-search");
       const presetCountDisplay = document.getElementById("preset-count-display");
+      const transitionSelect = document.getElementById("transition-select");
+      const transitionCountDisplay = document.getElementById("transition-count-display");
       const startSystemAudioBtn = document.getElementById("start-system-audio-btn");
       const startMicrophoneBtn = document.getElementById("start-microphone-btn");
       const stopAudioBtn = document.getElementById("stop-audio-btn");
@@ -1201,10 +1483,32 @@
           const blendSlider = document.getElementById("blend-slider");
           const blendValue = document.getElementById("blend-value");
           if (blendSlider && blendValue) {
-            const blendDefault = parseFloat(blendSlider.value) || 0.5;
+            // Try to load saved blend time from localStorage
+            let blendDefault = 0.5;
+            try {
+              const savedBlendTime = localStorage.getItem("butterchurn-blend-time");
+              if (savedBlendTime !== null) {
+                const parsed = parseFloat(savedBlendTime);
+                if (!isNaN(parsed) && parsed >= 0 && parsed <= 30) {
+                  blendDefault = parsed;
+                }
+              } else {
+                blendDefault = parseFloat(blendSlider.value) || 0.5;
+              }
+            } catch (error) {
+              blendDefault = parseFloat(blendSlider.value) || 0.5;
+            }
             blendSlider.value = blendDefault;
             blendSlider.setAttribute("value", blendDefault);
-            blendValue.textContent = blendDefault + "s";
+            blendValue.textContent = blendDefault.toFixed(1) + "s";
+
+            // Also sync beat blend slider
+            const beatBlendSlider = document.getElementById("beat-blend-slider");
+            const beatBlendValue = document.getElementById("beat-blend-value");
+            if (beatBlendSlider && beatBlendValue) {
+              beatBlendSlider.value = blendDefault;
+              beatBlendValue.textContent = blendDefault.toFixed(1) + "s";
+            }
           }
 
           // Initialize preset duration slider, display, and variable
@@ -1219,8 +1523,92 @@
             presetDuration = durationDefault;
           }
 
-          // Set blend slider max based on preset duration
-          updateBlendSliderMax();
+          // Set blend slider constraints based on current mode and constraints
+          updateBlendSliderConstraints();
+
+          // Initialize transition trigger and beat detection controls
+          try {
+            // Load transition trigger mode from localStorage
+            const savedTriggerMode = localStorage.getItem("butterchurn-transition-trigger");
+            const triggerMode = savedTriggerMode === "beat" || savedTriggerMode === "time" ? savedTriggerMode : useBeatDetection ? "beat" : "time";
+
+            // Set trigger mode
+            const triggerSelect = document.getElementById("transition-trigger-select");
+            if (triggerSelect) {
+              triggerSelect.value = triggerMode;
+            }
+
+            // Update useBeatDetection based on trigger mode
+            useBeatDetection = triggerMode === "beat";
+
+            // Show/hide appropriate controls
+            const timeControls = document.getElementById("time-mode-controls");
+            const beatControls = document.getElementById("beat-mode-controls");
+            if (timeControls && beatControls) {
+              if (triggerMode === "time") {
+                timeControls.style.display = "block";
+                beatControls.style.display = "none";
+              } else {
+                timeControls.style.display = "none";
+                beatControls.style.display = "block";
+              }
+            }
+
+            // Load beat detection settings from localStorage
+            const savedBeatSensitivity = localStorage.getItem("butterchurn-beat-sensitivity");
+            if (savedBeatSensitivity !== null) {
+              const parsed = parseFloat(savedBeatSensitivity);
+              // Clamp to valid range (0.1 - 3.0)
+              if (!isNaN(parsed)) {
+                beatSensitivity = Math.max(0.1, Math.min(3.0, parsed));
+              } else {
+                beatSensitivity = CONFIG.BEAT_SENSITIVITY;
+              }
+            }
+
+            const savedBeatInterval = localStorage.getItem("butterchurn-beat-interval");
+            if (savedBeatInterval !== null) {
+              beatMinInterval = parseInt(savedBeatInterval) || CONFIG.BEAT_MIN_INTERVAL;
+            }
+
+            // Update beat mode UI controls
+            const beatSensitivitySlider = document.getElementById("beat-sensitivity-slider");
+            const beatSensitivityValue = document.getElementById("beat-sensitivity-value");
+            if (beatSensitivitySlider && beatSensitivityValue) {
+              beatSensitivitySlider.value = beatSensitivity;
+              beatSensitivityValue.textContent = beatSensitivity.toFixed(1);
+            }
+
+            const beatIntervalSlider = document.getElementById("beat-interval-slider");
+            const beatIntervalValue = document.getElementById("beat-interval-value");
+            if (beatIntervalSlider && beatIntervalValue) {
+              beatIntervalSlider.value = beatMinInterval;
+              // Show in seconds if >= 1000ms, otherwise show in ms
+              if (beatMinInterval >= 1000) {
+                const seconds = (beatMinInterval / 1000).toFixed(1);
+                beatIntervalValue.textContent = seconds + "s";
+              } else {
+                beatIntervalValue.textContent = beatMinInterval + "ms";
+              }
+            }
+
+            // Initialize beat blend time slider (sync with regular blend time)
+            const beatBlendSlider = document.getElementById("beat-blend-slider");
+            const blendSlider = document.getElementById("blend-slider");
+            if (beatBlendSlider && blendSlider) {
+              const blendTime = parseFloat(blendSlider.value) || 0.5;
+              beatBlendSlider.value = blendTime;
+              const beatBlendValue = document.getElementById("beat-blend-value");
+              if (beatBlendValue) {
+                beatBlendValue.textContent = blendTime.toFixed(1) + "s";
+              }
+            }
+
+            // Update blend slider constraints based on current mode
+            updateBlendSliderConstraints();
+          } catch (error) {
+            console.warn("[Transition Trigger] Error initializing:", error);
+          }
         } catch (error) {
           console.warn("[Sliders] Error initializing sliders:", error);
         }
@@ -1819,8 +2207,9 @@
         // Always clear any existing timer first - ensure only ONE timer exists
         clearAutoAdvanceTimer();
 
-        // Only start if auto-advance is enabled
-        if (!isPresetAutoAdvance || currentPresets.length === 0) {
+        // Only start if auto-advance is enabled and beat detection is disabled
+        // (beat detection handles its own timing)
+        if (!isPresetAutoAdvance || currentPresets.length === 0 || useBeatDetection) {
           return;
         }
 
@@ -1963,7 +2352,17 @@
           const preset = presets[presetName];
           const blendTime = getValidatedBlendTime();
 
-          visualizer.loadPreset(preset, blendTime);
+          // Log transition info
+          if (blendTime > 0) {
+            console.log(`[Preset Transition] Starting transition to "${presetName}" ` + `with ${blendTime.toFixed(2)}s blend time`);
+          } else {
+            console.log(`[Preset] Loading "${presetName}" (no transition)`);
+          }
+
+          // Get blend pattern type (null = random, or specific type 1-9)
+          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+
+          visualizer.loadPreset(preset, blendTime, blendPatternType);
 
           // Update current preset index if it's in currentPresets
           const index = currentPresets.indexOf(presetName);
@@ -2402,8 +2801,19 @@
       // Initialize
       async function init() {
         try {
-          // Initialize rotation list first
+          // Initialize rotation lists first (before creating visualizer)
           initializeRotation();
+          initializeTransitionRotation();
+
+          // Initialize transition pattern selection from localStorage
+          try {
+            const savedTransition = localStorage.getItem("butterchurn-selected-transition");
+            if (savedTransition !== null && (savedTransition === "random" || ALL_TRANSITION_PATTERNS.includes(savedTransition))) {
+              selectedTransitionPattern = savedTransition;
+            }
+          } catch (error) {
+            console.warn("[Transition] Error loading saved transition:", error);
+          }
 
           // Check browser support
           if (!checkSupport()) {
@@ -2445,6 +2855,23 @@
               height: canvas.height,
               pixelRatio: window.devicePixelRatio || 1,
             });
+
+            // Initialize transition pattern settings in butterchurn
+            try {
+              // Set blend pattern type
+              const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+              visualizer.setBlendPatternType(blendPatternType);
+
+              // Set enabled patterns for random selection (only if random is selected)
+              if (selectedTransitionPattern === "random") {
+                const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) =>
+                  parseInt(p, 10)
+                );
+                visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
+              }
+            } catch (error) {
+              console.warn("[Transition] Error initializing transition settings:", error);
+            }
           } catch (error) {
             updateStatus("Failed to create visualizer: " + error.message, true);
             return;
@@ -2487,6 +2914,12 @@
 
           updateStatus(CONFIG.READY_MESSAGE, false);
 
+          // Check if butterchurn needs to be rebuilt for blend pattern logging
+          console.log(
+            "[Info] Blend pattern type logging is available after rebuilding butterchurn. " +
+              "Run rebuild-butterchurn.bat to see blend pattern types in console."
+          );
+
           // Update GitHub link from config
           const githubLink = document.getElementById("butterchurn-github-link");
           if (githubLink) {
@@ -2510,6 +2943,23 @@
             shuffleCheckbox.checked = isShuffleEnabled;
           }
 
+          // Initialize transition pattern selection UI
+          try {
+            updateTransitionDropdown(); // Populate dropdown with check/X indicators
+            if (transitionSelect) {
+              transitionSelect.value = selectedTransitionPattern;
+            }
+            updateBlacklistTransitionButton();
+            updateTransitionCountDisplay();
+
+            // Log transition rotation info
+            if (transitionsRemovedFromRotation.length > 0) {
+              console.log(`[Transition Rotation] ${transitionsRemovedFromRotation.length} patterns removed from rotation`);
+            }
+          } catch (error) {
+            console.warn("[Transition] Error initializing transition selection UI:", error);
+          }
+
           // Start preset auto-advance if enabled by default
           if (isPresetAutoAdvance && currentPresets.length > 0) {
             // Initialize shuffle history if shuffle is enabled
@@ -2518,6 +2968,7 @@
               shuffledHistoryIndex = 0;
             }
             // Timer will start after initial preset loads via loadPresetByIndex()
+            // (but only if beat detection is disabled)
             if (presetPlayPauseBtn) {
               presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
             }
@@ -2696,9 +3147,18 @@
           console.log("[Preset] Preset data:", preset ? "found" : "missing");
 
           const blendTime = getValidatedBlendTime();
-          console.log(`[Preset] Loading with blend time: ${blendTime}s`);
 
-          visualizer.loadPreset(preset, blendTime);
+          // Log transition info
+          if (blendTime > 0) {
+            console.log(`[Preset Transition] Starting transition to "${presetName}" ` + `with ${blendTime.toFixed(2)}s blend time`);
+          } else {
+            console.log(`[Preset] Loading "${presetName}" (no transition)`);
+          }
+
+          // Get blend pattern type (null = random, or specific type 1-9)
+          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+
+          visualizer.loadPreset(preset, blendTime, blendPatternType);
 
           currentPresetIndex = index;
 
@@ -2834,96 +3294,348 @@
 
       function updateBlendTime(value) {
         const blendSlider = document.getElementById("blend-slider");
-        const presetDurationSlider = document.getElementById("preset-duration-slider");
-        const blendValueDisplay = document.getElementById("blend-value");
+        if (!blendSlider) return;
 
-        if (!blendSlider || !presetDurationSlider || !blendValueDisplay) return;
+        let blendTime = parseFloat(value);
 
-        const blendTime = parseFloat(value);
-        const presetDuration = parseFloat(presetDurationSlider.value);
+        // Update constraints first (this will set max and adjust value if needed)
+        updateBlendSliderConstraints();
 
-        // Calculate max blend time (30 or presetDuration - 0.1, whichever is smaller)
-        const maxBlendTime = Math.min(30, Math.max(0, presetDuration - 0.1));
+        // Ensure value doesn't exceed current max
+        const maxValue = parseFloat(blendSlider.max);
+        blendTime = Math.min(blendTime, maxValue);
+        blendTime = Math.max(blendTime, 0);
 
-        // Ensure blend time is less than preset duration and within max
-        let validBlendTime = Math.min(blendTime, maxBlendTime);
-        if (validBlendTime >= presetDuration) {
-          validBlendTime = Math.max(0, presetDuration - 0.1);
+        // Set slider value
+        blendSlider.value = blendTime.toFixed(2);
+
+        // Sync with beat blend slider
+        const beatBlendSlider = document.getElementById("beat-blend-slider");
+        if (beatBlendSlider) {
+          beatBlendSlider.value = blendTime.toFixed(2);
         }
 
-        // Update slider value to match validated value
-        blendSlider.value = validBlendTime;
+        // Update displays
+        const blendValueDisplay = document.getElementById("blend-value");
+        if (blendValueDisplay) {
+          blendValueDisplay.textContent = blendTime.toFixed(1) + "s";
+        }
+        const beatBlendValue = document.getElementById("beat-blend-value");
+        if (beatBlendValue) {
+          beatBlendValue.textContent = blendTime.toFixed(1) + "s";
+        }
 
-        // Update slider max to ensure it's correct
-        updateBlendSliderMax();
+        // Update constraints again to check warnings
+        updateBlendSliderConstraints();
 
-        // Always update display to match the actual slider value after all updates
-        const finalBlendTime = parseFloat(blendSlider.value);
-        blendValueDisplay.textContent = finalBlendTime + "s";
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-blend-time", blendTime.toString());
+        } catch (error) {
+          console.warn("[Blend Time] Error saving:", error);
+        }
       }
 
-      // Helper function to update blend slider max based on preset duration (capped at 30)
-      function updateBlendSliderMax() {
+      // Update blend slider max and position based on valid constraints
+      function updateBlendSliderConstraints() {
         const blendSlider = document.getElementById("blend-slider");
-        const presetDurationSlider = document.getElementById("preset-duration-slider");
-        const blendValueDisplay = document.getElementById("blend-value");
+        const beatBlendSlider = document.getElementById("beat-blend-slider");
+        const triggerSelect = document.getElementById("transition-trigger-select");
+        const isBeatMode = triggerSelect && triggerSelect.value === "beat";
 
-        if (blendSlider && presetDurationSlider) {
-          const presetDuration = parseFloat(presetDurationSlider.value);
-          const maxBlendTime = Math.min(30, Math.max(0, presetDuration - 0.1)); // Max is 30, but can't be >= preset duration
-          blendSlider.max = maxBlendTime;
+        // Determine which slider is active and get constraints
+        const activeSlider = isBeatMode ? beatBlendSlider : blendSlider;
+        const inactiveSlider = isBeatMode ? blendSlider : beatBlendSlider;
 
-          // Ensure current blend time doesn't exceed the new max or preset duration
-          const currentBlendTime = parseFloat(blendSlider.value);
-          let validBlendTime = currentBlendTime;
+        let maxBlendTime = 30; // Default max (absolute max)
+        let warningEl = null;
+        let valueDisplay = null;
 
-          if (currentBlendTime >= presetDuration || currentBlendTime > maxBlendTime) {
-            validBlendTime = maxBlendTime;
-            blendSlider.value = validBlendTime;
+        if (isBeatMode) {
+          // Beat mode: constrained by min beat interval
+          const intervalSlider = document.getElementById("beat-interval-slider");
+          if (intervalSlider) {
+            const minIntervalMs = parseFloat(intervalSlider.value);
+            const minIntervalSeconds = minIntervalMs / 1000;
+            maxBlendTime = Math.min(30, Math.max(0, minIntervalSeconds - 0.05));
+          }
+          warningEl = document.getElementById("blend-time-warning");
+          valueDisplay = document.getElementById("beat-blend-value");
+        } else {
+          // Time mode: constrained by preset duration
+          const presetDurationSlider = document.getElementById("preset-duration-slider");
+          if (presetDurationSlider) {
+            const presetDuration = parseFloat(presetDurationSlider.value);
+            maxBlendTime = Math.min(30, Math.max(0, presetDuration - 0.1));
+          }
+          warningEl = document.getElementById("blend-time-preset-warning");
+          valueDisplay = document.getElementById("blend-value");
+        }
+
+        // Update both sliders
+        if (activeSlider) {
+          const currentValue = parseFloat(activeSlider.value) || 0;
+
+          // Set max based on constraint
+          activeSlider.max = maxBlendTime;
+
+          // Adjust position if current value exceeds max
+          if (currentValue > maxBlendTime) {
+            activeSlider.value = maxBlendTime.toFixed(2);
+            if (warningEl) warningEl.style.display = "block";
+          } else {
+            if (warningEl) warningEl.style.display = "none";
           }
 
-          // Always update display to match the actual slider value
-          if (blendValueDisplay) {
-            const finalBlendTime = parseFloat(blendSlider.value);
-            blendValueDisplay.textContent = finalBlendTime + "s";
+          // Update display
+          if (valueDisplay) {
+            const finalValue = parseFloat(activeSlider.value);
+            valueDisplay.textContent = finalValue.toFixed(1) + "s";
           }
+
+          // Sync with inactive slider
+          if (inactiveSlider) {
+            inactiveSlider.value = activeSlider.value;
+            inactiveSlider.max = maxBlendTime;
+            const inactiveValueDisplay = isBeatMode ? document.getElementById("blend-value") : document.getElementById("beat-blend-value");
+            if (inactiveValueDisplay) {
+              inactiveValueDisplay.textContent = parseFloat(activeSlider.value).toFixed(1) + "s";
+            }
+          }
+        }
+
+        // Also update inactive slider's max for consistency
+        if (inactiveSlider) {
+          inactiveSlider.max = maxBlendTime;
         }
       }
 
-      // Helper function to get validated blend time (ensures it's < preset duration)
+      // Helper function to update blend slider max based on preset duration (legacy, kept for compatibility)
+      function updateBlendSliderMax() {
+        updateBlendSliderConstraints();
+      }
+
+      // Helper function to get validated blend time (respects preset duration or min beat interval)
       function getValidatedBlendTime() {
         const blendSlider = document.getElementById("blend-slider");
         const presetDurationSlider = document.getElementById("preset-duration-slider");
+        const beatBlendSlider = document.getElementById("beat-blend-slider");
+        const intervalSlider = document.getElementById("beat-interval-slider");
 
-        if (!blendSlider || !presetDurationSlider) {
+        if (!blendSlider) {
           return 0.5; // Default fallback
         }
 
-        const blendTime = parseFloat(blendSlider.value);
-        const presetDuration = parseFloat(presetDurationSlider.value);
+        // Check which mode we're in
+        const triggerSelect = document.getElementById("transition-trigger-select");
+        const isBeatMode = triggerSelect && triggerSelect.value === "beat";
 
-        // Ensure blend time is less than preset duration
-        if (blendTime >= presetDuration) {
-          const validBlendTime = Math.max(0, presetDuration - 0.1);
-          blendSlider.value = validBlendTime;
-          document.getElementById("blend-value").textContent = validBlendTime + "s";
-          return validBlendTime;
+        let blendTime;
+        if (isBeatMode && beatBlendSlider) {
+          // Use beat blend slider value
+          blendTime = parseFloat(beatBlendSlider.value);
+          // Validate against min beat interval
+          if (intervalSlider) {
+            const minIntervalMs = parseFloat(intervalSlider.value);
+            const minIntervalSeconds = minIntervalMs / 1000;
+            blendTime = Math.min(blendTime, minIntervalSeconds - 0.05);
+          }
+        } else {
+          // Use regular blend slider value
+          blendTime = parseFloat(blendSlider.value);
+          // Validate against preset duration
+          if (presetDurationSlider) {
+            const presetDuration = parseFloat(presetDurationSlider.value);
+            blendTime = Math.min(blendTime, presetDuration - 0.1);
+          }
         }
 
-        return blendTime;
+        // Cap at slider max (30) and ensure positive
+        return Math.max(0, Math.min(blendTime, 30));
       }
 
       window.updatePresetDuration = function (value) {
         presetDuration = parseFloat(value);
         document.getElementById("preset-duration-value").textContent = value + "s";
 
-        // Update blend slider max and validate blend time
-        updateBlendSliderMax();
+        // Update blend slider constraints (max and position) based on new preset duration
+        updateBlendSliderConstraints();
 
-        // Restart timer with new duration if auto-advance is active
+        // Restart timer with new duration if auto-advance is active and not using beat detection
         // Simply restart the timer - this will give the current preset the new duration
-        if (isPresetAutoAdvance) {
+        if (isPresetAutoAdvance && !useBeatDetection) {
           resetAutoAdvanceTimer();
+        }
+      };
+
+      // Transition trigger handler
+      window.onTransitionTriggerChange = function () {
+        const triggerSelect = document.getElementById("transition-trigger-select");
+        const triggerMode = triggerSelect.value; // "time" or "beat"
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-transition-trigger", triggerMode);
+        } catch (error) {
+          console.warn("[Transition Trigger] Error saving setting:", error);
+        }
+
+        // Show/hide appropriate controls
+        const timeControls = document.getElementById("time-mode-controls");
+        const beatControls = document.getElementById("beat-mode-controls");
+
+        if (triggerMode === "time") {
+          useBeatDetection = false;
+          if (timeControls) timeControls.style.display = "block";
+          if (beatControls) beatControls.style.display = "none";
+          // Update blend slider constraints for time mode
+          updateBlendSliderConstraints();
+          // Restart timer-based auto-advance
+          if (isPresetAutoAdvance) {
+            startAutoAdvanceTimer();
+          }
+          window.beatDetectionDebug = false;
+          console.log("[Transition Trigger] Switched to Time-based mode");
+        } else {
+          useBeatDetection = true;
+          if (timeControls) timeControls.style.display = "none";
+          if (beatControls) beatControls.style.display = "block";
+          // Clear timer when switching to beat detection mode
+          clearAutoAdvanceTimer();
+          // Reset beat detection state
+          energyHistory = [];
+          lastBeatTime = 0;
+          averageEnergy = 0;
+          varianceEnergy = 0;
+          window.beatDebugFrameCount = 0;
+          // Enable debug logging by default when beat detection is enabled
+          window.beatDetectionDebug = true;
+          console.log("[Transition Trigger] Switched to Beat-based mode - Debug logging active");
+          console.log("[Beat Detection] Use window.beatDetectionDebug = false to disable debug messages");
+
+          // Update blend slider constraints for beat mode
+          updateBlendSliderConstraints();
+        }
+      };
+
+      // Update beat-based blend time (syncs with regular blend time)
+      window.updateBeatBlendTime = function (value) {
+        const beatBlendSlider = document.getElementById("beat-blend-slider");
+        if (!beatBlendSlider) return;
+
+        let blendTime = parseFloat(value);
+
+        // Update constraints first (this will set max and adjust value if needed)
+        updateBlendSliderConstraints();
+
+        // Ensure value doesn't exceed current max
+        const maxValue = parseFloat(beatBlendSlider.max);
+        blendTime = Math.min(blendTime, maxValue);
+        blendTime = Math.max(blendTime, 0);
+
+        // Set slider value
+        beatBlendSlider.value = blendTime.toFixed(2);
+
+        // Sync with regular blend time slider
+        const regularBlendSlider = document.getElementById("blend-slider");
+        if (regularBlendSlider) {
+          regularBlendSlider.value = blendTime.toFixed(2);
+        }
+
+        // Update displays
+        const blendValue = document.getElementById("beat-blend-value");
+        if (blendValue) {
+          blendValue.textContent = blendTime.toFixed(1) + "s";
+        }
+        const regularBlendValue = document.getElementById("blend-value");
+        if (regularBlendValue) {
+          regularBlendValue.textContent = blendTime.toFixed(1) + "s";
+        }
+
+        // Update constraints again to check warnings
+        updateBlendSliderConstraints();
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-blend-time", blendTime.toString());
+        } catch (error) {
+          console.warn("[Blend Time] Error saving:", error);
+        }
+      };
+
+      // Validate that blend time < min beat interval
+      function validateBeatBlendTime() {
+        const blendSlider = document.getElementById("beat-blend-slider");
+        const intervalSlider = document.getElementById("beat-interval-slider");
+        const warningEl = document.getElementById("blend-time-warning");
+
+        if (!blendSlider || !intervalSlider) return;
+
+        const blendTimeSeconds = parseFloat(blendSlider.value);
+        const minIntervalMs = parseFloat(intervalSlider.value);
+        const minIntervalSeconds = minIntervalMs / 1000;
+
+        if (blendTimeSeconds >= minIntervalSeconds) {
+          // Show warning and adjust blend time
+          if (warningEl) {
+            warningEl.style.display = "block";
+          }
+          // Clamp blend time to be slightly less than min interval
+          const maxBlendTime = Math.max(0, minIntervalSeconds - 0.05);
+          blendSlider.value = maxBlendTime.toFixed(2);
+          const blendValue = document.getElementById("beat-blend-value");
+          if (blendValue) {
+            blendValue.textContent = maxBlendTime.toFixed(2) + "s";
+          }
+          // Also sync regular blend slider
+          const regularBlendSlider = document.getElementById("blend-slider");
+          if (regularBlendSlider) {
+            regularBlendSlider.value = maxBlendTime.toFixed(2);
+            document.getElementById("blend-value").textContent = maxBlendTime.toFixed(2) + "s";
+          }
+        } else {
+          if (warningEl) {
+            warningEl.style.display = "none";
+          }
+        }
+      }
+
+      window.updateBeatSensitivity = function (value) {
+        beatSensitivity = parseFloat(value);
+        const displayEl = document.getElementById("beat-sensitivity-value");
+        if (displayEl) {
+          displayEl.textContent = beatSensitivity.toFixed(1);
+        }
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-beat-sensitivity", beatSensitivity.toString());
+        } catch (error) {
+          console.warn("[Beat Detection] Error saving sensitivity:", error);
+        }
+      };
+
+      window.updateBeatInterval = function (value) {
+        beatMinInterval = parseInt(value);
+        const displayEl = document.getElementById("beat-interval-value");
+        if (displayEl) {
+          // Show in seconds if >= 1000ms, otherwise show in ms
+          if (beatMinInterval >= 1000) {
+            const seconds = (beatMinInterval / 1000).toFixed(1);
+            displayEl.textContent = seconds + "s";
+          } else {
+            displayEl.textContent = beatMinInterval + "ms";
+          }
+        }
+
+        // Update blend slider constraints (max and position) based on new min beat interval
+        updateBlendSliderConstraints();
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-beat-interval", beatMinInterval.toString());
+        } catch (error) {
+          console.warn("[Beat Detection] Error saving interval:", error);
         }
       };
 
@@ -3682,10 +4394,126 @@
         }
       }
 
+      // Beat detection algorithm
+      function detectBeat() {
+        if (!visualizer || !useBeatDetection || !isPresetAutoAdvance) {
+          return false;
+        }
+
+        try {
+          // Get audio levels from visualizer's renderer
+          // Access via renderer property (which butterchurn exposes internally)
+          const renderer = visualizer.renderer;
+          if (!renderer || !renderer.audioLevels) return false;
+
+          const audioLevels = renderer.audioLevels;
+
+          // Calculate current energy from bass, mid, and treb
+          // Weight bass more heavily for beat detection
+          const currentEnergy = audioLevels.bass * 0.6 + audioLevels.mid * 0.3 + audioLevels.treb * 0.1;
+
+          // Add to history
+          energyHistory.push(currentEnergy);
+          if (energyHistory.length > energyHistorySize) {
+            energyHistory.shift();
+          }
+
+          // Need enough history to detect beats
+          if (energyHistory.length < 10) {
+            return false;
+          }
+
+          // Calculate average and variance
+          let sum = 0;
+          for (let i = 0; i < energyHistory.length; i++) {
+            sum += energyHistory[i];
+          }
+          averageEnergy = sum / energyHistory.length;
+
+          // Calculate variance
+          let varianceSum = 0;
+          for (let i = 0; i < energyHistory.length; i++) {
+            const diff = energyHistory[i] - averageEnergy;
+            varianceSum += diff * diff;
+          }
+          varianceEnergy = varianceSum / energyHistory.length;
+          const stdDev = Math.sqrt(varianceEnergy);
+
+          // Dynamic threshold: higher sensitivity = lower threshold = more sensitive
+          // Invert sensitivity: threshold = average + (stdDev / sensitivity)
+          // So higher sensitivity value = lower threshold = detects more beats
+          const threshold = averageEnergy + stdDev / beatSensitivity;
+
+          // Check for beat
+          const now = Date.now();
+          const timeSinceLastBeat = now - lastBeatTime;
+
+          // Debug logging (only log occasionally to avoid spam)
+          if (window.beatDetectionDebug) {
+            // Log every 30 frames (roughly once per second at 30fps)
+            if (!window.beatDebugFrameCount) window.beatDebugFrameCount = 0;
+            window.beatDebugFrameCount++;
+
+            if (window.beatDebugFrameCount % 30 === 0) {
+              console.log(
+                `[Beat Detection] Energy: ${currentEnergy.toFixed(3)}, ` +
+                  `Threshold: ${threshold.toFixed(3)}, ` +
+                  `Avg: ${averageEnergy.toFixed(3)}, ` +
+                  `StdDev: ${stdDev.toFixed(3)}, ` +
+                  `Bass: ${audioLevels.bass.toFixed(3)}, ` +
+                  `Mid: ${audioLevels.mid.toFixed(3)}, ` +
+                  `Treb: ${audioLevels.treb.toFixed(3)}`
+              );
+            }
+          }
+
+          if (currentEnergy > threshold && timeSinceLastBeat > beatMinInterval) {
+            lastBeatTime = now;
+
+            // Log beat detection
+            console.log(
+              `[Beat Detection] 🎵 BEAT DETECTED! ` +
+                `Energy: ${currentEnergy.toFixed(3)} > Threshold: ${threshold.toFixed(3)} ` +
+                `(Bass: ${audioLevels.bass.toFixed(2)}, Mid: ${audioLevels.mid.toFixed(2)}, Treb: ${audioLevels.treb.toFixed(2)})`
+            );
+
+            return true;
+          }
+
+          return false;
+        } catch (error) {
+          console.error("Beat detection error:", error);
+          return false;
+        }
+      }
+
       function render() {
         if (visualizer) {
           try {
             visualizer.render();
+
+            // Check for beat if beat detection is enabled
+            if (detectBeat()) {
+              // Beat detected - trigger preset change
+              isAutoTransition = true;
+
+              // Clear any existing timer since we're using beat detection
+              clearAutoAdvanceTimer();
+
+              // Check if current preset is disabled
+              const currentPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
+              if (currentPresetName && presetsRemovedFromRotation.includes(currentPresetName)) {
+                // Skip disabled presets
+                return;
+              }
+
+              // Change preset on beat
+              if (isShuffleEnabled) {
+                randomPreset();
+              } else {
+                nextPreset();
+              }
+            }
           } catch (error) {
             console.error("Render error:", error);
           }
@@ -3751,6 +4579,9 @@
           return;
         }
 
+        // Define key variable early so it's available for all checks
+        const key = e.key.toLowerCase();
+
         // Only process shortcuts without modifier keys
         if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
           // Arrow key navigation for presets
@@ -3767,7 +4598,6 @@
           }
 
           // Keyboard shortcuts
-          const key = e.key.toLowerCase();
 
           // Spacebar: Pause/Play presets
           if (e.key === " " && !isInputFocused) {
@@ -3820,8 +4650,8 @@
           }
         }
 
-        // Toggle auto-hide with H key
-        if (key === "h") {
+        // Toggle auto-hide with H key (only when no modifiers and input not focused)
+        if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey && !isInputFocused && key === "h") {
           e.preventDefault();
           toggleAutoHide();
           return;
