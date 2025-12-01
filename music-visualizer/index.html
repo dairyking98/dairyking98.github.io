@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -35,6 +35,8 @@
         width: 100vw;
         height: 100vh;
         z-index: 1;
+        will-change: contents;
+        transform: translateZ(0); /* Force GPU acceleration */
       }
 
       .control-section {
@@ -270,7 +272,12 @@
         opacity: 0;
         pointer-events: none;
         transform: translateY(-20px);
-        transition: all 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+        visibility: hidden;
+        contain: layout style paint;
+        content-visibility: hidden; /* Skip rendering when hidden */
       }
 
       .audio-source-panel {
@@ -334,7 +341,29 @@
 
       #playlists-panel {
         top: 20px;
-        right: 20px;
+        left: 380px;
+        width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      #playlists-panel::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      #playlists-panel::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      #playlists-panel::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      #playlists-panel::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
       }
 
       .panel-header {
@@ -471,6 +500,8 @@
         overflow-x: hidden;
         flex: 1;
         max-height: 350px;
+        contain: layout style paint;
+        will-change: scroll-position;
       }
 
       .preset-panel-list::-webkit-scrollbar {
@@ -495,6 +526,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        contain: layout style;
         padding: 8px;
         border-radius: 4px;
         cursor: pointer;
@@ -577,7 +609,19 @@
       // These must be defined before the HTML is fully parsed
       window.toggleAudioSourcePanel = function () {
         const audioPanel = document.getElementById("audio-source-panel");
-        if (audioPanel) audioPanel.classList.toggle("hidden");
+        const playlistsPanel = document.getElementById("playlists-panel");
+        if (audioPanel) {
+          const isHiding = !audioPanel.classList.contains("hidden");
+          audioPanel.classList.toggle("hidden");
+          // If hiding Audio Source panel and Playlists is open, slide it over
+          if (isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
+            // Move Playlists to where Audio Source panel was (left: 20px)
+            playlistsPanel.style.left = "20px";
+          } else if (!isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
+            // Restore Playlists position when Audio Source panel opens
+            playlistsPanel.style.left = "380px";
+          }
+        }
       };
       window.togglePresetsPanel = function () {
         const presetsPanel = document.getElementById("presets-panel");
@@ -604,7 +648,19 @@
       };
       window.togglePlaylistsPanel = function () {
         const playlistsPanel = document.getElementById("playlists-panel");
-        if (playlistsPanel) playlistsPanel.classList.toggle("hidden");
+        if (playlistsPanel) {
+          const isHiding = !playlistsPanel.classList.contains("hidden");
+          playlistsPanel.classList.toggle("hidden");
+          // Handle position based on audio source panel state
+          if (!playlistsPanel.classList.contains("hidden")) {
+            const audioPanel = document.getElementById("audio-source-panel");
+            if (audioPanel && !audioPanel.classList.contains("hidden")) {
+              playlistsPanel.style.left = "380px";
+            } else {
+              playlistsPanel.style.left = "20px";
+            }
+          }
+        }
       };
       window.handleStopPlayAudio = async function () {
         // This will be redefined later, but we need a placeholder
@@ -785,7 +841,7 @@
     <div class="control-panel audio-source-panel" id="audio-source-panel">
       <div class="panel-header">
         <h3>Audio Source</h3>
-        <button class="minimize-btn" onclick="toggleAudioSourcePanel()">−</button>
+        <button class="minimize-btn" onclick="toggleAudioSourcePanel()">âˆ’</button>
       </div>
 
       <div class="control-section">
@@ -803,18 +859,18 @@
         <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Radio Station</label>
         <select id="station-select" onchange="onStationSelect()" style="width: 100%; margin-bottom: 10px">
           <option value="">Select a station...</option>
-          <option value="bassdrive">🎵 Bassdrive Radio</option>
-          <option value="subfm">📻 Sub FM</option>
-          <option value="hardcorepower">⚡ Hardcore Power</option>
-          <option value="radio538-dance">📡 Radio 538 – Dance Department</option>
-          <option value="radio538-ibiza">📡 Radio 538 – Ibiza</option>
-          <option value="radio538-party">📡 Radio 538 – Party</option>
-          <option value="kissfm-nl">📡 Kiss FM NL – Dance / Club</option>
-          <option value="pinguin-radio">🎵 Pinguin Radio (Indie)</option>
-          <option value="dnbradio-main-mp3">🎧 DNBRadio - Main (320K MP3 US)</option>
-          <option value="dnbradio-plush">🎵 DNBRadio - Plush Recordings</option>
-          <option value="dnbradio-section8">⚡ DNBRadio - Section 8 Recordings</option>
-          <option value="dnbradio-darkstep">🌑 DNBRadio - Darkstep</option>
+          <option value="bassdrive">ðŸŽµ Bassdrive Radio</option>
+          <option value="subfm">ðŸ“» Sub FM</option>
+          <option value="hardcorepower">âš¡ Hardcore Power</option>
+          <option value="radio538-dance">ðŸ“¡ Radio 538 â€“ Dance Department</option>
+          <option value="radio538-ibiza">ðŸ“¡ Radio 538 â€“ Ibiza</option>
+          <option value="radio538-party">ðŸ“¡ Radio 538 â€“ Party</option>
+          <option value="kissfm-nl">ðŸ“¡ Kiss FM NL â€“ Dance / Club</option>
+          <option value="pinguin-radio">ðŸŽµ Pinguin Radio (Indie)</option>
+          <option value="dnbradio-main-mp3">ðŸŽ§ DNBRadio - Main (320K MP3 US)</option>
+          <option value="dnbradio-plush">ðŸŽµ DNBRadio - Plush Recordings</option>
+          <option value="dnbradio-section8">âš¡ DNBRadio - Section 8 Recordings</option>
+          <option value="dnbradio-darkstep">ðŸŒ‘ DNBRadio - Darkstep</option>
           <option value="custom">Custom URL...</option>
         </select>
         <div id="station-homepage-link" style="display: none; margin-top: 8px; margin-bottom: 10px">
@@ -833,7 +889,7 @@
               text-align: center;
               width: 100%;
             "
-            >🌐 Visit Station Homepage</a
+            >ðŸŒ Visit Station Homepage</a
           >
         </div>
         <div id="custom-url-container" style="display: none; margin-bottom: 10px">
@@ -870,7 +926,7 @@
           >
           <div class="search-container" style="margin-bottom: 10px">
             <input type="text" id="music-file-search" placeholder="Search music files..." oninput="onMusicFileSearchChange()" />
-            <button class="search-clear-btn hidden" id="search-clear-btn" onclick="clearMusicFileSearch()" title="Clear search">×</button>
+            <button class="search-clear-btn hidden" id="search-clear-btn" onclick="clearMusicFileSearch()" title="Clear search">Ã—</button>
           </div>
           <select id="music-file-select" onchange="onMusicFileSelectChange()" style="margin-bottom: 10px">
             <option value="">No files selected...</option>
@@ -881,9 +937,9 @@
       <!-- Playback Controls (shown when audio is playing) -->
       <div id="playback-controls" class="conditional-controls">
         <div class="playback-controls">
-          <button onclick="previousTrack()" id="prev-btn" style="min-width: 50px">⏮</button>
-          <button onclick="togglePlayPause()" id="play-pause-btn" style="flex: 1">⏸ Pause</button>
-          <button onclick="nextTrack()" id="next-btn" style="min-width: 50px">⏭</button>
+          <button onclick="previousTrack()" id="prev-btn" style="min-width: 50px">â®</button>
+          <button onclick="togglePlayPause()" id="play-pause-btn" style="flex: 1">â¸ Pause</button>
+          <button onclick="nextTrack()" id="next-btn" style="min-width: 50px">â­</button>
         </div>
         <div class="slider-group">
           <label style="min-width: 60px">Volume:</label>
@@ -933,7 +989,7 @@
     <div class="control-panel presets-panel hidden" id="playlists-panel">
       <div class="panel-header">
         <h3>Playlists</h3>
-        <button class="minimize-btn" onclick="togglePlaylistsPanel()">−</button>
+        <button class="minimize-btn" onclick="togglePlaylistsPanel()">âˆ’</button>
       </div>
 
       <div class="control-section">
@@ -1016,7 +1072,7 @@
     <div class="control-panel preset-list-panel hidden" id="preset-list-panel">
       <div class="panel-header">
         <h3>Preset List</h3>
-        <button class="minimize-btn" onclick="togglePresetListPanel()">−</button>
+        <button class="minimize-btn" onclick="togglePresetListPanel()">âˆ’</button>
       </div>
 
       <div class="control-section">
@@ -1061,7 +1117,7 @@
               transition: all 0.2s ease;
             "
           >
-            ×
+            Ã—
           </button>
         </div>
         <div style="margin-bottom: 10px">
@@ -1113,7 +1169,7 @@
     <div class="control-panel presets-panel" id="presets-panel">
       <div class="panel-header">
         <h3>Presets</h3>
-        <button class="minimize-btn" onclick="togglePresetsPanel()">−</button>
+        <button class="minimize-btn" onclick="togglePresetsPanel()">âˆ’</button>
       </div>
 
       <div class="control-section">
@@ -1133,28 +1189,10 @@
         <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
           ><span id="preset-count-display">0</span> presets available</label
         >
-        <button
-          onclick="togglePresetListPanel()"
-          style="
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-          "
-        >
-          Preset List [L]
-        </button>
         <div class="playback-controls">
-          <button onclick="previousPreset()" style="flex: 1">⏮ Previous [←]</button>
-          <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">▶ Play [Space]</button>
-          <button onclick="nextPreset()" style="flex: 1">Next [→] ⏭</button>
+          <button onclick="previousPreset()" style="flex: 1">â® Previous [â†]</button>
+          <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">â–¶ Play [Space]</button>
+          <button onclick="nextPreset()" style="flex: 1">Next [â†’] â­</button>
         </div>
 
         <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; align-items: center">
@@ -1310,11 +1348,11 @@
     <div
       class="control-panel presets-panel hidden"
       id="credits-panel"
-      style="bottom: 20px; right: 20px; top: auto; max-height: 60vh; overflow-y: auto"
+      style="top: 50%; left: 50%; transform: translate(-50%, -50%); max-height: 60vh; overflow-y: auto"
     >
       <div class="panel-header">
         <h3>Credits</h3>
-        <button class="minimize-btn" onclick="toggleCreditsPanel()">−</button>
+        <button class="minimize-btn" onclick="toggleCreditsPanel()">âˆ’</button>
       </div>
 
       <div class="control-section">
@@ -1352,12 +1390,13 @@
     <!-- Bottom Control Bar -->
     <div class="bottom-controls">
       <button onclick="toggleAudioSourcePanel()" id="audio-source-toggle-btn">Audio Source [A]</button>
-      <button onclick="togglePresetsPanel()" id="presets-toggle-btn">Presets [P]</button>
-      <button onclick="toggleCreditsPanel()" id="credits-toggle-btn">Credits [C]</button>
       <button onclick="togglePlaylistsPanel()" id="playlists-toggle-btn">Playlists [Q]</button>
-      <button onclick="toggleFullscreen()" id="fullscreen-btn">⛶ Fullscreen [F]</button>
-      <button onclick="saveScreenshot()" id="screenshot-btn">📷 Screenshot [S]</button>
+      <button onclick="togglePresetsPanel()" id="presets-toggle-btn">Presets [P]</button>
+      <button onclick="togglePresetListPanel()" id="preset-list-toggle-btn">Preset List [L]</button>
+      <button onclick="toggleFullscreen()" id="fullscreen-btn">â›¶ Fullscreen [F]</button>
+      <button onclick="saveScreenshot()" id="screenshot-btn">ðŸ“· Screenshot [S]</button>
       <button onclick="toggleAutoHide()" id="auto-hide-btn">Auto Hide (On) [H]</button>
+      <button onclick="toggleCreditsPanel()" id="credits-toggle-btn">Credits [C]</button>
     </div>
 
     <div
@@ -1445,22 +1484,22 @@
             homepage: "https://www.hardcorepower.nl/",
           },
           "radio538-dance": {
-            name: "Radio 538 – Dance Department",
+            name: "Radio 538 â€“ Dance Department",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR01.mp3",
             homepage: "https://www.538.nl/",
           },
           "radio538-ibiza": {
-            name: "Radio 538 – Ibiza",
+            name: "Radio 538 â€“ Ibiza",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR19.mp3",
             homepage: "https://www.538.nl/",
           },
           "radio538-party": {
-            name: "Radio 538 – Party",
+            name: "Radio 538 â€“ Party",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR16.mp3",
             homepage: "https://www.538.nl/",
           },
           "kissfm-nl": {
-            name: "Kiss FM NL – Dance / Club",
+            name: "Kiss FM NL â€“ Dance / Club",
             url: "https://stream.kissfm.nl/kissfm",
             homepage: "https://www.kissfm.nl/",
           },
@@ -1530,6 +1569,11 @@
       let presetAutoAdvanceInterval = null;
       let presetDuration = CONFIG.PRESET_DURATION; // seconds
       let isAutoTransition = false; // Flag to track if current transition is from auto-advance
+
+      // Performance optimization: debounce and lazy loading
+      let populatePresetPanelDebounceTimer = null;
+      let presetPanelPopulated = false; // Track if panel has been populated
+      let isPresetPanelVisible = false; // Track panel visibility
 
       // Beat detection state
       let useBeatDetection = CONFIG.USE_BEAT_DETECTION;
@@ -2831,7 +2875,7 @@
             if (savedAutoAdvance !== null) {
               isPresetAutoAdvance = savedAutoAdvance === "true";
               if (presetPlayPauseBtn) {
-                presetPlayPauseBtn.textContent = isPresetAutoAdvance ? "⏸ Pause [Space]" : "▶ Play [Space]";
+                presetPlayPauseBtn.textContent = isPresetAutoAdvance ? "â¸ Pause [Space]" : "â–¶ Play [Space]";
               }
             }
           } catch (error) {
@@ -2943,7 +2987,7 @@
             document.getElementById("internet-stream-controls").classList.add("active");
             // Reset play/pause button for internet stream (will be shown when stream loads)
             if (playPauseBtn) {
-              playPauseBtn.textContent = "▶ Play";
+              playPauseBtn.textContent = "â–¶ Play";
               playPauseBtn.disabled = false;
               playPauseBtn.style.opacity = "1";
               playPauseBtn.style.cursor = "pointer";
@@ -3190,10 +3234,13 @@
         const audioPanel = document.getElementById("audio-source-panel");
         const presetsPanel = document.getElementById("presets-panel");
 
+        // Check audio panel state before hiding (for playlists sliding logic)
+        let audioWasOpen = false;
         if (audioPanel) {
+          audioWasOpen = !audioPanel.classList.contains("hidden");
           // Store original state if not already stored
           if (!audioPanel.dataset.wasHidden) {
-            audioPanel.dataset.wasHidden = audioPanel.classList.contains("hidden") ? "true" : "false";
+            audioPanel.dataset.wasHidden = audioWasOpen ? "false" : "true";
           }
           audioPanel.classList.add("hidden");
         }
@@ -3211,7 +3258,7 @@
         }
 
         // Handle preset list panel: if both preset panel and preset list are open,
-        // slide preset list to the side to take preset panel's place
+        // slide preset list to the inside to take preset panel's place
         if (presetListPanel && presetsPanel) {
           const presetListWasHidden = presetListPanel.classList.contains("hidden");
 
@@ -3224,6 +3271,24 @@
             }
             // Slide preset list to where preset panel was (right: 20px)
             presetListPanel.style.right = "20px";
+          }
+        }
+
+        // Handle playlists panel: if both audio source panel and playlists are open,
+        // slide playlists to the inside to take audio source panel's place
+        const playlistsPanel = document.getElementById("playlists-panel");
+        if (playlistsPanel && audioPanel) {
+          const playlistsWasHidden = playlistsPanel.classList.contains("hidden");
+
+          // If playlists is open and audio source panel was open (before we just hid it)
+          if (!playlistsWasHidden && audioWasOpen) {
+            // Store original left position if not already stored
+            if (!playlistsPanel.dataset.originalLeft) {
+              const currentLeft = playlistsPanel.style.left || "380px";
+              playlistsPanel.dataset.originalLeft = currentLeft;
+            }
+            // Slide playlists to where audio source panel was (left: 20px)
+            playlistsPanel.style.left = "20px";
           }
         }
 
@@ -3281,6 +3346,15 @@
           delete presetListPanel.dataset.originalRight;
         }
 
+        // Restore playlists panel position if it was moved during autohide
+        const playlistsPanel = document.getElementById("playlists-panel");
+        if (playlistsPanel && playlistsPanel.dataset.originalLeft !== undefined) {
+          // Restore original position
+          playlistsPanel.style.left = playlistsPanel.dataset.originalLeft;
+          // Clear the stored position
+          delete playlistsPanel.dataset.originalLeft;
+        }
+
         const creditsPanel = document.getElementById("credits-panel");
         if (creditsPanel && creditsPanel.dataset.wasHidden !== undefined) {
           if (creditsPanel.dataset.wasHidden === "false") {
@@ -3333,9 +3407,9 @@
         const fullscreenBtn = document.getElementById("fullscreen-btn");
         if (fullscreenBtn) {
           if (document.fullscreenElement) {
-            fullscreenBtn.textContent = "⛶ Exit Fullscreen [F]";
+            fullscreenBtn.textContent = "â›¶ Exit Fullscreen [F]";
           } else {
-            fullscreenBtn.textContent = "⛶ Fullscreen [F]";
+            fullscreenBtn.textContent = "â›¶ Fullscreen [F]";
           }
         }
         // Reset timer on fullscreen change
@@ -3399,7 +3473,7 @@
           if (audioSource.paused) {
             audioSource.play();
             isPlaying = true;
-            playPauseBtn.textContent = "⏸ Pause";
+            playPauseBtn.textContent = "â¸ Pause";
 
             // MilkDrop3-style: reset beat detection state when resuming
             // Prevents stale scheduled transitions from firing immediately
@@ -3417,7 +3491,7 @@
           } else {
             audioSource.pause();
             isPlaying = false;
-            playPauseBtn.textContent = "▶ Play";
+            playPauseBtn.textContent = "â–¶ Play";
 
             // MilkDrop3-style: reset beat detection state when paused
             // Prevents stale data from causing transitions when resumed
@@ -3601,13 +3675,13 @@
         }
 
         if (isPresetAutoAdvance) {
-          presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
+          presetPlayPauseBtn.textContent = "â¸ Pause [Space]";
           // Reset auto-transition flag to prevent rapid transitions
           isAutoTransition = false;
           // Start auto-advance timer from current preset
           startAutoAdvanceTimer();
         } else {
-          presetPlayPauseBtn.textContent = "▶ Play [Space]";
+          presetPlayPauseBtn.textContent = "â–¶ Play [Space]";
           // Clear timer when pausing and reset auto-transition flag
           clearAutoAdvanceTimer();
           isAutoTransition = false;
@@ -3697,7 +3771,11 @@
               patternToUse === null ? "null" : patternToUse
             } to loadPreset)`
           );
-          visualizer.loadPreset(preset, blendTime, patternToUse);
+
+          // Use requestAnimationFrame to ensure smooth transition start
+          requestAnimationFrame(() => {
+            visualizer.loadPreset(preset, blendTime, patternToUse);
+          });
 
           // Update transition time tracking for beat detection
           lastTransitionTime = Date.now();
@@ -3810,11 +3888,28 @@
             shuffledHistoryIndex = -1;
           }
 
-          // Update current preset display
-          updateCurrentPresetDisplay();
-
-          // Update preset list highlighting
-          updatePresetListHighlighting();
+          // Update current preset display (defer during transitions for better performance)
+          if (blendTime > 0) {
+            // During transition, defer DOM updates
+            if (window.requestIdleCallback) {
+              requestIdleCallback(
+                () => {
+                  updateCurrentPresetDisplay();
+                  updatePresetListHighlighting();
+                },
+                { timeout: 200 }
+              );
+            } else {
+              setTimeout(() => {
+                updateCurrentPresetDisplay();
+                updatePresetListHighlighting();
+              }, 50);
+            }
+          } else {
+            // No transition, update immediately
+            updateCurrentPresetDisplay();
+            updatePresetListHighlighting();
+          }
 
           // Show preset name using butterchurn's built-in text animation (with longer duration)
           const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
@@ -3893,10 +3988,24 @@
 
       // togglePresetPanel removed - now using togglePresetListPanel for persistent panel
 
-      // Populate preset selection panel with checkboxes
-      async function populatePresetPanel() {
+      // Populate preset selection panel with checkboxes (lazy loading - only when visible)
+      async function populatePresetPanel(force = false) {
         const panelList = document.getElementById("preset-panel-list");
         if (!panelList) return;
+
+        // Check if preset panel is visible
+        const presetsPanel = document.getElementById("presets-panel");
+        const isVisible = presetsPanel && !presetsPanel.classList.contains("hidden");
+
+        // Lazy loading: only populate when panel is visible or forced
+        if (!isVisible && !force) {
+          presetPanelPopulated = false;
+          return;
+        }
+
+        // Mark as populated
+        presetPanelPopulated = true;
+        isPresetPanelVisible = isVisible;
 
         try {
           const presets = await butterchurnPresets.default.getPresets();
@@ -3951,6 +4060,9 @@
           // Store visible presets for Enable All/Disable All
           currentVisiblePresets = [...presetsToShow];
 
+          // Use DocumentFragment for better performance (batch DOM operations)
+          const fragment = document.createDocumentFragment();
+
           // Clear existing list
           panelList.innerHTML = "";
 
@@ -3998,34 +4110,46 @@
             item.appendChild(checkbox);
             item.appendChild(label);
             item.appendChild(ratingSpan);
-            panelList.appendChild(item);
+            fragment.appendChild(item);
           });
+
+          // Append fragment in one operation (better performance)
+          panelList.appendChild(fragment);
         } catch (error) {
           console.error("[Preset Panel] Error populating panel:", error);
         }
       }
 
-      // Update highlighting for current preset in the list
+      // Update highlighting for current preset in the list (only when panel is visible)
       function updatePresetListHighlighting() {
+        // Skip if panel is not visible (lazy loading optimization)
+        const presetsPanel = document.getElementById("presets-panel");
+        if (presetsPanel && presetsPanel.classList.contains("hidden")) {
+          return;
+        }
+
         const panelList = document.getElementById("preset-panel-list");
         if (!panelList) return;
 
-        // Remove "current" class from all items
-        const allItems = panelList.querySelectorAll(".preset-item");
-        allItems.forEach((item) => {
-          item.classList.remove("current");
-        });
+        // Use requestAnimationFrame to batch DOM updates
+        requestAnimationFrame(() => {
+          // Remove "current" class from all items
+          const allItems = panelList.querySelectorAll(".preset-item");
+          allItems.forEach((item) => {
+            item.classList.remove("current");
+          });
 
-        // Add "current" class to the item matching currentPresetName
-        if (currentPresetName) {
-          const currentItem = panelList.querySelector(`[data-preset-name="${CSS.escape(currentPresetName)}"]`);
-          if (currentItem) {
-            currentItem.classList.add("current");
+          // Add "current" class to the item matching currentPresetName
+          if (currentPresetName) {
+            const currentItem = panelList.querySelector(`[data-preset-name="${CSS.escape(currentPresetName)}"]`);
+            if (currentItem) {
+              currentItem.classList.add("current");
+            }
           }
-        }
+        });
       }
 
-      // Handle preset panel search
+      // Handle preset panel search (debounced for performance)
       window.onPresetPanelSearchChange = function () {
         const panelSearch = document.getElementById("preset-panel-search");
         const clearBtn = document.getElementById("preset-panel-search-clear-btn");
@@ -4039,9 +4163,15 @@
           }
         }
 
-        populatePresetPanel();
-        // Update count to show available presets (search + filter + checked)
-        updatePresetCountDisplay();
+        // Debounce preset panel updates to reduce lag during typing
+        if (populatePresetPanelDebounceTimer) {
+          clearTimeout(populatePresetPanelDebounceTimer);
+        }
+        populatePresetPanelDebounceTimer = setTimeout(() => {
+          populatePresetPanel();
+          // Update count to show available presets (search + filter + checked)
+          updatePresetCountDisplay();
+        }, 150); // 150ms debounce
       };
 
       // Clear preset panel search
@@ -4060,11 +4190,17 @@
         }
       };
 
-      // Handle preset panel rating filter change
+      // Handle preset panel rating filter change (debounced)
       window.onPresetPanelRatingFilterChange = function () {
-        populatePresetPanel();
-        // Update count to show available presets (search + filter + checked)
-        updatePresetCountDisplay();
+        // Debounce for smoother transitions
+        if (populatePresetPanelDebounceTimer) {
+          clearTimeout(populatePresetPanelDebounceTimer);
+        }
+        populatePresetPanelDebounceTimer = setTimeout(() => {
+          populatePresetPanel();
+          // Update count to show available presets (search + filter + checked)
+          updatePresetCountDisplay();
+        }, 100); // 100ms debounce for select changes
       };
 
       // Get available presets based on search/filter/sort + checked status
@@ -4705,7 +4841,7 @@
             // Timer will start after initial preset loads via loadPresetByIndex()
             // (but only if beat detection is disabled)
             if (presetPlayPauseBtn) {
-              presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
+              presetPlayPauseBtn.textContent = "â¸ Pause [Space]";
             }
           }
         } catch (error) {
@@ -4771,7 +4907,7 @@
               }`
             );
           } else {
-            console.log(`[Preset Loader] ✓ Successfully loaded ${presetCount} presets`);
+            console.log(`[Preset Loader] âœ“ Successfully loaded ${presetCount} presets`);
           }
         } catch (error) {
           console.error("Error loading presets:", error);
@@ -5674,7 +5810,7 @@
           scheduledTransitionTime = 0;
 
           updatePlaybackControlsVisibility();
-          playPauseBtn.textContent = "⏸ Pause";
+          playPauseBtn.textContent = "â¸ Pause";
           trackInfo.textContent = "Microphone Input";
           updateButtonStates();
 
@@ -5946,7 +6082,7 @@
               scheduledTransitionTime = 0;
 
               updatePlaybackControlsVisibility();
-              playPauseBtn.textContent = "⏸ Pause";
+              playPauseBtn.textContent = "â¸ Pause";
               trackInfo.textContent = streamName;
               updateButtonStates();
 
@@ -6034,7 +6170,7 @@
                     <span style="flex: 1; color: ${
                       index === currentPlaylistIndex ? "#4ade80" : "white"
                     }; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
-                    <button onclick="removeFromPlaylist(${index})" style="padding: 4px 8px; background: rgba(255,0,0,0.3); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">×</button>
+                    <button onclick="removeFromPlaylist(${index})" style="padding: 4px 8px; background: rgba(255,0,0,0.3); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Ã—</button>
                     <button onclick="loadPlaylistFileAtIndex(${index})" style="padding: 4px 8px; background: rgba(102,126,234,0.5); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Play</button>
                 `;
           playlistItems.appendChild(item);
@@ -6126,7 +6262,7 @@
               scheduledTransitionTime = 0;
 
               updatePlaybackControlsVisibility();
-              playPauseBtn.textContent = "⏸ Pause";
+              playPauseBtn.textContent = "â¸ Pause";
               trackInfo.textContent = file.name;
               updateButtonStates();
 
@@ -6427,7 +6563,7 @@
               stopAudioBtn.style.cursor = "pointer";
             } else if (canPlayStream) {
               // No audio but can play stream - show Play Audio
-              stopAudioBtn.textContent = "▶ Play Audio";
+              stopAudioBtn.textContent = "â–¶ Play Audio";
               stopAudioBtn.disabled = false;
               stopAudioBtn.style.opacity = "1";
               stopAudioBtn.style.cursor = "pointer";
@@ -6498,7 +6634,7 @@
               // Use FFT data directly (like MilkDrop3 uses raw FFT values)
               // Calculate frequency ranges matching audioLevels:
               // Bass: 20-320Hz, Mid: 320-2800Hz, Treb: 2800-11025Hz
-              // At 44.1kHz sample rate with 1024 FFT: bucketHz = 44100/1024 ≈ 43Hz per bin
+              // At 44.1kHz sample rate with 1024 FFT: bucketHz = 44100/1024 â‰ˆ 43Hz per bin
               // So: bass bins 0-7, mid bins 7-65, treb bins 65-256 (out of 512)
               const sampleRate = audio.audioContext ? audio.audioContext.sampleRate : 44100;
               const fftSize = audio.fftSize || (audio.numSamps ? audio.numSamps * 2 : 1024); // Default to 1024 if not available
@@ -6680,7 +6816,7 @@
             // Debug logging
             if (window.beatDetectionDebug) {
               console.log(
-                `[Beat Detection] 🎵 BEAT DETECTED! ` +
+                `[Beat Detection] ðŸŽµ BEAT DETECTED! ` +
                   `Energy: ${currentEnergy.toFixed(3)}, ` +
                   `Consistency: ${consistencyScore.toFixed(3)}, ` +
                   `Interval: ${interval.toFixed(0)}ms`
@@ -6849,8 +6985,12 @@
 
           // Only proceed if threshold is met
           if (meetsHardcutThreshold) {
+            // Check if there's a scheduled transition that hasn't been reached yet
+            const hasScheduledTransition = isTransitionScheduled && scheduledTransitionTime > now;
+
             // If minimum interval has passed (or instant transition), trigger immediately
-            if (isInstantTransition || timeSinceLastTransition >= minIntervalMs) {
+            // BUT respect scheduled transition time (don't bypass it unless instant)
+            if (isInstantTransition || (timeSinceLastTransition >= minIntervalMs && !hasScheduledTransition)) {
               // Check quiet period - reduce probability if too quiet
               let probabilityMultiplier = 1.0;
               if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
@@ -6858,16 +6998,22 @@
               }
 
               // For instant transitions or high probability, trigger immediately
+              // Instant transitions can override scheduled transitions
               if (isInstantTransition || Math.random() < probabilityMultiplier * 0.3) {
                 if (window.beatDetectionDebug) {
                   console.log(`[Transition] Immediate transition triggered${isInstantTransition ? " (instant)" : ""}`);
+                }
+                // Clear scheduled transition if we're triggering immediately
+                if (isTransitionScheduled) {
+                  isTransitionScheduled = false;
                 }
                 return { shouldTransition: true, scheduledTime: now };
               }
             }
 
             // Otherwise, schedule a transition (respecting minimum interval)
-            if (timeSinceLastTransition >= minIntervalMs) {
+            // Don't schedule a new transition if one is already scheduled and hasn't been reached
+            if (timeSinceLastTransition >= minIntervalMs && !hasScheduledTransition) {
               // Check quiet period - reduce probability if too quiet
               let probabilityMultiplier = 1.0;
               if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
@@ -6891,13 +7037,14 @@
                 timeRange = CONFIG.LOW_RANDOMNESS_TIME_RANGE;
               }
 
-              // Apply energy speed factor (higher energy = shorter time)
-              // BUT ensure minimum interval is respected
-              const minTime = Math.max(timeRange[0] / energySpeedFactor, minIntervalMs / 1000);
-              const maxTime = Math.max(timeRange[1] / energySpeedFactor, minIntervalMs / 1000);
+              // Calculate minimum time from last transition (not from now)
+              // Ensure the scheduled time is at least minIntervalMs from lastTransitionTime
+              const timeRemainingUntilMinInterval = Math.max(0, minIntervalMs - timeSinceLastTransition);
+              const minTimeFromNow = Math.max(timeRange[0] / energySpeedFactor, timeRemainingUntilMinInterval / 1000);
+              const maxTimeFromNow = Math.max(timeRange[1] / energySpeedFactor, timeRemainingUntilMinInterval / 1000);
 
               // Randomly choose transition time within range
-              const transitionDelay = (Math.random() * (maxTime - minTime) + minTime) * 1000; // Convert to ms
+              const transitionDelay = (Math.random() * (maxTimeFromNow - minTimeFromNow) + minTimeFromNow) * 1000; // Convert to ms
               const scheduledTime = now + transitionDelay;
 
               // Apply quiet period probability reduction
@@ -6929,8 +7076,8 @@
           try {
             visualizer.render();
 
-            // Check for beat if beat detection is enabled
-            if (useBeatDetection && isPresetAutoAdvance) {
+            // Check for beat if beat detection is enabled (skip if not playing for better performance)
+            if (useBeatDetection && isPresetAutoAdvance && isPlaying) {
               try {
                 const beatInfo = detectBeat();
                 const transitionDecision = calculateTransitionProbability(beatInfo);
@@ -7005,7 +7152,19 @@
       // Toggle Audio Source panel
       function toggleAudioSourcePanel() {
         const audioPanel = document.getElementById("audio-source-panel");
+        const playlistsPanel = document.getElementById("playlists-panel");
+        const isHiding = !audioPanel.classList.contains("hidden");
+
         audioPanel.classList.toggle("hidden");
+
+        // If hiding Audio Source panel and Playlists is open, slide it over
+        if (isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
+          // Move Playlists to where Audio Source panel was (left: 20px)
+          playlistsPanel.style.left = "20px";
+        } else if (!isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
+          // Restore Playlists position when Audio Source panel opens
+          playlistsPanel.style.left = "380px";
+        }
       }
 
       // Toggle Presets panel
@@ -7015,6 +7174,16 @@
         const isHiding = !presetsPanel.classList.contains("hidden");
 
         presetsPanel.classList.toggle("hidden");
+
+        // Lazy load preset panel when opening
+        if (!isHiding && !presetPanelPopulated) {
+          // Use requestIdleCallback for non-critical rendering
+          if (window.requestIdleCallback) {
+            requestIdleCallback(() => populatePresetPanel(), { timeout: 500 });
+          } else {
+            setTimeout(() => populatePresetPanel(), 0);
+          }
+        }
 
         // If hiding Presets panel and Preset List is open, slide it over
         if (isHiding && presetListPanel && !presetListPanel.classList.contains("hidden")) {
@@ -7030,10 +7199,74 @@
       function togglePresetListPanel() {
         const presetListPanel = document.getElementById("preset-list-panel");
         if (presetListPanel) {
+          const isHiding = !presetListPanel.classList.contains("hidden");
           presetListPanel.classList.toggle("hidden");
-          // Populate panel when opening
+          // Populate panel when opening (lazy load)
           if (!presetListPanel.classList.contains("hidden")) {
-            populatePresetPanel();
+            // Use requestIdleCallback for non-critical rendering
+            if (window.requestIdleCallback) {
+              requestIdleCallback(() => populatePresetPanel(), { timeout: 500 });
+            } else {
+              setTimeout(() => populatePresetPanel(), 0);
+            }
+            // Handle position based on presets panel state
+            const presetsPanel = document.getElementById("presets-panel");
+            if (presetsPanel && !presetsPanel.classList.contains("hidden")) {
+              presetListPanel.style.right = "480px";
+            } else {
+              presetListPanel.style.right = "20px";
+            }
+          }
+        }
+      }
+
+      // Minimize Presets panel
+      function minimizePresetsPanel() {
+        const presetsPanel = document.getElementById("presets-panel");
+        if (presetsPanel) {
+          presetsPanel.classList.add("hidden");
+          // Handle preset list panel position
+          const presetListPanel = document.getElementById("preset-list-panel");
+          if (presetListPanel && !presetListPanel.classList.contains("hidden")) {
+            presetListPanel.style.right = "20px";
+          }
+        }
+      }
+
+      // Minimize Preset List panel
+      function minimizePresetListPanel() {
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetListPanel) {
+          presetListPanel.classList.add("hidden");
+        }
+      }
+
+      // Open Presets panel
+      function openPresetsPanel() {
+        const presetsPanel = document.getElementById("presets-panel");
+        if (presetsPanel) {
+          presetsPanel.classList.remove("hidden");
+          // Handle preset list panel position
+          const presetListPanel = document.getElementById("preset-list-panel");
+          if (presetListPanel && !presetListPanel.classList.contains("hidden")) {
+            presetListPanel.style.right = "480px";
+          }
+        }
+      }
+
+      // Open Preset List panel
+      function openPresetListPanel() {
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetListPanel) {
+          presetListPanel.classList.remove("hidden");
+          // Populate panel when opening
+          populatePresetPanel();
+          // Handle position based on presets panel state
+          const presetsPanel = document.getElementById("presets-panel");
+          if (presetsPanel && !presetsPanel.classList.contains("hidden")) {
+            presetListPanel.style.right = "480px";
+          } else {
+            presetListPanel.style.right = "20px";
           }
         }
       }
@@ -7049,6 +7282,10 @@
       window.toggleAudioSourcePanel = toggleAudioSourcePanel;
       window.togglePresetsPanel = togglePresetsPanel;
       window.togglePresetListPanel = togglePresetListPanel;
+      window.minimizePresetsPanel = minimizePresetsPanel;
+      window.minimizePresetListPanel = minimizePresetListPanel;
+      window.openPresetsPanel = openPresetsPanel;
+      window.openPresetListPanel = openPresetListPanel;
       window.loadPreset = loadPreset;
       window.randomPreset = randomPreset;
       window.nextPreset = nextPreset;
@@ -7132,6 +7369,11 @@
             // Toggle Playlists panel
             e.preventDefault();
             togglePlaylistsPanel();
+            return;
+          } else if (key === "l") {
+            // Toggle Preset List panel
+            e.preventDefault();
+            togglePresetListPanel();
             return;
           } else if (key === "m") {
             // Toggle Shuffle
