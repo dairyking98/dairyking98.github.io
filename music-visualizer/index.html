@@ -341,7 +341,8 @@
 
       #playlists-panel {
         top: 20px;
-        left: 380px;
+        /* left position will be set by JavaScript based on audio source panel state */
+        right: auto !important; /* Override any right positioning */
         width: 400px;
         max-height: 90vh;
         overflow-y: auto;
@@ -616,10 +617,12 @@
           // If hiding Audio Source panel and Playlists is open, slide it over
           if (isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
             // Move Playlists to where Audio Source panel was (left: 20px)
-            playlistsPanel.style.left = "20px";
+            playlistsPanel.style.setProperty("left", "20px", "important");
+            playlistsPanel.style.right = "auto";
           } else if (!isHiding && playlistsPanel && !playlistsPanel.classList.contains("hidden")) {
-            // Restore Playlists position when Audio Source panel opens
-            playlistsPanel.style.left = "380px";
+            // Restore Playlists position when Audio Source panel opens (slide to the right)
+            playlistsPanel.style.setProperty("left", "380px", "important");
+            playlistsPanel.style.right = "auto";
           }
         }
       };
@@ -654,6 +657,7 @@
           // Handle position based on audio source panel state
           if (!playlistsPanel.classList.contains("hidden")) {
             const audioPanel = document.getElementById("audio-source-panel");
+            playlistsPanel.style.right = "auto";
             if (audioPanel && !audioPanel.classList.contains("hidden")) {
               playlistsPanel.style.left = "380px";
             } else {
@@ -986,7 +990,7 @@
     </div>
 
     <!-- Playlists Panel -->
-    <div class="control-panel presets-panel hidden" id="playlists-panel">
+    <div class="control-panel hidden" id="playlists-panel">
       <div class="panel-header">
         <h3>Playlists</h3>
         <button class="minimize-btn" onclick="togglePlaylistsPanel()">−</button>
@@ -3424,14 +3428,6 @@
       window.toggleCreditsPanel = function () {
         const creditsPanel = document.getElementById("credits-panel");
         creditsPanel.classList.toggle("hidden");
-      };
-
-      // Toggle Playlists panel
-      window.togglePlaylistsPanel = function () {
-        const playlistsPanel = document.getElementById("playlists-panel");
-        if (playlistsPanel) {
-          playlistsPanel.classList.toggle("hidden");
-        }
       };
 
       // Toggle Auto-Hide functionality
