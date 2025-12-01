@@ -466,78 +466,6 @@
         margin: 0;
       }
 
-      .preset-name-display {
-        color: #4ade80;
-        font-size: 14px;
-        text-align: center;
-        padding: 8px;
-        background: rgba(74, 222, 128, 0.1);
-        border-radius: 5px;
-        margin-top: 5px;
-        display: none;
-      }
-
-      .preset-name-display.show {
-        display: block;
-      }
-
-      .preset-name-overlay {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 50;
-        color: #4ade80;
-        font-size: 18px;
-        font-weight: 600;
-        text-align: center;
-        padding: 12px 24px;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .preset-name-overlay.show {
-        opacity: 1;
-      }
-
-      .persistent-preset-name {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 100;
-        color: #4ade80;
-        font-size: 20px;
-        font-weight: 600;
-        text-align: center;
-        padding: 12px 24px;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        display: none;
-      }
-
-      .persistent-preset-name.visible {
-        display: block;
-      }
-
-      .persistent-preset-name.fade-in {
-        opacity: 1;
-      }
-
-      .persistent-preset-name.fade-out {
-        opacity: 0;
-      }
-
       .preset-panel-list {
         overflow-y: auto;
         overflow-x: hidden;
@@ -803,13 +731,55 @@
         }
       })();
     </script>
-    <!-- Persistent Preset Name Display (at top of page) -->
-    <div class="persistent-preset-name" id="persistent-preset-name"></div>
-
     <canvas id="canvas"></canvas>
 
-    <!-- Preset Name Overlay (on top of visualization) -->
-    <div class="preset-name-overlay" id="preset-name-overlay"></div>
+    <!-- Rating Flash Notification -->
+    <div
+      id="rating-flash"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        font-size: 72px;
+        font-weight: bold;
+        color: #4ade80;
+        text-shadow:
+          0 0 20px rgba(74, 222, 128, 0.8),
+          0 0 40px rgba(74, 222, 128, 0.6);
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        display: none;
+      "
+    ></div>
+
+    <!-- Rating Flash Notification -->
+    <div
+      id="rating-flash"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        font-size: 72px;
+        font-weight: bold;
+        color: #4ade80;
+        text-shadow:
+          0 0 20px rgba(74, 222, 128, 0.8),
+          0 0 40px rgba(74, 222, 128, 0.6);
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        display: none;
+      "
+    ></div>
 
     <!-- Audio Source Panel -->
     <div class="control-panel audio-source-panel" id="audio-source-panel">
@@ -1036,7 +1006,7 @@
             "
           >
             Import
-            <input type="file" accept=".json" onchange="if(this.files[0]) importPlaylist(this.files[0])" style="display: none" />
+            <input type="file" accept=".json" onchange="if (this.files[0]) importPlaylist(this.files[0]);" style="display: none" />
           </label>
         </div>
       </div>
@@ -1224,7 +1194,7 @@
               "
             >
               Import Ratings
-              <input type="file" accept=".json" onchange="if(this.files[0]) importRatings(this.files[0])" style="display: none" />
+              <input type="file" accept=".json" onchange="if (this.files[0]) importRatings(this.files[0]);" style="display: none" />
             </label>
             <button
               onclick="clearRatings()"
@@ -1442,8 +1412,9 @@
         INACTIVITY_DELAY: 2000, // milliseconds (mouse inactivity before hiding controls)
         PRESET_LOADING_TIMEOUT: 30000, // milliseconds (preset loading timeout)
         TRACK_SLIDER_UPDATE_INTERVAL: 100, // milliseconds (track slider update frequency)
-        PRESET_NAME_DISPLAY_DURATION: 6000, // milliseconds (how long to show preset name overlay)
+        PRESET_NAME_DISPLAY_DURATION: 10000, // milliseconds (how long to show preset name overlay) - increased to 10 seconds
         PRESET_NAME_HIDE_BEFORE_TRANSITION: 0.5, // seconds (time before transition when preset name disappears)
+        BUTTERCHURN_TEXT_DURATION: 3.0, // seconds (how long to show butterchurn's animated preset name text)
 
         // LocalStorage keys
         ROTATION_STORAGE_KEY: "butterchurn-preset-rotation",
@@ -1558,7 +1529,6 @@
       let isPresetAutoAdvance = CONFIG.IS_PRESET_AUTO_ADVANCE;
       let presetAutoAdvanceInterval = null;
       let presetDuration = CONFIG.PRESET_DURATION; // seconds
-      let presetNameHideTimeout = null; // timeout for hiding preset name before transition
       let isAutoTransition = false; // Flag to track if current transition is from auto-advance
 
       // Beat detection state
@@ -1567,6 +1537,8 @@
       let lastBeatTime = 0;
       let lastBeatDetectedTime = 0; // Timestamp of last beat detection
       let lastTransitionTime = 0; // Timestamp of last preset transition
+      let audioResumeTime = 0; // Timestamp when audio was last resumed (for cooldown)
+      let beatDetectionReadyTime = 0; // Timestamp when beat detection became ready (enough energy history)
       let energyHistory = [];
       let energyHistorySize = 43; // Store last 43 samples (~1.5 seconds at 30fps)
       let averageEnergy = 0;
@@ -1702,35 +1674,61 @@
         }
         updateCurrentPresetDisplay();
 
-        // Visual indicator - flash the overlay
-        showRatingIndicator(presetName, rating);
+        // Visual indicator - flash the rating number
+        showRatingFlash(rating);
+
+        // Don't show preset name when rating (user requested)
+      }
+
+      function showRatingFlash(rating) {
+        const flashElement = document.getElementById("rating-flash");
+        if (!flashElement) return;
+
+        // Only show flash if rating is > 0
+        if (rating === 0) {
+          return;
+        }
+
+        // Set the rating text
+        flashElement.textContent = `${rating}/9`;
+
+        // Set color based on rating
+        if (rating >= 7) {
+          flashElement.style.color = "#4ade80"; // Green
+          flashElement.style.textShadow = "0 0 20px rgba(74, 222, 128, 0.8), 0 0 40px rgba(74, 222, 128, 0.6)";
+        } else if (rating >= 4) {
+          flashElement.style.color = "#fbbf24"; // Yellow/Orange
+          flashElement.style.textShadow = "0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.6)";
+        } else {
+          flashElement.style.color = "#f87171"; // Red
+          flashElement.style.textShadow = "0 0 20px rgba(248, 113, 113, 0.8), 0 0 40px rgba(248, 113, 113, 0.6)";
+        }
+
+        // Show and animate
+        flashElement.style.display = "block";
+        flashElement.style.transform = "translate(-50%, -50%) scale(0.5)";
+        flashElement.style.opacity = "0";
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+          flashElement.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+          flashElement.style.transform = "translate(-50%, -50%) scale(1)";
+          flashElement.style.opacity = "1";
+
+          // Hide after animation
+          setTimeout(() => {
+            flashElement.style.opacity = "0";
+            flashElement.style.transform = "translate(-50%, -50%) scale(1.2)";
+            setTimeout(() => {
+              flashElement.style.display = "none";
+            }, 200);
+          }, 600);
+        });
       }
 
       function showRatingIndicator(presetName, rating) {
-        const overlay = document.getElementById("preset-name-overlay");
-        if (!overlay) return;
-
-        // Show rating indicator
-        const ratingText = rating > 0 ? ` [${rating}]` : "";
-        overlay.textContent = presetName + ratingText;
-        overlay.classList.add("show");
-
-        // Add a brief color flash for visual feedback
-        overlay.style.color = "#4ade80";
-        overlay.style.transform = "translateX(-50%) scale(1.1)";
-        overlay.style.transition = "all 0.2s ease";
-
-        setTimeout(() => {
-          overlay.style.transform = "translateX(-50%) scale(1)";
-          overlay.style.transition = "all 0.3s ease";
-          setTimeout(() => {
-            overlay.style.color = "#4ade80";
-            // Hide after 2 seconds
-            setTimeout(() => {
-              overlay.classList.remove("show");
-            }, 2000);
-          }, 200);
-        }, 200);
+        // Don't show preset name when rating - only show the rating flash
+        // (Name display removed per user request)
       }
 
       function updateCurrentPresetDisplay() {
@@ -1758,24 +1756,33 @@
         if (presetName) {
           display.textContent = presetName;
           const rating = getPresetRating(presetName);
-          // Create 9 stars: filled on left, empty on right
-          const filledStars = "★".repeat(rating);
-          const emptyStars = "☆".repeat(9 - rating);
-          const stars = filledStars + emptyStars;
 
-          if (rating > 0) {
-            ratingDisplay.textContent = `${stars} (${rating}/9)`;
-            ratingDisplay.style.color = "#4ade80";
+          // Only show rating if it's greater than 0
+          if (rating > 0 && rating <= 9) {
+            ratingDisplay.textContent = `${rating}/9`;
             ratingDisplay.style.display = "block";
+            // Color code based on rating
+            if (rating >= 7) {
+              // Green for high ratings (7-9)
+              ratingDisplay.style.color = "#4ade80";
+            } else if (rating >= 4) {
+              // Yellow/Orange for medium ratings (4-6)
+              ratingDisplay.style.color = "#fbbf24";
+            } else {
+              // Red for low ratings (1-3)
+              ratingDisplay.style.color = "#f87171";
+            }
           } else {
-            ratingDisplay.textContent = `${stars} (Unrated)`;
-            ratingDisplay.style.color = "rgba(255, 255, 255, 0.5)";
-            ratingDisplay.style.display = "block";
+            // Hide rating display when rating is 0, undefined, or invalid
+            ratingDisplay.textContent = "";
+            ratingDisplay.style.display = "none";
+            ratingDisplay.style.color = ""; // Reset color
           }
         } else {
           display.textContent = "No preset loaded";
           ratingDisplay.textContent = "";
           ratingDisplay.style.display = "none";
+          ratingDisplay.style.color = ""; // Reset color
         }
       }
 
@@ -2161,20 +2168,8 @@
       }
 
       function updateRatingDisplay() {
-        const presetName = currentPresetName;
-        if (!presetName) return;
-        const rating = getPresetRating(presetName);
-        const overlay = document.getElementById("preset-name-overlay");
-
-        if (overlay) {
-          // Update overlay to show rating
-          const currentText = overlay.textContent;
-          const nameMatch = currentText.match(/^(.+?)(\s*\[.*?\])?$/);
-          if (nameMatch) {
-            const name = nameMatch[1];
-            overlay.textContent = rating > 0 ? `${name} [${rating}]` : name;
-          }
-        }
+        // Rating display is now handled by butterchurn's text system
+        // No custom overlay needed
       }
 
       // updatePresetSelectWithRatings removed - no longer using dropdown
@@ -2585,7 +2580,6 @@
       const presetPlayPauseBtn = document.getElementById("preset-play-pause-btn");
       const shuffleCheckbox = document.getElementById("shuffle-checkbox");
       const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
-      const presetNameOverlay = document.getElementById("preset-name-overlay");
       const presetSelect = document.getElementById("preset-select");
       const presetSearch = document.getElementById("preset-search");
       const presetCountDisplay = document.getElementById("preset-count-display");
@@ -3406,10 +3400,35 @@
             audioSource.play();
             isPlaying = true;
             playPauseBtn.textContent = "⏸ Pause";
+
+            // MilkDrop3-style: reset beat detection state when resuming
+            // Prevents stale scheduled transitions from firing immediately
+            const now = Date.now();
+            lastBeatTime = 0;
+            lastBeatDetectedTime = 0;
+            lastTransitionTime = now; // Reset transition timer to prevent immediate transitions
+            audioResumeTime = now; // Track when audio resumed for cooldown period
+            beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+            energyHistory = []; // Clear energy history to start fresh
+            beatIntervals = []; // Clear beat intervals
+            consistencyScore = 0;
+            isTransitionScheduled = false; // Cancel any scheduled transitions
+            scheduledTransitionTime = 0;
           } else {
             audioSource.pause();
             isPlaying = false;
             playPauseBtn.textContent = "▶ Play";
+
+            // MilkDrop3-style: reset beat detection state when paused
+            // Prevents stale data from causing transitions when resumed
+            lastBeatTime = 0;
+            lastBeatDetectedTime = 0;
+            lastTransitionTime = Date.now(); // Reset transition timer
+            energyHistory = []; // Clear energy history to prevent stale data
+            beatIntervals = []; // Clear beat intervals
+            consistencyScore = 0;
+            isTransitionScheduled = false; // Cancel any scheduled transitions
+            scheduledTransitionTime = 0;
           }
         }
       };
@@ -3508,10 +3527,6 @@
           clearTimeout(presetAutoAdvanceInterval);
           presetAutoAdvanceInterval = null;
         }
-        if (presetNameHideTimeout) {
-          clearTimeout(presetNameHideTimeout);
-          presetNameHideTimeout = null;
-        }
       }
 
       // Helper function to start/reset the auto-advance timer
@@ -3528,23 +3543,8 @@
 
         const presetDuration = parseFloat(document.getElementById("preset-duration-slider").value);
 
-        // Schedule hiding the preset name before transition
-        let hideBeforeTransition = CONFIG.PRESET_NAME_HIDE_BEFORE_TRANSITION;
-        if (hideBeforeTransition > presetDuration) {
-          hideBeforeTransition = presetDuration;
-        }
-
-        if (hideBeforeTransition > 0 && presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
-          const hideDelay = (presetDuration - hideBeforeTransition) * 1000;
-          if (hideDelay > 0) {
-            presetNameHideTimeout = setTimeout(() => {
-              if (presetNameOverlay) {
-                presetNameOverlay.classList.remove("show");
-              }
-              presetNameHideTimeout = null;
-            }, hideDelay);
-          }
-        }
+        // Preset name display is now handled by butterchurn's built-in text system
+        // No need to schedule hiding - butterchurn handles the animation timing
 
         // Start the SINGLE global timer - countdown triggers transition
         presetAutoAdvanceInterval = setTimeout(() => {
@@ -3632,59 +3632,29 @@
         }
       };
 
-      // Update persistent preset name display with fade transition
-      function updatePersistentPresetName(presetName) {
-        const persistentDisplay = document.getElementById("persistent-preset-name");
-        const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
-
-        if (!persistentDisplay || !showPresetNameCheckbox) return;
-
-        // Only show if checkbox is checked
-        if (!showPresetNameCheckbox.checked) {
-          persistentDisplay.classList.remove("visible", "fade-in", "fade-out");
-          return;
-        }
-
-        // If there's already a name displayed, fade it out first
-        if (persistentDisplay.textContent && persistentDisplay.textContent.trim() !== "") {
-          persistentDisplay.classList.remove("fade-in");
-          persistentDisplay.classList.add("fade-out");
-
-          // After fade out completes, update text and fade in
-          setTimeout(() => {
-            const rating = getPresetRating(presetName);
-            persistentDisplay.textContent = rating > 0 ? `${presetName} [${rating}]` : presetName;
-            persistentDisplay.classList.remove("fade-out");
-            persistentDisplay.classList.add("visible", "fade-in");
-          }, 300); // Wait for fade-out transition to complete (matches CSS transition time)
-        } else {
-          // No previous name, just fade in
-          const rating = getPresetRating(presetName);
-          persistentDisplay.textContent = rating > 0 ? `${presetName} [${rating}]` : presetName;
-          persistentDisplay.classList.add("visible", "fade-in");
-        }
-      }
-
-      // Show preset name checkbox handler - controls both overlay and persistent display
+      // Show preset name checkbox handler - controls butterchurn's text display
       window.onShowPresetNameChange = function () {
-        const show = showPresetNameCheckbox.checked;
-        const presetName =
-          currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+        const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
+        const show = showPresetNameCheckbox && showPresetNameCheckbox.checked;
 
-        // Update persistent display
-        if (presetName) {
-          updatePersistentPresetName(presetName);
-        } else {
-          const persistentDisplay = document.getElementById("persistent-preset-name");
-          if (persistentDisplay) {
-            persistentDisplay.classList.remove("visible", "fade-in", "fade-out");
-          }
+        // Save preference
+        try {
+          localStorage.setItem("butterchurn-show-preset-name", show.toString());
+        } catch (error) {
+          console.warn("[Preset Name] Error saving setting:", error);
         }
 
-        // Hide overlay when persistent display is enabled (they would overlap at the same position)
-        // The persistent display replaces the temporary overlay functionality
-        if (presetNameOverlay) {
-          presetNameOverlay.classList.remove("show");
+        // If enabled and we have a current preset, show it using butterchurn's text (with longer duration)
+        if (show && visualizer) {
+          const presetName =
+            currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+          if (presetName) {
+            visualizer.launchSongTitleAnim(presetName);
+            // Extend duration using config (default is 1.7, config sets it to 3.0)
+            if (visualizer.renderer && visualizer.renderer.supertext) {
+              visualizer.renderer.supertext.duration = CONFIG.BUTTERCHURN_TEXT_DURATION;
+            }
+          }
         }
       };
 
@@ -3846,11 +3816,15 @@
           // Update preset list highlighting
           updatePresetListHighlighting();
 
-          // Update persistent preset name display
-          updatePersistentPresetName(presetName);
-
-          // Don't show temporary overlay when persistent display is enabled (they would overlap)
-          // The persistent display handles showing the name when checkbox is checked
+          // Show preset name using butterchurn's built-in text animation (with longer duration)
+          const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
+          if (visualizer && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
+            visualizer.launchSongTitleAnim(presetName);
+            // Extend duration using config (default is 1.7, config sets it to 3.0)
+            if (visualizer.renderer && visualizer.renderer.supertext) {
+              visualizer.renderer.supertext.duration = CONFIG.BUTTERCHURN_TEXT_DURATION;
+            }
+          }
 
           updateStatus(`Loaded: ${presetName}`, false);
           console.log("[Preset] Preset loaded successfully");
@@ -4381,6 +4355,18 @@
           // Do NOT connect gainNode to audioContext.destination - system audio should not play back
 
           isPlaying = true;
+          // Reset beat detection state when starting system audio
+          const now = Date.now();
+          audioResumeTime = now;
+          beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+          lastBeatTime = 0;
+          lastBeatDetectedTime = 0;
+          lastTransitionTime = now;
+          energyHistory = [];
+          beatIntervals = [];
+          consistencyScore = 0;
+          isTransitionScheduled = false;
+          scheduledTransitionTime = 0;
 
           // Set track info BEFORE updating controls visibility so detection works
           trackInfo.textContent = "System Audio";
@@ -5007,7 +4993,7 @@
 
           // Save current preset to localStorage
           try {
-            localStorage.setItem("butterchurn-current-preset", presetName);
+            localStorage.setItem("butterchurn-current-preset", presetNameFromIndex);
           } catch (error) {
             console.warn("[Current Preset] Error saving setting:", error);
           }
@@ -5021,13 +5007,17 @@
           // Update preset list highlighting
           updatePresetListHighlighting();
 
-          // Update persistent preset name display
-          updatePersistentPresetName(presetName);
+          // Show preset name using butterchurn's built-in text animation (with longer duration)
+          const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
+          if (visualizer && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
+            visualizer.launchSongTitleAnim(presetNameFromIndex);
+            // Extend duration using config (default is 1.7, config sets it to 3.0)
+            if (visualizer.renderer && visualizer.renderer.supertext) {
+              visualizer.renderer.supertext.duration = CONFIG.BUTTERCHURN_TEXT_DURATION;
+            }
+          }
 
-          // Don't show temporary overlay when persistent display is enabled (they would overlap)
-          // The persistent display handles showing the name when checkbox is checked
-
-          updateStatus(`Loaded: ${presetName}`, false);
+          updateStatus(`Loaded: ${presetNameFromIndex}`, false);
           console.log("[Preset] Preset loaded successfully");
 
           // Reset the SINGLE global timer after ANY preset loads (manual or auto)
@@ -5670,6 +5660,18 @@
           gainNode = null;
 
           isPlaying = true;
+          // Reset beat detection state when starting microphone input
+          const now = Date.now();
+          audioResumeTime = now;
+          beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+          lastBeatTime = 0;
+          lastBeatDetectedTime = 0;
+          lastTransitionTime = now;
+          energyHistory = [];
+          beatIntervals = [];
+          consistencyScore = 0;
+          isTransitionScheduled = false;
+          scheduledTransitionTime = 0;
 
           updatePlaybackControlsVisibility();
           playPauseBtn.textContent = "⏸ Pause";
@@ -5930,6 +5932,19 @@
               await audio.play();
               isPlaying = true;
 
+              // Reset beat detection state when starting stream
+              const now = Date.now();
+              audioResumeTime = now;
+              beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+              lastBeatTime = 0;
+              lastBeatDetectedTime = 0;
+              lastTransitionTime = now;
+              energyHistory = [];
+              beatIntervals = [];
+              consistencyScore = 0;
+              isTransitionScheduled = false;
+              scheduledTransitionTime = 0;
+
               updatePlaybackControlsVisibility();
               playPauseBtn.textContent = "⏸ Pause";
               trackInfo.textContent = streamName;
@@ -6096,6 +6111,19 @@
 
               await audio.play();
               isPlaying = true;
+
+              // Reset beat detection state when starting audio file
+              const now = Date.now();
+              audioResumeTime = now;
+              beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+              lastBeatTime = 0;
+              lastBeatDetectedTime = 0;
+              lastTransitionTime = now;
+              energyHistory = [];
+              beatIntervals = [];
+              consistencyScore = 0;
+              isTransitionScheduled = false;
+              scheduledTransitionTime = 0;
 
               updatePlaybackControlsVisibility();
               playPauseBtn.textContent = "⏸ Pause";
@@ -6334,6 +6362,20 @@
         isPlaying = false;
         currentAudioFile = null;
         currentPlaylistIndex = -1;
+
+        // MilkDrop3-style: reset beat detection state when audio stops
+        // Prevents stale data from causing transitions when audio resumes
+        lastBeatTime = 0;
+        lastBeatDetectedTime = 0;
+        lastTransitionTime = Date.now(); // Reset transition timer
+        audioResumeTime = 0; // Reset resume time
+        beatDetectionReadyTime = 0; // Reset - beat detection not ready until energy history builds up
+        energyHistory = []; // Clear energy history to prevent stale data
+        beatIntervals = []; // Clear beat intervals
+        consistencyScore = 0;
+        isTransitionScheduled = false; // Cancel any scheduled transitions
+        scheduledTransitionTime = 0;
+
         updatePlaybackControlsVisibility();
         updateButtonStates(); // Update button states after stopping
         updateStatus("Audio stopped", false);
@@ -6425,6 +6467,12 @@
           return { detected: false, consistency: 0, energy: 0 };
         }
 
+        // MilkDrop3-style check: only detect beats when audio is actually playing
+        // Similar to MilkDrop3's GetFps() > 1.0f check - ensures system is active
+        if (!isPlaying) {
+          return { detected: false, consistency: 0, energy: 0 };
+        }
+
         try {
           // Get audio levels from visualizer's renderer
           const renderer = visualizer.renderer;
@@ -6432,11 +6480,79 @@
             return { detected: false, consistency: 0, energy: 0 };
           }
 
+          // MilkDrop3-style: Use FFT data (freqArray) for beat detection instead of just audioLevels
+          // This is more accurate as it uses the full frequency spectrum like MilkDrop3 does
+          // butterchurn exposes FFT data via renderer.audio.freqArray (512 frequency bins)
+          const audio = renderer.audio;
+
+          const hasFFTData = audio && audio.freqArray && audio.freqArray.length > 0;
+
+          // MilkDrop3-style: Use FFT data (freqArray) for beat detection
+          // This matches MilkDrop3's approach of using mysound.imm_rel[0] + mysound.imm_rel[1] + mysound.imm_rel[2]
+          // butterchurn's audioLevels uses the same frequency ranges, so we can use FFT data directly
+          let currentEnergy;
           const audioLevels = renderer.audioLevels;
 
-          // Calculate current energy from bass, mid, and treb
-          // Weight bass more heavily for beat detection
-          const currentEnergy = audioLevels.bass * 0.6 + audioLevels.mid * 0.3 + audioLevels.treb * 0.1;
+          if (hasFFTData) {
+            try {
+              // Use FFT data directly (like MilkDrop3 uses raw FFT values)
+              // Calculate frequency ranges matching audioLevels:
+              // Bass: 20-320Hz, Mid: 320-2800Hz, Treb: 2800-11025Hz
+              // At 44.1kHz sample rate with 1024 FFT: bucketHz = 44100/1024 ≈ 43Hz per bin
+              // So: bass bins 0-7, mid bins 7-65, treb bins 65-256 (out of 512)
+              const sampleRate = audio.audioContext ? audio.audioContext.sampleRate : 44100;
+              const fftSize = audio.fftSize || (audio.numSamps ? audio.numSamps * 2 : 1024); // Default to 1024 if not available
+              const bucketHz = sampleRate / fftSize;
+              const bassLow = Math.max(0, Math.round(20 / bucketHz) - 1);
+              const bassHigh = Math.min(audio.freqArray.length - 1, Math.round(320 / bucketHz) - 1);
+              const midHigh = Math.min(audio.freqArray.length - 1, Math.round(2800 / bucketHz) - 1);
+              const trebHigh = Math.min(audio.freqArray.length - 1, Math.round(11025 / bucketHz) - 1);
+
+              // Sum frequency bins for each range (like MilkDrop3's imm_rel)
+              let bassSum = 0,
+                midSum = 0,
+                trebSum = 0;
+              for (let i = bassLow; i <= bassHigh; i++) {
+                bassSum += audio.freqArray[i];
+              }
+              for (let i = bassHigh + 1; i <= midHigh; i++) {
+                midSum += audio.freqArray[i];
+              }
+              for (let i = midHigh + 1; i <= trebHigh; i++) {
+                trebSum += audio.freqArray[i];
+              }
+
+              // MilkDrop3-style: Sum all three bands (like mysound.imm_rel[0] + mysound.imm_rel[1] + mysound.imm_rel[2])
+              // Weight bass more heavily for beat detection
+              currentEnergy = bassSum * 0.6 + midSum * 0.3 + trebSum * 0.1;
+
+              // Validate that we have meaningful audio data
+              const totalAudio = bassSum + midSum + trebSum;
+              if (totalAudio < 0.001) {
+                return { detected: false, consistency: 0, energy: 0 };
+              }
+            } catch (fftError) {
+              console.error("[Beat Detection] Error accessing FFT data:", fftError);
+              // Fall through to audioLevels fallback
+              hasFFTData = false;
+            }
+          }
+
+          if (!hasFFTData) {
+            // Fallback to audioLevels if FFT data not available
+            if (!audioLevels) {
+              return { detected: false, consistency: 0, energy: 0 };
+            }
+
+            // Validate that we have meaningful audio data
+            const totalAudioLevel = audioLevels.bass + audioLevels.mid + audioLevels.treb;
+            if (totalAudioLevel < 0.001) {
+              return { detected: false, consistency: 0, energy: 0 };
+            }
+
+            // Use normalized audioLevels values
+            currentEnergy = audioLevels.bass * 0.6 + audioLevels.mid * 0.3 + audioLevels.treb * 0.1;
+          }
 
           // Add to history
           energyHistory.push(currentEnergy);
@@ -6445,8 +6561,20 @@
           }
 
           // Need enough history to detect beats
+          // Track when beat detection becomes ready (like MilkDrop3 waiting for audio to stabilize)
+          const wasReady = beatDetectionReadyTime > 0;
           if (energyHistory.length < 10) {
+            // Not ready yet - reset ready time
+            beatDetectionReadyTime = 0;
             return { detected: false, consistency: 0, energy: currentEnergy };
+          }
+
+          // Beat detection just became ready - mark the time
+          if (!wasReady) {
+            beatDetectionReadyTime = Date.now();
+            if (window.beatDetectionDebug) {
+              console.log("[Beat Detection] Beat detection ready - enough energy history collected");
+            }
           }
 
           // Calculate average and variance
@@ -6465,19 +6593,50 @@
           varianceEnergy = varianceSum / energyHistory.length;
           const stdDev = Math.sqrt(varianceEnergy);
 
-          // Fixed threshold like MilkDrop3 (uses standard deviation for adaptive detection)
-          // MilkDrop3 F8 modes use fixed thresholds (bass > 1.5, treb > 2.9)
-          // We use a fixed multiplier on standard deviation for consistency
-          const threshold = averageEnergy + stdDev * 1.0;
+          // Get hardcut mode configuration for threshold checking
+          const hardcutConfig = getHardcutModeConfig();
+
+          // Get bass and treb values for threshold checking (MilkDrop3 uses audioLevels values)
+          const bassValue = audioLevels ? audioLevels.bass : 0;
+          const trebValue = audioLevels ? audioLevels.treb : 0;
+
+          // Check if beat meets hardcut mode threshold requirements
+          // MilkDrop3 uses audioLevels values (bass, treb) for threshold checking
+          let meetsThreshold = false;
+
+          // Check bass threshold (modes 1, 6)
+          if (hardcutConfig.bassThreshold !== null && bassValue > hardcutConfig.bassThreshold) {
+            meetsThreshold = true;
+          }
+
+          // Check treb threshold (modes 2, 3, 4, 5)
+          if (hardcutConfig.trebThreshold !== null && trebValue > hardcutConfig.trebThreshold) {
+            meetsThreshold = true;
+          }
+
+          // For mode 6, need both bass > 1.5 AND special preset condition
+          // For now, we'll just check bass > 1.5 (special preset loading can be added later)
+          if (hardcutConfig.specialPresetThreshold !== undefined) {
+            meetsThreshold = bassValue > hardcutConfig.bassThreshold;
+          }
+
+          // If no specific threshold configured (mode 7 or fallback), use adaptive threshold
+          if (hardcutConfig.bassThreshold === null && hardcutConfig.trebThreshold === null) {
+            // Use adaptive threshold based on standard deviation
+            const threshold = averageEnergy + stdDev * 1.0;
+            meetsThreshold = currentEnergy > threshold;
+          }
 
           // Check for beat
           const now = Date.now();
           const timeSinceLastBeat = now - lastBeatTime;
           let beatDetected = false;
 
-          // Minimum interval check (prevent too-frequent beats)
-          const minInterval = 100; // Minimum 100ms between beats
-          if (currentEnergy > threshold && timeSinceLastBeat > minInterval) {
+          // Minimum interval check (prevent too-frequent beat detections for tracking)
+          // This is separate from transition minimum interval - just prevents beat detection spam
+          const minBeatDetectionInterval = 100; // Minimum 100ms between beat detections (for tracking)
+
+          if (meetsThreshold && timeSinceLastBeat > minBeatDetectionInterval) {
             beatDetected = true;
             const interval = timeSinceLastBeat;
 
@@ -6541,9 +6700,47 @@
         }
       }
 
+      // Get hardcut mode configuration (minimum interval and thresholds)
+      function getHardcutModeConfig() {
+        const configs = {
+          "hc-1": { minInterval: 200, bassThreshold: 1.5, trebThreshold: null }, // 0.2s min
+          "hc-2": { minInterval: 500, bassThreshold: null, trebThreshold: 2.9 }, // 0.5s min
+          "hc-3": {
+            minInterval: 1000,
+            bassThreshold: null,
+            trebThreshold: 2.9,
+          }, // 1.0s min
+          "hc-4": {
+            minInterval: 3000,
+            bassThreshold: null,
+            trebThreshold: 2.9,
+            instantThreshold: 8.0,
+          }, // 3.0s min, >8.0 instant
+          "hc-5": {
+            minInterval: 5000,
+            bassThreshold: null,
+            trebThreshold: 2.9,
+          }, // 5.0s min
+          "hc-6": {
+            minInterval: 0,
+            bassThreshold: 1.5,
+            trebThreshold: null,
+            specialPresetThreshold: 4.9,
+          }, // Bass > 1.5 + special preset > 4.9
+          "hc-7": { minInterval: 0, bassThreshold: null, trebThreshold: null }, // Effects auto-injected
+        };
+        return configs[hardcutMode] || configs["hc-1"];
+      }
+
       // Calculate transition probability and schedule transitions
       function calculateTransitionProbability(beatInfo) {
         if (!visualizer || !useBeatDetection || !isPresetAutoAdvance) {
+          return { shouldTransition: false, scheduledTime: 0 };
+        }
+
+        // MilkDrop3-style check: only allow transitions when audio is actually playing
+        // Prevents rapid transitions when paused or no audio
+        if (!isPlaying) {
           return { shouldTransition: false, scheduledTime: 0 };
         }
 
@@ -6551,73 +6748,180 @@
         const timeSinceLastTransition = now - lastTransitionTime;
         const timeSinceLastBeat = now - lastBeatDetectedTime;
 
-        // Force transition if no beat detected for extended period
-        if (timeSinceLastBeat >= CONFIG.NO_BEAT_FORCE_INTERVAL && lastBeatDetectedTime > 0) {
-          if (window.beatDetectionDebug) {
-            console.log(`[Transition] Force transition: No beat detected for ${(timeSinceLastBeat / 1000).toFixed(1)}s`);
-          }
-          return { shouldTransition: true, scheduledTime: now };
-        }
+        // Get hardcut mode configuration
+        const hardcutConfig = getHardcutModeConfig();
+        const minIntervalMs = hardcutConfig.minInterval;
 
-        // Check if scheduled transition time has been reached
+        // Check if scheduled transition time has been reached FIRST
+        // This should trigger even if we're in cooldown (scheduled transitions take priority)
+        // BUT enforce minimum interval from last transition (unless instant transition)
         if (isTransitionScheduled && now >= scheduledTransitionTime) {
-          if (window.beatDetectionDebug) {
-            console.log(`[Transition] Scheduled transition triggered`);
-          }
-          isTransitionScheduled = false;
-          return { shouldTransition: true, scheduledTime: now };
-        }
+          // Check for instant transition (mode 4: Treb > 8.0)
+          const renderer = visualizer.renderer;
+          const audioLevels = renderer ? renderer.audioLevels : null;
+          const trebValue = audioLevels ? audioLevels.treb : 0;
+          const isInstantTransition = hardcutConfig.instantThreshold && trebValue > hardcutConfig.instantThreshold;
 
-        // During consistent beats: use probability-based transitions
-        if (beatInfo.detected && beatInfo.consistency > 0.3 && beatIntervals.length >= 4) {
-          // Check quiet period - reduce probability if too quiet
-          let probabilityMultiplier = 1.0;
-          if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
-            probabilityMultiplier = CONFIG.QUIET_PROBABILITY_REDUCTION;
-          }
-
-          // Energy affects transition speed (higher energy = faster transitions)
-          // Calculate base transition speed based on energy
-          const normalizedEnergy = Math.min(1.0, beatInfo.energy / Math.max(0.1, beatInfo.averageEnergy));
-          const energySpeedFactor = 1.0 + normalizedEnergy * CONFIG.ENERGY_TO_SPEED_MULTIPLIER;
-
-          // Roll random probability
-          const roll = Math.random();
-          const isHighRandomness = roll > CONFIG.RANDOMNESS_ROLL_THRESHOLD;
-
-          // Choose time range based on randomness roll
-          let timeRange;
-          if (isHighRandomness) {
-            timeRange = CONFIG.HIGH_RANDOMNESS_TIME_RANGE;
-          } else {
-            timeRange = CONFIG.LOW_RANDOMNESS_TIME_RANGE;
-          }
-
-          // Apply energy speed factor (higher energy = shorter time)
-          const minTime = timeRange[0] / energySpeedFactor;
-          const maxTime = timeRange[1] / energySpeedFactor;
-
-          // Randomly choose transition time within range
-          const transitionDelay = (Math.random() * (maxTime - minTime) + minTime) * 1000; // Convert to ms
-          const scheduledTime = now + transitionDelay;
-
-          // Apply quiet period probability reduction
-          if (Math.random() < probabilityMultiplier) {
-            isTransitionScheduled = true;
-            scheduledTransitionTime = scheduledTime;
-
+          // Check minimum interval from last transition (hardcut mode requirement)
+          // Instant transitions bypass minimum interval
+          if (isInstantTransition || timeSinceLastTransition >= minIntervalMs) {
             if (window.beatDetectionDebug) {
-              console.log(
-                `[Transition] Scheduled transition in ${(transitionDelay / 1000).toFixed(2)}s ` +
-                  `(Energy: ${normalizedEnergy.toFixed(2)}, ` +
-                  `Randomness: ${isHighRandomness ? "HIGH" : "LOW"}, ` +
-                  `Quiet: ${probabilityMultiplier < 1.0 ? "YES" : "NO"})`
-              );
+              console.log(`[Transition] Scheduled transition triggered${isInstantTransition ? " (instant)" : ""}`);
+            }
+            isTransitionScheduled = false;
+            return { shouldTransition: true, scheduledTime: now };
+          } else {
+            // Reschedule for after minimum interval
+            const remainingTime = minIntervalMs - timeSinceLastTransition;
+            scheduledTransitionTime = now + remainingTime;
+            if (window.beatDetectionDebug) {
+              console.log(`[Transition] Scheduled transition delayed by minimum interval (${(remainingTime / 1000).toFixed(2)}s remaining)`);
             }
           }
         }
 
-        return { shouldTransition: false, scheduledTime: scheduledTransitionTime };
+        // MilkDrop3-style: cooldown period after audio resumes
+        // Prevents immediate transitions when audio resumes (wait for audio data to stabilize)
+        // BUT don't block scheduled transitions (checked above)
+        const RESUME_COOLDOWN = 2000; // 2 seconds cooldown after resume (like MilkDrop3's stabilization period)
+        if (audioResumeTime > 0 && now - audioResumeTime < RESUME_COOLDOWN) {
+          // Still in cooldown period - don't allow new transitions yet (but scheduled ones already passed)
+          return { shouldTransition: false, scheduledTime: 0 };
+        }
+
+        // Enforce minimum interval from last transition (hardcut mode requirement)
+        // This prevents transitions from happening faster than the mode allows
+        // EXCEPT for instant transitions (mode 4: Treb > 8.0)
+        const renderer = visualizer.renderer;
+        const audioLevels = renderer ? renderer.audioLevels : null;
+        const trebValue = audioLevels ? audioLevels.treb : 0;
+        const isInstantTransition = hardcutConfig.instantThreshold && trebValue > hardcutConfig.instantThreshold;
+
+        if (!isInstantTransition && timeSinceLastTransition < minIntervalMs && lastTransitionTime > 0) {
+          // Too soon since last transition - don't allow new transitions (unless instant)
+          return { shouldTransition: false, scheduledTime: 0 };
+        }
+
+        // Force transition if no beat detected for extended period
+        // BUT only if:
+        // 1. Audio is playing
+        // 2. Beat detection is ready (has enough energy history)
+        // 3. We've had at least one beat detected before (lastBeatDetectedTime > 0)
+        // 4. Beat detection has been ready for at least the force interval (prevents immediate force transitions on startup)
+        const BEAT_DETECTION_STABILIZATION = 3000; // Wait 3 seconds after beat detection is ready before allowing force transitions
+        const beatDetectionReadyDuration = beatDetectionReadyTime > 0 ? now - beatDetectionReadyTime : 0;
+        const canForceTransition = beatDetectionReadyTime > 0 && beatDetectionReadyDuration >= BEAT_DETECTION_STABILIZATION;
+
+        if (timeSinceLastBeat >= CONFIG.NO_BEAT_FORCE_INTERVAL && lastBeatDetectedTime > 0 && isPlaying && canForceTransition) {
+          // Force transitions must also respect minimum interval (unless instant)
+          const isInstantTransition = hardcutConfig.instantThreshold && trebValue > hardcutConfig.instantThreshold;
+          if (isInstantTransition || timeSinceLastTransition >= minIntervalMs) {
+            if (window.beatDetectionDebug) {
+              console.log(`[Transition] Force transition: No beat detected for ${(timeSinceLastBeat / 1000).toFixed(1)}s`);
+            }
+            return { shouldTransition: true, scheduledTime: now };
+          }
+        }
+
+        // During consistent beats: use probability-based transitions
+        // BUT only if beat detection is ready (has enough energy history)
+        // This prevents transitions during the initial build-up period
+        if (beatDetectionReadyTime > 0 && beatInfo.detected && beatInfo.consistency > 0.3 && beatIntervals.length >= 4) {
+          // Check if we meet hardcut mode threshold requirements
+          const audioLevels = renderer ? renderer.audioLevels : null;
+          const bassValue = audioLevels ? audioLevels.bass : 0;
+          const trebValue = audioLevels ? audioLevels.treb : 0;
+
+          let meetsHardcutThreshold = false;
+          if (hardcutConfig.bassThreshold !== null && bassValue > hardcutConfig.bassThreshold) {
+            meetsHardcutThreshold = true;
+          }
+          if (hardcutConfig.trebThreshold !== null && trebValue > hardcutConfig.trebThreshold) {
+            meetsHardcutThreshold = true;
+          }
+          // If no specific threshold, allow based on beat detection
+          if (hardcutConfig.bassThreshold === null && hardcutConfig.trebThreshold === null) {
+            meetsHardcutThreshold = true;
+          }
+
+          // Check for instant transition (mode 4: Treb > 8.0)
+          const isInstantTransition = hardcutConfig.instantThreshold && trebValue > hardcutConfig.instantThreshold;
+
+          // Only proceed if threshold is met
+          if (meetsHardcutThreshold) {
+            // If minimum interval has passed (or instant transition), trigger immediately
+            if (isInstantTransition || timeSinceLastTransition >= minIntervalMs) {
+              // Check quiet period - reduce probability if too quiet
+              let probabilityMultiplier = 1.0;
+              if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
+                probabilityMultiplier = CONFIG.QUIET_PROBABILITY_REDUCTION;
+              }
+
+              // For instant transitions or high probability, trigger immediately
+              if (isInstantTransition || Math.random() < probabilityMultiplier * 0.3) {
+                if (window.beatDetectionDebug) {
+                  console.log(`[Transition] Immediate transition triggered${isInstantTransition ? " (instant)" : ""}`);
+                }
+                return { shouldTransition: true, scheduledTime: now };
+              }
+            }
+
+            // Otherwise, schedule a transition (respecting minimum interval)
+            if (timeSinceLastTransition >= minIntervalMs) {
+              // Check quiet period - reduce probability if too quiet
+              let probabilityMultiplier = 1.0;
+              if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
+                probabilityMultiplier = CONFIG.QUIET_PROBABILITY_REDUCTION;
+              }
+
+              // Energy affects transition speed (higher energy = faster transitions)
+              // Calculate base transition speed based on energy
+              const normalizedEnergy = Math.min(1.0, beatInfo.energy / Math.max(0.1, beatInfo.averageEnergy));
+              const energySpeedFactor = 1.0 + normalizedEnergy * CONFIG.ENERGY_TO_SPEED_MULTIPLIER;
+
+              // Roll random probability
+              const roll = Math.random();
+              const isHighRandomness = roll > CONFIG.RANDOMNESS_ROLL_THRESHOLD;
+
+              // Choose time range based on randomness roll
+              let timeRange;
+              if (isHighRandomness) {
+                timeRange = CONFIG.HIGH_RANDOMNESS_TIME_RANGE;
+              } else {
+                timeRange = CONFIG.LOW_RANDOMNESS_TIME_RANGE;
+              }
+
+              // Apply energy speed factor (higher energy = shorter time)
+              // BUT ensure minimum interval is respected
+              const minTime = Math.max(timeRange[0] / energySpeedFactor, minIntervalMs / 1000);
+              const maxTime = Math.max(timeRange[1] / energySpeedFactor, minIntervalMs / 1000);
+
+              // Randomly choose transition time within range
+              const transitionDelay = (Math.random() * (maxTime - minTime) + minTime) * 1000; // Convert to ms
+              const scheduledTime = now + transitionDelay;
+
+              // Apply quiet period probability reduction
+              if (Math.random() < probabilityMultiplier) {
+                isTransitionScheduled = true;
+                scheduledTransitionTime = scheduledTime;
+
+                if (window.beatDetectionDebug) {
+                  console.log(
+                    `[Transition] Scheduled transition in ${(transitionDelay / 1000).toFixed(2)}s ` +
+                      `(Energy: ${normalizedEnergy.toFixed(2)}, ` +
+                      `Randomness: ${isHighRandomness ? "HIGH" : "LOW"}, ` +
+                      `Quiet: ${probabilityMultiplier < 1.0 ? "YES" : "NO"})`
+                  );
+                }
+              }
+            }
+          }
+        }
+
+        return {
+          shouldTransition: false,
+          scheduledTime: scheduledTransitionTime,
+        };
       }
 
       function render() {
@@ -6627,36 +6931,57 @@
 
             // Check for beat if beat detection is enabled
             if (useBeatDetection && isPresetAutoAdvance) {
-              const beatInfo = detectBeat();
-              const transitionDecision = calculateTransitionProbability(beatInfo);
+              try {
+                const beatInfo = detectBeat();
+                const transitionDecision = calculateTransitionProbability(beatInfo);
 
-              if (transitionDecision.shouldTransition) {
-                // Transition triggered - reset scheduled transition
-                isTransitionScheduled = false;
-                lastTransitionTime = Date.now();
+                // Debug logging (only log occasionally to avoid spam)
+                if (window.beatDetectionDebug && Math.random() < 0.01) {
+                  // Log ~1% of frames
+                  console.log("[Beat Detection] Status:", {
+                    detected: beatInfo.detected,
+                    energy: beatInfo.energy?.toFixed(3),
+                    consistency: beatInfo.consistency?.toFixed(3),
+                    shouldTransition: transitionDecision.shouldTransition,
+                    isPlaying: isPlaying,
+                    beatDetectionReady: beatDetectionReadyTime > 0,
+                    energyHistoryLength: energyHistory.length,
+                  });
+                }
 
-                // Beat detected - trigger preset change
-                isAutoTransition = true;
+                if (transitionDecision.shouldTransition) {
+                  // Transition triggered - reset scheduled transition
+                  isTransitionScheduled = false;
+                  lastTransitionTime = Date.now();
 
-                // Clear any existing timer since we're using beat detection
-                clearAutoAdvanceTimer();
+                  // Beat detected - trigger preset change
+                  isAutoTransition = true;
 
-                // Get available presets to check if any are available (async, don't block render)
-                getAvailablePresets()
-                  .then((availablePresets) => {
-                    if (availablePresets.length === 0) {
-                      // No available presets, stay on current
-                      return;
-                    }
+                  // Clear any existing timer since we're using beat detection
+                  clearAutoAdvanceTimer();
 
-                    // Change preset on transition
-                    if (isShuffleEnabled) {
-                      randomPreset().catch((err) => console.error("[Preset] Error in randomPreset:", err));
-                    } else {
-                      nextPreset().catch((err) => console.error("[Preset] Error in nextPreset:", err));
-                    }
-                  })
-                  .catch((err) => console.error("[Preset] Error getting available presets:", err));
+                  // Get available presets to check if any are available (async, don't block render)
+                  getAvailablePresets()
+                    .then((availablePresets) => {
+                      if (availablePresets.length === 0) {
+                        // No available presets, stay on current
+                        return;
+                      }
+
+                      // Change preset on transition
+                      if (isShuffleEnabled) {
+                        randomPreset().catch((err) => console.error("[Preset] Error in randomPreset:", err));
+                      } else {
+                        nextPreset().catch((err) => console.error("[Preset] Error in nextPreset:", err));
+                      }
+                    })
+                    .catch((err) => console.error("[Preset] Error getting available presets:", err));
+                }
+              } catch (beatError) {
+                // Log beat detection errors but don't break rendering
+                if (window.beatDetectionDebug) {
+                  console.error("[Beat Detection] Error in beat detection:", beatError);
+                }
               }
             }
           } catch (error) {
