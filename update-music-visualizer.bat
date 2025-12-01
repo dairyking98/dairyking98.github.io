@@ -19,19 +19,19 @@ if not exist "%SOURCE_DIR%\index.html" (
     exit /b 1
 )
 
-REM Copy index.html from source
-echo [1/3] Copying index.html from source...
-copy /Y "%SOURCE_DIR%\index.html" "%INDEX_FILE%" >nul
+REM Copy index.html from source (preserving UTF-8 encoding)
+echo [1/3] Copying index.html from source with UTF-8 encoding...
+powershell -NoProfile -Command "Copy-Item '%SOURCE_DIR%\index.html' -Destination '%INDEX_FILE%' -Force"
 if errorlevel 1 (
     echo ERROR: Failed to copy index.html
     exit /b 1
 )
-echo   ✓ Copied successfully
+echo   ✓ Copied successfully with UTF-8 encoding preserved
 echo.
 
-REM Update paths for Jekyll site
+REM Update paths for Jekyll site (preserving UTF-8 encoding)
 echo [2/3] Updating paths for Jekyll site...
-powershell -NoProfile -Command "$content = Get-Content '%INDEX_FILE%' -Raw; $content = $content -replace 'BUTTERCHURN_LIB_PATH: \"\./lib/butterchurn\.min\.js\"', 'BUTTERCHURN_LIB_PATH: \"/music-visualizer/lib/butterchurn.min.js\"'; $content = $content -replace 'PRESETS_WRAPPER_PATH: \"\./presets/butterchurn-presets-wrapper\.js\"', 'PRESETS_WRAPPER_PATH: \"/music-visualizer/presets/butterchurn-presets-wrapper.js\"'; [System.IO.File]::WriteAllText((Resolve-Path '%INDEX_FILE%'), $content, [System.Text.Encoding]::UTF8)"
+powershell -NoProfile -Command "$file = '%INDEX_FILE%'; $content = Get-Content $file -Raw -Encoding UTF8; $content = $content -replace 'BUTTERCHURN_LIB_PATH: \"\./lib/butterchurn\.min\.js\"', 'BUTTERCHURN_LIB_PATH: \"/music-visualizer/lib/butterchurn.min.js\"'; $content = $content -replace 'PRESETS_WRAPPER_PATH: \"\./presets/butterchurn-presets-wrapper\.js\"', 'PRESETS_WRAPPER_PATH: \"/music-visualizer/presets/butterchurn-presets-wrapper.js\"'; Set-Content $file -Value $content -NoNewline -Encoding UTF8"
 if errorlevel 1 (
     echo ERROR: Failed to update paths
     exit /b 1

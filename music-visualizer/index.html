@@ -841,7 +841,7 @@
     <div class="control-panel audio-source-panel" id="audio-source-panel">
       <div class="panel-header">
         <h3>Audio Source</h3>
-        <button class="minimize-btn" onclick="toggleAudioSourcePanel()">âˆ’</button>
+        <button class="minimize-btn" onclick="toggleAudioSourcePanel()">−</button>
       </div>
 
       <div class="control-section">
@@ -859,18 +859,18 @@
         <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Radio Station</label>
         <select id="station-select" onchange="onStationSelect()" style="width: 100%; margin-bottom: 10px">
           <option value="">Select a station...</option>
-          <option value="bassdrive">ðŸŽµ Bassdrive Radio</option>
-          <option value="subfm">ðŸ“» Sub FM</option>
-          <option value="hardcorepower">âš¡ Hardcore Power</option>
-          <option value="radio538-dance">ðŸ“¡ Radio 538 â€“ Dance Department</option>
-          <option value="radio538-ibiza">ðŸ“¡ Radio 538 â€“ Ibiza</option>
-          <option value="radio538-party">ðŸ“¡ Radio 538 â€“ Party</option>
-          <option value="kissfm-nl">ðŸ“¡ Kiss FM NL â€“ Dance / Club</option>
-          <option value="pinguin-radio">ðŸŽµ Pinguin Radio (Indie)</option>
-          <option value="dnbradio-main-mp3">ðŸŽ§ DNBRadio - Main (320K MP3 US)</option>
-          <option value="dnbradio-plush">ðŸŽµ DNBRadio - Plush Recordings</option>
-          <option value="dnbradio-section8">âš¡ DNBRadio - Section 8 Recordings</option>
-          <option value="dnbradio-darkstep">ðŸŒ‘ DNBRadio - Darkstep</option>
+          <option value="bassdrive">🎵 Bassdrive Radio</option>
+          <option value="subfm">📻 Sub FM</option>
+          <option value="hardcorepower">⚡ Hardcore Power</option>
+          <option value="radio538-dance">📡 Radio 538 – Dance Department</option>
+          <option value="radio538-ibiza">📡 Radio 538 – Ibiza</option>
+          <option value="radio538-party">📡 Radio 538 – Party</option>
+          <option value="kissfm-nl">📡 Kiss FM NL – Dance / Club</option>
+          <option value="pinguin-radio">🎵 Pinguin Radio (Indie)</option>
+          <option value="dnbradio-main-mp3">🎧 DNBRadio - Main (320K MP3 US)</option>
+          <option value="dnbradio-plush">🎵 DNBRadio - Plush Recordings</option>
+          <option value="dnbradio-section8">⚡ DNBRadio - Section 8 Recordings</option>
+          <option value="dnbradio-darkstep">🌑 DNBRadio - Darkstep</option>
           <option value="custom">Custom URL...</option>
         </select>
         <div id="station-homepage-link" style="display: none; margin-top: 8px; margin-bottom: 10px">
@@ -889,7 +889,7 @@
               text-align: center;
               width: 100%;
             "
-            >ðŸŒ Visit Station Homepage</a
+            >🌐 Visit Station Homepage</a
           >
         </div>
         <div id="custom-url-container" style="display: none; margin-bottom: 10px">
@@ -926,7 +926,7 @@
           >
           <div class="search-container" style="margin-bottom: 10px">
             <input type="text" id="music-file-search" placeholder="Search music files..." oninput="onMusicFileSearchChange()" />
-            <button class="search-clear-btn hidden" id="search-clear-btn" onclick="clearMusicFileSearch()" title="Clear search">Ã—</button>
+            <button class="search-clear-btn hidden" id="search-clear-btn" onclick="clearMusicFileSearch()" title="Clear search">×</button>
           </div>
           <select id="music-file-select" onchange="onMusicFileSelectChange()" style="margin-bottom: 10px">
             <option value="">No files selected...</option>
@@ -937,9 +937,9 @@
       <!-- Playback Controls (shown when audio is playing) -->
       <div id="playback-controls" class="conditional-controls">
         <div class="playback-controls">
-          <button onclick="previousTrack()" id="prev-btn" style="min-width: 50px">â®</button>
-          <button onclick="togglePlayPause()" id="play-pause-btn" style="flex: 1">â¸ Pause</button>
-          <button onclick="nextTrack()" id="next-btn" style="min-width: 50px">â­</button>
+          <button onclick="previousTrack()" id="prev-btn" style="min-width: 50px">⏮</button>
+          <button onclick="togglePlayPause()" id="play-pause-btn" style="flex: 1">⏸ Pause</button>
+          <button onclick="nextTrack()" id="next-btn" style="min-width: 50px">⏭</button>
         </div>
         <div class="slider-group">
           <label style="min-width: 60px">Volume:</label>
@@ -989,7 +989,7 @@
     <div class="control-panel presets-panel hidden" id="playlists-panel">
       <div class="panel-header">
         <h3>Playlists</h3>
-        <button class="minimize-btn" onclick="togglePlaylistsPanel()">âˆ’</button>
+        <button class="minimize-btn" onclick="togglePlaylistsPanel()">−</button>
       </div>
 
       <div class="control-section">
@@ -1072,7 +1072,7 @@
     <div class="control-panel preset-list-panel hidden" id="preset-list-panel">
       <div class="panel-header">
         <h3>Preset List</h3>
-        <button class="minimize-btn" onclick="togglePresetListPanel()">âˆ’</button>
+        <button class="minimize-btn" onclick="togglePresetListPanel()">−</button>
       </div>
 
       <div class="control-section">
@@ -1117,7 +1117,7 @@
               transition: all 0.2s ease;
             "
           >
-            Ã—
+            ×
           </button>
         </div>
         <div style="margin-bottom: 10px">
@@ -1169,7 +1169,7 @@
     <div class="control-panel presets-panel" id="presets-panel">
       <div class="panel-header">
         <h3>Presets</h3>
-        <button class="minimize-btn" onclick="togglePresetsPanel()">âˆ’</button>
+        <button class="minimize-btn" onclick="togglePresetsPanel()">−</button>
       </div>
 
       <div class="control-section">
@@ -1190,9 +1190,9 @@
           ><span id="preset-count-display">0</span> presets available</label
         >
         <div class="playback-controls">
-          <button onclick="previousPreset()" style="flex: 1">â® Previous [â†]</button>
-          <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">â–¶ Play [Space]</button>
-          <button onclick="nextPreset()" style="flex: 1">Next [â†’] â­</button>
+          <button onclick="previousPreset()" style="flex: 1">⏮ Previous [←]</button>
+          <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">▶ Play [Space]</button>
+          <button onclick="nextPreset()" style="flex: 1">Next [→] ⏭</button>
         </div>
 
         <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; align-items: center">
@@ -1352,7 +1352,7 @@
     >
       <div class="panel-header">
         <h3>Credits</h3>
-        <button class="minimize-btn" onclick="toggleCreditsPanel()">âˆ’</button>
+        <button class="minimize-btn" onclick="toggleCreditsPanel()">−</button>
       </div>
 
       <div class="control-section">
@@ -1393,8 +1393,8 @@
       <button onclick="togglePlaylistsPanel()" id="playlists-toggle-btn">Playlists [Q]</button>
       <button onclick="togglePresetsPanel()" id="presets-toggle-btn">Presets [P]</button>
       <button onclick="togglePresetListPanel()" id="preset-list-toggle-btn">Preset List [L]</button>
-      <button onclick="toggleFullscreen()" id="fullscreen-btn">â›¶ Fullscreen [F]</button>
-      <button onclick="saveScreenshot()" id="screenshot-btn">ðŸ“· Screenshot [S]</button>
+      <button onclick="toggleFullscreen()" id="fullscreen-btn">⛶ Fullscreen [F]</button>
+      <button onclick="saveScreenshot()" id="screenshot-btn">📷 Screenshot [S]</button>
       <button onclick="toggleAutoHide()" id="auto-hide-btn">Auto Hide (On) [H]</button>
       <button onclick="toggleCreditsPanel()" id="credits-toggle-btn">Credits [C]</button>
     </div>
@@ -1484,22 +1484,22 @@
             homepage: "https://www.hardcorepower.nl/",
           },
           "radio538-dance": {
-            name: "Radio 538 â€“ Dance Department",
+            name: "Radio 538 – Dance Department",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR01.mp3",
             homepage: "https://www.538.nl/",
           },
           "radio538-ibiza": {
-            name: "Radio 538 â€“ Ibiza",
+            name: "Radio 538 – Ibiza",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR19.mp3",
             homepage: "https://www.538.nl/",
           },
           "radio538-party": {
-            name: "Radio 538 â€“ Party",
+            name: "Radio 538 – Party",
             url: "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR16.mp3",
             homepage: "https://www.538.nl/",
           },
           "kissfm-nl": {
-            name: "Kiss FM NL â€“ Dance / Club",
+            name: "Kiss FM NL – Dance / Club",
             url: "https://stream.kissfm.nl/kissfm",
             homepage: "https://www.kissfm.nl/",
           },
@@ -2875,7 +2875,7 @@
             if (savedAutoAdvance !== null) {
               isPresetAutoAdvance = savedAutoAdvance === "true";
               if (presetPlayPauseBtn) {
-                presetPlayPauseBtn.textContent = isPresetAutoAdvance ? "â¸ Pause [Space]" : "â–¶ Play [Space]";
+                presetPlayPauseBtn.textContent = isPresetAutoAdvance ? "⏸ Pause [Space]" : "▶ Play [Space]";
               }
             }
           } catch (error) {
@@ -2987,7 +2987,7 @@
             document.getElementById("internet-stream-controls").classList.add("active");
             // Reset play/pause button for internet stream (will be shown when stream loads)
             if (playPauseBtn) {
-              playPauseBtn.textContent = "â–¶ Play";
+              playPauseBtn.textContent = "▶ Play";
               playPauseBtn.disabled = false;
               playPauseBtn.style.opacity = "1";
               playPauseBtn.style.cursor = "pointer";
@@ -3407,9 +3407,9 @@
         const fullscreenBtn = document.getElementById("fullscreen-btn");
         if (fullscreenBtn) {
           if (document.fullscreenElement) {
-            fullscreenBtn.textContent = "â›¶ Exit Fullscreen [F]";
+            fullscreenBtn.textContent = "⛶ Exit Fullscreen [F]";
           } else {
-            fullscreenBtn.textContent = "â›¶ Fullscreen [F]";
+            fullscreenBtn.textContent = "⛶ Fullscreen [F]";
           }
         }
         // Reset timer on fullscreen change
@@ -3473,7 +3473,7 @@
           if (audioSource.paused) {
             audioSource.play();
             isPlaying = true;
-            playPauseBtn.textContent = "â¸ Pause";
+            playPauseBtn.textContent = "⏸ Pause";
 
             // MilkDrop3-style: reset beat detection state when resuming
             // Prevents stale scheduled transitions from firing immediately
@@ -3491,7 +3491,7 @@
           } else {
             audioSource.pause();
             isPlaying = false;
-            playPauseBtn.textContent = "â–¶ Play";
+            playPauseBtn.textContent = "▶ Play";
 
             // MilkDrop3-style: reset beat detection state when paused
             // Prevents stale data from causing transitions when resumed
@@ -3675,13 +3675,13 @@
         }
 
         if (isPresetAutoAdvance) {
-          presetPlayPauseBtn.textContent = "â¸ Pause [Space]";
+          presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
           // Reset auto-transition flag to prevent rapid transitions
           isAutoTransition = false;
           // Start auto-advance timer from current preset
           startAutoAdvanceTimer();
         } else {
-          presetPlayPauseBtn.textContent = "â–¶ Play [Space]";
+          presetPlayPauseBtn.textContent = "▶ Play [Space]";
           // Clear timer when pausing and reset auto-transition flag
           clearAutoAdvanceTimer();
           isAutoTransition = false;
@@ -4841,7 +4841,7 @@
             // Timer will start after initial preset loads via loadPresetByIndex()
             // (but only if beat detection is disabled)
             if (presetPlayPauseBtn) {
-              presetPlayPauseBtn.textContent = "â¸ Pause [Space]";
+              presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
             }
           }
         } catch (error) {
@@ -4907,7 +4907,7 @@
               }`
             );
           } else {
-            console.log(`[Preset Loader] âœ“ Successfully loaded ${presetCount} presets`);
+            console.log(`[Preset Loader] ✓ Successfully loaded ${presetCount} presets`);
           }
         } catch (error) {
           console.error("Error loading presets:", error);
@@ -5810,7 +5810,7 @@
           scheduledTransitionTime = 0;
 
           updatePlaybackControlsVisibility();
-          playPauseBtn.textContent = "â¸ Pause";
+          playPauseBtn.textContent = "⏸ Pause";
           trackInfo.textContent = "Microphone Input";
           updateButtonStates();
 
@@ -6082,7 +6082,7 @@
               scheduledTransitionTime = 0;
 
               updatePlaybackControlsVisibility();
-              playPauseBtn.textContent = "â¸ Pause";
+              playPauseBtn.textContent = "⏸ Pause";
               trackInfo.textContent = streamName;
               updateButtonStates();
 
@@ -6170,7 +6170,7 @@
                     <span style="flex: 1; color: ${
                       index === currentPlaylistIndex ? "#4ade80" : "white"
                     }; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
-                    <button onclick="removeFromPlaylist(${index})" style="padding: 4px 8px; background: rgba(255,0,0,0.3); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Ã—</button>
+                    <button onclick="removeFromPlaylist(${index})" style="padding: 4px 8px; background: rgba(255,0,0,0.3); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">×</button>
                     <button onclick="loadPlaylistFileAtIndex(${index})" style="padding: 4px 8px; background: rgba(102,126,234,0.5); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Play</button>
                 `;
           playlistItems.appendChild(item);
@@ -6262,7 +6262,7 @@
               scheduledTransitionTime = 0;
 
               updatePlaybackControlsVisibility();
-              playPauseBtn.textContent = "â¸ Pause";
+              playPauseBtn.textContent = "⏸ Pause";
               trackInfo.textContent = file.name;
               updateButtonStates();
 
@@ -6563,7 +6563,7 @@
               stopAudioBtn.style.cursor = "pointer";
             } else if (canPlayStream) {
               // No audio but can play stream - show Play Audio
-              stopAudioBtn.textContent = "â–¶ Play Audio";
+              stopAudioBtn.textContent = "▶ Play Audio";
               stopAudioBtn.disabled = false;
               stopAudioBtn.style.opacity = "1";
               stopAudioBtn.style.cursor = "pointer";
@@ -6634,7 +6634,7 @@
               // Use FFT data directly (like MilkDrop3 uses raw FFT values)
               // Calculate frequency ranges matching audioLevels:
               // Bass: 20-320Hz, Mid: 320-2800Hz, Treb: 2800-11025Hz
-              // At 44.1kHz sample rate with 1024 FFT: bucketHz = 44100/1024 â‰ˆ 43Hz per bin
+              // At 44.1kHz sample rate with 1024 FFT: bucketHz = 44100/1024 ≈ 43Hz per bin
               // So: bass bins 0-7, mid bins 7-65, treb bins 65-256 (out of 512)
               const sampleRate = audio.audioContext ? audio.audioContext.sampleRate : 44100;
               const fftSize = audio.fftSize || (audio.numSamps ? audio.numSamps * 2 : 1024); // Default to 1024 if not available
@@ -6816,7 +6816,7 @@
             // Debug logging
             if (window.beatDetectionDebug) {
               console.log(
-                `[Beat Detection] ðŸŽµ BEAT DETECTED! ` +
+                `[Beat Detection] 🎵 BEAT DETECTED! ` +
                   `Energy: ${currentEnergy.toFixed(3)}, ` +
                   `Consistency: ${consistencyScore.toFixed(3)}, ` +
                   `Interval: ${interval.toFixed(0)}ms`
