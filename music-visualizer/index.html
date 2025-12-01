@@ -163,8 +163,18 @@
         transform: translateY(-50%) scale(0.95);
       }
 
-      .search-clear-btn.hidden {
+      .search-clear-btn.hidden,
+      .preset-panel-search-clear-btn.hidden {
         display: none;
+      }
+
+      .preset-panel-search-clear-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .preset-panel-search-clear-btn:active {
+        transform: translateY(-50%) scale(0.95);
       }
 
       select {
@@ -268,7 +278,61 @@
         left: 20px;
       }
 
+      .preset-list-panel {
+        top: 20px;
+        right: 480px;
+        width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .preset-list-panel::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .preset-list-panel::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .preset-list-panel::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      .preset-list-panel::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
       .presets-panel {
+        top: 20px;
+        right: 20px;
+        width: 450px;
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .presets-panel::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .presets-panel::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .presets-panel::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      .presets-panel::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      #playlists-panel {
         top: 20px;
         right: 20px;
       }
@@ -277,7 +341,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
       .panel-header h3 {
@@ -369,6 +433,10 @@
         min-width: 40px;
         padding: 8px 12px;
         flex: 0 0 auto;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .track-info {
@@ -437,6 +505,118 @@
         opacity: 1;
       }
 
+      .persistent-preset-name {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        color: #4ade80;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        padding: 12px 24px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: none;
+      }
+
+      .persistent-preset-name.visible {
+        display: block;
+      }
+
+      .persistent-preset-name.fade-in {
+        opacity: 1;
+      }
+
+      .persistent-preset-name.fade-out {
+        opacity: 0;
+      }
+
+      .preset-panel-list {
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+        max-height: 350px;
+      }
+
+      .preset-panel-list::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .preset-panel-list::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .preset-panel-list::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      .preset-panel-list::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .preset-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .preset-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .preset-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .preset-item-label {
+        flex: 1;
+        color: #fff;
+        font-size: 13px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .preset-item.disabled .preset-item-label {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: line-through;
+      }
+
+      .preset-item-rating {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 11px;
+        flex-shrink: 0;
+      }
+
+      .preset-item.current {
+        background: rgba(102, 126, 234, 0.3);
+        border-left: 3px solid #667eea;
+      }
+
+      .preset-item.current:hover {
+        background: rgba(102, 126, 234, 0.4);
+      }
+
+      .preset-item.current .preset-item-label {
+        font-weight: 600;
+        color: #fff;
+      }
+
       @media (max-width: 768px) {
         .control-panel {
           min-width: 90vw;
@@ -465,6 +645,82 @@
   </head>
   <body>
     <script>
+      // Define critical functions immediately so onclick handlers work
+      // These must be defined before the HTML is fully parsed
+      window.toggleAudioSourcePanel = function () {
+        const audioPanel = document.getElementById("audio-source-panel");
+        if (audioPanel) audioPanel.classList.toggle("hidden");
+      };
+      window.togglePresetsPanel = function () {
+        const presetsPanel = document.getElementById("presets-panel");
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetsPanel) {
+          const isHiding = !presetsPanel.classList.contains("hidden");
+          presetsPanel.classList.toggle("hidden");
+          if (isHiding && presetListPanel && !presetListPanel.classList.contains("hidden")) {
+            presetListPanel.style.right = "20px";
+          } else if (!isHiding && presetListPanel && !presetListPanel.classList.contains("hidden")) {
+            presetListPanel.style.right = "480px";
+          }
+        }
+      };
+      window.togglePresetListPanel = function () {
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetListPanel) {
+          presetListPanel.classList.toggle("hidden");
+        }
+      };
+      window.toggleCreditsPanel = function () {
+        const creditsPanel = document.getElementById("credits-panel");
+        if (creditsPanel) creditsPanel.classList.toggle("hidden");
+      };
+      window.togglePlaylistsPanel = function () {
+        const playlistsPanel = document.getElementById("playlists-panel");
+        if (playlistsPanel) playlistsPanel.classList.toggle("hidden");
+      };
+      window.handleStopPlayAudio = async function () {
+        // This will be redefined later, but we need a placeholder
+        console.log("Audio controls not yet initialized");
+      };
+      // Fullscreen toggle - will be redefined later with full implementation
+      window.toggleFullscreen = function () {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch((err) => {
+            console.error("Error entering fullscreen:", err);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      };
+      // Screenshot function - will be redefined later with full implementation
+      window.saveScreenshot = function () {
+        console.log("Screenshot function not yet fully initialized");
+        // This will be redefined later with full implementation
+      };
+      // Auto-hide toggle - will be redefined later with full implementation
+      window.toggleAutoHide = function () {
+        try {
+          // Load current state from localStorage
+          const saved = localStorage.getItem("butterchurn-auto-hide");
+          let isAutoHideEnabled = saved !== null ? saved === "true" : true;
+
+          // Toggle state
+          isAutoHideEnabled = !isAutoHideEnabled;
+
+          // Update button text
+          const autoHideBtn = document.getElementById("auto-hide-btn");
+          if (autoHideBtn) {
+            autoHideBtn.textContent = isAutoHideEnabled ? "Auto Hide (On) [H]" : "Auto Hide (Off) [H]";
+          }
+
+          // Save to localStorage
+          localStorage.setItem("butterchurn-auto-hide", isAutoHideEnabled.toString());
+        } catch (error) {
+          console.warn("[Auto-Hide] Error in early toggle:", error);
+        }
+        // Full implementation will override this later
+      };
+
       // Initialize volume slider value from localStorage before DOM renders
       // This ensures the slider shows the correct value immediately on page load
       // Hard refresh (Ctrl+F5) resets to 50%, normal refresh (F5) remembers saved volume
@@ -547,6 +803,9 @@
         }
       })();
     </script>
+    <!-- Persistent Preset Name Display (at top of page) -->
+    <div class="persistent-preset-name" id="persistent-preset-name"></div>
+
     <canvas id="canvas"></canvas>
 
     <!-- Preset Name Overlay (on top of visualization) -->
@@ -700,6 +959,186 @@
       </button>
     </div>
 
+    <!-- Playlists Panel -->
+    <div class="control-panel presets-panel hidden" id="playlists-panel">
+      <div class="panel-header">
+        <h3>Playlists</h3>
+        <button class="minimize-btn" onclick="togglePlaylistsPanel()">−</button>
+      </div>
+
+      <div class="control-section">
+        <select
+          id="playlist-select"
+          onchange="onPlaylistSelectChange()"
+          style="
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: #fff;
+          "
+        >
+          <option value="">Select playlist...</option>
+        </select>
+        <div style="display: flex; gap: 5px; margin-bottom: 10px">
+          <input
+            type="text"
+            id="new-playlist-name"
+            placeholder="New playlist name"
+            style="
+              flex: 1;
+              padding: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              color: #fff;
+            "
+          />
+          <button
+            onclick="createPlaylistFromInput()"
+            style="padding: 8px 15px; font-size: 12px; background: linear-gradient(135deg, #48bb78 0%, #38a169 100%)"
+          >
+            Create
+          </button>
+        </div>
+        <div style="display: flex; gap: 5px; flex-wrap: wrap">
+          <button
+            onclick="addCurrentPresetToPlaylist()"
+            style="padding: 8px 15px; font-size: 12px; flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          >
+            Add Current
+          </button>
+          <button
+            onclick="removeCurrentPresetFromPlaylist()"
+            style="padding: 8px 15px; font-size: 12px; flex: 1; background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%)"
+          >
+            Remove Current
+          </button>
+        </div>
+        <div style="display: flex; gap: 5px; margin-top: 10px">
+          <button
+            onclick="exportCurrentPlaylist()"
+            style="padding: 8px 15px; font-size: 12px; flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          >
+            Export
+          </button>
+          <label
+            style="
+              padding: 8px 15px;
+              font-size: 12px;
+              flex: 1;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              text-align: center;
+              cursor: pointer;
+              border-radius: 4px;
+            "
+          >
+            Import
+            <input type="file" accept=".json" onchange="if(this.files[0]) importPlaylist(this.files[0])" style="display: none" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preset List Panel -->
+    <div class="control-panel preset-list-panel hidden" id="preset-list-panel">
+      <div class="panel-header">
+        <h3>Preset List</h3>
+        <button class="minimize-btn" onclick="togglePresetListPanel()">−</button>
+      </div>
+
+      <div class="control-section">
+        <div class="preset-panel-search" style="margin-bottom: 10px; position: relative">
+          <input
+            type="text"
+            id="preset-panel-search"
+            placeholder="Search presets..."
+            oninput="onPresetPanelSearchChange()"
+            style="
+              width: 100%;
+              padding: 8px 35px 8px 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              color: #fff;
+            "
+          />
+          <button
+            class="preset-panel-search-clear-btn hidden"
+            id="preset-panel-search-clear-btn"
+            onclick="clearPresetPanelSearch()"
+            title="Clear search"
+            style="
+              position: absolute;
+              right: 4px;
+              top: 50%;
+              transform: translateY(-50%);
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              width: 28px;
+              height: 28px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-size: 18px;
+              line-height: 1;
+              padding: 0;
+              transition: all 0.2s ease;
+            "
+          >
+            ×
+          </button>
+        </div>
+        <div style="margin-bottom: 10px">
+          <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Filter/Sort by Rating:</label>
+          <select
+            id="preset-panel-rating-filter-select"
+            onchange="onPresetPanelRatingFilterChange()"
+            style="
+              width: 100%;
+              padding: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              color: #fff;
+            "
+          >
+            <option value="all">All Presets</option>
+            <option value="unrated">Unrated (0)</option>
+            <option value="1-3">1-3 Stars</option>
+            <option value="4-6">4-6 Stars</option>
+            <option value="7-9">7-9 Stars</option>
+            <option value="sort-high">Sort: Highest First</option>
+            <option value="sort-low">Sort: Lowest First</option>
+          </select>
+        </div>
+        <div class="preset-panel-actions" style="margin-bottom: 10px; display: flex; gap: 5px">
+          <button
+            onclick="enableAllVisiblePresets()"
+            title="Enable all visible presets in search results"
+            style="padding: 6px 12px; font-size: 11px; flex: 1; background: linear-gradient(135deg, #48bb78 0%, #38a169 100%)"
+          >
+            Enable All
+          </button>
+          <button
+            onclick="disableAllVisiblePresets()"
+            title="Disable all visible presets in search results"
+            style="padding: 6px 12px; font-size: 11px; flex: 1; background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%)"
+          >
+            Disable All
+          </button>
+        </div>
+        <div id="preset-panel-list" class="preset-panel-list">
+          <!-- Presets will be populated here -->
+        </div>
+      </div>
+    </div>
+
     <!-- Presets Panel -->
     <div class="control-panel presets-panel" id="presets-panel">
       <div class="panel-header">
@@ -708,63 +1147,115 @@
       </div>
 
       <div class="control-section">
-        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
-          >Select Preset (<span id="preset-count-display">0</span> available)</label
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+          "
         >
-        <div class="search-container" style="margin-bottom: 10px">
-          <input type="text" id="preset-search" placeholder="Search presets..." oninput="onPresetSearchChange()" />
-          <button class="search-clear-btn hidden" id="preset-search-clear-btn" onclick="clearPresetSearch()" title="Clear search">×</button>
+          <div style="color: rgba(255, 255, 255, 0.7); font-size: 11px; margin-bottom: 5px">Current Preset</div>
+          <div id="current-preset-display" style="color: #fff; font-size: 14px; font-weight: 500; word-break: break-word">No preset loaded</div>
+          <div id="current-preset-rating" style="color: #4ade80; font-size: 12px; margin-top: 5px"></div>
         </div>
-        <div style="display: flex; gap: 5px; margin-bottom: 10px; align-items: center">
-          <select id="preset-select" onchange="onPresetSelectChange()" style="flex: 1">
-            <option value="">Loading presets...</option>
-          </select>
-          <button
-            onclick="toggleBlacklistCurrentPreset()"
-            id="blacklist-btn"
-            title="Disable/Enable preset in rotation"
-            style="padding: 10px 20px; font-size: 14px; flex-shrink: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-          >
-            Disable
-          </button>
-        </div>
-
+        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
+          ><span id="preset-count-display">0</span> presets available</label
+        >
+        <button
+          onclick="togglePresetListPanel()"
+          style="
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+          "
+        >
+          Preset List [L]
+        </button>
         <div class="playback-controls">
           <button onclick="previousPreset()" style="flex: 1">⏮ Previous [←]</button>
           <button onclick="togglePresetPlayPause()" id="preset-play-pause-btn" style="flex: 1">▶ Play [Space]</button>
           <button onclick="nextPreset()" style="flex: 1">Next [→] ⏭</button>
         </div>
 
-        <div class="checkbox-group" style="margin-top: 10px">
-          <input type="checkbox" id="shuffle-checkbox" onchange="onShuffleChange()" checked />
-          <label for="shuffle-checkbox">Shuffle [M]</label>
-        </div>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; align-items: center">
+          <div class="checkbox-group" style="margin: 0">
+            <input type="checkbox" id="shuffle-checkbox" onchange="onShuffleChange()" checked />
+            <label for="shuffle-checkbox">Shuffle [M]</label>
+          </div>
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="show-preset-name-checkbox" onchange="onShowPresetNameChange()" />
-          <label for="show-preset-name-checkbox">Show Preset Name [N]</label>
+          <div class="checkbox-group" style="margin: 0">
+            <input type="checkbox" id="show-preset-name-checkbox" checked onchange="onShowPresetNameChange()" />
+            <label for="show-preset-name-checkbox">Show Preset Name [N]</label>
+          </div>
         </div>
       </div>
 
       <div class="control-section">
-        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 8px; font-weight: 500">Transition Trigger:</label>
-        <select
-          id="transition-trigger-select"
-          onchange="onTransitionTriggerChange()"
-          style="
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            color: #fff;
-            font-size: 13px;
-          "
-        >
-          <option value="time">Time-based</option>
-          <option value="beat">Beat-based</option>
-        </select>
+        <h4 style="color: #fff; font-size: 14px; margin-bottom: 10px; margin-top: 0">Ratings</h4>
+        <div style="margin-bottom: 10px">
+          <div style="color: rgba(255, 255, 255, 0.8); font-size: 12px; margin-bottom: 5px">Press 0-9 or numpad keys to rate current preset</div>
+          <div style="display: flex; gap: 5px; flex-wrap: wrap">
+            <button
+              onclick="exportRatings()"
+              style="padding: 8px 15px; font-size: 12px; flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-width: 100px"
+            >
+              Export Ratings
+            </button>
+            <label
+              style="
+                padding: 8px 15px;
+                font-size: 12px;
+                flex: 1;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                text-align: center;
+                cursor: pointer;
+                border-radius: 4px;
+                min-width: 100px;
+              "
+            >
+              Import Ratings
+              <input type="file" accept=".json" onchange="if(this.files[0]) importRatings(this.files[0])" style="display: none" />
+            </label>
+            <button
+              onclick="clearRatings()"
+              style="padding: 8px 15px; font-size: 12px; flex: 1; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); min-width: 100px"
+            >
+              Clear Ratings
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px">
+          <label style="color: #fff; font-size: 12px; font-weight: 500; white-space: nowrap">Transition Trigger:</label>
+          <select
+            id="transition-trigger-select"
+            onchange="onTransitionTriggerChange()"
+            style="
+              flex: 1;
+              padding: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              color: #fff;
+              font-size: 13px;
+            "
+          >
+            <option value="time">Time-based</option>
+            <option value="beat">Beat-based</option>
+          </select>
+        </div>
 
         <!-- Time-based controls -->
         <div id="time-mode-controls">
@@ -772,9 +1263,6 @@
             <label>Blend Time:</label>
             <input type="range" id="blend-slider" min="0" max="30" step="0.1" value="0.5" oninput="updateBlendTime(this.value)" />
             <span id="blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
-            <div id="blend-time-preset-warning" style="color: #ff6b6b; font-size: 10px; margin-top: 2px; display: none">
-              Must be less than Preset Duration
-            </div>
           </div>
           <div class="slider-group">
             <label>Preset Duration:</label>
@@ -785,61 +1273,66 @@
 
         <!-- Beat-based controls -->
         <div id="beat-mode-controls" style="display: none">
+          <div style="color: rgba(255, 255, 255, 0.7); font-size: 11px; margin-bottom: 12px; line-height: 1.4">
+            Transitions trigger when audio beats are detected. Choose a condition that defines what counts as a beat.
+          </div>
+          <div class="slider-group" style="margin-bottom: 15px">
+            <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Cut on Beat:</label>
+            <select
+              id="hardcut-mode-select"
+              onchange="onHardcutModeChange()"
+              style="
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                color: #fff;
+                font-size: 13px;
+              "
+            >
+              <option value="hc-1">1: Bass > 1.5 (0.2s min)</option>
+              <option value="hc-2">2: Treb > 2.9 (0.5s min)</option>
+              <option value="hc-3">3: Treb > 2.9 (1.0s min)</option>
+              <option value="hc-4">4: Treb > 2.9 (3.0s min, >8.0 instant)</option>
+              <option value="hc-5">5: Treb > 2.9 (5.0s min)</option>
+              <option value="hc-6">6: Bass > 1.5 (+ special preset > 4.9)</option>
+              <option value="hc-7">7: Effects auto-injected</option>
+            </select>
+          </div>
           <div class="slider-group">
             <label>Blend Time:</label>
-            <input type="range" id="beat-blend-slider" min="0" max="30" step="0.1" value="0.5" oninput="updateBeatBlendTime(this.value)" />
+            <input type="range" id="beat-blend-slider" min="0" max="3" step="0.1" value="0.5" oninput="updateBeatBlendTime(this.value)" />
             <span id="beat-blend-value" style="color: white; min-width: 40px; text-align: right">0.5s</span>
           </div>
-          <div class="slider-group">
-            <label>Beat Sensitivity:</label>
-            <input type="range" id="beat-sensitivity-slider" min="0.1" max="3.0" step="0.1" value="1.5" oninput="updateBeatSensitivity(this.value)" />
-            <span id="beat-sensitivity-value" style="color: white; min-width: 40px; text-align: right">1.5</span>
-            <div style="color: #aaa; font-size: 10px; margin-top: 2px">Higher = More Sensitive</div>
-          </div>
-          <div class="slider-group">
-            <label>Min Beat Interval:</label>
-            <input type="range" id="beat-interval-slider" min="100" max="15000" step="50" value="300" oninput="updateBeatInterval(this.value)" />
-            <span id="beat-interval-value" style="color: white; min-width: 40px; text-align: right">300ms</span>
-          </div>
+        </div>
+        <div style="margin-top: 15px">
+          <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px">Transition Pattern:</label>
+          <select
+            id="transition-pattern-select"
+            onchange="onTransitionPatternChange()"
+            style="
+              width: 100%;
+              padding: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              color: #fff;
+              font-size: 13px;
+              cursor: pointer;
+            "
+          >
+            <option value="0">Random</option>
+            <option value="1">Directional</option>
+            <option value="2">Plasma</option>
+            <option value="3">Radial</option>
+          </select>
         </div>
       </div>
 
       <div class="control-section">
-        <label style="color: #fff; font-size: 12px; display: block; margin-bottom: 5px"
-          >Transition Pattern (<span id="transition-count-display">9</span> available)</label
-        >
-        <div style="display: flex; gap: 5px; margin-bottom: 10px; align-items: center">
-          <select id="transition-select" onchange="onTransitionSelectChange()" style="flex: 1">
-            <option value="random">Random</option>
-            <option value="1">1 - Directional</option>
-            <option value="2">2 - Plasma</option>
-            <option value="3">3 - Radial</option>
-            <option value="4">4 - Square</option>
-            <option value="5">5 - Clock</option>
-            <option value="6">6 - Cross</option>
-            <option value="7">7 - Stars2</option>
-            <option value="8">8 - Nuclear</option>
-            <option value="9">9 - Arrow</option>
-          </select>
-          <button
-            onclick="toggleBlacklistCurrentTransition()"
-            id="blacklist-transition-btn"
-            title="Disable/Enable transition pattern in rotation"
-            style="
-              padding: 10px 20px;
-              font-size: 14px;
-              flex-shrink: 0;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-              color: white;
-              border: none;
-              border-radius: 8px;
-              cursor: pointer;
-              min-width: 100px;
-            "
-          >
-            Disable
-          </button>
-        </div>
+        <!-- Blend patterns are auto-randomized like MilkDrop3 (no UI selection needed) -->
       </div>
     </div>
 
@@ -870,6 +1363,15 @@
           <li>
             <strong>Preset creators</strong> - Special thanks to <strong>Flexi</strong> and all the amazing artists who created the visualizations
           </li>
+          <li>
+            <strong>ansorre</strong> - Massive collection of Milkdrop presets converted for Butterchurn
+            <a
+              href="https://github.com/ansorre/tens-of-thousands-milkdrop-presets-for-butterchurn"
+              target="_blank"
+              style="color: #667eea; text-decoration: none"
+              >(15,000+ presets)</a
+            >
+          </li>
         </ul>
         <p style="color: rgba(255, 255, 255, 0.6); font-size: 12px; line-height: 1.6; margin: 10px 0 0 0; font-style: italic">
           Thank you for making this incredible technology possible!
@@ -882,6 +1384,7 @@
       <button onclick="toggleAudioSourcePanel()" id="audio-source-toggle-btn">Audio Source [A]</button>
       <button onclick="togglePresetsPanel()" id="presets-toggle-btn">Presets [P]</button>
       <button onclick="toggleCreditsPanel()" id="credits-toggle-btn">Credits [C]</button>
+      <button onclick="togglePlaylistsPanel()" id="playlists-toggle-btn">Playlists [Q]</button>
       <button onclick="toggleFullscreen()" id="fullscreen-btn">⛶ Fullscreen [F]</button>
       <button onclick="saveScreenshot()" id="screenshot-btn">📷 Screenshot [S]</button>
       <button onclick="toggleAutoHide()" id="auto-hide-btn">Auto Hide (On) [H]</button>
@@ -912,8 +1415,8 @@
       // File paths
       const CONFIG = {
         // Library paths (adjust these to match your website structure)
-        BUTTERCHURN_LIB_PATH: "/assets/js/butterchurn.min.js",
-        PRESETS_WRAPPER_PATH: "/assets/js/butterchurn-presets-wrapper.js",
+        BUTTERCHURN_LIB_PATH: "/music-visualizer/lib/butterchurn.min.js",
+        PRESETS_WRAPPER_PATH: "/music-visualizer/presets/butterchurn-presets-wrapper.js",
 
         // Default preset settings
         DEFAULT_PRESET_NAME: "Geiss - Reaction Diffusion 2",
@@ -923,9 +1426,17 @@
 
         // Beat detection settings
         USE_BEAT_DETECTION: false, // Use beat detection instead of time-based auto-advance
-        BEAT_SENSITIVITY: 1.5, // Sensitivity for beat detection (higher = more sensitive)
-        BEAT_MIN_INTERVAL: 300, // Minimum milliseconds between beats
         BEAT_DECAY: 0.98, // Decay rate for energy history
+
+        // Beat consistency and transition probability settings
+        BEAT_CONSISTENCY_WINDOW: 12, // Number of beats to analyze for consistency
+        QUIET_ENERGY_THRESHOLD: 0.1, // Energy level below which transition probability is reduced
+        QUIET_PROBABILITY_REDUCTION: 0.3, // Multiplier for transition probability during quiet (0-1)
+        ENERGY_TO_SPEED_MULTIPLIER: 2.0, // How much energy affects transition speed
+        HIGH_RANDOMNESS_TIME_RANGE: [0.5, 3.0], // Time range for high randomness transitions [min, max] in seconds
+        LOW_RANDOMNESS_TIME_RANGE: [1.0, 2.0], // Time range for low randomness transitions [min, max] in seconds
+        RANDOMNESS_ROLL_THRESHOLD: 0.5, // Probability threshold for high vs low randomness
+        NO_BEAT_FORCE_INTERVAL: 5000, // Time without beats before forcing transition in ms
 
         // Timing settings
         INACTIVITY_DELAY: 2000, // milliseconds (mouse inactivity before hiding controls)
@@ -1034,7 +1545,8 @@
       let audioContext = null;
       let audioSource = null;
       let audioNode = null;
-      let gainNode = null; // Gain node for volume control
+      let gainNode = null; // Gain node for volume control (output)
+      let visualizerGainNode = null; // Gain node for visualizer (always 100% volume)
       let currentAudioElement = null; // Track current audio element for event handler validation
       let lastStreamURL = null; // Store last stream URL for resume functionality
       let lastStreamName = null; // Store last stream name for resume functionality
@@ -1051,17 +1563,30 @@
 
       // Beat detection state
       let useBeatDetection = CONFIG.USE_BEAT_DETECTION;
-      let beatSensitivity = CONFIG.BEAT_SENSITIVITY;
-      let beatMinInterval = CONFIG.BEAT_MIN_INTERVAL;
+      let hardcutMode = "hc-1"; // "hc-1", "hc-2", etc. (default to mode 1 like MilkDrop3)
       let lastBeatTime = 0;
+      let lastBeatDetectedTime = 0; // Timestamp of last beat detection
+      let lastTransitionTime = 0; // Timestamp of last preset transition
       let energyHistory = [];
       let energyHistorySize = 43; // Store last 43 samples (~1.5 seconds at 30fps)
       let averageEnergy = 0;
       let varianceEnergy = 0;
       let manualTransitionPending = false; // Flag to indicate a manual transition is in progress
+
+      // Beat consistency and transition scheduling state
+      let beatIntervals = []; // Array of time differences between beats
+      let consistencyScore = 0; // Calculated beat consistency (0-1)
+      let scheduledTransitionTime = 0; // When next transition should occur (if scheduled)
+      let isTransitionScheduled = false; // Boolean flag for scheduled transitions
       let isPresetLoading = false; // Flag to prevent multiple simultaneous preset loads
       let shuffledPresetHistory = []; // Track shuffled preset order
       let shuffledHistoryIndex = -1; // Current position in shuffled history
+      let presetHistoryQueue = []; // Rolling queue of most recent presets (max 100)
+      let presetHistoryIndex = -1; // Current position in preset history queue
+      const MAX_PRESET_HISTORY = 100; // Maximum size of preset history queue
+      let initialPresetName = null; // Track the very first preset loaded (the starting preset)
+      let currentPresetName = null; // Track current preset name
+      let currentVisiblePresets = []; // Track currently visible presets in preset list panel
       let currentAudioFile = null;
       let audioPlaylist = [];
       let currentPlaylistIndex = -1;
@@ -1071,24 +1596,20 @@
       let presetsRemovedFromRotation = [];
       const ROTATION_STORAGE_KEY = CONFIG.ROTATION_STORAGE_KEY;
 
-      // Transition pattern state
-      let selectedTransitionPattern = "random"; // "random" or "1"-"9"
-      let transitionsRemovedFromRotation = []; // Patterns disabled from random rotation
-      const TRANSITION_ROTATION_STORAGE_KEY = "butterchurn-transition-rotation";
-      const ALL_TRANSITION_PATTERNS = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+      // Preset ratings - stored in localStorage
+      let presetRatings = {}; // {presetName: rating} where rating is 0-9
+      const RATINGS_STORAGE_KEY = "butterchurn-preset-ratings";
 
-      // Transition pattern names mapping
-      const TRANSITION_PATTERN_NAMES = {
-        1: "Directional",
-        2: "Plasma",
-        3: "Radial",
-        4: "Square",
-        5: "Clock",
-        6: "Cross",
-        7: "Stars2",
-        8: "Nuclear",
-        9: "Arrow",
-      };
+      // Playlists - stored in localStorage
+      let playlists = []; // Array of {name: string, presets: string[]}
+      const PLAYLISTS_STORAGE_KEY = "butterchurn-playlists";
+
+      // Rating filter/sort state
+      let currentRatingFilter = "all"; // "all", "unrated", "1-3", "4-6", "7-9", "sort-high", "sort-low"
+
+      // Transition pattern state
+      // Blend patterns are auto-randomized like MilkDrop3 (patterns 1-3 from source)
+      // No UI selection needed - patterns are randomly chosen during transitions
 
       // Initialize rotation list from localStorage
       function initializeRotation() {
@@ -1107,61 +1628,39 @@
         }
       }
 
-      // Initialize transition rotation list from localStorage
-      function initializeTransitionRotation() {
+      // Initialize ratings from localStorage
+      function initializeRatings() {
         try {
-          const stored = localStorage.getItem(TRANSITION_ROTATION_STORAGE_KEY);
+          const stored = localStorage.getItem(RATINGS_STORAGE_KEY);
           if (stored) {
-            transitionsRemovedFromRotation = JSON.parse(stored);
+            presetRatings = JSON.parse(stored);
           } else {
-            transitionsRemovedFromRotation = [];
+            presetRatings = {};
           }
-          console.log(`[Transition Rotation] Loaded ${transitionsRemovedFromRotation.length} patterns removed from rotation`);
+          console.log(`[Ratings] Loaded ratings for ${Object.keys(presetRatings).length} presets`);
         } catch (error) {
-          console.error("[Transition Rotation] Error loading rotation list:", error);
-          transitionsRemovedFromRotation = [];
-        }
-
-        // Update transition count display
-        updateTransitionCountDisplay();
-      }
-
-      // Update transition count display
-      function updateTransitionCountDisplay() {
-        const countDisplay = document.getElementById("transition-count-display");
-        if (countDisplay) {
-          const enabledCount = ALL_TRANSITION_PATTERNS.length - transitionsRemovedFromRotation.length;
-          countDisplay.textContent = enabledCount;
+          console.error("[Ratings] Error loading ratings:", error);
+          presetRatings = {};
         }
       }
 
-      // Update transition dropdown with check/X indicators
-      function updateTransitionDropdown() {
-        const transitionSelect = document.getElementById("transition-select");
-        if (!transitionSelect) return;
-
-        // Store current selection
-        const currentSelection = transitionSelect.value;
-
-        // Clear and rebuild dropdown
-        transitionSelect.innerHTML = '<option value="random">Random</option>';
-
-        // Add all transition patterns with indicators
-        ALL_TRANSITION_PATTERNS.forEach((patternId) => {
-          const option = document.createElement("option");
-          const isRemovedFromRotation = transitionsRemovedFromRotation.includes(patternId);
-          const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
-          const patternName = TRANSITION_PATTERN_NAMES[patternId] || patternId;
-          option.textContent = indicator + patternId + " - " + patternName;
-          option.value = patternId;
-          transitionSelect.appendChild(option);
-        });
-
-        // Restore selection if it still exists
-        if (currentSelection) {
-          transitionSelect.value = currentSelection;
+      // Initialize playlists from localStorage
+      function initializePlaylists() {
+        try {
+          const stored = localStorage.getItem(PLAYLISTS_STORAGE_KEY);
+          if (stored) {
+            playlists = JSON.parse(stored);
+          } else {
+            playlists = [];
+          }
+          console.log(`[Playlists] Loaded ${playlists.length} playlists`);
+        } catch (error) {
+          console.error("[Playlists] Error loading playlists:", error);
+          playlists = [];
         }
       }
+
+      // Blend patterns are auto-randomized like MilkDrop3 (no UI needed)
 
       // Save rotation list to localStorage
       function saveRotation() {
@@ -1172,6 +1671,589 @@
         }
       }
 
+      // Rating functions
+      function getPresetRating(presetName) {
+        const rating = presetRatings[presetName];
+        // Ensure rating is a number
+        if (rating === undefined || rating === null) {
+          return 0;
+        }
+        const numRating = parseInt(rating, 10);
+        return isNaN(numRating) ? 0 : numRating;
+      }
+
+      function setPresetRating(presetName, rating) {
+        if (rating < 0 || rating > 9) {
+          console.error(`[Ratings] Invalid rating: ${rating}. Must be 0-9.`);
+          return;
+        }
+        if (rating === 0) {
+          // Remove rating if set to 0
+          delete presetRatings[presetName];
+        } else {
+          presetRatings[presetName] = rating;
+        }
+        saveRatings();
+        updateRatingDisplay();
+        // Update panel if it's open
+        const panel = document.getElementById("preset-list-panel");
+        if (panel && !panel.classList.contains("hidden")) {
+          populatePresetPanel();
+        }
+        updateCurrentPresetDisplay();
+
+        // Visual indicator - flash the overlay
+        showRatingIndicator(presetName, rating);
+      }
+
+      function showRatingIndicator(presetName, rating) {
+        const overlay = document.getElementById("preset-name-overlay");
+        if (!overlay) return;
+
+        // Show rating indicator
+        const ratingText = rating > 0 ? ` [${rating}]` : "";
+        overlay.textContent = presetName + ratingText;
+        overlay.classList.add("show");
+
+        // Add a brief color flash for visual feedback
+        overlay.style.color = "#4ade80";
+        overlay.style.transform = "translateX(-50%) scale(1.1)";
+        overlay.style.transition = "all 0.2s ease";
+
+        setTimeout(() => {
+          overlay.style.transform = "translateX(-50%) scale(1)";
+          overlay.style.transition = "all 0.3s ease";
+          setTimeout(() => {
+            overlay.style.color = "#4ade80";
+            // Hide after 2 seconds
+            setTimeout(() => {
+              overlay.classList.remove("show");
+            }, 2000);
+          }, 200);
+        }, 200);
+      }
+
+      function updateCurrentPresetDisplay() {
+        const display = document.getElementById("current-preset-display");
+        const ratingDisplay = document.getElementById("current-preset-rating");
+        const presetSelect = document.getElementById("preset-select");
+
+        // Get current preset name
+        let presetName = currentPresetName;
+        if (!presetName && currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+          presetName = currentPresets[currentPresetIndex];
+        }
+
+        // Update input field - show preset name or blank if invalid
+        if (presetSelect) {
+          if (presetName) {
+            presetSelect.value = presetName;
+          } else {
+            presetSelect.value = "";
+          }
+        }
+
+        if (!display || !ratingDisplay) return;
+
+        if (presetName) {
+          display.textContent = presetName;
+          const rating = getPresetRating(presetName);
+          // Create 9 stars: filled on left, empty on right
+          const filledStars = "★".repeat(rating);
+          const emptyStars = "☆".repeat(9 - rating);
+          const stars = filledStars + emptyStars;
+
+          if (rating > 0) {
+            ratingDisplay.textContent = `${stars} (${rating}/9)`;
+            ratingDisplay.style.color = "#4ade80";
+            ratingDisplay.style.display = "block";
+          } else {
+            ratingDisplay.textContent = `${stars} (Unrated)`;
+            ratingDisplay.style.color = "rgba(255, 255, 255, 0.5)";
+            ratingDisplay.style.display = "block";
+          }
+        } else {
+          display.textContent = "No preset loaded";
+          ratingDisplay.textContent = "";
+          ratingDisplay.style.display = "none";
+        }
+      }
+
+      function saveRatings() {
+        try {
+          localStorage.setItem(RATINGS_STORAGE_KEY, JSON.stringify(presetRatings));
+        } catch (error) {
+          console.error("[Ratings] Error saving ratings:", error);
+        }
+      }
+
+      function exportRatings() {
+        const dataStr = JSON.stringify(presetRatings, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "preset-ratings.json";
+        link.click();
+        URL.revokeObjectURL(url);
+        updateStatus("Ratings exported", false);
+      }
+
+      function importRatings(file) {
+        if (!file) {
+          console.error("[Ratings] No file provided for import");
+          updateStatus("Error: No file selected", true);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const fileContent = e.target.result;
+            if (!fileContent || fileContent.trim() === "") {
+              throw new Error("File is empty");
+            }
+
+            const imported = JSON.parse(fileContent);
+            if (!imported || typeof imported !== "object") {
+              throw new Error("Invalid JSON format: expected an object");
+            }
+
+            console.log(`[Ratings] Importing ${Object.keys(imported).length} ratings from file`);
+
+            // Convert all ratings to numbers and validate
+            let importedCount = 0;
+            let skippedCount = 0;
+            for (const [presetName, rating] of Object.entries(imported)) {
+              const numRating = parseInt(rating, 10);
+              if (!isNaN(numRating) && numRating >= 0 && numRating <= 9) {
+                if (numRating === 0) {
+                  delete presetRatings[presetName];
+                } else {
+                  presetRatings[presetName] = numRating;
+                }
+                importedCount++;
+              } else {
+                console.warn(`[Ratings] Skipping invalid rating for "${presetName}": ${rating}`);
+                skippedCount++;
+              }
+            }
+
+            console.log(`[Ratings] Successfully imported ${importedCount} ratings, skipped ${skippedCount}`);
+            saveRatings();
+            updateRatingDisplay();
+            // Update panel if it's open
+            const panel = document.getElementById("preset-list-panel");
+            if (panel && !panel.classList.contains("hidden")) {
+              populatePresetPanel();
+            }
+            updateStatus(`Imported ${importedCount} ratings from ${Object.keys(imported).length} entries`, false);
+          } catch (error) {
+            console.error("[Ratings] Error importing ratings:", error);
+            updateStatus(`Error importing ratings: ${error.message}`, true);
+          }
+        };
+
+        reader.onerror = function (e) {
+          console.error("[Ratings] FileReader error:", e);
+          updateStatus("Error reading file", true);
+        };
+
+        reader.readAsText(file);
+      }
+
+      function clearRatings() {
+        if (!confirm("Are you sure you want to clear all ratings? This cannot be undone.")) {
+          return;
+        }
+
+        const count = Object.keys(presetRatings).length;
+        presetRatings = {};
+        saveRatings();
+        updateRatingDisplay();
+
+        // Update panel if it's open
+        const panel = document.getElementById("preset-list-panel");
+        if (panel && !panel.classList.contains("hidden")) {
+          populatePresetPanel();
+        }
+
+        updateCurrentPresetDisplay();
+        updateStatus(`Cleared ${count} ratings`, false);
+        console.log(`[Ratings] Cleared ${count} ratings`);
+      }
+
+      // Playlist functions
+      function createPlaylist(name) {
+        if (!name || name.trim() === "") {
+          updateStatus("Playlist name cannot be empty", true);
+          return;
+        }
+        if (playlists.find((p) => p.name === name)) {
+          updateStatus("Playlist already exists", true);
+          return;
+        }
+        playlists.push({ name: name.trim(), presets: [] });
+        savePlaylists();
+        updatePlaylistUI();
+        updateStatus(`Created playlist: ${name}`, false);
+      }
+
+      function addToPlaylist(playlistName, presetName) {
+        const playlist = playlists.find((p) => p.name === playlistName);
+        if (!playlist) {
+          updateStatus("Playlist not found", true);
+          return;
+        }
+        if (!playlist.presets.includes(presetName)) {
+          playlist.presets.push(presetName);
+          savePlaylists();
+          updatePlaylistUI();
+          updateStatus(`Added to ${playlistName}`, false);
+        }
+      }
+
+      function removeFromPlaylist(playlistName, presetName) {
+        const playlist = playlists.find((p) => p.name === playlistName);
+        if (!playlist) {
+          return;
+        }
+        const index = playlist.presets.indexOf(presetName);
+        if (index > -1) {
+          playlist.presets.splice(index, 1);
+          savePlaylists();
+          updatePlaylistUI();
+          updateStatus(`Removed from ${playlistName}`, false);
+        }
+      }
+
+      function loadPlaylists() {
+        initializePlaylists();
+        updatePlaylistUI();
+      }
+
+      function savePlaylists() {
+        try {
+          localStorage.setItem(PLAYLISTS_STORAGE_KEY, JSON.stringify(playlists));
+        } catch (error) {
+          console.error("[Playlists] Error saving playlists:", error);
+        }
+      }
+
+      function exportPlaylist(playlistName) {
+        const playlist = playlists.find((p) => p.name === playlistName);
+        if (!playlist) {
+          updateStatus("Playlist not found", true);
+          return;
+        }
+        const dataStr = JSON.stringify(playlist, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `playlist-${playlistName.replace(/[^a-z0-9]/gi, "_")}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+        updateStatus(`Exported playlist: ${playlistName}`, false);
+      }
+
+      function importPlaylist(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const imported = JSON.parse(e.target.result);
+            if (!imported.name || !Array.isArray(imported.presets)) {
+              throw new Error("Invalid playlist format");
+            }
+            // Check if playlist with same name exists
+            const existingIndex = playlists.findIndex((p) => p.name === imported.name);
+            if (existingIndex > -1) {
+              // Merge presets (avoid duplicates)
+              const existing = playlists[existingIndex];
+              imported.presets.forEach((preset) => {
+                if (!existing.presets.includes(preset)) {
+                  existing.presets.push(preset);
+                }
+              });
+            } else {
+              playlists.push(imported);
+            }
+            savePlaylists();
+            updatePlaylistUI();
+            updateStatus(`Imported playlist: ${imported.name}`, false);
+          } catch (error) {
+            console.error("[Playlists] Error importing playlist:", error);
+            updateStatus("Error importing playlist", true);
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // UI helper functions
+      window.createPlaylistFromInput = function () {
+        const input = document.getElementById("new-playlist-name");
+        if (input && input.value) {
+          createPlaylist(input.value);
+          input.value = "";
+        }
+      };
+
+      window.addCurrentPresetToPlaylist = function () {
+        const playlistSelect = document.getElementById("playlist-select");
+        const presetSelect = document.getElementById("preset-select");
+        if (!playlistSelect || !playlistSelect.value) {
+          updateStatus("Please select a playlist", true);
+          return;
+        }
+        const presetName =
+          currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+        if (!presetName) {
+          updateStatus("No preset selected", true);
+          return;
+        }
+        addToPlaylist(playlistSelect.value, presetName);
+      };
+
+      window.removeCurrentPresetFromPlaylist = function () {
+        const playlistSelect = document.getElementById("playlist-select");
+        if (!playlistSelect || !playlistSelect.value) {
+          updateStatus("Please select a playlist", true);
+          return;
+        }
+        const presetName =
+          currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+        if (!presetName) {
+          updateStatus("No preset selected", true);
+          return;
+        }
+        removeFromPlaylist(playlistSelect.value, presetName);
+      };
+
+      window.exportCurrentPlaylist = function () {
+        const playlistSelect = document.getElementById("playlist-select");
+        if (!playlistSelect || !playlistSelect.value) {
+          updateStatus("Please select a playlist", true);
+          return;
+        }
+        exportPlaylist(playlistSelect.value);
+      };
+
+      window.onPlaylistSelectChange = function () {
+        // Could add functionality to filter by playlist here
+      };
+
+      // Rating filter/sort functions
+      window.onRatingFilterChange = function () {
+        const filterSelect = document.getElementById("rating-filter-select");
+        if (filterSelect) {
+          currentRatingFilter = filterSelect.value;
+          applyRatingFilter(currentRatingFilter);
+        }
+      };
+
+      async function applyRatingFilter(filterOption) {
+        if (!presetSelect) return;
+
+        try {
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+          let filteredPresets = [...allPresets];
+
+          // Apply filter
+          if (filterOption === "unrated") {
+            filteredPresets = filteredPresets.filter((p) => getPresetRating(p) === 0);
+          } else if (filterOption === "1-3") {
+            filteredPresets = filteredPresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 1 && rating <= 3;
+            });
+          } else if (filterOption === "4-6") {
+            filteredPresets = filteredPresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 4 && rating <= 6;
+            });
+          } else if (filterOption === "7-9") {
+            filteredPresets = filteredPresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 7 && rating <= 9;
+            });
+          }
+
+          // Apply sort
+          if (filterOption === "sort-high" || filterOption === "sort-low") {
+            filteredPresets.sort((a, b) => {
+              const ratingA = getPresetRating(a);
+              const ratingB = getPresetRating(b);
+              if (filterOption === "sort-high") {
+                return ratingB - ratingA; // Highest first
+              } else {
+                return ratingA - ratingB; // Lowest first
+              }
+            });
+          }
+
+          // Filter out disabled presets for currentPresets
+          filteredPresets = filteredPresets.filter((p) => !presetsRemovedFromRotation.includes(p));
+
+          // Update currentPresets if not "all" filter
+          if (filterOption !== "all") {
+            currentPresets = filteredPresets;
+          } else {
+            // Reload with rotation filter
+            await reloadPresetsWithRotation();
+          }
+
+          // Update count to show total enabled presets (always, regardless of rating filter)
+          await updatePresetCountDisplay();
+
+          // Update panel if it's open
+          const panel = document.getElementById("preset-list-panel");
+          if (panel && !panel.classList.contains("hidden")) {
+            populatePresetPanel();
+          }
+        } catch (error) {
+          console.error("[Rating Filter] Error applying filter:", error);
+        }
+      }
+
+      async function updatePlaylistUI() {
+        const playlistSelect = document.getElementById("playlist-select");
+        if (!playlistSelect) return;
+
+        playlistSelect.innerHTML = '<option value="">Select playlist...</option>';
+
+        // Add hardcoded playlists
+        const hardcodedPlaylists = [
+          { name: "Favorites", presets: [] },
+          { name: "Top Rated", presets: [] },
+          { name: "Unrated", presets: [] },
+        ];
+
+        // Populate hardcoded playlists
+        try {
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+          hardcodedPlaylists[0].presets = allPresets.filter((p) => getPresetRating(p) >= 7);
+          hardcodedPlaylists[1].presets = allPresets.filter((p) => {
+            const rating = getPresetRating(p);
+            return rating >= 5;
+          });
+          hardcodedPlaylists[2].presets = allPresets.filter((p) => getPresetRating(p) === 0);
+        } catch (e) {
+          console.error("[Playlists] Error populating hardcoded playlists:", e);
+        }
+
+        // Add hardcoded playlists
+        hardcodedPlaylists.forEach((playlist) => {
+          const option = document.createElement("option");
+          option.value = playlist.name;
+          option.textContent = `${playlist.name} (${playlist.presets.length})`;
+          playlistSelect.appendChild(option);
+        });
+
+        // Add user playlists
+        playlists.forEach((playlist) => {
+          const option = document.createElement("option");
+          option.value = playlist.name;
+          option.textContent = `${playlist.name} (${playlist.presets.length})`;
+          playlistSelect.appendChild(option);
+        });
+      }
+
+      function updateRatingDisplay() {
+        const presetName = currentPresetName;
+        if (!presetName) return;
+        const rating = getPresetRating(presetName);
+        const overlay = document.getElementById("preset-name-overlay");
+
+        if (overlay) {
+          // Update overlay to show rating
+          const currentText = overlay.textContent;
+          const nameMatch = currentText.match(/^(.+?)(\s*\[.*?\])?$/);
+          if (nameMatch) {
+            const name = nameMatch[1];
+            overlay.textContent = rating > 0 ? `${name} [${rating}]` : name;
+          }
+        }
+      }
+
+      // updatePresetSelectWithRatings removed - no longer using dropdown
+
+      // Bulk enable/disable functions
+      window.disableAllPresets = async function () {
+        try {
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+          presetsRemovedFromRotation = [...allPresets];
+          saveRotation();
+          await reloadPresetsWithRotation();
+          updateStatus(`Disabled all ${allPresets.length} presets`, false);
+        } catch (error) {
+          console.error("[Rotation] Error disabling all presets:", error);
+          updateStatus("Error disabling all presets", true);
+        }
+      };
+
+      window.enableAllPresets = async function () {
+        presetsRemovedFromRotation = [];
+        saveRotation();
+        await reloadPresetsWithRotation();
+        updateStatus("Enabled all presets", false);
+      };
+
+      // Enable all visible presets in search results
+      window.enableAllVisiblePresets = async function () {
+        if (currentVisiblePresets.length === 0) {
+          updateStatus("No presets visible to enable", true);
+          return;
+        }
+
+        let enabledCount = 0;
+        currentVisiblePresets.forEach((presetName) => {
+          const index = presetsRemovedFromRotation.indexOf(presetName);
+          if (index !== -1) {
+            presetsRemovedFromRotation.splice(index, 1);
+            enabledCount++;
+          }
+        });
+
+        if (enabledCount > 0) {
+          saveRotation();
+          await reloadPresetsWithRotation();
+          await updatePresetCountDisplay();
+          populatePresetPanel();
+          updateStatus(`Enabled ${enabledCount} visible preset(s)`, false);
+        } else {
+          updateStatus("All visible presets are already enabled", false);
+        }
+      };
+
+      // Disable all visible presets in search results
+      window.disableAllVisiblePresets = async function () {
+        if (currentVisiblePresets.length === 0) {
+          updateStatus("No presets visible to disable", true);
+          return;
+        }
+
+        let disabledCount = 0;
+        currentVisiblePresets.forEach((presetName) => {
+          if (!presetsRemovedFromRotation.includes(presetName)) {
+            presetsRemovedFromRotation.push(presetName);
+            disabledCount++;
+          }
+        });
+
+        if (disabledCount > 0) {
+          saveRotation();
+          await reloadPresetsWithRotation();
+          await updatePresetCountDisplay();
+          populatePresetPanel();
+          updateStatus(`Disabled ${disabledCount} visible preset(s)`, false);
+        } else {
+          updateStatus("All visible presets are already disabled", false);
+        }
+      };
+
       // Export rotation list to console
       window.exportRotation = function () {
         console.log("=== PRESETS REMOVED FROM ROTATION ===");
@@ -1181,15 +2263,13 @@
         return presetsRemovedFromRotation;
       };
 
-      // Toggle rotation status for current preset
+      // Toggle rotation status for current preset (kept for compatibility, but button removed)
       window.toggleBlacklistCurrentPreset = async function () {
-        // Get current preset name - check dropdown first (most reliable)
-        let presetName = null;
-        if (presetSelect && presetSelect.value) {
-          presetName = presetSelect.value;
-        } else if (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+        // Get current preset name
+        let presetName = currentPresetName;
+        if (!presetName && currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
           presetName = currentPresets[currentPresetIndex];
-        } else {
+        } else if (!presetName) {
           // Try to get from all presets if current index is invalid
           try {
             const presets = await butterchurnPresets.default.getPresets();
@@ -1235,109 +2315,218 @@
         updateBlacklistButton();
       };
 
-      // Transition pattern handlers
-      window.onTransitionSelectChange = function () {
-        const selectedValue = transitionSelect.value;
-        selectedTransitionPattern = selectedValue;
+      // Blend patterns are auto-randomized like MilkDrop3 (no handlers needed)
 
-        // Save to localStorage
-        try {
-          localStorage.setItem("butterchurn-selected-transition", selectedTransitionPattern);
-        } catch (error) {
-          console.warn("[Transition] Error saving selection:", error);
-        }
-
-        // Update butterchurn if visualizer exists
-        if (visualizer) {
-          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
-          visualizer.setBlendPatternType(blendPatternType);
-
-          // Update enabled patterns for random selection
-          if (selectedTransitionPattern === "random") {
-            const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) => parseInt(p, 10));
-            visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
-          }
-        }
-
-        // Update button state
-        updateBlacklistTransitionButton();
-
-        console.log(
-          `[Transition] Selected pattern: ${selectedTransitionPattern === "random" ? "Random" : TRANSITION_PATTERN_NAMES[selectedTransitionPattern]}`
-        );
-      };
-
-      window.toggleBlacklistCurrentTransition = async function () {
-        const transitionSelect = document.getElementById("transition-select");
-        if (!transitionSelect || !transitionSelect.value || transitionSelect.value === "random") {
-          updateStatus("Cannot disable 'Random' pattern", false);
+      // Custom Transition Patterns
+      // Note: This function attempts to register custom transitions, but butterchurn's
+      // built-in blend patterns (0-3) are used via the third parameter of loadPreset().
+      // The transition patterns are: 0=Random, 1=Directional, 2=Plasma, 3=Radial
+      function registerCustomTransitionPatterns(visualizer) {
+        if (!visualizer) {
+          console.warn("[Transition] Visualizer not available");
           return;
         }
 
-        const patternId = transitionSelect.value;
+        // Check if butterchurn supports registerTransition (custom API extension)
+        if (visualizer.registerTransition) {
+          try {
+            // Custom transition pattern 0: None (simple fade) - no special effects, just crossfade
+            visualizer.registerTransition(0, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              return {
+                blend: blend,
+                blendMode: "normal",
+              };
+            });
 
-        const index = transitionsRemovedFromRotation.indexOf(patternId);
+            // Custom transition pattern 1: Smooth fade
+            visualizer.registerTransition(1, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              return {
+                blend: blend,
+                blendMode: "normal",
+              };
+            });
 
-        if (index === -1) {
-          // Remove from rotation
-          transitionsRemovedFromRotation.push(patternId);
-          updateStatus(`Removed from rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`, false);
-          console.log(`[Transition Rotation] Removed "${patternId}" from rotation`);
+            // Custom transition pattern 2: Crossfade with slight zoom
+            visualizer.registerTransition(2, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const zoom = 1.0 + progress * 0.1;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                zoom: zoom,
+              };
+            });
+
+            // Custom transition pattern 3: Radial wipe
+            visualizer.registerTransition(3, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const angle = progress * Math.PI * 2;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                rotation: angle,
+              };
+            });
+
+            // Custom transition pattern 4: Slide transition
+            visualizer.registerTransition(4, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const offsetX = (1 - progress) * 100;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                offsetX: offsetX,
+              };
+            });
+
+            // Custom transition pattern 5: Dissolve
+            visualizer.registerTransition(5, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const noise = Math.random() * 0.1;
+              return {
+                blend: Math.min(1, blend + noise),
+                blendMode: "dissolve",
+              };
+            });
+
+            // Custom transition pattern 6: Color shift
+            visualizer.registerTransition(6, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const hueShift = progress * 360;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                hueShift: hueShift,
+              };
+            });
+
+            // Custom transition pattern 7: Pixelate dissolve
+            visualizer.registerTransition(7, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const pixelSize = Math.max(1, 20 * (1 - progress));
+              return {
+                blend: blend,
+                blendMode: "normal",
+                pixelSize: pixelSize,
+              };
+            });
+
+            // Custom transition pattern 8: Wave transition
+            visualizer.registerTransition(8, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const wave = Math.sin(progress * Math.PI * 4) * 0.1;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                waveOffset: wave,
+              };
+            });
+
+            // Custom transition pattern 9: Spiral transition
+            visualizer.registerTransition(9, function (progress, fromPreset, toPreset) {
+              const blend = progress;
+              const rotation = progress * Math.PI * 4;
+              const scale = 0.5 + progress * 0.5;
+              return {
+                blend: blend,
+                blendMode: "normal",
+                rotation: rotation,
+                scale: scale,
+              };
+            });
+
+            console.log("[Transition] Registered 4 custom transition patterns (0-3)");
+          } catch (error) {
+            console.error("[Transition] Error registering custom transition patterns:", error);
+          }
         } else {
-          // Add back to rotation
-          transitionsRemovedFromRotation.splice(index, 1);
-          updateStatus(`Added to rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`, false);
-          console.log(`[Transition Rotation] Added "${patternId}" to rotation`);
-        }
-
-        saveTransitionRotation();
-        updateTransitionCountDisplay();
-        updateTransitionDropdown(); // Update dropdown with check/X indicators
-        updateBlacklistTransitionButton();
-
-        // Update enabled patterns in butterchurn (only if random is selected)
-        if (visualizer && selectedTransitionPattern === "random") {
-          const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) => parseInt(p, 10));
-          visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
-        }
-      };
-
-      // Save transition rotation list to localStorage
-      function saveTransitionRotation() {
-        try {
-          localStorage.setItem(TRANSITION_ROTATION_STORAGE_KEY, JSON.stringify(transitionsRemovedFromRotation));
-        } catch (error) {
-          console.error("[Transition Rotation] Error saving rotation list:", error);
+          // If registerTransition is not available, we'll use butterchurn's built-in blend patterns
+          // via the third parameter of loadPreset() (if supported) or rely on random selection
+          // Pattern 0 (null) = simple fade, patterns 1-3 = various blend patterns
+          console.log("[Transition] Using butterchurn's built-in blend patterns (0-3, where 0=none/fade)");
         }
       }
 
-      // Update transition blacklist button appearance
-      function updateBlacklistTransitionButton() {
-        const blacklistBtn = document.getElementById("blacklist-transition-btn");
-        if (!blacklistBtn) return;
+      // Get transition pattern based on user selection
+      // Note: This uses butterchurn's built-in blend patterns (0-3)
+      // 0=Random, 1=Directional, 2=Plasma, 3=Radial
+      function getTransitionPattern() {
+        const transitionSelect = document.getElementById("transition-pattern-select");
+        if (!transitionSelect) {
+          // Fallback to 0 (Random) if dropdown doesn't exist
+          console.log(`[Transition] Dropdown not found, using default pattern: 0 (Random)`);
+          return 0;
+        }
 
-        const transitionSelect = document.getElementById("transition-select");
-        if (!transitionSelect || !transitionSelect.value || transitionSelect.value === "random") {
-          blacklistBtn.disabled = true;
-          blacklistBtn.style.opacity = "0.5";
-          blacklistBtn.textContent = "Disable";
+        const selectedValue = transitionSelect.value;
+
+        // Return the selected pattern number (0-3)
+        const patternNum = parseInt(selectedValue, 10);
+        const patternNames = {
+          0: "Random",
+          1: "Directional",
+          2: "Plasma",
+          3: "Radial",
+        };
+        console.log(`[Transition] Using selected pattern: ${patternNum} (${patternNames[patternNum] || "Unknown"})`);
+        return patternNum;
+      }
+
+      // Handle transition pattern selection change
+      function onTransitionPatternChange() {
+        const transitionSelect = document.getElementById("transition-pattern-select");
+        if (!transitionSelect) {
+          console.warn("[Transition] Dropdown not found in onTransitionPatternChange");
           return;
         }
 
-        const patternId = transitionSelect.value;
-        blacklistBtn.disabled = false;
-        blacklistBtn.style.opacity = "1";
+        const selectedValue = transitionSelect.value;
+        console.log(`[Transition] onTransitionPatternChange called with value: "${selectedValue}"`);
 
-        const isRemovedFromRotation = transitionsRemovedFromRotation.includes(patternId);
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-transition-pattern", selectedValue);
+        } catch (error) {
+          console.warn("[Transition] Error saving transition pattern:", error);
+        }
 
-        if (isRemovedFromRotation) {
-          blacklistBtn.style.background = "linear-gradient(135deg, #f5576c 0%, #f093fb 100%)";
-          blacklistBtn.textContent = "Enable";
-          blacklistBtn.title = `Enable in rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`;
-        } else {
-          blacklistBtn.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-          blacklistBtn.textContent = "Disable";
-          blacklistBtn.title = `Disable from rotation: ${TRANSITION_PATTERN_NAMES[patternId]}`;
+        // Log the selection
+        const patternNames = {
+          0: "Random",
+          1: "Directional",
+          2: "Plasma",
+          3: "Radial",
+        };
+        console.log(`[Transition] Pattern set to: ${patternNames[selectedValue] || selectedValue}`);
+      }
+
+      // Load saved transition pattern from localStorage
+      function loadTransitionPattern() {
+        const transitionSelect = document.getElementById("transition-pattern-select");
+        if (!transitionSelect) {
+          // If dropdown doesn't exist yet, try again after a short delay
+          setTimeout(loadTransitionPattern, 100);
+          return;
+        }
+
+        try {
+          const saved = localStorage.getItem("butterchurn-transition-pattern");
+          if (saved) {
+            transitionSelect.value = saved;
+            console.log(`[Transition] Loaded saved pattern: ${saved}`);
+          } else {
+            // Default to 0 (Random)
+            transitionSelect.value = "0";
+          }
+          // Always update status display after setting the value
+          onTransitionPatternChange();
+        } catch (error) {
+          console.warn("[Transition] Error loading transition pattern:", error);
+          transitionSelect.value = "0";
+          // Update status display
+          onTransitionPatternChange();
         }
       }
 
@@ -1348,11 +2537,9 @@
           return;
         }
 
-        // Get current preset name - check from select dropdown or currentPresets
-        let presetName = null;
-        if (presetSelect && presetSelect.value) {
-          presetName = presetSelect.value;
-        } else if (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+        // Get current preset name
+        let presetName = currentPresetName;
+        if (!presetName && currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
           presetName = currentPresets[currentPresetIndex];
         }
 
@@ -1402,8 +2589,7 @@
       const presetSelect = document.getElementById("preset-select");
       const presetSearch = document.getElementById("preset-search");
       const presetCountDisplay = document.getElementById("preset-count-display");
-      const transitionSelect = document.getElementById("transition-select");
-      const transitionCountDisplay = document.getElementById("transition-count-display");
+      // Blend patterns are auto-randomized (no UI elements needed)
       const startSystemAudioBtn = document.getElementById("start-system-audio-btn");
       const startMicrophoneBtn = document.getElementById("start-microphone-btn");
       const stopAudioBtn = document.getElementById("stop-audio-btn");
@@ -1526,70 +2712,55 @@
           // Set blend slider constraints based on current mode and constraints
           updateBlendSliderConstraints();
 
+          // Load transition pattern selection
+          loadTransitionPattern();
+
           // Initialize transition trigger and beat detection controls
           try {
             // Load transition trigger mode from localStorage
             const savedTriggerMode = localStorage.getItem("butterchurn-transition-trigger");
-            const triggerMode = savedTriggerMode === "beat" || savedTriggerMode === "time" ? savedTriggerMode : useBeatDetection ? "beat" : "time";
-
-            // Set trigger mode
             const triggerSelect = document.getElementById("transition-trigger-select");
+
             if (triggerSelect) {
+              const triggerMode = savedTriggerMode === "beat" || savedTriggerMode === "time" ? savedTriggerMode : useBeatDetection ? "beat" : "time";
+
+              // Set trigger mode dropdown value
               triggerSelect.value = triggerMode;
-            }
 
-            // Update useBeatDetection based on trigger mode
-            useBeatDetection = triggerMode === "beat";
+              // Update state and UI manually during initialization
+              // (Don't call the handler as it resets timers/state which we don't want during init)
+              useBeatDetection = triggerMode === "beat";
+              const timeControls = document.getElementById("time-mode-controls");
+              const beatControls = document.getElementById("beat-mode-controls");
+              if (timeControls && beatControls) {
+                if (triggerMode === "time") {
+                  timeControls.style.display = "block";
+                  beatControls.style.display = "none";
+                } else {
+                  timeControls.style.display = "none";
+                  beatControls.style.display = "block";
+                }
+              }
 
-            // Show/hide appropriate controls
-            const timeControls = document.getElementById("time-mode-controls");
-            const beatControls = document.getElementById("beat-mode-controls");
-            if (timeControls && beatControls) {
-              if (triggerMode === "time") {
-                timeControls.style.display = "block";
-                beatControls.style.display = "none";
-              } else {
-                timeControls.style.display = "none";
-                beatControls.style.display = "block";
+              // Update blend slider constraints for the restored mode
+              // (This function is defined earlier, so it should be available)
+              if (typeof updateBlendSliderConstraints === "function") {
+                updateBlendSliderConstraints();
               }
             }
 
-            // Load beat detection settings from localStorage
-            const savedBeatSensitivity = localStorage.getItem("butterchurn-beat-sensitivity");
-            if (savedBeatSensitivity !== null) {
-              const parsed = parseFloat(savedBeatSensitivity);
-              // Clamp to valid range (0.1 - 3.0)
-              if (!isNaN(parsed)) {
-                beatSensitivity = Math.max(0.1, Math.min(3.0, parsed));
-              } else {
-                beatSensitivity = CONFIG.BEAT_SENSITIVITY;
-              }
+            // Load hardcut mode from localStorage (default to hc-1 if not set)
+            const savedHardcutMode = localStorage.getItem("butterchurn-hardcut-mode");
+            if (savedHardcutMode && savedHardcutMode !== "none") {
+              hardcutMode = savedHardcutMode;
+            } else {
+              hardcutMode = "hc-1"; // Default to mode 1 like MilkDrop3
             }
 
-            const savedBeatInterval = localStorage.getItem("butterchurn-beat-interval");
-            if (savedBeatInterval !== null) {
-              beatMinInterval = parseInt(savedBeatInterval) || CONFIG.BEAT_MIN_INTERVAL;
-            }
-
-            // Update beat mode UI controls
-            const beatSensitivitySlider = document.getElementById("beat-sensitivity-slider");
-            const beatSensitivityValue = document.getElementById("beat-sensitivity-value");
-            if (beatSensitivitySlider && beatSensitivityValue) {
-              beatSensitivitySlider.value = beatSensitivity;
-              beatSensitivityValue.textContent = beatSensitivity.toFixed(1);
-            }
-
-            const beatIntervalSlider = document.getElementById("beat-interval-slider");
-            const beatIntervalValue = document.getElementById("beat-interval-value");
-            if (beatIntervalSlider && beatIntervalValue) {
-              beatIntervalSlider.value = beatMinInterval;
-              // Show in seconds if >= 1000ms, otherwise show in ms
-              if (beatMinInterval >= 1000) {
-                const seconds = (beatMinInterval / 1000).toFixed(1);
-                beatIntervalValue.textContent = seconds + "s";
-              } else {
-                beatIntervalValue.textContent = beatMinInterval + "ms";
-              }
+            // Set hardcut mode dropdown
+            const hardcutSelect = document.getElementById("hardcut-mode-select");
+            if (hardcutSelect) {
+              hardcutSelect.value = hardcutMode;
             }
 
             // Initialize beat blend time slider (sync with regular blend time)
@@ -1608,6 +2779,94 @@
             updateBlendSliderConstraints();
           } catch (error) {
             console.warn("[Transition Trigger] Error initializing:", error);
+          }
+
+          // Restore preset duration from localStorage
+          try {
+            const savedPresetDuration = localStorage.getItem("butterchurn-preset-duration");
+            if (savedPresetDuration !== null) {
+              const parsed = parseFloat(savedPresetDuration);
+              if (!isNaN(parsed) && parsed > 0) {
+                const presetDurationSlider = document.getElementById("preset-duration-slider");
+                const presetDurationValue = document.getElementById("preset-duration-value");
+                if (presetDurationSlider && presetDurationValue) {
+                  presetDurationSlider.value = parsed;
+                  presetDurationSlider.setAttribute("value", parsed);
+                  presetDurationValue.textContent = parsed + "s";
+                  presetDuration = parsed;
+                }
+              }
+            }
+          } catch (error) {
+            console.warn("[Preset Duration] Error restoring:", error);
+          }
+
+          // Restore shuffle checkbox state from localStorage
+          try {
+            const savedShuffle = localStorage.getItem("butterchurn-shuffle-enabled");
+            if (savedShuffle !== null && shuffleCheckbox) {
+              shuffleCheckbox.checked = savedShuffle === "true";
+              isShuffleEnabled = shuffleCheckbox.checked;
+            }
+          } catch (error) {
+            console.warn("[Shuffle] Error restoring:", error);
+          }
+
+          // Restore show preset name checkbox state from localStorage
+          try {
+            const savedShowPresetName = localStorage.getItem("butterchurn-show-preset-name");
+            if (showPresetNameCheckbox) {
+              if (savedShowPresetName !== null) {
+                showPresetNameCheckbox.checked = savedShowPresetName === "true";
+              } else {
+                // Default to checked if no saved value exists
+                showPresetNameCheckbox.checked = true;
+              }
+            }
+          } catch (error) {
+            console.warn("[Show Preset Name] Error restoring:", error);
+            // Default to checked on error
+            if (showPresetNameCheckbox) {
+              showPresetNameCheckbox.checked = true;
+            }
+          }
+
+          // Restore auto-advance play/pause state from localStorage
+          try {
+            const savedAutoAdvance = localStorage.getItem("butterchurn-auto-advance-enabled");
+            if (savedAutoAdvance !== null) {
+              isPresetAutoAdvance = savedAutoAdvance === "true";
+              if (presetPlayPauseBtn) {
+                presetPlayPauseBtn.textContent = isPresetAutoAdvance ? "⏸ Pause [Space]" : "▶ Play [Space]";
+              }
+            }
+          } catch (error) {
+            console.warn("[Auto-Advance] Error restoring:", error);
+          }
+
+          // Restore audio source type from localStorage
+          try {
+            const savedAudioSource = localStorage.getItem("butterchurn-audio-source-type");
+            if (savedAudioSource !== null && audioSourceTypeSelect) {
+              audioSourceTypeSelect.value = savedAudioSource;
+              // Call the change handler to properly update UI controls
+              if (typeof window.onAudioSourceTypeChange === "function") {
+                window.onAudioSourceTypeChange();
+              }
+            }
+          } catch (error) {
+            console.warn("[Audio Source] Error restoring:", error);
+          }
+
+          // Restore current preset selection from localStorage
+          try {
+            const savedPreset = localStorage.getItem("butterchurn-current-preset");
+            if (savedPreset !== null && presetSelect) {
+              presetSelect.value = savedPreset;
+              currentPresetName = savedPreset;
+            }
+          } catch (error) {
+            console.warn("[Current Preset] Error restoring:", error);
           }
         } catch (error) {
           console.warn("[Sliders] Error initializing sliders:", error);
@@ -1666,6 +2925,13 @@
       // Audio source type change handler
       window.onAudioSourceTypeChange = function () {
         const sourceType = audioSourceTypeSelect.value;
+
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-audio-source-type", sourceType);
+        } catch (error) {
+          console.warn("[Audio Source] Error saving setting:", error);
+        }
 
         // Auto-stop current audio when switching source types
         if (audioSource) {
@@ -1851,6 +3117,15 @@
       // Expose screenshot function globally
       window.saveScreenshot = saveScreenshot;
 
+      // Expose rating and playlist functions globally
+      window.exportRatings = exportRatings;
+      window.importRatings = importRatings;
+      window.clearRatings = clearRatings;
+      window.setPresetRating = setPresetRating;
+      window.getPresetRating = getPresetRating;
+      window.exportPlaylist = exportPlaylist;
+      window.importPlaylist = importPlaylist;
+
       // Mouse inactivity tracking
       let mouseInactivityTimeout = null;
       const INACTIVITY_DELAY = CONFIG.INACTIVITY_DELAY; // milliseconds
@@ -1929,12 +3204,33 @@
           audioPanel.classList.add("hidden");
         }
 
+        // Check preset panel state before hiding (for preset list sliding logic)
+        const presetListPanel = document.getElementById("preset-list-panel");
+        let presetsWasOpen = false;
         if (presetsPanel) {
+          presetsWasOpen = !presetsPanel.classList.contains("hidden");
           // Store original state if not already stored
           if (!presetsPanel.dataset.wasHidden) {
-            presetsPanel.dataset.wasHidden = presetsPanel.classList.contains("hidden") ? "true" : "false";
+            presetsPanel.dataset.wasHidden = presetsWasOpen ? "false" : "true";
           }
           presetsPanel.classList.add("hidden");
+        }
+
+        // Handle preset list panel: if both preset panel and preset list are open,
+        // slide preset list to the side to take preset panel's place
+        if (presetListPanel && presetsPanel) {
+          const presetListWasHidden = presetListPanel.classList.contains("hidden");
+
+          // If preset list is open and preset panel was open (before we just hid it)
+          if (!presetListWasHidden && presetsWasOpen) {
+            // Store original right position if not already stored
+            if (!presetListPanel.dataset.originalRight) {
+              const currentRight = presetListPanel.style.right || "480px";
+              presetListPanel.dataset.originalRight = currentRight;
+            }
+            // Slide preset list to where preset panel was (right: 20px)
+            presetListPanel.style.right = "20px";
+          }
         }
 
         const creditsPanel = document.getElementById("credits-panel");
@@ -1980,6 +3276,15 @@
           }
           // Clear the stored state
           delete presetsPanel.dataset.wasHidden;
+        }
+
+        // Restore preset list panel position if it was moved during autohide
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetListPanel && presetListPanel.dataset.originalRight !== undefined) {
+          // Restore original position
+          presetListPanel.style.right = presetListPanel.dataset.originalRight;
+          // Clear the stored position
+          delete presetListPanel.dataset.originalRight;
         }
 
         const creditsPanel = document.getElementById("credits-panel");
@@ -2044,13 +3349,21 @@
       });
 
       window.toggleFullscreen = toggleFullscreen;
-      window.toggleAudioSourcePanel = toggleAudioSourcePanel;
-      window.togglePresetsPanel = togglePresetsPanel;
+      // Note: toggleAudioSourcePanel, togglePresetsPanel, and togglePresetListPanel
+      // are assigned to window after they are defined (see below)
 
       // Toggle Credits panel
       window.toggleCreditsPanel = function () {
         const creditsPanel = document.getElementById("credits-panel");
         creditsPanel.classList.toggle("hidden");
+      };
+
+      // Toggle Playlists panel
+      window.togglePlaylistsPanel = function () {
+        const playlistsPanel = document.getElementById("playlists-panel");
+        if (playlistsPanel) {
+          playlistsPanel.classList.toggle("hidden");
+        }
       };
 
       // Toggle Auto-Hide functionality
@@ -2243,9 +3556,17 @@
             return;
           }
 
+          // Prevent transition if a preset is already loading
+          if (isPresetLoading) {
+            console.log("[Auto-Advance] Preset already loading, restarting timer");
+            startAutoAdvanceTimer(); // Restart timer
+            return;
+          }
+
           // Check if current preset is disabled - if so, restart timer without switching
-          const currentPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
-          if (currentPresetName && presetsRemovedFromRotation.includes(currentPresetName)) {
+          const presetNameToCheck =
+            currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+          if (presetNameToCheck && presetsRemovedFromRotation.includes(presetNameToCheck)) {
             startAutoAdvanceTimer(); // Restart timer
             return;
           }
@@ -2254,9 +3575,9 @@
           isAutoTransition = true;
 
           if (isShuffleEnabled) {
-            randomPreset();
+            randomPreset().catch((err) => console.error("[Preset] Error in randomPreset:", err));
           } else {
-            nextPreset();
+            nextPreset().catch((err) => console.error("[Preset] Error in nextPreset:", err));
           }
           // Timer will be restarted after preset loads in loadPresetByIndex() or loadPresetByName()
         }, presetDuration * 1000);
@@ -2272,14 +3593,24 @@
       window.togglePresetPlayPause = function () {
         isPresetAutoAdvance = !isPresetAutoAdvance;
 
+        // Save to localStorage
+        try {
+          localStorage.setItem("butterchurn-auto-advance-enabled", isPresetAutoAdvance.toString());
+        } catch (error) {
+          console.warn("[Auto-Advance] Error saving setting:", error);
+        }
+
         if (isPresetAutoAdvance) {
           presetPlayPauseBtn.textContent = "⏸ Pause [Space]";
+          // Reset auto-transition flag to prevent rapid transitions
+          isAutoTransition = false;
           // Start auto-advance timer from current preset
           startAutoAdvanceTimer();
         } else {
           presetPlayPauseBtn.textContent = "▶ Play [Space]";
-          // Clear timer when pausing
+          // Clear timer when pausing and reset auto-transition flag
           clearAutoAdvanceTimer();
+          isAutoTransition = false;
         }
       };
 
@@ -2290,8 +3621,10 @@
 
         if (isShuffleEnabled && !wasShuffled) {
           // Starting shuffle - initialize history with current preset
-          shuffledPresetHistory = [currentPresetIndex];
-          shuffledHistoryIndex = 0;
+          const presetNameForHistory =
+            currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+          shuffledPresetHistory = presetNameForHistory ? [presetNameForHistory] : [];
+          shuffledHistoryIndex = presetNameForHistory ? 0 : -1;
         } else if (!isShuffleEnabled && wasShuffled) {
           // Disabling shuffle - clear history
           shuffledPresetHistory = [];
@@ -2299,39 +3632,63 @@
         }
       };
 
-      // Show preset name checkbox handler - only controls overlay visibility
+      // Update persistent preset name display with fade transition
+      function updatePersistentPresetName(presetName) {
+        const persistentDisplay = document.getElementById("persistent-preset-name");
+        const showPresetNameCheckbox = document.getElementById("show-preset-name-checkbox");
+
+        if (!persistentDisplay || !showPresetNameCheckbox) return;
+
+        // Only show if checkbox is checked
+        if (!showPresetNameCheckbox.checked) {
+          persistentDisplay.classList.remove("visible", "fade-in", "fade-out");
+          return;
+        }
+
+        // If there's already a name displayed, fade it out first
+        if (persistentDisplay.textContent && persistentDisplay.textContent.trim() !== "") {
+          persistentDisplay.classList.remove("fade-in");
+          persistentDisplay.classList.add("fade-out");
+
+          // After fade out completes, update text and fade in
+          setTimeout(() => {
+            const rating = getPresetRating(presetName);
+            persistentDisplay.textContent = rating > 0 ? `${presetName} [${rating}]` : presetName;
+            persistentDisplay.classList.remove("fade-out");
+            persistentDisplay.classList.add("visible", "fade-in");
+          }, 300); // Wait for fade-out transition to complete (matches CSS transition time)
+        } else {
+          // No previous name, just fade in
+          const rating = getPresetRating(presetName);
+          persistentDisplay.textContent = rating > 0 ? `${presetName} [${rating}]` : presetName;
+          persistentDisplay.classList.add("visible", "fade-in");
+        }
+      }
+
+      // Show preset name checkbox handler - controls both overlay and persistent display
       window.onShowPresetNameChange = function () {
         const show = showPresetNameCheckbox.checked;
-        // Only control overlay visibility, not panel display
-        if (show && currentPresets[currentPresetIndex] && presetNameOverlay) {
-          // Show current preset name on overlay if checkbox is checked
-          presetNameOverlay.textContent = currentPresets[currentPresetIndex];
-          presetNameOverlay.classList.add("show");
-          setTimeout(() => {
-            if (presetNameOverlay) {
-              presetNameOverlay.classList.remove("show");
-            }
-          }, CONFIG.PRESET_NAME_DISPLAY_DURATION);
-        } else if (presetNameOverlay) {
-          // Hide overlay if checkbox is unchecked
+        const presetName =
+          currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
+
+        // Update persistent display
+        if (presetName) {
+          updatePersistentPresetName(presetName);
+        } else {
+          const persistentDisplay = document.getElementById("persistent-preset-name");
+          if (persistentDisplay) {
+            persistentDisplay.classList.remove("visible", "fade-in", "fade-out");
+          }
+        }
+
+        // Hide overlay when persistent display is enabled (they would overlap at the same position)
+        // The persistent display replaces the temporary overlay functionality
+        if (presetNameOverlay) {
           presetNameOverlay.classList.remove("show");
         }
       };
 
-      // Preset select dropdown handler
-      window.onPresetSelectChange = async function () {
-        const selectedValue = presetSelect.value;
-        if (!selectedValue) return;
-
-        // Reset timer on manual transition - timer will restart after preset loads
-        clearAutoAdvanceTimer();
-        isAutoTransition = false;
-
-        // Allow loading any preset by name (including blacklisted ones for manual selection)
-        const presetName = selectedValue; // Now stores actual preset name
-        await loadPresetByName(presetName);
-        updateBlacklistButton();
-      };
+      // Preset select handler removed - presets are now selected from the panel
 
       // Load preset by name (allows any preset for manual selection, even if removed from rotation)
       async function loadPresetByName(presetName) {
@@ -2359,10 +3716,22 @@
             console.log(`[Preset] Loading "${presetName}" (no transition)`);
           }
 
-          // Get blend pattern type (null = random, or specific type 1-9)
-          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+          // Get blend pattern type - use custom transition patterns (0-9)
+          // 0 = None (simple fade), 1-9 = various blend patterns
+          // Auto-randomize blend pattern like MilkDrop3
+          const transitionPattern = getTransitionPattern();
+          // Pass null for pattern 0 (simple fade) if butterchurn expects null for no pattern
+          const patternToUse = transitionPattern === 0 ? null : transitionPattern;
+          console.log(
+            `[Preset] Loading "${presetName}" with transition pattern: ${transitionPattern} (passing ${
+              patternToUse === null ? "null" : patternToUse
+            } to loadPreset)`
+          );
+          visualizer.loadPreset(preset, blendTime, patternToUse);
 
-          visualizer.loadPreset(preset, blendTime, blendPatternType);
+          // Update transition time tracking for beat detection
+          lastTransitionTime = Date.now();
+          isTransitionScheduled = false; // Clear any scheduled transition
 
           // Update current preset index if it's in currentPresets
           const index = currentPresets.indexOf(presetName);
@@ -2373,21 +3742,115 @@
             currentPresetIndex = -1;
           }
 
-          // Update preset select dropdown
-          if (presetSelect) {
-            presetSelect.value = presetName; // Set value directly to preset name
+          // Update current preset name
+          currentPresetName = presetName;
+
+          // Track the initial preset (first one loaded) - this should always be the default preset
+          if (initialPresetName === null) {
+            initialPresetName = presetName;
+            console.log(`[Preset History] Initial preset set to: ${initialPresetName}`);
+
+            // If this is not the default preset, something went wrong - log a warning
+            const defaultPresetName = CONFIG.DEFAULT_PRESET_NAME;
+            if (presetName.toLowerCase() !== defaultPresetName.toLowerCase()) {
+              console.warn(`[Preset History] Warning: Initial preset is "${presetName}" but default is "${defaultPresetName}"`);
+            }
           }
 
-          // Show preset name on overlay if checkbox is enabled
-          if (presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
-            presetNameOverlay.textContent = presetName;
-            presetNameOverlay.classList.add("show");
-            setTimeout(() => {
-              if (presetNameOverlay) {
-                presetNameOverlay.classList.remove("show");
-              }
-            }, CONFIG.PRESET_NAME_DISPLAY_DURATION);
+          // Update input field to show current preset name
+          if (presetSelect) {
+            presetSelect.value = presetName;
           }
+
+          // Save current preset to localStorage
+          try {
+            localStorage.setItem("butterchurn-current-preset", presetName);
+          } catch (error) {
+            console.warn("[Current Preset] Error saving setting:", error);
+          }
+
+          // Add to rolling preset history queue (for back/previous navigation)
+          // Check if the preset exists in the queue
+          const existingHistoryIndex = presetHistoryQueue.indexOf(presetName);
+
+          if (existingHistoryIndex >= 0) {
+            // Preset exists in queue - navigate to it (backward or forward)
+            if (existingHistoryIndex <= presetHistoryIndex) {
+              // Navigating backwards to an existing preset - just update the index
+              // Don't remove future items, preserve them so user can navigate forward again
+              presetHistoryIndex = Math.max(0, existingHistoryIndex);
+            } else {
+              // Navigating forward to an existing preset in the future - just update the index
+              // Don't remove future items, just move forward in the queue
+              presetHistoryIndex = existingHistoryIndex;
+            }
+          } else {
+            // New preset not in queue - add to queue
+            // Only remove future items when adding a truly new preset
+            if (presetHistoryIndex < presetHistoryQueue.length - 1) {
+              presetHistoryQueue = presetHistoryQueue.slice(0, presetHistoryIndex + 1);
+            }
+
+            // Add new preset to queue
+            presetHistoryQueue.push(presetName);
+            presetHistoryIndex = presetHistoryQueue.length - 1;
+
+            // Maintain max size of 100
+            if (presetHistoryQueue.length > MAX_PRESET_HISTORY) {
+              presetHistoryQueue.shift(); // Remove oldest
+              presetHistoryIndex--; // Adjust index since we removed from front
+              // Safety check: never allow index to go below 0
+              presetHistoryIndex = Math.max(0, presetHistoryIndex);
+            }
+          }
+
+          // Final safety check: ensure index never goes below 0 and queue is valid
+          presetHistoryIndex = Math.max(0, presetHistoryIndex);
+          // Ensure queue has at least the current preset
+          if (presetHistoryQueue.length === 0 && currentPresetName) {
+            presetHistoryQueue = [currentPresetName];
+            presetHistoryIndex = 0;
+          } else if (presetHistoryIndex >= presetHistoryQueue.length) {
+            // Index is out of bounds - reset to end of queue
+            presetHistoryIndex = Math.max(0, presetHistoryQueue.length - 1);
+          }
+
+          // Track shuffled preset history
+          if (isShuffleEnabled) {
+            // Check if this preset is already in history (for backward navigation)
+            const existingIndex = shuffledPresetHistory.indexOf(presetName);
+
+            if (existingIndex !== -1) {
+              // Preset is already in history - we're navigating backward or to an existing preset
+              // Update history index but preserve future items
+              shuffledHistoryIndex = existingIndex;
+            } else {
+              // This is a new preset - add it to history
+              // If we're going forward in history, remove any future items
+              if (shuffledHistoryIndex < shuffledPresetHistory.length - 1) {
+                shuffledPresetHistory = shuffledPresetHistory.slice(0, shuffledHistoryIndex + 1);
+              }
+              // Add current preset to history
+              shuffledPresetHistory.push(presetName);
+              shuffledHistoryIndex = shuffledPresetHistory.length - 1;
+            }
+          } else {
+            // Clear history when shuffle is disabled
+            shuffledPresetHistory = [];
+            shuffledHistoryIndex = -1;
+          }
+
+          // Update current preset display
+          updateCurrentPresetDisplay();
+
+          // Update preset list highlighting
+          updatePresetListHighlighting();
+
+          // Update persistent preset name display
+          updatePersistentPresetName(presetName);
+
+          // Don't show temporary overlay when persistent display is enabled (they would overlap)
+          // The persistent display handles showing the name when checkbox is checked
 
           updateStatus(`Loaded: ${presetName}`, false);
           console.log("[Preset] Preset loaded successfully");
@@ -2410,9 +3873,12 @@
         }
       }
 
-      // Preset search handler
-      window.onPresetSearchChange = function () {
-        if (!presetSearch || !presetSelect) return;
+      // Lazy-load dropdown when user interacts with it (prevents FPS lag during transitions)
+      // populateDropdownIfNeeded removed - no longer using dropdown
+
+      // Preset search handler - now filters the panel instead of dropdown
+      window.onPresetSearchChange = async function () {
+        if (!presetSearch) return;
 
         const searchTerm = presetSearch.value.toLowerCase().trim();
 
@@ -2426,30 +3892,15 @@
           }
         }
 
-        // Filter options
-        const options = presetSelect.querySelectorAll("option");
-        let visibleCount = 0;
-
-        options.forEach((option, index) => {
-          if (index === 0) return; // Skip first "Select a preset..." option
-          // Remove indicator prefix (🚫 or ✓) for search
-          const text = option.textContent;
-          const presetName = text.replace(/^[🚫✓]\s+/, "").toLowerCase();
-          if (searchTerm === "" || presetName.includes(searchTerm)) {
-            option.style.display = "";
-            visibleCount++;
-          } else {
-            option.style.display = "none";
+        // Update panel if it's open
+        const panel = document.getElementById("preset-list-panel");
+        if (panel && !panel.classList.contains("hidden")) {
+          // Sync panel search with main search
+          const panelSearch = document.getElementById("preset-panel-search");
+          if (panelSearch) {
+            panelSearch.value = presetSearch.value;
           }
-        });
-
-        // Update count display (only count presets in rotation)
-        if (presetCountDisplay) {
-          if (searchTerm) {
-            presetCountDisplay.textContent = `${visibleCount} (filtered)`;
-          } else {
-            presetCountDisplay.textContent = currentPresets.length;
-          }
+          populatePresetPanel();
         }
       };
 
@@ -2457,9 +3908,309 @@
       window.clearPresetSearch = function () {
         if (!presetSearch) return;
         presetSearch.value = "";
-        presetSearch.focus();
         onPresetSearchChange();
+        // Also clear panel search if open
+        const panelSearch = document.getElementById("preset-panel-search");
+        if (panelSearch) {
+          panelSearch.value = "";
+          populatePresetPanel();
+        }
       };
+
+      // togglePresetPanel removed - now using togglePresetListPanel for persistent panel
+
+      // Populate preset selection panel with checkboxes
+      async function populatePresetPanel() {
+        const panelList = document.getElementById("preset-panel-list");
+        if (!panelList) return;
+
+        try {
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+          const panelSearch = document.getElementById("preset-panel-search");
+          const searchTerm = panelSearch ? panelSearch.value.toLowerCase().trim() : "";
+          const ratingFilterSelect = document.getElementById("preset-panel-rating-filter-select");
+          const filterOption = ratingFilterSelect ? ratingFilterSelect.value : "all";
+
+          // Filter presets based on search
+          let presetsToShow = allPresets;
+          if (searchTerm) {
+            presetsToShow = allPresets.filter((presetName) => presetName.toLowerCase().includes(searchTerm));
+          }
+
+          // Apply rating filter
+          if (filterOption === "unrated") {
+            presetsToShow = presetsToShow.filter((p) => getPresetRating(p) === 0);
+          } else if (filterOption === "1-3") {
+            presetsToShow = presetsToShow.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 1 && rating <= 3;
+            });
+          } else if (filterOption === "4-6") {
+            presetsToShow = presetsToShow.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 4 && rating <= 6;
+            });
+          } else if (filterOption === "7-9") {
+            presetsToShow = presetsToShow.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 7 && rating <= 9;
+            });
+          }
+
+          // Apply sort
+          if (filterOption === "sort-high" || filterOption === "sort-low") {
+            presetsToShow.sort((a, b) => {
+              const ratingA = getPresetRating(a);
+              const ratingB = getPresetRating(b);
+              if (filterOption === "sort-high") {
+                return ratingB - ratingA; // Highest first
+              } else {
+                return ratingA - ratingB; // Lowest first
+              }
+            });
+          } else {
+            // Sort alphabetically if not sorting by rating
+            presetsToShow.sort();
+          }
+
+          // Store visible presets for Enable All/Disable All
+          currentVisiblePresets = [...presetsToShow];
+
+          // Clear existing list
+          panelList.innerHTML = "";
+
+          // Create checkbox for each preset
+          presetsToShow.forEach((presetName) => {
+            const item = document.createElement("div");
+            item.className = "preset-item";
+            item.setAttribute("data-preset-name", presetName);
+            const isDisabled = presetsRemovedFromRotation.includes(presetName);
+            if (isDisabled) {
+              item.classList.add("disabled");
+            }
+            // Mark current preset
+            if (presetName === currentPresetName) {
+              item.classList.add("current");
+            }
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = !isDisabled;
+            checkbox.id = `preset-checkbox-${presetName}`;
+            checkbox.onchange = () => togglePresetEnabled(presetName, checkbox.checked);
+
+            const label = document.createElement("label");
+            label.className = "preset-item-label";
+            label.htmlFor = checkbox.id;
+            label.textContent = presetName;
+            label.onclick = async (e) => {
+              e.preventDefault();
+              // Reset timer on manual transition
+              clearAutoAdvanceTimer();
+              isAutoTransition = false;
+              // Load preset when clicking label
+              await loadPresetByName(presetName);
+              updateCurrentPresetDisplay();
+              // Restart timer after preset loads
+              startAutoAdvanceTimer();
+            };
+
+            const rating = getPresetRating(presetName);
+            const ratingSpan = document.createElement("span");
+            ratingSpan.className = "preset-item-rating";
+            ratingSpan.textContent = rating > 0 ? `[${rating}]` : "";
+
+            item.appendChild(checkbox);
+            item.appendChild(label);
+            item.appendChild(ratingSpan);
+            panelList.appendChild(item);
+          });
+        } catch (error) {
+          console.error("[Preset Panel] Error populating panel:", error);
+        }
+      }
+
+      // Update highlighting for current preset in the list
+      function updatePresetListHighlighting() {
+        const panelList = document.getElementById("preset-panel-list");
+        if (!panelList) return;
+
+        // Remove "current" class from all items
+        const allItems = panelList.querySelectorAll(".preset-item");
+        allItems.forEach((item) => {
+          item.classList.remove("current");
+        });
+
+        // Add "current" class to the item matching currentPresetName
+        if (currentPresetName) {
+          const currentItem = panelList.querySelector(`[data-preset-name="${CSS.escape(currentPresetName)}"]`);
+          if (currentItem) {
+            currentItem.classList.add("current");
+          }
+        }
+      }
+
+      // Handle preset panel search
+      window.onPresetPanelSearchChange = function () {
+        const panelSearch = document.getElementById("preset-panel-search");
+        const clearBtn = document.getElementById("preset-panel-search-clear-btn");
+
+        // Show/hide clear button based on whether there's text
+        if (clearBtn && panelSearch) {
+          if (panelSearch.value.trim() === "") {
+            clearBtn.classList.add("hidden");
+          } else {
+            clearBtn.classList.remove("hidden");
+          }
+        }
+
+        populatePresetPanel();
+        // Update count to show available presets (search + filter + checked)
+        updatePresetCountDisplay();
+      };
+
+      // Clear preset panel search
+      window.clearPresetPanelSearch = function () {
+        const panelSearch = document.getElementById("preset-panel-search");
+        const clearBtn = document.getElementById("preset-panel-search-clear-btn");
+        if (panelSearch) {
+          panelSearch.value = "";
+          if (clearBtn) {
+            clearBtn.classList.add("hidden");
+          }
+          populatePresetPanel();
+          // Update count to show available presets (search + filter + checked)
+          updatePresetCountDisplay();
+          panelSearch.focus();
+        }
+      };
+
+      // Handle preset panel rating filter change
+      window.onPresetPanelRatingFilterChange = function () {
+        populatePresetPanel();
+        // Update count to show available presets (search + filter + checked)
+        updatePresetCountDisplay();
+      };
+
+      // Get available presets based on search/filter/sort + checked status
+      async function getAvailablePresets() {
+        try {
+          // If presets aren't loaded yet, return empty array
+          if (!currentPresets || currentPresets.length === 0) {
+            // Fallback: return all enabled presets if available
+            return currentPresets || [];
+          }
+
+          const presets = await butterchurnPresets.default.getPresets();
+          const allPresets = Object.keys(presets);
+
+          // Get search/filter from panel (may not exist if panel is hidden)
+          const panelSearch = document.getElementById("preset-panel-search");
+          const searchTerm = panelSearch ? panelSearch.value.toLowerCase().trim() : "";
+          const ratingFilterSelect = document.getElementById("preset-panel-rating-filter-select");
+          const filterOption = ratingFilterSelect ? ratingFilterSelect.value : "all";
+
+          // Start with all presets
+          let availablePresets = [...allPresets];
+
+          // Filter by search term
+          if (searchTerm) {
+            availablePresets = availablePresets.filter((presetName) => presetName.toLowerCase().includes(searchTerm));
+          }
+
+          // Filter by rating
+          if (filterOption === "unrated") {
+            availablePresets = availablePresets.filter((p) => getPresetRating(p) === 0);
+          } else if (filterOption === "1-3") {
+            availablePresets = availablePresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 1 && rating <= 3;
+            });
+          } else if (filterOption === "4-6") {
+            availablePresets = availablePresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 4 && rating <= 6;
+            });
+          } else if (filterOption === "7-9") {
+            availablePresets = availablePresets.filter((p) => {
+              const rating = getPresetRating(p);
+              return rating >= 7 && rating <= 9;
+            });
+          }
+
+          // Filter to only checked/enabled presets
+          availablePresets = availablePresets.filter((presetName) => !presetsRemovedFromRotation.includes(presetName));
+
+          // Apply sort
+          if (filterOption === "sort-high" || filterOption === "sort-low") {
+            availablePresets.sort((a, b) => {
+              const ratingA = getPresetRating(a);
+              const ratingB = getPresetRating(b);
+              if (filterOption === "sort-high") {
+                return ratingB - ratingA; // Highest first
+              } else {
+                return ratingA - ratingB; // Lowest first
+              }
+            });
+          } else {
+            // Sort alphabetically if not sorting by rating
+            availablePresets.sort();
+          }
+
+          return availablePresets;
+        } catch (error) {
+          console.error("[Available Presets] Error getting available presets:", error);
+          // Fallback to currentPresets if error
+          return currentPresets || [];
+        }
+      }
+
+      // Update preset count display (shows available presets based on search/filter/sort + checked)
+      async function updatePresetCountDisplay() {
+        const presetCountDisplay = document.getElementById("preset-count-display");
+        if (presetCountDisplay) {
+          try {
+            const availablePresets = await getAvailablePresets();
+            const count = availablePresets.length;
+            presetCountDisplay.textContent = count;
+            console.log(`[Preset Count] Updated to ${count} available presets (search/filter/sort + checked)`);
+          } catch (error) {
+            console.error("[Preset Count] Error updating count:", error);
+            // Fallback to currentPresets.length if calculation fails
+            const fallbackCount = currentPresets.length || 0;
+            presetCountDisplay.textContent = fallbackCount;
+          }
+        }
+      }
+
+      // Toggle preset enabled/disabled state
+      async function togglePresetEnabled(presetName, enabled) {
+        const index = presetsRemovedFromRotation.indexOf(presetName);
+
+        if (enabled) {
+          // Enable preset
+          if (index !== -1) {
+            presetsRemovedFromRotation.splice(index, 1);
+            updateStatus(`Added to rotation: ${presetName}`, false);
+          }
+        } else {
+          // Disable preset
+          if (index === -1) {
+            presetsRemovedFromRotation.push(presetName);
+            updateStatus(`Removed from rotation: ${presetName}`, false);
+          }
+        }
+
+        saveRotation();
+        await reloadPresetsWithRotation();
+
+        // Update the count display (shows only enabled presets)
+        await updatePresetCountDisplay();
+
+        // Update the panel to reflect changes (shows all presets in search, both enabled and disabled)
+        populatePresetPanel();
+      }
 
       // Music file select dropdown handler
       window.onMusicFileSelectChange = function () {
@@ -2612,6 +4363,10 @@
           const currentVolume = sliderValue / 100;
           gainNode.gain.value = currentVolume;
 
+          // Create visualizer gain node (always 100% volume for consistent visualization)
+          visualizerGainNode = audioContext.createGain();
+          visualizerGainNode.gain.value = 1.0; // Always full volume for visualizer
+
           // Ensure volume display is synced
           if (volumeValue) {
             volumeValue.textContent = Math.round(sliderValue) + "%";
@@ -2620,8 +4375,9 @@
           // Connect audioNode to gainNode (but not gainNode to destination for system audio)
           audioNode.connect(gainNode);
 
-          // Connect to visualizer only (no audible output for system audio)
-          visualizer.connectAudio(audioNode);
+          // Connect to visualizer through dedicated gain node (always 100% volume)
+          audioNode.connect(visualizerGainNode);
+          visualizer.connectAudio(visualizerGainNode);
           // Do NOT connect gainNode to audioContext.destination - system audio should not play back
 
           isPlaying = true;
@@ -2803,17 +4559,11 @@
         try {
           // Initialize rotation lists first (before creating visualizer)
           initializeRotation();
-          initializeTransitionRotation();
+          // Blend patterns auto-randomized (no initialization needed)
+          initializeRatings();
+          initializePlaylists();
 
-          // Initialize transition pattern selection from localStorage
-          try {
-            const savedTransition = localStorage.getItem("butterchurn-selected-transition");
-            if (savedTransition !== null && (savedTransition === "random" || ALL_TRANSITION_PATTERNS.includes(savedTransition))) {
-              selectedTransitionPattern = savedTransition;
-            }
-          } catch (error) {
-            console.warn("[Transition] Error loading saved transition:", error);
-          }
+          // Blend patterns are auto-randomized like MilkDrop3 (no saved selection needed)
 
           // Check browser support
           if (!checkSupport()) {
@@ -2828,6 +4578,8 @@
           updateStatus("Loading presets...", false);
           try {
             await loadPresets();
+            // Update playlist UI after presets are loaded
+            await updatePlaylistUI();
           } catch (err) {
             console.error("Preset loading failed:", err);
             updateStatus("Preset loading failed. Check console.", true);
@@ -2856,19 +4608,18 @@
               pixelRatio: window.devicePixelRatio || 1,
             });
 
+            // Register custom transition patterns
+            try {
+              registerCustomTransitionPatterns(visualizer);
+            } catch (error) {
+              console.warn("[Transition] Error registering custom transition patterns:", error);
+            }
+
             // Initialize transition pattern settings in butterchurn
             try {
               // Set blend pattern type
-              const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
-              visualizer.setBlendPatternType(blendPatternType);
-
-              // Set enabled patterns for random selection (only if random is selected)
-              if (selectedTransitionPattern === "random") {
-                const enabledPatterns = ALL_TRANSITION_PATTERNS.filter((p) => !transitionsRemovedFromRotation.includes(p)).map((p) =>
-                  parseInt(p, 10)
-                );
-                visualizer.setBlendPatternEnabledPatterns(enabledPatterns);
-              }
+              // Auto-randomize blend patterns like MilkDrop3 (patterns 1-3)
+              visualizer.setBlendPatternEnabledPatterns([1, 2, 3]);
             } catch (error) {
               console.warn("[Transition] Error initializing transition settings:", error);
             }
@@ -2888,20 +4639,28 @@
                 await audioContext.resume();
               }
 
-              // Try to find default preset
-              const defaultPresetName = CONFIG.DEFAULT_PRESET_NAME;
-              // Search in all presets (not just currentPresets) to allow loading even if removed from rotation
+              // Always start with the default preset for queue initialization
               const presets = await butterchurnPresets.default.getPresets();
               const allPresets = Object.keys(presets);
+
+              // Get default preset name
+              const defaultPresetName = CONFIG.DEFAULT_PRESET_NAME;
               const defaultIndex = allPresets.findIndex((name) => name.toLowerCase() === defaultPresetName.toLowerCase());
 
+              let presetToLoad = null;
               if (defaultIndex >= 0) {
-                await loadPresetByName(defaultPresetName);
-                console.log(`[Preset] Loaded default preset: ${defaultPresetName}`);
+                presetToLoad = defaultPresetName;
+                console.log(`[Preset] Loading default preset: ${defaultPresetName}`);
+              }
+
+              // Load the default preset (this initializes the queue with default at index 0)
+              // Don't load saved preset automatically - let default play first
+              if (presetToLoad) {
+                await loadPresetByName(presetToLoad);
                 presetLoaded = true;
               } else {
                 // Fallback to first preset if default not found
-                console.log(`[Preset] Default preset "${defaultPresetName}" not found, loading first preset`);
+                console.log(`[Preset] No saved or default preset found, loading first preset`);
                 if (currentPresets.length > 0) {
                   await loadPresetByIndex(0);
                   presetLoaded = true;
@@ -2945,17 +4704,7 @@
 
           // Initialize transition pattern selection UI
           try {
-            updateTransitionDropdown(); // Populate dropdown with check/X indicators
-            if (transitionSelect) {
-              transitionSelect.value = selectedTransitionPattern;
-            }
-            updateBlacklistTransitionButton();
-            updateTransitionCountDisplay();
-
-            // Log transition rotation info
-            if (transitionsRemovedFromRotation.length > 0) {
-              console.log(`[Transition Rotation] ${transitionsRemovedFromRotation.length} patterns removed from rotation`);
-            }
+            // Blend patterns are auto-randomized like MilkDrop3
           } catch (error) {
             console.warn("[Transition] Error initializing transition selection UI:", error);
           }
@@ -2963,8 +4712,8 @@
           // Start preset auto-advance if enabled by default
           if (isPresetAutoAdvance && currentPresets.length > 0) {
             // Initialize shuffle history if shuffle is enabled
-            if (isShuffleEnabled && currentPresetIndex >= 0) {
-              shuffledPresetHistory = [currentPresetIndex];
+            if (isShuffleEnabled && currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+              shuffledPresetHistory = [currentPresets[currentPresetIndex]];
               shuffledHistoryIndex = 0;
             }
             // Timer will start after initial preset loads via loadPresetByIndex()
@@ -3018,22 +4767,16 @@
           console.log(`Loaded ${presetCount} presets in rotation (${removedCount} removed from rotation)`);
           console.log(`[Preset Loader] Total presets in JSON: ${allPresets.length}, In rotation: ${presetCount}`);
 
-          // Populate preset select dropdown (show ALL presets with indicators - all selectable)
+          // Initialize input field to show current preset name
           if (presetSelect) {
-            presetSelect.innerHTML = '<option value="">Select a preset...</option>';
-            allPresets.forEach((presetName) => {
-              const option = document.createElement("option");
-              const isRemovedFromRotation = presetsRemovedFromRotation.includes(presetName);
-              const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
-              option.textContent = indicator + presetName;
-              option.value = presetName; // Store actual preset name
-              // All presets are selectable regardless of rotation status
-              presetSelect.appendChild(option);
-            });
+            if (currentPresetName) {
+              presetSelect.value = currentPresetName;
+            } else {
+              presetSelect.value = "";
+            }
           }
-          if (presetCountDisplay) {
-            presetCountDisplay.textContent = presetCount;
-          }
+          // Update count (shows only enabled presets)
+          await updatePresetCountDisplay();
 
           if (presetCount < 500) {
             console.warn(
@@ -3057,33 +4800,32 @@
         try {
           const presets = await butterchurnPresets.default.getPresets();
           const allPresets = Object.keys(presets);
-          const previousPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
+          const previousPresetName =
+            currentPresetName || (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length ? currentPresets[currentPresetIndex] : null);
           const wasCurrentPresetDisabled = previousPresetName && presetsRemovedFromRotation.includes(previousPresetName);
 
           currentPresets = allPresets.filter((presetName) => !presetsRemovedFromRotation.includes(presetName));
 
-          // Update dropdown (show ALL presets with indicators - all selectable)
-          if (presetSelect) {
-            presetSelect.innerHTML = '<option value="">Select a preset...</option>';
-            allPresets.forEach((presetName) => {
-              const option = document.createElement("option");
-              const isRemovedFromRotation = presetsRemovedFromRotation.includes(presetName);
-              const indicator = isRemovedFromRotation ? "🚫 " : "✓ ";
-              option.textContent = indicator + presetName;
-              option.value = presetName; // Store actual preset name
-              // All presets are selectable regardless of rotation status
-              // Select current preset if it matches
-              if (previousPresetName === presetName) {
-                option.selected = true;
-              }
-              presetSelect.appendChild(option);
-            });
+          // Update input field to show current preset name
+          if (presetSelect && previousPresetName) {
+            presetSelect.value = previousPresetName;
+          } else if (presetSelect) {
+            presetSelect.value = "";
           }
 
-          // Update count
-          if (presetCountDisplay) {
-            presetCountDisplay.textContent = currentPresets.length;
+          // Update currentPresetName
+          if (previousPresetName) {
+            currentPresetName = previousPresetName;
           }
+
+          // Update panel if it's open
+          const panel = document.getElementById("preset-list-panel");
+          if (panel && !panel.classList.contains("hidden")) {
+            populatePresetPanel();
+          }
+
+          // Update count (shows only enabled presets)
+          await updatePresetCountDisplay();
 
           // If current preset was disabled, keep it loaded and don't change index
           // This prevents auto-switching away from disabled presets
@@ -3155,17 +4897,86 @@
             console.log(`[Preset] Loading "${presetName}" (no transition)`);
           }
 
-          // Get blend pattern type (null = random, or specific type 1-9)
-          const blendPatternType = selectedTransitionPattern === "random" ? null : selectedTransitionPattern;
+          // Get blend pattern type - use custom transition patterns (0-9)
+          // 0 = None (simple fade), 1-9 = various blend patterns
+          // Auto-randomize blend pattern like MilkDrop3
+          const transitionPattern = getTransitionPattern();
+          // Pass null for pattern 0 (simple fade) if butterchurn expects null for no pattern
+          const patternToUse = transitionPattern === 0 ? null : transitionPattern;
+          console.log(
+            `[Preset] Loading "${presetName}" with transition pattern: ${transitionPattern} (passing ${
+              patternToUse === null ? "null" : patternToUse
+            } to loadPreset)`
+          );
+          visualizer.loadPreset(preset, blendTime, patternToUse);
 
-          visualizer.loadPreset(preset, blendTime, blendPatternType);
+          // Update transition time tracking for beat detection
+          lastTransitionTime = Date.now();
+          isTransitionScheduled = false; // Clear any scheduled transition
 
           currentPresetIndex = index;
 
+          // Update current preset name (needed for queue logic)
+          const presetNameFromIndex = currentPresets[index];
+          currentPresetName = presetNameFromIndex;
+
+          // Track the initial preset (first one loaded)
+          if (initialPresetName === null) {
+            initialPresetName = presetNameFromIndex;
+            console.log(`[Preset History] Initial preset set to: ${initialPresetName}`);
+          }
+
+          // Add to rolling preset history queue (for back/previous navigation)
+          // Check if the preset exists in the queue
+          const existingHistoryIndex = presetHistoryQueue.indexOf(presetNameFromIndex);
+
+          if (existingHistoryIndex >= 0) {
+            // Preset exists in queue - navigate to it (backward or forward)
+            if (existingHistoryIndex <= presetHistoryIndex) {
+              // Navigating backwards to an existing preset - just update the index
+              // Don't remove future items, preserve them so user can navigate forward again
+              presetHistoryIndex = Math.max(0, existingHistoryIndex);
+            } else {
+              // Navigating forward to an existing preset in the future - just update the index
+              // Don't remove future items, just move forward in the queue
+              presetHistoryIndex = existingHistoryIndex;
+            }
+          } else {
+            // New preset not in queue - add to queue
+            // Only remove future items when adding a truly new preset
+            if (presetHistoryIndex < presetHistoryQueue.length - 1) {
+              presetHistoryQueue = presetHistoryQueue.slice(0, presetHistoryIndex + 1);
+            }
+
+            // Add new preset to queue
+            presetHistoryQueue.push(presetNameFromIndex);
+            presetHistoryIndex = presetHistoryQueue.length - 1;
+
+            // Maintain max size of 100
+            if (presetHistoryQueue.length > MAX_PRESET_HISTORY) {
+              presetHistoryQueue.shift(); // Remove oldest
+              presetHistoryIndex--; // Adjust index since we removed from front
+              // Safety check: never allow index to go below 0
+              presetHistoryIndex = Math.max(0, presetHistoryIndex);
+            }
+          }
+
+          // Final safety check: ensure index never goes below 0 and queue is valid
+          presetHistoryIndex = Math.max(0, presetHistoryIndex);
+          // Ensure queue has at least the current preset
+          if (presetHistoryQueue.length === 0 && currentPresetName) {
+            presetHistoryQueue = [currentPresetName];
+            presetHistoryIndex = 0;
+          } else if (presetHistoryIndex >= presetHistoryQueue.length) {
+            // Index is out of bounds - reset to end of queue
+            presetHistoryIndex = Math.max(0, presetHistoryQueue.length - 1);
+          }
+
           // Track shuffled preset history
           if (isShuffleEnabled) {
+            const presetName = currentPresets[index];
             // Check if this preset is already in history (for backward navigation)
-            const existingIndex = shuffledPresetHistory.indexOf(index);
+            const existingIndex = shuffledPresetHistory.indexOf(presetName);
 
             if (existingIndex !== -1) {
               // Preset is already in history - we're navigating backward or to an existing preset
@@ -3178,7 +4989,7 @@
                 shuffledPresetHistory = shuffledPresetHistory.slice(0, shuffledHistoryIndex + 1);
               }
               // Add current preset to history
-              shuffledPresetHistory.push(index);
+              shuffledPresetHistory.push(presetName);
               shuffledHistoryIndex = shuffledPresetHistory.length - 1;
             }
           } else {
@@ -3187,25 +4998,34 @@
             shuffledHistoryIndex = -1;
           }
 
-          // Update preset select dropdown
+          // Current preset name already set above for queue logic
+
+          // Update input field to show current preset name
           if (presetSelect) {
-            presetSelect.value = presetName; // Set value to preset name (not index)
+            presetSelect.value = presetNameFromIndex;
+          }
+
+          // Save current preset to localStorage
+          try {
+            localStorage.setItem("butterchurn-current-preset", presetName);
+          } catch (error) {
+            console.warn("[Current Preset] Error saving setting:", error);
           }
 
           // Update blacklist button
           updateBlacklistButton();
 
-          // Show preset name on overlay (on top of visualization) if checkbox is enabled
-          if (presetNameOverlay && showPresetNameCheckbox && showPresetNameCheckbox.checked) {
-            presetNameOverlay.textContent = presetName;
-            presetNameOverlay.classList.add("show");
-            // Hide overlay after configured duration
-            setTimeout(() => {
-              if (presetNameOverlay) {
-                presetNameOverlay.classList.remove("show");
-              }
-            }, CONFIG.PRESET_NAME_DISPLAY_DURATION);
-          }
+          // Update current preset display
+          updateCurrentPresetDisplay();
+
+          // Update preset list highlighting
+          updatePresetListHighlighting();
+
+          // Update persistent preset name display
+          updatePersistentPresetName(presetName);
+
+          // Don't show temporary overlay when persistent display is enabled (they would overlap)
+          // The persistent display handles showing the name when checkbox is checked
 
           updateStatus(`Loaded: ${presetName}`, false);
           console.log("[Preset] Preset loaded successfully");
@@ -3229,67 +5049,283 @@
         }
       }
 
-      function randomPreset() {
-        if (currentPresets.length === 0) return;
+      // getDropdownPresets removed - no longer using dropdown, just use currentPresets
+
+      async function randomPreset() {
+        // Get available presets based on search/filter/sort + checked
+        const availablePresets = await getAvailablePresets();
+
+        if (availablePresets.length === 0) {
+          updateStatus("No available presets match current search/filter", true);
+          return;
+        }
 
         // Reset timer on transition - timer will restart after preset loads
         if (!isAutoTransition) {
           clearAutoAdvanceTimer();
         }
 
-        let randomIndex;
+        // Check if we can go forward in the preset history queue first
+        // This ensures beat-based transitions respect the queue navigation
+        if (presetHistoryIndex >= 0 && presetHistoryIndex < presetHistoryQueue.length - 1) {
+          // Navigate forward in history queue, skipping invalid presets
+          let foundValidPreset = false;
+
+          while (presetHistoryIndex < presetHistoryQueue.length - 1 && !foundValidPreset) {
+            const targetIndex = presetHistoryIndex + 1;
+            const candidatePreset = presetHistoryQueue[targetIndex];
+
+            // Check if the preset is still available (matches current filters)
+            if (availablePresets.includes(candidatePreset)) {
+              // Found a valid preset - navigate to it
+              await loadPresetByName(candidatePreset);
+              foundValidPreset = true;
+              return;
+            } else {
+              // Preset is invalid - skip it and continue forward
+              presetHistoryIndex++;
+            }
+          }
+
+          // If we found a valid preset in the queue, we already returned
+          // If not, fall through to random selection below
+        }
+
+        // No valid presets in queue ahead, or not in queue navigation mode
+        // Get current preset name to avoid repeating
+        const currentPresetNameToCheck = currentPresetName;
+
+        // Find a random preset from available presets
+        let selectedPreset;
         // Avoid repeating the same preset if possible
         do {
-          randomIndex = Math.floor(Math.random() * currentPresets.length);
-        } while (randomIndex === currentPresetIndex && currentPresets.length > 1);
-        loadPresetByIndex(randomIndex);
+          const randomIndex = Math.floor(Math.random() * availablePresets.length);
+          selectedPreset = availablePresets[randomIndex];
+        } while (selectedPreset === currentPresetNameToCheck && availablePresets.length > 1);
+
+        // Load the selected preset by name
+        await loadPresetByName(selectedPreset);
       }
 
-      function nextPreset() {
-        if (currentPresets.length === 0) return;
+      async function nextPreset() {
+        // Get available presets based on search/filter/sort + checked
+        const availablePresets = await getAvailablePresets();
+
+        if (availablePresets.length === 0) {
+          updateStatus("No available presets match current search/filter", true);
+          return;
+        }
 
         // Reset timer on transition - timer will restart after preset loads
         if (!isAutoTransition) {
           clearAutoAdvanceTimer();
         }
 
+        // Check if we can go forward in the preset history queue (if we've navigated backwards)
+        if (presetHistoryIndex >= 0 && presetHistoryIndex < presetHistoryQueue.length - 1) {
+          // Navigate forward in history queue, skipping invalid presets (don't remove them)
+          let foundValidPreset = false;
+
+          while (presetHistoryIndex < presetHistoryQueue.length - 1 && !foundValidPreset) {
+            const targetIndex = presetHistoryIndex + 1;
+            const candidatePreset = presetHistoryQueue[targetIndex];
+
+            // Check if the preset is still available (matches current filters)
+            if (availablePresets.includes(candidatePreset)) {
+              // Found a valid preset - navigate to it
+              // loadPresetByName will handle updating the index correctly
+              await loadPresetByName(candidatePreset);
+              foundValidPreset = true;
+              return;
+            } else {
+              // Preset is invalid - skip it (don't remove from queue) and continue forward
+              presetHistoryIndex++;
+              // Continue searching forward
+            }
+          }
+
+          // Reached the end of the queue without finding a valid preset - fall back to random
+          if (!foundValidPreset) {
+            // No more valid presets in queue, use random/shuffle
+            if (isShuffleEnabled) {
+              await randomPreset();
+            } else {
+              // Find current preset in available presets
+              const currentIndex = availablePresets.indexOf(currentPresetName);
+              if (currentIndex >= 0) {
+                const nextIndex = (currentIndex + 1) % availablePresets.length;
+                await loadPresetByName(availablePresets[nextIndex]);
+              } else {
+                // Current preset not in available list, go to first available
+                await loadPresetByName(availablePresets[0]);
+              }
+            }
+            return;
+          }
+        }
+
         if (isShuffleEnabled) {
-          // Check if we can go forward in history
+          // Check if we can go forward in history (only if history preset is still available)
           if (shuffledHistoryIndex < shuffledPresetHistory.length - 1) {
-            // Go forward in history
-            shuffledHistoryIndex++;
-            loadPresetByIndex(shuffledPresetHistory[shuffledHistoryIndex]);
-          } else {
-            // Generate new random preset and add to history
-            randomPreset();
+            const nextInHistory = shuffledPresetHistory[shuffledHistoryIndex + 1];
+            if (availablePresets.includes(nextInHistory)) {
+              // Go forward in history
+              shuffledHistoryIndex++;
+              await loadPresetByName(nextInHistory);
+              return;
+            }
           }
+          // Generate new random preset from available presets and add to history
+          await randomPreset();
         } else {
-          const nextIndex = (currentPresetIndex + 1) % currentPresets.length;
-          loadPresetByIndex(nextIndex);
+          // Find current preset in available presets
+          const currentIndex = availablePresets.indexOf(currentPresetName);
+          if (currentIndex >= 0) {
+            const nextIndex = (currentIndex + 1) % availablePresets.length;
+            await loadPresetByName(availablePresets[nextIndex]);
+          } else {
+            // Current preset not in available list, go to first available
+            await loadPresetByName(availablePresets[0]);
+          }
         }
       }
 
-      function previousPreset() {
-        if (currentPresets.length === 0) return;
+      async function previousPreset() {
+        // Early check: if we're at index 0 or below, we cannot go back further
+        // Also check if we're at the initial preset (the first one loaded)
+        console.log(
+          `[Previous] Current index: ${presetHistoryIndex}, queue length: ${presetHistoryQueue.length}, current preset: ${currentPresetName}, initial preset: ${initialPresetName}`
+        );
+
+        // Check if we're at the initial preset (the starting preset)
+        if (initialPresetName && currentPresetName === initialPresetName) {
+          updateStatus("Already at the beginning of preset history", false);
+          return;
+        }
+
+        if (presetHistoryIndex <= 0) {
+          // Ensure queue is properly initialized with current preset
+          if (presetHistoryQueue.length === 0 && currentPresetName) {
+            presetHistoryQueue = [currentPresetName];
+            presetHistoryIndex = 0;
+          } else if (presetHistoryIndex < 0 && currentPresetName) {
+            // Index is invalid - reset to 0
+            if (!presetHistoryQueue.includes(currentPresetName)) {
+              presetHistoryQueue.unshift(currentPresetName);
+            }
+            presetHistoryIndex = 0;
+          }
+          updateStatus("Already at the beginning of preset history", false);
+          return;
+        }
+
+        // Get available presets based on search/filter/sort + checked
+        const availablePresets = await getAvailablePresets();
+
+        if (availablePresets.length === 0) {
+          updateStatus("No available presets match current search/filter", true);
+          return;
+        }
 
         // Reset timer on transition - timer will restart after preset loads
         if (!isAutoTransition) {
           clearAutoAdvanceTimer();
         }
 
-        if (isShuffleEnabled) {
-          // Go back in shuffled history
-          if (shuffledHistoryIndex > 0) {
-            shuffledHistoryIndex--;
-            loadPresetByIndex(shuffledPresetHistory[shuffledHistoryIndex]);
-          } else {
-            // Already at the beginning of history
-            console.log("[Preset] Already at the beginning of shuffled history");
+        // Use rolling preset history queue for back navigation
+        // Navigate backwards, removing invalid presets from the queue as we go
+        // Safety check: ensure we don't go below 0
+        while (presetHistoryIndex > 0 && presetHistoryQueue.length > 0) {
+          const targetIndex = presetHistoryIndex - 1;
+
+          // Safety check: ensure target index is valid
+          if (targetIndex < 0 || targetIndex >= presetHistoryQueue.length) {
+            break;
           }
-        } else {
-          const prevIndex = (currentPresetIndex - 1 + currentPresets.length) % currentPresets.length;
-          loadPresetByIndex(prevIndex);
+
+          const candidatePreset = presetHistoryQueue[targetIndex];
+
+          // Safety check: ensure we have a valid preset
+          if (!candidatePreset) {
+            // Remove invalid entry and continue
+            presetHistoryQueue.splice(targetIndex, 1);
+            presetHistoryIndex--;
+            // Safety check: never allow index to go below 0
+            presetHistoryIndex = Math.max(0, presetHistoryIndex);
+            // If we hit 0, break out of loop
+            if (presetHistoryIndex === 0) {
+              break;
+            }
+            continue;
+          }
+
+          // Check if the preset is still available (matches current filters)
+          if (availablePresets.includes(candidatePreset)) {
+            // Found a valid preset - navigate to it
+            // But first check: if this is the initial preset, we've reached the beginning
+            if (initialPresetName && candidatePreset === initialPresetName) {
+              // We're navigating to the initial preset - this is the furthest back we can go
+              await loadPresetByName(candidatePreset);
+              return;
+            }
+            // Check if we're trying to go before the initial preset
+            if (initialPresetName && targetIndex >= 0) {
+              // Find where the initial preset is in the queue
+              const initialPresetIndex = presetHistoryQueue.indexOf(initialPresetName);
+              if (initialPresetIndex >= 0 && targetIndex < initialPresetIndex) {
+                // We're trying to go before the initial preset - stop at the initial preset instead
+                updateStatus("Already at the beginning of preset history", false);
+                return;
+              }
+            }
+            // loadPresetByName will detect backward navigation and update index correctly
+            await loadPresetByName(candidatePreset);
+            return;
+          } else {
+            // Preset is invalid - remove it from the queue
+            presetHistoryQueue.splice(targetIndex, 1);
+            // Adjust current index since we removed an item before it
+            presetHistoryIndex--;
+            // Safety check: never allow index to go below 0
+            presetHistoryIndex = Math.max(0, presetHistoryIndex);
+            // If we hit 0, break out of loop
+            if (presetHistoryIndex === 0) {
+              break;
+            }
+            // Continue searching backwards
+          }
         }
+
+        // After loop: ensure we're at a valid position (should be 0 or above)
+        // At the front of the queue (index 0) - ensure current preset is preserved
+        // The current preset should always remain in the queue, even if it doesn't match current filters
+        if (presetHistoryIndex <= 0) {
+          // Force index to 0 and ensure current preset is there
+          presetHistoryIndex = 0;
+          if (presetHistoryQueue.length === 0 || presetHistoryQueue[0] !== currentPresetName) {
+            // Current preset not at index 0 - fix it
+            if (presetHistoryQueue.includes(currentPresetName)) {
+              // Current preset exists elsewhere in queue - move it to index 0
+              const existingIndex = presetHistoryQueue.indexOf(currentPresetName);
+              presetHistoryQueue.splice(existingIndex, 1);
+              presetHistoryQueue.unshift(currentPresetName);
+            } else {
+              // Current preset not in queue at all - add it at index 0
+              presetHistoryQueue.unshift(currentPresetName);
+            }
+          }
+        }
+
+        // Final safety check: if somehow we're still not at 0, force it
+        if (presetHistoryIndex < 0) {
+          presetHistoryIndex = 0;
+          if (presetHistoryQueue.length === 0 && currentPresetName) {
+            presetHistoryQueue = [currentPresetName];
+          }
+        }
+
+        // At the front of the queue - don't roll back, just inform user and return
+        updateStatus("Already at the beginning of preset history", false);
       }
 
       function updateBlendTime(value) {
@@ -3352,13 +5388,8 @@
         let valueDisplay = null;
 
         if (isBeatMode) {
-          // Beat mode: constrained by min beat interval
-          const intervalSlider = document.getElementById("beat-interval-slider");
-          if (intervalSlider) {
-            const minIntervalMs = parseFloat(intervalSlider.value);
-            const minIntervalSeconds = minIntervalMs / 1000;
-            maxBlendTime = Math.min(30, Math.max(0, minIntervalSeconds - 0.05));
-          }
+          // Beat mode: capped at 3 seconds
+          maxBlendTime = 3; // Cap at 3 seconds
           warningEl = document.getElementById("blend-time-warning");
           valueDisplay = document.getElementById("beat-blend-value");
         } else {
@@ -3368,7 +5399,6 @@
             const presetDuration = parseFloat(presetDurationSlider.value);
             maxBlendTime = Math.min(30, Math.max(0, presetDuration - 0.1));
           }
-          warningEl = document.getElementById("blend-time-preset-warning");
           valueDisplay = document.getElementById("blend-value");
         }
 
@@ -3382,9 +5412,6 @@
           // Adjust position if current value exceeds max
           if (currentValue > maxBlendTime) {
             activeSlider.value = maxBlendTime.toFixed(2);
-            if (warningEl) warningEl.style.display = "block";
-          } else {
-            if (warningEl) warningEl.style.display = "none";
           }
 
           // Update display
@@ -3420,7 +5447,6 @@
         const blendSlider = document.getElementById("blend-slider");
         const presetDurationSlider = document.getElementById("preset-duration-slider");
         const beatBlendSlider = document.getElementById("beat-blend-slider");
-        const intervalSlider = document.getElementById("beat-interval-slider");
 
         if (!blendSlider) {
           return 0.5; // Default fallback
@@ -3432,14 +5458,10 @@
 
         let blendTime;
         if (isBeatMode && beatBlendSlider) {
-          // Use beat blend slider value
+          // Use beat blend slider value (like MilkDrop3 F8 modes with blend time)
           blendTime = parseFloat(beatBlendSlider.value);
-          // Validate against min beat interval
-          if (intervalSlider) {
-            const minIntervalMs = parseFloat(intervalSlider.value);
-            const minIntervalSeconds = minIntervalMs / 1000;
-            blendTime = Math.min(blendTime, minIntervalSeconds - 0.05);
-          }
+          // Cap beat mode blend time at 3 seconds
+          blendTime = Math.min(blendTime, 3);
         } else {
           // Use regular blend slider value
           blendTime = parseFloat(blendSlider.value);
@@ -3450,8 +5472,9 @@
           }
         }
 
-        // Cap at slider max (30) and ensure positive
-        return Math.max(0, Math.min(blendTime, 30));
+        // Cap at slider max (30 for time mode, 3 for beat mode) and ensure positive
+        const maxBlendTime = isBeatMode ? 3 : 30;
+        return Math.max(0, Math.min(blendTime, maxBlendTime));
       }
 
       window.updatePresetDuration = function (value) {
@@ -3600,42 +5623,18 @@
         }
       }
 
-      window.updateBeatSensitivity = function (value) {
-        beatSensitivity = parseFloat(value);
-        const displayEl = document.getElementById("beat-sensitivity-value");
-        if (displayEl) {
-          displayEl.textContent = beatSensitivity.toFixed(1);
-        }
+      // Hardcut mode change handler
+      window.onHardcutModeChange = function () {
+        const hardcutSelect = document.getElementById("hardcut-mode-select");
+        if (!hardcutSelect) return;
+
+        hardcutMode = hardcutSelect.value; // "none", "hc-1", "hc-2", etc.
 
         // Save to localStorage
         try {
-          localStorage.setItem("butterchurn-beat-sensitivity", beatSensitivity.toString());
+          localStorage.setItem("butterchurn-hardcut-mode", hardcutMode);
         } catch (error) {
-          console.warn("[Beat Detection] Error saving sensitivity:", error);
-        }
-      };
-
-      window.updateBeatInterval = function (value) {
-        beatMinInterval = parseInt(value);
-        const displayEl = document.getElementById("beat-interval-value");
-        if (displayEl) {
-          // Show in seconds if >= 1000ms, otherwise show in ms
-          if (beatMinInterval >= 1000) {
-            const seconds = (beatMinInterval / 1000).toFixed(1);
-            displayEl.textContent = seconds + "s";
-          } else {
-            displayEl.textContent = beatMinInterval + "ms";
-          }
-        }
-
-        // Update blend slider constraints (max and position) based on new min beat interval
-        updateBlendSliderConstraints();
-
-        // Save to localStorage
-        try {
-          localStorage.setItem("butterchurn-beat-interval", beatMinInterval.toString());
-        } catch (error) {
-          console.warn("[Beat Detection] Error saving interval:", error);
+          console.warn("[Hardcut Mode] Error saving setting:", error);
         }
       };
 
@@ -3660,8 +5659,12 @@
           audioNode = audioContext.createMediaStreamSource(stream);
 
           // Microphone: no volume control, no output to speakers, full volume to visualizer
-          // Connect directly to visualizer (full volume)
-          visualizer.connectAudio(audioNode);
+          // Create visualizer gain node (always 100% volume for consistent visualization)
+          visualizerGainNode = audioContext.createGain();
+          visualizerGainNode.gain.value = 1.0; // Always full volume for visualizer
+          // Connect to visualizer through dedicated gain node (always 100% volume)
+          audioNode.connect(visualizerGainNode);
+          visualizer.connectAudio(visualizerGainNode);
           // Do NOT connect to destination - microphone should not output to speakers
           // Do NOT create gain node - microphone doesn't need volume control
           gainNode = null;
@@ -3897,7 +5900,7 @@
               audioSource = audio;
               audioNode = audioContext.createMediaElementSource(audio);
 
-              // Create gain node for volume control
+              // Create gain node for volume control (output)
               gainNode = audioContext.createGain();
               // Use window.__currentVolume if available (respects hard refresh), otherwise use slider
               let sliderValue = volumeSlider ? parseFloat(volumeSlider.value) : 100;
@@ -3907,17 +5910,22 @@
               const currentVolume = sliderValue / 100;
               gainNode.gain.value = currentVolume;
 
+              // Create visualizer gain node (always 100% volume for consistent visualization)
+              visualizerGainNode = audioContext.createGain();
+              visualizerGainNode.gain.value = 1.0; // Always full volume for visualizer
+
               // Sync slider value display if it exists
               if (volumeValue) {
                 volumeValue.textContent = Math.round(sliderValue) + "%";
               }
 
-              // Connect: audioNode -> gainNode -> destination
+              // Connect: audioNode -> gainNode -> destination (output volume controlled)
               audioNode.connect(gainNode);
               gainNode.connect(audioContext.destination);
 
-              // Connect to visualizer (before gain node to maintain full signal)
-              visualizer.connectAudio(audioNode);
+              // Connect to visualizer through dedicated gain node (always 100% volume)
+              audioNode.connect(visualizerGainNode);
+              visualizer.connectAudio(visualizerGainNode);
 
               await audio.play();
               isPlaying = true;
@@ -4059,7 +6067,7 @@
               currentPlaylistIndex = index;
               audioNode = audioContext.createMediaElementSource(audio);
 
-              // Create gain node for volume control
+              // Create gain node for volume control (output)
               gainNode = audioContext.createGain();
               // Use window.__currentVolume if available (respects hard refresh), otherwise use slider
               let sliderValue = volumeSlider ? parseFloat(volumeSlider.value) : 100;
@@ -4069,17 +6077,22 @@
               const currentVolume = sliderValue / 100;
               gainNode.gain.value = currentVolume;
 
+              // Create visualizer gain node (always 100% volume for consistent visualization)
+              visualizerGainNode = audioContext.createGain();
+              visualizerGainNode.gain.value = 1.0; // Always full volume for visualizer
+
               // Sync slider value display if it exists
               if (volumeValue) {
                 volumeValue.textContent = Math.round(sliderValue) + "%";
               }
 
-              // Connect: audioNode -> gainNode -> destination
+              // Connect: audioNode -> gainNode -> destination (output volume controlled)
               audioNode.connect(gainNode);
               gainNode.connect(audioContext.destination);
 
-              // Connect to visualizer (before gain node to maintain full signal)
-              visualizer.connectAudio(audioNode);
+              // Connect to visualizer through dedicated gain node (always 100% volume)
+              audioNode.connect(visualizerGainNode);
+              visualizer.connectAudio(visualizerGainNode);
 
               await audio.play();
               isPlaying = true;
@@ -4277,7 +6290,19 @@
 
         audioSource = null;
 
-        // Disconnect gain node first, then audio node
+        // Disconnect visualizer gain node first
+        if (visualizerGainNode) {
+          try {
+            // Disconnect all connections from visualizer gain node
+            visualizerGainNode.disconnect();
+          } catch (e) {
+            // Node may already be disconnected or in invalid state - ignore
+            console.debug("Visualizer gain node disconnect (expected if already disconnected):", e.message);
+          }
+          visualizerGainNode = null;
+        }
+
+        // Disconnect gain node (output volume control)
         if (gainNode) {
           try {
             // Disconnect all connections from gain node
@@ -4394,17 +6419,18 @@
         }
       }
 
-      // Beat detection algorithm
+      // Beat detection algorithm with consistency tracking
       function detectBeat() {
         if (!visualizer || !useBeatDetection || !isPresetAutoAdvance) {
-          return false;
+          return { detected: false, consistency: 0, energy: 0 };
         }
 
         try {
           // Get audio levels from visualizer's renderer
-          // Access via renderer property (which butterchurn exposes internally)
           const renderer = visualizer.renderer;
-          if (!renderer || !renderer.audioLevels) return false;
+          if (!renderer || !renderer.audioLevels) {
+            return { detected: false, consistency: 0, energy: 0 };
+          }
 
           const audioLevels = renderer.audioLevels;
 
@@ -4420,7 +6446,7 @@
 
           // Need enough history to detect beats
           if (energyHistory.length < 10) {
-            return false;
+            return { detected: false, consistency: 0, energy: currentEnergy };
           }
 
           // Calculate average and variance
@@ -4439,52 +6465,159 @@
           varianceEnergy = varianceSum / energyHistory.length;
           const stdDev = Math.sqrt(varianceEnergy);
 
-          // Dynamic threshold: higher sensitivity = lower threshold = more sensitive
-          // Invert sensitivity: threshold = average + (stdDev / sensitivity)
-          // So higher sensitivity value = lower threshold = detects more beats
-          const threshold = averageEnergy + stdDev / beatSensitivity;
+          // Fixed threshold like MilkDrop3 (uses standard deviation for adaptive detection)
+          // MilkDrop3 F8 modes use fixed thresholds (bass > 1.5, treb > 2.9)
+          // We use a fixed multiplier on standard deviation for consistency
+          const threshold = averageEnergy + stdDev * 1.0;
 
           // Check for beat
           const now = Date.now();
           const timeSinceLastBeat = now - lastBeatTime;
+          let beatDetected = false;
 
-          // Debug logging (only log occasionally to avoid spam)
-          if (window.beatDetectionDebug) {
-            // Log every 30 frames (roughly once per second at 30fps)
-            if (!window.beatDebugFrameCount) window.beatDebugFrameCount = 0;
-            window.beatDebugFrameCount++;
+          // Minimum interval check (prevent too-frequent beats)
+          const minInterval = 100; // Minimum 100ms between beats
+          if (currentEnergy > threshold && timeSinceLastBeat > minInterval) {
+            beatDetected = true;
+            const interval = timeSinceLastBeat;
 
-            if (window.beatDebugFrameCount % 30 === 0) {
+            // Track beat intervals for consistency analysis
+            beatIntervals.push(interval);
+            const maxIntervals = CONFIG.BEAT_CONSISTENCY_WINDOW;
+            if (beatIntervals.length > maxIntervals) {
+              beatIntervals.shift();
+            }
+
+            lastBeatTime = now;
+            lastBeatDetectedTime = now;
+
+            // Calculate consistency score from interval variance
+            if (beatIntervals.length >= 4) {
+              // Calculate mean interval
+              let intervalSum = 0;
+              for (let i = 0; i < beatIntervals.length; i++) {
+                intervalSum += beatIntervals[i];
+              }
+              const meanInterval = intervalSum / beatIntervals.length;
+
+              // Calculate variance
+              let intervalVarianceSum = 0;
+              for (let i = 0; i < beatIntervals.length; i++) {
+                const diff = beatIntervals[i] - meanInterval;
+                intervalVarianceSum += diff * diff;
+              }
+              const intervalVariance = intervalVarianceSum / beatIntervals.length;
+              const intervalStdDev = Math.sqrt(intervalVariance);
+
+              // Consistency score: lower variance = higher consistency
+              // Normalize: 1.0 = perfect consistency, 0.0 = no consistency
+              // Use coefficient of variation (stdDev/mean) for normalization
+              const coefficientOfVariation = meanInterval > 0 ? intervalStdDev / meanInterval : 1.0;
+              consistencyScore = Math.max(0, Math.min(1, 1.0 - Math.min(coefficientOfVariation, 1.0)));
+            } else {
+              consistencyScore = 0;
+            }
+
+            // Debug logging
+            if (window.beatDetectionDebug) {
               console.log(
-                `[Beat Detection] Energy: ${currentEnergy.toFixed(3)}, ` +
-                  `Threshold: ${threshold.toFixed(3)}, ` +
-                  `Avg: ${averageEnergy.toFixed(3)}, ` +
-                  `StdDev: ${stdDev.toFixed(3)}, ` +
-                  `Bass: ${audioLevels.bass.toFixed(3)}, ` +
-                  `Mid: ${audioLevels.mid.toFixed(3)}, ` +
-                  `Treb: ${audioLevels.treb.toFixed(3)}`
+                `[Beat Detection] 🎵 BEAT DETECTED! ` +
+                  `Energy: ${currentEnergy.toFixed(3)}, ` +
+                  `Consistency: ${consistencyScore.toFixed(3)}, ` +
+                  `Interval: ${interval.toFixed(0)}ms`
               );
             }
           }
 
-          if (currentEnergy > threshold && timeSinceLastBeat > beatMinInterval) {
-            lastBeatTime = now;
-
-            // Log beat detection
-            console.log(
-              `[Beat Detection] 🎵 BEAT DETECTED! ` +
-                `Energy: ${currentEnergy.toFixed(3)} > Threshold: ${threshold.toFixed(3)} ` +
-                `(Bass: ${audioLevels.bass.toFixed(2)}, Mid: ${audioLevels.mid.toFixed(2)}, Treb: ${audioLevels.treb.toFixed(2)})`
-            );
-
-            return true;
-          }
-
-          return false;
+          return {
+            detected: beatDetected,
+            consistency: consistencyScore,
+            energy: currentEnergy,
+            averageEnergy: averageEnergy,
+          };
         } catch (error) {
           console.error("Beat detection error:", error);
-          return false;
+          return { detected: false, consistency: 0, energy: 0 };
         }
+      }
+
+      // Calculate transition probability and schedule transitions
+      function calculateTransitionProbability(beatInfo) {
+        if (!visualizer || !useBeatDetection || !isPresetAutoAdvance) {
+          return { shouldTransition: false, scheduledTime: 0 };
+        }
+
+        const now = Date.now();
+        const timeSinceLastTransition = now - lastTransitionTime;
+        const timeSinceLastBeat = now - lastBeatDetectedTime;
+
+        // Force transition if no beat detected for extended period
+        if (timeSinceLastBeat >= CONFIG.NO_BEAT_FORCE_INTERVAL && lastBeatDetectedTime > 0) {
+          if (window.beatDetectionDebug) {
+            console.log(`[Transition] Force transition: No beat detected for ${(timeSinceLastBeat / 1000).toFixed(1)}s`);
+          }
+          return { shouldTransition: true, scheduledTime: now };
+        }
+
+        // Check if scheduled transition time has been reached
+        if (isTransitionScheduled && now >= scheduledTransitionTime) {
+          if (window.beatDetectionDebug) {
+            console.log(`[Transition] Scheduled transition triggered`);
+          }
+          isTransitionScheduled = false;
+          return { shouldTransition: true, scheduledTime: now };
+        }
+
+        // During consistent beats: use probability-based transitions
+        if (beatInfo.detected && beatInfo.consistency > 0.3 && beatIntervals.length >= 4) {
+          // Check quiet period - reduce probability if too quiet
+          let probabilityMultiplier = 1.0;
+          if (beatInfo.averageEnergy < CONFIG.QUIET_ENERGY_THRESHOLD) {
+            probabilityMultiplier = CONFIG.QUIET_PROBABILITY_REDUCTION;
+          }
+
+          // Energy affects transition speed (higher energy = faster transitions)
+          // Calculate base transition speed based on energy
+          const normalizedEnergy = Math.min(1.0, beatInfo.energy / Math.max(0.1, beatInfo.averageEnergy));
+          const energySpeedFactor = 1.0 + normalizedEnergy * CONFIG.ENERGY_TO_SPEED_MULTIPLIER;
+
+          // Roll random probability
+          const roll = Math.random();
+          const isHighRandomness = roll > CONFIG.RANDOMNESS_ROLL_THRESHOLD;
+
+          // Choose time range based on randomness roll
+          let timeRange;
+          if (isHighRandomness) {
+            timeRange = CONFIG.HIGH_RANDOMNESS_TIME_RANGE;
+          } else {
+            timeRange = CONFIG.LOW_RANDOMNESS_TIME_RANGE;
+          }
+
+          // Apply energy speed factor (higher energy = shorter time)
+          const minTime = timeRange[0] / energySpeedFactor;
+          const maxTime = timeRange[1] / energySpeedFactor;
+
+          // Randomly choose transition time within range
+          const transitionDelay = (Math.random() * (maxTime - minTime) + minTime) * 1000; // Convert to ms
+          const scheduledTime = now + transitionDelay;
+
+          // Apply quiet period probability reduction
+          if (Math.random() < probabilityMultiplier) {
+            isTransitionScheduled = true;
+            scheduledTransitionTime = scheduledTime;
+
+            if (window.beatDetectionDebug) {
+              console.log(
+                `[Transition] Scheduled transition in ${(transitionDelay / 1000).toFixed(2)}s ` +
+                  `(Energy: ${normalizedEnergy.toFixed(2)}, ` +
+                  `Randomness: ${isHighRandomness ? "HIGH" : "LOW"}, ` +
+                  `Quiet: ${probabilityMultiplier < 1.0 ? "YES" : "NO"})`
+              );
+            }
+          }
+        }
+
+        return { shouldTransition: false, scheduledTime: scheduledTransitionTime };
       }
 
       function render() {
@@ -4493,25 +6626,37 @@
             visualizer.render();
 
             // Check for beat if beat detection is enabled
-            if (detectBeat()) {
-              // Beat detected - trigger preset change
-              isAutoTransition = true;
+            if (useBeatDetection && isPresetAutoAdvance) {
+              const beatInfo = detectBeat();
+              const transitionDecision = calculateTransitionProbability(beatInfo);
 
-              // Clear any existing timer since we're using beat detection
-              clearAutoAdvanceTimer();
+              if (transitionDecision.shouldTransition) {
+                // Transition triggered - reset scheduled transition
+                isTransitionScheduled = false;
+                lastTransitionTime = Date.now();
 
-              // Check if current preset is disabled
-              const currentPresetName = presetSelect && presetSelect.value ? presetSelect.value : currentPresets[currentPresetIndex] || null;
-              if (currentPresetName && presetsRemovedFromRotation.includes(currentPresetName)) {
-                // Skip disabled presets
-                return;
-              }
+                // Beat detected - trigger preset change
+                isAutoTransition = true;
 
-              // Change preset on beat
-              if (isShuffleEnabled) {
-                randomPreset();
-              } else {
-                nextPreset();
+                // Clear any existing timer since we're using beat detection
+                clearAutoAdvanceTimer();
+
+                // Get available presets to check if any are available (async, don't block render)
+                getAvailablePresets()
+                  .then((availablePresets) => {
+                    if (availablePresets.length === 0) {
+                      // No available presets, stay on current
+                      return;
+                    }
+
+                    // Change preset on transition
+                    if (isShuffleEnabled) {
+                      randomPreset().catch((err) => console.error("[Preset] Error in randomPreset:", err));
+                    } else {
+                      nextPreset().catch((err) => console.error("[Preset] Error in nextPreset:", err));
+                    }
+                  })
+                  .catch((err) => console.error("[Preset] Error getting available presets:", err));
               }
             }
           } catch (error) {
@@ -4541,7 +6686,31 @@
       // Toggle Presets panel
       function togglePresetsPanel() {
         const presetsPanel = document.getElementById("presets-panel");
+        const presetListPanel = document.getElementById("preset-list-panel");
+        const isHiding = !presetsPanel.classList.contains("hidden");
+
         presetsPanel.classList.toggle("hidden");
+
+        // If hiding Presets panel and Preset List is open, slide it over
+        if (isHiding && presetListPanel && !presetListPanel.classList.contains("hidden")) {
+          // Move Preset List to where Presets panel was (right: 20px)
+          presetListPanel.style.right = "20px";
+        } else if (!isHiding && presetListPanel && !presetListPanel.classList.contains("hidden")) {
+          // Restore Preset List position when Presets panel opens
+          presetListPanel.style.right = "480px";
+        }
+      }
+
+      // Toggle Preset List panel
+      function togglePresetListPanel() {
+        const presetListPanel = document.getElementById("preset-list-panel");
+        if (presetListPanel) {
+          presetListPanel.classList.toggle("hidden");
+          // Populate panel when opening
+          if (!presetListPanel.classList.contains("hidden")) {
+            populatePresetPanel();
+          }
+        }
       }
 
       // Toggle controls visibility (for both panels) - kept for keyboard shortcut
@@ -4552,6 +6721,9 @@
 
       // Make functions globally available
       // Assign after functions are defined
+      window.toggleAudioSourcePanel = toggleAudioSourcePanel;
+      window.togglePresetsPanel = togglePresetsPanel;
+      window.togglePresetListPanel = togglePresetListPanel;
       window.loadPreset = loadPreset;
       window.randomPreset = randomPreset;
       window.nextPreset = nextPreset;
@@ -4564,7 +6736,7 @@
       window.toggleControls = toggleControls;
 
       // Keyboard shortcuts
-      document.addEventListener("keydown", (e) => {
+      document.addEventListener("keydown", async (e) => {
         // Don't handle keyboard shortcuts when user is typing in input fields
         const activeElement = document.activeElement;
         const isInputFocused =
@@ -4588,11 +6760,11 @@
           if (!isInputFocused) {
             if (e.key === "ArrowLeft") {
               e.preventDefault();
-              previousPreset();
+              await previousPreset();
               return;
             } else if (e.key === "ArrowRight") {
               e.preventDefault();
-              nextPreset();
+              await nextPreset();
               return;
             }
           }
@@ -4631,6 +6803,11 @@
             e.preventDefault();
             toggleCreditsPanel();
             return;
+          } else if (key === "q") {
+            // Toggle Playlists panel
+            e.preventDefault();
+            togglePlaylistsPanel();
+            return;
           } else if (key === "m") {
             // Toggle Shuffle
             e.preventDefault();
@@ -4655,6 +6832,41 @@
           e.preventDefault();
           toggleAutoHide();
           return;
+        }
+
+        // Number keys (0-9) and numpad for rating presets
+        if (!e.ctrlKey && !e.altKey && !e.metaKey && !isInputFocused) {
+          const numKey = e.key;
+          // Check if it's a number key (0-9) or numpad (Numpad0-Numpad9)
+          let rating = null;
+          if (numKey >= "0" && numKey <= "9") {
+            rating = parseInt(numKey);
+          } else if (numKey.startsWith("Numpad")) {
+            const numpadNum = numKey.replace("Numpad", "");
+            if (numpadNum >= "0" && numpadNum <= "9") {
+              rating = parseInt(numpadNum);
+            }
+          }
+
+          if (rating !== null) {
+            e.preventDefault();
+            // Get current preset name
+            const presetSelect = document.getElementById("preset-select");
+            let presetName = null;
+            if (presetSelect && presetSelect.value) {
+              presetName = presetSelect.value;
+            } else if (currentPresetIndex >= 0 && currentPresetIndex < currentPresets.length) {
+              presetName = currentPresets[currentPresetIndex];
+            }
+
+            if (presetName) {
+              setPresetRating(presetName, rating);
+              updateStatus(`Rated "${presetName}" as ${rating}`, false);
+            } else {
+              updateStatus("No preset selected to rate", true);
+            }
+            return;
+          }
         }
       });
 
