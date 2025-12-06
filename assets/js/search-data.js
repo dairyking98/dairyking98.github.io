@@ -93,7 +93,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/music-visualizer/";
               },
-            },{id: "post-music-visualizer-instant-milkdrop-in-your-browser",
+            },{id: "post-mingkwai-rediscovered-a-symposium-on-the-revolutionary-chinese-typewriter",
+        
+          title: "MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter",
+        
+        description: "Reflections on attending the MingKwai symposium at Stanford, exploring the history and impact of Lin Yutang&#39;s revolutionary Chinese typewriter prototype.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/mingkwai-rediscovered-symposium/";
+          
+        },
+      },{id: "post-music-visualizer-instant-milkdrop-in-your-browser",
         
           title: "Music Visualizer - Instant Milkdrop in Your Browser",
         
