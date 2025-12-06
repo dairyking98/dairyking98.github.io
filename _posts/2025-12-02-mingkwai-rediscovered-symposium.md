@@ -30,7 +30,7 @@ Thankfully, Dr. Thomas Mullaney graciously stepped in to guide them through this
 
 Hearing their story firsthand added such a personal dimension to the symposium. This wasn't just about a machine or an inventor—it was about a family who stumbled upon history and, with guidance from experts, made the decision to entrust it to an institution that would preserve and honor its legacy. Their journey from basement discovery to Stanford's collection is a reminder that preserving history often depends on ordinary people making thoughtful decisions about remarkable objects.
 
-When I inquired about the backstory of how the typewriter could have ended up in their family's possession, they shared a fascinating connection: Mrs. Felix's father or grandfather was affiliated with Linotype Company. This raises intriguing questions about the machine's journey.
+When I inquired about the backstory of how the typewriter could have ended up in their family's possession, they shared a fascinating connection: Mrs. Felix's grandfather was affiliated with Linotype Company. This raises intriguing questions about the machine's journey.
 
 The Felix family connection to Linotype could mean several things. They might have been affiliated with the company after Lin was forced to sell the rights to the MingKwai prototype to Linotype in 1948, or they could have had a hand in the prototype's creation or manufacture earlier. This opens up a compelling historical mystery.
 
@@ -46,19 +46,21 @@ Lin Yutang was far more than just an inventor. In his early career, he was a wri
 
 Lin was the first to create such a system, breaking Chinese characters into prefixes and suffixes in a revolutionary way. Before this innovation, there was no efficient method for organizing or retrieving Chinese characters. His system would become foundational to how Chinese text input works even today.
 
-Lin was also the author of _My Country and My People_, a bestseller that remained on bestseller lists for 52 weeks and established him as one of the most influential interpreters of Chinese culture for the West in the first half of the 20th century. His book sales, in fact, likely funded the creation of the MingKwai machine—estimated at $120,000 at the time (worth approximately $2 million today).
+Lin was also the author of _My Country and My People_, a bestseller that remained on bestseller lists for 52 weeks and established him as one of the most influential interpreters of Chinese culture for the West in the first half of the 20th century. His book sales, in fact, likely funded the creation of the MingKwai machine—estimated at **<span>$</span>120,000** at the time (worth approximately **<span>$</span>2 million** today).
 
 ## How the MingKwai Works
 
 The MingKwai typewriter operates on a remarkably innovative system. It features:
 
-- **An upper bank of keys** - These select a type cylinder
-- **A lower bank of keys** - These select an axial position on the type cylinder
-- **8 selection keys** - These rotate the type cylinder to a specified facet
+- **An upper bank of 36 keys** - These select a type cylinder
+- **A lower bank of 29 keys** - These select an axial position on the type cylinder
+- **8 selection keys** - These rotate the type cylinder to a specified facet and print the selected character
 
 The upper and lower bank keys change what appears in the "Magic Eye"—a display showing up to 9 characters, with 8 available to print. If a 9th character is available, it goes to a "next page" option.
 
 The system broke characters into prefixes and suffixes, and what makes this truly remarkable is that **this is the first pop-up menu and the first input editor ever created**—and the writing method is still fundamentally the same for Chinese input today. Modern users can reach speeds of 221 characters per minute in Chinese using systems derived from Lin's innovations.
+
+Perhaps even more significant is that the MingKwai is a **visually designed** typewriter—characters are typed based on how they are seen, not by their meaning or phonetic pronunciation. This revolutionary approach means that someone who didn't know Chinese could theoretically write on this machine by visually picking out character components and piecing together words using three strokes (prefix, suffix, and selection). As David Brock compared, it's the equivalent of having more than a single English keyboard on a single key. This visual approach democratized Chinese typewriting, making it accessible to users regardless of their linguistic knowledge, and represents a fundamentally different paradigm from phonetic or meaning-based input methods.
 
 ## The Physical Machine
 
@@ -74,7 +76,7 @@ The patent number for this invention is 2613795, and I was excited to learn that
 
 One of the most fascinating aspects of the symposium was the discussion of Lin's unfortunate situation in 1948, when he had to sell the rights to the MingKwai prototype to Linotype. The Felix family's connection to Linotype adds an intriguing dimension to this story—could their relative's involvement have been part of the pathway that led to Linotype's acquisition?
 
-The circumstances that forced Lin to sell his creation are a sobering reminder that financial pressures can shape the fate of even the most revolutionary inventions. Having invested an estimated $120,000 (worth approximately $2 million today) in the prototype, largely funded by his book sales, Lin found himself in a position where he needed to sell the rights. The question remains: why did Linotype buy it? Was it to suppress competition, or because they recognized its value and potential? Or perhaps, given the potential pre-existing relationship suggested by the Felix family connection, the acquisition was formalizing an existing collaboration or bringing a project fully into Linotype's portfolio.
+The circumstances that forced Lin to sell his creation are a sobering reminder that financial pressures can shape the fate of even the most revolutionary inventions. Having invested an estimated **<span>$</span>120,000** (worth approximately **<span>$</span>2 million** today) in the prototype, largely funded by his book sales, Lin found himself in a position where he needed to sell the rights. The question remains: why did Linotype buy it? Was it to suppress competition, or because they recognized its value and potential? Or perhaps, given the potential pre-existing relationship suggested by the Felix family connection, the acquisition was formalizing an existing collaboration or bringing a project fully into Linotype's portfolio.
 
 Linotype produced a report that both criticized and praised various features of the machine. They expressed doubt about Lin's claim of 50 words per minute. In testing, new users reached up to 20 words per minute after only 6-9 hours of practice—already faster than the MingKwai's mechanism would permit at that stage.
 
@@ -86,7 +88,9 @@ The report's most critical assessment was of the machine's mechanical complexity
 
 ## The Sheffield Dish
 
-Another fascinating discovery mentioned at the symposium was the Sheffield dish, which has also been discovered and will be joining the Stanford library collection. Remarkably, the Sheffield dish represents the very first Chinese typewriter—a crucial piece of the historical puzzle that helps us understand the evolution of Chinese typewriting technology and the context in which the MingKwai was developed. Having both artifacts together at Stanford will allow researchers to trace the complete lineage of Chinese typewriter development, from this earliest iteration to Lin Yutang's revolutionary prototype.
+Another fascinating discovery mentioned at the symposium was the Sheffield dish (also called the Sheffield disc), which has also been discovered and will be joining the Stanford library collection. This is the disc for the Sheffield Chinese Typewriter, invented ca. 1897 by Devello Zelotes Sheffield of Buffalo, New York—the very first Chinese typewriter. The Sheffield Chinese Typewriter was a 4,000-character machine, making it a crucial piece of the historical puzzle that helps us understand the evolution of Chinese typewriting technology and the context in which the MingKwai was developed.
+
+Unfortunately, I was unable to capture a picture of the Sheffield dish during the symposium's PowerPoint presentation due to limited screen time—perhaps it's still meant to be somewhat of a secret until more research is completed. The [Sheffield Chinese Typewriter remains a sought-after artifact](https://www.antikeychop.com/chinesetypewriter) in the typewriter collecting community, and having both artifacts together at Stanford will allow researchers to trace the complete lineage of Chinese typewriter development, from this earliest iteration (the Sheffield) to Lin Yutang's revolutionary prototype (the MingKwai).
 
 ## A Talk by Willie Liu
 
