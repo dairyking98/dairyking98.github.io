@@ -50,13 +50,13 @@ This process has been a journey of self-reflection. It's forced me to really thi
 
 I've also learned a lot about resilience and patience. PhD applications are a marathon, not a sprint, and there have been plenty of moments where I've felt overwhelmed or discouraged. But I've kept pushing forward, and I'm proud of the work I've put in.
 
-I'll be completely honest: I'm still not sure this is the path for me. There's a part of me that questions whether a PhD is really what I want or need. But a lot of my peers are encouraging me to pursue it, and I trust their judgment. They see something in me that makes them think this is a good fit, and I think I'm not too unwise to follow their guidance. When I think about it myself, I think it might be? The research, the learning, the intellectual challenge—there's something appealing about it. The uncertainty is definitely there, but so is a sense that this could be right for me. I'm going forward with the applications, and we'll see where this leads.
+I'll be completely honest: I'm still not entirely certain this is the path for me. There's a part of me that questions whether a PhD is really what I want or need. But many of my peers and mentors are encouraging me to pursue it, and I trust their judgment. They see something in me that makes them think this is a good fit. When I think about it myself, I find the research, the learning, and the intellectual challenge genuinely appealing. The uncertainty is there, but so is a sense that this could be right for me. I'm moving forward with the applications, and I'm curious to see where this leads.
 
 ## Looking Forward
 
 Once December is over and my applications are submitted, I'll be able to breathe a bit easier. I'm planning to use that time to update this website with more images and content—right now the site is fairly minimal, but once the application stress is behind me, I'll be able to focus on populating it with photos, project details, and other content I've been putting off.
 
-I'm still not entirely sure this is for me, but I think it might be? I'm going to see what happens with these applications and take it from there. Maybe getting in (or not getting in) will help clarify things. Maybe the process of going through it will reveal more about what I actually want.
+I'm still exploring whether this is the right path, but I'm moving forward with curiosity and an open mind. I'll see what happens with these applications and take it from there. Maybe getting in (or not getting in) will help clarify things. Maybe the process of going through it will reveal more about what I actually want.
 
 If you're also going through this process, know that you're not alone. It's stressful, time-consuming, and sometimes frustrating, but it's also an opportunity to really think about what you want and where you're going. And it's okay to not be completely certain—I'm certainly not.
 
