@@ -93,7 +93,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/music-visualizer/";
               },
-            },{id: "post-mingkwai-rediscovered-a-symposium-on-the-revolutionary-chinese-typewriter",
+            },{id: "post-stability-commander",
+        
+          title: "Stability COMmander",
+        
+        description: "Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated boom prototype.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/stability-commander/";
+          
+        },
+      },{id: "post-mingkwai-rediscovered-a-symposium-on-the-revolutionary-chinese-typewriter",
         
           title: "MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter",
         
