@@ -32,7 +32,11 @@
     {% if page.title == null or page.title == '' %}
       {{ page.date | date: '%Y' }} | {{ title }}
     {% else %}
-      {{ page.title }} | {{ title }}
+      {% if page.subtitle %}
+        {{ page.title }} — {{ page.subtitle }} | {{ title }}
+      {% else %}
+        {{ page.title }} | {{ title }}
+      {% endif %}
     {% endif %}
   {% else %}
     {{ title }}
