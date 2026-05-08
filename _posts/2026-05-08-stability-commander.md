@@ -3,10 +3,11 @@ layout: post
 title: Stability COMmander
 subtitle: Hardware-Validated Stability Control for a Telehandler Prototype
 date: 2026-05-08 12:00:00 -0700
+permalink: /blog/2026/stability-commander/
 description: Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated boom prototype.
 tags: school-project capstone mechanical-engineering embedded-systems control-systems cad fabrication stm32 matlab simulink python hardware-in-the-loop simulation
 categories: School Projects
-thumbnail: /assets/img/2026/stability-commander/cad-assembly.png
+thumbnail: assets/img/2026/stability-commander/cad-assembly.png
 ---
 
 **Stability COMmander** is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints.
@@ -90,27 +91,19 @@ The project strengthened my experience in mechanical design, hardware selection,
 
 ### CAD assembly
 
-![Full CAD assembly of the Stability COMmander telehandler prototype](/assets/img/2026/stability-commander/cad-assembly.png)
-
-*Full CAD assembly used to validate actuator stroke, mounting geometry, and boom range of motion prior to fabrication.*
+{% include figure.liquid path="assets/img/2026/stability-commander/cad-assembly.png" class="img-fluid rounded z-depth-1" alt="Full CAD assembly of the Stability COMmander telehandler prototype" caption="Full CAD assembly used to validate actuator stroke, mounting geometry, and boom range of motion prior to fabrication." %}
 
 ### Physical prototype
 
-![Fabricated physical prototype boom and actuator hardware](/assets/img/2026/stability-commander/physical-prototype.jpeg)
-
-*Fabricated prototype used to check real linkage motion, actuator placement, and load-holding behavior against the CAD intent.*
+{% include figure.liquid path="assets/img/2026/stability-commander/physical-prototype.jpeg" class="img-fluid rounded z-depth-1" alt="Fabricated physical prototype boom and actuator hardware" caption="Fabricated prototype used to check real linkage motion, actuator placement, and load-holding behavior against the CAD intent." %}
 
 ### Hardware architecture
 
-![System flowchart of onboard hardware architecture and signals](/assets/img/2026/stability-commander/hardware-signals-flowchart.jpeg)
-
-*Hardware and signal flow between sensors, MCU, actuator drivers, and power paths.*
+{% include figure.liquid path="assets/img/2026/stability-commander/hardware-signals-flowchart.jpeg" class="img-fluid rounded z-depth-1" alt="Flowchart of onboard hardware architecture and signal paths" caption="Hardware and signal flow between sensors, MCU, actuator drivers, and power paths." %}
 
 ### Visualization
 
-![Pygame interface showing chassis, boom axes, stability bounds, and live motion](/assets/img/2026/stability-commander/pygame-visualization.jpeg)
-
-*Interactive visualization tying vehicle kinematics and stability diagnostics to operators and debug scenarios.*
+{% include figure.liquid path="assets/img/2026/stability-commander/pygame-visualization.jpeg" class="img-fluid rounded z-depth-1" alt="Pygame visualization of chassis motion, boom, and stability bounds" caption="Interactive visualization tying vehicle kinematics and stability diagnostics to operators and debug scenarios." %}
 
 ## Links
 

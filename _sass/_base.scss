@@ -690,6 +690,22 @@ footer.sticky-bottom {
   }
 }
 
+// Figures in blog posts: constrain to column width (theme figure.liquid uses width="100%" on img)
+.post #markdown-content figure {
+  max-width: 100%;
+
+  picture,
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .caption {
+    margin-top: 0.5rem;
+  }
+}
+
 .post-list {
   margin: 0;
   margin-bottom: 40px;
