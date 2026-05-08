@@ -250,11 +250,6 @@ ninja.data = [{
           description: "RoboCam system for automated camera control and 3D printer integration",
           section: "Projects",handler: () => {
               window.location.href = "/projects/school-project/robocam/";
-            },},{id: "projects-ev-battery-management-system",
-          title: 'EV Battery Management System',
-          description: "Ongoing senior capstone project (Fall 2025–Spring 2026): electric vehicle battery management and swapping system for continuous equipment operation.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/school-project/senior-capstone-ev-battery-management/";
             },},{id: "projects-stability-commander",
           title: 'Stability COMmander',
           description: "Hardware-validated stability control for a telehandler prototype — STM32 embedded logic, Simulink HIL, Pygame visualization, and a fabricated boom for real-world geometry checks.",
