@@ -1,0 +1,48 @@
+---
+layout: splash
+permalink: /
+title: "Leonard Chau"
+header:
+  overlay_color: "#1c2b3a"
+  overlay_filter: 0.7
+  overlay_image: /assets/img/2026/stability-commander/cad-assembly.png
+  actions:
+    - label: "View Projects"
+      url: "/projects/"
+    - label: "Download CV"
+      url: "/assets/pdf/leonard-chau-cv.pdf"
+excerpt: "Mechanical engineer and maker building low-cost scientific instruments — at the intersection of hardware, optics, and software."
+
+intro:
+  - excerpt: >
+      I'm a mechanical engineer (B.S. SFSU, May 2026), researcher in Dr. Raymond Esquerra's Bioengineering Lab, and fabricator with hands-on experience in TIG welding, machining, and 3D printing. I build things that bridge precision craftsmanship and modern technology.
+
+feature_row:
+  - image_path: /assets/img/2026/stability-commander/cad-assembly.png
+    alt: "Stability COMmander CAD assembly"
+    title: "Stability COMmander"
+    excerpt: "Tip-over prevention for a telehandler — STM32 embedded control, Simulink HIL testing, and a fabricated boom prototype. Capstone project."
+    url: "/projects/stability-commander/"
+    btn_label: "View Project"
+    btn_class: "btn--primary"
+  - image_path: /assets/img/12.jpg
+    alt: "FluorCam"
+    title: "FluorCam"
+    excerpt: "Open-source fluorescence microscope at ~$500 vs. $20k+ commercial systems. Raspberry Pi, coaxial optics, Python automation."
+    url: "/projects/fluorcam/"
+    btn_label: "View Project"
+    btn_class: "btn--primary"
+  - image_path: /assets/img/12.jpg
+    alt: "HPWriter"
+    title: "HPWriter"
+    excerpt: "Silent digital typewriter printing on plain paper with an HP45 inkjet cartridge. Instant boot, no OS, USB keyboard input."
+    url: "/projects/hpwriter/"
+    btn_label: "View Project"
+    btn_class: "btn--primary"
+---
+
+{% include feature_row id="intro" type="center" %}
+
+<h2 style="text-align:center; margin-bottom: 0.5em;">Featured Projects</h2>
+
+{% include feature_row %}

@@ -1,11 +1,12 @@
 ---
-layout: post
+layout: single
 title: Building HPWriter - A Silent Digital Typewriter
 date: 2025-11-20 10:00:00
 description: Why I'm building HPWriter, a silent digital typewriter that prints on plain paper, and what inspired this project.
 tags: hpwriter typewriter electronics engineering projects
 categories: Projects
-thumbnail: /assets/img/9.jpg
+header:
+  teaser: /assets/img/9.jpg
 ---
 
 I've been working on a project called **HPWriter**—a silent digital typewriter that prints on plain paper using an HP45 inkjet cartridge. It's been one of those projects that started from a simple observation and grew into something I'm genuinely excited about building.

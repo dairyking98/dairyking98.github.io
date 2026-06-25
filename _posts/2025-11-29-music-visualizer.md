@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Music Visualizer - Instant Milkdrop in Your Browser
 date: 2025-11-29 10:00:00
 description: A browser-ready music visualizer powered by Butterchurn, bringing the classic Milkdrop experience to internet radio and your own music files.

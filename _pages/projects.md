@@ -1,18 +1,10 @@
 ---
-layout: page
-title: projects&works
+title: "Projects"
+layout: collection
 permalink: /projects/
-description: Projects dropdown
-nav: true
-nav_order: 3
-dropdown: true
-children:
-  - title: school projects
-    permalink: /school-projects/
-  - title: personal projects
-    permalink: /personal-projects/
-  - title: 3d type elements
-    permalink: /3d-type-elements/
-  - title: photography
-    permalink: /photography/
+collection: projects
+entries_layout: grid
+sort_by: importance
+sort_order: forward
+author_profile: false
 ---

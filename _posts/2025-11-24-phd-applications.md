@@ -1,11 +1,12 @@
 ---
-layout: post
+layout: single
 title: My PhD Application Journey
 date: 2025-11-24 10:00:00
 description: An update on my PhD application process and what I've learned along the way.
 tags: phd applications graduate-school academia personal
 categories: General
-thumbnail: assets/img/9.jpg
+header:
+  teaser: /assets/img/9.jpg
 ---
 
 I'm currently in the midst of applying to PhD programs, and I wanted to share a bit about my experience so far. This process has been both challenging and enlightening, and I thought it might be helpful (or at least interesting) to document what I've been going through.

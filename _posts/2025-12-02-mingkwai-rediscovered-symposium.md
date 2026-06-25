@@ -1,14 +1,15 @@
 ---
-layout: post
+layout: single
 title: MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter
 date: 2025-12-02 15:00:00
 description: Reflections on attending the MingKwai symposium at Stanford, exploring the history and impact of Lin Yutang's revolutionary Chinese typewriter prototype.
 tags: typewriter mingkwai lin-yutang chinese-typing stanford history technology
 categories: typewriters history events
-thumbnail: assets/img/mingkwai-symposium.jpg
+header:
+  teaser: /assets/img/mingkwai-symposium.jpg
 ---
 
-{% include figure.liquid path="assets/img/mingkwai-symposium.jpg" class="img-fluid rounded z-depth-1" alt="MingKwai Chinese Typewriter Symposium at Stanford University" %}
+{% include figure image_path="assets/img/mingkwai-symposium.jpg" alt="MingKwai Chinese Typewriter Symposium at Stanford University" caption="" %}
 
 On December 2, 2025, I had the privilege of attending "MingKwai, Rediscovered" at Stanford University—a symposium exploring the origins, history, and lasting impact of one of the most revolutionary (and perhaps underappreciated) inventions in the history of Chinese information technology: the MingKwai Chinese Typewriter.
 
