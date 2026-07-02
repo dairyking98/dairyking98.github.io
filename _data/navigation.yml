@@ -5,5 +5,7 @@ main:
     url: /blog/
   - title: "CV"
     url: /cv/
+  - title: "Tools"
+    url: /tools/
   - title: "Contact"
     url: /contact/
