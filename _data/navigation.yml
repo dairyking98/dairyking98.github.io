@@ -7,5 +7,7 @@ main:
     url: /cv/
   - title: "Tools"
     url: /tools/
+  - title: "Collection"
+    url: /typewriter-collection/
   - title: "Contact"
     url: /contact/

@@ -1,0 +1,480 @@
+# Display-only inventory for the typewriter collection showcase.
+# Purchase/sale price, valuation, source, and repair notes are intentionally
+# excluded from this public data file.
+- manufacturer: Hammond
+  model: Model 1
+  size: Standard
+  drive: Manual
+  serial_number: "15058"
+  year: "1890"
+  layout: QWERTY
+- manufacturer: Sun
+  model: No. 2 Standard
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "8278"
+  year: "1901-07"
+  pitch: "10"
+  typeface: Standard
+  layout: 3 Bank
+- manufacturer: Blickensderfer
+  model: No. 5
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "133130"
+  year: "1909"
+  pitch: "10"
+  layout: DHIATENSOR
+- manufacturer: Blickensderfer
+  model: No. 8
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "135255"
+  year: "1909"
+  pitch: "10"
+  layout: DHIATENSOR
+- manufacturer: Royal
+  model: Model 5
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "126126-5"
+  pitch: "10"
+  typeface: Tall Roman
+- manufacturer: Bennett
+  model: Pocket Typewriter
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "14682"
+  year: "1910-13"
+  pitch: "10"
+  layout: 3 Bank
+- manufacturer: Bennett
+  model: Pocket Typewriter
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "18627"
+  year: "1910-13"
+  pitch: "10"
+  layout: 3 Bank
+- manufacturer: Continental
+  model: Standard
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "26277"
+  year: "1911"
+  pitch: "10"
+  typeface: Italic
+  layout: QWERTZ
+- manufacturer: Harris
+  model: Visible No. 4
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "19149"
+  year: "1912-15"
+  pitch: "10"
+  typeface: Standard
+  layout: 3 Bank
+- manufacturer: Hammond
+  model: Multiplex
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "224478"
+  year: "1913-15"
+  pitch: "10"
+  typeface: Standard
+- manufacturer: Hammond
+  model: Multiplex
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "CC231416"
+  year: "1915"
+  pitch: "10/15"
+  typeface: Mathematical
+- manufacturer: Underwood
+  model: No. 3
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "206803"
+  year: "1917"
+  pitch: "12"
+  typeface: Standard
+- manufacturer: Corona
+  model: "3"
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "231258"
+  year: "1919"
+  pitch: "10"
+  typeface: Standard
+  layout: 3 Bank
+- manufacturer: Mignon
+  model: No. 4
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: "352222"
+  year: "1925"
+  pitch: "10"
+  layout: Index
+- manufacturer: Woodstock
+  model: Model 5N
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: N168116E
+  year: "1927"
+  pitch: "12"
+  typeface: Standard
+- manufacturer: Royal
+  model: De Luxe
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: A597665
+  year: "1936"
+  pitch: "10"
+  typeface: Italic
+- manufacturer: Royal
+  model: Quiet De Luxe
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: A-873792
+  year: "1939"
+  pitch: "10"
+  typeface: Royal Vogue
+- manufacturer: Remington
+  model: "17"
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: J794385
+  year: "1946"
+  pitch: "10"
+  typeface: Pin Point
+  layout: Unshifted
+- manufacturer: Smith Corona
+  model: Clipper
+  size: Portable
+  drive: Manual
+  color: Brown
+  serial_number: 5C218668
+  year: "1952"
+  pitch: "6"
+  typeface: Bulletin
+- manufacturer: Underwood
+  model: Quiet Tab
+  size: Portable
+  drive: Manual
+  color: Teal
+  serial_number: AA2730434
+  year: "1953"
+  pitch: "10"
+  typeface: Continental
+- manufacturer: Olympia
+  model: SM4
+  size: Portable
+  drive: Manual
+  color: White
+  serial_number: "490865"
+  year: "1954"
+  pitch: "11"
+  typeface: Tall Script RaRo75
+- manufacturer: Olympia
+  model: SM3
+  size: Portable
+  drive: Manual
+  color: Cream
+  serial_number: "1205390"
+  year: "1958"
+  pitch: "11"
+  typeface: Standard
+- manufacturer: Olympia
+  model: SG1
+  size: Standard
+  drive: Manual
+  color: Green
+  serial_number: "7-487163"
+  year: "1959"
+  pitch: "10"
+  typeface: Double Gothic
+- manufacturer: Facit
+  model: T1
+  size: Standard
+  drive: Manual
+  color: Gray
+  serial_number: T1-123221
+  year: "1959"
+  pitch: "10"
+  typeface: Arrow keys, brackets
+- manufacturer: Facit
+  model: TP1
+  size: Portable
+  drive: Manual
+  color: Gray
+  serial_number: P287156
+  year: "1961"
+  pitch: "10"
+  typeface: Esquire/Bruxelles
+- manufacturer: Facit
+  model: TP1
+  size: Portable
+  drive: Manual
+  color: Gray
+  serial_number: P411069
+  year: "1965"
+  pitch: "10"
+  typeface: Imperial
+- manufacturer: IBM
+  model: Selectric II
+  size: Standard
+  drive: Electric
+  color: Green
+  pitch: "10/12"
+- manufacturer: Royal
+  model: Quiet De Luxe
+  size: Portable
+  drive: Manual
+  color: Black
+  pitch: "10"
+  typeface: Standard
+- manufacturer: Remington
+  model: 17 Early
+  size: Portable
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: Royal
+  model: Quiet De Luxe
+  size: Portable
+  drive: Manual
+  color: Gray
+  pitch: "10"
+  typeface: Standard
+  layout: White Russian
+- manufacturer: Olympia
+  model: SM9
+  size: Portable
+  drive: Manual
+  color: White
+  typeface: Standard
+- manufacturer: Royal
+  model: Quiet De Luxe
+  size: Portable
+  drive: Manual
+  color: Pink
+  typeface: Standard
+- manufacturer: Triumph
+  model: De Jur Perfekt
+  size: Portable
+  drive: Manual
+  color: Tan
+  serial_number: "1228617"
+  year: "1960"
+  pitch: "11"
+  typeface: Standard
+- manufacturer: Underwood
+  model: 3 Bank
+  size: Portable
+  drive: Manual
+  color: Black
+  pitch: "12"
+  typeface: Standard
+- manufacturer: Underwood
+  model: Champion Typemaster
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: G1130193
+  year: "1938"
+  pitch: "10"
+  typeface: Italic
+  layout: Apothecary
+- manufacturer: Mignon
+  model: No. 4
+  size: Portable
+  drive: Manual
+  color: Black
+  pitch: "10"
+  layout: Index
+- manufacturer: Remington
+  model: Super-Writer
+  size: Standard
+  drive: Manual
+  color: Silver (stripped)
+  pitch: "10"
+  typeface: Standard
+- manufacturer: Underwood
+  model: 4 Bank
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: 4B7867
+  year: "1926"
+  pitch: "10"
+  typeface: Standard
+- manufacturer: IBM
+  model: Model 04 Executive
+  size: Standard
+  drive: Electric
+  color: Black
+  serial_number: "180437"
+  year: "1947"
+  typeface: Proportional Modern
+- manufacturer: Urania
+  size: Standard
+  drive: Manual
+  color: Black
+  typeface: Italic
+  layout: QWERTZ
+- manufacturer: Fox
+  model: No. 3
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "12593"
+  typeface: Standard
+- manufacturer: Molle
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "7464"
+  typeface: Standard
+- manufacturer: New Yost
+  model: No. 4
+  size: Standard
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: Oliver
+  model: No. 3
+  size: Standard
+  drive: Manual
+  color: Green
+  typeface: Standard
+- manufacturer: Reliance
+  model: Visible
+  size: Standard
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: National
+  size: Standard
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: Postal
+  model: No. 3
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "14550"
+  year: "1901-08"
+- manufacturer: Remington
+  model: Junior
+  size: Standard
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: Mercedes
+  model: Modell 4
+  size: Standard
+  drive: Manual
+  color: Black
+  pitch: "9"
+  typeface: Steile Zierschrift
+- manufacturer: Junior (Spain)
+  model: Model 58
+  size: Portable
+  drive: Manual
+  color: Gray-Blue
+  serial_number: C2492
+  typeface: Standard
+- manufacturer: Remington
+  model: Portable Model 1
+  size: Portable
+  drive: Manual
+  color: Black
+  serial_number: NA13437
+  typeface: Standard
+- manufacturer: Olympia
+  model: SM3
+  size: Portable
+  drive: Manual
+  color: Gray
+  serial_number: "2680308"
+  typeface: Italic
+- manufacturer: Everest
+  model: K2
+  size: Portable
+  drive: Manual
+  color: Gray
+  typeface: Standard
+- manufacturer: IBM
+  model: Model 04 Executive
+  size: Portable
+  drive: Electric
+  color: Black Crinkle
+  typeface: Proportional Modern
+- manufacturer: Alpina
+  model: SK24
+  size: Portable
+  drive: Manual
+  color: Gray/Cream
+  serial_number: "309290"
+  typeface: Congressional
+- manufacturer: Underwood
+  model: 3 Bank
+  size: Portable
+  drive: Manual
+  color: Black
+  typeface: Standard
+- manufacturer: Smith Corona
+  model: Skywriter
+  size: Ultra Portable
+  drive: Manual
+  color: Gray
+  typeface: Standard
+- manufacturer: Hermes
+  model: Baby
+  size: Ultra Portable
+  drive: Manual
+  color: Green
+  typeface: Standard
+- manufacturer: Antares
+  model: Parva
+  size: Ultra Portable
+  drive: Manual
+  color: Gray
+  typeface: Standard
+- manufacturer: Emerson
+  model: No. 3
+  size: Standard
+  drive: Manual
+  color: Black
+  serial_number: "4217"
+  typeface: Standard
+- manufacturer: Royal
+  model: KMH
+  size: Standard
+  drive: Manual
+  color: Hammertone Blue
+  typeface: Standard
+- manufacturer: Mercury (Consul)
+  model: MBM (1511)
+  size: Portable
+  drive: Manual
+  color: Black
+  typeface: Standard
