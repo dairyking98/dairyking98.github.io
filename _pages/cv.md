@@ -113,5 +113,5 @@ See the [Projects](/projects/) page for full write-ups.
 - **Stability COMmander** — STM32 embedded tip-over prevention; Simulink HIL + fabricated prototype (2026)
 - **FluorCam** — $500 open-source fluorescence microscope (2024–Present)
 - **StentorCam** — automated dark-field imaging for Stentor coeruleus research (2024–Present)
-- **HPWriter** — silent digital typewriter using HP45 inkjet cartridge (2024–Present)
+- **HPWriter** — concept for a silent digital typewriter using an HP45 inkjet cartridge (early-stage idea)
 - **3D Type Elements** — parametric resin-printed replacement parts for antique typewriters (2022–Present)
