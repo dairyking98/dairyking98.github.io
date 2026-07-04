@@ -1,0 +1,399 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>3D-Printed Type Elements - Leonard Chau</title>
+<meta name="description" content="Parametric OpenSCAD type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, and Postal.">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+  <meta property="article:author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="3D-Printed Type Elements">
+<meta property="og:url" content="https://leonardchau.com/projects/type-elements/">
+
+
+  <meta property="og:description" content="Parametric OpenSCAD type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, and Postal.">
+
+
+
+  <meta property="og:image" content="https://leonardchau.com/assets/img/12.jpg">
+  
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-04T12:53:05-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/projects/type-elements/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/typewriter-collection/"
+                
+                
+              >Collection</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="3D-Printed Type Elements">
+    <meta itemprop="description" content="Since 2022 I’ve been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical “golf balls,” vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision resin, with per-machine dimensions and calibration values tracked in the Type-Elements repository. Machines below, roughly in the order I tackled them.">
+    <meta itemprop="datePublished" content="2026-07-04T12:53:05-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/projects/type-elements/" itemprop="url">3D-Printed Type Elements
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Since 2022 I’ve been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical “golf balls,” vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision resin, with per-machine dimensions and calibration values tracked in the <a href="https://github.com/dairyking98/Type-Elements">Type-Elements repository</a>. Machines below, roughly in the order I tackled them.</p>
+
+<h2 id="blickensderfer">Blickensderfer Typewheels</h2>
+
+<p>The first type element I ever attempted, done in collaboration with <strong>Brent Carter</strong>, who handled font design and digitization while I handled the 3D printing and mechanical engineering. Early prototypes were modeled in Fusion 360 — <a href="https://www.youtube.com/watch?v=fJSAW26kJwg">validated with outsourced resin prints in this video</a> — before I bought my own resin printer and switched to OpenSCAD, which handled the parametric draft-angle geometry far better than Fusion 360 could.</p>
+
+<p>The result: brand-new typewheels for Blickensderfer models 5, 6, 7, 8, 9, and the Home Blick, in both DHIATENSOR and QWERTY layouts, including typefaces never previously available for these machines — Steile Zierschrift, Goudy italic, and Script/Vogue. The project was <a href="https://typewriterrevolution.com/new-typewheels-for-the-blickensderfer-typewriter/">featured on Typewriter Revolution</a>.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>
+    <p>1909 Blickensderfer No. 5 (Serial: 133130)</p>
+  </li>
+  <li>
+    <p>1909 Blickensderfer No. 8 (Serial: 135255)</p>
+  </li>
+</ul>
+
+<h2 id="ibm-selectric">IBM Selectric Type Elements</h2>
+
+<p>The second attempt, starting with a Fusion 360 prototype — then shelved after another OpenSCAD Selectric model was released and I assumed the problem was already solved. It got reignited when a collector friend in Finland acquired a rare <strong>IBM Selectric Composer</strong> (a proportional/justified-type variant of the Selectric) and needed elements for it.</p>
+
+<p>That became a fully remote collaboration: I designed in OpenSCAD and generated STL files from the US, he printed and tested them in Finland, and we iterated on fitment and character quality through photos and feedback with neither of us having direct access to the other’s hardware. Once dialed in for the Composer, the system was generalized to work for standard Selectrics too — fully parametric, accepting any keyboard layout, any font, and any key arrangement.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>IBM Selectric II</li>
+</ul>
+
+<h2 id="bennett">Bennett Type Elements</h2>
+
+<p>The third project, and a different challenge from the previous two: Bennett Pocket Typewriters (c. 1910) use type elements made of vulcanized rubber, which is fragile and prone to cracking with age — original elements are scarce and often too damaged to use. Getting the geometry right took many OpenSCAD iterations, since the Bennett’s construction differs significantly from both the Blickensderfer and Selectric designs. The resin-printed result ended up more durable than the original rubber elements.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>
+    <p>1910-13 Bennett Pocket Typewriter (Serial: 14682)</p>
+  </li>
+  <li>
+    <p>1910-13 Bennett Pocket Typewriter (Serial: 18627)</p>
+  </li>
+</ul>
+
+<h2 id="helios-klimax">Helios Klimax Type Elements</h2>
+
+<p>The fourth, done for a collector friend in Germany rather than my own collection. The Helios Klimax is an unusual and rare German typewriter with its own mechanical quirks, so this was another back-and-forth collaboration — he supplied measurements, photos, and fitment feedback on his damaged original, and I iterated the OpenSCAD model remotely until it fit and printed correctly on his end.</p>
+
+<h2 id="hammond">Hammond Shuttles &amp; Index</h2>
+
+<p>Hammond typewriters print from a curved, two-row <strong>shuttle</strong> — a die-cast type bar arranged in an arc — rather than a typebar or wheel, and later models could swap shuttles to change typeface or language entirely. This directory covers the standard shuttle, two split-shuttle iterations (the Multiplex prints from two mirror-image halves that slide onto a central folder tube), the index variant, and a Glagolitic shuttle for the old Slavic script. I own two Hammond Multiplex machines myself, including one still waiting on a mathematical shuttle.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>
+    <p>1890 Hammond Model 1 (Serial: 15058)</p>
+  </li>
+  <li>
+    <p>1913-15 Hammond Multiplex (Serial: 224478)</p>
+  </li>
+  <li>
+    <p>1915 Hammond Multiplex (Serial: CC231416)</p>
+  </li>
+</ul>
+
+<h2 id="mignon">Mignon Index Elements</h2>
+
+<p>The AEG Mignon (models 2/3/4) is an index typewriter — instead of a keyboard, you guide a pointer over a printed character index and press a lever to print. The cylindrical index element supports 32+ languages through a shared layout system, so a new language is a matter of generating a new index rather than redesigning the mechanism.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>
+    <p>1925 Mignon No. 4 (Serial: 352222)</p>
+  </li>
+  <li>
+    <p>Mignon No. 4</p>
+  </li>
+</ul>
+
+<h2 id="postal">Postal Type Elements</h2>
+
+<p>A calibrated element for the Postal No. 3 (c. 1901–08) — one of which is in my own collection.</p>
+
+<p>Related typewriters in my <a href="/typewriter-collection/">collection</a>:</p>
+
+<ul>
+  <li>1901-08 Postal No. 3 (Serial: 14550)</li>
+</ul>
+
+<h2 id="process">Process</h2>
+
+<p>All of these use the same basic workflow: parametric modeling in OpenSCAD, high-precision resin 3D printing, and iterative fitment testing against the real mechanism — either in person or, for the Selectric Composer and Helios Klimax, entirely over email with collaborators on other continents.</p>
+
+<p>For inquiries about custom type elements or collaboration, reach out via email or <a href="https://instagram.com/blick_elements">Instagram (@blick_elements)</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-04T12:53:05-07:00">July 4, 2026</time></p>
+
+
+      </footer>
+
+      
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/projects/stability-commander/" class="pagination--pager" title="Stability COMmander">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

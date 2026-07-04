@@ -5,9 +5,9 @@ var store = [{
         "url": "/general/welcome/",
         "teaser": "/assets/img/welcome-thumb.jpg"
       },{
-        "title": "Building HPWriter - A Silent Digital Typewriter",
-        "excerpt":"I’ve been working on a project called HPWriter—a silent digital typewriter that prints on plain paper using an HP45 inkjet cartridge. It’s been one of those projects that started from a simple observation and grew into something I’m genuinely excited about building. The Problem That Started It All The inspiration...","categories": ["Projects"],
-        "tags": ["hpwriter","typewriter","electronics","engineering","projects"],
+        "title": "HPWriter - An Idea for a Silent Digital Typewriter",
+        "excerpt":"I’ve been kicking around an idea called HPWriter — a silent digital typewriter that would print on plain paper, possibly using an HP45 inkjet cartridge. Nothing here is built, committed, or even fully thought out yet; this is just the problem and the rough idea, written down so I don’t...","categories": ["Projects"],
+        "tags": ["hpwriter","typewriter","idea"],
         "url": "/projects/hpwriter-project/",
         "teaser": "/assets/img/9.jpg"
       },{
@@ -16,12 +16,6 @@ var store = [{
         "tags": ["phd","applications","graduate-school","academia","personal"],
         "url": "/general/phd-applications/",
         "teaser": "/assets/img/9.jpg"
-      },{
-        "title": "Music Visualizer - Instant Milkdrop in Your Browser",
-        "excerpt":"If you’re old enough to remember Winamp, you probably remember Milkdrop - that mesmerizing, psychedelic visualizer that turned your music into flowing, pulsing, mind-bending graphics. It was (and still is) absolutely dope. Why Milkdrop is Cool Milkdrop was created by Ryan Geiss back in 2001, and it quickly became the...","categories": ["Projects"],
-        "tags": ["music","visualizer","webgl","butterchurn","milkdrop"],
-        "url": "/projects/music-visualizer/",
-        "teaser": null
       },{
         "title": "MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter",
         "excerpt":"On December 2, 2025, I had the privilege of attending “MingKwai, Rediscovered” at Stanford University—a symposium exploring the origins, history, and lasting impact of one of the most revolutionary (and perhaps underappreciated) inventions in the history of Chinese information technology: the MingKwai Chinese Typewriter. A Remarkable Discovery The story begins...","categories": ["typewriters","history","events"],
@@ -53,47 +47,17 @@ var store = [{
         "url": "/projects/analog-voltmeter-clock/",
         "teaser": "/assets/img/12.jpg"
       },{
-        "title": "Bennett Type Elements",
-        "excerpt":"Overview I developed 3D-printed replacement type elements for the Bennett Pocket Typewriter using OpenSCAD and high-precision resin 3D printing. This project was born from my acquisition of a Bennett Pocket Typewriter with the specific desire to recreate the type elements, as the original vulcanized rubber type elements are frequently lost...","categories": ["3d type elements"],
-        "tags": [],
-        "url": "/projects/bennett-type-elements/",
-        "teaser": "/assets/img/12.jpg"
-      },{
-        "title": "Blickensderfer Typewheels",
-        "excerpt":"Overview I collaborated with Brent Carter to design and manufacture brand-new, interchangeable typewheels for Blickensderfer typewriters using precision 3D printing technology. This project brings new life to machines that have been “obsolete” for nearly a century, creating replacement parts that are not only functional but also introduce typefaces never before...","categories": ["3d type elements"],
-        "tags": [],
-        "url": "/projects/blickensderfer-typewheels/",
-        "teaser": "/assets/img/12.jpg"
-      },{
         "title": "Self-Propelled Wall Leaper",
         "excerpt":"This project was completed for my Intro to Engineering course in November 2022, under Professor Khandani. The challenge was to create a device from scratch that is self-propelled and launches from one point to another 8 feet away while overcoming a 3-foot vertical height in the center. Video Demonstration 1:...","categories": ["school-project"],
         "tags": [],
         "url": "/projects/cad-project-self-propelled-wall-leaper/",
         "teaser": "/assets/img/12.jpg"
       },{
-        "title": "FluorCam",
-        "excerpt":"FluorCam is a low-cost, open-source fluorescence and IR dark-field microscope system based on RoboCam. The system achieves fluorescence imaging comparable to commercial microscopes at a fraction of the cost, making advanced imaging accessible for research and education. Project Overview FluorCam adapts the RoboCam platform for fluorescence imaging: Coaxial Optics: Specialized...","categories": ["school-project"],
-        "tags": [],
-        "url": "/projects/fluorcam/",
-        "teaser": "/assets/img/12.jpg"
-      },{
-        "title": "Helios Klimax Type Elements",
-        "excerpt":"Overview I collaborated with a collector friend in Germany to design and manufacture 3D-printed replacement type elements for the Helios Klimax Typewriter, an unusual typewriter from Germany. This project involved extensive back-and-forth design and iteration to create a successful type element that restores functionality to this rare machine. Development History...","categories": ["3d type elements"],
-        "tags": [],
-        "url": "/projects/helios-klimax-type-elements/",
-        "teaser": "/assets/img/12.jpg"
-      },{
-        "title": "HPWriter - Silent Digital Typewriter",
-        "excerpt":"A modern, silent typewriter that prints on plain paper using an HP45 inkjet cartridge. This project explores a practical “digital typewriter” that behaves like a real appliance — no operating system, no laptop required. Project Overview HPWriter is designed to solve the problem of noisy, distracting typewriters in classroom settings,...","categories": ["personal-project"],
+        "title": "HPWriter - Silent Digital Typewriter (Concept)",
+        "excerpt":"HPWriter is an idea I’m kicking around, not a built project yet — nothing about the design is committed or thought out in detail. This page is a placeholder for the concept so I remember to come back to it. The Idea A distraction-free writing device that behaves like an...","categories": ["personal-project"],
         "tags": [],
         "url": "/projects/hpwriter/",
         "teaser": null
-      },{
-        "title": "IBM Selectric Type Elements",
-        "excerpt":"Overview I developed a fully parametric OpenSCAD system for creating 3D-printed type elements for IBM Selectric typewriters. This project began with initial prototypes in Fusion360, was temporarily abandoned, and then reignited through collaboration with a collector in Finland who owns a rare IBM Selectric Composer. The final system can generate...","categories": ["3d type elements"],
-        "tags": [],
-        "url": "/projects/ibm-selectric-type-elements/",
-        "teaser": "/assets/img/12.jpg"
       },{
         "title": "Large Laser Cut Vernier Caliper",
         "excerpt":"I designed and built a large-format vernier caliper as an educational tool that demonstrates precision measurement concepts at a scale that’s easy to see and understand. Design and CAD Created the caliper beam outline and bracket geometry in Fusion 360 Exported brackets as STL for printing; caliper outline as DXF...","categories": ["personal-project"],
@@ -102,7 +66,7 @@ var store = [{
         "teaser": "/assets/img/12.jpg"
       },{
         "title": "RoboCam",
-        "excerpt":"RoboCam is an automated camera control system that integrates Raspberry Pi camera hardware with 3D printer motion control for precise positioning and imaging automation. The system enables automated calibration, experiment execution, and camera control through a suite of Python scripts. Project Overview RoboCam provides a complete solution for automated imaging...","categories": ["school-project"],
+        "excerpt":"RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. FluorCam and StentorCam are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy,...","categories": ["school-project"],
         "tags": [],
         "url": "/projects/robocam/",
         "teaser": "/assets/img/12.jpg"
@@ -113,9 +77,9 @@ var store = [{
         "url": "/projects/stability-commander/",
         "teaser": "/assets/img/2026/stability-commander/cad-assembly.png"
       },{
-        "title": "StentorCam",
-        "excerpt":"StentorCam is an automated dark-field imaging platform based on the RoboCam system, specifically designed for studying Stentor coeruleus behavior and other biological imaging applications. The system extends RoboCam’s capabilities with well plate support and specialized features for biological research. Project Overview StentorCam builds upon the RoboCam foundation to provide: Well...","categories": ["school-project"],
+        "title": "3D-Printed Type Elements",
+        "excerpt":"Since 2022 I’ve been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical “golf balls,” vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision...","categories": ["3d type elements"],
         "tags": [],
-        "url": "/projects/stentorcam/",
+        "url": "/projects/type-elements/",
         "teaser": "/assets/img/12.jpg"
       }]

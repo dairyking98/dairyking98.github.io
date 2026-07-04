@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://leonardchau.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://leonardchau.com/" rel="alternate" type="text/html" /><updated>2026-07-04T12:09:45-07:00</updated><id>https://leonardchau.com/feed.xml</id><title type="html">Leonard Chau</title><subtitle>Mechanical Engineer, Maker &amp; Researcher — SF Bay Area</subtitle><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><entry><title type="html">Stability COMmander</title><link href="https://leonardchau.com/blog/2026/stability-commander/" rel="alternate" type="text/html" title="Stability COMmander" /><published>2026-05-08T12:00:00-07:00</published><updated>2026-05-08T12:00:00-07:00</updated><id>https://leonardchau.com/blog/2026/stability-commander</id><content type="html" xml:base="https://leonardchau.com/blog/2026/stability-commander/"><![CDATA[<p><strong>Stability COMmander</strong> is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://leonardchau.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://leonardchau.com/" rel="alternate" type="text/html" /><updated>2026-07-04T12:53:05-07:00</updated><id>https://leonardchau.com/feed.xml</id><title type="html">Leonard Chau</title><subtitle>Mechanical Engineer, Maker &amp; Researcher — SF Bay Area</subtitle><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><entry><title type="html">Stability COMmander</title><link href="https://leonardchau.com/blog/2026/stability-commander/" rel="alternate" type="text/html" title="Stability COMmander" /><published>2026-05-08T12:00:00-07:00</published><updated>2026-05-08T12:00:00-07:00</updated><id>https://leonardchau.com/blog/2026/stability-commander</id><content type="html" xml:base="https://leonardchau.com/blog/2026/stability-commander/"><![CDATA[<p><strong>Stability COMmander</strong> is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints.</p>
 
 <h2 id="my-contribution">My contribution</h2>
 
@@ -250,60 +250,7 @@ The prototype moved the project beyond digital simulation and gave the team a ph
 
 <p>The fact that this prototype was discovered in a New York basement and is now at Stanford, being studied and celebrated, feels like a fitting next chapter in the story of a machine that was ahead of its time. With ongoing research, document releases, and reproduction efforts on the horizon, we’re witnessing the beginning of a new phase in understanding and appreciating Lin Yutang’s groundbreaking work. His legacy continues to influence how we interact with technology today, even if most people don’t realize it.</p>
 
-<p>I’m grateful to have been able to attend this symposium and learn about this remarkable piece of history. The MingKwai deserves to be remembered not just as a typewriter, but as one of the foundational inventions of modern human-computer interaction. I look forward to seeing how the research, documentation, and reproductions continue to illuminate this important chapter in the history of technology.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="typewriters" /><category term="history" /><category term="events" /><category term="typewriter" /><category term="mingkwai" /><category term="lin-yutang" /><category term="chinese-typing" /><category term="stanford" /><category term="history" /><category term="technology" /><summary type="html"><![CDATA[Reflections on attending the MingKwai symposium at Stanford, exploring the history and impact of Lin Yutang's revolutionary Chinese typewriter prototype.]]></summary></entry><entry><title type="html">Music Visualizer - Instant Milkdrop in Your Browser</title><link href="https://leonardchau.com/projects/music-visualizer/" rel="alternate" type="text/html" title="Music Visualizer - Instant Milkdrop in Your Browser" /><published>2025-11-29T02:00:00-08:00</published><updated>2025-11-29T02:00:00-08:00</updated><id>https://leonardchau.com/projects/music-visualizer</id><content type="html" xml:base="https://leonardchau.com/projects/music-visualizer/"><![CDATA[<p>If you’re old enough to remember Winamp, you probably remember Milkdrop - that mesmerizing, psychedelic visualizer that turned your music into flowing, pulsing, mind-bending graphics. It was (and still is) absolutely dope.</p>
-
-<h2 id="why-milkdrop-is-cool">Why Milkdrop is Cool</h2>
-
-<p>Milkdrop was created by Ryan Geiss back in 2001, and it quickly became the gold standard for music visualization. What made it special wasn’t just the pretty graphics - it was the <strong>reactive</strong> nature. Every beat, every frequency, every moment in the music directly influenced the visuals. The community created thousands of presets, each one a unique artistic interpretation of how music should look.</p>
-
-<p>The visualizations weren’t just random patterns - they were carefully crafted equations that responded to audio analysis in real-time. Bass frequencies might create pulsing waves, treble could trigger particle explosions, and the overall energy would drive the color shifts and motion. It was like watching your music come alive.</p>
-
-<h2 id="why-this-app-is-really-cool">Why This App is Really Cool</h2>
-
-<p>Fast forward to 2025, and we have <a href="https://github.com/jberg/butterchurn">Butterchurn</a> - a WebGL port of Milkdrop that runs entirely in your browser. No installation, no plugins, no hassle. Just open a page and you’re visualizing music.</p>
-
-<p>I’ve built a <a href="/music-visualizer/">music visualizer app</a> that brings this experience to:</p>
-
-<ul>
-  <li><strong>Internet Radio</strong> - Stream from stations like Bassdrive, Sub FM, DNBRadio, and more. Just pick a station and watch the visuals react to the live stream.</li>
-  <li><strong>Your Own Music</strong> - Upload audio files and visualize your personal collection.</li>
-  <li><strong>System Audio</strong> - Capture audio from any tab or application on your computer.</li>
-  <li><strong>Microphone Input</strong> - Visualize whatever you’re hearing through your mic.</li>
-</ul>
-
-<p>The best part? It’s <strong>instant</strong>. No downloads, no setup, no waiting. It’s browser-ready and works on any modern device with WebGL 2.0 support.</p>
-
-<h2 id="technical-details">Technical Details</h2>
-
-<p>The app uses:</p>
-
-<ul>
-  <li><strong>Butterchurn</strong> - A WebGL 2.0 implementation of the Milkdrop visualizer engine</li>
-  <li><strong>Web Audio API</strong> - For real-time audio analysis and frequency data</li>
-  <li><strong>ES Modules</strong> - Modern JavaScript for clean, maintainable code</li>
-  <li><strong>500+ Presets</strong> - All the classic Milkdrop presets plus community contributions</li>
-</ul>
-
-<p>The visualizer analyzes audio in real-time, extracting frequency data and audio levels that drive the preset equations. Each preset is a mathematical expression that transforms this audio data into visual output - waves, particles, colors, and motion all synchronized to your music.</p>
-
-<h2 id="try-it-out">Try It Out</h2>
-
-<p>Check out the <a href="/music-visualizer/">Music Visualizer</a> page. Pick a radio station, upload a track, or connect your microphone. The presets auto-advance every 10 seconds (configurable), or you can manually browse through them. Hit fullscreen, let the UI fade away, and just watch your music come alive.</p>
-
-<p>It’s like having Winamp’s Milkdrop in 2025, but better - because it works everywhere, with everything, instantly.</p>
-
-<h2 id="credits--acknowledgments">Credits &amp; Acknowledgments</h2>
-
-<p>This project wouldn’t be possible without the amazing work of these creators:</p>
-
-<ul>
-  <li><strong>jberg</strong> - Creator of <a href="https://github.com/jberg/butterchurn">Butterchurn</a>, the WebGL port that makes Milkdrop work in modern browsers</li>
-  <li><strong>Ryan Geiss</strong> - Original creator of Milkdrop, the revolutionary music visualizer</li>
-  <li><strong>Nullsoft</strong> - Creators of Winamp, the legendary music player that brought Milkdrop to millions</li>
-  <li><strong>All the amazing preset creators</strong> - The community artists who’ve created thousands of beautiful presets over the years. Special thanks to <strong>Flexi</strong> and all the other talented preset creators who continue to push the boundaries of audio visualization art.</li>
-</ul>
-
-<p>Thank you for making this incredible technology accessible and inspiring countless hours of visual music experiences!</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="Projects" /><category term="music" /><category term="visualizer" /><category term="webgl" /><category term="butterchurn" /><category term="milkdrop" /><summary type="html"><![CDATA[A browser-ready music visualizer powered by Butterchurn, bringing the classic Milkdrop experience to internet radio and your own music files.]]></summary></entry><entry><title type="html">My PhD Application Journey</title><link href="https://leonardchau.com/general/phd-applications/" rel="alternate" type="text/html" title="My PhD Application Journey" /><published>2025-11-24T02:00:00-08:00</published><updated>2025-11-24T02:00:00-08:00</updated><id>https://leonardchau.com/general/phd-applications</id><content type="html" xml:base="https://leonardchau.com/general/phd-applications/"><![CDATA[<p>I’m currently in the midst of applying to PhD programs, and I wanted to share a bit about my experience so far. This process has been both challenging and enlightening, and I thought it might be helpful (or at least interesting) to document what I’ve been going through.</p>
+<p>I’m grateful to have been able to attend this symposium and learn about this remarkable piece of history. The MingKwai deserves to be remembered not just as a typewriter, but as one of the foundational inventions of modern human-computer interaction. I look forward to seeing how the research, documentation, and reproductions continue to illuminate this important chapter in the history of technology.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="typewriters" /><category term="history" /><category term="events" /><category term="typewriter" /><category term="mingkwai" /><category term="lin-yutang" /><category term="chinese-typing" /><category term="stanford" /><category term="history" /><category term="technology" /><summary type="html"><![CDATA[Reflections on attending the MingKwai symposium at Stanford, exploring the history and impact of Lin Yutang's revolutionary Chinese typewriter prototype.]]></summary></entry><entry><title type="html">My PhD Application Journey</title><link href="https://leonardchau.com/general/phd-applications/" rel="alternate" type="text/html" title="My PhD Application Journey" /><published>2025-11-24T02:00:00-08:00</published><updated>2025-11-24T02:00:00-08:00</updated><id>https://leonardchau.com/general/phd-applications</id><content type="html" xml:base="https://leonardchau.com/general/phd-applications/"><![CDATA[<p>I’m currently in the midst of applying to PhD programs, and I wanted to share a bit about my experience so far. This process has been both challenging and enlightening, and I thought it might be helpful (or at least interesting) to document what I’ve been going through.</p>
 
 <h2 id="where-im-at">Where I’m At</h2>
 
@@ -355,94 +302,23 @@ The prototype moved the project beyond digital simulation and gave the team a ph
 
 <p>If you’re also going through this process, know that you’re not alone. It’s stressful, time-consuming, and sometimes frustrating, but it’s also an opportunity to really think about what you want and where you’re going. And it’s okay to not be completely certain—I’m certainly not.</p>
 
-<p>I’ll update this post once I have more to share—whether that’s after submissions, after decisions, or whenever something interesting happens in this journey.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="General" /><category term="phd" /><category term="applications" /><category term="graduate-school" /><category term="academia" /><category term="personal" /><summary type="html"><![CDATA[An update on my PhD application process and what I've learned along the way.]]></summary></entry><entry><title type="html">Building HPWriter - A Silent Digital Typewriter</title><link href="https://leonardchau.com/projects/hpwriter-project/" rel="alternate" type="text/html" title="Building HPWriter - A Silent Digital Typewriter" /><published>2025-11-20T02:00:00-08:00</published><updated>2025-11-20T02:00:00-08:00</updated><id>https://leonardchau.com/projects/hpwriter-project</id><content type="html" xml:base="https://leonardchau.com/projects/hpwriter-project/"><![CDATA[<p>I’ve been working on a project called <strong>HPWriter</strong>—a silent digital typewriter that prints on plain paper using an HP45 inkjet cartridge. It’s been one of those projects that started from a simple observation and grew into something I’m genuinely excited about building.</p>
+<p>I’ll update this post once I have more to share—whether that’s after submissions, after decisions, or whenever something interesting happens in this journey.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="General" /><category term="phd" /><category term="applications" /><category term="graduate-school" /><category term="academia" /><category term="personal" /><summary type="html"><![CDATA[An update on my PhD application process and what I've learned along the way.]]></summary></entry><entry><title type="html">HPWriter - An Idea for a Silent Digital Typewriter</title><link href="https://leonardchau.com/projects/hpwriter-project/" rel="alternate" type="text/html" title="HPWriter - An Idea for a Silent Digital Typewriter" /><published>2025-11-20T02:00:00-08:00</published><updated>2025-11-20T02:00:00-08:00</updated><id>https://leonardchau.com/projects/hpwriter-project</id><content type="html" xml:base="https://leonardchau.com/projects/hpwriter-project/"><![CDATA[<p>I’ve been kicking around an idea called <strong>HPWriter</strong> — a silent digital typewriter that would print on plain paper, possibly using an HP45 inkjet cartridge. Nothing here is built, committed, or even fully thought out yet; this is just the problem and the rough idea, written down so I don’t lose it.</p>
 
 <h2 id="the-problem-that-started-it-all">The Problem That Started It All</h2>
 
-<p>The inspiration for HPWriter came from a very specific frustration: I love typewriters, but they’re loud. Really loud. And while that satisfying <em>clack-clack-clack</em> is part of the charm when you’re typing at home, it becomes a problem in shared spaces—classrooms, libraries, coffee shops, anywhere you want to focus but don’t want to disturb everyone around you.</p>
+<p>I love typewriters, but they’re loud. That satisfying <em>clack-clack-clack</em> is part of the charm at home, but it’s a problem in shared spaces — classrooms, libraries, coffee shops, anywhere you want to focus without disturbing everyone around you.</p>
 
-<p>There are quieter alternatives—thermal paper typewriters exist, and they’re much quieter than mechanical typewriters. But they come with significant drawbacks: the paper can be hard to find, it’s temperature-sensitive (text can fade or darken with heat), and most concerningly, thermal paper often contains BPA and other chemicals that can be toxic. Plus, thermal paper typewriters are outdated technology, built on systems that are no longer in active development.</p>
+<p>There are quieter alternatives. Thermal paper typewriters exist, but the paper is hard to find, fades or darkens with heat, and often contains BPA. The Freewrite offers distraction-free writing, but it doesn’t produce paper — everything stays digital, and for me there’s something important about physical output you can hold or file away without a device to read it.</p>
 
-<p>There’s also the Freewrite, a digital silent typewriter that offers distraction-free writing. But it doesn’t produce paper output—everything stays digital. For me, there’s something important about having physical output you can hold, file away, or share without needing a device to read it.</p>
+<p>At the same time, I’ve noticed how distracting modern devices can be — students with laptops or iPads get pulled away by notifications and apps. There’s something appealing about a device that does one thing well: lets you write, without distractions, and produces real output.</p>
 
-<p>At the same time, I’ve noticed how distracting modern devices can be. When I see students in class with laptops or iPads, they’re often pulled away by notifications, apps, and the endless possibilities of the internet. There’s something to be said for a device that does one thing well: lets you write, without distractions, and produces real output you can hold in your hands.</p>
+<h2 id="the-rough-idea">The Rough Idea</h2>
 
-<h2 id="what-i-wanted-to-build">What I Wanted to Build</h2>
+<p>Combine the focus of a typewriter, the silence of modern electronics, and real ink on plain paper, in something that behaves like a simple appliance rather than a computer. An HP45 inkjet cartridge is one option I’m considering for the printing mechanism, since it’s cheap, refillable, and reasonably well-documented for hobbyist control — but that’s about as far as the thinking has gone. The electronics, mechanical design, and overall feasibility are all still open questions.</p>
 
-<p>I wanted to create something that combined the best of both worlds:</p>
+<h2 id="where-this-stands">Where This Stands</h2>
 
-<ul>
-  <li><strong>The focus of a typewriter</strong> - No operating system, no apps, no notifications. Just you and your words.</li>
-  <li><strong>The silence of modern electronics</strong> - Quiet enough to use anywhere without bothering others.</li>
-  <li><strong>Real ink on paper</strong> - Not a screen, not thermal paper, but actual ink on standard paper that will last.</li>
-  <li><strong>The simplicity of an appliance</strong> - Instant boot, no setup, just plug in a keyboard and start typing.</li>
-</ul>
-
-<p>HPWriter is my attempt to build exactly that.</p>
-
-<h2 id="why-hp45-inkjet">Why HP45 Inkjet?</h2>
-
-<p>The choice to use an HP45 inkjet cartridge might seem unusual, but it’s actually perfect for this application. HP45 cartridges are:</p>
-
-<ul>
-  <li><strong>Readily available</strong> - You can find them anywhere, and they’re relatively inexpensive.</li>
-  <li><strong>Refillable</strong> - HP45 cartridges can be refilled, which reduces waste and long-term costs, aligning with the serviceable design philosophy.</li>
-  <li><strong>High quality</strong> - They produce crisp, permanent text on standard paper.</li>
-  <li><strong>Well-documented</strong> - There’s existing work on controlling these cartridges, which makes the engineering challenge more approachable.</li>
-  <li><strong>Compact</strong> - The cartridge is small enough to fit in a portable device.</li>
-  <li><strong>Uses standard paper</strong> - Unlike thermal paper typewriters, HPWriter uses plain paper that’s easy to find, won’t fade with temperature, and doesn’t contain toxic chemicals.</li>
-</ul>
-
-<p>The technical challenge of generating the microsecond firing pulses needed to control the inkjet nozzles is interesting, but it’s a solvable problem with modern microcontrollers.</p>
-
-<h2 id="the-design-philosophy">The Design Philosophy</h2>
-
-<p>From the beginning, I’ve been thinking about HPWriter as a long-lived, serviceable device. I’m using:</p>
-
-<ul>
-  <li><strong>ESP32-S3 microcontroller</strong> - Modern, capable, and well-supported.</li>
-  <li><strong>NEMA-14 stepper motors with TMC drivers</strong> - Quiet, precise motion control.</li>
-  <li><strong>Modular design</strong> - Components that can be replaced or upgraded.</li>
-  <li><strong>Open-source everything</strong> - All the code, schematics, and documentation will be available.</li>
-</ul>
-
-<p>This isn’t meant to be a disposable gadget. I want something that could last for years, that you could repair yourself, and that would become a reliable tool for focused writing.</p>
-
-<h2 id="where-this-fits">Where This Fits</h2>
-
-<p>I see HPWriter being useful in several scenarios:</p>
-
-<ul>
-  <li><strong>Classrooms and libraries</strong> - Silent enough to use without disturbing others.</li>
-  <li><strong>Focus writing sessions</strong> - No internet means no distractions.</li>
-  <li><strong>Journaling and personal writing</strong> - Physical output provides a tangible record.</li>
-  <li><strong>Field research</strong> - Battery-powered portability for on-site note-taking.</li>
-  <li><strong>Creative writing</strong> - A dedicated device for deep work.</li>
-</ul>
-
-<p>It’s not trying to replace laptops or tablets—it’s trying to fill a specific niche where you want to write, you want physical output, and you want to do it quietly and without distractions.</p>
-
-<h2 id="the-journey-so-far">The Journey So Far</h2>
-
-<p>Building HPWriter has been a learning experience. I’ve had to dive deep into:</p>
-
-<ul>
-  <li>Inkjet cartridge control and timing</li>
-  <li>Stepper motor control and quiet operation</li>
-  <li>USB keyboard and flash drive interfacing</li>
-  <li>Text editing and print buffer management</li>
-  <li>Mechanical design for paper handling</li>
-</ul>
-
-<p>Each piece has its own challenges, but that’s part of what makes the project interesting. It’s at the intersection of mechanical engineering, electronics, and software—exactly the kind of work I love doing.</p>
-
-<h2 id="whats-next">What’s Next</h2>
-
-<p>The project is still very much in development. I’m working through the mechanical design, refining the electronics, and building out the software. The <a href="https://github.com/dairyking98/HPWriter">HPWriter repository</a> has all the current work, and I’m documenting the process as I go.</p>
-
-<p>I’m excited to see where this goes. There’s something appealing about building a tool that does one thing really well, and I think HPWriter has the potential to be exactly that—a silent, focused writing device that produces real, tangible output.</p>
-
-<p>If you’re interested in following along, check out the <a href="/projects/">project page</a> or the <a href="https://github.com/dairyking98/HPWriter">GitHub repository</a>. I’ll be sharing updates as the project progresses.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="Projects" /><category term="hpwriter" /><category term="typewriter" /><category term="electronics" /><category term="engineering" /><category term="projects" /><summary type="html"><![CDATA[Why I'm building HPWriter, a silent digital typewriter that prints on plain paper, and what inspired this project.]]></summary></entry><entry><title type="html">Welcome to My Engineering Blog</title><link href="https://leonardchau.com/general/welcome/" rel="alternate" type="text/html" title="Welcome to My Engineering Blog" /><published>2025-02-10T02:00:00-08:00</published><updated>2025-02-10T02:00:00-08:00</updated><id>https://leonardchau.com/general/welcome</id><content type="html" xml:base="https://leonardchau.com/general/welcome/"><![CDATA[<p>Welcome to my engineering blog and portfolio!</p>
+<p>This is idea-stage only — no prototype, no finalized design, no timeline. If it turns into a real build, I’ll post actual progress instead of speculation.</p>]]></content><author><name>Leonard Chau</name><email>leonard.chau@yahoo.com</email></author><category term="Projects" /><category term="hpwriter" /><category term="typewriter" /><category term="idea" /><summary type="html"><![CDATA[An early, unbuilt idea for a silent digital typewriter that would print on plain paper, and the problem that inspired it.]]></summary></entry><entry><title type="html">Welcome to My Engineering Blog</title><link href="https://leonardchau.com/general/welcome/" rel="alternate" type="text/html" title="Welcome to My Engineering Blog" /><published>2025-02-10T02:00:00-08:00</published><updated>2025-02-10T02:00:00-08:00</updated><id>https://leonardchau.com/general/welcome</id><content type="html" xml:base="https://leonardchau.com/general/welcome/"><![CDATA[<p>Welcome to my engineering blog and portfolio!</p>
 
 <p>This site is built with <a href="https://jekyllrb.com/">Jekyll</a>, a static site generator. I’ll be using this space to:</p>
 
