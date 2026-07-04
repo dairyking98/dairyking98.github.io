@@ -1,0 +1,337 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>RoboCam - Leonard Chau</title>
+<meta name="description" content="RoboCam system for automated camera control and 3D printer integration">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+  <meta property="article:author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="RoboCam">
+<meta property="og:url" content="https://leonardchau.com/projects/robocam/">
+
+
+  <meta property="og:description" content="RoboCam system for automated camera control and 3D printer integration">
+
+
+
+  <meta property="og:image" content="https://leonardchau.com/assets/img/12.jpg">
+  
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-04T12:09:45-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/projects/robocam/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="RoboCam">
+    <meta itemprop="description" content="RoboCam is an automated camera control system that integrates Raspberry Pi camera hardware with 3D printer motion control for precise positioning and imaging automation. The system enables automated calibration, experiment execution, and camera control through a suite of Python scripts.">
+    <meta itemprop="datePublished" content="2026-07-04T12:09:45-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/projects/robocam/" itemprop="url">RoboCam
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>RoboCam is an automated camera control system that integrates Raspberry Pi camera hardware with 3D printer motion control for precise positioning and imaging automation. The system enables automated calibration, experiment execution, and camera control through a suite of Python scripts.</p>
+
+<h2 id="project-overview">Project Overview</h2>
+
+<p>RoboCam provides a complete solution for automated imaging workflows, combining:</p>
+
+<ul>
+  <li><strong>Raspberry Pi Camera Integration</strong>: High-resolution imaging with Picamera2</li>
+  <li><strong>3D Printer Motion Control</strong>: G-code based positioning via serial communication</li>
+  <li><strong>Calibration System</strong>: 4-corner calibration for precise positioning</li>
+  <li><strong>Experiment Automation</strong>: GUI-based experiment design and execution</li>
+  <li><strong>Laser Control</strong>: GPIO-controlled laser for illumination</li>
+</ul>
+
+<h2 id="key-features">Key Features</h2>
+
+<ul>
+  <li><strong>Automated Calibration</strong>: 4-corner calibration system for accurate positioning</li>
+  <li><strong>Experiment Automation</strong>: GUI application for designing and running automated experiments</li>
+  <li><strong>Preview System</strong>: Real-time preview and alignment checking</li>
+  <li><strong>Video Recording</strong>: Automated video capture with configurable settings</li>
+  <li><strong>Motion Control</strong>: Integration with Marlin/RepRap compatible 3D printers via G-code</li>
+  <li><strong>Camera Control</strong>: Full control over camera settings, resolution, and frame rates</li>
+</ul>
+
+<h2 id="technical-implementation">Technical Implementation</h2>
+
+<p>The RoboCam system is built using:</p>
+
+<ul>
+  <li><strong>Python</strong> for automation and control</li>
+  <li><strong>Picamera2</strong> for Raspberry Pi camera interface</li>
+  <li><strong>Tkinter</strong> for GUI applications</li>
+  <li><strong>Serial Communication</strong> for 3D printer control</li>
+  <li><strong>GPIO</strong> for laser control</li>
+</ul>
+
+<h2 id="repository">Repository</h2>
+
+<p>The complete source code, documentation, and setup instructions are available in the <a href="https://github.com/dairyking98/RoboCam-Suite">RoboCam-Suite repository</a>. The project website is hosted at <a href="https://dairyking98.github.io/RoboCam-Suite/">dairyking98.github.io/RoboCam-Suite</a>.</p>
+
+<hr />
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-04T12:09:45-07:00">July 4, 2026</time></p>
+
+
+      </footer>
+
+      
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/projects/large-laser-cut-vernier-caliper/" class="pagination--pager" title="Large Laser Cut Vernier Caliper">Previous</a>
+    
+    
+      <a href="/projects/stability-commander/" class="pagination--pager" title="Stability COMmander">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,3 +1,5621 @@
-!function(){function t(e,i,n){function r(o,a){if(!i[o]){if(!e[o]){var h="function"==typeof require&&require;if(!a&&h)return h(o,!0);if(s)return s(o,!0);var u=new Error("Cannot find module '"+o+"'");throw u.code="MODULE_NOT_FOUND",u}var c=i[o]={exports:{}};e[o][0].call(c.exports,function(t){return r(e[o][1][t]||t)},c,c.exports,t,e,i,n)}return i[o].exports}for(var s="function"==typeof require&&require,o=0;o<n.length;o++)r(n[o]);return r}return t}()({1:[function(t,e){let i=t("point-in-polygon");class n{constructor(t,e){this.p5=t,this.polygon=e}contains(t){return i(t,this.polygon)}draw(){this.p5.beginShape();for(let t=0;t<this.polygon.length;t++)this.p5.vertex(this.polygon[t][0],this.polygon[t][1]);this.p5.vertex(this.polygon[0][0],this.polygon[0][1]),this.p5.endShape()}}e.exports=n},{"point-in-polygon":11}],2:[function(t,e){e.exports={MinDistance:2,MaxDistance:5,RepulsionRadius:15,MaxVelocity:.1,AttractionForce:.2,RepulsionForce:.6,AlignmentForce:.55,NodeInjectionInterval:100,DrawNodes:!1,TraceMode:!1,DebugMode:!1,FillMode:!1,DrawHistory:!1,HistoryCaptureInterval:1e3,MaxHistorySize:10,UseBrownianMotion:!0,BrownianMotionRange:.01,ShowBounds:!0,TimeScale:1}},{}],3:[function(t,e){let i=t("vec2"),n=t("./Defaults");class r extends i{constructor(t,e,r,s=n,o=!1,a,h){super(e,r),this.p5=t,this.isFixed=o,this.settings=Object.assign({},n,s),this.velocity=0,this.nextPosition=new i(e,r),this.minDistance=a||s.MinDistance,this.repulsionRadius=h||s.RepulsionRadius}iterate(){this.isFixed||(this.x=this.p5.lerp(this.x,this.nextPosition.x,this.settings.MaxVelocity),this.y=this.p5.lerp(this.y,this.nextPosition.y,this.settings.MaxVelocity))}draw(){this.isFixed?this.p5.ellipse(this.x,this.y,20):this.p5.ellipse(this.x,this.y,5)}}e.exports=r},{"./Defaults":2,vec2:21}],4:[function(t,e){class i{constructor(t){this.world=t,this.getElements(),this.loadInitialValues(),this.setupValueChangeListeners()}getElements(){this.minDistanceRange=document.querySelector(".parameters-content #min-distance"),this.minDistanceValue=document.querySelector(".parameters-content #min-distance + .value"),this.maxDistanceRange=document.querySelector(".parameters-content #max-distance"),this.maxDistanceValue=document.querySelector(".parameters-content #max-distance + .value"),this.repulsionRadiusRange=document.querySelector(".parameters-content #repulsion-radius"),this.repulsionRadiusValue=document.querySelector(".parameters-content #repulsion-radius + .value"),this.attractionForceRange=document.querySelector(".parameters-content #attraction-force"),this.attractionForceValue=document.querySelector(".parameters-content #attraction-force + .value"),this.repulsionForceRange=document.querySelector(".parameters-content #repulsion-force"),this.repulsionForceValue=document.querySelector(".parameters-content #repulsion-force + .value"),this.alignmentForceRange=document.querySelector(".parameters-content #alignment-force"),this.alignmentForceValue=document.querySelector(".parameters-content #alignment-force + .value"),this.drawNodesCheckbox=document.querySelector(".parameters-content #draw-nodes"),this.fillModeCheckbox=document.querySelector(".parameters-content #fill-mode"),this.debugModeCheckbox=document.querySelector(".parameters-content #debug-mode"),this.traceModeCheckbox=document.querySelector(".parameters-content #trace-mode"),this.drawHistoryCheckbox=document.querySelector(".parameters-content #draw-history"),this.historyIntervalRange=document.querySelector(".parameters-content #history-capture-interval"),this.historyIntervalValue=document.querySelector(".parameters-content #history-capture-interval + .value"),this.maxHistoryRange=document.querySelector(".parameters-content #max-history-size"),this.maxHistoryValue=document.querySelector(".parameters-content #max-history-size + .value"),this.brownianMotionCheckbox=document.querySelector(".parameters-content #use-brownian-motion"),this.brownianMotionRange=document.querySelector(".parameters-content #brownian-motion-range"),this.brownianMotionValue=document.querySelector(".parameters-content #brownian-motion-range + .value"),this.timeScaleRange=document.querySelector(".parameters-content #time-scale"),this.timeScaleValue=document.querySelector(".parameters-content #time-scale + .value")}loadInitialValues(){this.minDistanceRange.value=this.world.settings.MinDistance,this.minDistanceValue.innerHTML=this.world.settings.MinDistance,this.maxDistanceRange.value=this.world.settings.MaxDistance,this.maxDistanceValue.innerHTML=this.world.settings.MaxDistance,this.repulsionRadiusRange.value=this.world.settings.RepulsionRadius,this.repulsionRadiusValue.innerHTML=this.world.settings.RepulsionRadius,this.attractionForceRange.value=this.world.settings.AttractionForce,this.attractionForceValue.innerHTML=this.world.settings.AttractionForce,this.repulsionForceRange.value=this.world.settings.RepulsionForce,this.repulsionForceValue.innerHTML=this.world.settings.RepulsionForce,this.alignmentForceRange.value=this.world.settings.AlignmentForce,this.alignmentForceValue.innerHTML=this.world.settings.AlignmentForce,this.drawNodesCheckbox.checked=this.world.settings.DrawNodes,this.fillModeCheckbox.checked=this.world.settings.FillMode,this.debugModeCheckbox.checked=this.world.settings.DebugMode,this.traceModeCheckbox.checked=this.world.settings.TraceMode,this.drawHistoryCheckbox.checked=this.world.settings.DrawHistory,this.historyIntervalRange.value=this.world.settings.HistoryCaptureInterval,this.historyIntervalValue.innerHTML=this.world.settings.HistoryCaptureInterval,this.maxHistoryRange.value=this.world.settings.MaxHistorySize,this.maxHistoryValue.innerHTML=this.world.settings.MaxHistorySize,this.brownianMotionCheckbox.checked=this.world.settings.UseBrownianMotion,this.brownianMotionRange.value=this.world.settings.BrownianMotionRange,this.brownianMotionValue.innerHTML=this.world.settings.BrownianMotionRange,this.timeScaleRange.value=this.world.settings.TimeScale,this.timeScaleValue.innerHTML=this.world.settings.TimeScale+"x"}setupValueChangeListeners(){this.minDistanceRange.addEventListener("input",this.minDistanceChangeHandler.bind(this)),this.maxDistanceRange.addEventListener("input",this.maxDistanceChangeHandler.bind(this)),this.repulsionRadiusRange.addEventListener("input",this.repulsionRadiusChangeHandler.bind(this)),this.attractionForceRange.addEventListener("input",this.attractionForceChangeHandler.bind(this)),this.repulsionForceRange.addEventListener("input",this.repulsionForceChangeHandler.bind(this)),this.alignmentForceRange.addEventListener("input",this.alignmentForceChangeHandler.bind(this)),this.drawNodesCheckbox.addEventListener("change",this.drawNodesChangeHandler.bind(this)),this.fillModeCheckbox.addEventListener("change",this.fillModeChangeHandler.bind(this)),this.debugModeCheckbox.addEventListener("change",this.debugModeChangeHandler.bind(this)),this.traceModeCheckbox.addEventListener("change",this.traceModeChangeHandler.bind(this)),this.drawHistoryCheckbox.addEventListener("change",this.drawHistoryChangeHandler.bind(this)),this.historyIntervalRange.addEventListener("input",this.historyIntervalChangeHandler.bind(this)),this.maxHistoryRange.addEventListener("input",this.maxHistoryChangeHandler.bind(this)),this.brownianMotionCheckbox.addEventListener("change",this.brownianMotionChangeHandler.bind(this)),this.brownianMotionRange.addEventListener("input",this.brownianMotionRangeChangeHandler.bind(this)),this.timeScaleRange.addEventListener("input",this.timeScaleChangeHandler.bind(this))}minDistanceChangeHandler(t){this.minDistanceValue.innerHTML=t.target.value,this.world.setMinDistance(t.target.value)}maxDistanceChangeHandler(t){this.maxDistanceValue.innerHTML=t.target.value,this.world.setMaxDistance(t.target.value)}repulsionRadiusChangeHandler(t){this.repulsionRadiusValue.innerHTML=t.target.value,this.world.setRepulsionRadius(t.target.value)}attractionForceChangeHandler(t){this.attractionForceValue.innerHTML=t.target.value,this.world.setAttractionForce(t.target.value)}repulsionForceChangeHandler(t){this.repulsionForceValue.innerHTML=t.target.value,this.world.setRepulsionForce(t.target.value)}alignmentForceChangeHandler(t){this.alignmentForceValue.innerHTML=t.target.value,this.world.setAlignmentForce(t.target.value)}drawNodesChangeHandler(t){this.world.setDrawNodes(t.target.checked)}fillModeChangeHandler(t){this.world.setFillMode(t.target.checked)}debugModeChangeHandler(t){this.world.setDebugMode(t.target.checked)}traceModeChangeHandler(t){this.world.setTraceMode(t.target.checked)}drawHistoryChangeHandler(t){this.world.setDrawHistory(t.target.checked)}historyIntervalChangeHandler(t){this.historyIntervalValue.innerHTML=t.target.value,this.world.setHistoryCaptureInterval(parseFloat(t.target.value))}maxHistoryChangeHandler(t){this.maxHistoryValue.innerHTML=t.target.value,this.world.setMaxHistorySize(parseInt(t.target.value))}brownianMotionChangeHandler(t){this.world.setBrownianMotion(t.target.checked)}brownianMotionRangeChangeHandler(t){this.brownianMotionValue.innerHTML=t.target.value}timeScaleChangeHandler(t){const e=parseFloat(t.target.value);this.timeScaleValue.innerHTML=e+"x",this.world.setTimeScale(e);const i=document.querySelector(".speed-indicator .speed-value"),n=document.querySelector(".speed-indicator");i&&(i.innerHTML=e+"x"),n&&(1===e?n.classList.add("hidden"):n.classList.remove("hidden"))}}e.exports=i},{}],5:[function(t,e){let i=t("rbush-knn"),n=t("./Node"),r=t("./Bounds"),s=t("./Defaults");class o{constructor(t,e,i=s,n=!1,r=!1,o={h:0,s:0,b:0,a:255},a={h:0,s:0,b:0,a:255},h={h:0,s:0,b:255,a:255},u={h:0,s:0,b:255,a:255}){this.p5=t,this.nodes=e,this.isClosed=n,this.settings=Object.assign({},s,i),this.bounds=r,this.injectionMode="RANDOM",this.lastNodeInjectTime=0,this.nodeHistory=[],this.drawNodes=this.settings.DrawNodes,this.traceMode=this.settings.TraceMode,this.debugMode=this.settings.DebugMode,this.fillMode=this.settings.FillMode,this.useBrownianMotion=this.settings.UseBrownianMotion,this.drawHistory=this.settings.DrawHistory,this.showBounds=this.settings.ShowBounds,this.fillColor=o,this.strokeColor=a,this.invertedFillColor=h,this.invertedStrokeColor=u}iterate(t){for(let[e,i]of this.nodes.entries())this.useBrownianMotion&&this.applyBrownianMotion(e),this.applyAttraction(e),this.applyRepulsion(e,t),this.applyAlignment(e),this.applyBounds(e),i.iterate();this.splitEdges(),this.pruneNodes(),this.p5.millis()-this.lastNodeInjectTime>=this.settings.NodeInjectionInterval&&(this.injectNode(),this.lastNodeInjectTime=this.p5.millis())}applyBrownianMotion(t){this.nodes[t].x+=this.p5.random(-this.settings.BrownianMotionRange/2,this.settings.BrownianMotionRange/2),this.nodes[t].y+=this.p5.random(-this.settings.BrownianMotionRange/2,this.settings.BrownianMotionRange/2)}applyAttraction(t){let e,i,r=this.getConnectedNodes(t);null!=r.nextNode&&r.nextNode instanceof n&&!this.nodes[t].isFixed&&(e=this.nodes[t].distance(r.nextNode),i=Math.min(this.nodes[t].minDistance,r.nextNode.minDistance),e>i&&(this.nodes[t].nextPosition.x=this.p5.lerp(this.nodes[t].nextPosition.x,r.nextNode.x,this.settings.AttractionForce),this.nodes[t].nextPosition.y=this.p5.lerp(this.nodes[t].nextPosition.y,r.nextNode.y,this.settings.AttractionForce))),null!=r.previousNode&&r.previousNode instanceof n&&!this.nodes[t].isFixed&&(e=this.nodes[t].distance(r.previousNode),i=Math.min(this.nodes[t].minDistance,r.previousNode.minDistance),e>i&&(this.nodes[t].nextPosition.x=this.p5.lerp(this.nodes[t].nextPosition.x,r.previousNode.x,this.settings.AttractionForce),this.nodes[t].nextPosition.y=this.p5.lerp(this.nodes[t].nextPosition.y,r.previousNode.y,this.settings.AttractionForce)))}applyRepulsion(t,e){var n=i(e,this.nodes[t].x,this.nodes[t].y,void 0,void 0,this.nodes[t].repulsionRadius*this.nodes[t].repulsionRadius);for(let e of n)this.nodes[t].nextPosition.x=this.p5.lerp(this.nodes[t].x,e.x,-this.settings.RepulsionForce),this.nodes[t].nextPosition.y=this.p5.lerp(this.nodes[t].y,e.y,-this.settings.RepulsionForce)}applyAlignment(t){let e=this.getConnectedNodes(t);if(null!=e.previousNode&&e.previousNode instanceof n&&null!=e.nextNode&&e.nextNode instanceof n&&!this.nodes[t].isFixed){let i=this.getMidpointNode(e.previousNode,e.nextNode);this.nodes[t].nextPosition.x=this.p5.lerp(this.nodes[t].nextPosition.x,i.x,this.settings.AlignmentForce),this.nodes[t].nextPosition.y=this.p5.lerp(this.nodes[t].nextPosition.y,i.y,this.settings.AlignmentForce)}}splitEdges(){for(let[t,e]of this.nodes.entries()){let i=this.getConnectedNodes(t);if(null!=i.previousNode&&i.previousNode instanceof n&&e.distance(i.previousNode)>=this.settings.MaxDistance){let n=this.getMidpointNode(e,i.previousNode);0==t?this.nodes.splice(this.nodes.length,0,n):this.nodes.splice(t,0,n)}}}pruneNodes(){for(let[t,e]of this.nodes.entries()){let i=this.getConnectedNodes(t);null!=i.previousNode&&i.previousNode instanceof n&&e.distance(i.previousNode)<this.settings.MinDistance&&(0==t?this.nodes[this.nodes.length-1].isFixed||this.nodes.splice(this.nodes.length-1,1):this.nodes[t-1].isFixed||this.nodes.splice(t-1,1))}}injectNode(){switch(this.injectionMode){case"RANDOM":this.injectRandomNode();break;case"CURVATURE":this.injectNodeByCurvature()}}injectRandomNode(){let t=parseInt(this.p5.random(1,this.nodes.length)),e=this.getConnectedNodes(t);if(null!=e.previousNode&&e.previousNode instanceof n&&null!=e.nextNode&&e.nextNode instanceof n&&this.nodes[t].distance(e.previousNode)>this.settings.MinDistance){let i=this.getMidpointNode(this.nodes[t],e.previousNode);this.nodes.splice(t,0,i)}}injectNodeByCurvature(){for(let[t,e]of this.nodes.entries()){let i=this.getConnectedNodes(t);if(null==i.previousNode||null==i.nextNode)continue;let n=i.nextNode.y-i.previousNode.y,r=i.nextNode.x-i.previousNode.x;if(Math.round(Math.abs(Math.atan(n/r)))>20){let n=this.getMidpointNode(e,i.previousNode),r=this.getMidpointNode(e,i.nextNode);0==t?(this.nodes.splice(this.nodes.length-1,0,n),this.nodes.splice(0,0,r)):this.nodes.splice(t,1,n,r)}}}applyBounds(t){null!=this.bounds&&this.bounds instanceof r&&!this.bounds.contains([this.nodes[t].x,this.nodes[t].y])&&(this.nodes[t].isFixed=!0)}getConnectedNodes(t){let e,i;return 0==t&&this.isClosed?e=this.nodes[this.nodes.length-1]:t>=1&&(e=this.nodes[t-1]),t==this.nodes.length-1&&this.isClosed?i=this.nodes[0]:t<=this.nodes.length-1&&(i=this.nodes[t+1]),{previousNode:e,nextNode:i}}getNodeAtDistance(t,e){if(0===e)return this.nodes[t];let i=t+e;return this.isClosed?(i=(i%this.nodes.length+this.nodes.length)%this.nodes.length,this.nodes[i]):i>=0&&i<this.nodes.length?this.nodes[i]:void 0}getPathDistance(t,e){if(t===e)return 0;const i=Math.abs(e-t);if(this.isClosed){const t=this.nodes.length-i;return Math.min(i,t)}return i}getMidpointNode(t,e,i=!1){return new n(this.p5,(t.x+e.x)/2,(t.y+e.y)/2,this.settings,i)}draw(){const t="dark"===document.documentElement.getAttribute("data-theme"),e=t?this.invertedFillColor:this.fillColor,i=t?this.invertedStrokeColor:this.strokeColor;this.drawHistory&&this.drawPreviousEdges(),this.showBounds&&null!=this.bounds&&this.bounds instanceof r&&this.drawBounds(),this.fillMode&&this.isClosed?this.p5.fill(e.h,e.s,e.b,e.a):this.p5.noFill(),this.p5.stroke(i.h,i.s,i.b,i.a),this.drawCurrentEdges(),this.drawNodes&&this.drawCurrentNodes()}drawCurrentEdges(){this.drawEdges(this.nodes)}drawPreviousEdges(){const t="dark"===document.documentElement.getAttribute("data-theme")?this.invertedStrokeColor:this.strokeColor;for(let[e,i]of this.nodeHistory.entries())this.p5.stroke(t.h,t.s,t.b,30*e),this.drawEdges(i)}drawEdges(t){this.debugMode||this.p5.beginShape();for(let e=0;e<t.length;e++)this.debugMode?e>0&&(this.traceMode?this.p5.stroke(this.p5.map(e,0,t.length-1,0,255,!0),255,255,2):this.p5.stroke(this.p5.map(e,0,t.length-1,0,255,!0),255,255,255),this.p5.line(t[e-1].x,t[e-1].y,t[e].x,t[e].y)):this.p5.vertex(t[e].x,t[e].y);this.isClosed&&(this.debugMode?this.p5.line(t[t.length-1].x,t[t.length-1].y,t[0].x,t[0].y):this.p5.vertex(t[0].x,t[0].y)),this.debugMode||this.p5.endShape()}drawCurrentNodes(){this.p5.noStroke();"dark"===document.documentElement.getAttribute("data-theme")?this.p5.fill(255):this.p5.fill(0);for(let[t,e]of this.nodes.entries())this.debugMode&&this.p5.fill(this.p5.map(t,0,this.nodes.length-1,0,255,!0),255,255,255),e.draw()}drawBounds(){"dark"===document.documentElement.getAttribute("data-theme")?this.p5.stroke(100):this.p5.stroke(200),this.p5.noFill(),this.bounds.draw()}addToHistory(){this.nodeHistory.length==this.settings.MaxHistorySize&&this.nodeHistory.shift(),this.nodeHistory.push(Object.assign([],JSON.parse(JSON.stringify(this.nodes))))}moveTo(t,e){for(let i of this.nodes)i.x+=t,i.y+=e}scale(t){for(let e of this.nodes)e.x*=t,e.y*=t}addNode(t){this.nodes.push(t)}toArray(){let t=[];for(let e of this.nodes)t.push([e.x,e.y]);return t}getTraceMode(){return this.traceMode}setMinDistance(t){this.settings.MinDistance=t;for(let e of this.nodes)e.minDistance=t}setMaxDistance(t){this.settings.MaxDistance=t;for(let e of this.nodes)e.maxDistance=t}setRepulsionRadius(t){this.settings.RepulsionRadius=t;for(let e of this.nodes)e.repulsionRadius=t}setAttractionForce(t){this.settings.AttractionForce=t}setRepulsionForce(t){this.settings.RepulsionForce=t}setAlignmentForce(t){this.settings.AlignmentForce=t}setTraceMode(t){this.traceMode=t}setBounds(t){this.bounds=t}toggleTraceMode(){this.setTraceMode(!this.getTraceMode())}}e.exports=o},{"./Bounds":1,"./Defaults":2,"./Node":3,"rbush-knn":13}],6:[function(t,e){let i=t("./Node"),n=t("./Path"),r=t("./Defaults"),{SVGPathData:s}=t("svg-pathdata");class o{constructor(){}static loadFromObject(t,e,i=r){return this.load(t,document.getElementById(e),i)}static load(t,e,o=r){this.settings=Object.assign({},r,o);let a=e.querySelectorAll("path"),h=new n(t,[],this.settings,!0),u=[];for(let e of a){let r=new s(e.getAttribute("d")),o={x:0,y:0};for(let[e,a]of r.commands.entries()){switch(a.type){case s.MOVE_TO:case s.LINE_TO:h.addNode(new i(t,a.x,a.y,this.settings));break;case s.HORIZ_LINE_TO:h.addNode(new i(t,a.x,o.y,this.settings));break;case s.VERT_LINE_TO:h.addNode(new i(t,o.x,a.y,this.settings));break;case s.CLOSE_PATH:u.push(h),h=new n(t,[],this.settings,!0),h.setInvertedColors(!0)}if(e==r.commands.length-1&&a.type!=s.CLOSE_PATH){let e=h.nodes[0];h.nodes[h.nodes.length-1].distance(e)<.1?h.isClosed=!0:h.isClosed=!1,u.push(h),h=new n(t,[],this.settings,!0)}a.hasOwnProperty("x")&&(o.x=a.x),a.hasOwnProperty("y")&&(o.y=a.y)}}return u}}e.exports=o},{"./Defaults":2,"./Node":3,"./Path":5,"svg-pathdata":15}],7:[function(t,e){e.exports={MinDistance:2,MaxDistance:5,RepulsionRadius:15,MaxVelocity:.1,AttractionForce:.2,RepulsionForce:.6,AlignmentForce:.55,NodeInjectionInterval:100,DrawNodes:!1,TraceMode:!1,InvertedColors:!1,DebugMode:!1,FillMode:!1,DrawHistory:!1,ShowBounds:!0,UseBrownianMotion:!0,BrownianMotionRange:.01,TimeScale:1}},{}],8:[function(t,e){let i=t("rbush"),n=t("svg-points").toPath,r=t("file-saver").saveAs,s=t("./Defaults");class o{constructor(t,e=s,n=[]){this.p5=t,this.paths=n,this.paused=!1,this.settings=Object.assign({},s,e);const r=localStorage.getItem("differential-growth-timeScale");null!==r&&(this.settings.TimeScale=parseFloat(r)),this.traceMode=this.settings.TraceMode,this.drawNodes=this.settings.DrawNodes,this.debugMode=this.settings.DebugMode,this.fillMode=this.settings.FillMode,this.drawHistory=this.settings.DrawHistory,this.useBrownianMotion=this.settings.UseBrownianMotion,this.showBounds=this.settings.ShowBounds,this.timeScale=this.settings.TimeScale,this.tree=i(9,[".x",".y",".x",".y"]),this.buildTree(),this.historyIntervalId=null,this.startHistoryCapture()}startHistoryCapture(){null!==this.historyIntervalId&&clearInterval(this.historyIntervalId);let t=this;this.historyIntervalId=setInterval(function(){t.addToHistory()},this.settings.HistoryCaptureInterval)}iterate(){if(this.prunePaths(),this.buildTree(),null!=this.paths&&this.paths instanceof Array&&this.paths.length>0&&!this.paused)for(let t of this.paths)t.iterate(this.tree)}draw(){this.traceMode||this.drawBackground();for(let t of this.paths)t.draw()}drawBackground(){this.p5.clear()}buildTree(){this.tree.clear();for(let t of this.paths)this.tree.load(t.nodes)}addPath(t){t.drawNodes=this.drawNodes,t.debugMode=this.debugMode,t.fillMode=this.fillMode,t.useBrownianMotion=this.useBrownianMotion,t.setTraceMode(this.traceMode),this.paths.push(t)}addPaths(t){for(let e of t)this.addPath(e)}addToHistory(){if(!this.paused)for(let t of this.paths)t.addToHistory()}prunePaths(){for(let t=0;t<this.paths.length;t++)this.paths[t].nodes.length<=1&&this.paths.splice(t,1)}export(){let t=document.createElementNS("http://www.w3.org/2000/svg","svg");t.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns","http://www.w3.org/2000/svg"),t.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),t.setAttribute("width",window.innerWidth),t.setAttribute("height",window.innerHeight),t.setAttribute("viewBox","0 0 "+window.innerWidth+" "+window.innerHeight);const e="dark"===document.documentElement.getAttribute("data-theme");let i=document.createElementNS("http://www.w3.org/2000/svg","rect");i.setAttribute("width",window.innerWidth),i.setAttribute("height",window.innerHeight),i.setAttribute("fill",e?"#000000":"#ffffff"),t.appendChild(i);for(let e of this.paths){if(this.drawHistory)for(let i of e.nodeHistory)t.appendChild(this.createPathElFromNodes(i,e.isClosed));t.appendChild(this.createPathElFromNodes(e.nodes),e.isClosed)}const n='<?xml version="1.0" encoding="UTF-8" standalone="no"?>',s=(new XMLSerializer).serializeToString(t),o=new Blob([n,s],{type:"image/svg+xml;"});r(o,"differential-growth-"+Date.now()+".svg")}createPathElFromNodes(t,e){let i="";for(let[e,n]of t.entries())i+=n.x+","+n.y,e<t.length-1&&(i+=" ");let r=n({type:"polyline",points:i});e&&(r+=" Z");const s="dark"===document.documentElement.getAttribute("data-theme")?"white":"black";let o=document.createElementNS("http://www.w3.org/2000/svg","path");return o.setAttribute("d",r),o.setAttribute("style",`fill: none; stroke: ${s}; stroke-width: 1`),o}clearPaths(){this.paths=[]}pause(){this.paused=!0}unpause(){this.paused=!1}getDrawNodes(){return this.drawNodes}getDebugMode(){return this.debugMode}getFillMode(){return this.fillMode}getDrawHistory(){return this.drawHistory}getDrawBounds(){return this.showBounds}setMinDistance(t){this.settings.MinDistance=t;for(let e of this.paths)e.setMinDistance(t)}setMaxDistance(t){this.settings.MaxDistance=t;for(let e of this.paths)e.setMaxDistance(t)}setRepulsionRadius(t){this.settings.RepulsionRadius=t;for(let e of this.paths)e.setRepulsionRadius(t)}setAttractionForce(t){this.settings.AttractionForce=t;for(let e of this.paths)e.setAttractionForce(t)}setRepulsionForce(t){this.settings.RepulsionForce=t;for(let e of this.paths)e.setRepulsionForce(t)}setAlignmentForce(t){this.settings.AlignmentForce=t;for(let e of this.paths)e.setAlignmentForce(t)}setDrawNodes(t){this.drawBackground();for(let e of this.paths)e.drawNodes=t,e.draw();this.drawNodes=t,this.settings.DrawNodes=t}setDebugMode(t){this.drawBackground();for(let e of this.paths)e.debugMode=t,e.draw();this.debugMode=t,this.settings.DebugMode=t}setFillMode(t){this.drawBackground();for(let e of this.paths)e.fillMode=t,e.draw();this.fillMode=t,this.settings.FillMode=t}setDrawHistory(t){this.drawBackground();for(let e of this.paths)e.drawHistory=t,e.draw();this.drawHistory=t,this.settings.DrawHistory=t}setTraceMode(t){this.traceMode=t,this.settings.TraceMode=t,this.drawBackground();for(let e of this.paths)e.traceMode=t}setDrawBounds(t){this.drawBackground();for(let e of this.paths)e.showBounds=t,e.draw();this.showBounds=t}setBrownianMotion(t){this.useBrownianMotion=t,this.settings.UseBrownianMotion=t;for(let e of this.paths)e.useBrownianMotion=t}setHistoryCaptureInterval(t){this.settings.HistoryCaptureInterval=t,this.startHistoryCapture()}setMaxHistorySize(t){this.settings.MaxHistorySize=t;for(let e of this.paths)e.settings.MaxHistorySize=t}setTimeScale(t){this.timeScale=t,this.settings.TimeScale=t,localStorage.setItem("differential-growth-timeScale",t.toString())}getTimeScale(){return this.timeScale}toggleDrawNodes(){this.setDrawNodes(!this.getDrawNodes())}toggleTraceMode(){this.traceMode=!this.traceMode,this.drawBackground();for(let t of this.paths)t.toggleTraceMode(),t.draw()}toggleDebugMode(){this.setDebugMode(!this.getDebugMode())}toggleFillMode(){this.setFillMode(!this.getFillMode())}toggleDrawHistory(){this.setDrawHistory(!this.getDrawHistory())}toggleDrawBounds(){this.setDrawBounds(!this.getDrawBounds())}togglePause(){this.paused?this.unpause():this.pause()}}e.exports=o},{"./Defaults":2,"file-saver":10,rbush:14,"svg-points":16}],9:[function(t){function e(){console.log("initPlayground called, document.readyState:",document.readyState),"loading"===document.readyState?(console.log("DOM still loading, waiting for DOMContentLoaded"),document.addEventListener("DOMContentLoaded",function(){console.log("DOMContentLoaded fired, creating p5 instance"),setTimeout(function(){new p5(L)},100)})):(console.log("DOM already ready, creating p5 instance"),setTimeout(function(){new p5(L)},100))}let i,n,r=t("./Node"),s=t("./Path"),o=t("./World"),a=t("./SVGLoader"),h=t("./Settings"),u=t("./ParametersPanel"),c=[];const l=0,d=1,p=2;let f,y,m,g,v,x,w,M,T,b=l,N=10,O=!1,_=!1,S=document.querySelectorAll("button"),E=document.querySelector(".svgImportInput"),C=document.querySelector(".play"),A=document.querySelector(".modal"),R=null,D=document.querySelector(".speed-indicator .speed-value"),H=document.querySelector(".speed-indicator");const L=function(t){function e(t){for(let t of S)t.removeAttribute("aria-current");switch(t){case l:document.querySelector(".freehand").setAttribute("aria-current",!0);break;case d:document.querySelector(".rectangle").setAttribute("aria-current",!0);break;case p:document.querySelector(".circle").setAttribute("aria-current",!0)}b=t}function L(t){const i=t.currentTarget;i.classList.contains("freehand")?e(l):i.classList.contains("rectangle")?e(d):i.classList.contains("circle")&&e(p)}function k(){E.click()}function I(){i.clearPaths(),i.drawBackground()}function F(){i.export()}function P(){i.togglePause();let t=C.querySelector(".icon"),e=C.querySelector(".text");i.paused?(t.classList.remove("fa-pause"),t.classList.add("fa-play"),e.innerHTML="Play"):(t.classList.remove("fa-play"),t.classList.add("fa-pause"),e.innerHTML="Pause")}function V(){w=document.querySelector(".keyboard"),U("keyboard-controls")}function q(){w=document.querySelector(".about"),U("about")}function B(){w=document.querySelector(".parameters"),U("parameters")}function U(t){let e=A.querySelectorAll(".modal-content > div:not(.close)");for(let t of e)t.classList.add("is-hidden");A.querySelector("."+t+"-content").classList.remove("is-hidden"),A.classList.add("is-visible"),R&&A.removeEventListener("click",R),R=function(t){if(_)return;A.querySelector(".modal-content").contains(t.target)||X()},A.addEventListener("click",R),A.querySelector(".close").addEventListener("click",X),A.addEventListener("keydown",function(e){"Escape"==e.key&&X()," "!=e.key&&"Spacebar"!=e.key||e.target.classList.contains("close")&&e.preventDefault(),"keyboard-controls"===t?"Tab"==e.key&&e.preventDefault():(M=A.querySelector(".first-focusable-element"),T=A.querySelector("."+t+"-content").querySelector(".last-focusable-element"),e.target==M&&"Tab"==e.key&&e.shiftKey?(e.preventDefault(),T.focus()):e.target!=T||"Tab"!=e.key||e.shiftKey||(e.preventDefault(),M.focus()))})}function X(){A.classList.remove("is-visible"),R&&(A.removeEventListener("click",R),R=null),w&&w.focus()}function Y(){localStorage.removeItem("differential-growth-timeScale"),window.location.reload()}function j(){let e=this.files[0];if("image/svg+xml"===e.type){let n=new FileReader;n.onload=function(){let e=(new DOMParser).parseFromString(n.result,"image/svg+xml"),r=a.load(t,e,h);i.addPaths(r),i.draw()},n.readAsText(e)}document.querySelector(".import").blur()}t.setup=function(){console.log("p5.setup called");const e=document.getElementById("p5-canvas");if(!e)return void console.error("p5-canvas container not found");console.log("Container found:",e);const n=window.innerWidth,r=window.innerHeight-60,s=t.createCanvas(n,r);console.log("Canvas created:",s,"size:",n,"x",r),s.parent("p5-canvas"),t.colorMode(t.HSB,255),t.rectMode(t.CENTER),t.smooth(),console.log("Canvas setup complete");try{i=new o(t,h),i.pause(),console.log("World created successfully");new u(i);console.log("ParametersPanel created successfully"),D&&(D.innerHTML=i.settings.TimeScale+"x",H&&(1===i.settings.TimeScale?H.classList.add("hidden"):H.classList.remove("hidden")))}catch(t){console.error("Error creating World or ParametersPanel:",t)}setTimeout(function(){const t=document.querySelector(".freehand"),e=document.querySelector(".rectangle"),i=document.querySelector(".circle");t&&t.addEventListener("click",L),e&&e.addEventListener("click",L),i&&i.addEventListener("click",L);const n=document.querySelector(".import"),r=document.querySelector(".reset"),s=document.querySelector(".export");n&&n.addEventListener("click",k),r&&r.addEventListener("click",I),s&&s.addEventListener("click",F);const o=document.querySelector(".play");o&&o.addEventListener("click",P);const a=document.querySelector(".keyboard"),h=document.querySelector(".about"),u=document.querySelector(".parameters");a&&a.addEventListener("click",V),h&&h.addEventListener("click",q),u&&u.addEventListener("click",B);const c=document.querySelector(".svgImportInput"),l=document.querySelector(".start"),d=document.querySelector(".reset-params");c&&c.addEventListener("change",j),l&&l.addEventListener("click",X),d&&d.addEventListener("click",Y),console.log("Event listeners attached"),console.log("Buttons found:",{freehand:!!t,rectangle:!!e,circle:!!i,play:!!o,keyboard:!!a})},200)},t.draw=function(){if(i&&!i.paused){const t=Math.floor(i.timeScale);for(let e=0;e<t;e++)i.iterate();i.draw()}},t.windowResized=function(){t.resizeCanvas(window.innerWidth,window.innerHeight-60),i&&i.drawBackground()},t.mousePressed=function(e){const n=document.querySelector(".modal.is-visible");if(n){const e=n.querySelector(".modal-content").getBoundingClientRect();if(t.mouseX>=e.left&&t.mouseX<=e.right&&t.mouseY>=e.top&&t.mouseY<=e.bottom)return}switch(e&&e.preventDefault(),console.log("mousePressed",t.mouseX,t.mouseY,"activeTool:",b),_=!0,b){case d:case p:if(!i.paused&&(console.log("mousePressed: Setting wasPlayingBeforeDrawing = true and pausing"),O=!0,i.pause(),C)){let t=C.querySelector(".icon"),e=C.querySelector(".text");t&&e&&(t.classList.remove("fa-pause"),t.classList.add("fa-play"),e.innerHTML="Play")}f=t.mouseX,y=t.mouseY}},t.mouseReleased=function(e){if(!i)return;const o=document.querySelector(".modal.is-visible");if(o){const e=o.querySelector(".modal-content").getBoundingClientRect();if(t.mouseX>=e.left&&t.mouseX<=e.right&&t.mouseY>=e.top&&t.mouseY<=e.bottom)return}switch(e&&e.preventDefault(),b){case l:if(t.mouseButton==t.LEFT){if(0==c.length)return;let e=!1,r=c[0];c[c.length-1].distance(r)<=N&&(e=!0),n=new s(t,c,i.settings,e),i.addPath(n),c=[]}break;case d:m=t.mouseX,g=t.mouseY,c.push(new r(t,f,y,i.settings)),c.push(new r(t,m,y,i.settings)),c.push(new r(t,m,g,i.settings)),c.push(new r(t,f,g,i.settings)),n=new s(t,c,i.settings,!0),i.addPath(n),c=[];break;case p:m=t.mouseX,g=t.mouseY,v=m-f,x=g-y;for(let e=0;e<360;e++)c.push(new r(t,f+v/2+v/2*Math.cos(e*Math.PI/180),y+x/2+x/2*Math.sin(e*Math.PI/180),i.settings));n=new s(t,c,i.settings,!0),i.addPath(n),c=[]}if(i.draw(),console.log("mouseReleased end: wasPlayingBeforeDrawing =",O),O&&(console.log("Auto-resuming playback"),i.unpause(),O=!1,C)){let t=C.querySelector(".icon"),e=C.querySelector(".text");t&&e&&(t.classList.remove("fa-play"),t.classList.add("fa-pause"),e.innerHTML="Pause")}setTimeout(()=>{_=!1},100)},t.mouseDragged=function(e){if(!i)return;const n=document.querySelector(".modal.is-visible");if(n){const e=n.querySelector(".modal-content").getBoundingClientRect();if(t.mouseX>=e.left&&t.mouseX<=e.right&&t.mouseY>=e.top&&t.mouseY<=e.bottom)return}if(e&&e.preventDefault(),_=!0,!i.paused&&(console.log("mouseDragged: Setting wasPlayingBeforeDrawing = true and pausing"),O=!0,i.pause(),C)){let t=C.querySelector(".icon"),e=C.querySelector(".text");t&&e&&(t.classList.remove("fa-pause"),t.classList.add("fa-play"),e.innerHTML="Play")}switch(i.draw(),b){case l:if(t.mouseButton==t.LEFT){if(c.push(new r(t,t.mouseX,t.mouseY,i.settings)),console.log("Freehand: added node",c.length,"at",t.mouseX,t.mouseY),c.length>0)for(let[e,i]of c.entries())e>0&&(t.stroke(0),t.line(c[e-1].x,c[e-1].y,i.x,i.y));let e=c[0];c[c.length-1].distance(e)<=N&&(t.fill(150),t.noStroke(),t.ellipseMode(t.CENTER),t.ellipse(c[0].x,c[0].y,2*N))}break;case d:
-t.mouseButton==t.LEFT&&(t.stroke(0),t.line(f,y,t.mouseX,y),t.line(t.mouseX,y,t.mouseX,t.mouseY),t.line(t.mouseX,t.mouseY,f,t.mouseY),t.line(f,t.mouseY,f,y));break;case p:t.mouseButton==t.LEFT&&null!=f&&null!=y&&(t.stroke(0),t.noFill(),t.ellipseMode(t.CORNERS),t.ellipse(f,y,t.mouseX,t.mouseY))}},t.keyReleased=function(e){switch(" "===t.key&&e&&e.preventDefault(),t.key){case"t":i.toggleTraceMode();break;case"n":i.toggleDrawNodes();break;case"r":i.clearPaths(),i.drawBackground();break;case" ":P();break;case"d":i.toggleDebugMode();break;case"f":i.toggleFillMode();break;case"h":i.toggleDrawHistory();break;case"s":i.export();break;case"b":i.toggleDrawBounds()}}};try{console.log("Differential growth bundle loaded"),e()}catch(t){console.error("FATAL ERROR in differential growth bundle:",t),console.error("Stack:",t.stack)}},{"./Node":3,"./ParametersPanel":4,"./Path":5,"./SVGLoader":6,"./Settings":7,"./World":8}],10:[function(t,e,i){(function(t){(function(){var n,r;n=this,r=function(){"use strict";function i(t,e){return void 0===e?e={autoBom:!1}:"object"!=typeof e&&(console.warn("Deprecated: Expected third argument to be a object"),e={autoBom:!e}),e.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(t.type)?new Blob(["\ufeff",t],{type:t.type}):t}function n(t,e,i){var n=new XMLHttpRequest;n.open("GET",t),n.responseType="blob",n.onload=function(){h(n.response,e,i)},n.onerror=function(){console.error("could not download file")},n.send()}function r(t){var e=new XMLHttpRequest;e.open("HEAD",t,!1);try{e.send()}catch(t){}return 200<=e.status&&299>=e.status}function s(t){try{t.dispatchEvent(new MouseEvent("click"))}catch(i){var e=document.createEvent("MouseEvents");e.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),t.dispatchEvent(e)}}var o="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof t&&t.global===t?t:void 0,a=o.navigator&&/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),h=o.saveAs||("object"!=typeof window||window!==o?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(t,e,i){var a=o.URL||o.webkitURL,h=document.createElement("a");e=e||t.name||"download",h.download=e,h.rel="noopener","string"==typeof t?(h.href=t,h.origin===location.origin?s(h):r(h.href)?n(t,e,i):s(h,h.target="_blank")):(h.href=a.createObjectURL(t),setTimeout(function(){a.revokeObjectURL(h.href)},4e4),setTimeout(function(){s(h)},0))}:"msSaveOrOpenBlob"in navigator?function(t,e,o){if(e=e||t.name||"download","string"!=typeof t)navigator.msSaveOrOpenBlob(i(t,o),e);else if(r(t))n(t,e,o);else{var a=document.createElement("a");a.href=t,a.target="_blank",setTimeout(function(){s(a)})}}:function(t,e,i,r){if((r=r||open("","_blank"))&&(r.document.title=r.document.body.innerText="downloading..."),"string"==typeof t)return n(t,e,i);var s="application/octet-stream"===t.type,h=/constructor/i.test(o.HTMLElement)||o.safari,u=/CriOS\/[\d]+/.test(navigator.userAgent);if((u||s&&h||a)&&"undefined"!=typeof FileReader){var c=new FileReader;c.onloadend=function(){var t=c.result;t=u?t:t.replace(/^data:[^;]*;/,"data:attachment/file;"),r?r.location.href=t:location=t,r=null},c.readAsDataURL(t)}else{var l=o.URL||o.webkitURL,d=l.createObjectURL(t);r?r.location=d:location.href=d,r=null,setTimeout(function(){l.revokeObjectURL(d)},4e4)}});o.saveAs=h.saveAs=h,void 0!==e&&(e.exports=h)},"function"==typeof define&&define.amd?define([],r):void 0!==i?r():(r(),n.FileSaver={})}).call(this)}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],11:[function(t,e){e.exports=function(t,e){for(var i=t[0],n=t[1],r=!1,s=0,o=e.length-1;s<e.length;o=s++){var a=e[s][0],h=e[s][1],u=e[o][0],c=e[o][1];h>n!=c>n&&i<(u-a)*(n-h)/(c-h)+a&&(r=!r)}return r}},{}],12:[function(t,e,i){!function(t,n){"object"==typeof i&&void 0!==e?e.exports=n():"function"==typeof define&&define.amd?define(n):t.quickselect=n()}(this,function(){"use strict";function t(t,i,r,s,o){e(t,i,r||0,s||t.length-1,o||n)}function e(t,n,r,s,o){for(;s>r;){if(s-r>600){var a=s-r+1,h=n-r+1,u=Math.log(a),c=.5*Math.exp(2*u/3),l=.5*Math.sqrt(u*c*(a-c)/a)*(h-a/2<0?-1:1);e(t,n,Math.max(r,Math.floor(n-h*c/a+l)),Math.min(s,Math.floor(n+(a-h)*c/a+l)),o)}var d=t[n],p=r,f=s;for(i(t,r,n),o(t[s],d)>0&&i(t,r,s);p<f;){for(i(t,p,f),p++,f--;o(t[p],d)<0;)p++;for(;o(t[f],d)>0;)f--}0===o(t[r],d)?i(t,r,f):i(t,++f,s),f<=n&&(r=f+1),n<=f&&(s=f-1)}}function i(t,e,i){var n=t[e];t[e]=t[i],t[i]=n}function n(t,e){return t<e?-1:t>e?1:0}return t})},{}],13:[function(t,e){"use strict";function i(t,e,i,s,a,h){for(var u,c,l,d,p=t.data,f=[],y=t.toBBox,m=new o(null,n);p;){for(u=0;u<p.children.length;u++)c=p.children[u],l=r(e,i,p.leaf?y(c):c),(!h||l<=h)&&m.push({node:c,isItem:p.leaf,dist:l});for(;m.length&&m.peek().isItem;)if(d=m.pop().node,a&&!a(d)||f.push(d),s&&f.length===s)return f;(p=m.pop())&&(p=p.node)}return f}function n(t,e){return t.dist-e.dist}function r(t,e,i){var n=s(t,i.minX,i.maxX),r=s(e,i.minY,i.maxY);return n*n+r*r}function s(t,e,i){return t<e?e-t:t<=i?0:t-i}var o=t("tinyqueue");e.exports=i,e.exports.default=i},{tinyqueue:20}],14:[function(t,e){"use strict";function i(t,e){if(!(this instanceof i))return new i(t,e);this._maxEntries=Math.max(4,t||9),this._minEntries=Math.max(2,Math.ceil(.4*this._maxEntries)),e&&this._initFormat(e),this.clear()}function n(t,e,i){if(!i)return e.indexOf(t);for(var n=0;n<e.length;n++)if(i(t,e[n]))return n;return-1}function r(t,e){s(t,0,t.children.length,e,t)}function s(t,e,i,n,r){r||(r=y(null)),r.minX=1/0,r.minY=1/0,r.maxX=-1/0,r.maxY=-1/0;for(var s,a=e;a<i;a++)s=t.children[a],o(r,t.leaf?n(s):s);return r}function o(t,e){return t.minX=Math.min(t.minX,e.minX),t.minY=Math.min(t.minY,e.minY),t.maxX=Math.max(t.maxX,e.maxX),t.maxY=Math.max(t.maxY,e.maxY),t}function a(t,e){return t.minX-e.minX}function h(t,e){return t.minY-e.minY}function u(t){return(t.maxX-t.minX)*(t.maxY-t.minY)}function c(t){return t.maxX-t.minX+(t.maxY-t.minY)}function l(t,e){return(Math.max(e.maxX,t.maxX)-Math.min(e.minX,t.minX))*(Math.max(e.maxY,t.maxY)-Math.min(e.minY,t.minY))}function d(t,e){var i=Math.max(t.minX,e.minX),n=Math.max(t.minY,e.minY),r=Math.min(t.maxX,e.maxX),s=Math.min(t.maxY,e.maxY);return Math.max(0,r-i)*Math.max(0,s-n)}function p(t,e){return t.minX<=e.minX&&t.minY<=e.minY&&e.maxX<=t.maxX&&e.maxY<=t.maxY}function f(t,e){return e.minX<=t.maxX&&e.minY<=t.maxY&&e.maxX>=t.minX&&e.maxY>=t.minY}function y(t){return{children:t,height:1,leaf:!0,minX:1/0,minY:1/0,maxX:-1/0,maxY:-1/0}}function m(t,e,i,n,r){for(var s,o=[e,i];o.length;)(i=o.pop())-(e=o.pop())<=n||(s=e+Math.ceil((i-e)/n/2)*n,g(t,s,e,i,r),o.push(e,s,s,i))}e.exports=i,e.exports.default=i;var g=t("quickselect");i.prototype={all:function(){return this._all(this.data,[])},search:function(t){var e=this.data,i=[],n=this.toBBox;if(!f(t,e))return i;for(var r,s,o,a,h=[];e;){for(r=0,s=e.children.length;r<s;r++)o=e.children[r],f(t,a=e.leaf?n(o):o)&&(e.leaf?i.push(o):p(t,a)?this._all(o,i):h.push(o));e=h.pop()}return i},collides:function(t){var e=this.data,i=this.toBBox;if(!f(t,e))return!1;for(var n,r,s,o,a=[];e;){for(n=0,r=e.children.length;n<r;n++)if(s=e.children[n],f(t,o=e.leaf?i(s):s)){if(e.leaf||p(t,o))return!0;a.push(s)}e=a.pop()}return!1},load:function(t){if(!t||!t.length)return this;if(t.length<this._minEntries){for(var e=0,i=t.length;e<i;e++)this.insert(t[e]);return this}var n=this._build(t.slice(),0,t.length-1,0);if(this.data.children.length)if(this.data.height===n.height)this._splitRoot(this.data,n);else{if(this.data.height<n.height){var r=this.data;this.data=n,n=r}this._insert(n,this.data.height-n.height-1,!0)}else this.data=n;return this},insert:function(t){return t&&this._insert(t,this.data.height-1),this},clear:function(){return this.data=y([]),this},remove:function(t,e){if(!t)return this;for(var i,r,s,o,a=this.data,h=this.toBBox(t),u=[],c=[];a||u.length;){if(a||(a=u.pop(),r=u[u.length-1],i=c.pop(),o=!0),a.leaf&&-1!==(s=n(t,a.children,e)))return a.children.splice(s,1),u.push(a),this._condense(u),this;o||a.leaf||!p(a,h)?r?(i++,a=r.children[i],o=!1):a=null:(u.push(a),c.push(i),i=0,r=a,a=a.children[0])}return this},toBBox:function(t){return t},compareMinX:a,compareMinY:h,toJSON:function(){return this.data},fromJSON:function(t){return this.data=t,this},_all:function(t,e){for(var i=[];t;)t.leaf?e.push.apply(e,t.children):i.push.apply(i,t.children),t=i.pop();return e},_build:function(t,e,i,n){var s,o=i-e+1,a=this._maxEntries;if(o<=a)return r(s=y(t.slice(e,i+1)),this.toBBox),s;n||(n=Math.ceil(Math.log(o)/Math.log(a)),a=Math.ceil(o/Math.pow(a,n-1))),(s=y([])).leaf=!1,s.height=n;var h,u,c,l,d=Math.ceil(o/a),p=d*Math.ceil(Math.sqrt(a));for(m(t,e,i,p,this.compareMinX),h=e;h<=i;h+=p)for(m(t,h,c=Math.min(h+p-1,i),d,this.compareMinY),u=h;u<=c;u+=d)l=Math.min(u+d-1,c),s.children.push(this._build(t,u,l,n-1));return r(s,this.toBBox),s},_chooseSubtree:function(t,e,i,n){for(var r,s,o,a,h,c,d,p;n.push(e),!e.leaf&&n.length-1!==i;){for(d=p=1/0,r=0,s=e.children.length;r<s;r++)h=u(o=e.children[r]),(c=l(t,o)-h)<p?(p=c,d=h<d?h:d,a=o):c===p&&h<d&&(d=h,a=o);e=a||e.children[0]}return e},_insert:function(t,e,i){var n=this.toBBox,r=i?t:n(t),s=[],a=this._chooseSubtree(r,this.data,e,s);for(a.children.push(t),o(a,r);e>=0&&s[e].children.length>this._maxEntries;)this._split(s,e),e--;this._adjustParentBBoxes(r,s,e)},_split:function(t,e){var i=t[e],n=i.children.length,s=this._minEntries;this._chooseSplitAxis(i,s,n);var o=this._chooseSplitIndex(i,s,n),a=y(i.children.splice(o,i.children.length-o));a.height=i.height,a.leaf=i.leaf,r(i,this.toBBox),r(a,this.toBBox),e?t[e-1].children.push(a):this._splitRoot(i,a)},_splitRoot:function(t,e){this.data=y([t,e]),this.data.height=t.height+1,this.data.leaf=!1,r(this.data,this.toBBox)},_chooseSplitIndex:function(t,e,i){var n,r,o,a,h,c,l,p;for(c=l=1/0,n=e;n<=i-e;n++)a=d(r=s(t,0,n,this.toBBox),o=s(t,n,i,this.toBBox)),h=u(r)+u(o),a<c?(c=a,p=n,l=h<l?h:l):a===c&&h<l&&(l=h,p=n);return p},_chooseSplitAxis:function(t,e,i){var n=t.leaf?this.compareMinX:a,r=t.leaf?this.compareMinY:h;this._allDistMargin(t,e,i,n)<this._allDistMargin(t,e,i,r)&&t.children.sort(n)},_allDistMargin:function(t,e,i,n){t.children.sort(n);var r,a,h=this.toBBox,u=s(t,0,e,h),l=s(t,i-e,i,h),d=c(u)+c(l);for(r=e;r<i-e;r++)a=t.children[r],o(u,t.leaf?h(a):a),d+=c(u);for(r=i-e-1;r>=e;r--)a=t.children[r],o(l,t.leaf?h(a):a),d+=c(l);return d},_adjustParentBBoxes:function(t,e,i){for(var n=i;n>=0;n--)o(e[n],t)},_condense:function(t){for(var e,i=t.length-1;i>=0;i--)0===t[i].children.length?i>0?(e=t[i-1].children).splice(e.indexOf(t[i]),1):this.clear():r(t[i],this.toBBox)},_initFormat:function(t){var e=["return a"," - b",";"];this.compareMinX=new Function("a","b",e.join(t[0])),this.compareMinY=new Function("a","b",e.join(t[1])),this.toBBox=new Function("a","return {minX: a"+t[0]+", minY: a"+t[1]+", maxX: a"+t[2]+", maxY: a"+t[3]+"};")}}},{quickselect:12}],15:[function(t,e,i){var n,r;n=this,r=function(t){"use strict";function e(t,e){function i(){this.constructor=t}l(t,e),t.prototype=null===e?Object.create(e):(i.prototype=e.prototype,new i)}function i(t,e){var i=t[0],n=t[1];return[i*Math.cos(e)-n*Math.sin(e),i*Math.sin(e)+n*Math.cos(e)]}function n(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];for(var i=0;i<t.length;i++)if("number"!=typeof t[i])throw new Error("assertNumbers arguments["+i+"] is not a number. "+typeof t[i]+" == typeof "+t[i]);return!0}function r(t,e,n){t.lArcFlag=0===t.lArcFlag?0:1,t.sweepFlag=0===t.sweepFlag?0:1;var r=t.rX,s=t.rY,o=t.x,a=t.y;r=Math.abs(t.rX),s=Math.abs(t.rY);var h=i([(e-o)/2,(n-a)/2],-t.xRot/180*d),u=h[0],c=h[1],l=Math.pow(u,2)/Math.pow(r,2)+Math.pow(c,2)/Math.pow(s,2);1<l&&(r*=Math.sqrt(l),s*=Math.sqrt(l)),t.rX=r,t.rY=s;var p=Math.pow(r,2)*Math.pow(c,2)+Math.pow(s,2)*Math.pow(u,2),f=(t.lArcFlag!==t.sweepFlag?1:-1)*Math.sqrt(Math.max(0,(Math.pow(r,2)*Math.pow(s,2)-p)/p)),y=r*c/s*f,m=-s*u/r*f,g=i([y,m],t.xRot/180*d);t.cX=g[0]+(e+o)/2,t.cY=g[1]+(n+a)/2,t.phi1=Math.atan2((c-m)/s,(u-y)/r),t.phi2=Math.atan2((-c-m)/s,(-u-y)/r),0===t.sweepFlag&&t.phi2>t.phi1&&(t.phi2-=2*d),1===t.sweepFlag&&t.phi2<t.phi1&&(t.phi2+=2*d),t.phi1*=180/d,t.phi2*=180/d}function s(t,e,i){n(t,e,i);var r=t*t+e*e-i*i;if(0>r)return[];if(0===r)return[[t*i/(t*t+e*e),e*i/(t*t+e*e)]];var s=Math.sqrt(r);return[[(t*i+e*s)/(t*t+e*e),(e*i-t*s)/(t*t+e*e)],[(t*i-e*s)/(t*t+e*e),(e*i+t*s)/(t*t+e*e)]]}function o(t,e,i){return(1-i)*t+i*e}function a(t,e,i,n){return t+Math.cos(n/180*d)*e+Math.sin(n/180*d)*i}function h(t,e,i,n){var r=e-t,s=i-e,o=3*r+3*(n-i)-6*s,a=6*(s-r),h=3*r;return Math.abs(o)<1e-6?[-h/a]:function(t,e,i){void 0===i&&(i=1e-6);var n=t*t/4-e;if(n<-i)return[];if(n<=i)return[-t/2];var r=Math.sqrt(n);return[-t/2-r,-t/2+r]}(a/o,h/o,1e-6)}function u(t,e,i,n,r){var s=1-r;return t*(s*s*s)+e*(3*s*s*r)+i*(3*s*r*r)+n*(r*r*r)}function c(t){var e="";Array.isArray(t)||(t=[t]);for(var i=0;i<t.length;i++){var n=t[i];if(n.type===w.CLOSE_PATH)e+="z";else if(n.type===w.HORIZ_LINE_TO)e+=(n.relative?"h":"H")+n.x;else if(n.type===w.VERT_LINE_TO)e+=(n.relative?"v":"V")+n.y;else if(n.type===w.MOVE_TO)e+=(n.relative?"m":"M")+n.x+T+n.y;else if(n.type===w.LINE_TO)e+=(n.relative?"l":"L")+n.x+T+n.y;else if(n.type===w.CURVE_TO)e+=(n.relative?"c":"C")+n.x1+T+n.y1+T+n.x2+T+n.y2+T+n.x+T+n.y;else if(n.type===w.SMOOTH_CURVE_TO)e+=(n.relative?"s":"S")+n.x2+T+n.y2+T+n.x+T+n.y;else if(n.type===w.QUAD_TO)e+=(n.relative?"q":"Q")+n.x1+T+n.y1+T+n.x+T+n.y;else if(n.type===w.SMOOTH_QUAD_TO)e+=(n.relative?"t":"T")+n.x+T+n.y;else{if(n.type!==w.ARC)throw new Error('Unexpected command type "'+n.type+'" at index '+i+".");e+=(n.relative?"a":"A")+n.rX+T+n.rY+T+n.xRot+T+ +n.lArcFlag+T+ +n.sweepFlag+T+n.x+T+n.y}}return e}var l=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var i in e)e.hasOwnProperty(i)&&(t[i]=e[i])},d=Math.PI,p=Math.PI/180;!function(t){function e(){return d(function(t,e,i){return t.relative&&(void 0!==t.x1&&(t.x1+=e),void 0!==t.y1&&(t.y1+=i),void 0!==t.x2&&(t.x2+=e),void 0!==t.y2&&(t.y2+=i),void 0!==t.x&&(t.x+=e),void 0!==t.y&&(t.y+=i),t.relative=!1),t})}function c(){var t=NaN,e=NaN,i=NaN,n=NaN;return d(function(r,s,o){return r.type&w.SMOOTH_CURVE_TO&&(r.type=w.CURVE_TO,t=isNaN(t)?s:t,e=isNaN(e)?o:e,r.x1=r.relative?s-t:2*s-t,r.y1=r.relative?o-e:2*o-e),r.type&w.CURVE_TO?(t=r.relative?s+r.x2:r.x2,e=r.relative?o+r.y2:r.y2):(t=NaN,e=NaN),r.type&w.SMOOTH_QUAD_TO&&(r.type=w.QUAD_TO,i=isNaN(i)?s:i,n=isNaN(n)?o:n,r.x1=r.relative?s-i:2*s-i,r.y1=r.relative?o-n:2*o-n),r.type&w.QUAD_TO?(i=r.relative?s+r.x1:r.x1,n=r.relative?o+r.y1:r.y1):(i=NaN,n=NaN),r})}function l(){var t=NaN,e=NaN;return d(function(i,n,r){if(i.type&w.SMOOTH_QUAD_TO&&(i.type=w.QUAD_TO,t=isNaN(t)?n:t,e=isNaN(e)?r:e,i.x1=i.relative?n-t:2*n-t,i.y1=i.relative?r-e:2*r-e),i.type&w.QUAD_TO){t=i.relative?n+i.x1:i.x1,e=i.relative?r+i.y1:i.y1;var s=i.x1,o=i.y1;i.type=w.CURVE_TO,i.x1=((i.relative?0:n)+2*s)/3,i.y1=((i.relative?0:r)+2*o)/3,i.x2=(i.x+2*s)/3,i.y2=(i.y+2*o)/3}else t=NaN,e=NaN;return i})}function d(t){var e=0,i=0,n=NaN,r=NaN;return function(s){if(isNaN(n)&&!(s.type&w.MOVE_TO))throw new Error("path must start with moveto");var o=t(s,e,i,n,r);return s.type&w.CLOSE_PATH&&(e=n,i=r),void 0!==s.x&&(e=s.relative?e+s.x:s.x),void 0!==s.y&&(i=s.relative?i+s.y:s.y),s.type&w.MOVE_TO&&(n=e,r=i),o}}function f(t,e,i,r,s,o){return n(t,e,i,r,s,o),d(function(n,a,h,u){function c(t){return t*t}var l=n.x1,d=n.x2,p=n.relative&&!isNaN(u),f=void 0!==n.x?n.x:p?0:a,y=void 0!==n.y?n.y:p?0:h;n.type&w.HORIZ_LINE_TO&&0!==e&&(n.type=w.LINE_TO,n.y=n.relative?0:h),n.type&w.VERT_LINE_TO&&0!==i&&(n.type=w.LINE_TO,n.x=n.relative?0:a),void 0!==n.x&&(n.x=n.x*t+y*i+(p?0:s)),void 0!==n.y&&(n.y=f*e+n.y*r+(p?0:o)),void 0!==n.x1&&(n.x1=n.x1*t+n.y1*i+(p?0:s)),void 0!==n.y1&&(n.y1=l*e+n.y1*r+(p?0:o)),void 0!==n.x2&&(n.x2=n.x2*t+n.y2*i+(p?0:s)),void 0!==n.y2&&(n.y2=d*e+n.y2*r+(p?0:o));var m=t*r-e*i;if(void 0!==n.xRot&&(1!==t||0!==e||0!==i||1!==r))if(0===m)delete n.rX,delete n.rY,delete n.xRot,delete n.lArcFlag,delete n.sweepFlag,n.type=w.LINE_TO;else{var g=n.xRot*Math.PI/180,v=Math.sin(g),x=Math.cos(g),M=1/c(n.rX),T=1/c(n.rY),b=c(x)*M+c(v)*T,N=2*v*x*(M-T),O=c(v)*M+c(x)*T,_=b*r*r-N*e*r+O*e*e,S=N*(t*r+e*i)-2*(b*i*r+O*t*e),E=b*i*i-N*t*i+O*t*t,C=(Math.atan2(S,_-E)+Math.PI)%Math.PI/2,A=Math.sin(C),R=Math.cos(C);n.rX=Math.abs(m)/Math.sqrt(_*c(R)+S*A*R+E*c(A)),n.rY=Math.abs(m)/Math.sqrt(_*c(A)-S*A*R+E*c(R)),n.xRot=180*C/Math.PI}return void 0!==n.sweepFlag&&0>m&&(n.sweepFlag=+!n.sweepFlag),n})}function y(){return function(t){var e={};for(var i in t)e[i]=t[i];return e}}t.ROUND=function(t){function e(e){return Math.round(e*t)/t}return void 0===t&&(t=1e13),n(t),function(t){return void 0!==t.x1&&(t.x1=e(t.x1)),void 0!==t.y1&&(t.y1=e(t.y1)),void 0!==t.x2&&(t.x2=e(t.x2)),void 0!==t.y2&&(t.y2=e(t.y2)),void 0!==t.x&&(t.x=e(t.x)),void 0!==t.y&&(t.y=e(t.y)),t}},t.TO_ABS=e,t.TO_REL=function(){return d(function(t,e,i){return t.relative||(void 0!==t.x1&&(t.x1-=e),void 0!==t.y1&&(t.y1-=i),void 0!==t.x2&&(t.x2-=e),void 0!==t.y2&&(t.y2-=i),void 0!==t.x&&(t.x-=e),void 0!==t.y&&(t.y-=i),t.relative=!0),t})},t.NORMALIZE_HVZ=function(t,e,i){return void 0===t&&(t=!0),void 0===e&&(e=!0),void 0===i&&(i=!0),d(function(n,r,s,o,a){if(isNaN(o)&&!(n.type&w.MOVE_TO))throw new Error("path must start with moveto");return e&&n.type&w.HORIZ_LINE_TO&&(n.type=w.LINE_TO,n.y=n.relative?0:s),i&&n.type&w.VERT_LINE_TO&&(n.type=w.LINE_TO,n.x=n.relative?0:r),t&&n.type&w.CLOSE_PATH&&(n.type=w.LINE_TO,n.x=n.relative?o-r:o,n.y=n.relative?a-s:a),n.type&w.ARC&&(0===n.rX||0===n.rY)&&(n.type=w.LINE_TO,delete n.rX,delete n.rY,delete n.xRot,delete n.lArcFlag,delete n.sweepFlag),n})},t.NORMALIZE_ST=c,t.QT_TO_C=l,t.INFO=d,t.SANITIZE=function(t){void 0===t&&(t=0),n(t);var e=NaN,i=NaN,r=NaN,s=NaN;return d(function(n,o,a,h,u){var c=Math.abs,l=!1,d=0,p=0;if(n.type&w.SMOOTH_CURVE_TO&&(d=isNaN(e)?0:o-e,p=isNaN(i)?0:a-i),n.type&(w.CURVE_TO|w.SMOOTH_CURVE_TO)?(e=n.relative?o+n.x2:n.x2,i=n.relative?a+n.y2:n.y2):(e=NaN,i=NaN),n.type&w.SMOOTH_QUAD_TO?(r=isNaN(r)?o:2*o-r,s=isNaN(s)?a:2*a-s):n.type&w.QUAD_TO?(r=n.relative?o+n.x1:n.x1,s=n.relative?a+n.y1:n.y2):(r=NaN,s=NaN),n.type&w.LINE_COMMANDS||n.type&w.ARC&&(0===n.rX||0===n.rY||!n.lArcFlag)||n.type&w.CURVE_TO||n.type&w.SMOOTH_CURVE_TO||n.type&w.QUAD_TO||n.type&w.SMOOTH_QUAD_TO){var f=void 0===n.x?0:n.relative?n.x:n.x-o,y=void 0===n.y?0:n.relative?n.y:n.y-a;d=isNaN(r)?void 0===n.x1?d:n.relative?n.x:n.x1-o:r-o,p=isNaN(s)?void 0===n.y1?p:n.relative?n.y:n.y1-a:s-a;var m=void 0===n.x2?0:n.relative?n.x:n.x2-o,g=void 0===n.y2?0:n.relative?n.y:n.y2-a;c(f)<=t&&c(y)<=t&&c(d)<=t&&c(p)<=t&&c(m)<=t&&c(g)<=t&&(l=!0)}return n.type&w.CLOSE_PATH&&c(o-h)<=t&&c(a-u)<=t&&(l=!0),l?[]:n})},t.MATRIX=f,t.ROTATE=function(t,e,i){void 0===e&&(e=0),void 0===i&&(i=0),n(t,e,i);var r=Math.sin(t),s=Math.cos(t);return f(s,r,-r,s,e-e*s+i*r,i-e*r-i*s)},t.TRANSLATE=function(t,e){return void 0===e&&(e=0),n(t,e),f(1,0,0,1,t,e)},t.SCALE=function(t,e){return void 0===e&&(e=t),n(t,e),f(t,0,0,e,0,0)},t.SKEW_X=function(t){return n(t),f(1,0,Math.atan(t),1,0,0)},t.SKEW_Y=function(t){return n(t),f(1,Math.atan(t),0,1,0,0)},t.X_AXIS_SYMMETRY=function(t){return void 0===t&&(t=0),n(t),f(-1,0,0,1,t,0)},t.Y_AXIS_SYMMETRY=function(t){return void 0===t&&(t=0),n(t),f(1,0,0,-1,0,t)},t.A_TO_C=function(){return d(function(t,e,n){return w.ARC===t.type?function(t,e,n){var s,a,h,u;t.cX||r(t,e,n);for(var c=Math.min(t.phi1,t.phi2),l=Math.max(t.phi1,t.phi2)-c,d=Math.ceil(l/90),f=new Array(d),y=e,m=n,g=0;g<d;g++){var v=o(t.phi1,t.phi2,g/d),x=o(t.phi1,t.phi2,(g+1)/d),M=x-v,T=4/3*Math.tan(M*p/4),b=[Math.cos(v*p)-T*Math.sin(v*p),Math.sin(v*p)+T*Math.cos(v*p)],N=b[0],O=b[1],_=[Math.cos(x*p),Math.sin(x*p)],S=_[0],E=_[1],C=[S+T*Math.sin(x*p),E-T*Math.cos(x*p)],A=C[0],R=C[1];f[g]={relative:t.relative,type:w.CURVE_TO};var D=function(e,n){var r=i([e*t.rX,n*t.rY],t.xRot),s=r[0],o=r[1];return[t.cX+s,t.cY+o]};s=D(N,O),f[g].x1=s[0],f[g].y1=s[1],a=D(A,R),f[g].x2=a[0],f[g].y2=a[1],h=D(S,E),f[g].x=h[0],f[g].y=h[1],t.relative&&(f[g].x1-=y,f[g].y1-=m,f[g].x2-=y,f[g].y2-=m,f[g].x-=y,f[g].y-=m),y=(u=[f[g].x,f[g].y])[0],m=u[1]}return f}(t,t.relative?0:e,t.relative?0:n):t})},t.ANNOTATE_ARCS=function(){return d(function(t,e,i){return t.relative&&(e=0,i=0),w.ARC===t.type&&r(t,e,i),t})},t.CLONE=y,t.CALCULATE_BOUNDS=function(){var t=function(t){var e={};for(var i in t)e[i]=t[i];return e},i=e(),n=l(),o=c(),p=d(function(e,c,l){function d(t){t>p.maxX&&(p.maxX=t),t<p.minX&&(p.minX=t)}function f(t){t>p.maxY&&(p.maxY=t),t<p.minY&&(p.minY=t)}var y=o(n(i(t(e))));if(y.type&w.DRAWING_COMMANDS&&(d(c),f(l)),y.type&w.HORIZ_LINE_TO&&d(y.x),y.type&w.VERT_LINE_TO&&f(y.y),y.type&w.LINE_TO&&(d(y.x),f(y.y)),y.type&w.CURVE_TO){d(y.x),f(y.y);for(var m=0,g=h(c,y.x1,y.x2,y.x);m<g.length;m++)0<(L=g[m])&&1>L&&d(u(c,y.x1,y.x2,y.x,L));for(var v=0,x=h(l,y.y1,y.y2,y.y);v<x.length;v++)0<(L=x[v])&&1>L&&f(u(l,y.y1,y.y2,y.y,L))}if(y.type&w.ARC){d(y.x),f(y.y),r(y,c,l);for(var M=y.xRot/180*Math.PI,T=Math.cos(M)*y.rX,b=Math.sin(M)*y.rX,N=-Math.sin(M)*y.rY,O=Math.cos(M)*y.rY,_=y.phi1<y.phi2?[y.phi1,y.phi2]:-180>y.phi2?[y.phi2+360,y.phi1+360]:[y.phi2,y.phi1],S=_[0],E=_[1],C=function(t){var e=t[0],i=t[1],n=180*Math.atan2(i,e)/Math.PI;return n<S?n+360:n},A=0,R=s(N,-T,0).map(C);A<R.length;A++)(L=R[A])>S&&L<E&&d(a(y.cX,T,N,L));for(var D=0,H=s(O,-b,0).map(C);D<H.length;D++){var L;(L=H[D])>S&&L<E&&f(a(y.cY,b,O,L))}}return e});return p.minX=1/0,p.maxX=-1/0,p.minY=1/0,p.maxY=-1/0,p}}(t.SVGPathDataTransformer||(t.SVGPathDataTransformer={}));var f,y,m=function(){function e(){}return e.prototype.round=function(e){return this.transform(t.SVGPathDataTransformer.ROUND(e))},e.prototype.toAbs=function(){return this.transform(t.SVGPathDataTransformer.TO_ABS())},e.prototype.toRel=function(){return this.transform(t.SVGPathDataTransformer.TO_REL())},e.prototype.normalizeHVZ=function(e,i,n){return this.transform(t.SVGPathDataTransformer.NORMALIZE_HVZ(e,i,n))},e.prototype.normalizeST=function(){return this.transform(t.SVGPathDataTransformer.NORMALIZE_ST())},e.prototype.qtToC=function(){return this.transform(t.SVGPathDataTransformer.QT_TO_C())},e.prototype.aToC=function(){return this.transform(t.SVGPathDataTransformer.A_TO_C())},e.prototype.sanitize=function(e){return this.transform(t.SVGPathDataTransformer.SANITIZE(e))},e.prototype.translate=function(e,i){return this.transform(t.SVGPathDataTransformer.TRANSLATE(e,i))},e.prototype.scale=function(e,i){return this.transform(t.SVGPathDataTransformer.SCALE(e,i))},e.prototype.rotate=function(e,i,n){return this.transform(t.SVGPathDataTransformer.ROTATE(e,i,n))},e.prototype.matrix=function(e,i,n,r,s,o){return this.transform(t.SVGPathDataTransformer.MATRIX(e,i,n,r,s,o))},e.prototype.skewX=function(e){return this.transform(t.SVGPathDataTransformer.SKEW_X(e))},e.prototype.skewY=function(e){return this.transform(t.SVGPathDataTransformer.SKEW_Y(e))},e.prototype.xSymmetry=function(e){return this.transform(t.SVGPathDataTransformer.X_AXIS_SYMMETRY(e))},e.prototype.ySymmetry=function(e){return this.transform(t.SVGPathDataTransformer.Y_AXIS_SYMMETRY(e))},e.prototype.annotateArcs=function(){return this.transform(t.SVGPathDataTransformer.ANNOTATE_ARCS())},e}(),g=function(t){return" "===t||"\t"===t||"\r"===t||"\n"===t},v=function(t){return"0".charCodeAt(0)<=t.charCodeAt(0)&&t.charCodeAt(0)<="9".charCodeAt(0)},x=function(t){function i(){var e=t.call(this)||this;return e.curNumber="",e.curCommandType=-1,e.curCommandRelative=!1,e.canParseCommandOrComma=!0,e.curNumberHasExp=!1,e.curNumberHasExpDigits=!1,e.curNumberHasDecimal=!1,e.curArgs=[],e}return e(i,t),i.prototype.finish=function(t){if(void 0===t&&(t=[]),this.parse(" ",t),0!==this.curArgs.length||!this.canParseCommandOrComma)throw new SyntaxError("Unterminated command at the path end.");return t},i.prototype.parse=function(t,e){var i=this;void 0===e&&(e=[]);for(var n=function(t){e.push(t),i.curArgs.length=0,i.canParseCommandOrComma=!0},r=0;r<t.length;r++){var s=t[r];if(v(s))this.curNumber+=s,this.curNumberHasExpDigits=this.curNumberHasExp;else if("e"!==s&&"E"!==s)if("-"!==s&&"+"!==s||!this.curNumberHasExp||this.curNumberHasExpDigits)if("."!==s||this.curNumberHasExp||this.curNumberHasDecimal){if(this.curNumber&&-1!==this.curCommandType){var o=Number(this.curNumber);if(isNaN(o))throw new SyntaxError("Invalid number ending at "+r);if(this.curCommandType===w.ARC)if(0===this.curArgs.length||1===this.curArgs.length){if(0>o)throw new SyntaxError('Expected positive number, got "'+o+'" at index "'+r+'"')}else if((3===this.curArgs.length||4===this.curArgs.length)&&"0"!==this.curNumber&&"1"!==this.curNumber)throw new SyntaxError('Expected a flag, got "'+this.curNumber+'" at index "'+r+'"');this.curArgs.push(o),this.curArgs.length===M[this.curCommandType]&&(w.HORIZ_LINE_TO===this.curCommandType?n({type:w.HORIZ_LINE_TO,relative:this.curCommandRelative,x:o}):w.VERT_LINE_TO===this.curCommandType?n({type:w.VERT_LINE_TO,relative:this.curCommandRelative,y:o}):this.curCommandType===w.MOVE_TO||this.curCommandType===w.LINE_TO||this.curCommandType===w.SMOOTH_QUAD_TO?(n({type:this.curCommandType,relative:this.curCommandRelative,x:this.curArgs[0],y:this.curArgs[1]}),w.MOVE_TO===this.curCommandType&&(this.curCommandType=w.LINE_TO)):this.curCommandType===w.CURVE_TO?n({type:w.CURVE_TO,relative:this.curCommandRelative,x1:this.curArgs[0],y1:this.curArgs[1],x2:this.curArgs[2],y2:this.curArgs[3],x:this.curArgs[4],y:this.curArgs[5]}):this.curCommandType===w.SMOOTH_CURVE_TO?n({type:w.SMOOTH_CURVE_TO,relative:this.curCommandRelative,x2:this.curArgs[0],y2:this.curArgs[1],x:this.curArgs[2],y:this.curArgs[3]}):this.curCommandType===w.QUAD_TO?n({type:w.QUAD_TO,relative:this.curCommandRelative,x1:this.curArgs[0],y1:this.curArgs[1],x:this.curArgs[2],y:this.curArgs[3]}):this.curCommandType===w.ARC&&n({type:w.ARC,relative:this.curCommandRelative,rX:this.curArgs[0],rY:this.curArgs[1],xRot:this.curArgs[2],lArcFlag:this.curArgs[3],sweepFlag:this.curArgs[4],x:this.curArgs[5],y:this.curArgs[6]})),this.curNumber="",this.curNumberHasExpDigits=!1,this.curNumberHasExp=!1,this.curNumberHasDecimal=!1,this.canParseCommandOrComma=!0}if(!g(s))if(","===s&&this.canParseCommandOrComma)this.canParseCommandOrComma=!1;else if("+"!==s&&"-"!==s&&"."!==s){if(0!==this.curArgs.length)throw new SyntaxError("Unterminated command at index "+r+".");if(!this.canParseCommandOrComma)throw new SyntaxError('Unexpected character "'+s+'" at index '+r+". Command cannot follow comma");if(this.canParseCommandOrComma=!1,"z"!==s&&"Z"!==s)if("h"===s||"H"===s)this.curCommandType=w.HORIZ_LINE_TO,this.curCommandRelative="h"===s;else if("v"===s||"V"===s)this.curCommandType=w.VERT_LINE_TO,this.curCommandRelative="v"===s;else if("m"===s||"M"===s)this.curCommandType=w.MOVE_TO,this.curCommandRelative="m"===s;else if("l"===s||"L"===s)this.curCommandType=w.LINE_TO,this.curCommandRelative="l"===s;else if("c"===s||"C"===s)this.curCommandType=w.CURVE_TO,this.curCommandRelative="c"===s;else if("s"===s||"S"===s)this.curCommandType=w.SMOOTH_CURVE_TO,this.curCommandRelative="s"===s;else if("q"===s||"Q"===s)this.curCommandType=w.QUAD_TO,this.curCommandRelative="q"===s;else if("t"===s||"T"===s)this.curCommandType=w.SMOOTH_QUAD_TO,this.curCommandRelative="t"===s;else{if("a"!==s&&"A"!==s)throw new SyntaxError('Unexpected character "'+s+'" at index '+r+".");this.curCommandType=w.ARC,this.curCommandRelative="a"===s}else e.push({type:w.CLOSE_PATH}),this.canParseCommandOrComma=!0,this.curCommandType=-1}else this.curNumber=s,this.curNumberHasDecimal="."===s}else this.curNumber+=s,this.curNumberHasDecimal=!0;else this.curNumber+=s;else this.curNumber+=s,this.curNumberHasExp=!0}return e},i.prototype.transform=function(t){return Object.create(this,{parse:{value:function(e,i){void 0===i&&(i=[]);for(var n=0,r=Object.getPrototypeOf(this).parse.call(this,e);n<r.length;n++){var s=r[n],o=t(s);Array.isArray(o)?i.push.apply(i,o):i.push(o)}return i}}})},i}(m),w=function(i){function n(t){var e=i.call(this)||this;return e.commands="string"==typeof t?n.parse(t):t,e}return e(n,i),n.prototype.encode=function(){return n.encode(this.commands)},n.prototype.getBounds=function(){var e=t.SVGPathDataTransformer.CALCULATE_BOUNDS();return this.transform(e),e},n.prototype.transform=function(t){for(var e=[],i=0,n=this.commands;i<n.length;i++){var r=t(n[i]);Array.isArray(r)?e.push.apply(e,r):e.push(r)}return this.commands=e,this},n.encode=function(t){return c(t)},n.parse=function(t){var e=new x,i=[];return e.parse(t,i),e.finish(i),i},n.CLOSE_PATH=1,n.MOVE_TO=2,n.HORIZ_LINE_TO=4,n.VERT_LINE_TO=8,n.LINE_TO=16,n.CURVE_TO=32,n.SMOOTH_CURVE_TO=64,n.QUAD_TO=128,n.SMOOTH_QUAD_TO=256,n.ARC=512,n.LINE_COMMANDS=n.LINE_TO|n.HORIZ_LINE_TO|n.VERT_LINE_TO,n.DRAWING_COMMANDS=n.HORIZ_LINE_TO|n.VERT_LINE_TO|n.LINE_TO|n.CURVE_TO|n.SMOOTH_CURVE_TO|n.QUAD_TO|n.SMOOTH_QUAD_TO|n.ARC,n}(m),M=((f={})[w.MOVE_TO]=2,f[w.LINE_TO]=2,f[w.HORIZ_LINE_TO]=1,f[w.VERT_LINE_TO]=1,f[w.CLOSE_PATH]=0,f[w.QUAD_TO]=4,f[w.SMOOTH_QUAD_TO]=2,f[w.CURVE_TO]=6,f[w.SMOOTH_CURVE_TO]=4,f[w.ARC]=7,f),T=" ",b=function(i){function n(t){var e=i.call(this)||this;return e.commands="string"==typeof t?n.parse(t):t,e}return e(n,i),n.prototype.encode=function(){return n.encode(this.commands)},n.prototype.getBounds=function(){var e=t.SVGPathDataTransformer.CALCULATE_BOUNDS();return this.transform(e),e},n.prototype.transform=function(t){for(var e=[],i=0,n=this.commands;i<n.length;i++){var r=t(n[i]);Array.isArray(r)?e.push.apply(e,r):e.push(r)}return this.commands=e,this},n.encode=function(t){return c(t)},n.parse=function(t){var e=new x,i=[];return e.parse(t,i),e.finish(i),i},n.CLOSE_PATH=1,n.MOVE_TO=2,n.HORIZ_LINE_TO=4,n.VERT_LINE_TO=8,n.LINE_TO=16,n.CURVE_TO=32,n.SMOOTH_CURVE_TO=64,n.QUAD_TO=128,n.SMOOTH_QUAD_TO=256,n.ARC=512,n.LINE_COMMANDS=n.LINE_TO|n.HORIZ_LINE_TO|n.VERT_LINE_TO,n.DRAWING_COMMANDS=n.HORIZ_LINE_TO|n.VERT_LINE_TO|n.LINE_TO|n.CURVE_TO|n.SMOOTH_CURVE_TO|n.QUAD_TO|n.SMOOTH_QUAD_TO|n.ARC,n}(m),N=((y={})[b.MOVE_TO]=2,y[b.LINE_TO]=2,y[b.HORIZ_LINE_TO]=1,y[b.VERT_LINE_TO]=1,y[b.CLOSE_PATH]=0,y[b.QUAD_TO]=4,y[b.SMOOTH_QUAD_TO]=2,y[b.CURVE_TO]=6,y[b.SMOOTH_CURVE_TO]=4,y[b.ARC]=7,y);t.SVGPathData=b,t.COMMAND_ARG_COUNTS=N,t.encodeSVGPath=c,t.SVGPathDataParser=x,Object.defineProperty(t,"__esModule",{value:!0})},"object"==typeof i&&void 0!==e?r(i):"function"==typeof define&&define.amd?define(["exports"],r):r(n.svgpathdata={})},{}],16:[function(t,e,i){"use strict";function n(t){return t&&t.__esModule?t:{default:t}}Object.defineProperty(i,"__esModule",{value:!0}),i.valid=i.toPoints=i.toPath=void 0;var r=n(t("./toPath")),s=n(t("./toPoints")),o=n(t("./valid"));i.toPath=r.default,i.toPoints=s.default,i.valid=o.default},{"./toPath":17,"./toPoints":18,"./valid":19}],17:[function(t,e,i){"use strict";function n(t){return t&&t.__esModule?t:{default:t}}Object.defineProperty(i,"__esModule",{value:!0});var r=n(t("./toPoints")),s=function(t){var e="",i=0,n=void 0,r=!0,s=!1,o=void 0;try{for(var a,h=t[Symbol.iterator]();!(r=(a=h.next()).done);r=!0){var u=a.value,c=u.curve,l=void 0!==c&&c,d=u.moveTo,p=u.x,f=u.y,y=0===i||d,m=i===t.length-1||t[i+1].moveTo,g=0===i?null:t[i-1];if(y)n=u,m||(e+="M"+p+","+f);else if(l){switch(l.type){case"arc":var v=u.curve,x=v.largeArcFlag,w=void 0===x?0:x,M=v.rx,T=v.ry,b=v.sweepFlag,N=void 0===b?0:b,O=v.xAxisRotation;e+="A"+M+","+T+","+(void 0===O?0:O)+","+w+","+N+","+p+","+f;break;case"cubic":var _=u.curve;e+="C"+_.x1+","+_.y1+","+_.x2+","+_.y2+","+p+","+f;break;case"quadratic":var S=u.curve;e+="Q"+S.x1+","+S.y1+","+p+","+f}m&&p===n.x&&f===n.y&&(e+="Z")}else m&&p===n.x&&f===n.y?e+="Z":p!==g.x&&f!==g.y?e+="L"+p+","+f:p!==g.x?e+="H"+p:f!==g.y&&(e+="V"+f);i++}}catch(t){s=!0,o=t}finally{try{!r&&h.return&&h.return()}finally{if(s)throw o}}return e},o=function(t){var e=Array.isArray(t),i=e?Array.isArray(t[0]):"g"===t.type,n=e?t:i?t.shapes.map(function(t){return(0,r.default)(t)}):(0,r.default)(t);return i?n.map(function(t){return s(t)}):s(n)};i.default=o},{"./toPoints":18}],18:[function(t,e,i){"use strict";function n(t,e){var i={};for(var n in t)e.indexOf(n)>=0||Object.prototype.hasOwnProperty.call(t,n)&&(i[n]=t[n]);return i}Object.defineProperty(i,"__esModule",{value:!0});var r=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var i=arguments[e];for(var n in i)Object.prototype.hasOwnProperty.call(i,n)&&(t[n]=i[n])}return t},s=function(t){var e=t.type,i=n(t,["type"]);switch(e){case"circle":return o(i);case"ellipse":return a(i);case"line":return h(i);case"path":return m(i);case"polygon":return g(i);case"polyline":return v(i);case"rect":return w(i);case"g":return b(i);default:throw new Error("Not a valid shape type")}},o=function(t){var e=t.cx,i=t.cy,n=t.r;return[{x:e,y:i-n,moveTo:!0},{x:e,y:i+n,curve:{type:"arc",rx:n,ry:n,sweepFlag:1}},{
-x:e,y:i-n,curve:{type:"arc",rx:n,ry:n,sweepFlag:1}}]},a=function(t){var e=t.cx,i=t.cy,n=t.rx,r=t.ry;return[{x:e,y:i-r,moveTo:!0},{x:e,y:i+r,curve:{type:"arc",rx:n,ry:r,sweepFlag:1}},{x:e,y:i-r,curve:{type:"arc",rx:n,ry:r,sweepFlag:1}}]},h=function(t){var e=t.x1,i=t.x2;return[{x:e,y:t.y1,moveTo:!0},{x:i,y:t.y2}]},u=/[MmLlHhVvCcSsQqTtAaZz]/g,c={A:7,C:6,H:1,L:2,M:2,Q:4,S:4,T:2,V:1,Z:0},l=["a","c","h","l","m","q","s","t","v"],d=function(t){return-1!==l.indexOf(t)},p=["xAxisRotation","largeArcFlag","sweepFlag"],f=function(t){return t.match(u)},y=function(t){return t.split(u).map(function(t){return t.replace(/[0-9]+-/g,function(t){return t.slice(0,-1)+" -"})}).map(function(t){return t.replace(/\.[0-9]+/g,function(t){return t+" "})}).map(function(t){return t.trim()}).filter(function(t){return t.length>0}).map(function(t){return t.split(/[ ,]+/).map(parseFloat).filter(function(t){return!isNaN(t)})})},m=function(t){for(var e=t.d,i=f(e),n=y(e),r=[],s=void 0,o=0,a=i.length;o<a;o++){var h=i[o],u=h.toUpperCase(),l=c[u],m=d(h);if(l>0)for(var g=n.shift(),v=g.length/l,x=0;x<v;x++){var w=r[r.length-1]||{x:0,y:0};switch(u){case"M":var M=(m?w.x:0)+g.shift(),T=(m?w.y:0)+g.shift();0===x?(s={x:M,y:T},r.push({x:M,y:T,moveTo:!0})):r.push({x:M,y:T});break;case"L":r.push({x:(m?w.x:0)+g.shift(),y:(m?w.y:0)+g.shift()});break;case"H":r.push({x:(m?w.x:0)+g.shift(),y:w.y});break;case"V":r.push({x:w.x,y:(m?w.y:0)+g.shift()});break;case"A":r.push({curve:{type:"arc",rx:g.shift(),ry:g.shift(),xAxisRotation:g.shift(),largeArcFlag:g.shift(),sweepFlag:g.shift()},x:(m?w.x:0)+g.shift(),y:(m?w.y:0)+g.shift()});var b=!0,N=!1,O=void 0;try{for(var _,S=p[Symbol.iterator]();!(b=(_=S.next()).done);b=!0){var E=_.value;0===r[r.length-1].curve[E]&&delete r[r.length-1].curve[E]}}catch(t){N=!0,O=t}finally{try{!b&&S.return&&S.return()}finally{if(N)throw O}}break;case"C":r.push({curve:{type:"cubic",x1:(m?w.x:0)+g.shift(),y1:(m?w.y:0)+g.shift(),x2:(m?w.x:0)+g.shift(),y2:(m?w.y:0)+g.shift()},x:(m?w.x:0)+g.shift(),y:(m?w.y:0)+g.shift()});break;case"S":var C=(m?w.x:0)+g.shift(),A=(m?w.y:0)+g.shift(),R=(m?w.x:0)+g.shift(),D=(m?w.y:0)+g.shift(),H={},L=void 0,k=void 0;w.curve&&"cubic"===w.curve.type?(H.x=Math.abs(w.x-w.curve.x2),H.y=Math.abs(w.y-w.curve.y2),L=w.x<w.curve.x2?w.x-H.x:w.x+H.x,k=w.y<w.curve.y2?w.y-H.y:w.y+H.y):(H.x=Math.abs(R-C),H.y=Math.abs(D-A),L=w.x,k=w.y),r.push({curve:{type:"cubic",x1:L,y1:k,x2:C,y2:A},x:R,y:D});break;case"Q":r.push({curve:{type:"quadratic",x1:(m?w.x:0)+g.shift(),y1:(m?w.y:0)+g.shift()},x:(m?w.x:0)+g.shift(),y:(m?w.y:0)+g.shift()});break;case"T":var I=(m?w.x:0)+g.shift(),F=(m?w.y:0)+g.shift(),P=void 0,V=void 0;if(w.curve&&"quadratic"===w.curve.type){var q={x:Math.abs(w.x-w.curve.x1),y:Math.abs(w.y-w.curve.y1)};P=w.x<w.curve.x1?w.x-q.x:w.x+q.x,V=w.y<w.curve.y1?w.y-q.y:w.y+q.y}else P=w.x,V=w.y;r.push({curve:{type:"quadratic",x1:P,y1:V},x:I,y:F})}}else{var B=r[r.length-1]||{x:0,y:0};B.x===s.x&&B.y===s.y||r.push({x:s.x,y:s.y})}}return r},g=function(t){var e=t.points;return x({closed:!0,points:e})},v=function(t){var e=t.points;return x({closed:!1,points:e})},x=function(t){var e=t.closed,i=t.points.split(/[\s,]+/).map(function(t){return parseFloat(t)}).reduce(function(t,e,i){return i%2==0?t.push({x:e}):t[(i-1)/2].y=e,t},[]);return e&&i.push(r({},i[0])),i[0].moveTo=!0,i},w=function(t){var e=t.height,i=t.rx,n=t.ry,r=t.width,s=t.x,o=t.y;return i||n?T({height:e,rx:i||n,ry:n||i,width:r,x:s,y:o}):M({height:e,width:r,x:s,y:o})},M=function(t){var e=t.height,i=t.width,n=t.x,r=t.y;return[{x:n,y:r,moveTo:!0},{x:n+i,y:r},{x:n+i,y:r+e},{x:n,y:r+e},{x:n,y:r}]},T=function(t){var e=t.height,i=t.rx,n=t.ry,r=t.width,s=t.x,o=t.y,a={type:"arc",rx:i,ry:n,sweepFlag:1};return[{x:s+i,y:o,moveTo:!0},{x:s+r-i,y:o},{x:s+r,y:o+n,curve:a},{x:s+r,y:o+e-n},{x:s+r-i,y:o+e,curve:a},{x:s+i,y:o+e},{x:s,y:o+e-n,curve:a},{x:s,y:o+n},{x:s+i,y:o,curve:a}]},b=function(t){return t.shapes.map(function(t){return s(t)})};i.default=s},{}],19:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},r=function t(e){var i=s(e),r=[];if(i.map(function(t){var i=t.match,s=t.prop,o=t.required,a=t.type;void 0===e[s]?o&&r.push(s+" prop is required"+("type"===s?"":" on a "+e.type)):(void 0!==a&&("array"===a?Array.isArray(e[s])||r.push(s+" prop must be of type array"):n(e[s])!==a&&r.push(s+" prop must be of type "+a)),Array.isArray(i)&&-1===i.indexOf(e[s])&&r.push(s+" prop must be one of "+i.join(", ")))}),"g"===e.type&&Array.isArray(e.shapes)){var o=e.shapes.map(function(e){return t(e)});return[].concat.apply(r,o)}return r},s=function(t){var e=[{match:["circle","ellipse","line","path","polygon","polyline","rect","g"],prop:"type",required:!0,type:"string"}];switch(t.type){case"circle":e.push({prop:"cx",required:!0,type:"number"}),e.push({prop:"cy",required:!0,type:"number"}),e.push({prop:"r",required:!0,type:"number"});break;case"ellipse":e.push({prop:"cx",required:!0,type:"number"}),e.push({prop:"cy",required:!0,type:"number"}),e.push({prop:"rx",required:!0,type:"number"}),e.push({prop:"ry",required:!0,type:"number"});break;case"line":e.push({prop:"x1",required:!0,type:"number"}),e.push({prop:"x2",required:!0,type:"number"}),e.push({prop:"y1",required:!0,type:"number"}),e.push({prop:"y2",required:!0,type:"number"});break;case"path":e.push({prop:"d",required:!0,type:"string"});break;case"polygon":case"polyline":e.push({prop:"points",required:!0,type:"string"});break;case"rect":e.push({prop:"height",required:!0,type:"number"}),e.push({prop:"rx",type:"number"}),e.push({prop:"ry",type:"number"}),e.push({prop:"width",required:!0,type:"number"}),e.push({prop:"x",required:!0,type:"number"}),e.push({prop:"y",required:!0,type:"number"});break;case"g":e.push({prop:"shapes",required:!0,type:"array"})}return e},o=function(t){var e=r(t);return{errors:e,valid:0===e.length}};i.default=o},{}],20:[function(t,e){"use strict";function i(t,e){if(!(this instanceof i))return new i(t,e);if(this.data=t||[],this.length=this.data.length,this.compare=e||n,this.length>0)for(var r=(this.length>>1)-1;r>=0;r--)this._down(r)}function n(t,e){return t<e?-1:t>e?1:0}e.exports=i,e.exports.default=i,i.prototype={push:function(t){this.data.push(t),this.length++,this._up(this.length-1)},pop:function(){if(0!==this.length){var t=this.data[0];return this.length--,this.length>0&&(this.data[0]=this.data[this.length],this._down(0)),this.data.pop(),t}},peek:function(){return this.data[0]},_up:function(t){for(var e=this.data,i=this.compare,n=e[t];t>0;){var r=t-1>>1,s=e[r];if(i(n,s)>=0)break;e[t]=s,t=r}e[t]=n},_down:function(t){for(var e=this.data,i=this.compare,n=this.length>>1,r=e[t];t<n;){var s=1+(t<<1),o=s+1,a=e[s];if(o<this.length&&i(e[o],a)<0&&(s=o,a=e[o]),i(a,r)>=0)break;e[t]=a,t=s}e[t]=r}}},{}],21:[function(t,e){!function t(i,n){function r(t,e){if(!(this instanceof r))return new r(t,e);s(t)?(e=t[1],t=t[0]):"object"==typeof t&&t&&(e=t.y,t=t.x),this.x=r.clean(t||0),this.y=r.clean(e||0)}var s=function(t){return"[object Array]"===Object.prototype.toString.call(t)};r.prototype={change:function(t){if("function"==typeof t)this.observers?this.observers.push(t):this.observers=[t];else if(this.observers&&this.observers.length)for(var e=this.observers.length-1;e>=0;e--)this.observers[e](this,t);return this},ignore:function(t){if(this.observers)if(t)for(var e=this.observers,i=e.length;i--;)e[i]===t&&e.splice(i,1);else this.observers=[];return this},set:function(t,e,i){if("number"!=typeof t&&(i=e,e=t.y,t=t.x),this.x===t&&this.y===e)return this;var n=null;return!1!==i&&this.observers&&this.observers.length&&(n=this.clone()),this.x=r.clean(t),this.y=r.clean(e),!1!==i?this.change(n):void 0},zero:function(){return this.set(0,0)},clone:function(){return new this.constructor(this.x,this.y)},negate:function(t){return t?new this.constructor(-this.x,-this.y):this.set(-this.x,-this.y)},add:function(t,e,i){return"number"!=typeof t&&(i=e,s(t)?(e=t[1],t=t[0]):(e=t.y,t=t.x)),t+=this.x,e+=this.y,i?new this.constructor(t,e):this.set(t,e)},subtract:function(t,e,i){return"number"!=typeof t&&(i=e,s(t)?(e=t[1],t=t[0]):(e=t.y,t=t.x)),t=this.x-t,e=this.y-e,i?new this.constructor(t,e):this.set(t,e)},multiply:function(t,e,i){return"number"!=typeof t?(i=e,s(t)?(e=t[1],t=t[0]):(e=t.y,t=t.x)):"number"!=typeof e&&(i=e,e=t),t*=this.x,e*=this.y,i?new this.constructor(t,e):this.set(t,e)},rotate:function(t,e,i){var n,r,s=this.x,o=this.y,a=Math.cos(t),h=Math.sin(t);return n=a*s-(e=e?-1:1)*h*o,r=e*h*s+a*o,i?new this.constructor(n,r):this.set(n,r)},length:function(){var t=this.x,e=this.y;return Math.sqrt(t*t+e*e)},lengthSquared:function(){var t=this.x,e=this.y;return t*t+e*e},distance:function(t){var e=this.x-t.x,i=this.y-t.y;return Math.sqrt(e*e+i*i)},nearest:function(t){for(var e,i=Number.MAX_VALUE,n=null,r=t.length-1;r>=0;r--)(e=this.distance(t[r]))<=i&&(i=e,n=t[r]);return n},normalize:function(t){var e=this.length(),i=e<Number.MIN_VALUE?0:1/e;return t?new this.constructor(this.x*i,this.y*i):this.set(this.x*i,this.y*i)},equal:function(t,e){return"number"!=typeof t&&(s(t)?(e=t[1],t=t[0]):(e=t.y,t=t.x)),r.clean(t)===this.x&&r.clean(e)===this.y},abs:function(t){var e=Math.abs(this.x),i=Math.abs(this.y);return t?new this.constructor(e,i):this.set(e,i)},min:function(t,e){var i=this.x,n=this.y,r=t.x,s=t.y,o=i<r?i:r,a=n<s?n:s;return e?new this.constructor(o,a):this.set(o,a)},max:function(t,e){var i=this.x,n=this.y,r=t.x,s=t.y,o=i>r?i:r,a=n>s?n:s;return e?new this.constructor(o,a):this.set(o,a)},clamp:function(t,e,i){var n=this.min(e,!0).max(t);return i?n:this.set(n.x,n.y)},lerp:function(t,e,i){return this.add(t.subtract(this,!0).multiply(e),i)},skew:function(t){return t?new this.constructor(-this.y,this.x):this.set(-this.y,this.x)},dot:function(t){return r.clean(this.x*t.x+t.y*this.y)},perpDot:function(t){return r.clean(this.x*t.y-this.y*t.x)},angleTo:function(t){return Math.atan2(this.perpDot(t),this.dot(t))},divide:function(t,e,i){if("number"!=typeof t?(i=e,s(t)?(e=t[1],t=t[0]):(e=t.y,t=t.x)):"number"!=typeof e&&(i=e,e=t),0===t||0===e)throw new Error("division by zero");if(isNaN(t)||isNaN(e))throw new Error("NaN detected");return i?new this.constructor(this.x/t,this.y/e):this.set(this.x/t,this.y/e)},isPointOnLine:function(t,e){return(t.y-this.y)*(t.x-e.x)===(t.y-e.y)*(t.x-this.x)},toArray:function(){return[this.x,this.y]},fromArray:function(t){return this.set(t[0],t[1])},toJSON:function(){return{x:this.x,y:this.y}},toString:function(){return"("+this.x+", "+this.y+")"},constructor:r},r.fromArray=function(t,e){return new(e||r)(t[0],t[1])},r.precision=n||8;var o=Math.pow(10,r.precision);return r.clean=i||function(t){if(isNaN(t))throw new Error("NaN detected");if(!isFinite(t))throw new Error("Infinity detected");return Math.round(t)===t?t:Math.round(t*o)/o},r.inject=t,i||(r.fast=t(function(t){return t}),void 0!==e&&"object"==typeof e.exports?e.exports=r:window.Vec2=window.Vec2||r),r}()},{}]},{},[9]);
+(function () {
+  function r(e, n, t) {
+    function o(i, f) {
+      if (!n[i]) {
+        if (!e[i]) {
+          var c = "function" == typeof require && require;
+          if (!f && c) return c(i, !0);
+          if (u) return u(i, !0);
+          var a = new Error("Cannot find module '" + i + "'");
+          throw ((a.code = "MODULE_NOT_FOUND"), a);
+        }
+        var p = (n[i] = { exports: {} });
+        e[i][0].call(
+          p.exports,
+          function (r) {
+            var n = e[i][1][r];
+            return o(n || r);
+          },
+          p,
+          p.exports,
+          r,
+          e,
+          n,
+          t
+        );
+      }
+      return n[i].exports;
+    }
+    for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) o(t[i]);
+    return o;
+  }
+  return r;
+})()(
+  {
+    1: [
+      function (require, module, exports) {
+        /** @module Bounds */
+
+        let inside = require("point-in-polygon");
+
+        /** Polygonal container for Paths that can constrain them to particular shapes */
+        class Bounds {
+          /**
+           * Create a new Bounds object
+           * @param {object} p5 Reference to global instance of p5.js for drawing
+           * @param {array} polygon Array of sequential points in the format of [polygon_n][x1][y1], ...
+           */
+          constructor(p5, polygon) {
+            this.p5 = p5;
+            this.polygon = polygon;
+          }
+
+          /**
+           * Test if a given point is within this Bounds polygon
+           * @param {array} point Coordinates of point to test ([x,y])
+           * @returns {boolean}
+           */
+          contains(point) {
+            return inside(point, this.polygon);
+          }
+
+          /** Draws this Bounds polygon to the canvas */
+          draw() {
+            this.p5.beginShape();
+
+            for (let i = 0; i < this.polygon.length; i++) {
+              this.p5.vertex(this.polygon[i][0], this.polygon[i][1]);
+            }
+
+            this.p5.vertex(this.polygon[0][0], this.polygon[0][1]);
+
+            this.p5.endShape();
+          }
+        }
+
+        module.exports = Bounds;
+      },
+      { "point-in-polygon": 11 },
+    ],
+    2: [
+      function (require, module, exports) {
+        /** @module Defaults */
+
+        module.exports = {
+          /**
+           * Minimum distance between nodes. Used in attraction, pruning, and injection
+           * @type {number}
+           */
+          MinDistance: 2,
+
+          /**
+           * Maximum distance between nodes before they are split
+           * @type {number}
+           */
+          MaxDistance: 5,
+
+          /**
+           * Radius to search for nearby nodes for repulsion force
+           * @type {number}
+           */
+          RepulsionRadius: 15,
+
+          /**
+           * Maximum velocity at which a node can move per frame
+           * @type {number}
+           */
+          MaxVelocity: 0.1,
+
+          /**
+           * Maximum attraction force between connected nodes
+           * @type {number}
+           */
+          AttractionForce: 0.2,
+
+          /**
+           * Maximum repulsion force between nearby nodes
+           * @type {number}
+           */
+          RepulsionForce: 0.6,
+
+          /**
+           * Maximum alignment force between connected nodes
+           * @type {number}
+           */
+          AlignmentForce: 0.55,
+
+          /**
+           * Interval (in ms) between call to node injection routine
+           * @type {number}
+           */
+          NodeInjectionInterval: 100,
+
+          /**
+           * Show/hide circles for each node
+           * @type {boolean}
+           */
+          DrawNodes: false,
+
+          /**
+           * Allow accumulation of path growth by disabling background repaints
+           * @type {boolean}
+           */
+          TraceMode: false,
+
+          /**
+           * Turn on/off debug mode (per-edge colors)
+           * @type {boolean}
+           */
+          DebugMode: false,
+
+          /**
+           * Turn on/off shape fills for closed paths
+           * @type {boolean}
+           */
+          FillMode: false,
+
+          /**
+           * Turn on/off capturing and rendering of previous node positions to create a "tree ring" effect
+           * @type {boolean}
+           */
+          DrawHistory: false,
+
+          /**
+           * Interval (in ms) between capture of paths for history effect
+           * @type {number}
+           */
+          HistoryCaptureInterval: 1000,
+
+          /**
+           * Maximum number of previous paths to capture for history effect
+           * @type {number}
+           */
+          MaxHistorySize: 10,
+
+          /**
+           * Turn on/off Brownian motion
+           * @type {boolean}
+           */
+          UseBrownianMotion: true,
+
+          /**
+           * Amount to 'jiggle' nodes when Brownian motion is enabled
+           * @type {number}
+           */
+          BrownianMotionRange: 0.01,
+
+          /**
+           * Draw all boundaries
+           * @type {boolean}
+           */
+          ShowBounds: true,
+
+          /**
+           * Time scale multiplier for simulation speed (1x = normal, higher = faster)
+           * @type {number}
+           */
+          TimeScale: 1,
+        };
+      },
+      {},
+    ],
+    3: [
+      function (require, module, exports) {
+        /** @module Node */
+
+        let Vec2 = require("vec2"),
+          Defaults = require("./Defaults");
+
+        /**
+         * Single point (node) within a Path, whose only job is to manage it's position and movement towards new position.
+         * @extends Vec2
+         */
+        class Node extends Vec2 {
+          /**
+           * Create a new Node object
+           * @param {object} p5 Reference to global instance of p5.js for drawing
+           * @param {number} x Initial X coordinate
+           * @param {number} y Initial Y coordinate
+           * @param {object} [settings] Object of local override Settings to merge with Defaults
+           * @param {boolean} [isFixed] Whether or not this Node is allowed to move
+           * @param {number} [minDistance] Minimum distance this Node wants to be to nearby Nodes
+           * @param {number} [repulsionRadius] Radius around Node that will affect movement of other Nodes
+           */
+          constructor(p5, x, y, settings = Defaults, isFixed = false, minDistance, repulsionRadius) {
+            super(x, y);
+
+            this.p5 = p5;
+            this.isFixed = isFixed;
+            this.settings = Object.assign({}, Defaults, settings);
+
+            this.velocity = 0;
+            this.nextPosition = new Vec2(x, y);
+
+            this.minDistance = minDistance || settings.MinDistance;
+            this.repulsionRadius = repulsionRadius || settings.RepulsionRadius;
+          }
+
+          /** Moves Node by one "step */
+          iterate() {
+            if (!this.isFixed) {
+              this.x = this.p5.lerp(this.x, this.nextPosition.x, this.settings.MaxVelocity);
+              this.y = this.p5.lerp(this.y, this.nextPosition.y, this.settings.MaxVelocity);
+            }
+          }
+
+          /** Draw this Node to the canvas */
+          draw() {
+            if (this.isFixed) {
+              this.p5.ellipse(this.x, this.y, 20);
+            } else {
+              this.p5.ellipse(this.x, this.y, 5);
+            }
+          }
+        }
+
+        module.exports = Node;
+      },
+      { "./Defaults": 2, vec2: 21 },
+    ],
+    4: [
+      function (require, module, exports) {
+        /*
+=============================================================================
+  ParametersPanel class
+=============================================================================
+*/
+
+        class ParametersPanel {
+          constructor(world) {
+            this.world = world;
+
+            // Get all DOM elements
+            this.getElements();
+
+            // Set values of all ranges from World settings
+            this.loadInitialValues();
+
+            // Set up listeners to bind ranges/checkboxes to World parameters
+
+            // Set up listeners to change value spans for each range
+            this.setupValueChangeListeners();
+          }
+
+          getElements() {
+            // Min distance
+            this.minDistanceRange = document.querySelector(".parameters-content #min-distance");
+            this.minDistanceValue = document.querySelector(".parameters-content #min-distance + .value");
+
+            // Max distance
+            this.maxDistanceRange = document.querySelector(".parameters-content #max-distance");
+            this.maxDistanceValue = document.querySelector(".parameters-content #max-distance + .value");
+
+            // Repulsion radius
+            this.repulsionRadiusRange = document.querySelector(".parameters-content #repulsion-radius");
+            this.repulsionRadiusValue = document.querySelector(".parameters-content #repulsion-radius + .value");
+
+            // ---
+
+            // Attraction force
+            this.attractionForceRange = document.querySelector(".parameters-content #attraction-force");
+            this.attractionForceValue = document.querySelector(".parameters-content #attraction-force + .value");
+
+            // Repulsion force
+            this.repulsionForceRange = document.querySelector(".parameters-content #repulsion-force");
+            this.repulsionForceValue = document.querySelector(".parameters-content #repulsion-force + .value");
+
+            // Alignment force
+            this.alignmentForceRange = document.querySelector(".parameters-content #alignment-force");
+            this.alignmentForceValue = document.querySelector(".parameters-content #alignment-force + .value");
+
+            // ---
+
+            // Checkboxes
+            this.drawNodesCheckbox = document.querySelector(".parameters-content #draw-nodes");
+            this.fillModeCheckbox = document.querySelector(".parameters-content #fill-mode");
+            this.debugModeCheckbox = document.querySelector(".parameters-content #debug-mode");
+            this.traceModeCheckbox = document.querySelector(".parameters-content #trace-mode");
+
+            // ---
+
+            // Draw history checkbox and ranges
+            this.drawHistoryCheckbox = document.querySelector(".parameters-content #draw-history");
+
+            this.historyIntervalRange = document.querySelector(".parameters-content #history-capture-interval");
+            this.historyIntervalValue = document.querySelector(".parameters-content #history-capture-interval + .value");
+
+            this.maxHistoryRange = document.querySelector(".parameters-content #max-history-size");
+            this.maxHistoryValue = document.querySelector(".parameters-content #max-history-size + .value");
+
+            // ---
+
+            // Brownian motion checkbox and range
+            this.brownianMotionCheckbox = document.querySelector(".parameters-content #use-brownian-motion");
+
+            this.brownianMotionRange = document.querySelector(".parameters-content #brownian-motion-range");
+            this.brownianMotionValue = document.querySelector(".parameters-content #brownian-motion-range + .value");
+
+            // ---
+
+            // Time scale range
+            this.timeScaleRange = document.querySelector(".parameters-content #time-scale");
+            this.timeScaleValue = document.querySelector(".parameters-content #time-scale + .value");
+          }
+
+          loadInitialValues() {
+            // Min distance
+            this.minDistanceRange.value = this.world.settings.MinDistance;
+            this.minDistanceValue.innerHTML = this.world.settings.MinDistance;
+
+            // Max distance
+            this.maxDistanceRange.value = this.world.settings.MaxDistance;
+            this.maxDistanceValue.innerHTML = this.world.settings.MaxDistance;
+
+            // Repulsion radius
+            this.repulsionRadiusRange.value = this.world.settings.RepulsionRadius;
+            this.repulsionRadiusValue.innerHTML = this.world.settings.RepulsionRadius;
+
+            // ---
+
+            // Attraction force
+            this.attractionForceRange.value = this.world.settings.AttractionForce;
+            this.attractionForceValue.innerHTML = this.world.settings.AttractionForce;
+
+            // Repulsion force
+            this.repulsionForceRange.value = this.world.settings.RepulsionForce;
+            this.repulsionForceValue.innerHTML = this.world.settings.RepulsionForce;
+
+            // Alignment force
+            this.alignmentForceRange.value = this.world.settings.AlignmentForce;
+            this.alignmentForceValue.innerHTML = this.world.settings.AlignmentForce;
+
+            // ---
+
+            this.drawNodesCheckbox.checked = this.world.settings.DrawNodes;
+            this.fillModeCheckbox.checked = this.world.settings.FillMode;
+            this.debugModeCheckbox.checked = this.world.settings.DebugMode;
+            this.traceModeCheckbox.checked = this.world.settings.TraceMode;
+
+            // ---
+
+            this.drawHistoryCheckbox.checked = this.world.settings.DrawHistory;
+
+            this.historyIntervalRange.value = this.world.settings.HistoryCaptureInterval;
+            this.historyIntervalValue.innerHTML = this.world.settings.HistoryCaptureInterval;
+
+            this.maxHistoryRange.value = this.world.settings.MaxHistorySize;
+            this.maxHistoryValue.innerHTML = this.world.settings.MaxHistorySize;
+
+            // ---
+
+            this.brownianMotionCheckbox.checked = this.world.settings.UseBrownianMotion;
+
+            this.brownianMotionRange.value = this.world.settings.BrownianMotionRange;
+            this.brownianMotionValue.innerHTML = this.world.settings.BrownianMotionRange;
+
+            // ---
+
+            this.timeScaleRange.value = this.world.settings.TimeScale;
+            this.timeScaleValue.innerHTML = this.world.settings.TimeScale + "x";
+          }
+
+          setupValueChangeListeners() {
+            this.minDistanceRange.addEventListener("input", this.minDistanceChangeHandler.bind(this));
+            this.maxDistanceRange.addEventListener("input", this.maxDistanceChangeHandler.bind(this));
+            this.repulsionRadiusRange.addEventListener("input", this.repulsionRadiusChangeHandler.bind(this));
+
+            this.attractionForceRange.addEventListener("input", this.attractionForceChangeHandler.bind(this));
+            this.repulsionForceRange.addEventListener("input", this.repulsionForceChangeHandler.bind(this));
+            this.alignmentForceRange.addEventListener("input", this.alignmentForceChangeHandler.bind(this));
+
+            this.drawNodesCheckbox.addEventListener("change", this.drawNodesChangeHandler.bind(this));
+            this.fillModeCheckbox.addEventListener("change", this.fillModeChangeHandler.bind(this));
+            this.debugModeCheckbox.addEventListener("change", this.debugModeChangeHandler.bind(this));
+            this.traceModeCheckbox.addEventListener("change", this.traceModeChangeHandler.bind(this));
+
+            this.drawHistoryCheckbox.addEventListener("change", this.drawHistoryChangeHandler.bind(this));
+            this.historyIntervalRange.addEventListener("input", this.historyIntervalChangeHandler.bind(this));
+            this.maxHistoryRange.addEventListener("input", this.maxHistoryChangeHandler.bind(this));
+
+            this.brownianMotionCheckbox.addEventListener("change", this.brownianMotionChangeHandler.bind(this));
+            this.brownianMotionRange.addEventListener("input", this.brownianMotionRangeChangeHandler.bind(this));
+
+            this.timeScaleRange.addEventListener("input", this.timeScaleChangeHandler.bind(this));
+          }
+
+          minDistanceChangeHandler(e) {
+            this.minDistanceValue.innerHTML = e.target.value;
+            this.world.setMinDistance(e.target.value);
+          }
+          maxDistanceChangeHandler(e) {
+            this.maxDistanceValue.innerHTML = e.target.value;
+            this.world.setMaxDistance(e.target.value);
+          }
+          repulsionRadiusChangeHandler(e) {
+            this.repulsionRadiusValue.innerHTML = e.target.value;
+            this.world.setRepulsionRadius(e.target.value);
+          }
+
+          attractionForceChangeHandler(e) {
+            this.attractionForceValue.innerHTML = e.target.value;
+            this.world.setAttractionForce(e.target.value);
+          }
+          repulsionForceChangeHandler(e) {
+            this.repulsionForceValue.innerHTML = e.target.value;
+            this.world.setRepulsionForce(e.target.value);
+          }
+          alignmentForceChangeHandler(e) {
+            this.alignmentForceValue.innerHTML = e.target.value;
+            this.world.setAlignmentForce(e.target.value);
+          }
+
+          drawNodesChangeHandler(e) {
+            this.world.setDrawNodes(e.target.checked);
+          }
+          fillModeChangeHandler(e) {
+            this.world.setFillMode(e.target.checked);
+          }
+          debugModeChangeHandler(e) {
+            this.world.setDebugMode(e.target.checked);
+          }
+          traceModeChangeHandler(e) {
+            this.world.setTraceMode(e.target.checked);
+          }
+
+          drawHistoryChangeHandler(e) {
+            this.world.setDrawHistory(e.target.checked);
+          }
+          historyIntervalChangeHandler(e) {
+            this.historyIntervalValue.innerHTML = e.target.value;
+            this.world.setHistoryCaptureInterval(parseFloat(e.target.value));
+          }
+          maxHistoryChangeHandler(e) {
+            this.maxHistoryValue.innerHTML = e.target.value;
+            this.world.setMaxHistorySize(parseInt(e.target.value));
+          }
+
+          brownianMotionChangeHandler(e) {
+            this.world.setBrownianMotion(e.target.checked);
+          }
+          brownianMotionRangeChangeHandler(e) {
+            this.brownianMotionValue.innerHTML = e.target.value;
+          }
+
+          timeScaleChangeHandler(e) {
+            const value = parseFloat(e.target.value);
+            this.timeScaleValue.innerHTML = value + "x";
+            this.world.setTimeScale(value);
+
+            // Update speed indicator on screen
+            const speedIndicatorValue = document.querySelector(".speed-indicator .speed-value");
+            const speedIndicatorContainer = document.querySelector(".speed-indicator");
+            if (speedIndicatorValue) {
+              speedIndicatorValue.innerHTML = value + "x";
+            }
+            // Show/hide based on whether it's 1x
+            if (speedIndicatorContainer) {
+              if (value === 1) {
+                speedIndicatorContainer.classList.add("hidden");
+              } else {
+                speedIndicatorContainer.classList.remove("hidden");
+              }
+            }
+          }
+        }
+
+        module.exports = ParametersPanel;
+      },
+      {},
+    ],
+    5: [
+      function (require, module, exports) {
+        /** @module Path */
+
+        let knn = require("rbush-knn"),
+          Node = require("./Node"),
+          Bounds = require("./Bounds"),
+          Defaults = require("./Defaults");
+
+        /** Manages a set of Nodes in a continuous, ordered data structure (an Array). */
+        class Path {
+          /**
+           * Create a new Path object
+           * @param {object} p5 Reference to global p5.js instance
+           * @param {array} nodes Array of initial Node objects to start with
+           * @param {object} [settings] Object containing local override Settings to be merged with Defaults
+           * @param {boolean} [isClosed] Whether this Path is closed (true) or open (false)
+           * @param {object} [bounds] Bounds object that this Path must stay within
+           * @param {object} [fillColor] Fill color object containing properties h, s, b, and a
+           * @param {object} [strokeColor] Stroke color object containing properties h, s, b, and a
+           * @param {object} [invertedFillColor] Fill color in "invert mode" containing properties h, s, b, and a
+           * @param {object} [invertedStrokeColor] Stroke color in "invert mode" containing properties h, s, b, and a
+           */
+          constructor(
+            p5,
+            nodes,
+            settings = Defaults,
+            isClosed = false,
+            bounds = false,
+            fillColor = { h: 0, s: 0, b: 0, a: 255 },
+            strokeColor = { h: 0, s: 0, b: 0, a: 255 },
+            invertedFillColor = { h: 0, s: 0, b: 255, a: 255 },
+            invertedStrokeColor = { h: 0, s: 0, b: 255, a: 255 }
+          ) {
+            this.p5 = p5;
+            this.nodes = nodes;
+            this.isClosed = isClosed;
+            this.settings = Object.assign({}, Defaults, settings);
+            this.bounds = bounds;
+
+            this.injectionMode = "RANDOM";
+            this.lastNodeInjectTime = 0;
+
+            this.nodeHistory = [];
+
+            this.drawNodes = this.settings.DrawNodes;
+            this.traceMode = this.settings.TraceMode;
+            this.debugMode = this.settings.DebugMode;
+            this.fillMode = this.settings.FillMode;
+            this.useBrownianMotion = this.settings.UseBrownianMotion;
+            this.drawHistory = this.settings.DrawHistory;
+            this.showBounds = this.settings.ShowBounds;
+
+            this.fillColor = fillColor;
+            this.strokeColor = strokeColor;
+            this.invertedFillColor = invertedFillColor;
+            this.invertedStrokeColor = invertedStrokeColor;
+          }
+
+          /**
+           * Run one "tick" of the simulation
+           * @param {object} tree Reference to the appropriate R-tree index that this Path belongs to (see World)
+           */
+          iterate(tree) {
+            for (let [index, node] of this.nodes.entries()) {
+              // Apply Brownian motion to realistically 'jiggle' nodes
+              if (this.useBrownianMotion) {
+                this.applyBrownianMotion(index);
+              }
+
+              // Move towards neighbors (attraction), if there is space to move
+              this.applyAttraction(index);
+
+              // Move away from any nodes that are too close (repulsion)
+              this.applyRepulsion(index, tree);
+
+              // Align with neighbors
+              this.applyAlignment(index);
+
+              // Apply boundaries
+              this.applyBounds(index);
+
+              // Move towards next position
+              node.iterate();
+            }
+
+            // Split any edges that have become too long
+            this.splitEdges();
+
+            // Remove any nodes that are too close to other nodes
+            this.pruneNodes();
+
+            // Inject a new node to introduce asymmetry every so often
+            if (this.p5.millis() - this.lastNodeInjectTime >= this.settings.NodeInjectionInterval) {
+              this.injectNode();
+              this.lastNodeInjectTime = this.p5.millis();
+            }
+          }
+
+          /**
+           * For the Node wit the provided index, simulate the small random motions that real microscopic particles experience from collisions with fast-moving molecules
+           * @param {number} index Index of Node to apply forces to
+           */
+          applyBrownianMotion(index) {
+            this.nodes[index].x += this.p5.random(-this.settings.BrownianMotionRange / 2, this.settings.BrownianMotionRange / 2);
+            this.nodes[index].y += this.p5.random(-this.settings.BrownianMotionRange / 2, this.settings.BrownianMotionRange / 2);
+          }
+
+          /**
+           * Move the Node with the provided index closer to it's connected neighbor Nodes
+           * @param {number} index Index of Node to apply forces to
+           */
+          applyAttraction(index) {
+            let distance, leastMinDistance;
+            let connectedNodes = this.getConnectedNodes(index);
+
+            // Move towards next node, if there is one
+            if (connectedNodes.nextNode != undefined && connectedNodes.nextNode instanceof Node && !this.nodes[index].isFixed) {
+              distance = this.nodes[index].distance(connectedNodes.nextNode);
+              leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.nextNode.minDistance);
+
+              if (distance > leastMinDistance) {
+                this.nodes[index].nextPosition.x = this.p5.lerp(
+                  this.nodes[index].nextPosition.x,
+                  connectedNodes.nextNode.x,
+                  this.settings.AttractionForce
+                );
+                this.nodes[index].nextPosition.y = this.p5.lerp(
+                  this.nodes[index].nextPosition.y,
+                  connectedNodes.nextNode.y,
+                  this.settings.AttractionForce
+                );
+              }
+            }
+
+            // Move towards previous node, if there is one
+            if (connectedNodes.previousNode != undefined && connectedNodes.previousNode instanceof Node && !this.nodes[index].isFixed) {
+              distance = this.nodes[index].distance(connectedNodes.previousNode);
+              leastMinDistance = Math.min(this.nodes[index].minDistance, connectedNodes.previousNode.minDistance);
+
+              if (distance > leastMinDistance) {
+                this.nodes[index].nextPosition.x = this.p5.lerp(
+                  this.nodes[index].nextPosition.x,
+                  connectedNodes.previousNode.x,
+                  this.settings.AttractionForce
+                );
+                this.nodes[index].nextPosition.y = this.p5.lerp(
+                  this.nodes[index].nextPosition.y,
+                  connectedNodes.previousNode.y,
+                  this.settings.AttractionForce
+                );
+              }
+            }
+          }
+
+          /**
+           * Move the referenced Node (by index) away from all other nearby Nodes within the appropriate R-tree index (tree), within a pre-defined radius
+           * @param {number} index Index of Node to apply forces to
+           * @param {object} tree Reference to the appropriate R-tree index that this Path belongs to (see World)
+           */
+          applyRepulsion(index, tree) {
+            // Perform knn search to find all neighbors within certain radius
+            var neighbors = knn(
+              tree,
+              this.nodes[index].x,
+              this.nodes[index].y,
+              undefined,
+              undefined,
+              this.nodes[index].repulsionRadius * this.nodes[index].repulsionRadius
+            ); // radius must be squared as per https://github.com/mourner/rbush-knn/issues/13
+
+            // Move this node away from all nearby neighbors
+            // TODO: Make this proportional to distance?
+            for (let node of neighbors) {
+              this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].x, node.x, -this.settings.RepulsionForce);
+              this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].y, node.y, -this.settings.RepulsionForce);
+            }
+          }
+
+          /**
+           * Move the referenced Node (by index) towards the midpoint of it's connected neighbor Nodes in an effort to minimize curvature
+           * @param {number} index Index of Node to apply forces to
+           */
+          applyAlignment(index) {
+            let connectedNodes = this.getConnectedNodes(index);
+
+            if (
+              connectedNodes.previousNode != undefined &&
+              connectedNodes.previousNode instanceof Node &&
+              connectedNodes.nextNode != undefined &&
+              connectedNodes.nextNode instanceof Node &&
+              !this.nodes[index].isFixed
+            ) {
+              // Find the midpoint between the neighbors of this node
+              let midpoint = this.getMidpointNode(connectedNodes.previousNode, connectedNodes.nextNode);
+
+              // Move this point towards this midpoint
+              this.nodes[index].nextPosition.x = this.p5.lerp(this.nodes[index].nextPosition.x, midpoint.x, this.settings.AlignmentForce);
+              this.nodes[index].nextPosition.y = this.p5.lerp(this.nodes[index].nextPosition.y, midpoint.y, this.settings.AlignmentForce);
+            }
+          }
+
+          /** Search for edges that are too long and inject a new Node to split them up */
+          splitEdges() {
+            for (let [index, node] of this.nodes.entries()) {
+              let connectedNodes = this.getConnectedNodes(index);
+
+              if (
+                connectedNodes.previousNode != undefined &&
+                connectedNodes.previousNode instanceof Node &&
+                node.distance(connectedNodes.previousNode) >= this.settings.MaxDistance
+              ) {
+                let midpointNode = this.getMidpointNode(node, connectedNodes.previousNode);
+
+                // Inject the new midpoint node into the global list
+                if (index == 0) {
+                  this.nodes.splice(this.nodes.length, 0, midpointNode);
+                } else {
+                  this.nodes.splice(index, 0, midpointNode);
+                }
+              }
+            }
+          }
+
+          /** Remove Nodes that are too close to their neighbors to minimize "pinching" */
+          pruneNodes() {
+            for (let [index, node] of this.nodes.entries()) {
+              let connectedNodes = this.getConnectedNodes(index);
+
+              if (
+                connectedNodes.previousNode != undefined &&
+                connectedNodes.previousNode instanceof Node &&
+                node.distance(connectedNodes.previousNode) < this.settings.MinDistance
+              ) {
+                if (index == 0) {
+                  if (!this.nodes[this.nodes.length - 1].isFixed) {
+                    this.nodes.splice(this.nodes.length - 1, 1);
+                  }
+                } else {
+                  if (!this.nodes[index - 1].isFixed) {
+                    this.nodes.splice(index - 1, 1);
+                  }
+                }
+              }
+            }
+          }
+
+          /** Insert a new Node using the current injection method */
+          injectNode() {
+            switch (this.injectionMode) {
+              case "RANDOM":
+                this.injectRandomNode();
+                break;
+              case "CURVATURE":
+                this.injectNodeByCurvature();
+                break;
+            }
+          }
+
+          /** Insert a new Node in a random location along the Path, if there is space for it */
+          injectRandomNode() {
+            // Choose two connected nodes at random
+            let index = parseInt(this.p5.random(1, this.nodes.length));
+            let connectedNodes = this.getConnectedNodes(index);
+
+            if (
+              connectedNodes.previousNode != undefined &&
+              connectedNodes.previousNode instanceof Node &&
+              connectedNodes.nextNode != undefined &&
+              connectedNodes.nextNode instanceof Node &&
+              this.nodes[index].distance(connectedNodes.previousNode) > this.settings.MinDistance
+            ) {
+              // Create a new node in the middle
+              let midpointNode = this.getMidpointNode(this.nodes[index], connectedNodes.previousNode);
+
+              // Splice new node into array
+              this.nodes.splice(index, 0, midpointNode);
+            }
+          }
+
+          /** Insert a new Node in an area where curvature is high */
+          injectNodeByCurvature() {
+            for (let [index, node] of this.nodes.entries()) {
+              let connectedNodes = this.getConnectedNodes(index);
+
+              if (connectedNodes.previousNode == undefined || connectedNodes.nextNode == undefined) {
+                continue;
+              }
+
+              // Find angle between adjacent nodes
+              let n = connectedNodes.nextNode.y - connectedNodes.previousNode.y;
+              let d = connectedNodes.nextNode.x - connectedNodes.previousNode.x;
+              let angle = Math.round(Math.abs(Math.atan(n / d)));
+
+              // // If angle is below a certain angle (high curvature), replace the current node with two nodes
+              if (angle > 20) {
+                let previousMidpointNode = this.getMidpointNode(node, connectedNodes.previousNode);
+                let nextMidpointNode = this.getMidpointNode(node, connectedNodes.nextNode);
+
+                // // Replace this node with the two new nodes
+                if (index == 0) {
+                  this.nodes.splice(this.nodes.length - 1, 0, previousMidpointNode);
+                  this.nodes.splice(0, 0, nextMidpointNode);
+                } else {
+                  this.nodes.splice(index, 1, previousMidpointNode, nextMidpointNode);
+                }
+              }
+            }
+          }
+
+          /**
+           * Do not allow the referenced Node (by index) to leave the interior of the assigned Bounds polygon
+           * @param {number} index Index of Node to apply force to
+           */
+          applyBounds(index) {
+            if (this.bounds != undefined && this.bounds instanceof Bounds && !this.bounds.contains([this.nodes[index].x, this.nodes[index].y])) {
+              this.nodes[index].isFixed = true;
+            }
+          }
+
+          /**
+           * For a given Node, find a return it's immediate connected neighbor Nodes
+           * @param {number} index Index of Node to retrieve neighbors of
+           * @returns {object} References to previous and next nodes, if they exist. Will always return a value for at least one.
+           */
+          getConnectedNodes(index) {
+            let previousNode, nextNode;
+
+            // Find previous node, if there is one
+            if (index == 0 && this.isClosed) {
+              previousNode = this.nodes[this.nodes.length - 1];
+            } else if (index >= 1) {
+              previousNode = this.nodes[index - 1];
+            }
+
+            // Find next node, if there is one
+            if (index == this.nodes.length - 1 && this.isClosed) {
+              nextNode = this.nodes[0];
+            } else if (index <= this.nodes.length - 1) {
+              nextNode = this.nodes[index + 1];
+            }
+
+            return {
+              previousNode,
+              nextNode,
+            };
+          }
+
+          /**
+           * Get a node at a specific offset from the given index along the path
+           * @param {number} index Starting index
+           * @param {number} offset Offset from index (positive or negative)
+           * @returns {object|undefined} Node at the offset position, or undefined if not exists
+           */
+          getNodeAtDistance(index, offset) {
+            if (offset === 0) return this.nodes[index];
+
+            let targetIndex = index + offset;
+
+            if (this.isClosed) {
+              // Wrap around for closed paths
+              targetIndex = ((targetIndex % this.nodes.length) + this.nodes.length) % this.nodes.length;
+              return this.nodes[targetIndex];
+            } else {
+              // Check bounds for open paths
+              if (targetIndex >= 0 && targetIndex < this.nodes.length) {
+                return this.nodes[targetIndex];
+              }
+              return undefined;
+            }
+          }
+
+          /**
+           * Calculate the path distance between two nodes (n = number of nodes along the path, not pixels)
+           * @param {number} fromIndex Starting node index
+           * @param {number} toIndex Target node index
+           * @returns {number} Minimum path distance in nodes (n) between nodes along the path
+           */
+          getPathDistance(fromIndex, toIndex) {
+            if (fromIndex === toIndex) return 0;
+
+            const directDistance = Math.abs(toIndex - fromIndex);
+
+            if (this.isClosed) {
+              // For closed paths, consider wrap-around distance
+              const wrapDistance = this.nodes.length - directDistance;
+              return Math.min(directDistance, wrapDistance);
+            } else {
+              return directDistance;
+            }
+          }
+
+          /**
+           * Create and return a Node exactly halfway between the two provided Nodes
+           * @param {object} node1 First node
+           * @param {object} node2 Second node
+           * @param {boolean} [fixed] Whether this new Node should be fixed or not
+           * @returns {object} New Node object
+           */
+          getMidpointNode(node1, node2, fixed = false) {
+            return new Node(this.p5, (node1.x + node2.x) / 2, (node1.y + node2.y) / 2, this.settings, fixed);
+          }
+
+          /** Draw this Path to the canvas using current object visibility settings */
+          draw() {
+            // Check if dark mode is active
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+
+            // Select appropriate colors based on dark mode
+            const currentFillColor = isDarkMode ? this.invertedFillColor : this.fillColor;
+            const currentStrokeColor = isDarkMode ? this.invertedStrokeColor : this.strokeColor;
+
+            // Draw all the previous paths saved to the history array
+            if (this.drawHistory) {
+              this.drawPreviousEdges();
+            }
+
+            // Draw bounds
+            if (this.showBounds && this.bounds != undefined && this.bounds instanceof Bounds) {
+              this.drawBounds();
+            }
+
+            // Set shape fill
+            if (this.fillMode && this.isClosed) {
+              this.p5.fill(currentFillColor.h, currentFillColor.s, currentFillColor.b, currentFillColor.a);
+            } else {
+              this.p5.noFill();
+            }
+
+            // Set stroke color
+            this.p5.stroke(currentStrokeColor.h, currentStrokeColor.s, currentStrokeColor.b, currentStrokeColor.a);
+
+            // Draw current edges
+            this.drawCurrentEdges();
+
+            // Draw all nodes
+            if (this.drawNodes) {
+              this.drawCurrentNodes();
+            }
+          }
+
+          /** Draw the current edges (leading edge) of the path */
+          drawCurrentEdges() {
+            this.drawEdges(this.nodes);
+          }
+
+          /** Draw all previous edges of the path saved to history array */
+          drawPreviousEdges() {
+            // Check if dark mode is active
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+            const currentStrokeColor = isDarkMode ? this.invertedStrokeColor : this.strokeColor;
+
+            for (let [index, nodes] of this.nodeHistory.entries()) {
+              this.p5.stroke(currentStrokeColor.h, currentStrokeColor.s, currentStrokeColor.b, index * 30);
+
+              this.drawEdges(nodes);
+            }
+          }
+
+          /**
+           * Draw edges for a given set of nodes - can be either the current or previous nodes
+           * @param {array} nodes Array of Node objects
+           */
+          drawEdges(nodes) {
+            // Begin capturing vertices
+            if (!this.debugMode) {
+              this.p5.beginShape();
+            }
+
+            // Create vertices or lines (if debug mode)
+            for (let i = 0; i < nodes.length; i++) {
+              if (!this.debugMode) {
+                this.p5.vertex(nodes[i].x, nodes[i].y);
+              } else {
+                // In debug mode each line has a unique stroke color, which isn't possible with begin/endShape(). Instead we'll use line()
+                if (i > 0) {
+                  if (!this.traceMode) {
+                    this.p5.stroke(this.p5.map(i, 0, nodes.length - 1, 0, 255, true), 255, 255, 255);
+                  } else {
+                    this.p5.stroke(this.p5.map(i, 0, nodes.length - 1, 0, 255, true), 255, 255, 2);
+                  }
+
+                  this.p5.line(nodes[i - 1].x, nodes[i - 1].y, nodes[i].x, nodes[i].y);
+                }
+              }
+            }
+
+            // For closed paths, connect the last and first nodes
+            if (this.isClosed) {
+              if (!this.debugMode) {
+                this.p5.vertex(nodes[0].x, nodes[0].y);
+              } else {
+                this.p5.line(nodes[nodes.length - 1].x, nodes[nodes.length - 1].y, nodes[0].x, nodes[0].y);
+              }
+            }
+
+            // Stop capturing vertices
+            if (!this.debugMode) {
+              this.p5.endShape();
+            }
+          }
+
+          /** Draw circles for every node */
+          drawCurrentNodes() {
+            this.p5.noStroke();
+
+            // Check if dark mode is active
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+
+            if (!isDarkMode) {
+              this.p5.fill(0);
+            } else {
+              this.p5.fill(255);
+            }
+
+            for (let [index, node] of this.nodes.entries()) {
+              if (this.debugMode) {
+                this.p5.fill(this.p5.map(index, 0, this.nodes.length - 1, 0, 255, true), 255, 255, 255);
+              }
+
+              node.draw();
+            }
+          }
+
+          /** Draw boundary shape(s) */
+          drawBounds() {
+            // Check if dark mode is active
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+
+            if (!isDarkMode) {
+              this.p5.stroke(200);
+            } else {
+              this.p5.stroke(100);
+            }
+
+            this.p5.noFill();
+
+            this.bounds.draw();
+          }
+
+          /** Take a snapshot of the current nodes by saving a dereferenced clone of them to the history array */
+          addToHistory() {
+            if (this.nodeHistory.length == this.settings.MaxHistorySize) {
+              this.nodeHistory.shift();
+            }
+
+            this.nodeHistory.push(Object.assign([], JSON.parse(JSON.stringify(this.nodes))));
+          }
+
+          /**
+           * Move this entire Path by a certain amount by moving all of it's Nodes
+           * @param {number} xOffset Distance on X axis to move Path
+           * @param {number} yOffset Distance on Y axis to move Path
+           */
+          moveTo(xOffset, yOffset) {
+            for (let node of this.nodes) {
+              node.x += xOffset;
+              node.y += yOffset;
+            }
+          }
+
+          /**
+           * Scale (multiply) all Nodes by the provided factor
+           * @param {number} factor Factor to multiple all Nodes' coordinates by
+           */
+          scale(factor) {
+            for (let node of this.nodes) {
+              node.x *= factor;
+              node.y *= factor;
+            }
+          }
+
+          /**
+           * Insert a new Node object from outside of this class
+           * @param {object} node Node object to insert
+           */
+          addNode(node) {
+            this.nodes.push(node);
+          }
+
+          /**
+           * Return a raw 2D array of all Node coordinates. Useful for creating Bounds objects.
+           * @returns {array} Array of all Node coordinates in the format of [polygon_n][x1][y1], ...
+           */
+          toArray() {
+            let polygon = [];
+
+            for (let node of this.nodes) {
+              polygon.push([node.x, node.y]);
+            }
+
+            return polygon;
+          }
+
+          /**
+           * Get the current state of "trace mode" flag
+           * @returns {boolean} Current state of "trace mode" flag
+           */
+          getTraceMode() {
+            return this.traceMode;
+          }
+
+          /**
+           * Sets the minimum distance that each Node wants to be from it's neighboring Nodes
+           * @param {number} minDistance
+           */
+          setMinDistance(minDistance) {
+            this.settings.MinDistance = minDistance;
+
+            for (let node of this.nodes) {
+              node.minDistance = minDistance;
+            }
+          }
+
+          /**
+           * Sets the maximum distance an edge can be before it is split
+           * @param {number} maxDistance
+           */
+          setMaxDistance(maxDistance) {
+            this.settings.MaxDistance = maxDistance;
+
+            for (let node of this.nodes) {
+              node.maxDistance = maxDistance;
+            }
+          }
+
+          /**
+           * Sets the radius around each Node that it can affect other Nodes
+           * @param {number} repulsionRadius
+           */
+          setRepulsionRadius(repulsionRadius) {
+            this.settings.RepulsionRadius = repulsionRadius;
+
+            for (let node of this.nodes) {
+              node.repulsionRadius = repulsionRadius;
+            }
+          }
+
+          /**
+           * Sets the force scalar that is used when Nodes pull each other closer
+           * @param {number} attractionForce
+           */
+          setAttractionForce(attractionForce) {
+            this.settings.AttractionForce = attractionForce;
+          }
+
+          /**
+           * Sets the force scalar that is used when Nodes are pushing others away
+           * @param {number} repulsionForce
+           */
+          setRepulsionForce(repulsionForce) {
+            this.settings.RepulsionForce = repulsionForce;
+          }
+
+          /**
+           * Sets the force scalar that is used when Nodes trying to align with their neighbors to reduce curvature
+           * @param {number} alignmentForce
+           */
+          setAlignmentForce(alignmentForce) {
+            this.settings.AlignmentForce = alignmentForce;
+          }
+
+          /**
+           * Sets the state of the "trace mode" flag
+           * @param {boolean} state New state for "trace mode" flag
+           */
+          setTraceMode(state) {
+            this.traceMode = state;
+          }
+
+          /**
+           * Set the Bounds object that this Path must stay within
+           * @param {object} bounds Bounds object that this Path must stay within
+           */
+          setBounds(bounds) {
+            this.bounds = bounds;
+          }
+
+          /** Toggle the current state of the "trace mode" flag */
+          toggleTraceMode() {
+            this.setTraceMode(!this.getTraceMode());
+          }
+        }
+
+        module.exports = Path;
+      },
+      { "./Bounds": 1, "./Defaults": 2, "./Node": 3, "rbush-knn": 13 },
+    ],
+    6: [
+      function (require, module, exports) {
+        /** @module SVGLoader */
+
+        let Node = require("./Node"),
+          Path = require("./Path"),
+          Defaults = require("./Defaults"),
+          { SVGPathData } = require("svg-pathdata");
+
+        /** Utility class to load an external SVG file and produce Path(s) */
+        class SVGLoader {
+          constructor() {}
+
+          /**
+           * Kick of loading of an SVG document embedded within a DOM element with the provided ID
+           * @param {object} p5 Reference to the global instance of p5.js
+           * @param {string} id ID attribute of the DOM node to load SVG data from
+           * @param {object} settings Object containing local override Settings to merge with Defaults
+           * @returns {array} See `load()`
+           */
+          static loadFromObject(p5, id, settings = Defaults) {
+            return this.load(p5, document.getElementById(id), settings);
+          }
+
+          /**
+           * Extract path data from the provided SVG node and produce a set of Path objects with Nodes
+           * @param {object} p5 Reference to the global instance of p5.js
+           * @param {node} svgNode SVG DOM node to load data from
+           * @param {object} settings Object containing local override Settings to merge with Defaults
+           */
+          static load(p5, svgNode, settings = Defaults) {
+            this.settings = Object.assign({}, Defaults, settings);
+
+            let inputPaths = svgNode.querySelectorAll("path"),
+              currentPath = new Path(p5, [], this.settings, true),
+              paths = [];
+
+            // Scrape all points from all points, and record breakpoints
+            for (let inputPath of inputPaths) {
+              let pathData = new SVGPathData(inputPath.getAttribute("d"));
+
+              let previousCoords = {
+                x: 0,
+                y: 0,
+              };
+
+              for (let [index, command] of pathData.commands.entries()) {
+                switch (command.type) {
+                  // Move ('M') and line ('L') commands have both X and Y
+                  case SVGPathData.MOVE_TO:
+                  case SVGPathData.LINE_TO:
+                    currentPath.addNode(new Node(p5, command.x, command.y, this.settings));
+                    break;
+
+                  // Horizontal line ('H') commands only have X, using previous command's Y
+                  case SVGPathData.HORIZ_LINE_TO:
+                    currentPath.addNode(new Node(p5, command.x, previousCoords.y, this.settings));
+                    break;
+
+                  // Vertical line ('V') commands only have Y, using previous command's X
+                  case SVGPathData.VERT_LINE_TO:
+                    currentPath.addNode(new Node(p5, previousCoords.x, command.y, this.settings));
+                    break;
+
+                  // ClosePath ('Z') commands are a naive indication that the current path can be processed and added to the world
+                  case SVGPathData.CLOSE_PATH:
+                    // Capture path in return object
+                    paths.push(currentPath);
+
+                    // Set up a new empty Path for the next loop iterations
+                    currentPath = new Path(p5, [], this.settings, true);
+                    currentPath.setInvertedColors(true);
+                    break;
+                }
+
+                // Unclosed paths never have CLOSE_PATH commands, so wrap up the current path when we're at the end of the path and have not found the command
+                if (index == pathData.commands.length - 1 && command.type != SVGPathData.CLOSE_PATH) {
+                  let firstNode = currentPath.nodes[0],
+                    lastNode = currentPath.nodes[currentPath.nodes.length - 1];
+
+                  // Automatically close the path if the first and last nodes are effectively the same, even if a CLOSE_PATH command doesn't exist
+                  if (lastNode.distance(firstNode) < 0.1) {
+                    currentPath.isClosed = true;
+                  } else {
+                    currentPath.isClosed = false;
+                  }
+
+                  paths.push(currentPath);
+
+                  currentPath = new Path(p5, [], this.settings, true);
+                }
+
+                // Capture X coordinate, if there was one
+                if (command.hasOwnProperty("x")) {
+                  previousCoords.x = command.x;
+                }
+
+                // Capture Y coordinate, if there was one
+                if (command.hasOwnProperty("y")) {
+                  previousCoords.y = command.y;
+                }
+              }
+            }
+
+            return paths;
+          }
+        }
+
+        module.exports = SVGLoader;
+      },
+      { "./Defaults": 2, "./Node": 3, "./Path": 5, "svg-pathdata": 15 },
+    ],
+    7: [
+      function (require, module, exports) {
+        module.exports = {
+          MinDistance: 2,
+          MaxDistance: 5,
+          RepulsionRadius: 15,
+          MaxVelocity: 0.1,
+          AttractionForce: 0.2,
+          RepulsionForce: 0.6,
+          AlignmentForce: 0.55,
+          NodeInjectionInterval: 100,
+          DrawNodes: false,
+          TraceMode: false,
+          InvertedColors: false,
+          DebugMode: false,
+          FillMode: false,
+          DrawHistory: false,
+          ShowBounds: true,
+          UseBrownianMotion: true,
+          BrownianMotionRange: 0.01,
+          TimeScale: 1,
+        };
+      },
+      {},
+    ],
+    8: [
+      function (require, module, exports) {
+        /** @module World */
+
+        let rbush = require("rbush"),
+          toPath = require("svg-points").toPath,
+          saveAs = require("file-saver").saveAs,
+          Defaults = require("./Defaults");
+
+        /** Manages a set of Paths and provides some global control mechanisms, such as pausing the simulation. */
+        class World {
+          /**
+           * Create a new World object
+           * @param {object} p5 Reference to global p5.js instance
+           * @param {object} [settings] Object containing local override Settings to be merged with Defaults
+           * @param {array} [paths] Array of Path objects that belong to this World
+           */
+          constructor(p5, settings = Defaults, paths = []) {
+            this.p5 = p5;
+            this.paths = paths;
+
+            this.paused = false;
+            this.settings = Object.assign({}, Defaults, settings);
+
+            // Load time scale from localStorage if available
+            const savedTimeScale = localStorage.getItem("differential-growth-timeScale");
+            if (savedTimeScale !== null) {
+              this.settings.TimeScale = parseFloat(savedTimeScale);
+            }
+
+            this.traceMode = this.settings.TraceMode;
+            this.drawNodes = this.settings.DrawNodes;
+            this.debugMode = this.settings.DebugMode;
+            this.fillMode = this.settings.FillMode;
+            this.drawHistory = this.settings.DrawHistory;
+            this.useBrownianMotion = this.settings.UseBrownianMotion;
+            this.showBounds = this.settings.ShowBounds;
+            this.timeScale = this.settings.TimeScale;
+
+            this.tree = rbush(9, [".x", ".y", ".x", ".y"]); // use custom accessor strings per https://github.com/mourner/rbush#data-format
+            this.buildTree();
+
+            // Begin capturing path history
+            this.historyIntervalId = null;
+            this.startHistoryCapture();
+          }
+
+          /** Start or restart history capture with current interval setting */
+          startHistoryCapture() {
+            // Clear existing interval if it exists
+            if (this.historyIntervalId !== null) {
+              clearInterval(this.historyIntervalId);
+            }
+
+            // Start new interval
+            let _this = this;
+            this.historyIntervalId = setInterval(function () {
+              _this.addToHistory();
+            }, this.settings.HistoryCaptureInterval);
+          }
+
+          /** Run a single "tick" of the simulation by iterating on all Paths */
+          iterate() {
+            this.prunePaths();
+            this.buildTree();
+
+            if (this.paths != undefined && this.paths instanceof Array && this.paths.length > 0 && !this.paused) {
+              for (let path of this.paths) {
+                path.iterate(this.tree);
+              }
+            }
+          }
+
+          /** Draw the background and all Paths */
+          draw() {
+            if (!this.traceMode) {
+              this.drawBackground();
+            }
+
+            for (let path of this.paths) {
+              path.draw();
+            }
+          }
+
+          /** Draw the background to the canvas */
+          drawBackground() {
+            // Use transparent background to show webpage background
+            this.p5.clear();
+          }
+
+          /** Build an R-tree spatial index with all Nodes of all Paths in this World */
+          buildTree() {
+            this.tree.clear();
+
+            for (let path of this.paths) {
+              this.tree.load(path.nodes);
+            }
+          }
+
+          /**
+           * Add a new Path to the World from outside this class
+           * @param {object} path Path object to add to this World
+           */
+          addPath(path) {
+            // Cascade all current World settings to new path
+            path.drawNodes = this.drawNodes;
+            path.debugMode = this.debugMode;
+            path.fillMode = this.fillMode;
+            path.useBrownianMotion = this.useBrownianMotion;
+            path.setTraceMode(this.traceMode);
+
+            this.paths.push(path);
+          }
+
+          /**
+           * Add multiple Path objects to this World
+           * @param {array} paths
+           */
+          addPaths(paths) {
+            for (let path of paths) {
+              this.addPath(path);
+            }
+          }
+
+          /** Add another snapshot to each Path */
+          addToHistory() {
+            if (!this.paused) {
+              for (let path of this.paths) {
+                path.addToHistory();
+              }
+            }
+          }
+
+          /** Remove any Paths that have gotten too small */
+          prunePaths() {
+            for (let i = 0; i < this.paths.length; i++) {
+              if (this.paths[i].nodes.length <= 1) {
+                this.paths.splice(i, 1);
+              }
+            }
+          }
+
+          /** Generate an SVG file using the current canvas contents and open up a download prompt on the user's machine */
+          export() {
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg");
+            svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+            svg.setAttribute("width", window.innerWidth);
+            svg.setAttribute("height", window.innerHeight);
+            svg.setAttribute("viewBox", "0 0 " + window.innerWidth + " " + window.innerHeight);
+
+            // Add background rectangle based on current theme for SVG export
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+            let bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            bgRect.setAttribute("width", window.innerWidth);
+            bgRect.setAttribute("height", window.innerHeight);
+            bgRect.setAttribute("fill", isDarkMode ? "#000000" : "#ffffff");
+            svg.appendChild(bgRect);
+
+            // Add a <path> node for every Path in this World
+            for (let path of this.paths) {
+              // If history is enabled, create a new <path> node for each snapshot
+              if (this.drawHistory) {
+                for (let nodes of path.nodeHistory) {
+                  svg.appendChild(this.createPathElFromNodes(nodes, path.isClosed));
+                }
+              }
+
+              svg.appendChild(this.createPathElFromNodes(path.nodes), path.isClosed);
+            }
+
+            // Force download of SVG based on https://jsfiddle.net/ch77e7yh/1
+            const svgDoctype = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
+            const serializedSvg = new XMLSerializer().serializeToString(svg);
+            const blob = new Blob([svgDoctype, serializedSvg], { type: "image/svg+xml;" });
+            saveAs(blob, "differential-growth-" + Date.now() + ".svg");
+          }
+
+          /**
+           * Create a new SVG path element from a provided set of Node objects
+           * @param {array} nodes Array of Node objects
+           * @param {boolean} isClosed Whether this path should be closed (true) or open (false)
+           * @returns SVG path DOM node with a `d` attribute generated from the provided Nodes array.
+           */
+          createPathElFromNodes(nodes, isClosed) {
+            let pointsString = "";
+
+            for (let [index, node] of nodes.entries()) {
+              pointsString += node.x + "," + node.y;
+
+              if (index < nodes.length - 1) {
+                pointsString += " ";
+              }
+            }
+
+            let d = toPath({
+              type: "polyline",
+              points: pointsString,
+            });
+
+            if (isClosed) {
+              d += " Z";
+            }
+
+            // Use current theme for stroke color in SVG export
+            const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+            const strokeColor = isDarkMode ? "white" : "black";
+
+            let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            pathEl.setAttribute("d", d);
+            pathEl.setAttribute("style", `fill: none; stroke: ${strokeColor}; stroke-width: 1`);
+
+            return pathEl;
+          }
+
+          /** Remove all Paths from this World */
+          clearPaths() {
+            this.paths = [];
+          }
+
+          /** Pause the simulation */
+          pause() {
+            this.paused = true;
+          }
+
+          /** Unpause the simulation */
+          unpause() {
+            this.paused = false;
+          }
+
+          /**
+           * Get the current state of the Nodes visibility flag
+           * @returns {boolean} Current state of Node visibility flag
+           */
+          getDrawNodes() {
+            return this.drawNodes;
+          }
+
+          /**
+           * Get the current state of the debug mode flag
+           * @returns {boolean} Current state of debug mode flag
+           */
+          getDebugMode() {
+            return this.debugMode;
+          }
+
+          /**
+           * Get the current state of the fill mode flag
+           * @returns {boolean} Current state of the fill mode flag
+           */
+          getFillMode() {
+            return this.fillMode;
+          }
+
+          /**
+           * Get the current state of the history effect visibility flag
+           * @returns {boolean} Current state of the history effect visibility flag
+           */
+          getDrawHistory() {
+            return this.drawHistory;
+          }
+
+          /**
+           * Get the current state of the Bounds visibility flag
+           * @returns {boolean} Current state of the Bounds visibility flag
+           */
+          getDrawBounds() {
+            return this.showBounds;
+          }
+
+          /**
+           * Set the minimum distance that each Node wants to be from it's connected neighbors
+           * @param {number} minDistance Distance that each Node wants to be from it's neighbors
+           */
+          setMinDistance(minDistance) {
+            this.settings.MinDistance = minDistance;
+
+            for (let path of this.paths) {
+              path.setMinDistance(minDistance);
+            }
+          }
+
+          /**
+           * Set the maximum distance an edge can be before it is split
+           * @param {number} maxDistance Distance between each Node
+           */
+          setMaxDistance(maxDistance) {
+            this.settings.MaxDistance = maxDistance;
+
+            for (let path of this.paths) {
+              path.setMaxDistance(maxDistance);
+            }
+          }
+
+          /**
+           * Set the distance around each Node that it can affect other Nodes through repulsion
+           * @param {number} repulsionRadius Distance around each Node
+           */
+          setRepulsionRadius(repulsionRadius) {
+            this.settings.RepulsionRadius = repulsionRadius;
+
+            for (let path of this.paths) {
+              path.setRepulsionRadius(repulsionRadius);
+            }
+          }
+
+          /**
+           * Set the force scalar that is used when Nodes pull each other closer
+           * @param {number} attractionForce Scalar value used for attraction force
+           */
+          setAttractionForce(attractionForce) {
+            this.settings.AttractionForce = attractionForce;
+
+            for (let path of this.paths) {
+              path.setAttractionForce(attractionForce);
+            }
+          }
+
+          /**
+           * Set the force scalar that is used when Nodes are pushing others away
+           * @param {number} repulsionForce Scalar value used for repulsion force
+           */
+          setRepulsionForce(repulsionForce) {
+            this.settings.RepulsionForce = repulsionForce;
+
+            for (let path of this.paths) {
+              path.setRepulsionForce(repulsionForce);
+            }
+          }
+
+          /**
+           * Set the force scalar that is used when Nodes trying to align with their neighbors to reduce curvature
+           * @param {number} alignmentForce Scalar value used for alignment force
+           */
+          setAlignmentForce(alignmentForce) {
+            this.settings.AlignmentForce = alignmentForce;
+
+            for (let path of this.paths) {
+              path.setAlignmentForce(alignmentForce);
+            }
+          }
+
+          /**
+           * Set the state of the Node visibility flag
+           * @param {boolean} state Next state for the Node visibility flag
+           */
+          setDrawNodes(state) {
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.drawNodes = state;
+              path.draw();
+            }
+
+            this.drawNodes = state;
+            this.settings.DrawNodes = state;
+          }
+
+          /**
+           * Set the state of the "debug mode" flag
+           * @param {boolean} state Next state for the "debug mode" flag
+           */
+          setDebugMode(state) {
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.debugMode = state;
+              path.draw();
+            }
+
+            this.debugMode = state;
+            this.settings.DebugMode = state;
+          }
+
+          /**
+           * Set the state of the "fill mode" flag
+           * @param {boolean} state Next state for the "fill mode" flag
+           */
+          setFillMode(state) {
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.fillMode = state;
+              path.draw();
+            }
+
+            this.fillMode = state;
+            this.settings.FillMode = state;
+          }
+
+          /**
+           * Set the state of the "history" effect flag
+           * @param {boolean} state Next state for the "history" effect flag
+           */
+          setDrawHistory(state) {
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.drawHistory = state;
+              path.draw();
+            }
+
+            this.drawHistory = state;
+            this.settings.DrawHistory = state;
+          }
+
+          /**
+           * Set the state of the "trace mode" flag
+           * @param {boolean} state Next state for the "trace mode" flag
+           */
+          setTraceMode(state) {
+            this.traceMode = state;
+            this.settings.TraceMode = state;
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.traceMode = state;
+            }
+          }
+
+          /**
+           * Set the state of the Bounds visibility flag
+           * @param {boolean} state Next state for the Bounds visibility flag
+           */
+          setDrawBounds(state) {
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.showBounds = state;
+              path.draw();
+            }
+
+            this.showBounds = state;
+          }
+
+          /**
+           * Set the state of Brownian motion
+           * @param {boolean} state Next state for Brownian motion
+           */
+          setBrownianMotion(state) {
+            this.useBrownianMotion = state;
+            this.settings.UseBrownianMotion = state;
+
+            for (let path of this.paths) {
+              path.useBrownianMotion = state;
+            }
+          }
+
+          /**
+           * Set the history capture interval
+           * @param {number} interval Interval in milliseconds
+           */
+          setHistoryCaptureInterval(interval) {
+            this.settings.HistoryCaptureInterval = interval;
+            this.startHistoryCapture();
+          }
+
+          /**
+           * Set the maximum history size
+           * @param {number} size Maximum number of history snapshots to keep
+           */
+          setMaxHistorySize(size) {
+            this.settings.MaxHistorySize = size;
+
+            for (let path of this.paths) {
+              path.settings.MaxHistorySize = size;
+            }
+          }
+
+          /**
+           * Set the time scale for simulation speed
+           * @param {number} scale Speed multiplier (1 = normal, higher = faster)
+           */
+          setTimeScale(scale) {
+            this.timeScale = scale;
+            this.settings.TimeScale = scale;
+
+            // Save to localStorage
+            localStorage.setItem("differential-growth-timeScale", scale.toString());
+          }
+
+          /**
+           * Get the current time scale
+           * @returns {number} Current time scale value
+           */
+          getTimeScale() {
+            return this.timeScale;
+          }
+
+          /** Toggle the state of the Node visibility flag */
+          toggleDrawNodes() {
+            this.setDrawNodes(!this.getDrawNodes());
+          }
+
+          /** Toggle the state of the "trace mode" effect flag */
+          toggleTraceMode() {
+            this.traceMode = !this.traceMode;
+            this.drawBackground();
+
+            for (let path of this.paths) {
+              path.toggleTraceMode();
+              path.draw();
+            }
+          }
+
+          /** Toggle the state of the "debug mode" flag */
+          toggleDebugMode() {
+            this.setDebugMode(!this.getDebugMode());
+          }
+
+          /** Toggle the state of the "fill mode" flag */
+          toggleFillMode() {
+            this.setFillMode(!this.getFillMode());
+          }
+
+          /** Toggle the state of the "history" effect flag */
+          toggleDrawHistory() {
+            this.setDrawHistory(!this.getDrawHistory());
+          }
+
+          /** Toggle the state of the Bounds visibility flag */
+          toggleDrawBounds() {
+            this.setDrawBounds(!this.getDrawBounds());
+          }
+
+          /** Toggle the pause/unpause state of the simulation */
+          togglePause() {
+            if (this.paused) {
+              this.unpause();
+            } else {
+              this.pause();
+            }
+          }
+        }
+
+        module.exports = World;
+      },
+      { "./Defaults": 2, "file-saver": 10, rbush: 14, "svg-points": 16 },
+    ],
+    9: [
+      function (require, module, exports) {
+        let Node = require("./Node"),
+          Path = require("./Path"),
+          World = require("./World"),
+          SVGLoader = require("./SVGLoader"),
+          Settings = require("./Settings"),
+          ParametersPanel = require("./ParametersPanel");
+
+        let world,
+          path,
+          nodes = [];
+
+        const FREEHAND = 0,
+          RECTANGLE = 1,
+          CIRCLE = 2;
+        let activeTool = FREEHAND;
+
+        let distanceToClose = 10;
+
+        let startX, startY, endX, endY, deltaX, deltaY;
+        let wasPlayingBeforeDrawing = false;
+        let isDrawing = false;
+
+        let allButtonEls = document.querySelectorAll("button"),
+          svgImportInputEl = document.querySelector(".svgImportInput"),
+          playButtonEl = document.querySelector(".play");
+
+        let modalEl = document.querySelector(".modal"),
+          triggeringEl,
+          firstFocusableElement,
+          lastFocusableElement,
+          backdropClickHandler = null;
+
+        let speedIndicatorEl = document.querySelector(".speed-indicator .speed-value"),
+          speedIndicatorContainer = document.querySelector(".speed-indicator");
+
+        /*
+=============================================================================
+  p5.js sketch
+=============================================================================
+*/
+
+        const sketch = function (p5) {
+          // Setup -------------------------------------------------------------
+          p5.setup = function () {
+            console.log("p5.setup called");
+            const container = document.getElementById("p5-canvas");
+            if (!container) {
+              console.error("p5-canvas container not found");
+              return;
+            }
+            console.log("Container found:", container);
+
+            // Use full window dimensions below navbar (60px)
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight - 60;
+
+            const canvas = p5.createCanvas(containerWidth, containerHeight);
+            console.log("Canvas created:", canvas, "size:", containerWidth, "x", containerHeight);
+            canvas.parent("p5-canvas");
+            p5.colorMode(p5.HSB, 255);
+            p5.rectMode(p5.CENTER);
+            p5.smooth();
+            console.log("Canvas setup complete");
+
+            // Set up and start the simulation
+            try {
+              world = new World(p5, Settings);
+              world.pause();
+              console.log("World created successfully");
+
+              // Set up the Parameters window
+              let paramPanel = new ParametersPanel(world);
+              console.log("ParametersPanel created successfully");
+
+              // Update speed indicator with loaded value
+              if (speedIndicatorEl) {
+                speedIndicatorEl.innerHTML = world.settings.TimeScale + "x";
+                // Hide if speed is 1x
+                if (speedIndicatorContainer) {
+                  if (world.settings.TimeScale === 1) {
+                    speedIndicatorContainer.classList.add("hidden");
+                  } else {
+                    speedIndicatorContainer.classList.remove("hidden");
+                  }
+                }
+              }
+            } catch (err) {
+              console.error("Error creating World or ParametersPanel:", err);
+            }
+
+            // Wait a bit for DOM to be fully ready, then set up event listeners
+            setTimeout(function () {
+              // Left menu ----------------------
+              // Drawing tools
+              const freehand = document.querySelector(".freehand");
+              const rectangle = document.querySelector(".rectangle");
+              const circle = document.querySelector(".circle");
+
+              if (freehand) freehand.addEventListener("click", handleToolClick);
+              if (rectangle) rectangle.addEventListener("click", handleToolClick);
+              if (circle) circle.addEventListener("click", handleToolClick);
+
+              // Import, export, and clear
+              const importBtn = document.querySelector(".import");
+              const resetBtn = document.querySelector(".reset");
+              const exportBtn = document.querySelector(".export");
+
+              if (importBtn) importBtn.addEventListener("click", openFileImport);
+              if (resetBtn) resetBtn.addEventListener("click", clearPaths);
+              if (exportBtn) exportBtn.addEventListener("click", exportSVG);
+
+              // Center controls ----------------
+              const playBtn = document.querySelector(".play");
+              if (playBtn) playBtn.addEventListener("click", togglePause);
+
+              // Right menu ---------------------
+              const keyboardBtn = document.querySelector(".keyboard");
+              const aboutBtn = document.querySelector(".about");
+              const parametersBtn = document.querySelector(".parameters");
+
+              if (keyboardBtn) keyboardBtn.addEventListener("click", toggleKeyboardControls);
+              if (aboutBtn) aboutBtn.addEventListener("click", toggleAbout);
+              if (parametersBtn) parametersBtn.addEventListener("click", toggleParameters);
+
+              // Other functions ----------------
+              const svgInput = document.querySelector(".svgImportInput");
+              const startBtn = document.querySelector(".start");
+              const resetParamsBtn = document.querySelector(".reset-params");
+
+              if (svgInput) svgInput.addEventListener("change", importSVG);
+              if (startBtn) startBtn.addEventListener("click", closeModal);
+              if (resetParamsBtn) resetParamsBtn.addEventListener("click", resetParameters);
+
+              console.log("Event listeners attached");
+              console.log("Buttons found:", {
+                freehand: !!freehand,
+                rectangle: !!rectangle,
+                circle: !!circle,
+                play: !!playBtn,
+                keyboard: !!keyboardBtn,
+              });
+            }, 200);
+          };
+
+          // Draw ---------------------------------------------------------------
+          p5.draw = function () {
+            if (!world) return;
+
+            if (!world.paused) {
+              // Apply time scale by iterating multiple times per frame
+              const iterations = Math.floor(world.timeScale);
+              for (let i = 0; i < iterations; i++) {
+                world.iterate();
+              }
+              world.draw();
+            }
+          };
+
+          p5.windowResized = function () {
+            p5.resizeCanvas(window.innerWidth, window.innerHeight - 60);
+            if (world) {
+              world.drawBackground();
+            }
+          };
+
+          /*
+  =============================================================================
+    Custom functions
+  =============================================================================
+  */
+          function setActiveTool(tool) {
+            for (let button of allButtonEls) {
+              button.removeAttribute("aria-current");
+            }
+
+            switch (tool) {
+              case FREEHAND:
+                document.querySelector(".freehand").setAttribute("aria-current", true);
+                break;
+              case RECTANGLE:
+                document.querySelector(".rectangle").setAttribute("aria-current", true);
+                break;
+              case CIRCLE:
+                document.querySelector(".circle").setAttribute("aria-current", true);
+                break;
+            }
+
+            activeTool = tool;
+          }
+
+          // Set active tool based on which tool icon was clicked
+          function handleToolClick(e) {
+            // Use currentTarget to get the button element, not the icon/text span that was clicked
+            const button = e.currentTarget;
+            if (button.classList.contains("freehand")) {
+              setActiveTool(FREEHAND);
+            } else if (button.classList.contains("rectangle")) {
+              setActiveTool(RECTANGLE);
+            } else if (button.classList.contains("circle")) {
+              setActiveTool(CIRCLE);
+            }
+          }
+
+          // Import SVG - open file input dialog
+          function openFileImport() {
+            svgImportInputEl.click();
+          }
+
+          // Eraser - clear all paths from the world
+          function clearPaths() {
+            world.clearPaths();
+            world.drawBackground();
+          }
+
+          // Download SVG - export world contents as SVG
+          function exportSVG() {
+            world.export();
+          }
+
+          // Play button - toggle pause/unpause of world
+          function togglePause() {
+            world.togglePause();
+
+            let icon = playButtonEl.querySelector(".icon");
+            let text = playButtonEl.querySelector(".text");
+
+            if (world.paused) {
+              icon.classList.remove("fa-pause");
+              icon.classList.add("fa-play");
+              text.innerHTML = "Play";
+            } else {
+              icon.classList.remove("fa-play");
+              icon.classList.add("fa-pause");
+              text.innerHTML = "Pause";
+            }
+          }
+
+          // Keyboard icon - toggle keyboard controls modal window
+          function toggleKeyboardControls() {
+            triggeringEl = document.querySelector(".keyboard");
+            openModal("keyboard-controls");
+          }
+
+          // Question mark icon - toggle 'about' modal window
+          function toggleAbout() {
+            triggeringEl = document.querySelector(".about");
+            openModal("about");
+          }
+
+          // Sliders icon - toggle parameters modal window
+          function toggleParameters() {
+            triggeringEl = document.querySelector(".parameters");
+            openModal("parameters");
+          }
+
+          function openModal(modal) {
+            let allContentEls = modalEl.querySelectorAll(".modal-content > div:not(.close)");
+
+            for (let contentEl of allContentEls) {
+              contentEl.classList.add("is-hidden");
+            }
+
+            modalEl.querySelector("." + modal + "-content").classList.remove("is-hidden");
+            modalEl.classList.add("is-visible");
+
+            // Remove old backdrop listener if it exists
+            if (backdropClickHandler) {
+              modalEl.removeEventListener("click", backdropClickHandler);
+            }
+
+            // Create and store new listener on the modal container itself
+            backdropClickHandler = function (e) {
+              // Don't close if we're in the middle of drawing
+              if (isDrawing) {
+                return;
+              }
+              // Only close if clicking outside the modal-content
+              const modalContent = modalEl.querySelector(".modal-content");
+              if (!modalContent.contains(e.target)) {
+                closeModal();
+              }
+            };
+
+            modalEl.addEventListener("click", backdropClickHandler);
+            modalEl.querySelector(".close").addEventListener("click", closeModal);
+
+            modalEl.addEventListener("keydown", function (e) {
+              if (e.key == "Escape") {
+                closeModal();
+              }
+
+              // Prevent spacebar from triggering the close button when it's focused
+              if (e.key == " " || e.key == "Spacebar") {
+                // Only allow spacebar on actual interactive elements like Apply button
+                if (e.target.classList.contains("close")) {
+                  e.preventDefault();
+                }
+              }
+
+              if (modal === "keyboard-controls") {
+                if (e.key == "Tab") {
+                  e.preventDefault();
+                }
+              } else {
+                firstFocusableElement = modalEl.querySelector(".first-focusable-element");
+                lastFocusableElement = modalEl.querySelector("." + modal + "-content").querySelector(".last-focusable-element");
+
+                if (e.target == firstFocusableElement && e.key == "Tab" && e.shiftKey) {
+                  e.preventDefault();
+                  lastFocusableElement.focus();
+                } else if (e.target == lastFocusableElement && e.key == "Tab" && !e.shiftKey) {
+                  e.preventDefault();
+                  firstFocusableElement.focus();
+                }
+              }
+            });
+
+            // Don't auto-focus the close button to avoid spacebar accidentally closing the modal
+            // Users can still click it or press Escape to close
+            // modalEl.querySelector(".close").focus();
+          }
+
+          function closeModal() {
+            modalEl.classList.remove("is-visible");
+
+            // Clean up modal listener
+            if (backdropClickHandler) {
+              modalEl.removeEventListener("click", backdropClickHandler);
+              backdropClickHandler = null;
+            }
+
+            if (triggeringEl) {
+              triggeringEl.focus();
+            }
+          }
+
+          // Reset parameters to defaults
+          function resetParameters() {
+            // Clear all saved settings from localStorage
+            localStorage.removeItem("differential-growth-timeScale");
+
+            // Reload the page to reset everything
+            window.location.reload();
+          }
+
+          // Parse SVG file from user input and add to World
+          function importSVG() {
+            let file = this.files[0];
+
+            if (file.type === "image/svg+xml") {
+              let reader = new FileReader();
+
+              // When a file is loaded, convert it from a raw text string to a DOM tree, then parse it for Paths and add to World
+              reader.onload = function () {
+                let parser = new DOMParser();
+                let svgNode = parser.parseFromString(reader.result, "image/svg+xml");
+                let paths = SVGLoader.load(p5, svgNode, Settings);
+                world.addPaths(paths);
+                world.draw();
+              };
+
+              // Read the contents of the uploaded file as a raw text string
+              reader.readAsText(file);
+            }
+
+            // Blur the focus on the button so it isn't accidentally retriggered on 'Space'
+            document.querySelector(".import").blur();
+          }
+
+          /*
+  =============================================================================
+    Mouse handlers
+  =============================================================================
+  */
+
+          p5.mousePressed = function (event) {
+            // Don't draw if clicking inside the modal content
+            const modal = document.querySelector(".modal.is-visible");
+            if (modal) {
+              const modalContent = modal.querySelector(".modal-content");
+              const rect = modalContent.getBoundingClientRect();
+              if (p5.mouseX >= rect.left && p5.mouseX <= rect.right && p5.mouseY >= rect.top && p5.mouseY <= rect.bottom) {
+                return;
+              }
+            }
+
+            // Prevent default to avoid text selection
+            if (event) event.preventDefault();
+
+            console.log("mousePressed", p5.mouseX, p5.mouseY, "activeTool:", activeTool);
+
+            // Mark that we're starting to draw
+            isDrawing = true;
+
+            switch (activeTool) {
+              // Rectangle tool -----------------------------------
+              case RECTANGLE:
+              case CIRCLE:
+                // Track if it was playing before we start drawing
+                if (!world.paused) {
+                  console.log("mousePressed: Setting wasPlayingBeforeDrawing = true and pausing");
+                  wasPlayingBeforeDrawing = true;
+                  world.pause();
+
+                  // Update play button UI
+                  if (playButtonEl) {
+                    let icon = playButtonEl.querySelector(".icon");
+                    let text = playButtonEl.querySelector(".text");
+                    if (icon && text) {
+                      icon.classList.remove("fa-pause");
+                      icon.classList.add("fa-play");
+                      text.innerHTML = "Play";
+                    }
+                  }
+                }
+
+                startX = p5.mouseX;
+                startY = p5.mouseY;
+                break;
+            }
+          };
+
+          p5.mouseReleased = function (event) {
+            if (!world) return;
+
+            // Don't draw if clicking inside the modal content
+            const modal = document.querySelector(".modal.is-visible");
+            if (modal) {
+              const modalContent = modal.querySelector(".modal-content");
+              const rect = modalContent.getBoundingClientRect();
+              if (p5.mouseX >= rect.left && p5.mouseX <= rect.right && p5.mouseY >= rect.top && p5.mouseY <= rect.bottom) {
+                return;
+              }
+            }
+
+            // Prevent default to avoid text selection
+            if (event) event.preventDefault();
+
+            switch (activeTool) {
+              // Freehand tool ------------------------------------
+              case FREEHAND:
+                if (p5.mouseButton == p5.LEFT) {
+                  if (nodes.length == 0) {
+                    return;
+                  }
+
+                  let isClosed = false,
+                    firstNode = nodes[0],
+                    lastNode = nodes[nodes.length - 1];
+
+                  // If end point is very close to starting point, make the path closed
+                  if (lastNode.distance(firstNode) <= distanceToClose) {
+                    isClosed = true;
+                  }
+
+                  // Create and add Path to the World
+                  path = new Path(p5, nodes, world.settings, isClosed);
+                  world.addPath(path);
+
+                  nodes = [];
+                }
+
+                break;
+
+              // Rectangle tool -----------------------------------
+              case RECTANGLE:
+                endX = p5.mouseX;
+                endY = p5.mouseY;
+
+                nodes.push(new Node(p5, startX, startY, world.settings)); // top left
+                nodes.push(new Node(p5, endX, startY, world.settings)); // top right
+                nodes.push(new Node(p5, endX, endY, world.settings)); // bottom right
+                nodes.push(new Node(p5, startX, endY, world.settings)); // bottom left
+
+                path = new Path(p5, nodes, world.settings, true);
+                world.addPath(path);
+
+                nodes = [];
+                break;
+
+              // Circle tool --------------------------------------
+              case CIRCLE:
+                endX = p5.mouseX;
+                endY = p5.mouseY;
+                deltaX = endX - startX;
+                deltaY = endY - startY;
+
+                for (let i = 0; i < 360; i++) {
+                  nodes.push(
+                    new Node(
+                      p5,
+                      startX + deltaX / 2 + (deltaX / 2) * Math.cos((i * Math.PI) / 180),
+                      startY + deltaY / 2 + (deltaY / 2) * Math.sin((i * Math.PI) / 180),
+                      world.settings
+                    )
+                  );
+                }
+
+                path = new Path(p5, nodes, world.settings, true);
+                world.addPath(path);
+
+                nodes = [];
+                break;
+            }
+
+            world.draw();
+
+            // Resume playing if it was playing before drawing started
+            console.log("mouseReleased end: wasPlayingBeforeDrawing =", wasPlayingBeforeDrawing);
+            if (wasPlayingBeforeDrawing) {
+              console.log("Auto-resuming playback");
+              world.unpause();
+              wasPlayingBeforeDrawing = false;
+
+              // Update play button UI
+              if (playButtonEl) {
+                let icon = playButtonEl.querySelector(".icon");
+                let text = playButtonEl.querySelector(".text");
+                if (icon && text) {
+                  icon.classList.remove("fa-play");
+                  icon.classList.add("fa-pause");
+                  text.innerHTML = "Pause";
+                }
+              }
+            }
+
+            // Mark that we're done drawing (delay slightly to ensure event processing completes)
+            setTimeout(() => {
+              isDrawing = false;
+            }, 100);
+          };
+
+          p5.mouseDragged = function (event) {
+            if (!world) return;
+
+            // Don't draw if clicking inside the modal content
+            const modal = document.querySelector(".modal.is-visible");
+            if (modal) {
+              const modalContent = modal.querySelector(".modal-content");
+              const rect = modalContent.getBoundingClientRect();
+              if (p5.mouseX >= rect.left && p5.mouseX <= rect.right && p5.mouseY >= rect.top && p5.mouseY <= rect.bottom) {
+                return;
+              }
+            }
+
+            // Prevent default to avoid text selection
+            if (event) event.preventDefault();
+
+            // Mark that we're drawing
+            isDrawing = true;
+
+            // Track if it was playing before we pause it for drawing
+            if (!world.paused) {
+              console.log("mouseDragged: Setting wasPlayingBeforeDrawing = true and pausing");
+              wasPlayingBeforeDrawing = true;
+              world.pause();
+
+              // Update play button UI
+              if (playButtonEl) {
+                let icon = playButtonEl.querySelector(".icon");
+                let text = playButtonEl.querySelector(".text");
+                if (icon && text) {
+                  icon.classList.remove("fa-pause");
+                  icon.classList.add("fa-play");
+                  text.innerHTML = "Play";
+                }
+              }
+            }
+
+            world.draw();
+
+            switch (activeTool) {
+              // Freehand tool ------------------------------------
+              case FREEHAND:
+                if (p5.mouseButton == p5.LEFT) {
+                  nodes.push(new Node(p5, p5.mouseX, p5.mouseY, world.settings));
+                  console.log("Freehand: added node", nodes.length, "at", p5.mouseX, p5.mouseY);
+
+                  if (nodes.length > 0) {
+                    for (let [index, node] of nodes.entries()) {
+                      if (index > 0) {
+                        p5.stroke(0);
+                        p5.line(nodes[index - 1].x, nodes[index - 1].y, node.x, node.y);
+                      }
+                    }
+                  }
+
+                  let firstNode = nodes[0],
+                    lastNode = nodes[nodes.length - 1];
+
+                  // If current point is very near the starting point, highlight the starting point to indicate that the path will close
+                  if (lastNode.distance(firstNode) <= distanceToClose) {
+                    p5.fill(150);
+                    p5.noStroke();
+                    p5.ellipseMode(p5.CENTER);
+                    p5.ellipse(nodes[0].x, nodes[0].y, distanceToClose * 2);
+                  }
+                }
+
+                break;
+
+              // Rectangle tool -----------------------------------
+              case RECTANGLE:
+                if (p5.mouseButton == p5.LEFT) {
+                  p5.stroke(0);
+                  p5.line(startX, startY, p5.mouseX, startY); // top
+                  p5.line(p5.mouseX, startY, p5.mouseX, p5.mouseY); // right
+                  p5.line(p5.mouseX, p5.mouseY, startX, p5.mouseY); // bottom
+                  p5.line(startX, p5.mouseY, startX, startY); // left
+                }
+
+                break;
+
+              // Circle tool --------------------------------------
+              case CIRCLE:
+                if (p5.mouseButton == p5.LEFT && startX != undefined && startY != undefined) {
+                  p5.stroke(0);
+                  p5.noFill();
+                  p5.ellipseMode(p5.CORNERS);
+                  p5.ellipse(startX, startY, p5.mouseX, p5.mouseY);
+                }
+            }
+          };
+
+          /*
+  =============================================================================
+    Key handler
+  =============================================================================
+  */
+          p5.keyReleased = function (event) {
+            // Prevent spacebar from triggering focused buttons (like the modal close button)
+            if (p5.key === " " && event) {
+              event.preventDefault();
+            }
+
+            switch (p5.key) {
+              // Toggle trace mode with 't'
+              case "t":
+                world.toggleTraceMode();
+                break;
+
+              // Toggle drawing of nodes with 'n'
+              case "n":
+                world.toggleDrawNodes();
+                break;
+
+              // Reset simulation with current parameters with 'r'
+              case "r":
+                world.clearPaths();
+                world.drawBackground();
+                break;
+
+              // Toggle pause with Space
+              case " ":
+                togglePause();
+                break;
+
+              // Toggle debug mode with 'd'
+              case "d":
+                world.toggleDebugMode();
+                break;
+
+              // Toggle fill for all shapes with 'f'
+              case "f":
+                world.toggleFillMode();
+                break;
+
+              // Toggle path history with 'h'
+              case "h":
+                world.toggleDrawHistory();
+                break;
+
+              // Export SVG with 's'
+              case "s":
+                world.export();
+                break;
+
+              // Toggle visibility of all bounds for all paths with 'b'
+              case "b":
+                world.toggleDrawBounds();
+                break;
+            }
+          };
+        };
+
+        // Launch the sketch using p5js in instantiated mode when DOM is ready
+        function initPlayground() {
+          console.log("initPlayground called, document.readyState:", document.readyState);
+          // Wait for DOM to be fully ready
+          if (document.readyState === "loading") {
+            console.log("DOM still loading, waiting for DOMContentLoaded");
+            document.addEventListener("DOMContentLoaded", function () {
+              console.log("DOMContentLoaded fired, creating p5 instance");
+              setTimeout(function () {
+                new p5(sketch);
+              }, 100);
+            });
+          } else {
+            console.log("DOM already ready, creating p5 instance");
+            setTimeout(function () {
+              new p5(sketch);
+            }, 100);
+          }
+        }
+
+        try {
+          console.log("Differential growth bundle loaded");
+          initPlayground();
+        } catch (err) {
+          console.error("FATAL ERROR in differential growth bundle:", err);
+          console.error("Stack:", err.stack);
+        }
+      },
+      { "./Node": 3, "./ParametersPanel": 4, "./Path": 5, "./SVGLoader": 6, "./Settings": 7, "./World": 8 },
+    ],
+    10: [
+      function (require, module, exports) {
+        (function (global) {
+          (function () {
+            (function (a, b) {
+              if ("function" == typeof define && define.amd) define([], b);
+              else if ("undefined" != typeof exports) b();
+              else {
+                b(), (a.FileSaver = { exports: {} }.exports);
+              }
+            })(this, function () {
+              "use strict";
+              function b(a, b) {
+                return (
+                  "undefined" == typeof b
+                    ? (b = { autoBom: !1 })
+                    : "object" != typeof b && (console.warn("Deprecated: Expected third argument to be a object"), (b = { autoBom: !b })),
+                  b.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)
+                    ? new Blob(["\uFEFF", a], { type: a.type })
+                    : a
+                );
+              }
+              function c(a, b, c) {
+                var d = new XMLHttpRequest();
+                d.open("GET", a),
+                  (d.responseType = "blob"),
+                  (d.onload = function () {
+                    g(d.response, b, c);
+                  }),
+                  (d.onerror = function () {
+                    console.error("could not download file");
+                  }),
+                  d.send();
+              }
+              function d(a) {
+                var b = new XMLHttpRequest();
+                b.open("HEAD", a, !1);
+                try {
+                  b.send();
+                } catch (a) {}
+                return 200 <= b.status && 299 >= b.status;
+              }
+              function e(a) {
+                try {
+                  a.dispatchEvent(new MouseEvent("click"));
+                } catch (c) {
+                  var b = document.createEvent("MouseEvents");
+                  b.initMouseEvent("click", !0, !0, window, 0, 0, 0, 80, 20, !1, !1, !1, !1, 0, null), a.dispatchEvent(b);
+                }
+              }
+              var f =
+                  "object" == typeof window && window.window === window
+                    ? window
+                    : "object" == typeof self && self.self === self
+                      ? self
+                      : "object" == typeof global && global.global === global
+                        ? global
+                        : void 0,
+                a =
+                  f.navigator &&
+                  /Macintosh/.test(navigator.userAgent) &&
+                  /AppleWebKit/.test(navigator.userAgent) &&
+                  !/Safari/.test(navigator.userAgent),
+                g =
+                  f.saveAs ||
+                  ("object" != typeof window || window !== f
+                    ? function () {}
+                    : "download" in HTMLAnchorElement.prototype && !a
+                      ? function (b, g, h) {
+                          var i = f.URL || f.webkitURL,
+                            j = document.createElement("a");
+                          (g = g || b.name || "download"),
+                            (j.download = g),
+                            (j.rel = "noopener"),
+                            "string" == typeof b
+                              ? ((j.href = b), j.origin === location.origin ? e(j) : d(j.href) ? c(b, g, h) : e(j, (j.target = "_blank")))
+                              : ((j.href = i.createObjectURL(b)),
+                                setTimeout(function () {
+                                  i.revokeObjectURL(j.href);
+                                }, 4e4),
+                                setTimeout(function () {
+                                  e(j);
+                                }, 0));
+                        }
+                      : "msSaveOrOpenBlob" in navigator
+                        ? function (f, g, h) {
+                            if (((g = g || f.name || "download"), "string" != typeof f)) navigator.msSaveOrOpenBlob(b(f, h), g);
+                            else if (d(f)) c(f, g, h);
+                            else {
+                              var i = document.createElement("a");
+                              (i.href = f),
+                                (i.target = "_blank"),
+                                setTimeout(function () {
+                                  e(i);
+                                });
+                            }
+                          }
+                        : function (b, d, e, g) {
+                            if (
+                              ((g = g || open("", "_blank")),
+                              g && (g.document.title = g.document.body.innerText = "downloading..."),
+                              "string" == typeof b)
+                            )
+                              return c(b, d, e);
+                            var h = "application/octet-stream" === b.type,
+                              i = /constructor/i.test(f.HTMLElement) || f.safari,
+                              j = /CriOS\/[\d]+/.test(navigator.userAgent);
+                            if ((j || (h && i) || a) && "undefined" != typeof FileReader) {
+                              var k = new FileReader();
+                              (k.onloadend = function () {
+                                var a = k.result;
+                                (a = j ? a : a.replace(/^data:[^;]*;/, "data:attachment/file;")),
+                                  g ? (g.location.href = a) : (location = a),
+                                  (g = null);
+                              }),
+                                k.readAsDataURL(b);
+                            } else {
+                              var l = f.URL || f.webkitURL,
+                                m = l.createObjectURL(b);
+                              g ? (g.location = m) : (location.href = m),
+                                (g = null),
+                                setTimeout(function () {
+                                  l.revokeObjectURL(m);
+                                }, 4e4);
+                            }
+                          });
+              (f.saveAs = g.saveAs = g), "undefined" != typeof module && (module.exports = g);
+            });
+          }).call(this);
+        }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {});
+      },
+      {},
+    ],
+    11: [
+      function (require, module, exports) {
+        module.exports = function (point, vs) {
+          // ray-casting algorithm based on
+          // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+          var x = point[0],
+            y = point[1];
+
+          var inside = false;
+          for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i][0],
+              yi = vs[i][1];
+            var xj = vs[j][0],
+              yj = vs[j][1];
+
+            var intersect = yi > y != yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+            if (intersect) inside = !inside;
+          }
+
+          return inside;
+        };
+      },
+      {},
+    ],
+    12: [
+      function (require, module, exports) {
+        (function (global, factory) {
+          typeof exports === "object" && typeof module !== "undefined"
+            ? (module.exports = factory())
+            : typeof define === "function" && define.amd
+              ? define(factory)
+              : (global.quickselect = factory());
+        })(this, function () {
+          "use strict";
+
+          function quickselect(arr, k, left, right, compare) {
+            quickselectStep(arr, k, left || 0, right || arr.length - 1, compare || defaultCompare);
+          }
+
+          function quickselectStep(arr, k, left, right, compare) {
+            while (right > left) {
+              if (right - left > 600) {
+                var n = right - left + 1;
+                var m = k - left + 1;
+                var z = Math.log(n);
+                var s = 0.5 * Math.exp((2 * z) / 3);
+                var sd = 0.5 * Math.sqrt((z * s * (n - s)) / n) * (m - n / 2 < 0 ? -1 : 1);
+                var newLeft = Math.max(left, Math.floor(k - (m * s) / n + sd));
+                var newRight = Math.min(right, Math.floor(k + ((n - m) * s) / n + sd));
+                quickselectStep(arr, k, newLeft, newRight, compare);
+              }
+
+              var t = arr[k];
+              var i = left;
+              var j = right;
+
+              swap(arr, left, k);
+              if (compare(arr[right], t) > 0) swap(arr, left, right);
+
+              while (i < j) {
+                swap(arr, i, j);
+                i++;
+                j--;
+                while (compare(arr[i], t) < 0) i++;
+                while (compare(arr[j], t) > 0) j--;
+              }
+
+              if (compare(arr[left], t) === 0) swap(arr, left, j);
+              else {
+                j++;
+                swap(arr, j, right);
+              }
+
+              if (j <= k) left = j + 1;
+              if (k <= j) right = j - 1;
+            }
+          }
+
+          function swap(arr, i, j) {
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+          }
+
+          function defaultCompare(a, b) {
+            return a < b ? -1 : a > b ? 1 : 0;
+          }
+
+          return quickselect;
+        });
+      },
+      {},
+    ],
+    13: [
+      function (require, module, exports) {
+        "use strict";
+
+        var Queue = require("tinyqueue");
+
+        module.exports = knn;
+        module.exports.default = knn;
+
+        function knn(tree, x, y, n, predicate, maxDistance) {
+          var node = tree.data,
+            result = [],
+            toBBox = tree.toBBox,
+            i,
+            child,
+            dist,
+            candidate;
+
+          var queue = new Queue(null, compareDist);
+
+          while (node) {
+            for (i = 0; i < node.children.length; i++) {
+              child = node.children[i];
+              dist = boxDist(x, y, node.leaf ? toBBox(child) : child);
+              if (!maxDistance || dist <= maxDistance) {
+                queue.push({
+                  node: child,
+                  isItem: node.leaf,
+                  dist: dist,
+                });
+              }
+            }
+
+            while (queue.length && queue.peek().isItem) {
+              candidate = queue.pop().node;
+              if (!predicate || predicate(candidate)) result.push(candidate);
+              if (n && result.length === n) return result;
+            }
+
+            node = queue.pop();
+            if (node) node = node.node;
+          }
+
+          return result;
+        }
+
+        function compareDist(a, b) {
+          return a.dist - b.dist;
+        }
+
+        function boxDist(x, y, box) {
+          var dx = axisDist(x, box.minX, box.maxX),
+            dy = axisDist(y, box.minY, box.maxY);
+          return dx * dx + dy * dy;
+        }
+
+        function axisDist(k, min, max) {
+          return k < min ? min - k : k <= max ? 0 : k - max;
+        }
+      },
+      { tinyqueue: 20 },
+    ],
+    14: [
+      function (require, module, exports) {
+        "use strict";
+
+        module.exports = rbush;
+        module.exports.default = rbush;
+
+        var quickselect = require("quickselect");
+
+        function rbush(maxEntries, format) {
+          if (!(this instanceof rbush)) return new rbush(maxEntries, format);
+
+          // max entries in a node is 9 by default; min node fill is 40% for best performance
+          this._maxEntries = Math.max(4, maxEntries || 9);
+          this._minEntries = Math.max(2, Math.ceil(this._maxEntries * 0.4));
+
+          if (format) {
+            this._initFormat(format);
+          }
+
+          this.clear();
+        }
+
+        rbush.prototype = {
+          all: function () {
+            return this._all(this.data, []);
+          },
+
+          search: function (bbox) {
+            var node = this.data,
+              result = [],
+              toBBox = this.toBBox;
+
+            if (!intersects(bbox, node)) return result;
+
+            var nodesToSearch = [],
+              i,
+              len,
+              child,
+              childBBox;
+
+            while (node) {
+              for (i = 0, len = node.children.length; i < len; i++) {
+                child = node.children[i];
+                childBBox = node.leaf ? toBBox(child) : child;
+
+                if (intersects(bbox, childBBox)) {
+                  if (node.leaf) result.push(child);
+                  else if (contains(bbox, childBBox)) this._all(child, result);
+                  else nodesToSearch.push(child);
+                }
+              }
+              node = nodesToSearch.pop();
+            }
+
+            return result;
+          },
+
+          collides: function (bbox) {
+            var node = this.data,
+              toBBox = this.toBBox;
+
+            if (!intersects(bbox, node)) return false;
+
+            var nodesToSearch = [],
+              i,
+              len,
+              child,
+              childBBox;
+
+            while (node) {
+              for (i = 0, len = node.children.length; i < len; i++) {
+                child = node.children[i];
+                childBBox = node.leaf ? toBBox(child) : child;
+
+                if (intersects(bbox, childBBox)) {
+                  if (node.leaf || contains(bbox, childBBox)) return true;
+                  nodesToSearch.push(child);
+                }
+              }
+              node = nodesToSearch.pop();
+            }
+
+            return false;
+          },
+
+          load: function (data) {
+            if (!(data && data.length)) return this;
+
+            if (data.length < this._minEntries) {
+              for (var i = 0, len = data.length; i < len; i++) {
+                this.insert(data[i]);
+              }
+              return this;
+            }
+
+            // recursively build the tree with the given data from scratch using OMT algorithm
+            var node = this._build(data.slice(), 0, data.length - 1, 0);
+
+            if (!this.data.children.length) {
+              // save as is if tree is empty
+              this.data = node;
+            } else if (this.data.height === node.height) {
+              // split root if trees have the same height
+              this._splitRoot(this.data, node);
+            } else {
+              if (this.data.height < node.height) {
+                // swap trees if inserted one is bigger
+                var tmpNode = this.data;
+                this.data = node;
+                node = tmpNode;
+              }
+
+              // insert the small tree into the large tree at appropriate level
+              this._insert(node, this.data.height - node.height - 1, true);
+            }
+
+            return this;
+          },
+
+          insert: function (item) {
+            if (item) this._insert(item, this.data.height - 1);
+            return this;
+          },
+
+          clear: function () {
+            this.data = createNode([]);
+            return this;
+          },
+
+          remove: function (item, equalsFn) {
+            if (!item) return this;
+
+            var node = this.data,
+              bbox = this.toBBox(item),
+              path = [],
+              indexes = [],
+              i,
+              parent,
+              index,
+              goingUp;
+
+            // depth-first iterative tree traversal
+            while (node || path.length) {
+              if (!node) {
+                // go up
+                node = path.pop();
+                parent = path[path.length - 1];
+                i = indexes.pop();
+                goingUp = true;
+              }
+
+              if (node.leaf) {
+                // check current node
+                index = findItem(item, node.children, equalsFn);
+
+                if (index !== -1) {
+                  // item found, remove the item and condense tree upwards
+                  node.children.splice(index, 1);
+                  path.push(node);
+                  this._condense(path);
+                  return this;
+                }
+              }
+
+              if (!goingUp && !node.leaf && contains(node, bbox)) {
+                // go down
+                path.push(node);
+                indexes.push(i);
+                i = 0;
+                parent = node;
+                node = node.children[0];
+              } else if (parent) {
+                // go right
+                i++;
+                node = parent.children[i];
+                goingUp = false;
+              } else node = null; // nothing found
+            }
+
+            return this;
+          },
+
+          toBBox: function (item) {
+            return item;
+          },
+
+          compareMinX: compareNodeMinX,
+          compareMinY: compareNodeMinY,
+
+          toJSON: function () {
+            return this.data;
+          },
+
+          fromJSON: function (data) {
+            this.data = data;
+            return this;
+          },
+
+          _all: function (node, result) {
+            var nodesToSearch = [];
+            while (node) {
+              if (node.leaf) result.push.apply(result, node.children);
+              else nodesToSearch.push.apply(nodesToSearch, node.children);
+
+              node = nodesToSearch.pop();
+            }
+            return result;
+          },
+
+          _build: function (items, left, right, height) {
+            var N = right - left + 1,
+              M = this._maxEntries,
+              node;
+
+            if (N <= M) {
+              // reached leaf level; return leaf
+              node = createNode(items.slice(left, right + 1));
+              calcBBox(node, this.toBBox);
+              return node;
+            }
+
+            if (!height) {
+              // target height of the bulk-loaded tree
+              height = Math.ceil(Math.log(N) / Math.log(M));
+
+              // target number of root entries to maximize storage utilization
+              M = Math.ceil(N / Math.pow(M, height - 1));
+            }
+
+            node = createNode([]);
+            node.leaf = false;
+            node.height = height;
+
+            // split the items into M mostly square tiles
+
+            var N2 = Math.ceil(N / M),
+              N1 = N2 * Math.ceil(Math.sqrt(M)),
+              i,
+              j,
+              right2,
+              right3;
+
+            multiSelect(items, left, right, N1, this.compareMinX);
+
+            for (i = left; i <= right; i += N1) {
+              right2 = Math.min(i + N1 - 1, right);
+
+              multiSelect(items, i, right2, N2, this.compareMinY);
+
+              for (j = i; j <= right2; j += N2) {
+                right3 = Math.min(j + N2 - 1, right2);
+
+                // pack each entry recursively
+                node.children.push(this._build(items, j, right3, height - 1));
+              }
+            }
+
+            calcBBox(node, this.toBBox);
+
+            return node;
+          },
+
+          _chooseSubtree: function (bbox, node, level, path) {
+            var i, len, child, targetNode, area, enlargement, minArea, minEnlargement;
+
+            while (true) {
+              path.push(node);
+
+              if (node.leaf || path.length - 1 === level) break;
+
+              minArea = minEnlargement = Infinity;
+
+              for (i = 0, len = node.children.length; i < len; i++) {
+                child = node.children[i];
+                area = bboxArea(child);
+                enlargement = enlargedArea(bbox, child) - area;
+
+                // choose entry with the least area enlargement
+                if (enlargement < minEnlargement) {
+                  minEnlargement = enlargement;
+                  minArea = area < minArea ? area : minArea;
+                  targetNode = child;
+                } else if (enlargement === minEnlargement) {
+                  // otherwise choose one with the smallest area
+                  if (area < minArea) {
+                    minArea = area;
+                    targetNode = child;
+                  }
+                }
+              }
+
+              node = targetNode || node.children[0];
+            }
+
+            return node;
+          },
+
+          _insert: function (item, level, isNode) {
+            var toBBox = this.toBBox,
+              bbox = isNode ? item : toBBox(item),
+              insertPath = [];
+
+            // find the best node for accommodating the item, saving all nodes along the path too
+            var node = this._chooseSubtree(bbox, this.data, level, insertPath);
+
+            // put the item into the node
+            node.children.push(item);
+            extend(node, bbox);
+
+            // split on node overflow; propagate upwards if necessary
+            while (level >= 0) {
+              if (insertPath[level].children.length > this._maxEntries) {
+                this._split(insertPath, level);
+                level--;
+              } else break;
+            }
+
+            // adjust bboxes along the insertion path
+            this._adjustParentBBoxes(bbox, insertPath, level);
+          },
+
+          // split overflowed node into two
+          _split: function (insertPath, level) {
+            var node = insertPath[level],
+              M = node.children.length,
+              m = this._minEntries;
+
+            this._chooseSplitAxis(node, m, M);
+
+            var splitIndex = this._chooseSplitIndex(node, m, M);
+
+            var newNode = createNode(node.children.splice(splitIndex, node.children.length - splitIndex));
+            newNode.height = node.height;
+            newNode.leaf = node.leaf;
+
+            calcBBox(node, this.toBBox);
+            calcBBox(newNode, this.toBBox);
+
+            if (level) insertPath[level - 1].children.push(newNode);
+            else this._splitRoot(node, newNode);
+          },
+
+          _splitRoot: function (node, newNode) {
+            // split root node
+            this.data = createNode([node, newNode]);
+            this.data.height = node.height + 1;
+            this.data.leaf = false;
+            calcBBox(this.data, this.toBBox);
+          },
+
+          _chooseSplitIndex: function (node, m, M) {
+            var i, bbox1, bbox2, overlap, area, minOverlap, minArea, index;
+
+            minOverlap = minArea = Infinity;
+
+            for (i = m; i <= M - m; i++) {
+              bbox1 = distBBox(node, 0, i, this.toBBox);
+              bbox2 = distBBox(node, i, M, this.toBBox);
+
+              overlap = intersectionArea(bbox1, bbox2);
+              area = bboxArea(bbox1) + bboxArea(bbox2);
+
+              // choose distribution with minimum overlap
+              if (overlap < minOverlap) {
+                minOverlap = overlap;
+                index = i;
+
+                minArea = area < minArea ? area : minArea;
+              } else if (overlap === minOverlap) {
+                // otherwise choose distribution with minimum area
+                if (area < minArea) {
+                  minArea = area;
+                  index = i;
+                }
+              }
+            }
+
+            return index;
+          },
+
+          // sorts node children by the best axis for split
+          _chooseSplitAxis: function (node, m, M) {
+            var compareMinX = node.leaf ? this.compareMinX : compareNodeMinX,
+              compareMinY = node.leaf ? this.compareMinY : compareNodeMinY,
+              xMargin = this._allDistMargin(node, m, M, compareMinX),
+              yMargin = this._allDistMargin(node, m, M, compareMinY);
+
+            // if total distributions margin value is minimal for x, sort by minX,
+            // otherwise it's already sorted by minY
+            if (xMargin < yMargin) node.children.sort(compareMinX);
+          },
+
+          // total margin of all possible split distributions where each node is at least m full
+          _allDistMargin: function (node, m, M, compare) {
+            node.children.sort(compare);
+
+            var toBBox = this.toBBox,
+              leftBBox = distBBox(node, 0, m, toBBox),
+              rightBBox = distBBox(node, M - m, M, toBBox),
+              margin = bboxMargin(leftBBox) + bboxMargin(rightBBox),
+              i,
+              child;
+
+            for (i = m; i < M - m; i++) {
+              child = node.children[i];
+              extend(leftBBox, node.leaf ? toBBox(child) : child);
+              margin += bboxMargin(leftBBox);
+            }
+
+            for (i = M - m - 1; i >= m; i--) {
+              child = node.children[i];
+              extend(rightBBox, node.leaf ? toBBox(child) : child);
+              margin += bboxMargin(rightBBox);
+            }
+
+            return margin;
+          },
+
+          _adjustParentBBoxes: function (bbox, path, level) {
+            // adjust bboxes along the given tree path
+            for (var i = level; i >= 0; i--) {
+              extend(path[i], bbox);
+            }
+          },
+
+          _condense: function (path) {
+            // go through the path, removing empty nodes and updating bboxes
+            for (var i = path.length - 1, siblings; i >= 0; i--) {
+              if (path[i].children.length === 0) {
+                if (i > 0) {
+                  siblings = path[i - 1].children;
+                  siblings.splice(siblings.indexOf(path[i]), 1);
+                } else this.clear();
+              } else calcBBox(path[i], this.toBBox);
+            }
+          },
+
+          _initFormat: function (format) {
+            // data format (minX, minY, maxX, maxY accessors)
+
+            // uses eval-type function compilation instead of just accepting a toBBox function
+            // because the algorithms are very sensitive to sorting functions performance,
+            // so they should be dead simple and without inner calls
+
+            var compareArr = ["return a", " - b", ";"];
+
+            this.compareMinX = new Function("a", "b", compareArr.join(format[0]));
+            this.compareMinY = new Function("a", "b", compareArr.join(format[1]));
+
+            this.toBBox = new Function(
+              "a",
+              "return {minX: a" + format[0] + ", minY: a" + format[1] + ", maxX: a" + format[2] + ", maxY: a" + format[3] + "};"
+            );
+          },
+        };
+
+        function findItem(item, items, equalsFn) {
+          if (!equalsFn) return items.indexOf(item);
+
+          for (var i = 0; i < items.length; i++) {
+            if (equalsFn(item, items[i])) return i;
+          }
+          return -1;
+        }
+
+        // calculate node's bbox from bboxes of its children
+        function calcBBox(node, toBBox) {
+          distBBox(node, 0, node.children.length, toBBox, node);
+        }
+
+        // min bounding rectangle of node children from k to p-1
+        function distBBox(node, k, p, toBBox, destNode) {
+          if (!destNode) destNode = createNode(null);
+          destNode.minX = Infinity;
+          destNode.minY = Infinity;
+          destNode.maxX = -Infinity;
+          destNode.maxY = -Infinity;
+
+          for (var i = k, child; i < p; i++) {
+            child = node.children[i];
+            extend(destNode, node.leaf ? toBBox(child) : child);
+          }
+
+          return destNode;
+        }
+
+        function extend(a, b) {
+          a.minX = Math.min(a.minX, b.minX);
+          a.minY = Math.min(a.minY, b.minY);
+          a.maxX = Math.max(a.maxX, b.maxX);
+          a.maxY = Math.max(a.maxY, b.maxY);
+          return a;
+        }
+
+        function compareNodeMinX(a, b) {
+          return a.minX - b.minX;
+        }
+        function compareNodeMinY(a, b) {
+          return a.minY - b.minY;
+        }
+
+        function bboxArea(a) {
+          return (a.maxX - a.minX) * (a.maxY - a.minY);
+        }
+        function bboxMargin(a) {
+          return a.maxX - a.minX + (a.maxY - a.minY);
+        }
+
+        function enlargedArea(a, b) {
+          return (Math.max(b.maxX, a.maxX) - Math.min(b.minX, a.minX)) * (Math.max(b.maxY, a.maxY) - Math.min(b.minY, a.minY));
+        }
+
+        function intersectionArea(a, b) {
+          var minX = Math.max(a.minX, b.minX),
+            minY = Math.max(a.minY, b.minY),
+            maxX = Math.min(a.maxX, b.maxX),
+            maxY = Math.min(a.maxY, b.maxY);
+
+          return Math.max(0, maxX - minX) * Math.max(0, maxY - minY);
+        }
+
+        function contains(a, b) {
+          return a.minX <= b.minX && a.minY <= b.minY && b.maxX <= a.maxX && b.maxY <= a.maxY;
+        }
+
+        function intersects(a, b) {
+          return b.minX <= a.maxX && b.minY <= a.maxY && b.maxX >= a.minX && b.maxY >= a.minY;
+        }
+
+        function createNode(children) {
+          return {
+            children: children,
+            height: 1,
+            leaf: true,
+            minX: Infinity,
+            minY: Infinity,
+            maxX: -Infinity,
+            maxY: -Infinity,
+          };
+        }
+
+        // sort an array so that items come in groups of n unsorted items, with groups sorted between each other;
+        // combines selection algorithm with binary divide & conquer approach
+
+        function multiSelect(arr, left, right, n, compare) {
+          var stack = [left, right],
+            mid;
+
+          while (stack.length) {
+            right = stack.pop();
+            left = stack.pop();
+
+            if (right - left <= n) continue;
+
+            mid = left + Math.ceil((right - left) / n / 2) * n;
+            quickselect(arr, mid, left, right, compare);
+
+            stack.push(left, mid, mid, right);
+          }
+        }
+      },
+      { quickselect: 12 },
+    ],
+    15: [
+      function (require, module, exports) {
+        !(function (t, r) {
+          "object" == typeof exports && "undefined" != typeof module
+            ? r(exports)
+            : "function" == typeof define && define.amd
+              ? define(["exports"], r)
+              : r((t.svgpathdata = {}));
+        })(this, function (t) {
+          "use strict";
+          var r =
+            Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array &&
+              function (t, r) {
+                t.__proto__ = r;
+              }) ||
+            function (t, r) {
+              for (var e in r) r.hasOwnProperty(e) && (t[e] = r[e]);
+            };
+          function e(t, e) {
+            function a() {
+              this.constructor = t;
+            }
+            r(t, e), (t.prototype = null === e ? Object.create(e) : ((a.prototype = e.prototype), new a()));
+          }
+          function a(t, r) {
+            var e = t[0],
+              a = t[1];
+            return [e * Math.cos(r) - a * Math.sin(r), e * Math.sin(r) + a * Math.cos(r)];
+          }
+          function n() {
+            for (var t = [], r = 0; r < arguments.length; r++) t[r] = arguments[r];
+            for (var e = 0; e < t.length; e++)
+              if ("number" != typeof t[e])
+                throw new Error("assertNumbers arguments[" + e + "] is not a number. " + typeof t[e] + " == typeof " + t[e]);
+            return !0;
+          }
+          var i = Math.PI;
+          function o(t, r, e) {
+            (t.lArcFlag = 0 === t.lArcFlag ? 0 : 1), (t.sweepFlag = 0 === t.sweepFlag ? 0 : 1);
+            var n = t.rX,
+              o = t.rY,
+              s = t.x,
+              u = t.y;
+            (n = Math.abs(t.rX)), (o = Math.abs(t.rY));
+            var h = a([(r - s) / 2, (e - u) / 2], (-t.xRot / 180) * i),
+              c = h[0],
+              m = h[1],
+              y = Math.pow(c, 2) / Math.pow(n, 2) + Math.pow(m, 2) / Math.pow(o, 2);
+            1 < y && ((n *= Math.sqrt(y)), (o *= Math.sqrt(y))), (t.rX = n), (t.rY = o);
+            var p = Math.pow(n, 2) * Math.pow(m, 2) + Math.pow(o, 2) * Math.pow(c, 2),
+              T = (t.lArcFlag !== t.sweepFlag ? 1 : -1) * Math.sqrt(Math.max(0, (Math.pow(n, 2) * Math.pow(o, 2) - p) / p)),
+              O = ((n * m) / o) * T,
+              _ = ((-o * c) / n) * T,
+              f = a([O, _], (t.xRot / 180) * i);
+            (t.cX = f[0] + (r + s) / 2),
+              (t.cY = f[1] + (e + u) / 2),
+              (t.phi1 = Math.atan2((m - _) / o, (c - O) / n)),
+              (t.phi2 = Math.atan2((-m - _) / o, (-c - O) / n)),
+              0 === t.sweepFlag && t.phi2 > t.phi1 && (t.phi2 -= 2 * i),
+              1 === t.sweepFlag && t.phi2 < t.phi1 && (t.phi2 += 2 * i),
+              (t.phi1 *= 180 / i),
+              (t.phi2 *= 180 / i);
+          }
+          function s(t, r, e) {
+            n(t, r, e);
+            var a = t * t + r * r - e * e;
+            if (0 > a) return [];
+            if (0 === a) return [[(t * e) / (t * t + r * r), (r * e) / (t * t + r * r)]];
+            var i = Math.sqrt(a);
+            return [
+              [(t * e + r * i) / (t * t + r * r), (r * e - t * i) / (t * t + r * r)],
+              [(t * e - r * i) / (t * t + r * r), (r * e + t * i) / (t * t + r * r)],
+            ];
+          }
+          var u = Math.PI / 180;
+          function h(t, r, e) {
+            return (1 - e) * t + e * r;
+          }
+          function c(t, r, e, a) {
+            return t + Math.cos((a / 180) * i) * r + Math.sin((a / 180) * i) * e;
+          }
+          function m(t, r, e, a) {
+            var n = r - t,
+              i = e - r,
+              o = 3 * n + 3 * (a - e) - 6 * i,
+              s = 6 * (i - n),
+              u = 3 * n;
+            return Math.abs(o) < 1e-6
+              ? [-u / s]
+              : (function (t, r, e) {
+                  void 0 === e && (e = 1e-6);
+                  var a = (t * t) / 4 - r;
+                  if (a < -e) return [];
+                  if (a <= e) return [-t / 2];
+                  var n = Math.sqrt(a);
+                  return [-t / 2 - n, -t / 2 + n];
+                })(s / o, u / o, 1e-6);
+          }
+          function y(t, r, e, a, n) {
+            var i = 1 - n;
+            return t * (i * i * i) + r * (3 * i * i * n) + e * (3 * i * n * n) + a * (n * n * n);
+          }
+          !(function (t) {
+            function r() {
+              return p(function (t, r, e) {
+                return (
+                  t.relative &&
+                    (void 0 !== t.x1 && (t.x1 += r),
+                    void 0 !== t.y1 && (t.y1 += e),
+                    void 0 !== t.x2 && (t.x2 += r),
+                    void 0 !== t.y2 && (t.y2 += e),
+                    void 0 !== t.x && (t.x += r),
+                    void 0 !== t.y && (t.y += e),
+                    (t.relative = !1)),
+                  t
+                );
+              });
+            }
+            function e() {
+              var t = NaN,
+                r = NaN,
+                e = NaN,
+                a = NaN;
+              return p(function (n, i, o) {
+                return (
+                  n.type & l.SMOOTH_CURVE_TO &&
+                    ((n.type = l.CURVE_TO),
+                    (t = isNaN(t) ? i : t),
+                    (r = isNaN(r) ? o : r),
+                    (n.x1 = n.relative ? i - t : 2 * i - t),
+                    (n.y1 = n.relative ? o - r : 2 * o - r)),
+                  n.type & l.CURVE_TO ? ((t = n.relative ? i + n.x2 : n.x2), (r = n.relative ? o + n.y2 : n.y2)) : ((t = NaN), (r = NaN)),
+                  n.type & l.SMOOTH_QUAD_TO &&
+                    ((n.type = l.QUAD_TO),
+                    (e = isNaN(e) ? i : e),
+                    (a = isNaN(a) ? o : a),
+                    (n.x1 = n.relative ? i - e : 2 * i - e),
+                    (n.y1 = n.relative ? o - a : 2 * o - a)),
+                  n.type & l.QUAD_TO ? ((e = n.relative ? i + n.x1 : n.x1), (a = n.relative ? o + n.y1 : n.y1)) : ((e = NaN), (a = NaN)),
+                  n
+                );
+              });
+            }
+            function i() {
+              var t = NaN,
+                r = NaN;
+              return p(function (e, a, n) {
+                if (
+                  (e.type & l.SMOOTH_QUAD_TO &&
+                    ((e.type = l.QUAD_TO),
+                    (t = isNaN(t) ? a : t),
+                    (r = isNaN(r) ? n : r),
+                    (e.x1 = e.relative ? a - t : 2 * a - t),
+                    (e.y1 = e.relative ? n - r : 2 * n - r)),
+                  e.type & l.QUAD_TO)
+                ) {
+                  (t = e.relative ? a + e.x1 : e.x1), (r = e.relative ? n + e.y1 : e.y1);
+                  var i = e.x1,
+                    o = e.y1;
+                  (e.type = l.CURVE_TO),
+                    (e.x1 = ((e.relative ? 0 : a) + 2 * i) / 3),
+                    (e.y1 = ((e.relative ? 0 : n) + 2 * o) / 3),
+                    (e.x2 = (e.x + 2 * i) / 3),
+                    (e.y2 = (e.y + 2 * o) / 3);
+                } else (t = NaN), (r = NaN);
+                return e;
+              });
+            }
+            function p(t) {
+              var r = 0,
+                e = 0,
+                a = NaN,
+                n = NaN;
+              return function (i) {
+                if (isNaN(a) && !(i.type & l.MOVE_TO)) throw new Error("path must start with moveto");
+                var o = t(i, r, e, a, n);
+                return (
+                  i.type & l.CLOSE_PATH && ((r = a), (e = n)),
+                  void 0 !== i.x && (r = i.relative ? r + i.x : i.x),
+                  void 0 !== i.y && (e = i.relative ? e + i.y : i.y),
+                  i.type & l.MOVE_TO && ((a = r), (n = e)),
+                  o
+                );
+              };
+            }
+            function T(t, r, e, a, i, o) {
+              return (
+                n(t, r, e, a, i, o),
+                p(function (n, s, u, h) {
+                  var c = n.x1,
+                    m = n.x2,
+                    y = n.relative && !isNaN(h),
+                    p = void 0 !== n.x ? n.x : y ? 0 : s,
+                    T = void 0 !== n.y ? n.y : y ? 0 : u;
+                  function O(t) {
+                    return t * t;
+                  }
+                  n.type & l.HORIZ_LINE_TO && 0 !== r && ((n.type = l.LINE_TO), (n.y = n.relative ? 0 : u)),
+                    n.type & l.VERT_LINE_TO && 0 !== e && ((n.type = l.LINE_TO), (n.x = n.relative ? 0 : s)),
+                    void 0 !== n.x && (n.x = n.x * t + T * e + (y ? 0 : i)),
+                    void 0 !== n.y && (n.y = p * r + n.y * a + (y ? 0 : o)),
+                    void 0 !== n.x1 && (n.x1 = n.x1 * t + n.y1 * e + (y ? 0 : i)),
+                    void 0 !== n.y1 && (n.y1 = c * r + n.y1 * a + (y ? 0 : o)),
+                    void 0 !== n.x2 && (n.x2 = n.x2 * t + n.y2 * e + (y ? 0 : i)),
+                    void 0 !== n.y2 && (n.y2 = m * r + n.y2 * a + (y ? 0 : o));
+                  var _ = t * a - r * e;
+                  if (void 0 !== n.xRot && (1 !== t || 0 !== r || 0 !== e || 1 !== a))
+                    if (0 === _) delete n.rX, delete n.rY, delete n.xRot, delete n.lArcFlag, delete n.sweepFlag, (n.type = l.LINE_TO);
+                    else {
+                      var f = (n.xRot * Math.PI) / 180,
+                        v = Math.sin(f),
+                        N = Math.cos(f),
+                        E = 1 / O(n.rX),
+                        d = 1 / O(n.rY),
+                        A = O(N) * E + O(v) * d,
+                        x = 2 * v * N * (E - d),
+                        C = O(v) * E + O(N) * d,
+                        M = A * a * a - x * r * a + C * r * r,
+                        R = x * (t * a + r * e) - 2 * (A * e * a + C * t * r),
+                        S = A * e * e - x * t * e + C * t * t,
+                        I = ((Math.atan2(R, M - S) + Math.PI) % Math.PI) / 2,
+                        g = Math.sin(I),
+                        V = Math.cos(I);
+                      (n.rX = Math.abs(_) / Math.sqrt(M * O(V) + R * g * V + S * O(g))),
+                        (n.rY = Math.abs(_) / Math.sqrt(M * O(g) - R * g * V + S * O(V))),
+                        (n.xRot = (180 * I) / Math.PI);
+                    }
+                  return void 0 !== n.sweepFlag && 0 > _ && (n.sweepFlag = +!n.sweepFlag), n;
+                })
+              );
+            }
+            function O() {
+              return function (t) {
+                var r = {};
+                for (var e in t) r[e] = t[e];
+                return r;
+              };
+            }
+            (t.ROUND = function (t) {
+              function r(r) {
+                return Math.round(r * t) / t;
+              }
+              return (
+                void 0 === t && (t = 1e13),
+                n(t),
+                function (t) {
+                  return (
+                    void 0 !== t.x1 && (t.x1 = r(t.x1)),
+                    void 0 !== t.y1 && (t.y1 = r(t.y1)),
+                    void 0 !== t.x2 && (t.x2 = r(t.x2)),
+                    void 0 !== t.y2 && (t.y2 = r(t.y2)),
+                    void 0 !== t.x && (t.x = r(t.x)),
+                    void 0 !== t.y && (t.y = r(t.y)),
+                    t
+                  );
+                }
+              );
+            }),
+              (t.TO_ABS = r),
+              (t.TO_REL = function () {
+                return p(function (t, r, e) {
+                  return (
+                    t.relative ||
+                      (void 0 !== t.x1 && (t.x1 -= r),
+                      void 0 !== t.y1 && (t.y1 -= e),
+                      void 0 !== t.x2 && (t.x2 -= r),
+                      void 0 !== t.y2 && (t.y2 -= e),
+                      void 0 !== t.x && (t.x -= r),
+                      void 0 !== t.y && (t.y -= e),
+                      (t.relative = !0)),
+                    t
+                  );
+                });
+              }),
+              (t.NORMALIZE_HVZ = function (t, r, e) {
+                return (
+                  void 0 === t && (t = !0),
+                  void 0 === r && (r = !0),
+                  void 0 === e && (e = !0),
+                  p(function (a, n, i, o, s) {
+                    if (isNaN(o) && !(a.type & l.MOVE_TO)) throw new Error("path must start with moveto");
+                    return (
+                      r && a.type & l.HORIZ_LINE_TO && ((a.type = l.LINE_TO), (a.y = a.relative ? 0 : i)),
+                      e && a.type & l.VERT_LINE_TO && ((a.type = l.LINE_TO), (a.x = a.relative ? 0 : n)),
+                      t && a.type & l.CLOSE_PATH && ((a.type = l.LINE_TO), (a.x = a.relative ? o - n : o), (a.y = a.relative ? s - i : s)),
+                      a.type & l.ARC &&
+                        (0 === a.rX || 0 === a.rY) &&
+                        ((a.type = l.LINE_TO), delete a.rX, delete a.rY, delete a.xRot, delete a.lArcFlag, delete a.sweepFlag),
+                      a
+                    );
+                  })
+                );
+              }),
+              (t.NORMALIZE_ST = e),
+              (t.QT_TO_C = i),
+              (t.INFO = p),
+              (t.SANITIZE = function (t) {
+                void 0 === t && (t = 0), n(t);
+                var r = NaN,
+                  e = NaN,
+                  a = NaN,
+                  i = NaN;
+                return p(function (n, o, s, u, h) {
+                  var c = Math.abs,
+                    m = !1,
+                    y = 0,
+                    p = 0;
+                  if (
+                    (n.type & l.SMOOTH_CURVE_TO && ((y = isNaN(r) ? 0 : o - r), (p = isNaN(e) ? 0 : s - e)),
+                    n.type & (l.CURVE_TO | l.SMOOTH_CURVE_TO)
+                      ? ((r = n.relative ? o + n.x2 : n.x2), (e = n.relative ? s + n.y2 : n.y2))
+                      : ((r = NaN), (e = NaN)),
+                    n.type & l.SMOOTH_QUAD_TO
+                      ? ((a = isNaN(a) ? o : 2 * o - a), (i = isNaN(i) ? s : 2 * s - i))
+                      : n.type & l.QUAD_TO
+                        ? ((a = n.relative ? o + n.x1 : n.x1), (i = n.relative ? s + n.y1 : n.y2))
+                        : ((a = NaN), (i = NaN)),
+                    n.type & l.LINE_COMMANDS ||
+                      (n.type & l.ARC && (0 === n.rX || 0 === n.rY || !n.lArcFlag)) ||
+                      n.type & l.CURVE_TO ||
+                      n.type & l.SMOOTH_CURVE_TO ||
+                      n.type & l.QUAD_TO ||
+                      n.type & l.SMOOTH_QUAD_TO)
+                  ) {
+                    var T = void 0 === n.x ? 0 : n.relative ? n.x : n.x - o,
+                      O = void 0 === n.y ? 0 : n.relative ? n.y : n.y - s;
+                    (y = isNaN(a) ? (void 0 === n.x1 ? y : n.relative ? n.x : n.x1 - o) : a - o),
+                      (p = isNaN(i) ? (void 0 === n.y1 ? p : n.relative ? n.y : n.y1 - s) : i - s);
+                    var _ = void 0 === n.x2 ? 0 : n.relative ? n.x : n.x2 - o,
+                      f = void 0 === n.y2 ? 0 : n.relative ? n.y : n.y2 - s;
+                    c(T) <= t && c(O) <= t && c(y) <= t && c(p) <= t && c(_) <= t && c(f) <= t && (m = !0);
+                  }
+                  return n.type & l.CLOSE_PATH && c(o - u) <= t && c(s - h) <= t && (m = !0), m ? [] : n;
+                });
+              }),
+              (t.MATRIX = T),
+              (t.ROTATE = function (t, r, e) {
+                void 0 === r && (r = 0), void 0 === e && (e = 0), n(t, r, e);
+                var a = Math.sin(t),
+                  i = Math.cos(t);
+                return T(i, a, -a, i, r - r * i + e * a, e - r * a - e * i);
+              }),
+              (t.TRANSLATE = function (t, r) {
+                return void 0 === r && (r = 0), n(t, r), T(1, 0, 0, 1, t, r);
+              }),
+              (t.SCALE = function (t, r) {
+                return void 0 === r && (r = t), n(t, r), T(t, 0, 0, r, 0, 0);
+              }),
+              (t.SKEW_X = function (t) {
+                return n(t), T(1, 0, Math.atan(t), 1, 0, 0);
+              }),
+              (t.SKEW_Y = function (t) {
+                return n(t), T(1, Math.atan(t), 0, 1, 0, 0);
+              }),
+              (t.X_AXIS_SYMMETRY = function (t) {
+                return void 0 === t && (t = 0), n(t), T(-1, 0, 0, 1, t, 0);
+              }),
+              (t.Y_AXIS_SYMMETRY = function (t) {
+                return void 0 === t && (t = 0), n(t), T(1, 0, 0, -1, 0, t);
+              }),
+              (t.A_TO_C = function () {
+                return p(function (t, r, e) {
+                  return l.ARC === t.type
+                    ? (function (t, r, e) {
+                        var n, i, s, c;
+                        t.cX || o(t, r, e);
+                        for (
+                          var m = Math.min(t.phi1, t.phi2),
+                            y = Math.max(t.phi1, t.phi2) - m,
+                            p = Math.ceil(y / 90),
+                            T = new Array(p),
+                            O = r,
+                            _ = e,
+                            f = 0;
+                          f < p;
+                          f++
+                        ) {
+                          var v = h(t.phi1, t.phi2, f / p),
+                            N = h(t.phi1, t.phi2, (f + 1) / p),
+                            E = N - v,
+                            d = (4 / 3) * Math.tan((E * u) / 4),
+                            A = [Math.cos(v * u) - d * Math.sin(v * u), Math.sin(v * u) + d * Math.cos(v * u)],
+                            x = A[0],
+                            C = A[1],
+                            M = [Math.cos(N * u), Math.sin(N * u)],
+                            R = M[0],
+                            S = M[1],
+                            I = [R + d * Math.sin(N * u), S - d * Math.cos(N * u)],
+                            g = I[0],
+                            V = I[1];
+                          T[f] = { relative: t.relative, type: l.CURVE_TO };
+                          var L = function (r, e) {
+                            var n = a([r * t.rX, e * t.rY], t.xRot),
+                              i = n[0],
+                              o = n[1];
+                            return [t.cX + i, t.cY + o];
+                          };
+                          (n = L(x, C)),
+                            (T[f].x1 = n[0]),
+                            (T[f].y1 = n[1]),
+                            (i = L(g, V)),
+                            (T[f].x2 = i[0]),
+                            (T[f].y2 = i[1]),
+                            (s = L(R, S)),
+                            (T[f].x = s[0]),
+                            (T[f].y = s[1]),
+                            t.relative && ((T[f].x1 -= O), (T[f].y1 -= _), (T[f].x2 -= O), (T[f].y2 -= _), (T[f].x -= O), (T[f].y -= _)),
+                            (O = (c = [T[f].x, T[f].y])[0]),
+                            (_ = c[1]);
+                        }
+                        return T;
+                      })(t, t.relative ? 0 : r, t.relative ? 0 : e)
+                    : t;
+                });
+              }),
+              (t.ANNOTATE_ARCS = function () {
+                return p(function (t, r, e) {
+                  return t.relative && ((r = 0), (e = 0)), l.ARC === t.type && o(t, r, e), t;
+                });
+              }),
+              (t.CLONE = O),
+              (t.CALCULATE_BOUNDS = function () {
+                var t = function (t) {
+                    var r = {};
+                    for (var e in t) r[e] = t[e];
+                    return r;
+                  },
+                  a = r(),
+                  n = i(),
+                  u = e(),
+                  h = p(function (r, e, i) {
+                    var p = u(n(a(t(r))));
+                    function T(t) {
+                      t > h.maxX && (h.maxX = t), t < h.minX && (h.minX = t);
+                    }
+                    function O(t) {
+                      t > h.maxY && (h.maxY = t), t < h.minY && (h.minY = t);
+                    }
+                    if (
+                      (p.type & l.DRAWING_COMMANDS && (T(e), O(i)),
+                      p.type & l.HORIZ_LINE_TO && T(p.x),
+                      p.type & l.VERT_LINE_TO && O(p.y),
+                      p.type & l.LINE_TO && (T(p.x), O(p.y)),
+                      p.type & l.CURVE_TO)
+                    ) {
+                      T(p.x), O(p.y);
+                      for (var _ = 0, f = m(e, p.x1, p.x2, p.x); _ < f.length; _++) 0 < (U = f[_]) && 1 > U && T(y(e, p.x1, p.x2, p.x, U));
+                      for (var v = 0, N = m(i, p.y1, p.y2, p.y); v < N.length; v++) 0 < (U = N[v]) && 1 > U && O(y(i, p.y1, p.y2, p.y, U));
+                    }
+                    if (p.type & l.ARC) {
+                      T(p.x), O(p.y), o(p, e, i);
+                      for (
+                        var E = (p.xRot / 180) * Math.PI,
+                          d = Math.cos(E) * p.rX,
+                          A = Math.sin(E) * p.rX,
+                          x = -Math.sin(E) * p.rY,
+                          C = Math.cos(E) * p.rY,
+                          M = p.phi1 < p.phi2 ? [p.phi1, p.phi2] : -180 > p.phi2 ? [p.phi2 + 360, p.phi1 + 360] : [p.phi2, p.phi1],
+                          R = M[0],
+                          S = M[1],
+                          I = function (t) {
+                            var r = t[0],
+                              e = t[1],
+                              a = (180 * Math.atan2(e, r)) / Math.PI;
+                            return a < R ? a + 360 : a;
+                          },
+                          g = 0,
+                          V = s(x, -d, 0).map(I);
+                        g < V.length;
+                        g++
+                      )
+                        (U = V[g]) > R && U < S && T(c(p.cX, d, x, U));
+                      for (var L = 0, D = s(C, -A, 0).map(I); L < D.length; L++) {
+                        var U;
+                        (U = D[L]) > R && U < S && O(c(p.cY, A, C, U));
+                      }
+                    }
+                    return r;
+                  });
+                return (h.minX = 1 / 0), (h.maxX = -1 / 0), (h.minY = 1 / 0), (h.maxY = -1 / 0), h;
+              });
+          })(t.SVGPathDataTransformer || (t.SVGPathDataTransformer = {}));
+          var p,
+            T,
+            O = (function () {
+              function r() {}
+              return (
+                (r.prototype.round = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.ROUND(r));
+                }),
+                (r.prototype.toAbs = function () {
+                  return this.transform(t.SVGPathDataTransformer.TO_ABS());
+                }),
+                (r.prototype.toRel = function () {
+                  return this.transform(t.SVGPathDataTransformer.TO_REL());
+                }),
+                (r.prototype.normalizeHVZ = function (r, e, a) {
+                  return this.transform(t.SVGPathDataTransformer.NORMALIZE_HVZ(r, e, a));
+                }),
+                (r.prototype.normalizeST = function () {
+                  return this.transform(t.SVGPathDataTransformer.NORMALIZE_ST());
+                }),
+                (r.prototype.qtToC = function () {
+                  return this.transform(t.SVGPathDataTransformer.QT_TO_C());
+                }),
+                (r.prototype.aToC = function () {
+                  return this.transform(t.SVGPathDataTransformer.A_TO_C());
+                }),
+                (r.prototype.sanitize = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.SANITIZE(r));
+                }),
+                (r.prototype.translate = function (r, e) {
+                  return this.transform(t.SVGPathDataTransformer.TRANSLATE(r, e));
+                }),
+                (r.prototype.scale = function (r, e) {
+                  return this.transform(t.SVGPathDataTransformer.SCALE(r, e));
+                }),
+                (r.prototype.rotate = function (r, e, a) {
+                  return this.transform(t.SVGPathDataTransformer.ROTATE(r, e, a));
+                }),
+                (r.prototype.matrix = function (r, e, a, n, i, o) {
+                  return this.transform(t.SVGPathDataTransformer.MATRIX(r, e, a, n, i, o));
+                }),
+                (r.prototype.skewX = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.SKEW_X(r));
+                }),
+                (r.prototype.skewY = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.SKEW_Y(r));
+                }),
+                (r.prototype.xSymmetry = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.X_AXIS_SYMMETRY(r));
+                }),
+                (r.prototype.ySymmetry = function (r) {
+                  return this.transform(t.SVGPathDataTransformer.Y_AXIS_SYMMETRY(r));
+                }),
+                (r.prototype.annotateArcs = function () {
+                  return this.transform(t.SVGPathDataTransformer.ANNOTATE_ARCS());
+                }),
+                r
+              );
+            })(),
+            _ = function (t) {
+              return " " === t || "\t" === t || "\r" === t || "\n" === t;
+            },
+            f = function (t) {
+              return "0".charCodeAt(0) <= t.charCodeAt(0) && t.charCodeAt(0) <= "9".charCodeAt(0);
+            },
+            v = (function (t) {
+              function r() {
+                var r = t.call(this) || this;
+                return (
+                  (r.curNumber = ""),
+                  (r.curCommandType = -1),
+                  (r.curCommandRelative = !1),
+                  (r.canParseCommandOrComma = !0),
+                  (r.curNumberHasExp = !1),
+                  (r.curNumberHasExpDigits = !1),
+                  (r.curNumberHasDecimal = !1),
+                  (r.curArgs = []),
+                  r
+                );
+              }
+              return (
+                e(r, t),
+                (r.prototype.finish = function (t) {
+                  if ((void 0 === t && (t = []), this.parse(" ", t), 0 !== this.curArgs.length || !this.canParseCommandOrComma))
+                    throw new SyntaxError("Unterminated command at the path end.");
+                  return t;
+                }),
+                (r.prototype.parse = function (t, r) {
+                  var e = this;
+                  void 0 === r && (r = []);
+                  for (
+                    var a = function (t) {
+                        r.push(t), (e.curArgs.length = 0), (e.canParseCommandOrComma = !0);
+                      },
+                      n = 0;
+                    n < t.length;
+                    n++
+                  ) {
+                    var i = t[n];
+                    if (f(i)) (this.curNumber += i), (this.curNumberHasExpDigits = this.curNumberHasExp);
+                    else if ("e" !== i && "E" !== i)
+                      if (("-" !== i && "+" !== i) || !this.curNumberHasExp || this.curNumberHasExpDigits)
+                        if ("." !== i || this.curNumberHasExp || this.curNumberHasDecimal) {
+                          if (this.curNumber && -1 !== this.curCommandType) {
+                            var o = Number(this.curNumber);
+                            if (isNaN(o)) throw new SyntaxError("Invalid number ending at " + n);
+                            if (this.curCommandType === l.ARC)
+                              if (0 === this.curArgs.length || 1 === this.curArgs.length) {
+                                if (0 > o) throw new SyntaxError('Expected positive number, got "' + o + '" at index "' + n + '"');
+                              } else if ((3 === this.curArgs.length || 4 === this.curArgs.length) && "0" !== this.curNumber && "1" !== this.curNumber)
+                                throw new SyntaxError('Expected a flag, got "' + this.curNumber + '" at index "' + n + '"');
+                            this.curArgs.push(o),
+                              this.curArgs.length === N[this.curCommandType] &&
+                                (l.HORIZ_LINE_TO === this.curCommandType
+                                  ? a({ type: l.HORIZ_LINE_TO, relative: this.curCommandRelative, x: o })
+                                  : l.VERT_LINE_TO === this.curCommandType
+                                    ? a({ type: l.VERT_LINE_TO, relative: this.curCommandRelative, y: o })
+                                    : this.curCommandType === l.MOVE_TO ||
+                                        this.curCommandType === l.LINE_TO ||
+                                        this.curCommandType === l.SMOOTH_QUAD_TO
+                                      ? (a({ type: this.curCommandType, relative: this.curCommandRelative, x: this.curArgs[0], y: this.curArgs[1] }),
+                                        l.MOVE_TO === this.curCommandType && (this.curCommandType = l.LINE_TO))
+                                      : this.curCommandType === l.CURVE_TO
+                                        ? a({
+                                            type: l.CURVE_TO,
+                                            relative: this.curCommandRelative,
+                                            x1: this.curArgs[0],
+                                            y1: this.curArgs[1],
+                                            x2: this.curArgs[2],
+                                            y2: this.curArgs[3],
+                                            x: this.curArgs[4],
+                                            y: this.curArgs[5],
+                                          })
+                                        : this.curCommandType === l.SMOOTH_CURVE_TO
+                                          ? a({
+                                              type: l.SMOOTH_CURVE_TO,
+                                              relative: this.curCommandRelative,
+                                              x2: this.curArgs[0],
+                                              y2: this.curArgs[1],
+                                              x: this.curArgs[2],
+                                              y: this.curArgs[3],
+                                            })
+                                          : this.curCommandType === l.QUAD_TO
+                                            ? a({
+                                                type: l.QUAD_TO,
+                                                relative: this.curCommandRelative,
+                                                x1: this.curArgs[0],
+                                                y1: this.curArgs[1],
+                                                x: this.curArgs[2],
+                                                y: this.curArgs[3],
+                                              })
+                                            : this.curCommandType === l.ARC &&
+                                              a({
+                                                type: l.ARC,
+                                                relative: this.curCommandRelative,
+                                                rX: this.curArgs[0],
+                                                rY: this.curArgs[1],
+                                                xRot: this.curArgs[2],
+                                                lArcFlag: this.curArgs[3],
+                                                sweepFlag: this.curArgs[4],
+                                                x: this.curArgs[5],
+                                                y: this.curArgs[6],
+                                              })),
+                              (this.curNumber = ""),
+                              (this.curNumberHasExpDigits = !1),
+                              (this.curNumberHasExp = !1),
+                              (this.curNumberHasDecimal = !1),
+                              (this.canParseCommandOrComma = !0);
+                          }
+                          if (!_(i))
+                            if ("," === i && this.canParseCommandOrComma) this.canParseCommandOrComma = !1;
+                            else if ("+" !== i && "-" !== i && "." !== i) {
+                              if (0 !== this.curArgs.length) throw new SyntaxError("Unterminated command at index " + n + ".");
+                              if (!this.canParseCommandOrComma)
+                                throw new SyntaxError('Unexpected character "' + i + '" at index ' + n + ". Command cannot follow comma");
+                              if (((this.canParseCommandOrComma = !1), "z" !== i && "Z" !== i))
+                                if ("h" === i || "H" === i) (this.curCommandType = l.HORIZ_LINE_TO), (this.curCommandRelative = "h" === i);
+                                else if ("v" === i || "V" === i) (this.curCommandType = l.VERT_LINE_TO), (this.curCommandRelative = "v" === i);
+                                else if ("m" === i || "M" === i) (this.curCommandType = l.MOVE_TO), (this.curCommandRelative = "m" === i);
+                                else if ("l" === i || "L" === i) (this.curCommandType = l.LINE_TO), (this.curCommandRelative = "l" === i);
+                                else if ("c" === i || "C" === i) (this.curCommandType = l.CURVE_TO), (this.curCommandRelative = "c" === i);
+                                else if ("s" === i || "S" === i) (this.curCommandType = l.SMOOTH_CURVE_TO), (this.curCommandRelative = "s" === i);
+                                else if ("q" === i || "Q" === i) (this.curCommandType = l.QUAD_TO), (this.curCommandRelative = "q" === i);
+                                else if ("t" === i || "T" === i) (this.curCommandType = l.SMOOTH_QUAD_TO), (this.curCommandRelative = "t" === i);
+                                else {
+                                  if ("a" !== i && "A" !== i) throw new SyntaxError('Unexpected character "' + i + '" at index ' + n + ".");
+                                  (this.curCommandType = l.ARC), (this.curCommandRelative = "a" === i);
+                                }
+                              else r.push({ type: l.CLOSE_PATH }), (this.canParseCommandOrComma = !0), (this.curCommandType = -1);
+                            } else (this.curNumber = i), (this.curNumberHasDecimal = "." === i);
+                        } else (this.curNumber += i), (this.curNumberHasDecimal = !0);
+                      else this.curNumber += i;
+                    else (this.curNumber += i), (this.curNumberHasExp = !0);
+                  }
+                  return r;
+                }),
+                (r.prototype.transform = function (t) {
+                  return Object.create(this, {
+                    parse: {
+                      value: function (r, e) {
+                        void 0 === e && (e = []);
+                        for (var a = 0, n = Object.getPrototypeOf(this).parse.call(this, r); a < n.length; a++) {
+                          var i = n[a],
+                            o = t(i);
+                          Array.isArray(o) ? e.push.apply(e, o) : e.push(o);
+                        }
+                        return e;
+                      },
+                    },
+                  });
+                }),
+                r
+              );
+            })(O),
+            l = (function (r) {
+              function a(t) {
+                var e = r.call(this) || this;
+                return (e.commands = "string" == typeof t ? a.parse(t) : t), e;
+              }
+              return (
+                e(a, r),
+                (a.prototype.encode = function () {
+                  return a.encode(this.commands);
+                }),
+                (a.prototype.getBounds = function () {
+                  var r = t.SVGPathDataTransformer.CALCULATE_BOUNDS();
+                  return this.transform(r), r;
+                }),
+                (a.prototype.transform = function (t) {
+                  for (var r = [], e = 0, a = this.commands; e < a.length; e++) {
+                    var n = t(a[e]);
+                    Array.isArray(n) ? r.push.apply(r, n) : r.push(n);
+                  }
+                  return (this.commands = r), this;
+                }),
+                (a.encode = function (t) {
+                  return d(t);
+                }),
+                (a.parse = function (t) {
+                  var r = new v(),
+                    e = [];
+                  return r.parse(t, e), r.finish(e), e;
+                }),
+                (a.CLOSE_PATH = 1),
+                (a.MOVE_TO = 2),
+                (a.HORIZ_LINE_TO = 4),
+                (a.VERT_LINE_TO = 8),
+                (a.LINE_TO = 16),
+                (a.CURVE_TO = 32),
+                (a.SMOOTH_CURVE_TO = 64),
+                (a.QUAD_TO = 128),
+                (a.SMOOTH_QUAD_TO = 256),
+                (a.ARC = 512),
+                (a.LINE_COMMANDS = a.LINE_TO | a.HORIZ_LINE_TO | a.VERT_LINE_TO),
+                (a.DRAWING_COMMANDS =
+                  a.HORIZ_LINE_TO | a.VERT_LINE_TO | a.LINE_TO | a.CURVE_TO | a.SMOOTH_CURVE_TO | a.QUAD_TO | a.SMOOTH_QUAD_TO | a.ARC),
+                a
+              );
+            })(O),
+            N =
+              (((p = {})[l.MOVE_TO] = 2),
+              (p[l.LINE_TO] = 2),
+              (p[l.HORIZ_LINE_TO] = 1),
+              (p[l.VERT_LINE_TO] = 1),
+              (p[l.CLOSE_PATH] = 0),
+              (p[l.QUAD_TO] = 4),
+              (p[l.SMOOTH_QUAD_TO] = 2),
+              (p[l.CURVE_TO] = 6),
+              (p[l.SMOOTH_CURVE_TO] = 4),
+              (p[l.ARC] = 7),
+              p),
+            E = " ";
+          function d(t) {
+            var r = "";
+            Array.isArray(t) || (t = [t]);
+            for (var e = 0; e < t.length; e++) {
+              var a = t[e];
+              if (a.type === l.CLOSE_PATH) r += "z";
+              else if (a.type === l.HORIZ_LINE_TO) r += (a.relative ? "h" : "H") + a.x;
+              else if (a.type === l.VERT_LINE_TO) r += (a.relative ? "v" : "V") + a.y;
+              else if (a.type === l.MOVE_TO) r += (a.relative ? "m" : "M") + a.x + E + a.y;
+              else if (a.type === l.LINE_TO) r += (a.relative ? "l" : "L") + a.x + E + a.y;
+              else if (a.type === l.CURVE_TO) r += (a.relative ? "c" : "C") + a.x1 + E + a.y1 + E + a.x2 + E + a.y2 + E + a.x + E + a.y;
+              else if (a.type === l.SMOOTH_CURVE_TO) r += (a.relative ? "s" : "S") + a.x2 + E + a.y2 + E + a.x + E + a.y;
+              else if (a.type === l.QUAD_TO) r += (a.relative ? "q" : "Q") + a.x1 + E + a.y1 + E + a.x + E + a.y;
+              else if (a.type === l.SMOOTH_QUAD_TO) r += (a.relative ? "t" : "T") + a.x + E + a.y;
+              else {
+                if (a.type !== l.ARC) throw new Error('Unexpected command type "' + a.type + '" at index ' + e + ".");
+                r += (a.relative ? "a" : "A") + a.rX + E + a.rY + E + a.xRot + E + +a.lArcFlag + E + +a.sweepFlag + E + a.x + E + a.y;
+              }
+            }
+            return r;
+          }
+          var A = (function (r) {
+              function a(t) {
+                var e = r.call(this) || this;
+                return (e.commands = "string" == typeof t ? a.parse(t) : t), e;
+              }
+              return (
+                e(a, r),
+                (a.prototype.encode = function () {
+                  return a.encode(this.commands);
+                }),
+                (a.prototype.getBounds = function () {
+                  var r = t.SVGPathDataTransformer.CALCULATE_BOUNDS();
+                  return this.transform(r), r;
+                }),
+                (a.prototype.transform = function (t) {
+                  for (var r = [], e = 0, a = this.commands; e < a.length; e++) {
+                    var n = t(a[e]);
+                    Array.isArray(n) ? r.push.apply(r, n) : r.push(n);
+                  }
+                  return (this.commands = r), this;
+                }),
+                (a.encode = function (t) {
+                  return d(t);
+                }),
+                (a.parse = function (t) {
+                  var r = new v(),
+                    e = [];
+                  return r.parse(t, e), r.finish(e), e;
+                }),
+                (a.CLOSE_PATH = 1),
+                (a.MOVE_TO = 2),
+                (a.HORIZ_LINE_TO = 4),
+                (a.VERT_LINE_TO = 8),
+                (a.LINE_TO = 16),
+                (a.CURVE_TO = 32),
+                (a.SMOOTH_CURVE_TO = 64),
+                (a.QUAD_TO = 128),
+                (a.SMOOTH_QUAD_TO = 256),
+                (a.ARC = 512),
+                (a.LINE_COMMANDS = a.LINE_TO | a.HORIZ_LINE_TO | a.VERT_LINE_TO),
+                (a.DRAWING_COMMANDS =
+                  a.HORIZ_LINE_TO | a.VERT_LINE_TO | a.LINE_TO | a.CURVE_TO | a.SMOOTH_CURVE_TO | a.QUAD_TO | a.SMOOTH_QUAD_TO | a.ARC),
+                a
+              );
+            })(O),
+            x =
+              (((T = {})[A.MOVE_TO] = 2),
+              (T[A.LINE_TO] = 2),
+              (T[A.HORIZ_LINE_TO] = 1),
+              (T[A.VERT_LINE_TO] = 1),
+              (T[A.CLOSE_PATH] = 0),
+              (T[A.QUAD_TO] = 4),
+              (T[A.SMOOTH_QUAD_TO] = 2),
+              (T[A.CURVE_TO] = 6),
+              (T[A.SMOOTH_CURVE_TO] = 4),
+              (T[A.ARC] = 7),
+              T);
+          (t.SVGPathData = A),
+            (t.COMMAND_ARG_COUNTS = x),
+            (t.encodeSVGPath = d),
+            (t.SVGPathDataParser = v),
+            Object.defineProperty(t, "__esModule", { value: !0 });
+        });
+      },
+      {},
+    ],
+    16: [
+      function (require, module, exports) {
+        "use strict";
+
+        Object.defineProperty(exports, "__esModule", {
+          value: true,
+        });
+        exports.valid = exports.toPoints = exports.toPath = undefined;
+
+        var _toPath = require("./toPath");
+
+        var _toPath2 = _interopRequireDefault(_toPath);
+
+        var _toPoints = require("./toPoints");
+
+        var _toPoints2 = _interopRequireDefault(_toPoints);
+
+        var _valid = require("./valid");
+
+        var _valid2 = _interopRequireDefault(_valid);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : { default: obj };
+        }
+
+        exports.toPath = _toPath2.default;
+        exports.toPoints = _toPoints2.default;
+        exports.valid = _valid2.default;
+      },
+      { "./toPath": 17, "./toPoints": 18, "./valid": 19 },
+    ],
+    17: [
+      function (require, module, exports) {
+        "use strict";
+
+        Object.defineProperty(exports, "__esModule", {
+          value: true,
+        });
+
+        var _toPoints = require("./toPoints");
+
+        var _toPoints2 = _interopRequireDefault(_toPoints);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : { default: obj };
+        }
+
+        var pointsToD = function pointsToD(p) {
+          var d = "";
+          var i = 0;
+          var firstPoint = void 0;
+
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (
+              var _iterator = p[Symbol.iterator](), _step;
+              !(_iteratorNormalCompletion = (_step = _iterator.next()).done);
+              _iteratorNormalCompletion = true
+            ) {
+              var point = _step.value;
+              var _point$curve = point.curve,
+                curve = _point$curve === undefined ? false : _point$curve,
+                moveTo = point.moveTo,
+                x = point.x,
+                y = point.y;
+
+              var isFirstPoint = i === 0 || moveTo;
+              var isLastPoint = i === p.length - 1 || p[i + 1].moveTo;
+              var prevPoint = i === 0 ? null : p[i - 1];
+
+              if (isFirstPoint) {
+                firstPoint = point;
+
+                if (!isLastPoint) {
+                  d += "M" + x + "," + y;
+                }
+              } else if (curve) {
+                switch (curve.type) {
+                  case "arc":
+                    var _point$curve2 = point.curve,
+                      _point$curve2$largeAr = _point$curve2.largeArcFlag,
+                      largeArcFlag = _point$curve2$largeAr === undefined ? 0 : _point$curve2$largeAr,
+                      rx = _point$curve2.rx,
+                      ry = _point$curve2.ry,
+                      _point$curve2$sweepFl = _point$curve2.sweepFlag,
+                      sweepFlag = _point$curve2$sweepFl === undefined ? 0 : _point$curve2$sweepFl,
+                      _point$curve2$xAxisRo = _point$curve2.xAxisRotation,
+                      xAxisRotation = _point$curve2$xAxisRo === undefined ? 0 : _point$curve2$xAxisRo;
+
+                    d += "A" + rx + "," + ry + "," + xAxisRotation + "," + largeArcFlag + "," + sweepFlag + "," + x + "," + y;
+                    break;
+                  case "cubic":
+                    var _point$curve3 = point.curve,
+                      cx1 = _point$curve3.x1,
+                      cy1 = _point$curve3.y1,
+                      cx2 = _point$curve3.x2,
+                      cy2 = _point$curve3.y2;
+
+                    d += "C" + cx1 + "," + cy1 + "," + cx2 + "," + cy2 + "," + x + "," + y;
+                    break;
+                  case "quadratic":
+                    var _point$curve4 = point.curve,
+                      qx1 = _point$curve4.x1,
+                      qy1 = _point$curve4.y1;
+
+                    d += "Q" + qx1 + "," + qy1 + "," + x + "," + y;
+                    break;
+                }
+
+                if (isLastPoint && x === firstPoint.x && y === firstPoint.y) {
+                  d += "Z";
+                }
+              } else if (isLastPoint && x === firstPoint.x && y === firstPoint.y) {
+                d += "Z";
+              } else if (x !== prevPoint.x && y !== prevPoint.y) {
+                d += "L" + x + "," + y;
+              } else if (x !== prevPoint.x) {
+                d += "H" + x;
+              } else if (y !== prevPoint.y) {
+                d += "V" + y;
+              }
+
+              i++;
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
+          }
+
+          return d;
+        };
+
+        var toPath = function toPath(s) {
+          var isPoints = Array.isArray(s);
+          var isGroup = isPoints ? Array.isArray(s[0]) : s.type === "g";
+          var points = isPoints
+            ? s
+            : isGroup
+              ? s.shapes.map(function (shp) {
+                  return (0, _toPoints2.default)(shp);
+                })
+              : (0, _toPoints2.default)(s);
+
+          if (isGroup) {
+            return points.map(function (p) {
+              return pointsToD(p);
+            });
+          }
+
+          return pointsToD(points);
+        };
+
+        exports.default = toPath;
+      },
+      { "./toPoints": 18 },
+    ],
+    18: [
+      function (require, module, exports) {
+        "use strict";
+
+        Object.defineProperty(exports, "__esModule", {
+          value: true,
+        });
+
+        var _extends =
+          Object.assign ||
+          function (target) {
+            for (var i = 1; i < arguments.length; i++) {
+              var source = arguments[i];
+              for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                  target[key] = source[key];
+                }
+              }
+            }
+            return target;
+          };
+
+        function _objectWithoutProperties(obj, keys) {
+          var target = {};
+          for (var i in obj) {
+            if (keys.indexOf(i) >= 0) continue;
+            if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+            target[i] = obj[i];
+          }
+          return target;
+        }
+
+        var toPoints = function toPoints(_ref) {
+          var type = _ref.type,
+            props = _objectWithoutProperties(_ref, ["type"]);
+
+          switch (type) {
+            case "circle":
+              return getPointsFromCircle(props);
+            case "ellipse":
+              return getPointsFromEllipse(props);
+            case "line":
+              return getPointsFromLine(props);
+            case "path":
+              return getPointsFromPath(props);
+            case "polygon":
+              return getPointsFromPolygon(props);
+            case "polyline":
+              return getPointsFromPolyline(props);
+            case "rect":
+              return getPointsFromRect(props);
+            case "g":
+              return getPointsFromG(props);
+            default:
+              throw new Error("Not a valid shape type");
+          }
+        };
+
+        var getPointsFromCircle = function getPointsFromCircle(_ref2) {
+          var cx = _ref2.cx,
+            cy = _ref2.cy,
+            r = _ref2.r;
+
+          return [
+            { x: cx, y: cy - r, moveTo: true },
+            { x: cx, y: cy + r, curve: { type: "arc", rx: r, ry: r, sweepFlag: 1 } },
+            { x: cx, y: cy - r, curve: { type: "arc", rx: r, ry: r, sweepFlag: 1 } },
+          ];
+        };
+
+        var getPointsFromEllipse = function getPointsFromEllipse(_ref3) {
+          var cx = _ref3.cx,
+            cy = _ref3.cy,
+            rx = _ref3.rx,
+            ry = _ref3.ry;
+
+          return [
+            { x: cx, y: cy - ry, moveTo: true },
+            { x: cx, y: cy + ry, curve: { type: "arc", rx: rx, ry: ry, sweepFlag: 1 } },
+            { x: cx, y: cy - ry, curve: { type: "arc", rx: rx, ry: ry, sweepFlag: 1 } },
+          ];
+        };
+
+        var getPointsFromLine = function getPointsFromLine(_ref4) {
+          var x1 = _ref4.x1,
+            x2 = _ref4.x2,
+            y1 = _ref4.y1,
+            y2 = _ref4.y2;
+
+          return [
+            { x: x1, y: y1, moveTo: true },
+            { x: x2, y: y2 },
+          ];
+        };
+
+        var validCommands = /[MmLlHhVvCcSsQqTtAaZz]/g;
+
+        var commandLengths = {
+          A: 7,
+          C: 6,
+          H: 1,
+          L: 2,
+          M: 2,
+          Q: 4,
+          S: 4,
+          T: 2,
+          V: 1,
+          Z: 0,
+        };
+
+        var relativeCommands = ["a", "c", "h", "l", "m", "q", "s", "t", "v"];
+
+        var isRelative = function isRelative(command) {
+          return relativeCommands.indexOf(command) !== -1;
+        };
+
+        var optionalArcKeys = ["xAxisRotation", "largeArcFlag", "sweepFlag"];
+
+        var getCommands = function getCommands(d) {
+          return d.match(validCommands);
+        };
+
+        var getParams = function getParams(d) {
+          return d
+            .split(validCommands)
+            .map(function (v) {
+              return v.replace(/[0-9]+-/g, function (m) {
+                return m.slice(0, -1) + " -";
+              });
+            })
+            .map(function (v) {
+              return v.replace(/\.[0-9]+/g, function (m) {
+                return m + " ";
+              });
+            })
+            .map(function (v) {
+              return v.trim();
+            })
+            .filter(function (v) {
+              return v.length > 0;
+            })
+            .map(function (v) {
+              return v
+                .split(/[ ,]+/)
+                .map(parseFloat)
+                .filter(function (n) {
+                  return !isNaN(n);
+                });
+            });
+        };
+
+        var getPointsFromPath = function getPointsFromPath(_ref5) {
+          var d = _ref5.d;
+
+          var commands = getCommands(d);
+          var params = getParams(d);
+
+          var points = [];
+
+          var moveTo = void 0;
+
+          for (var i = 0, l = commands.length; i < l; i++) {
+            var command = commands[i];
+            var upperCaseCommand = command.toUpperCase();
+            var commandLength = commandLengths[upperCaseCommand];
+            var relative = isRelative(command);
+
+            if (commandLength > 0) {
+              var commandParams = params.shift();
+              var iterations = commandParams.length / commandLength;
+
+              for (var j = 0; j < iterations; j++) {
+                var prevPoint = points[points.length - 1] || { x: 0, y: 0 };
+
+                switch (upperCaseCommand) {
+                  case "M":
+                    var x = (relative ? prevPoint.x : 0) + commandParams.shift();
+                    var y = (relative ? prevPoint.y : 0) + commandParams.shift();
+
+                    if (j === 0) {
+                      moveTo = { x: x, y: y };
+                      points.push({ x: x, y: y, moveTo: true });
+                    } else {
+                      points.push({ x: x, y: y });
+                    }
+
+                    break;
+
+                  case "L":
+                    points.push({
+                      x: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                      y: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                    });
+
+                    break;
+
+                  case "H":
+                    points.push({
+                      x: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                      y: prevPoint.y,
+                    });
+
+                    break;
+
+                  case "V":
+                    points.push({
+                      x: prevPoint.x,
+                      y: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                    });
+
+                    break;
+
+                  case "A":
+                    points.push({
+                      curve: {
+                        type: "arc",
+                        rx: commandParams.shift(),
+                        ry: commandParams.shift(),
+                        xAxisRotation: commandParams.shift(),
+                        largeArcFlag: commandParams.shift(),
+                        sweepFlag: commandParams.shift(),
+                      },
+                      x: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                      y: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                    });
+
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                      for (
+                        var _iterator = optionalArcKeys[Symbol.iterator](), _step;
+                        !(_iteratorNormalCompletion = (_step = _iterator.next()).done);
+                        _iteratorNormalCompletion = true
+                      ) {
+                        var k = _step.value;
+
+                        if (points[points.length - 1]["curve"][k] === 0) {
+                          delete points[points.length - 1]["curve"][k];
+                        }
+                      }
+                    } catch (err) {
+                      _didIteratorError = true;
+                      _iteratorError = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                          _iterator.return();
+                        }
+                      } finally {
+                        if (_didIteratorError) {
+                          throw _iteratorError;
+                        }
+                      }
+                    }
+
+                    break;
+
+                  case "C":
+                    points.push({
+                      curve: {
+                        type: "cubic",
+                        x1: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                        y1: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                        x2: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                        y2: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                      },
+                      x: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                      y: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                    });
+
+                    break;
+
+                  case "S":
+                    var sx2 = (relative ? prevPoint.x : 0) + commandParams.shift();
+                    var sy2 = (relative ? prevPoint.y : 0) + commandParams.shift();
+                    var sx = (relative ? prevPoint.x : 0) + commandParams.shift();
+                    var sy = (relative ? prevPoint.y : 0) + commandParams.shift();
+
+                    var diff = {};
+
+                    var sx1 = void 0;
+                    var sy1 = void 0;
+
+                    if (prevPoint.curve && prevPoint.curve.type === "cubic") {
+                      diff.x = Math.abs(prevPoint.x - prevPoint.curve.x2);
+                      diff.y = Math.abs(prevPoint.y - prevPoint.curve.y2);
+                      sx1 = prevPoint.x < prevPoint.curve.x2 ? prevPoint.x - diff.x : prevPoint.x + diff.x;
+                      sy1 = prevPoint.y < prevPoint.curve.y2 ? prevPoint.y - diff.y : prevPoint.y + diff.y;
+                    } else {
+                      diff.x = Math.abs(sx - sx2);
+                      diff.y = Math.abs(sy - sy2);
+                      sx1 = prevPoint.x;
+                      sy1 = prevPoint.y;
+                    }
+
+                    points.push({ curve: { type: "cubic", x1: sx1, y1: sy1, x2: sx2, y2: sy2 }, x: sx, y: sy });
+
+                    break;
+
+                  case "Q":
+                    points.push({
+                      curve: {
+                        type: "quadratic",
+                        x1: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                        y1: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                      },
+                      x: (relative ? prevPoint.x : 0) + commandParams.shift(),
+                      y: (relative ? prevPoint.y : 0) + commandParams.shift(),
+                    });
+
+                    break;
+
+                  case "T":
+                    var tx = (relative ? prevPoint.x : 0) + commandParams.shift();
+                    var ty = (relative ? prevPoint.y : 0) + commandParams.shift();
+
+                    var tx1 = void 0;
+                    var ty1 = void 0;
+
+                    if (prevPoint.curve && prevPoint.curve.type === "quadratic") {
+                      var _diff = {
+                        x: Math.abs(prevPoint.x - prevPoint.curve.x1),
+                        y: Math.abs(prevPoint.y - prevPoint.curve.y1),
+                      };
+
+                      tx1 = prevPoint.x < prevPoint.curve.x1 ? prevPoint.x - _diff.x : prevPoint.x + _diff.x;
+                      ty1 = prevPoint.y < prevPoint.curve.y1 ? prevPoint.y - _diff.y : prevPoint.y + _diff.y;
+                    } else {
+                      tx1 = prevPoint.x;
+                      ty1 = prevPoint.y;
+                    }
+
+                    points.push({ curve: { type: "quadratic", x1: tx1, y1: ty1 }, x: tx, y: ty });
+
+                    break;
+                }
+              }
+            } else {
+              var _prevPoint = points[points.length - 1] || { x: 0, y: 0 };
+
+              if (_prevPoint.x !== moveTo.x || _prevPoint.y !== moveTo.y) {
+                points.push({ x: moveTo.x, y: moveTo.y });
+              }
+            }
+          }
+
+          return points;
+        };
+
+        var getPointsFromPolygon = function getPointsFromPolygon(_ref6) {
+          var points = _ref6.points;
+
+          return getPointsFromPoints({ closed: true, points: points });
+        };
+
+        var getPointsFromPolyline = function getPointsFromPolyline(_ref7) {
+          var points = _ref7.points;
+
+          return getPointsFromPoints({ closed: false, points: points });
+        };
+
+        var getPointsFromPoints = function getPointsFromPoints(_ref8) {
+          var closed = _ref8.closed,
+            points = _ref8.points;
+
+          var numbers = points.split(/[\s,]+/).map(function (n) {
+            return parseFloat(n);
+          });
+
+          var p = numbers.reduce(function (arr, point, i) {
+            if (i % 2 === 0) {
+              arr.push({ x: point });
+            } else {
+              arr[(i - 1) / 2].y = point;
+            }
+
+            return arr;
+          }, []);
+
+          if (closed) {
+            p.push(_extends({}, p[0]));
+          }
+
+          p[0].moveTo = true;
+
+          return p;
+        };
+
+        var getPointsFromRect = function getPointsFromRect(_ref9) {
+          var height = _ref9.height,
+            rx = _ref9.rx,
+            ry = _ref9.ry,
+            width = _ref9.width,
+            x = _ref9.x,
+            y = _ref9.y;
+
+          if (rx || ry) {
+            return getPointsFromRectWithCornerRadius({
+              height: height,
+              rx: rx || ry,
+              ry: ry || rx,
+              width: width,
+              x: x,
+              y: y,
+            });
+          }
+
+          return getPointsFromBasicRect({ height: height, width: width, x: x, y: y });
+        };
+
+        var getPointsFromBasicRect = function getPointsFromBasicRect(_ref10) {
+          var height = _ref10.height,
+            width = _ref10.width,
+            x = _ref10.x,
+            y = _ref10.y;
+
+          return [
+            { x: x, y: y, moveTo: true },
+            { x: x + width, y: y },
+            { x: x + width, y: y + height },
+            { x: x, y: y + height },
+            { x: x, y: y },
+          ];
+        };
+
+        var getPointsFromRectWithCornerRadius = function getPointsFromRectWithCornerRadius(_ref11) {
+          var height = _ref11.height,
+            rx = _ref11.rx,
+            ry = _ref11.ry,
+            width = _ref11.width,
+            x = _ref11.x,
+            y = _ref11.y;
+
+          var curve = { type: "arc", rx: rx, ry: ry, sweepFlag: 1 };
+
+          return [
+            { x: x + rx, y: y, moveTo: true },
+            { x: x + width - rx, y: y },
+            { x: x + width, y: y + ry, curve: curve },
+            { x: x + width, y: y + height - ry },
+            { x: x + width - rx, y: y + height, curve: curve },
+            { x: x + rx, y: y + height },
+            { x: x, y: y + height - ry, curve: curve },
+            { x: x, y: y + ry },
+            { x: x + rx, y: y, curve: curve },
+          ];
+        };
+
+        var getPointsFromG = function getPointsFromG(_ref12) {
+          var shapes = _ref12.shapes;
+          return shapes.map(function (s) {
+            return toPoints(s);
+          });
+        };
+
+        exports.default = toPoints;
+      },
+      {},
+    ],
+    19: [
+      function (require, module, exports) {
+        "use strict";
+
+        Object.defineProperty(exports, "__esModule", {
+          value: true,
+        });
+
+        var _typeof =
+          typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
+            ? function (obj) {
+                return typeof obj;
+              }
+            : function (obj) {
+                return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+              };
+
+        var getErrors = function getErrors(shape) {
+          var rules = getRules(shape);
+          var errors = [];
+
+          rules.map(function (_ref) {
+            var match = _ref.match,
+              prop = _ref.prop,
+              required = _ref.required,
+              type = _ref.type;
+
+            if (typeof shape[prop] === "undefined") {
+              if (required) {
+                errors.push(prop + " prop is required" + (prop === "type" ? "" : " on a " + shape.type));
+              }
+            } else {
+              if (typeof type !== "undefined") {
+                if (type === "array") {
+                  if (!Array.isArray(shape[prop])) {
+                    errors.push(prop + " prop must be of type array");
+                  }
+                } else if (_typeof(shape[prop]) !== type) {
+                  // eslint-disable-line valid-typeof
+                  errors.push(prop + " prop must be of type " + type);
+                }
+              }
+
+              if (Array.isArray(match)) {
+                if (match.indexOf(shape[prop]) === -1) {
+                  errors.push(prop + " prop must be one of " + match.join(", "));
+                }
+              }
+            }
+          });
+
+          if (shape.type === "g" && Array.isArray(shape.shapes)) {
+            var childErrors = shape.shapes.map(function (s) {
+              return getErrors(s);
+            });
+            return [].concat.apply(errors, childErrors);
+          }
+
+          return errors;
+        };
+
+        var getRules = function getRules(shape) {
+          var rules = [
+            {
+              match: ["circle", "ellipse", "line", "path", "polygon", "polyline", "rect", "g"],
+              prop: "type",
+              required: true,
+              type: "string",
+            },
+          ];
+
+          switch (shape.type) {
+            case "circle":
+              rules.push({ prop: "cx", required: true, type: "number" });
+              rules.push({ prop: "cy", required: true, type: "number" });
+              rules.push({ prop: "r", required: true, type: "number" });
+              break;
+
+            case "ellipse":
+              rules.push({ prop: "cx", required: true, type: "number" });
+              rules.push({ prop: "cy", required: true, type: "number" });
+              rules.push({ prop: "rx", required: true, type: "number" });
+              rules.push({ prop: "ry", required: true, type: "number" });
+              break;
+
+            case "line":
+              rules.push({ prop: "x1", required: true, type: "number" });
+              rules.push({ prop: "x2", required: true, type: "number" });
+              rules.push({ prop: "y1", required: true, type: "number" });
+              rules.push({ prop: "y2", required: true, type: "number" });
+              break;
+
+            case "path":
+              rules.push({ prop: "d", required: true, type: "string" });
+              break;
+
+            case "polygon":
+            case "polyline":
+              rules.push({ prop: "points", required: true, type: "string" });
+              break;
+
+            case "rect":
+              rules.push({ prop: "height", required: true, type: "number" });
+              rules.push({ prop: "rx", type: "number" });
+              rules.push({ prop: "ry", type: "number" });
+              rules.push({ prop: "width", required: true, type: "number" });
+              rules.push({ prop: "x", required: true, type: "number" });
+              rules.push({ prop: "y", required: true, type: "number" });
+              break;
+
+            case "g":
+              rules.push({ prop: "shapes", required: true, type: "array" });
+              break;
+          }
+
+          return rules;
+        };
+
+        var valid = function valid(shape) {
+          var errors = getErrors(shape);
+
+          return {
+            errors: errors,
+            valid: errors.length === 0,
+          };
+        };
+
+        exports.default = valid;
+      },
+      {},
+    ],
+    20: [
+      function (require, module, exports) {
+        "use strict";
+
+        module.exports = TinyQueue;
+        module.exports.default = TinyQueue;
+
+        function TinyQueue(data, compare) {
+          if (!(this instanceof TinyQueue)) return new TinyQueue(data, compare);
+
+          this.data = data || [];
+          this.length = this.data.length;
+          this.compare = compare || defaultCompare;
+
+          if (this.length > 0) {
+            for (var i = (this.length >> 1) - 1; i >= 0; i--) this._down(i);
+          }
+        }
+
+        function defaultCompare(a, b) {
+          return a < b ? -1 : a > b ? 1 : 0;
+        }
+
+        TinyQueue.prototype = {
+          push: function (item) {
+            this.data.push(item);
+            this.length++;
+            this._up(this.length - 1);
+          },
+
+          pop: function () {
+            if (this.length === 0) return undefined;
+
+            var top = this.data[0];
+            this.length--;
+
+            if (this.length > 0) {
+              this.data[0] = this.data[this.length];
+              this._down(0);
+            }
+            this.data.pop();
+
+            return top;
+          },
+
+          peek: function () {
+            return this.data[0];
+          },
+
+          _up: function (pos) {
+            var data = this.data;
+            var compare = this.compare;
+            var item = data[pos];
+
+            while (pos > 0) {
+              var parent = (pos - 1) >> 1;
+              var current = data[parent];
+              if (compare(item, current) >= 0) break;
+              data[pos] = current;
+              pos = parent;
+            }
+
+            data[pos] = item;
+          },
+
+          _down: function (pos) {
+            var data = this.data;
+            var compare = this.compare;
+            var halfLength = this.length >> 1;
+            var item = data[pos];
+
+            while (pos < halfLength) {
+              var left = (pos << 1) + 1;
+              var right = left + 1;
+              var best = data[left];
+
+              if (right < this.length && compare(data[right], best) < 0) {
+                left = right;
+                best = data[right];
+              }
+              if (compare(best, item) >= 0) break;
+
+              data[pos] = best;
+              pos = left;
+            }
+
+            data[pos] = item;
+          },
+        };
+      },
+      {},
+    ],
+    21: [
+      function (require, module, exports) {
+        (function inject(clean, precision, undef) {
+          var isArray = function (a) {
+            return Object.prototype.toString.call(a) === "[object Array]";
+          };
+
+          var defined = function (a) {
+            return a !== undef;
+          };
+
+          function Vec2(x, y) {
+            if (!(this instanceof Vec2)) {
+              return new Vec2(x, y);
+            }
+
+            if (isArray(x)) {
+              y = x[1];
+              x = x[0];
+            } else if ("object" === typeof x && x) {
+              y = x.y;
+              x = x.x;
+            }
+
+            this.x = Vec2.clean(x || 0);
+            this.y = Vec2.clean(y || 0);
+          }
+
+          Vec2.prototype = {
+            change: function (fn) {
+              if (typeof fn === "function") {
+                if (this.observers) {
+                  this.observers.push(fn);
+                } else {
+                  this.observers = [fn];
+                }
+              } else if (this.observers && this.observers.length) {
+                for (var i = this.observers.length - 1; i >= 0; i--) {
+                  this.observers[i](this, fn);
+                }
+              }
+
+              return this;
+            },
+
+            ignore: function (fn) {
+              if (this.observers) {
+                if (!fn) {
+                  this.observers = [];
+                } else {
+                  var o = this.observers,
+                    l = o.length;
+                  while (l--) {
+                    o[l] === fn && o.splice(l, 1);
+                  }
+                }
+              }
+              return this;
+            },
+
+            // set x and y
+            set: function (x, y, notify) {
+              if ("number" != typeof x) {
+                notify = y;
+                y = x.y;
+                x = x.x;
+              }
+
+              if (this.x === x && this.y === y) {
+                return this;
+              }
+
+              var orig = null;
+              if (notify !== false && this.observers && this.observers.length) {
+                orig = this.clone();
+              }
+
+              this.x = Vec2.clean(x);
+              this.y = Vec2.clean(y);
+
+              if (notify !== false) {
+                return this.change(orig);
+              }
+            },
+
+            // reset x and y to zero
+            zero: function () {
+              return this.set(0, 0);
+            },
+
+            // return a new vector with the same component values
+            // as this one
+            clone: function () {
+              return new this.constructor(this.x, this.y);
+            },
+
+            // negate the values of this vector
+            negate: function (returnNew) {
+              if (returnNew) {
+                return new this.constructor(-this.x, -this.y);
+              } else {
+                return this.set(-this.x, -this.y);
+              }
+            },
+
+            // Add the incoming `vec2` vector to this vector
+            add: function (x, y, returnNew) {
+              if (typeof x != "number") {
+                returnNew = y;
+                if (isArray(x)) {
+                  y = x[1];
+                  x = x[0];
+                } else {
+                  y = x.y;
+                  x = x.x;
+                }
+              }
+
+              x += this.x;
+              y += this.y;
+
+              if (!returnNew) {
+                return this.set(x, y);
+              } else {
+                // Return a new vector if `returnNew` is truthy
+                return new this.constructor(x, y);
+              }
+            },
+
+            // Subtract the incoming `vec2` from this vector
+            subtract: function (x, y, returnNew) {
+              if (typeof x != "number") {
+                returnNew = y;
+                if (isArray(x)) {
+                  y = x[1];
+                  x = x[0];
+                } else {
+                  y = x.y;
+                  x = x.x;
+                }
+              }
+
+              x = this.x - x;
+              y = this.y - y;
+
+              if (!returnNew) {
+                return this.set(x, y);
+              } else {
+                // Return a new vector if `returnNew` is truthy
+                return new this.constructor(x, y);
+              }
+            },
+
+            // Multiply this vector by the incoming `vec2`
+            multiply: function (x, y, returnNew) {
+              if (typeof x != "number") {
+                returnNew = y;
+                if (isArray(x)) {
+                  y = x[1];
+                  x = x[0];
+                } else {
+                  y = x.y;
+                  x = x.x;
+                }
+              } else if (typeof y != "number") {
+                returnNew = y;
+                y = x;
+              }
+
+              x *= this.x;
+              y *= this.y;
+
+              if (!returnNew) {
+                return this.set(x, y);
+              } else {
+                return new this.constructor(x, y);
+              }
+            },
+
+            // Rotate this vector. Accepts a `Rotation` or angle in radians.
+            //
+            // Passing a truthy `inverse` will cause the rotation to
+            // be reversed.
+            //
+            // If `returnNew` is truthy, a new
+            // `Vec2` will be created with the values resulting from
+            // the rotation. Otherwise the rotation will be applied
+            // to this vector directly, and this vector will be returned.
+            rotate: function (r, inverse, returnNew) {
+              var x = this.x,
+                y = this.y,
+                cos = Math.cos(r),
+                sin = Math.sin(r),
+                rx,
+                ry;
+
+              inverse = inverse ? -1 : 1;
+
+              rx = cos * x - inverse * sin * y;
+              ry = inverse * sin * x + cos * y;
+
+              if (returnNew) {
+                return new this.constructor(rx, ry);
+              } else {
+                return this.set(rx, ry);
+              }
+            },
+
+            // Calculate the length of this vector
+            length: function () {
+              var x = this.x,
+                y = this.y;
+              return Math.sqrt(x * x + y * y);
+            },
+
+            // Get the length squared. For performance, use this instead of `Vec2#length` (if possible).
+            lengthSquared: function () {
+              var x = this.x,
+                y = this.y;
+              return x * x + y * y;
+            },
+
+            // Return the distance betwen this `Vec2` and the incoming vec2 vector
+            // and return a scalar
+            distance: function (vec2) {
+              var x = this.x - vec2.x;
+              var y = this.y - vec2.y;
+              return Math.sqrt(x * x + y * y);
+            },
+
+            // Given Array of Vec2, find closest to this Vec2.
+            nearest: function (others) {
+              var shortestDistance = Number.MAX_VALUE,
+                nearest = null,
+                currentDistance;
+
+              for (var i = others.length - 1; i >= 0; i--) {
+                currentDistance = this.distance(others[i]);
+                if (currentDistance <= shortestDistance) {
+                  shortestDistance = currentDistance;
+                  nearest = others[i];
+                }
+              }
+
+              return nearest;
+            },
+
+            // Convert this vector into a unit vector.
+            // Returns the length.
+            normalize: function (returnNew) {
+              var length = this.length();
+
+              // Collect a ratio to shrink the x and y coords
+              var invertedLength = length < Number.MIN_VALUE ? 0 : 1 / length;
+
+              if (!returnNew) {
+                // Convert the coords to be greater than zero
+                // but smaller than or equal to 1.0
+                return this.set(this.x * invertedLength, this.y * invertedLength);
+              } else {
+                return new this.constructor(this.x * invertedLength, this.y * invertedLength);
+              }
+            },
+
+            // Determine if another `Vec2`'s components match this one's
+            // also accepts 2 scalars
+            equal: function (v, w) {
+              if (typeof v != "number") {
+                if (isArray(v)) {
+                  w = v[1];
+                  v = v[0];
+                } else {
+                  w = v.y;
+                  v = v.x;
+                }
+              }
+
+              return Vec2.clean(v) === this.x && Vec2.clean(w) === this.y;
+            },
+
+            // Return a new `Vec2` that contains the absolute value of
+            // each of this vector's parts
+            abs: function (returnNew) {
+              var x = Math.abs(this.x),
+                y = Math.abs(this.y);
+
+              if (returnNew) {
+                return new this.constructor(x, y);
+              } else {
+                return this.set(x, y);
+              }
+            },
+
+            // Return a new `Vec2` consisting of the smallest values
+            // from this vector and the incoming
+            //
+            // When returnNew is truthy, a new `Vec2` will be returned
+            // otherwise the minimum values in either this or `v` will
+            // be applied to this vector.
+            min: function (v, returnNew) {
+              var tx = this.x,
+                ty = this.y,
+                vx = v.x,
+                vy = v.y,
+                x = tx < vx ? tx : vx,
+                y = ty < vy ? ty : vy;
+
+              if (returnNew) {
+                return new this.constructor(x, y);
+              } else {
+                return this.set(x, y);
+              }
+            },
+
+            // Return a new `Vec2` consisting of the largest values
+            // from this vector and the incoming
+            //
+            // When returnNew is truthy, a new `Vec2` will be returned
+            // otherwise the minimum values in either this or `v` will
+            // be applied to this vector.
+            max: function (v, returnNew) {
+              var tx = this.x,
+                ty = this.y,
+                vx = v.x,
+                vy = v.y,
+                x = tx > vx ? tx : vx,
+                y = ty > vy ? ty : vy;
+
+              if (returnNew) {
+                return new this.constructor(x, y);
+              } else {
+                return this.set(x, y);
+              }
+            },
+
+            // Clamp values into a range.
+            // If this vector's values are lower than the `low`'s
+            // values, then raise them.  If they are higher than
+            // `high`'s then lower them.
+            //
+            // Passing returnNew as true will cause a new Vec2 to be
+            // returned.  Otherwise, this vector's values will be clamped
+            clamp: function (low, high, returnNew) {
+              var ret = this.min(high, true).max(low);
+              if (returnNew) {
+                return ret;
+              } else {
+                return this.set(ret.x, ret.y);
+              }
+            },
+
+            // Perform linear interpolation between two vectors
+            // amount is a decimal between 0 and 1
+            lerp: function (vec, amount, returnNew) {
+              return this.add(vec.subtract(this, true).multiply(amount), returnNew);
+            },
+
+            // Get the skew vector such that dot(skew_vec, other) == cross(vec, other)
+            skew: function (returnNew) {
+              if (!returnNew) {
+                return this.set(-this.y, this.x);
+              } else {
+                return new this.constructor(-this.y, this.x);
+              }
+            },
+
+            // calculate the dot product between
+            // this vector and the incoming
+            dot: function (b) {
+              return Vec2.clean(this.x * b.x + b.y * this.y);
+            },
+
+            // calculate the perpendicular dot product between
+            // this vector and the incoming
+            perpDot: function (b) {
+              return Vec2.clean(this.x * b.y - this.y * b.x);
+            },
+
+            // Determine the angle between two vec2s
+            angleTo: function (vec) {
+              return Math.atan2(this.perpDot(vec), this.dot(vec));
+            },
+
+            // Divide this vector's components by a scalar
+            divide: function (x, y, returnNew) {
+              if (typeof x != "number") {
+                returnNew = y;
+                if (isArray(x)) {
+                  y = x[1];
+                  x = x[0];
+                } else {
+                  y = x.y;
+                  x = x.x;
+                }
+              } else if (typeof y != "number") {
+                returnNew = y;
+                y = x;
+              }
+
+              if (x === 0 || y === 0) {
+                throw new Error("division by zero");
+              }
+
+              if (isNaN(x) || isNaN(y)) {
+                throw new Error("NaN detected");
+              }
+
+              if (returnNew) {
+                return new this.constructor(this.x / x, this.y / y);
+              }
+
+              return this.set(this.x / x, this.y / y);
+            },
+
+            isPointOnLine: function (start, end) {
+              return (start.y - this.y) * (start.x - end.x) === (start.y - end.y) * (start.x - this.x);
+            },
+
+            toArray: function () {
+              return [this.x, this.y];
+            },
+
+            fromArray: function (array) {
+              return this.set(array[0], array[1]);
+            },
+            toJSON: function () {
+              return { x: this.x, y: this.y };
+            },
+            toString: function () {
+              return "(" + this.x + ", " + this.y + ")";
+            },
+            constructor: Vec2,
+          };
+
+          Vec2.fromArray = function (array, ctor) {
+            return new (ctor || Vec2)(array[0], array[1]);
+          };
+
+          // Floating point stability
+          Vec2.precision = precision || 8;
+          var p = Math.pow(10, Vec2.precision);
+
+          Vec2.clean =
+            clean ||
+            function (val) {
+              if (isNaN(val)) {
+                throw new Error("NaN detected");
+              }
+
+              if (!isFinite(val)) {
+                throw new Error("Infinity detected");
+              }
+
+              if (Math.round(val) === val) {
+                return val;
+              }
+
+              return Math.round(val * p) / p;
+            };
+
+          Vec2.inject = inject;
+
+          if (!clean) {
+            Vec2.fast = inject(function (k) {
+              return k;
+            });
+
+            // Expose, but also allow creating a fresh Vec2 subclass.
+            if (typeof module !== "undefined" && typeof module.exports == "object") {
+              module.exports = Vec2;
+            } else {
+              window.Vec2 = window.Vec2 || Vec2;
+            }
+          }
+          return Vec2;
+        })();
+      },
+      {},
+    ],
+  },
+  {},
+  [9]
+);

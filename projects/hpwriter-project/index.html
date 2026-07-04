@@ -1,0 +1,727 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Building HPWriter - A Silent Digital Typewriter - Leonard Chau</title>
+<meta name="description" content="Why I’m building HPWriter, a silent digital typewriter that prints on plain paper, and what inspired this project.">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+  <meta property="article:author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Building HPWriter - A Silent Digital Typewriter">
+<meta property="og:url" content="https://leonardchau.com/projects/hpwriter-project/">
+
+
+  <meta property="og:description" content="Why I’m building HPWriter, a silent digital typewriter that prints on plain paper, and what inspired this project.">
+
+
+
+  <meta property="og:image" content="https://leonardchau.com/assets/img/9.jpg">
+  
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-11-20T02:00:00-08:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/projects/hpwriter-project/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://leonardchau.com/">
+        <img src="/assets/img/leonard.jpg" alt="Leonard Chau" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://leonardchau.com/" itemprop="url">Leonard Chau</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>B.S. Mechanical Engineering (SFSU ‘26). Maker and researcher building things at the intersection of hardware, optics, and software.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-location-dot" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco Bay Area, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/typemealetter" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+          
+            <li><a href="https://youtube.com/@dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i><span class="label">YouTube</span></a></li>
+          
+        
+          
+            <li><a href="mailto:leonard.chau@yahoo.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:leonard.chau@yahoo.com" rel="me" class="u-email">
+            <meta itemprop="email" content="leonard.chau@yahoo.com" />
+            <i class="fas fa-fw fa-square-envelope" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Building HPWriter - A Silent Digital Typewriter">
+    <meta itemprop="description" content="I’ve been working on a project called HPWriter—a silent digital typewriter that prints on plain paper using an HP45 inkjet cartridge. It’s been one of those projects that started from a simple observation and grew into something I’m genuinely excited about building.">
+    <meta itemprop="datePublished" content="2025-11-20T02:00:00-08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/projects/hpwriter-project/" itemprop="url">Building HPWriter - A Silent Digital Typewriter
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I’ve been working on a project called <strong>HPWriter</strong>—a silent digital typewriter that prints on plain paper using an HP45 inkjet cartridge. It’s been one of those projects that started from a simple observation and grew into something I’m genuinely excited about building.</p>
+
+<h2 id="the-problem-that-started-it-all">The Problem That Started It All</h2>
+
+<p>The inspiration for HPWriter came from a very specific frustration: I love typewriters, but they’re loud. Really loud. And while that satisfying <em>clack-clack-clack</em> is part of the charm when you’re typing at home, it becomes a problem in shared spaces—classrooms, libraries, coffee shops, anywhere you want to focus but don’t want to disturb everyone around you.</p>
+
+<p>There are quieter alternatives—thermal paper typewriters exist, and they’re much quieter than mechanical typewriters. But they come with significant drawbacks: the paper can be hard to find, it’s temperature-sensitive (text can fade or darken with heat), and most concerningly, thermal paper often contains BPA and other chemicals that can be toxic. Plus, thermal paper typewriters are outdated technology, built on systems that are no longer in active development.</p>
+
+<p>There’s also the Freewrite, a digital silent typewriter that offers distraction-free writing. But it doesn’t produce paper output—everything stays digital. For me, there’s something important about having physical output you can hold, file away, or share without needing a device to read it.</p>
+
+<p>At the same time, I’ve noticed how distracting modern devices can be. When I see students in class with laptops or iPads, they’re often pulled away by notifications, apps, and the endless possibilities of the internet. There’s something to be said for a device that does one thing well: lets you write, without distractions, and produces real output you can hold in your hands.</p>
+
+<h2 id="what-i-wanted-to-build">What I Wanted to Build</h2>
+
+<p>I wanted to create something that combined the best of both worlds:</p>
+
+<ul>
+  <li><strong>The focus of a typewriter</strong> - No operating system, no apps, no notifications. Just you and your words.</li>
+  <li><strong>The silence of modern electronics</strong> - Quiet enough to use anywhere without bothering others.</li>
+  <li><strong>Real ink on paper</strong> - Not a screen, not thermal paper, but actual ink on standard paper that will last.</li>
+  <li><strong>The simplicity of an appliance</strong> - Instant boot, no setup, just plug in a keyboard and start typing.</li>
+</ul>
+
+<p>HPWriter is my attempt to build exactly that.</p>
+
+<h2 id="why-hp45-inkjet">Why HP45 Inkjet?</h2>
+
+<p>The choice to use an HP45 inkjet cartridge might seem unusual, but it’s actually perfect for this application. HP45 cartridges are:</p>
+
+<ul>
+  <li><strong>Readily available</strong> - You can find them anywhere, and they’re relatively inexpensive.</li>
+  <li><strong>Refillable</strong> - HP45 cartridges can be refilled, which reduces waste and long-term costs, aligning with the serviceable design philosophy.</li>
+  <li><strong>High quality</strong> - They produce crisp, permanent text on standard paper.</li>
+  <li><strong>Well-documented</strong> - There’s existing work on controlling these cartridges, which makes the engineering challenge more approachable.</li>
+  <li><strong>Compact</strong> - The cartridge is small enough to fit in a portable device.</li>
+  <li><strong>Uses standard paper</strong> - Unlike thermal paper typewriters, HPWriter uses plain paper that’s easy to find, won’t fade with temperature, and doesn’t contain toxic chemicals.</li>
+</ul>
+
+<p>The technical challenge of generating the microsecond firing pulses needed to control the inkjet nozzles is interesting, but it’s a solvable problem with modern microcontrollers.</p>
+
+<h2 id="the-design-philosophy">The Design Philosophy</h2>
+
+<p>From the beginning, I’ve been thinking about HPWriter as a long-lived, serviceable device. I’m using:</p>
+
+<ul>
+  <li><strong>ESP32-S3 microcontroller</strong> - Modern, capable, and well-supported.</li>
+  <li><strong>NEMA-14 stepper motors with TMC drivers</strong> - Quiet, precise motion control.</li>
+  <li><strong>Modular design</strong> - Components that can be replaced or upgraded.</li>
+  <li><strong>Open-source everything</strong> - All the code, schematics, and documentation will be available.</li>
+</ul>
+
+<p>This isn’t meant to be a disposable gadget. I want something that could last for years, that you could repair yourself, and that would become a reliable tool for focused writing.</p>
+
+<h2 id="where-this-fits">Where This Fits</h2>
+
+<p>I see HPWriter being useful in several scenarios:</p>
+
+<ul>
+  <li><strong>Classrooms and libraries</strong> - Silent enough to use without disturbing others.</li>
+  <li><strong>Focus writing sessions</strong> - No internet means no distractions.</li>
+  <li><strong>Journaling and personal writing</strong> - Physical output provides a tangible record.</li>
+  <li><strong>Field research</strong> - Battery-powered portability for on-site note-taking.</li>
+  <li><strong>Creative writing</strong> - A dedicated device for deep work.</li>
+</ul>
+
+<p>It’s not trying to replace laptops or tablets—it’s trying to fill a specific niche where you want to write, you want physical output, and you want to do it quietly and without distractions.</p>
+
+<h2 id="the-journey-so-far">The Journey So Far</h2>
+
+<p>Building HPWriter has been a learning experience. I’ve had to dive deep into:</p>
+
+<ul>
+  <li>Inkjet cartridge control and timing</li>
+  <li>Stepper motor control and quiet operation</li>
+  <li>USB keyboard and flash drive interfacing</li>
+  <li>Text editing and print buffer management</li>
+  <li>Mechanical design for paper handling</li>
+</ul>
+
+<p>Each piece has its own challenges, but that’s part of what makes the project interesting. It’s at the intersection of mechanical engineering, electronics, and software—exactly the kind of work I love doing.</p>
+
+<h2 id="whats-next">What’s Next</h2>
+
+<p>The project is still very much in development. I’m working through the mechanical design, refining the electronics, and building out the software. The <a href="https://github.com/dairyking98/HPWriter">HPWriter repository</a> has all the current work, and I’m documenting the process as I go.</p>
+
+<p>I’m excited to see where this goes. There’s something appealing about building a tool that does one thing really well, and I think HPWriter has the potential to be exactly that—a silent, focused writing device that produces real, tangible output.</p>
+
+<p>If you’re interested in following along, check out the <a href="/projects/">project page</a> or the <a href="https://github.com/dairyking98/HPWriter">GitHub repository</a>. I’ll be sharing updates as the project progresses.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-11-20T02:00:00-08:00">November 20, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/general/welcome/" class="pagination--pager" title="Welcome to My Engineering Blog">Previous</a>
+    
+    
+      <a href="/general/phd-applications/" class="pagination--pager" title="My PhD Application Journey">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/2026/stability-commander/cad-assembly.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/blog/2026/stability-commander/" rel="permalink">Stability COMmander
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">Stability COMmander is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluat...</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/mingkwai-symposium.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/typewriters/history/events/mingkwai-rediscovered-symposium/" rel="permalink">MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">
+      
+
+    
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/projects/music-visualizer/" rel="permalink">Music Visualizer - Instant Milkdrop in Your Browser
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">If you’re old enough to remember Winamp, you probably remember Milkdrop - that mesmerizing, psychedelic visualizer that turned your music into flowing, pulsi...</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/9.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/general/phd-applications/" rel="permalink">My PhD Application Journey
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">I’m currently in the midst of applying to PhD programs, and I wanted to share a bit about my experience so far. This process has been both challenging and en...</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,1 +1,314 @@
-{"basics":{"name":"Leonard Chau","label":"Mechanical Engineering Student","image":"","email":"leonard.chau@yahoo.com","phone":"(510) 461-4851","url":"https://leonardchau.com","summary":"Mechanical Engineering student at San Francisco State University with expertise in bioengineering research, robotics, microscopy systems, and manufacturing. Experienced in developing low-cost automated imaging platforms, 3D printing, and precision fabrication.","location":{"address":"","postalCode":"","city":"San Francisco","countryCode":"US","region":"California"},"profiles":[{"network":"LinkedIn","username":"leonardchau","url":"https://linkedin.com/in/leonardchau"}]},"work":[{"name":"San Francisco State University","position":"Engineering Machine Shop Assistant","url":"","startDate":"2024-09-01","endDate":"","summary":"Support faculty and students by preparing laboratory equipment, maintaining machine tools, and keeping the workspace organized and safety-compliant. Manage and troubleshoot multi-material FDM 3D printers, laser cutters, waterjet cutter, and general shop machinery. Co-developed new internal shop processes to streamline machine access and improve long-term sustainability. Guide capstone teams through manufacturing planning, material selection, tolerance considerations, and prototype iteration.","highlights":["Multi-material FDM 3D printing and laser cutting","Machine tool maintenance and calibration","Developed SOPs and maintenance protocols","Capstone team mentorship"]},{"name":"Altamont Manufacturing","position":"TIG Welder & Fabricator","url":"","startDate":"2019-04-01","endDate":"2022-04-01","summary":"Interpreted technical drawings to prepare, assemble, and finish metal components with tight tolerances. Produced high-quality TIG weldments on aluminum and steel alloys for both structural and aesthetic applications. Used jigs and fixturing to maintain alignment and consistency. Coordinated fabrication steps across multiple simultaneous jobs to support fast production cycles.","highlights":["TIG welding on aluminum and steel","Precision fabrication with tight tolerances","Multi-job coordination and quality control"]},{"name":"Exploratorium","position":"Presenter, Engineering Day","url":"","startDate":"2025-09-01","endDate":"2025-09-01","summary":"Collaborated with peers to design and present a public demonstration highlighting the natural bioluminescence of dinoflagellates. Engineered an interactive system that used a vibration transducer to convert music into mechanical stimulation, triggering light emission in real time. Communicated biological mechanisms and engineering design to attendees.","highlights":["Public science communication","Interactive system design","Biological and mechanical integration"]}],"volunteer":[],"education":[{"institution":"San Francisco State University","location":"San Francisco, CA","url":"https://www.sfsu.edu/","area":"Mechanical Engineering","studyType":"Bachelor of Science","startDate":"2023-09-01","endDate":"2026-05-01","score":"3.92","courses":["Dynamics","Thermodynamics","Mechanics of Solids","Mechanics of Fluids","System Dynamics and Vibration","Materials and Manufacturing Processes","Control Systems","Heat Transfer","Thermal Power Systems","Renewable Energy Systems","Engineering Design Project I","Engineering Experimentation","Microcontrollers","Experimental Analysis"]},{"institution":"Diablo Valley College","location":"Pleasant Hill, CA","url":"","area":"Engineering","studyType":"Coursework","startDate":"2016-09-01","endDate":"2023-05-01","score":"","courses":["Engineering Drawing","Engineering Materials","Calculus","Physics","MATLAB","Chemistry","Biology","Business"]},{"institution":"Las Positas College","location":"Livermore, CA","url":"","area":"Manufacturing","studyType":"Coursework","startDate":"2018-09-01","endDate":"2019-05-01","score":"","courses":["Metallurgy","Print Reading","Welding Processes"]}],"awards":[{"title":"Kenneth Fong Translation Research Award","date":"2025-09-01","awarder":"San Francisco State University","url":"","summary":"Funded student research assistant for automated mechatronic systems in GC/MS seaweed analysis at SFSU."},{"title":"Dean's List","date":"2023-09-01","awarder":"San Francisco State University","url":"","summary":"Fall 2023 – Current"}],"certificates":[],"publications":[{"name":"FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy","publisher":"Center for Cellular Construction Summer Retreat","releaseDate":"2025-08-01","url":"","summary":"Poster presentation at Center for Cellular Construction Summer Retreat, Tiburon, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."},{"name":"FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy","publisher":"Gilead Scholars Research Program Symposium","releaseDate":"2025-07-01","url":"","summary":"Oral presentation at Gilead Scholars Research Program Symposium, San Francisco, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."},{"name":"FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy","publisher":"Student Enrichment Office Annual Research Symposium","releaseDate":"2025-07-01","url":"","summary":"Oral presentation at Student Enrichment Office Annual Research Symposium, San Francisco, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."}],"skills":[{"name":"Design & Manufacturing","level":"Advanced","icon":"fa-solid fa-cogs","keywords":["Fusion 360","SolidWorks","OpenSCAD","FDM 3D printing","Laser cutting/engraving","Manual machining","Tolerance analysis","Rapid prototyping","Multi-material fabrication"]},{"name":"Metalworking & Fabrication","level":"Advanced","icon":"fa-solid fa-hammer","keywords":["TIG welding","MIG welding","Stick welding","Flux-Core welding","Oxy-acetylene cutting","Plasma cutting","Metal surface finishing"]},{"name":"Robotics & Embedded Systems","level":"Intermediate","icon":"fa-solid fa-microchip","keywords":["Servo motor control","Raspberry Pi","Linux/Bash automation","Sensors (temperature, humidity, pressure)","Soldering","Firmware flashing"]},{"name":"Optics & Microscopy","level":"Intermediate","icon":"fa-solid fa-microscope","keywords":["Coaxial imaging systems","Focal length and field of view","Magnification and NA","Microns-per-pixel calibration","Depth-of-field characterization","Sample preparation"]},{"name":"Computer Vision & Automation","level":"Intermediate","icon":"fa-solid fa-eye","keywords":["Python","OpenCV","Tkinter","Image processing","Blob detection","Watershed segmentation","Video export with ffmpeg","Data visualization"]},{"name":"Programming","level":"Intermediate","icon":"fa-solid fa-code","keywords":["Python","MATLAB","C++","Git/GitHub","Serial communication","I2C communication"]}],"languages":[{"language":"English","fluency":"Native speaker","icon":""}],"interests":[{"name":"Reverse Engineering","icon":"fa-solid fa-wrench","keywords":["Antique restoration","Obsolete part reconstruction","Parametric modeling","Digital fabrication"]},{"name":"Bioengineering","icon":"fa-solid fa-dna","keywords":["Microscopy systems","Automated imaging","Biological research","Low-cost instrumentation"]}],"references":[],"projects":[{"name":"StentorCam","summary":"Co-developed a low-cost robotic imaging system integrating a Raspberry Pi, custom Python code, a coaxial lens system, and a 3D-printed dark-field mask paired with an IR light-plate. Led the mechanical design and fabrication of modular 3D-printed components while contributing to both software development and experimental validation. The platform enables automated, high-throughput assays of light and chemical stimulation at roughly 1/20th the cost of commercial instruments.","highlights":["Automated microscopy","Low-cost imaging platform","3D-printed modular components","Python automation","Validated in multi-well plate experiments"],"startDate":"2024-09-01","endDate":"","url":""},{"name":"FluorCam","summary":"Helped design and build a modular, open-source fluorescence and infrared dark-field imaging system. Built around Raspberry Pi hardware, coaxial optics, and custom 3D-printed components, the platform integrates an excitation light source with optical filters for high-sensitivity imaging of biological specimens such as Drosophila larvae, while also capturing non-fluorescent samples under IR dark-field illumination.","highlights":["Open-source fluorescence microscopy","Modular design","Raspberry Pi integration","High-sensitivity imaging","Presented at multiple symposia"],"startDate":"2024-09-01","endDate":"","url":""},{"name":"3D-Cam","summary":"Lead the ongoing development of a platform that uses a single camera and mirror reflections to extrapolate z-height for depth reconstruction in microscopy. Design and fabricate modular 3D-printed mounts and housings for flexible optical configurations while also developing custom video capture, image processing, and tracking software to enable reliable depth reconstruction.","highlights":["Single-camera depth reconstruction","Mirror-based z-height extrapolation","Custom image processing","Modular 3D-printed components"],"startDate":"2024-09-01","endDate":"","url":""},{"name":"Tensegrity Structures","summary":"Contributed to exploratory research on the design and mechanical behavior of tensegrity structures. Developed both experimental prototypes and display-quality models, beginning with a modular tensegrity system constructed from wooden dowels, rubber bands, and 3D-printed joints. Transitioned to advanced prototypes using stainless steel tubing, Kevlar cord, and precision-drilled fasteners, producing high-tension architectural forms now exhibited on the SFSU campus.","highlights":["Tensegrity design","Experimental prototyping","Stainless steel fabrication","Campus exhibition"],"startDate":"2024-09-01","endDate":"2024-12-01","url":""},{"name":"Parametric Typewriter Type Elements","summary":"Design and fabricate replacement and custom type elements for multiple antique typewriter models that utilize single-piece cylindrical or spherical type mechanisms. Using OpenSCAD and resin 3D printing, reverse-engineer these components through detailed dimensional measurements, geometric calculations, and iterative mechanical testing. Developed fully parametric OpenSCAD models that allow scalable modification of glyph geometry, alignment, and mounting interfaces for varying fonts, sizes, and mechanical systems.","highlights":["Reverse engineering","Parametric OpenSCAD modeling","Resin 3D printing","Antique restoration","Precision mechanical design"],"startDate":"2022-01-01","endDate":"","url":""}]}
+{
+  "basics": {
+    "name": "Leonard Chau",
+    "label": "Mechanical Engineering Student",
+    "image": "",
+    "email": "leonard.chau@yahoo.com",
+    "phone": "(510) 461-4851",
+    "url": "https://leonardchau.com",
+    "summary": "Mechanical Engineering student at San Francisco State University with expertise in bioengineering research, robotics, microscopy systems, and manufacturing. Experienced in developing low-cost automated imaging platforms, 3D printing, and precision fabrication.",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "San Francisco",
+      "countryCode": "US",
+      "region": "California"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "leonardchau",
+        "url": "https://linkedin.com/in/leonardchau"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "San Francisco State University",
+      "position": "Engineering Machine Shop Assistant",
+      "url": "",
+      "startDate": "2024-09-01",
+      "endDate": "",
+      "summary": "Support faculty and students by preparing laboratory equipment, maintaining machine tools, and keeping the workspace organized and safety-compliant. Manage and troubleshoot multi-material FDM 3D printers, laser cutters, waterjet cutter, and general shop machinery. Co-developed new internal shop processes to streamline machine access and improve long-term sustainability. Guide capstone teams through manufacturing planning, material selection, tolerance considerations, and prototype iteration.",
+      "highlights": [
+        "Multi-material FDM 3D printing and laser cutting",
+        "Machine tool maintenance and calibration",
+        "Developed SOPs and maintenance protocols",
+        "Capstone team mentorship"
+      ]
+    },
+    {
+      "name": "Altamont Manufacturing",
+      "position": "TIG Welder & Fabricator",
+      "url": "",
+      "startDate": "2019-04-01",
+      "endDate": "2022-04-01",
+      "summary": "Interpreted technical drawings to prepare, assemble, and finish metal components with tight tolerances. Produced high-quality TIG weldments on aluminum and steel alloys for both structural and aesthetic applications. Used jigs and fixturing to maintain alignment and consistency. Coordinated fabrication steps across multiple simultaneous jobs to support fast production cycles.",
+      "highlights": ["TIG welding on aluminum and steel", "Precision fabrication with tight tolerances", "Multi-job coordination and quality control"]
+    },
+    {
+      "name": "Exploratorium",
+      "position": "Presenter, Engineering Day",
+      "url": "",
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-01",
+      "summary": "Collaborated with peers to design and present a public demonstration highlighting the natural bioluminescence of dinoflagellates. Engineered an interactive system that used a vibration transducer to convert music into mechanical stimulation, triggering light emission in real time. Communicated biological mechanisms and engineering design to attendees.",
+      "highlights": ["Public science communication", "Interactive system design", "Biological and mechanical integration"]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "San Francisco State University",
+      "location": "San Francisco, CA",
+      "url": "https://www.sfsu.edu/",
+      "area": "Mechanical Engineering",
+      "studyType": "Bachelor of Science",
+      "startDate": "2023-09-01",
+      "endDate": "2026-05-01",
+      "score": "3.92",
+      "courses": [
+        "Dynamics",
+        "Thermodynamics",
+        "Mechanics of Solids",
+        "Mechanics of Fluids",
+        "System Dynamics and Vibration",
+        "Materials and Manufacturing Processes",
+        "Control Systems",
+        "Heat Transfer",
+        "Thermal Power Systems",
+        "Renewable Energy Systems",
+        "Engineering Design Project I",
+        "Engineering Experimentation",
+        "Microcontrollers",
+        "Experimental Analysis"
+      ]
+    },
+    {
+      "institution": "Diablo Valley College",
+      "location": "Pleasant Hill, CA",
+      "url": "",
+      "area": "Engineering",
+      "studyType": "Coursework",
+      "startDate": "2016-09-01",
+      "endDate": "2023-05-01",
+      "score": "",
+      "courses": ["Engineering Drawing", "Engineering Materials", "Calculus", "Physics", "MATLAB", "Chemistry", "Biology", "Business"]
+    },
+    {
+      "institution": "Las Positas College",
+      "location": "Livermore, CA",
+      "url": "",
+      "area": "Manufacturing",
+      "studyType": "Coursework",
+      "startDate": "2018-09-01",
+      "endDate": "2019-05-01",
+      "score": "",
+      "courses": ["Metallurgy", "Print Reading", "Welding Processes"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Kenneth Fong Translation Research Award",
+      "date": "2025-09-01",
+      "awarder": "San Francisco State University",
+      "url": "",
+      "summary": "Funded student research assistant for automated mechatronic systems in GC/MS seaweed analysis at SFSU."
+    },
+    {
+      "title": "Dean's List",
+      "date": "2023-09-01",
+      "awarder": "San Francisco State University",
+      "url": "",
+      "summary": "Fall 2023 – Current"
+    }
+  ],
+  "certificates": [],
+  "publications": [
+    {
+      "name": "FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy",
+      "publisher": "Center for Cellular Construction Summer Retreat",
+      "releaseDate": "2025-08-01",
+      "url": "",
+      "summary": "Poster presentation at Center for Cellular Construction Summer Retreat, Tiburon, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."
+    },
+    {
+      "name": "FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy",
+      "publisher": "Gilead Scholars Research Program Symposium",
+      "releaseDate": "2025-07-01",
+      "url": "",
+      "summary": "Oral presentation at Gilead Scholars Research Program Symposium, San Francisco, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."
+    },
+    {
+      "name": "FluorCam: A Low Cost, High‑Throughput, Automated Platform for Fluorescent Microscopy",
+      "publisher": "Student Enrichment Office Annual Research Symposium",
+      "releaseDate": "2025-07-01",
+      "url": "",
+      "summary": "Oral presentation at Student Enrichment Office Annual Research Symposium, San Francisco, CA. Co-authors: Chudinov, P., Curry, K., Estevez, I., Paguio, K., Brien, A., Nesbeth, A., Vazquez, J., Ceron, D., Esquerra, R."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Design & Manufacturing",
+      "level": "Advanced",
+      "icon": "fa-solid fa-cogs",
+      "keywords": [
+        "Fusion 360",
+        "SolidWorks",
+        "OpenSCAD",
+        "FDM 3D printing",
+        "Laser cutting/engraving",
+        "Manual machining",
+        "Tolerance analysis",
+        "Rapid prototyping",
+        "Multi-material fabrication"
+      ]
+    },
+    {
+      "name": "Metalworking & Fabrication",
+      "level": "Advanced",
+      "icon": "fa-solid fa-hammer",
+      "keywords": [
+        "TIG welding",
+        "MIG welding",
+        "Stick welding",
+        "Flux-Core welding",
+        "Oxy-acetylene cutting",
+        "Plasma cutting",
+        "Metal surface finishing"
+      ]
+    },
+    {
+      "name": "Robotics & Embedded Systems",
+      "level": "Intermediate",
+      "icon": "fa-solid fa-microchip",
+      "keywords": [
+        "Servo motor control",
+        "Raspberry Pi",
+        "Linux/Bash automation",
+        "Sensors (temperature, humidity, pressure)",
+        "Soldering",
+        "Firmware flashing"
+      ]
+    },
+    {
+      "name": "Optics & Microscopy",
+      "level": "Intermediate",
+      "icon": "fa-solid fa-microscope",
+      "keywords": [
+        "Coaxial imaging systems",
+        "Focal length and field of view",
+        "Magnification and NA",
+        "Microns-per-pixel calibration",
+        "Depth-of-field characterization",
+        "Sample preparation"
+      ]
+    },
+    {
+      "name": "Computer Vision & Automation",
+      "level": "Intermediate",
+      "icon": "fa-solid fa-eye",
+      "keywords": [
+        "Python",
+        "OpenCV",
+        "Tkinter",
+        "Image processing",
+        "Blob detection",
+        "Watershed segmentation",
+        "Video export with ffmpeg",
+        "Data visualization"
+      ]
+    },
+    {
+      "name": "Programming",
+      "level": "Intermediate",
+      "icon": "fa-solid fa-code",
+      "keywords": ["Python", "MATLAB", "C++", "Git/GitHub", "Serial communication", "I2C communication"]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker",
+      "icon": ""
+    }
+  ],
+  "interests": [
+    {
+      "name": "Reverse Engineering",
+      "icon": "fa-solid fa-wrench",
+      "keywords": ["Antique restoration", "Obsolete part reconstruction", "Parametric modeling", "Digital fabrication"]
+    },
+    {
+      "name": "Bioengineering",
+      "icon": "fa-solid fa-dna",
+      "keywords": ["Microscopy systems", "Automated imaging", "Biological research", "Low-cost instrumentation"]
+    }
+  ],
+  "references": [],
+  "projects": [
+    {
+      "name": "StentorCam",
+      "summary": "Co-developed a low-cost robotic imaging system integrating a Raspberry Pi, custom Python code, a coaxial lens system, and a 3D-printed dark-field mask paired with an IR light-plate. Led the mechanical design and fabrication of modular 3D-printed components while contributing to both software development and experimental validation. The platform enables automated, high-throughput assays of light and chemical stimulation at roughly 1/20th the cost of commercial instruments.",
+      "highlights": [
+        "Automated microscopy",
+        "Low-cost imaging platform",
+        "3D-printed modular components",
+        "Python automation",
+        "Validated in multi-well plate experiments"
+      ],
+      "startDate": "2024-09-01",
+      "endDate": "",
+      "url": ""
+    },
+    {
+      "name": "FluorCam",
+      "summary": "Helped design and build a modular, open-source fluorescence and infrared dark-field imaging system. Built around Raspberry Pi hardware, coaxial optics, and custom 3D-printed components, the platform integrates an excitation light source with optical filters for high-sensitivity imaging of biological specimens such as Drosophila larvae, while also capturing non-fluorescent samples under IR dark-field illumination.",
+      "highlights": [
+        "Open-source fluorescence microscopy",
+        "Modular design",
+        "Raspberry Pi integration",
+        "High-sensitivity imaging",
+        "Presented at multiple symposia"
+      ],
+      "startDate": "2024-09-01",
+      "endDate": "",
+      "url": ""
+    },
+    {
+      "name": "3D-Cam",
+      "summary": "Lead the ongoing development of a platform that uses a single camera and mirror reflections to extrapolate z-height for depth reconstruction in microscopy. Design and fabricate modular 3D-printed mounts and housings for flexible optical configurations while also developing custom video capture, image processing, and tracking software to enable reliable depth reconstruction.",
+      "highlights": [
+        "Single-camera depth reconstruction",
+        "Mirror-based z-height extrapolation",
+        "Custom image processing",
+        "Modular 3D-printed components"
+      ],
+      "startDate": "2024-09-01",
+      "endDate": "",
+      "url": ""
+    },
+    {
+      "name": "Tensegrity Structures",
+      "summary": "Contributed to exploratory research on the design and mechanical behavior of tensegrity structures. Developed both experimental prototypes and display-quality models, beginning with a modular tensegrity system constructed from wooden dowels, rubber bands, and 3D-printed joints. Transitioned to advanced prototypes using stainless steel tubing, Kevlar cord, and precision-drilled fasteners, producing high-tension architectural forms now exhibited on the SFSU campus.",
+      "highlights": ["Tensegrity design", "Experimental prototyping", "Stainless steel fabrication", "Campus exhibition"],
+      "startDate": "2024-09-01",
+      "endDate": "2024-12-01",
+      "url": ""
+    },
+    {
+      "name": "Parametric Typewriter Type Elements",
+      "summary": "Design and fabricate replacement and custom type elements for multiple antique typewriter models that utilize single-piece cylindrical or spherical type mechanisms. Using OpenSCAD and resin 3D printing, reverse-engineer these components through detailed dimensional measurements, geometric calculations, and iterative mechanical testing. Developed fully parametric OpenSCAD models that allow scalable modification of glyph geometry, alignment, and mounting interfaces for varying fonts, sizes, and mechanical systems.",
+      "highlights": [
+        "Reverse engineering",
+        "Parametric OpenSCAD modeling",
+        "Resin 3D printing",
+        "Antique restoration",
+        "Precision mechanical design"
+      ],
+      "startDate": "2022-01-01",
+      "endDate": "",
+      "url": ""
+    }
+  ]
+}

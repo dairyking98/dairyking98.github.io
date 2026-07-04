@@ -1,1 +1,20 @@
-module.exports={MinDistance:2,MaxDistance:5,RepulsionRadius:15,MaxVelocity:.1,AttractionForce:.2,RepulsionForce:.6,AlignmentForce:.55,NodeInjectionInterval:100,DrawNodes:!1,TraceMode:!1,InvertedColors:!1,DebugMode:!1,FillMode:!1,DrawHistory:!1,ShowBounds:!0,UseBrownianMotion:!0,BrownianMotionRange:.01,TimeScale:1};
+module.exports = {
+  MinDistance: 2,
+  MaxDistance: 5,
+  RepulsionRadius: 15,
+  MaxVelocity: 0.1,
+  AttractionForce: 0.2,
+  RepulsionForce: 0.6,
+  AlignmentForce: 0.55,
+  NodeInjectionInterval: 100,
+  DrawNodes: false,
+  TraceMode: false,
+  InvertedColors: false,
+  DebugMode: false,
+  FillMode: false,
+  DrawHistory: false,
+  ShowBounds: true,
+  UseBrownianMotion: true,
+  BrownianMotionRange: 0.01,
+  TimeScale: 1,
+};

@@ -1,1 +1,368 @@
-class DifferentialGrowth{constructor(s,t){this.width=s,this.height=t,this.maxEdgeLength=15,this.minNodeDistance=8,this.attractionForce=.01,this.repulsionForce=.05,this.alignmentForce=.02,this.repulsionRadius=30,this.damping=.9,this.paths=[],this.allNodes=[],this.allEdges=[],this.paused=!1,this.traceMode=!1,this.showNodes=!1,this.invertColors=!1,this.debugMode=!1,this.showFills=!0,this.showHistory=!1,this.showBounds=!1,this.history=[],this.maxHistory=50,this.spatialIndex=null}initializePath(s){const t=new Path(s);this.paths.push(t),this.allNodes.push(...t.getAllNodes()),this.allEdges.push(...t.getAllEdges()),this.updateSpatialIndex()}updateSpatialIndex(){this.spatialIndex=new Map,this.allNodes.forEach(s=>{const t=`${Math.floor(s.x/50)}_${Math.floor(s.y/50)}`;this.spatialIndex.has(t)||this.spatialIndex.set(t,[]),this.spatialIndex.get(t).push(s)})}getNearbyNodes(s,t){const i=[],h=Math.floor(s.x/50),e=Math.floor(s.y/50);for(let s=-1;s<=1;s++)for(let t=-1;t<=1;t++){const o=`${h+s}_${e+t}`;this.spatialIndex&&this.spatialIndex.has(o)&&i.push(...this.spatialIndex.get(o))}return i.filter(i=>{if(i===s)return!1;return s.distanceTo(i)<=t})}update(){this.paused||(this.applyForces(),this.updatePositions(),this.splitLongEdges(),this.updateSpatialIndex(),this.grow(),(this.traceMode||this.showHistory)&&this.saveHistory())}applyForces(){this.allNodes.forEach(s=>{s.vx=0,s.vy=0}),this.allNodes.forEach(s=>{s.neighbors.forEach(t=>{const i=t.x-s.x,h=t.y-s.y,e=Math.sqrt(i*i+h*h);if(e>0){const t=(e-.7*this.maxEdgeLength)*this.attractionForce;s.vx+=i/e*t,s.vy+=h/e*t}})}),this.allNodes.forEach(s=>{if(2===s.neighbors.length){const t=s.neighbors[0],i=s.neighbors[1],h=(t.x+i.x)/2,e=(t.y+i.y)/2,o=h-s.x,a=e-s.y;s.vx+=o*this.alignmentForce,s.vy+=a*this.alignmentForce}}),this.allNodes.forEach(s=>{this.getNearbyNodes(s,this.repulsionRadius).forEach(t=>{const i=s.x-t.x,h=s.y-t.y,e=Math.sqrt(i*i+h*h);if(e>0&&e<this.repulsionRadius&&!s.neighbors.includes(t)){const t=(this.repulsionRadius-e)/this.repulsionRadius*this.repulsionForce;s.vx+=i/e*t,s.vy+=h/e*t}})})}updatePositions(){this.allNodes.forEach(s=>{s.x+=s.vx,s.y+=s.vy,s.vx*=this.damping,s.vy*=this.damping,s.x=Math.max(10,Math.min(this.width-10,s.x)),s.y=Math.max(10,Math.min(this.height-10,s.y))})}splitLongEdges(){const s=[];this.allEdges.forEach(t=>{t.updateLength(),t.length>this.maxEdgeLength&&s.push(t)}),s.forEach(s=>{const t=(s.nodeA.x+s.nodeB.x)/2,i=(s.nodeA.y+s.nodeB.y)/2,h=new Node(t,i),e=this.paths.find(t=>t.edges.includes(s));if(e){const t=e.nodes.indexOf(s.nodeA),i=e.nodes.indexOf(s.nodeB);if(-1!==t&&-1!==i){const s=Math.min(t,i)+1;e.nodes.splice(s,0,h)}e.addNode(h),this.allNodes.push(h);const[o,a]=s.split(h),n=this.allEdges.indexOf(s);n>-1&&this.allEdges.splice(n,1);const d=e.edges.indexOf(s);d>-1&&e.edges.splice(d,1),this.allEdges.push(o,a),e.edges.push(o,a)}})}grow(){if(Math.random()<.01&&this.allEdges.length>0){const s=this.allEdges[Math.floor(Math.random()*this.allEdges.length)],t=.3+.4*Math.random(),i=s.nodeA.x+(s.nodeB.x-s.nodeA.x)*t,h=s.nodeA.y+(s.nodeB.y-s.nodeA.y)*t,e=new Node(i,h),o=this.paths.find(t=>t.edges.includes(s));if(o){const t=o.nodes.indexOf(s.nodeA);if(-1!==t){o.nodes.splice(t+1,0,e),o.addNode(e),this.allNodes.push(e);const[i,h]=s.split(e),a=this.allEdges.indexOf(s);a>-1&&this.allEdges.splice(a,1);const n=o.edges.indexOf(s);n>-1&&o.edges.splice(n,1),this.allEdges.push(i,h),o.edges.push(i,h)}}}}saveHistory(){const s=this.paths.map(s=>({nodes:s.nodes.map(s=>({x:s.x,y:s.y}))}));this.history.push(s),this.history.length>this.maxHistory&&this.history.shift()}reset(s=0){this.paths=[],this.allNodes=[],this.allEdges=[],this.history=[];const t=this.width/2,i=this.height/2,h=.2*Math.min(this.width,this.height);let e=[];switch(s%9){case 0:for(let s=0;s<20;s++){const o=s/20*Math.PI*2;e.push({x:t+Math.cos(o)*h,y:i+Math.sin(o)*h})}break;case 1:for(let s=0;s<3;s++){const o=s/3*Math.PI*2-Math.PI/2;e.push({x:t+Math.cos(o)*h,y:i+Math.sin(o)*h})}break;case 2:for(let s=0;s<4;s++){const o=s/4*Math.PI*2-Math.PI/4;e.push({x:t+Math.cos(o)*h,y:i+Math.sin(o)*h})}break;case 3:e=[{x:t-h,y:i},{x:t+h,y:i}];break;case 4:for(let s=0;s<10;s++){const o=s/10*Math.PI*2,a=s%2==0?h:.5*h;e.push({x:t+Math.cos(o)*a,y:i+Math.sin(o)*a})}break;default:for(let s=0;s<20;s++){const o=s/20*Math.PI*2;e.push({x:t+Math.cos(o)*h,y:i+Math.sin(o)*h})}}this.initializePath(e)}exportSVG(){let s=`<svg xmlns="http://www.w3.org/2000/svg" width="${this.width}" height="${this.height}">\n`;return this.invertColors&&(s+=`  <rect width="${this.width}" height="${this.height}" fill="white"/>\n`),this.paths.forEach(t=>{if(t.nodes.length>0){let i=`M ${t.nodes[0].x} ${t.nodes[0].y}`;for(let s=1;s<t.nodes.length;s++)i+=` L ${t.nodes[s].x} ${t.nodes[s].y}`;t.nodes.length>2&&(i+=" Z");const h=this.showFills?this.invertColors?"black":"white":"none",e=this.invertColors?"white":"black";s+=`  <path d="${i}" fill="${h}" stroke="${e}" stroke-width="1"/>\n`}}),s+="</svg>",s}}
+// Main Differential Growth class
+class DifferentialGrowth {
+  constructor(canvasWidth, canvasHeight) {
+    this.width = canvasWidth;
+    this.height = canvasHeight;
+
+    // Parameters
+    this.maxEdgeLength = 15;
+    this.minNodeDistance = 8;
+    this.attractionForce = 0.01;
+    this.repulsionForce = 0.05;
+    this.alignmentForce = 0.02;
+    this.repulsionRadius = 30;
+    this.damping = 0.9;
+
+    // State
+    this.paths = [];
+    this.allNodes = [];
+    this.allEdges = [];
+    this.paused = false;
+    this.traceMode = false;
+    this.showNodes = false;
+    this.invertColors = false;
+    this.debugMode = false;
+    this.showFills = true;
+    this.showHistory = false;
+    this.showBounds = false;
+
+    // History for trace mode
+    this.history = [];
+    this.maxHistory = 50;
+
+    // Spatial index for performance
+    this.spatialIndex = null;
+  }
+
+  initializePath(points) {
+    const path = new Path(points);
+    this.paths.push(path);
+    this.allNodes.push(...path.getAllNodes());
+    this.allEdges.push(...path.getAllEdges());
+    this.updateSpatialIndex();
+  }
+
+  updateSpatialIndex() {
+    // Simple spatial grid for now (can be optimized with rbush later)
+    this.spatialIndex = new Map();
+    this.allNodes.forEach((node) => {
+      const key = `${Math.floor(node.x / 50)}_${Math.floor(node.y / 50)}`;
+      if (!this.spatialIndex.has(key)) {
+        this.spatialIndex.set(key, []);
+      }
+      this.spatialIndex.get(key).push(node);
+    });
+  }
+
+  getNearbyNodes(node, radius) {
+    const candidates = [];
+    const gridX = Math.floor(node.x / 50);
+    const gridY = Math.floor(node.y / 50);
+
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        const key = `${gridX + dx}_${gridY + dy}`;
+        if (this.spatialIndex && this.spatialIndex.has(key)) {
+          candidates.push(...this.spatialIndex.get(key));
+        }
+      }
+    }
+
+    return candidates.filter((n) => {
+      if (n === node) return false;
+      const dist = node.distanceTo(n);
+      return dist <= radius;
+    });
+  }
+
+  update() {
+    if (this.paused) return;
+
+    // Apply forces
+    this.applyForces();
+
+    // Update positions
+    this.updatePositions();
+
+    // Split edges that are too long
+    this.splitLongEdges();
+
+    // Update spatial index
+    this.updateSpatialIndex();
+
+    // Add growth (introduce new nodes)
+    this.grow();
+
+    // Save history for trace mode
+    if (this.traceMode || this.showHistory) {
+      this.saveHistory();
+    }
+  }
+
+  applyForces() {
+    // Reset velocities
+    this.allNodes.forEach((node) => {
+      node.vx = 0;
+      node.vy = 0;
+    });
+
+    // Attraction to neighbors
+    this.allNodes.forEach((node) => {
+      node.neighbors.forEach((neighbor) => {
+        const dx = neighbor.x - node.x;
+        const dy = neighbor.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 0) {
+          const force = (dist - this.maxEdgeLength * 0.7) * this.attractionForce;
+          node.vx += (dx / dist) * force;
+          node.vy += (dy / dist) * force;
+        }
+      });
+    });
+
+    // Alignment (nodes want to be on straight line between neighbors)
+    this.allNodes.forEach((node) => {
+      if (node.neighbors.length === 2) {
+        const prev = node.neighbors[0];
+        const next = node.neighbors[1];
+
+        const midX = (prev.x + next.x) / 2;
+        const midY = (prev.y + next.y) / 2;
+
+        const dx = midX - node.x;
+        const dy = midY - node.y;
+
+        node.vx += dx * this.alignmentForce;
+        node.vy += dy * this.alignmentForce;
+      }
+    });
+
+    // Repulsion from nearby nodes
+    this.allNodes.forEach((node) => {
+      const nearby = this.getNearbyNodes(node, this.repulsionRadius);
+      nearby.forEach((other) => {
+        const dx = node.x - other.x;
+        const dy = node.y - other.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 0 && dist < this.repulsionRadius) {
+          // Don't repel from neighbors (they have attraction)
+          if (!node.neighbors.includes(other)) {
+            const force = ((this.repulsionRadius - dist) / this.repulsionRadius) * this.repulsionForce;
+            node.vx += (dx / dist) * force;
+            node.vy += (dy / dist) * force;
+          }
+        }
+      });
+    });
+  }
+
+  updatePositions() {
+    this.allNodes.forEach((node) => {
+      node.x += node.vx;
+      node.y += node.vy;
+
+      // Apply damping
+      node.vx *= this.damping;
+      node.vy *= this.damping;
+
+      // Keep nodes within bounds (optional)
+      node.x = Math.max(10, Math.min(this.width - 10, node.x));
+      node.y = Math.max(10, Math.min(this.height - 10, node.y));
+    });
+  }
+
+  splitLongEdges() {
+    const edgesToSplit = [];
+
+    this.allEdges.forEach((edge) => {
+      edge.updateLength();
+      if (edge.length > this.maxEdgeLength) {
+        edgesToSplit.push(edge);
+      }
+    });
+
+    edgesToSplit.forEach((edge) => {
+      const midX = (edge.nodeA.x + edge.nodeB.x) / 2;
+      const midY = (edge.nodeA.y + edge.nodeB.y) / 2;
+      const newNode = new Node(midX, midY);
+
+      // Find which path this edge belongs to
+      const path = this.paths.find((p) => p.edges.includes(edge));
+      if (path) {
+        const nodeAIndex = path.nodes.indexOf(edge.nodeA);
+        const nodeBIndex = path.nodes.indexOf(edge.nodeB);
+
+        // Insert new node between nodeA and nodeB
+        if (nodeAIndex !== -1 && nodeBIndex !== -1) {
+          const insertIndex = Math.min(nodeAIndex, nodeBIndex) + 1;
+          path.nodes.splice(insertIndex, 0, newNode);
+        }
+
+        path.addNode(newNode);
+        this.allNodes.push(newNode);
+
+        // Split the edge
+        const [edgeA, edgeB] = edge.split(newNode);
+
+        // Remove old edge and add new ones
+        const edgeIndex = this.allEdges.indexOf(edge);
+        if (edgeIndex > -1) {
+          this.allEdges.splice(edgeIndex, 1);
+        }
+        const pathEdgeIndex = path.edges.indexOf(edge);
+        if (pathEdgeIndex > -1) {
+          path.edges.splice(pathEdgeIndex, 1);
+        }
+
+        this.allEdges.push(edgeA, edgeB);
+        path.edges.push(edgeA, edgeB);
+      }
+    });
+  }
+
+  grow() {
+    // Simple growth: occasionally add a node at a random position along a random edge
+    if (Math.random() < 0.01 && this.allEdges.length > 0) {
+      const edge = this.allEdges[Math.floor(Math.random() * this.allEdges.length)];
+      const t = 0.3 + Math.random() * 0.4; // Add somewhere in the middle
+      const x = edge.nodeA.x + (edge.nodeB.x - edge.nodeA.x) * t;
+      const y = edge.nodeA.y + (edge.nodeB.y - edge.nodeA.y) * t;
+
+      const newNode = new Node(x, y);
+      const path = this.paths.find((p) => p.edges.includes(edge));
+
+      if (path) {
+        const nodeAIndex = path.nodes.indexOf(edge.nodeA);
+        if (nodeAIndex !== -1) {
+          path.nodes.splice(nodeAIndex + 1, 0, newNode);
+          path.addNode(newNode);
+          this.allNodes.push(newNode);
+
+          const [edgeA, edgeB] = edge.split(newNode);
+
+          const edgeIndex = this.allEdges.indexOf(edge);
+          if (edgeIndex > -1) {
+            this.allEdges.splice(edgeIndex, 1);
+          }
+          const pathEdgeIndex = path.edges.indexOf(edge);
+          if (pathEdgeIndex > -1) {
+            path.edges.splice(pathEdgeIndex, 1);
+          }
+
+          this.allEdges.push(edgeA, edgeB);
+          path.edges.push(edgeA, edgeB);
+        }
+      }
+    }
+  }
+
+  saveHistory() {
+    const snapshot = this.paths.map((path) => ({
+      nodes: path.nodes.map((n) => ({ x: n.x, y: n.y })),
+    }));
+    this.history.push(snapshot);
+    if (this.history.length > this.maxHistory) {
+      this.history.shift();
+    }
+  }
+
+  reset(seedShape = 0) {
+    this.paths = [];
+    this.allNodes = [];
+    this.allEdges = [];
+    this.history = [];
+
+    // Create initial shape based on seed
+    const centerX = this.width / 2;
+    const centerY = this.height / 2;
+    const radius = Math.min(this.width, this.height) * 0.2;
+
+    let points = [];
+    switch (seedShape % 9) {
+      case 0: // Circle
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          points.push({
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+          });
+        }
+        break;
+      case 1: // Triangle
+        for (let i = 0; i < 3; i++) {
+          const angle = (i / 3) * Math.PI * 2 - Math.PI / 2;
+          points.push({
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+          });
+        }
+        break;
+      case 2: // Square
+        for (let i = 0; i < 4; i++) {
+          const angle = (i / 4) * Math.PI * 2 - Math.PI / 4;
+          points.push({
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+          });
+        }
+        break;
+      case 3: // Line
+        points = [
+          { x: centerX - radius, y: centerY },
+          { x: centerX + radius, y: centerY },
+        ];
+        break;
+      case 4: // Star
+        for (let i = 0; i < 10; i++) {
+          const angle = (i / 10) * Math.PI * 2;
+          const r = i % 2 === 0 ? radius : radius * 0.5;
+          points.push({
+            x: centerX + Math.cos(angle) * r,
+            y: centerY + Math.sin(angle) * r,
+          });
+        }
+        break;
+      default:
+        // Default to circle
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          points.push({
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+          });
+        }
+    }
+
+    this.initializePath(points);
+  }
+
+  exportSVG() {
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${this.width}" height="${this.height}">\n`;
+
+    if (this.invertColors) {
+      svg += `  <rect width="${this.width}" height="${this.height}" fill="white"/>\n`;
+    }
+
+    this.paths.forEach((path) => {
+      if (path.nodes.length > 0) {
+        let pathData = `M ${path.nodes[0].x} ${path.nodes[0].y}`;
+        for (let i = 1; i < path.nodes.length; i++) {
+          pathData += ` L ${path.nodes[i].x} ${path.nodes[i].y}`;
+        }
+        if (path.nodes.length > 2) {
+          pathData += " Z";
+        }
+
+        const fill = this.showFills ? (this.invertColors ? "black" : "white") : "none";
+        const stroke = this.invertColors ? "white" : "black";
+
+        svg += `  <path d="${pathData}" fill="${fill}" stroke="${stroke}" stroke-width="1"/>\n`;
+      }
+    });
+
+    svg += "</svg>";
+    return svg;
+  }
+}
