@@ -35,7 +35,7 @@ RoboCam builds on prior work in the same lab and open-source community rather th
 
 1. **[FlyCam](https://github.com/E-Lab-SFSU/FlyCam)** (Esquerra Lab, SFSU) — the original 3D-printer-as-imaging-stage concept that inspired this platform.
 2. **[screamuch/RoboCam](https://github.com/screamuch/RoboCam)** — the base RoboCam implementation this project's suite was built on.
-3. **[RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite)** — the first full working suite built from that base: Raspberry Pi + Picamera2, GPIO laser control, and calibrate/preview/experiment applications supporting RoboCam, FluorCam, and StentorCam.
+3. **[RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite)** — the first working suite built from that base: Raspberry Pi + Picamera2, GPIO laser control, and calibrate/preview/experiment applications. It was designed to generalize across different devices and experiments, but in practice was only built out with StentorCam in mind.
 4. **[RoboCam-Suite2.0](https://github.com/dairyking98/RoboCam-Suite2.0)** — a complete modular rewrite: cross-platform (Windows/macOS/Linux), a PySide6 GUI, pluggable camera/motion drivers, and full hardware simulation mode.
 5. **[RoboCam3.1](https://github.com/dairyking98/RoboCam3.1)** (current) — the most advanced version: a six-tab PySide6 application with dual motion backends (Marlin and Klipper), multi-camera support, burst-mode capture, and a post-processing pipeline for converting raw sensor data into frames and video.
 
