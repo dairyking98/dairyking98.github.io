@@ -31,13 +31,13 @@ StentorCam adapts RoboCam for well-plate behavioral imaging of *Stentor coeruleu
 
 ## Origins & Version History
 
-RoboCam builds on prior work in the same lab and open-source community rather than starting from scratch:
+RoboCam builds on prior work in the same lab and open-source community rather than starting from scratch — each rebuild below happened for a specific reason, not just for its own sake:
 
-1. **[FlyCam](https://github.com/E-Lab-SFSU/FlyCam)** (Esquerra Lab, SFSU) — the original 3D-printer-as-imaging-stage concept that inspired this platform.
-2. **[screamuch/RoboCam](https://github.com/screamuch/RoboCam)** — the base RoboCam implementation this project's suite was built on.
-3. **[RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite)** — the first working suite built from that base: Raspberry Pi + Picamera2, GPIO laser control, and calibrate/preview/experiment applications. It was designed to generalize across different devices and experiments, but in practice was only built out with StentorCam in mind.
-4. **[RoboCam-Suite2.0](https://github.com/dairyking98/RoboCam-Suite2.0)** — a complete modular rewrite: cross-platform (Windows/macOS/Linux), a PySide6 GUI, pluggable camera/motion drivers, and full hardware simulation mode.
-5. **[RoboCam3.1](https://github.com/dairyking98/RoboCam3.1)** (current) — the most advanced version: a six-tab PySide6 application with dual motion backends (Marlin and Klipper), multi-camera support, burst-mode capture, and a post-processing pipeline for converting raw sensor data into frames and video.
+1. **[FlyCam](https://github.com/E-Lab-SFSU/FlyCam)** (Esquerra Lab, SFSU) — the original 3D-printer-as-imaging-stage concept that inspired this platform, and the earliest of everything here. Its GUI was originally built on PySimpleGUI, later migrated to the FreeSimpleGUI fork after PySimpleGUI's license changed to a paid/restricted model — the same licensing shift is why every project below built its GUI on Tkinter (and later PySide6) instead.
+2. **[screamuch/RoboCam](https://github.com/screamuch/RoboCam)** — the base RoboCam implementation this project's suite was built on. Development continued here rather than on the original repo because that repo's author was no longer around to keep working on it.
+3. **[RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite)** — the first working suite built from that base: a Tkinter GUI, Raspberry Pi + Picamera2 imaging, GPIO laser control, and calibrate/preview/experiment applications. It was designed to generalize across different devices and experiments, but in practice was only built out with StentorCam in mind. Partway through, Player One monochrome astrophotography camera support was added alongside Picamera2 — the Raspberry Pi camera's monochrome sensitivity wasn't good enough for the imaging this needed, so a dedicated monochrome astro camera was brought in, accepting slower USB-based capture as the tradeoff.
+4. **[RoboCam-Suite2.0](https://github.com/dairyking98/RoboCam-Suite2.0)** — a complete modular rewrite: cross-platform (Windows/macOS/Linux), moved off Tkinter to a PySide6 GUI, pluggable camera/motion drivers (carrying Player One, Picamera2, and OpenCV forward), and full hardware simulation mode.
+5. **[RoboCam3.1](https://github.com/dairyking98/RoboCam3.1)** (current) — a clean rewrite on top of 2.0's foundation: a fresh GUI implementation, expanded camera support, and Klipper support — driving the laser/stimulus output through the 3D printer's own control board via G-code instead of Raspberry Pi GPIO, ahead of hardware built around Klipper controllers rather than Marlin-only boards. Also adds dual motion backends, burst-mode capture, and a post-processing pipeline for converting raw sensor data into frames and video.
 
 ## Repository
 
