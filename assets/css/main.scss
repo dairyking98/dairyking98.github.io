@@ -4,18 +4,22 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-// Minimal Mistakes reserves a right-hand gutter on `.page` for the author/
-// nav sidebar (`$right-sidebar-width[-narrow]`) unconditionally, even on
-// pages that render no `.sidebar` (author_profile: false, no page.sidebar).
-// That leaves single-layout pages narrower than they need to be. Only
-// reserve the gutter when a `.sidebar` actually precedes `.page` in markup.
-#main .page {
+// Minimal Mistakes reserves a right-hand gutter on `.page` and `.archive`
+// for the author/nav sidebar (`$right-sidebar-width[-narrow]`)
+// unconditionally, even on pages that render no `.sidebar` (author_profile:
+// false, no page.sidebar) — e.g. single pages/projects and the /blog/
+// listing (archive layout). That leaves them narrower than they need to
+// be. Only reserve the gutter when a `.sidebar` actually precedes the
+// content element in markup.
+#main .page,
+#main .archive {
   float: none;
   width: 100%;
   padding-inline-end: 0;
 }
 
-#main .sidebar + .page {
+#main .sidebar + .page,
+#main .sidebar + .archive {
   @include breakpoint($large) {
     float: inline-end;
     width: calc(100% - #{$right-sidebar-width-narrow});
