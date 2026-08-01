@@ -3,3 +3,27 @@
 ---
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
+
+// Minimal Mistakes reserves a right-hand gutter on `.page` for the author/
+// nav sidebar (`$right-sidebar-width[-narrow]`) unconditionally, even on
+// pages that render no `.sidebar` (author_profile: false, no page.sidebar).
+// That leaves single-layout pages narrower than they need to be. Only
+// reserve the gutter when a `.sidebar` actually precedes `.page` in markup.
+#main .page {
+  float: none;
+  width: 100%;
+  padding-inline-end: 0;
+}
+
+#main .sidebar + .page {
+  @include breakpoint($large) {
+    float: inline-end;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-inline-end: $right-sidebar-width-narrow;
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(100% - #{$right-sidebar-width});
+    padding-inline-end: $right-sidebar-width;
+  }
+}
