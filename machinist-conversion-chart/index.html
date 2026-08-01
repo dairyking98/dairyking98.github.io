@@ -1,0 +1,393 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Machinist Conversion Chart - Leonard Chau</title>
+<meta name="description" content="Interactive conversion chart for fractions, inches, millimeters, letter/number drills, and sheet/wire gauge">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Machinist Conversion Chart">
+<meta property="og:url" content="https://leonardchau.com/machinist-conversion-chart/">
+
+
+  <meta property="og:description" content="Interactive conversion chart for fractions, inches, millimeters, letter/number drills, and sheet/wire gauge">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/machinist-conversion-chart/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/typewriter-collection/"
+                
+                
+              >Collection</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machinist Conversion Chart">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/machinist-conversion-chart/" itemprop="url">Machinist Conversion Chart
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div id="chart-controls" style="margin-bottom: 2rem;">
+  <div id="interval-controls" style="margin-bottom: 1rem;">
+    <h3>Interval Settings</h3>
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;">
+      <div>
+        <label for="interval-start">Start:</label>
+        <input type="range" id="interval-start" min="0" max="5" step="0.001" value="0" style="width: 200px;" />
+        <input type="number" id="interval-start-input" min="0" max="5" step="0.001" value="0" style="width: 80px; margin-left: 0.5rem;" />
+        <span>in</span>
+      </div>
+      <div>
+        <label for="interval-end">End:</label>
+        <input type="range" id="interval-end" min="0" max="5" step="0.001" value="1" style="width: 200px;" />
+        <input type="number" id="interval-end-input" min="0" max="5" step="0.001" value="1" style="width: 80px; margin-left: 0.5rem;" />
+        <span>in</span>
+      </div>
+      <div>
+        <label for="interval-step-denom">Step (Fraction Denominator):</label>
+        <select id="interval-step-denom" style="width: 120px; margin-left: 0.5rem;">
+          <option value="2">1/2 (0.5)</option>
+          <option value="4">1/4 (0.25)</option>
+          <option value="8">1/8 (0.125)</option>
+          <option value="16">1/16 (0.0625)</option>
+          <option value="32">1/32 (0.03125)</option>
+          <option value="64" selected="">1/64 (0.015625)</option>
+          <option value="128">1/128 (0.0078125)</option>
+        </select>
+        <span id="interval-step-display" style="margin-left: 0.5rem;">= 0.015625 in</span>
+      </div>
+      <div>
+        <label for="interval-mm-step">Step (Millimeters):</label>
+        <select id="interval-mm-step" style="width: 120px; margin-left: 0.5rem;">
+          <option value="0.01">0.01 mm</option>
+          <option value="0.05">0.05 mm</option>
+          <option value="0.1">0.1 mm</option>
+          <option value="0.5" selected="">0.5 mm</option>
+          <option value="1">1 mm</option>
+          <option value="2">2 mm</option>
+          <option value="5">5 mm</option>
+          <option value="10">10 mm</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="gauge-controls">
+    <h3>Gauge Systems</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-steel" checked="" />
+        <span>Steel (Mfr Std)</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-galvanized" />
+        <span>Galvanized Steel</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-stainless" />
+        <span>Stainless Steel</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-aluminum" />
+        <span>Aluminum (B&amp;S)</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-zinc" />
+        <span>Zinc</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-awg" checked="" />
+        <span>Wire (AWG)</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+        <input type="checkbox" id="cb-gauge-usstd" />
+        <span>US Standard</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div id="chart-container" style="overflow-x: auto;">
+  <table id="conversion-chart">
+    <thead id="chart-header"></thead>
+    <tbody id="chart-body"></tbody>
+  </table>
+</div>
+
+<script src="/assets/js/drill-sizes.js"></script>
+
+<script src="/assets/js/gauge-sizes.js"></script>
+
+<script src="/assets/js/machinist-conversion-chart.js"></script>
+
+<div class="notice--info">
+  <strong>Data Sources:</strong> Letter and number drill decimal sizes are read from <strong>ASME B94.11M-1993</strong> ("Twist Drills"),
+  Table 1 &mdash; verified directly against the standard's own table, not a secondary reference.
+  <br /><br />
+  Gauge numbering (Steel, Galvanized Steel, Stainless Steel, Aluminum, Zinc, AWG) is <em>not</em> an ASME or ISO standard &mdash; ASTM
+  explicitly discourages its use ("an archaic term of limited usefulness not having general agreement on meaning," ASTM A480/A480M) &mdash;
+  and neither ASME nor ISO publishes a gauge-number table. These values are Machinery's Handbook (Oberg) figures, read from the raw
+  source tables directly rather than a paraphrased summary. The one exception with real legal weight is <strong>US Standard Gauge</strong>,
+  which is defined by U.S. federal statute, 15 U.S.C. &sect;&nbsp;206. Aluminum sheet and AWG wire share the same Brown &amp; Sharpe (B&amp;S)
+  numbering, listed as separate systems here since they're commonly looked up separately.
+</div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

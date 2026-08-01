@@ -174,136 +174,6 @@
 <div id="main" role="main">
   
 
-  <div class="sidebar sticky">
-  
-
-
-
-<div itemscope itemtype="https://schema.org/Person" class="h-card">
-
-  
-    <div class="author__avatar">
-      <a href="https://leonardchau.com/">
-        <img src="/assets/img/leonard.jpg" alt="Leonard Chau" itemprop="image" class="u-photo">
-      </a>
-    </div>
-  
-
-  <div class="author__content">
-    <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="https://leonardchau.com/" itemprop="url">Leonard Chau</a>
-    </h3>
-    
-      <div class="author__bio p-note" itemprop="description">
-        <p>B.S. Mechanical Engineering (SFSU ‘26). Maker and researcher building things at the intersection of hardware, optics, and software.</p>
-
-      </div>
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">Follow</button>
-    <ul class="author__urls social-icons">
-      
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-location-dot" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco Bay Area, CA</span>
-        </li>
-      
-
-      
-        
-          
-            <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
-          
-        
-          
-            <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
-          
-        
-          
-            <li><a href="https://instagram.com/typemealetter" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
-          
-        
-          
-            <li><a href="https://youtube.com/@dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i><span class="label">YouTube</span></a></li>
-          
-        
-          
-            <li><a href="mailto:leonard.chau@yahoo.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
-          
-        
-      
-
-      
-
-      
-        <li>
-          <a href="mailto:leonard.chau@yahoo.com" rel="me" class="u-email">
-            <meta itemprop="email" content="leonard.chau@yahoo.com" />
-            <i class="fas fa-fw fa-square-envelope" aria-hidden="true"></i><span class="label">Email</span>
-          </a>
-        </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
-  
-  </div>
-
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
@@ -328,14 +198,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <div class="notice--info">
-  <strong>Data Source:</strong> Thread size data is based on information from
-  <a href="https://www.sizes.com/tools/thread_american.htm" target="_blank" rel="noopener noreferrer">American Thread Standards</a> and
-  <a href="https://www.sizes.com/tools/thread_metric.htm" target="_blank" rel="noopener noreferrer">Metric Thread Standards</a>
-  from <a href="https://www.sizes.com" target="_blank" rel="noopener noreferrer">sizes.com</a>.
-</div>
-
-<div id="chart-controls" style="margin-bottom: 2rem;">
+        <div id="chart-controls" style="margin-bottom: 2rem;">
   <div id="thread-type-controls" style="margin-bottom: 1rem;">
     <h3>Thread Type</h3>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
@@ -405,6 +268,30 @@
 <script src="/assets/js/drill-sizes.js"></script>
 
 <script src="/assets/js/thread-size-chart.js"></script>
+
+<div class="notice--info">
+  <strong>Data Sources:</strong> Thread diameters, TPI/pitch, and tap drill sizes are cross-checked against
+  <a href="https://www.sizes.com/tools/thread_american.htm" target="_blank" rel="noopener noreferrer">American Thread Standards</a> and
+  <a href="https://www.sizes.com/tools/thread_metric.htm" target="_blank" rel="noopener noreferrer">Metric Thread Standards</a>
+  on <a href="https://www.sizes.com" target="_blank" rel="noopener noreferrer">sizes.com</a>, which cover sizes up to 1" (American) and 30&nbsp;mm (metric); larger sizes use standard machinist references instead.
+  No ASME/ISO standard we could access directly tabulates tap-drill selection for UN threads (ASME B1.1 defines thread geometry
+  &mdash; including the basic minor diameter D1 in Tables 6/7 &mdash; but no drill-selection table, and ASME B94.9's tap drill table
+  covers pipe taps only), so tap drills above 1" are computed from that same B1.1 geometry: each one sits at a constant offset above
+  its size's basic minor diameter D1, and that offset is identical for every size sharing the same TPI &mdash; confirmed against the
+  four 12-TPI UNF sizes from 1" to 1-1/2" (including the already-verified 1" row), which all sit exactly 0.0277" above D1, and
+  similarly for the 7-TPI and 6-TPI UNC pairs (0.0140" and 0.0085").
+  <br /><br />
+  Clearance drill sizes are read directly from primary standards: <strong>ASME B18.2.8-1999</strong> Table 2 (Close Fit / H12) for inch
+  sizes #0&ndash;1-1/2", which is the full range that standard covers per its own Scope section &mdash; two sizes
+  (#12 and 9/16") aren't individually tabulated there and are computed the same way the standard derives the rest of the table:
+  nominal diameter plus the Close Fit allowance from Table 1's size bracket, rounded to the nearest standard drill.
+  Inch sizes 1-3/4" and 2" fall outside B18.2.8's stated scope (it explicitly covers "#0 through 1.5 in"); their values extend the
+  standard's own last allowance bracket (1-3/8", 1-1/2": Close Fit = major diameter + 1/16") rather than a tabulated figure.
+  Metric clearance sizes are read from the "fine" series (H12) of <strong>ISO 273:1979</strong> Table (dimensions in mm), which ASME B18.2.8
+  itself cites as the source its own metric table agrees with; this covers every metric size on this chart except M2.2, whose value
+  (major diameter + 0.2&nbsp;mm) is the same allowance ISO 273 uses for both its immediate neighbors, M2 and M2.5 &mdash; interpolated
+  from the standard rather than tabulated directly, since M2.2 itself is a non-preferred size neither ISO 273 nor B18.2.8 lists.
+</div>
 
 
         

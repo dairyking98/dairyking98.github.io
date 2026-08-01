@@ -15,29 +15,22 @@
 <meta charset="utf-8">
 
 
-<!-- begin _includes/seo.html --><title>3D-Cam - Leonard Chau</title>
-<meta name="description" content="E-Lab SFSU project for 3D camera applications">
+<!-- begin _includes/seo.html --><title>Wavelength / Color Chart - Leonard Chau</title>
+<meta name="description" content="Interactive visible-light wavelength to color chart, built from real CIE 1931 color-matching data">
 
 
   <meta name="author" content="Leonard Chau">
   
-  <meta property="article:author" content="Leonard Chau">
-  
 
 
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Leonard Chau">
-<meta property="og:title" content="3D-Cam">
-<meta property="og:url" content="https://leonardchau.com/projects/3d-cam/">
+<meta property="og:title" content="Wavelength / Color Chart">
+<meta property="og:url" content="https://leonardchau.com/wavelength-color-chart/">
 
 
-  <meta property="og:description" content="E-Lab SFSU project for 3D camera applications">
-
-
-
-  <meta property="og:image" content="https://leonardchau.com/assets/img/12.jpg">
-  
+  <meta property="og:description" content="Interactive visible-light wavelength to color chart, built from real CIE 1931 color-matching data">
 
 
 
@@ -45,14 +38,14 @@
 
 
 
-  <meta property="article:published_time" content="2026-08-01T16:27:52-07:00">
 
 
 
 
 
 
-<link rel="canonical" href="https://leonardchau.com/projects/3d-cam/">
+
+<link rel="canonical" href="https://leonardchau.com/wavelength-color-chart/">
 
 
 
@@ -184,16 +177,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="3D-Cam">
-    <meta itemprop="description" content="3D-Cam is a depth-imaging platform developed at the E-Lab at San Francisco State University. The system uses a single camera and mirror geometry to perform z-height reconstruction without requiring dual-camera hardware, making 3D imaging more accessible and cost-effective.">
-    <meta itemprop="datePublished" content="2026-08-01T16:27:52-07:00">
+    <meta itemprop="headline" content="Wavelength / Color Chart">
+    
+    
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://leonardchau.com/projects/3d-cam/" itemprop="url">3D-Cam
+            <a href="https://leonardchau.com/wavelength-color-chart/" itemprop="url">Wavelength / Color Chart
 </a>
           </h1>
           
@@ -205,58 +198,43 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>3D-Cam is a depth-imaging platform developed at the E-Lab at San Francisco State University. The system uses a single camera and mirror geometry to perform z-height reconstruction without requiring dual-camera hardware, making 3D imaging more accessible and cost-effective.</p>
+        <div id="wavelength-chart-wrap">
+  <div style="text-align: center; margin-bottom: 1.5rem;">
+    <div id="wavelength-swatch"></div>
+    <div id="wavelength-label" style="font-size: 2rem; font-weight: bold; margin-top: 0.75rem;">555 nm</div>
+    <div id="wavelength-region" style="opacity: 0.7;">Green</div>
+    <div id="wavelength-codes" style="margin-top: 0.5rem; font-family: monospace; font-size: 1.1rem; opacity: 0.85;">
+      <span id="wavelength-hex">#3dc300</span>
+      &nbsp;&middot;&nbsp;
+      <span id="wavelength-rgb">RGB(61, 195, 0)</span>
+    </div>
+  </div>
 
-<h2 id="project-overview">Project Overview</h2>
+  <div id="wavelength-slider-wrap">
+    <div id="wavelength-gradient-bar"></div>
+    <div id="wavelength-ticks"></div>
+    <input type="range" id="wavelength-slider" min="380" max="750" step="1" value="555" aria-label="Wavelength in nanometers" />
+  </div>
+</div>
 
-<p>3D-Cam provides a novel approach to depth imaging:</p>
+<script src="/assets/js/wavelength-colors.js"></script>
 
-<ul>
-  <li><strong>Single Camera System</strong>: Uses one camera with mirror geometry instead of dual cameras</li>
-  <li><strong>Z-Height Reconstruction</strong>: Performs depth reconstruction from 2D images</li>
-  <li><strong>Cost-Effective Design</strong>: Eliminates need for expensive dual-camera setups</li>
-  <li><strong>Active Development</strong>: Currently under active development and refinement</li>
-</ul>
+<script src="/assets/js/wavelength-color-chart.js"></script>
 
-<h2 id="key-features">Key Features</h2>
-
-<ul>
-  <li><strong>Depth Imaging</strong>: Z-height reconstruction from single camera input</li>
-  <li><strong>Mirror Geometry</strong>: Innovative use of mirrors for depth perception</li>
-  <li><strong>Mechanical Design</strong>: Custom mechanical design for camera and mirror positioning</li>
-  <li><strong>Software Development</strong>: Python-based image processing and depth reconstruction</li>
-  <li><strong>Open Source</strong>: Developed as part of E-Lab SFSU research initiatives</li>
-</ul>
-
-<h2 id="technical-implementation">Technical Implementation</h2>
-
-<p>The 3D-Cam system includes:</p>
-
-<ul>
-  <li><strong>Applications</strong>: User-facing applications for depth imaging</li>
-  <li><strong>Calibration Files</strong>: Calibration data for accurate depth reconstruction</li>
-  <li><strong>Libraries</strong>: Core libraries for image processing and depth calculation</li>
-  <li><strong>Scripts</strong>: Automation and utility scripts</li>
-  <li><strong>Documentation</strong>: Setup guides and technical documentation</li>
-</ul>
-
-<h2 id="repository-structure">Repository Structure</h2>
-
-<p>The project repository contains:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">apps/</code>: Application software</li>
-  <li><code class="language-plaintext highlighter-rouge">calibrations/</code>: Calibration files and data</li>
-  <li><code class="language-plaintext highlighter-rouge">lib/</code>: Core libraries and modules</li>
-  <li><code class="language-plaintext highlighter-rouge">scripts/</code>: Utility and automation scripts</li>
-  <li><code class="language-plaintext highlighter-rouge">docs/</code>: Documentation and setup guides</li>
-</ul>
-
-<h2 id="repository">Repository</h2>
-
-<p>The complete source code, documentation, and setup instructions are available in the <a href="https://github.com/E-Lab-SFSU/3D-Cam">3D-Cam repository</a>. The project website is hosted at <a href="https://e-lab-sfsu.github.io/3D-Cam/">e-lab-sfsu.github.io/3D-Cam</a>.</p>
-
-<hr />
+<div class="notice--info">
+  <strong>Data Sources:</strong> Colors are computed from the real <strong>CIE 1931 2&deg; standard observer</strong> color-matching
+  functions at native 1&nbsp;nm resolution (no interpolation), using the Stockman &amp; Sharpe compilation hosted by the Color
+  and Vision Research Laboratory (CVRL, UCL) &mdash; the standard reference dataset for this data, not an analytic approximation.
+  Each wavelength's XYZ value is converted to linear sRGB via the standard D65 matrix (IEC 61966-2-1), out-of-gamut components are
+  clipped to zero, and the whole spectrum is scaled by a single global factor (not per-wavelength) so relative brightness between
+  wavelengths is preserved before sRGB gamma encoding. That's why violet and deep red genuinely look dim near the ends of the bar
+  rather than fully saturated &mdash; that dimming is physically correct human luminous sensitivity, not a rendering shortfall, and
+  it's the main thing most "rainbow gradient" wavelength charts get wrong by normalizing each color independently.
+  <br /><br />
+  380&ndash;750&nbsp;nm is used as the visible range; unlike the color math itself, the exact cutoffs and the named color-region
+  boundaries (violet/blue/cyan/green/yellow/orange/red) are common convention, not a fixed standard &mdash; visual sensitivity fades
+  gradually rather than stopping at a sharp edge, and different sources place these boundaries tens of nm apart.
+</div>
 
         
       </section>
@@ -273,23 +251,12 @@
         
 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-01T16:27:52-07:00">August 1, 2026</time></p>
-
 
       </footer>
 
       
 
       
-
-  <nav class="pagination" aria-label="Post pagination">
-    
-      <a href="#" class="pagination--pager disabled">Previous</a>
-    
-    
-      <a href="/projects/acrylic-tensile-testing/" class="pagination--pager" title="Acrylic Tensile Testing">Next</a>
-    
-  </nav>
 
 
     </div>
