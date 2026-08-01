@@ -2,11 +2,16 @@
 layout: single
 title: RoboCam
 description: A 3D-printer-based robotic imaging platform, with FluorCam (fluorescence microscopy) and StentorCam (behavioral dark-field imaging) as its two research applications.
+# PHOTO NEEDED: hero shot of the full rig on the printer bed, well-plate loaded, ideally with the laser lit.
+# Save as assets/img/2026/robocam/hero.jpg, then set header.teaser (and header.image) to it. See PHOTOS_NEEDED.md.
 header:
   teaser: /assets/img/12.jpg
 importance: 1
 category: school-project
 github: https://github.com/dairyking98/RoboCam3.1
+toc: true
+toc_label: "Contents"
+toc_sticky: true
 ---
 
 RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. **FluorCam** and **StentorCam** are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of *Stentor coeruleus*.
@@ -28,6 +33,67 @@ This work has been presented at the Gilead Scholars Research Program Symposium, 
 ## StentorCam {#stentorcam}
 
 StentorCam adapts RoboCam for well-plate behavioral imaging of *Stentor coeruleus*, adding well-plate motion profiles, dark-field optics with infrared illumination, and automated tracking/stimulation experiments. It has been used in NSF-funded training programs and team research projects for high-throughput biological imaging.
+
+## Recent Development {#recent-development}
+
+RoboCam3.1 has moved fast since it was first written up here. Highlights from the last several dozen commits:
+
+**GUI & workflow**
+- A dedicated **Motion Profiles tab** for tuning Marlin feed-rate, acceleration, and jerk directly from the GUI instead of hand-editing firmware config
+- **Demo Mode**: a fullscreen preview with keyboard-shortcut well navigation and laser control, for showing the rig off without touching the full calibration/experiment workflow
+- A **well crosshair overlay** on the live camera preview, plus Setup-panel state (camera, connection, layout) now persists and reloads across sessions
+- **ETA accuracy and auto-homing safety** fixes for the Experiment tab, plus verbose Setup-panel logging during Marlin connect
+- **Exposure and Target FPS decoupled** in the Calibration tab — target FPS now snaps to what's actually achievable after exposure changes, instead of silently drifting
+
+**Camera & capture**
+- **Multi-camera selection**: the Setup panel enumerates every connected Pi camera by model/index, and PlayerOne cameras blocked by USB permissions get an in-app udev-rule installer instead of a silent failure
+- The **raw-burst capture path was rebuilt for real throughput**: acquisition and disk-writing now run on separate threads connected by a bounded queue, so encoding/disk I/O can never stall the capture loop — every frame is still guaranteed written, even on `stop()`
+- The Pi camera path now opens a genuine **video+raw stream configuration**, so `get_raw_frame()` returns true 10/12-bit Bayer sensor data instead of ISP-processed greyscale
+
+**Klipper support**
+- Motion and laser/stimulus control can now run through a **Klipper-based printer controller** via G-code (`SET_PIN`) as an alternative to wiring a dedicated Raspberry Pi GPIO output — aimed at newer hardware builds using Klipper controllers instead of Marlin-only boards. (Implemented, not yet exercised against real Klipper hardware — see Known Issues in `docs/recording_modes.md`.)
+
+**Processing pipeline**
+- A new **Processing tab** batch-converts raw `.npy` bursts into PNG/JPEG image sequences and video (constant-fps MP4 for presentation, VFR MKV with accurate per-frame timing for archival), with an **auto-process after experiment** option that kicks off the moment a run finishes
+
+## Hardware {#hardware}
+
+RoboCam repurposes a stock FDM 3D printer's XY(Z) motion system as a precision positioning stage — the print head is replaced with a camera/illumination carriage, and the bed becomes the imaging stage for well plates or samples.
+
+<!-- PHOTO NEEDED: full rig on the printer bed, well-plate loaded.
+Save as assets/img/2026/robocam/rig-overview.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/robocam/rig-overview.jpg" alt="RoboCam rig on the 3D printer bed" caption="RoboCam's camera/illumination carriage mounted on the printer's XY(Z) stage." %}
+-->
+
+<!-- PHOTO NEEDED: close-up of the laser/IR illumination and optics mount.
+Save as assets/img/2026/robocam/optics-mount.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/robocam/optics-mount.jpg" alt="RoboCam laser and optics mount" caption="GPIO/Klipper-controlled laser and dark-field optics mount, 3D-printed." %}
+-->
+
+<!-- PHOTO NEEDED: side-by-side or swap shot of the two camera options (Player One astro camera vs. Raspberry Pi camera module).
+Save as assets/img/2026/robocam/camera-comparison.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/robocam/camera-comparison.jpg" alt="PlayerOne and Raspberry Pi camera options" caption="Interchangeable imaging heads: PlayerOne monochrome astronomy camera vs. Raspberry Pi camera module." %}
+-->
+
+## Experimental Data {#experimental-data}
+
+Every experiment captures **raw sensor bursts** rather than encoded video — frames are written as fast as possible with per-frame timestamps (`time.perf_counter()`), and video/images are produced afterward in a separate post-processing step. That keeps the time-critical capture loop free of encoding overhead and preserves full sensor bit depth for downstream analysis. Captures are stacked into one memory-mapped `.npy` array per well plus a JSON sidecar of per-frame timing and laser events, then converted by the Processing tab into PNG/JPEG stacks, a presentation MP4, and/or a lossless VFR MKV for archival.
+
+Real measurement from a 3-well capture (Mars 662M mono, 8-bit, 1280×960, 908 frames, 2026-07-29) shows how the export formats compare against the raw data:
+
+| Format | Total size | % of raw | Lossless? |
+|---|---|---|---|
+| Raw `.npy` | 1,064.0 MiB | 100% | — |
+| PNG stack | 743.6 MiB | 69.9% | Yes |
+| VFR (ffv1) | 673.6 MiB | 63.3% | Yes |
+| JPEG stack (q95) | 469.8 MiB | 44.2% | No |
+| MP4 (libx264, presentation) | 225.9 MiB | 21.2% | No |
+
+<!-- PHOTO NEEDED: a representative captured frame or plate montage from a real experiment (StentorCam dark-field well or FluorCam fluorescence shot).
+Save as assets/img/2026/robocam/sample-capture.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/robocam/sample-capture.jpg" alt="Sample RoboCam capture frame" caption="A representative captured frame from a well-plate imaging run." %}
+Note: there are old candidate frames in the archived RoboCam repos on disk, but I couldn't confirm they're actually representative captures rather than unrelated test shots — worth reviewing yourself before using one here rather than guessing.
+-->
 
 ## Origins & Version History
 

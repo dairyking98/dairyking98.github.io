@@ -1,6 +1,11 @@
 # Display-only inventory for the typewriter collection showcase.
 # Purchase/sale price, valuation, source, and repair notes are intentionally
 # excluded from this public data file.
+#
+# Optional `image` field: path to a photo of that specific machine, e.g.
+#   image: /assets/img/2026/typewriter-collection/hammond-model-1.jpg
+# Leave it off entries with no photo yet — the collection page and table
+# both degrade gracefully without it.
 - manufacturer: Hammond
   model: Model 1
   size: Standard

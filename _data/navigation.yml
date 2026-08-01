@@ -9,5 +9,7 @@ main:
     url: /tools/
   - title: "Collection"
     url: /typewriter-collection/
+  - title: "Photography"
+    url: /photography/
   - title: "Contact"
     url: /contact/
