@@ -1,6 +1,21 @@
 // Behavior for /fraction-inch-mm-chart/. Depends on letterDrillSizes and
-// numberDrillSizes from drill-sizes.js, loaded first on that page.
+// numberDrillSizes from drill-sizes.js, and the gauge tables from
+// gauge-sizes.js, both loaded first on that page.
 (function() {
+  // Gauge systems available, in display order. Each maps a gauge-number
+  // string to a decimal-inch thickness/diameter; see gauge-sizes.js for
+  // sourcing notes.
+  const gaugeSystems = [
+    { key: 'steel', label: 'Steel', table: steelGauge },
+    { key: 'galvanized', label: 'Galv. Steel', table: galvanizedGauge },
+    { key: 'stainless', label: 'Stainless', table: stainlessGauge },
+    { key: 'aluminum', label: 'Aluminum', table: aluminumGauge },
+    { key: 'zinc', label: 'Zinc', table: zincGauge },
+    { key: 'awg', label: 'AWG (Wire)', table: awgGauge },
+    { key: 'usstd', label: 'US Standard', table: usStdGauge },
+  ];
+  let enabledGaugeSystems = ['steel', 'awg'];
+
   // Build comprehensive fraction lookup
   const fractionLookup = new Map();
 
@@ -59,6 +74,25 @@
       }
     }
     return null;
+  }
+
+  // Find every enabled gauge system with an exact match at this decimal,
+  // e.g. [{system: 'Steel', num: '16'}]. A given decimal can match more
+  // than one system (several tables share numbering).
+  function findExactGauges(decimal) {
+    const matches = [];
+    gaugeSystems.forEach(({ key, label, table }) => {
+      if (!enabledGaugeSystems.includes(key)) {
+        return;
+      }
+      for (const [num, size] of Object.entries(table)) {
+        if (Math.abs(size - decimal) < 0.000001) {
+          matches.push({ system: label, num });
+          break;
+        }
+      }
+    });
+    return matches;
   }
 
   // Check if a fraction denominator is compatible with the step denominator
@@ -202,7 +236,7 @@
   }
 
   // State
-  let enabledColumns = ['millimeters', 'inches', 'fractions', 'drill'];
+  let enabledColumns = ['millimeters', 'inches', 'fractions', 'drill', 'gauge'];
   let intervalStart = 0;
   let intervalEnd = 1;
   let intervalStepDenom = 64; // Fraction denominator (e.g., 64 means 1/64)
@@ -346,8 +380,35 @@
       }
     }
 
-    // Convert Map to array and sort by decimal value
+    // 5. Add gauge sizes within range, for whichever systems are enabled
+    gaugeSystems.forEach(({ key, table }) => {
+      if (!enabledGaugeSystems.includes(key)) {
+        return;
+      }
+      for (const [, size] of Object.entries(table)) {
+        if (size >= intervalStart && size <= intervalEnd) {
+          const dkey = size.toFixed(6);
+          if (!dataMap.has(dkey)) {
+            dataMap.set(dkey, {
+              decimal: Math.round(size * 1000000) / 1000000,
+              fraction: decimalToFraction(size, false),
+              millimeters: Math.round(size * 25.4 * 10000) / 10000,
+              letterDrill: findExactLetterDrill(size),
+              numberDrill: findExactNumberDrill(size),
+              isFractionInterval: false,
+              isMMInterval: false
+            });
+          }
+        }
+      }
+    });
+
+    // Convert Map to array, resolve gauge matches now that every row that
+    // could exist has been added, and sort by decimal value
     const data = Array.from(dataMap.values());
+    data.forEach(item => {
+      item.gauges = findExactGauges(item.decimal);
+    });
     data.sort((a, b) => a.decimal - b.decimal);
 
     return data;
@@ -423,6 +484,12 @@
             }
             value = drills.length > 0 ? drills.join(', ') : '—';
             // Bold drills
+            shouldBold = true;
+            break;
+          case 'gauge':
+            value = item.gauges && item.gauges.length > 0
+              ? item.gauges.map(g => `${g.num} ${g.system}`).join(', ')
+              : '—';
             shouldBold = true;
             break;
           case 'millimeters':
@@ -522,6 +589,24 @@
     intervalMMStep = parseFloat(e.target.value);
     updateIntervalDisplay();
     renderChart();
+  });
+
+  // Event listeners for gauge system checkboxes
+  gaugeSystems.forEach(({ key }) => {
+    const checkbox = document.getElementById(`cb-gauge-${key}`);
+    if (!checkbox) {
+      return;
+    }
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        if (!enabledGaugeSystems.includes(key)) {
+          enabledGaugeSystems.push(key);
+        }
+      } else {
+        enabledGaugeSystems = enabledGaugeSystems.filter(k => k !== key);
+      }
+      renderChart();
+    });
   });
 
   // Initialize
