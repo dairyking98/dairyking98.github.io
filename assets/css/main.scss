@@ -81,6 +81,20 @@
 #inventory-table th:nth-last-child(11),
 #inventory-table td:nth-last-child(11) { width: 6%; }  // image, once photos exist
 
+// Shared by #chart-container on /machinist-conversion-chart/ and
+// /thread-size-chart/ (its own inline style sets overflow-x: auto, for
+// horizontal scroll on mobile). Per spec, an explicit overflow-x with no
+// explicit overflow-y makes the y-axis compute to auto too, not its default
+// visible — which turns this div into its own scroll container. Since it's
+// never height-constrained it never actually scrolls, but position: sticky
+// on the table header inside it now sticks relative to THIS (non-scrolling)
+// container instead of the real page scroll, which is why the sticky
+// header didn't follow the page down. Pin overflow-y explicitly so that
+// auto-coupling doesn't happen.
+#chart-container {
+  overflow-y: visible;
+}
+
 // /machinist-conversion-chart/
 // The theme sets `table { display: block }` for its own horizontal-scroll
 // trick, which breaks `position: sticky` on `th` (sticky needs real table
