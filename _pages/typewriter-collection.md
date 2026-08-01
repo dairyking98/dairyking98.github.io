@@ -3,14 +3,16 @@ layout: single
 title: "Typewriter Collection"
 permalink: /typewriter-collection/
 description: A running list of the antique and vintage typewriters in my collection.
-author_profile: true
+author_profile: false
 ---
 
 {{ site.data.typewriters.size }} machines, spanning an 1890 Hammond Model 1 to mid-century portables. Some entries are missing a year, serial number, or typeface simply because I haven't logged that detail yet — this list reflects what I've catalogued so far, not the full extent of what I own. See [3D-Printed Type Elements](/projects/type-elements/) for the replacement parts I've designed for several of these.
 
 Restoring these machines — cleaning, repairing, and adjusting decades-old mechanisms back to working order — turns out to double as a genuinely effective way to unwind from engineering coursework: focused, hands-on, and close to a flow state. It was enough of a pattern that it became the subject of a class presentation on stress-reduction techniques.
 
+<!-- FEATURED MACHINES: restore this heading once the first photo below is uncommented — an empty heading with no photos under it renders as a blank gap.
 ## Featured Machines
+-->
 
 <!-- PHOTO NEEDED: the 1890 Hammond Model 1 — the oldest machine in the collection.
 Save as assets/img/2026/typewriter-collection/hammond-model-1.jpg, then uncomment:
@@ -34,12 +36,16 @@ Save as assets/img/2026/typewriter-collection/ibm-selectric-ii.jpg, then uncomme
 
 ## Full Inventory
 
-<div style="overflow-x: auto;" markdown="1">
+{% assign has_images = false %}
+{%- for tw in site.data.typewriters -%}
+  {%- if tw.image %}{% assign has_images = true %}{% endif -%}
+{%- endfor %}
+<div id="inventory-table" style="overflow-x: auto;" markdown="1">
 
-| | Year | Manufacturer | Model | Size | Drive | Color | Serial No. | Typeface | Layout / Pitch |
-|---|---|---|---|---|---|---|---|---|---|
+| {% if has_images %}| {% endif %}Year | Manufacturer | Model | Size | Drive | Color | Serial No. | Typeface | Layout | Pitch |
+|{% if has_images %}---|{% endif %}---|---|---|---|---|---|---|---|---|---|
 {% for tw in site.data.typewriters -%}
-| {% if tw.image %}![{{ tw.manufacturer }} {{ tw.model }}]({{ tw.image | relative_url }}){: width="60"}{% endif %} | {{ tw.year | default: "—" }} | {{ tw.manufacturer }} | {{ tw.model | default: "—" }} | {{ tw.size | default: "—" }} | {{ tw.drive | default: "—" }} | {{ tw.color | default: "—" }} | {{ tw.serial_number | default: "—" }} | {{ tw.typeface | default: "—" }} | {{ tw.layout | default: tw.pitch | default: "—" }} |
+| {% if has_images %}{% if tw.image %}![{{ tw.manufacturer }} {{ tw.model }}]({{ tw.image | relative_url }}){: width="60"}{% endif %} | {% endif %}{{ tw.year | default: "—" }} | {{ tw.manufacturer }} | {{ tw.model | default: "—" }} | {{ tw.size | default: "—" }} | {{ tw.drive | default: "—" }} | {{ tw.color | default: "—" }} | {{ tw.serial_number | default: "—" }} | {{ tw.typeface | default: "—" }} | {{ tw.layout | default: "—" }} | {{ tw.pitch | default: "—" }} |
 {% endfor %}
 
 </div>

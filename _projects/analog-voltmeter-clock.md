@@ -116,52 +116,29 @@ The following documents are available for reference:
 ### Code Files
 
 - [Arduino Clock Code v1](/projects/school-project/vmeter-clock/vmeter-clock.ino) - Original Arduino source code (v1)
-- [Arduino Clock Code v2](/projects/school-project/vmeter-clock/vmeter-clock-v2.ino) - Enhanced version with play mode (v2)
+- [Arduino Clock Code v2](/projects/school-project/vmeter-clock/vmeter-clock-v2.ino) - Play Mode version (v2) — code-complete, never flashed or tested on hardware
 
 ### Documentation
 
-- [Complete Documentation](/vmeter-clock/documentation/) - Complete project documentation including hardware setup, pin configuration, and functionality
-- [Operation Guide](/vmeter-clock/operation-guide/) - Quick reference guide for operating the voltmeter clock
-- [Technical Documentation](/vmeter-clock/technical/) - Detailed technical documentation including code architecture, algorithms, and implementation details
-- [Arduino Code Documentation](/vmeter-clock/code/) - Complete Arduino source code with detailed comments
+- [Complete Documentation](/vmeter-clock/documentation/) - Hardware setup, pin configuration, and functionality reference (v1)
+- [Operation Guide](/vmeter-clock/operation-guide/) - Quick reference guide for operating the voltmeter clock (v1)
+- [Technical Documentation](/vmeter-clock/technical/) - Code architecture, algorithms, and implementation details (v1)
 
 ---
 
-## Version 2 Improvements (November 16, 2025)
+## Version 2 (Written, Never Tested)
 
-The voltmeter clock has been enhanced with several new features in version 2:
+After the original build, I wrote a full "Play Mode" enhancement to `vmeter-clock-v2.ino` — the code is complete and detailed, but it was **never flashed to the Arduino or tested on real hardware**. Everything below describes what the code does, not a verified feature of the physical clock:
 
-### Play Mode
+- **Triple-Click Activation**: a `detectTripleClick()` routine watches the last three button-press timestamps and enters play mode if all three land within a 500ms window
+- **Interactive Voltmeter Control**: the rotary encoder drives whichever voltmeter is active through its full PWM range (0-255) via `updatePlayModeVoltmeters()`
+- **Voltmeter Selection**: each button press in play mode cycles the active voltmeter (Hour → Minute → Second) via `handlePlayModeButton()`
+- **Dynamic LED Patterns**: `updatePlayModeLEDs()` cycles all four LEDs through the 16 binary combinations of a 4-bit pattern, updating every 300ms
+- **Automatic Timeout**: tracks button presses and encoder movement as activity; exits back to normal time display after 15 seconds of inactivity
+- **Time-adjustment priority**: a long press still exits play mode and enters time adjustment, so the two modes can't conflict
 
-A new interactive "Play Mode" has been added that transforms the voltmeter clock into an interactive display:
-
-- **Triple-Click Activation**: Quickly triple-click the button to enter play mode
-- **Interactive Voltmeter Control**: Use the rotary encoder to manually control any of the three voltmeters through their full PWM range (0-255)
-- **Voltmeter Selection**: Press the button while in play mode to cycle through which voltmeter is active (Hour → Minute → Second)
-- **Dynamic LED Patterns**: All four LEDs cycle through binary patterns (0-15), displaying all possible combinations in a mesmerizing visual effect
-- **Automatic Timeout**: Play mode automatically exits after 15 seconds of inactivity, returning to normal time display
-
-### Enhanced User Experience
-
-- **Activity Detection**: Play mode tracks both button presses and encoder movements to reset the inactivity timer
-- **Seamless Mode Switching**: Time adjustment mode takes priority over play mode, allowing you to adjust the time even while in play mode
-- **Improved Encoder Handling**: Enhanced encoder counter management for play mode's full PWM range
-
-### Technical Improvements
-
-- **Triple-Click Detection**: Sophisticated algorithm that detects three button presses within a 500ms window
-- **LED Pattern Cycling**: Efficient binary pattern generation that cycles through all 16 possible LED combinations
-- **Non-Blocking Timeouts**: All timing operations use millis() for non-blocking delays, ensuring smooth operation
-
-### Use Cases
-
-Play mode is perfect for:
-
-- **Demonstrations**: Show off the voltmeter movement and PWM control
-- **Calibration**: Manually test voltmeter response across the full range
-- **Interactive Displays**: Create custom visual effects with the LED patterns
-- **Educational Purposes**: Demonstrate PWM control and voltmeter behavior
+The rest of the sketch — sensor reading, RTC handling, quarter-second time interpolation, PTH display — is identical to v1; play mode is purely additive. All timing in both the original code and the play mode addition uses non-blocking `millis()` comparisons, not `delay()`.
 
 ---
 
-_This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework. Version 2 improvements were added on November 16, 2025._
+_This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework._
