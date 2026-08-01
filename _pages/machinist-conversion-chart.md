@@ -54,7 +54,7 @@ author_profile: false
     <h3>Gauge Systems</h3>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
       <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-gauge-steel" checked>
+        <input type="checkbox" id="cb-gauge-steel">
         <span>Steel (Mfr Std)</span>
       </label>
       <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
@@ -74,7 +74,7 @@ author_profile: false
         <span>Zinc</span>
       </label>
       <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-        <input type="checkbox" id="cb-gauge-awg" checked>
+        <input type="checkbox" id="cb-gauge-awg">
         <span>Wire (AWG)</span>
       </label>
       <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">

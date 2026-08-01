@@ -82,6 +82,14 @@
 #inventory-table td:nth-last-child(11) { width: 6%; }  // image, once photos exist
 
 // /machinist-conversion-chart/
+// The theme sets `table { display: block }` for its own horizontal-scroll
+// trick, which breaks `position: sticky` on `th` (sticky needs real table
+// layout) — override back to `display: table` and let #chart-container's
+// own overflow-x: auto handle scrolling instead (same fix as #inventory-table above).
+#conversion-chart {
+  display: table;
+  width: 100%;
+}
 #conversion-chart th {
   position: sticky;
   top: 0;
@@ -92,11 +100,28 @@
 #conversion-chart td {
   white-space: nowrap;
 }
+// label column reads left-to-right, the rest are numeric-ish values that
+// read better right-aligned (numbers line up on their last digit) —
+// matters most on mobile, where the theme's default centered text gets
+// hard to scan once columns are narrow and content is wrapping/tight
+#conversion-chart th:first-child,
+#conversion-chart td:first-child {
+  text-align: left;
+}
+#conversion-chart th:not(:first-child),
+#conversion-chart td:not(:first-child) {
+  text-align: right;
+}
 #interval-controls input[type="range"] {
   margin: 0 0.5rem;
 }
 
 // /thread-size-chart/
+// Same display:block-vs-sticky issue as #conversion-chart above.
+#thread-chart {
+  display: table;
+  width: 100%;
+}
 #thread-chart th {
   position: sticky;
   top: 0;
@@ -109,6 +134,15 @@
 #thread-chart th,
 #thread-chart td {
   white-space: nowrap;
+}
+// same left-label/right-numbers reasoning as #conversion-chart above
+#thread-chart th:first-child,
+#thread-chart td:first-child {
+  text-align: left;
+}
+#thread-chart th:not(:first-child),
+#thread-chart td:not(:first-child) {
+  text-align: right;
 }
 
 // /wavelength-color-chart/
