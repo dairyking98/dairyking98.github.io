@@ -96,13 +96,21 @@
 }
 
 // /machinist-conversion-chart/
-// The theme sets `table { display: block }` for its own horizontal-scroll
-// trick, which breaks `position: sticky` on `th` (sticky needs real table
-// layout) — override back to `display: table` and let #chart-container's
-// own overflow-x: auto handle scrolling instead (same fix as #inventory-table above).
+// The theme's base `table` rule sets `display: block` AND `overflow-x: auto`
+// directly on every <table> (its own horizontal-scroll trick) — both break
+// `position: sticky` on `th`. display:block breaks it because sticky needs
+// real table layout; overflow-x: auto breaks it because that makes
+// overflow-y compute to auto too (CSS spec: an explicit value on one
+// overflow axis stops the other defaulting to visible), which turns the
+// table itself into its own dead scroll container (never height-
+// constrained, so it never actually scrolls) that sticky then sticks
+// relative to instead of the real page scroll. Override all three so the
+// theme's rule doesn't reach this table at all; #chart-container's own
+// overflow-x: auto (see above) is what actually handles horizontal scroll.
 #conversion-chart {
   display: table;
   width: 100%;
+  overflow: visible;
 }
 #conversion-chart th {
   position: sticky;
@@ -131,10 +139,11 @@
 }
 
 // /thread-size-chart/
-// Same display:block-vs-sticky issue as #conversion-chart above.
+// Same display/overflow-vs-sticky issue as #conversion-chart above.
 #thread-chart {
   display: table;
   width: 100%;
+  overflow: visible;
 }
 #thread-chart th {
   position: sticky;
