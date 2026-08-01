@@ -1,7 +1,7 @@
 ---
 layout: single
 title: 3D-Printed Type Elements
-description: Parametric OpenSCAD type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, and Postal.
+description: Parametric OpenSCAD type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, Postal, and a set of standalone type slug replicas.
 header:
   teaser: /assets/img/2026/type-elements/hammond-split-shuttle.png
 importance: 1
@@ -79,9 +79,9 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The fourth, done for a collector friend in Germany rather than my own collection. The Helios Klimax is an unusual and rare German typewriter with its own mechanical quirks, so this was another back-and-forth collaboration — he supplied measurements, photos, and fitment feedback on his damaged original, and I iterated the OpenSCAD model remotely until it fit and printed correctly on his end.
 
-{% include figure image_path="/assets/img/2026/type-elements/helios-klimax-render.png" alt="Helios Klimax type element OpenSCAD render" caption="v4-generated Helios Klimax type element." %}
+{% include figure image_path="/assets/img/2026/type-elements/helios-klimax-render.png" alt="Helios Klimax type element OpenSCAD render, with the SVG logo engraved on the top face" caption="v4-generated Helios Klimax type element, with the original logo engraved on the top face — a v4-only addition ported from the machine's v1 SVG artwork." %}
 
-{% include figure image_path="/assets/img/2026/type-elements/helios-klimax.png" alt="Helios Klimax logo" caption="The logo from the original element." %}
+{% include figure image_path="/assets/img/2026/type-elements/helios-klimax.png" alt="Helios Klimax logo" caption="The logo from the original element, as source artwork." %}
 
 ## Hammond Shuttles & Index {#hammond}
 
@@ -90,6 +90,8 @@ Hammond typewriters print from a curved **shuttle** — a die-cast type bar arra
 This directory covers both the Model 1 split shuttle and the conventional standard shuttle used from the Multiplex onward, plus the index variant and a Glagolitic shuttle for the old Slavic script. I own two Hammond Multiplex machines myself, including one still waiting on a mathematical shuttle.
 
 {% include figure image_path="/assets/img/2026/type-elements/hammond-split-shuttle.png" alt="Hammond Model 1 split shuttle OpenSCAD render" caption="Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward." %}
+
+{% include figure image_path="/assets/img/2026/type-elements/hammond-shuttle.png" alt="Conventional Hammond shuttle OpenSCAD render" caption="The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above." %}
 
 {% assign hammonds = site.data.typewriters | where: "manufacturer", "Hammond" %}
 {% if hammonds.size > 0 %}
@@ -137,15 +139,61 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 {% endfor %}
 {% endif %}
 
-## v4: Rebuilt Pipeline {#v4}
+## Type Slugs {#type-slugs}
 
-The whole toolchain got a ground-up rewrite as **v4**, moving from per-machine scripts to a shared pipeline with common glyph handling, logging, and tooling:
+A different, smaller thing from everything above: a **type slug** is the individual metal-type-style element a typebar or shuttle actually carries, not a full keyboard/typewriter build — so this is a set of five small standalone replicas rather than another machine to restore. Most of them are novelty/reference pieces, not functional replacement parts, with one exception: the **Gauge Slug** is real and functional, meant to be installed on the machine to measure typebar swing and alignment-cut position directly. The other four are the **generic Type Slug**, the **Vogue Slug** (a faithful replica of a real 2-piece "Vogue Foundry" mark, modeled from real drawings), the **Oliver Slug** (modeled after a real Oliver typewriter slug — I own an Oliver No. 3), and the **Lumi Slug** (a novelty 4-character loop pendant).
+
+This whole family dates back to v1 and was never carried into v2 at all, so porting it into v4 meant treating v1 as ground truth rather than diffing against a v2 file like every other machine here.
+
+{% include figure image_path="/assets/img/2026/type-elements/oliver-slug.png" alt="Oliver typewriter slug OpenSCAD render" caption="v4-generated Oliver Slug — replica of a real Oliver typewriter type slug." %}
+
+<!-- PHOTO NEEDED (nice-to-have upgrade): a printed Oliver Slug, ideally next to the real Oliver No. 3's own slug for comparison.
+Save as assets/img/2026/type-elements/oliver-slug-printed.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/type-elements/oliver-slug-printed.jpg" alt="Printed Oliver Slug" caption="Resin-printed Oliver Slug, next to an original for comparison." %}
+-->
+
+{% assign olivers = site.data.typewriters | where: "manufacturer", "Oliver" %}
+{% if olivers.size > 0 %}
+Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+{% for tw in olivers %}
+- {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
+{% endfor %}
+{% endif %}
+
+## From OpenSCAD to v4 {#v4}
+
+The toolchain has gone through four real rewrites since 2022 — each one driven by a specific, measured limitation of the version before it, not a rewrite for its own sake:
+
+1. **v1** — raw, one-off OpenSCAD files, one per machine, no shared code between them. Parameters adjusted live through OpenSCAD's Customizer panel. This is where every machine started, and it's how the first Blickensderfer typewheels actually got designed.
+2. **v2** — extracted the logic every machine actually had in common (the glyph pipeline, resin support, core/shaft, per-machine layouts) into a shared OpenSCAD `lib/`, so a second or third machine stopped meaning a full copy-paste-and-modify. Still built the character draft taper with OpenSCAD's own built-in `minkowski(cone)` operation, though — which is where the next rewrite came from.
+3. **v3 (experiment, dead end)** — OpenSCAD's `minkowski()` is correct but slow at this scale, so v3 tried swapping it for build123d's real B-rep `draft()` (OpenCascade) instead. It didn't hold up: at the real 27.5° target angle it self-intersects on ordinary straight-stroke letters, and it rejects curved-stroke glyphs outright (`draft()` only accepts faces swept from straight-line profiles — most real fonts, most letters, don't qualify). Confirmed not viable and shelved, but it's what proved OpenSCAD's approach couldn't just be swapped for a faster one without solving the underlying problem differently.
+4. **v4 (current)** — a full rewrite in Python, first attempted with a per-vertex mesh-offset technique adapted from a friend's 2023 tool: fast, but topology-blind — a fixed-distance push per outline vertex has no way to detect when a glyph's local geometry (the gap inside an 'H', the diagonal junctions in a 'k' or 'm', 'i' 's separate dot) is too tight to support that offset, and it just folds through itself instead of failing loudly. Patches fixed some cases and broke others (a self-union repair that welded 'i' 's dot into its stem, losing real volume). The fix was a real Minkowski sum via `manifold3d` — mathematically guaranteed not to self-intersect on any input topology, so there's no per-glyph failure case left to chase. Every assembly boolean was moved to real `manifold3d` CSG at the same time, after plain mesh concatenation was found to silently produce wrong geometry wherever two parts overlapped (a measured 1148mm³ double-counted-overlap bug — concatenation merges vertex/face arrays with no boolean resolution, so overlapping surfaces just stayed superimposed instead of forming a real intersection edge).
+
+v4 also brought a shared pipeline with common glyph handling, logging, and tooling across every machine:
 
 - **Adaptive glyph-contour tracing** replaces a fixed `points_per_mm` sampling rate with a `flatness_tolerance_mm`-driven adaptive tracer — denser sampling on tight curves, sparser on straight runs, instead of one blanket resolution for every glyph
 - **Cross-platform setup** — `setup.sh`/`setup.bat` bootstrap the environment on Linux/macOS and Windows alike, including auto-installing [f3d](https://f3d.app/) for STL preview
 - **`tune.py`** (the interactive calibration/preview GUI) got a reworked machine picker — Cylinders/Shuttles/Spheres grouped into their own columns instead of one long collapsible tree — plus a real Layout tab for the Selectric family and per-machine config scratch copies so edits to one machine's settings can't bleed into another's
 - **Resin selection notes** — documented tradeoffs between glyph fidelity and toughness across resin types, from real print testing
 - **Unified console logging** (`lib/build_log.py`) across every machine script, replacing ad hoc `print()` calls with consistent per-character and mesh-summary output
+
+## Engineering Details {#engineering-details}
+
+Three things that don't show up in the finished part but drive most of the actual design work:
+
+**Inner shaft design.** Every cylindrical element (Blickensderfer, Postal, Bennett, Mignon, Helios) mounts by slipping over a central spindle inside the typewriter — so the bore running through the middle has to be a precise slip fit, not just "roughly round." Resin shrinks slightly as it cures, so the bore's as-printed diameter isn't the same as its as-designed diameter, and that offset has to be found empirically per resin/printer combination rather than assumed. A small calibration print (the "Shaft Gauge Test set") exists specifically to dial in that offset before committing to a full element.
+
+{% include figure image_path="/assets/img/2026/type-elements/inner-shaft-cutaway.png" alt="Cutaway of a Blickensderfer element showing the inner shaft bore" caption="Cutaway of a Blickensderfer element — the knurled center post is the precision slip-fit shaft interface, surrounded by the drive-pin holes it aligns against." %}
+
+**The Minkowski draft sweep.** Every struck character needs a slight taper — wider at the root than at the tip — so it releases cleanly during printing and molding instead of undercutting itself. Nothing real gets built without one; a die-cast or molded part with zero draft can't release from its tool at all. That taper is generated with a real Minkowski sum (dilating the character solid by a draft cone via `manifold3d`), not a cheaper per-vertex outline offset — the offset approach was tried first and abandoned after it self-intersected on narrow features (the gap inside an 'H', the diagonal junctions in a 'k' or 'm'). A true Minkowski sum can't produce that failure on any input topology, at the cost of being slower to compute.
+
+{% include figure image_path="/assets/img/2026/type-elements/minkowski-undrafted.png" alt="A single character before the Minkowski draft sweep, straight walls" caption="Before: flat, undrafted walls." %}
+
+{% include figure image_path="/assets/img/2026/type-elements/minkowski-drafted.png" alt="The same character after the Minkowski draft sweep, tapered walls" caption="After: the same character, Minkowski-summed with a draft cone — visibly wider at the root." %}
+
+**Custom-coded resin supports.** Rather than leaving support placement to a slicer's auto-support algorithm — which has no idea which faces are struck characters that need to stay clean — every machine has its own hand-coded `ResinSupport()` geometry, positioned around the element's real anchoring points and unioned with the body into one print-ready mesh. It's a genuinely different scheme per machine family (a Hammond split shuttle's supports have nothing in common with a Blickensderfer typewheel's), tuned against real print failures rather than generic defaults.
+
+{% include figure image_path="/assets/img/2026/type-elements/resin-supports.png" alt="Standalone render of a Blickensderfer element's resin support structure" caption="A Blickensderfer element's resin support structure on its own — support rods plus breakaway ring, before being unioned with the printed part." %}
 
 ## Process
 

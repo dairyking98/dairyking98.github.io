@@ -31,3 +31,69 @@
     padding-inline-end: $right-sidebar-width;
   }
 }
+
+// /typewriter-collection/ — Full Inventory table.
+// Fixed column widths so one long value (a typeface name, a color note)
+// can't balloon its whole column — nth-last-child so these hold steady
+// whether or not the leading image column (added at the front) exists.
+// The theme sets `table { display: block }` (its own horizontal-scroll
+// trick), which makes `table-layout` unreliable — override display back
+// to `table` here and let this div's own overflow-x:auto handle scroll.
+#inventory-table table {
+  display: table;
+  table-layout: fixed;
+}
+#inventory-table th,
+#inventory-table td {
+  vertical-align: top;
+  white-space: nowrap; // default: short/controlled-vocabulary values never break mid-word
+}
+// free-text columns that can genuinely run long: wrap at word boundaries only
+#inventory-table th:nth-last-child(9), #inventory-table td:nth-last-child(9), // Manufacturer
+#inventory-table th:nth-last-child(8), #inventory-table td:nth-last-child(8), // Model
+#inventory-table th:nth-last-child(5), #inventory-table td:nth-last-child(5), // Color
+#inventory-table th:nth-last-child(3), #inventory-table td:nth-last-child(3), // Typeface
+#inventory-table th:nth-last-child(2), #inventory-table td:nth-last-child(2)  // Layout
+{
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+#inventory-table th:nth-last-child(10),
+#inventory-table td:nth-last-child(10) { width: 6%; }  // Year
+#inventory-table th:nth-last-child(9),
+#inventory-table td:nth-last-child(9) { width: 11%; }  // Manufacturer
+#inventory-table th:nth-last-child(8),
+#inventory-table td:nth-last-child(8) { width: 13%; }  // Model
+#inventory-table th:nth-last-child(7),
+#inventory-table td:nth-last-child(7) { width: 8%; }   // Size
+#inventory-table th:nth-last-child(6),
+#inventory-table td:nth-last-child(6) { width: 7%; }   // Drive
+#inventory-table th:nth-last-child(5),
+#inventory-table td:nth-last-child(5) { width: 9%; }   // Color
+#inventory-table th:nth-last-child(4),
+#inventory-table td:nth-last-child(4) { width: 11%; }  // Serial No.
+#inventory-table th:nth-last-child(3),
+#inventory-table td:nth-last-child(3) { width: 17%; }  // Typeface
+#inventory-table th:nth-last-child(2),
+#inventory-table td:nth-last-child(2) { width: 12%; }  // Layout
+#inventory-table th:nth-last-child(1),
+#inventory-table td:nth-last-child(1) { width: 6%; }   // Pitch
+#inventory-table th:nth-last-child(11),
+#inventory-table td:nth-last-child(11) { width: 6%; }  // image, once photos exist
+
+// /fraction-inch-mm-chart/
+#conversion-chart th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#interval-controls input[type="range"] {
+  margin: 0 0.5rem;
+}
+
+// /thread-size-chart/
+#thread-chart th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
