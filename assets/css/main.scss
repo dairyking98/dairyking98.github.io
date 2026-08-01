@@ -137,8 +137,20 @@
 }
 // Single source of truth for the bar/slider/thumb height math below
 $wavelength-bar-height: clamp(40px, 7vw, 60px);
-#wavelength-gradient-bar {
+// Gradient bar and slider are stacked via grid (both in the same 1x1 grid
+// area) instead of a negative-margin overlay — immune to the two elements'
+// heights drifting apart under text-only zoom or per-browser clamp()
+// rounding, which a margin-based overlay is not.
+#wavelength-track-stack {
+  display: grid;
   height: $wavelength-bar-height;
+}
+#wavelength-track-stack > * {
+  grid-column: 1;
+  grid-row: 1;
+  height: 100%;
+}
+#wavelength-gradient-bar {
   border-radius: 6px;
   border: 1px solid rgba(128, 128, 128, 0.4);
 }
@@ -164,17 +176,22 @@ $wavelength-bar-height: clamp(40px, 7vw, 60px);
   margin: 0 auto 2px;
   background: currentColor;
 }
-// The slider sits directly on top of the gradient bar rather than below it
-// — track made fully transparent so only the gradient shows through, thumb
-// styled as a simple high-contrast marker that reads on any spectrum color.
+// The slider sits directly on top of the gradient bar (see the grid stack
+// above) — track made fully transparent so only the gradient shows through,
+// thumb styled as a simple high-contrast marker that reads on any spectrum
+// color. All three appearance resets (unprefixed, -webkit-, -moz-) are
+// required — Firefox in particular renders its own opaque native track on
+// top of ours if -moz-appearance isn't explicitly set to none, which is
+// enough on its own to make the slider look broken and hide the gradient
+// underneath it.
 #wavelength-slider {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: $wavelength-bar-height;
-  margin: calc(#{$wavelength-bar-height} * -1) 0 0;
+  margin: 0;
   appearance: none;
   -webkit-appearance: none;
+  -moz-appearance: none;
   background: transparent;
   cursor: pointer;
 }
