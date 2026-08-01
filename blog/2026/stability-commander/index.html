@@ -16,7 +16,7 @@
 
 
 <!-- begin _includes/seo.html --><title>Stability COMmander - Leonard Chau</title>
-<meta name="description" content="Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated boom prototype.">
+<meta name="description" content="Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated scale-model boom.">
 
 
   <meta name="author" content="Leonard Chau">
@@ -32,7 +32,7 @@
 <meta property="og:url" content="https://leonardchau.com/blog/2026/stability-commander/">
 
 
-  <meta property="og:description" content="Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated boom prototype.">
+  <meta property="og:description" content="Real-time telehandler stability control prototype tracking vehicle–load center of mass against the support polygon — STM32 embedded logic, MATLAB/Simulink HIL, Pygame visualization, and a fabricated scale-model boom.">
 
 
 
@@ -144,6 +144,12 @@
                 
                 
               >Collection</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/contact/"
@@ -309,7 +315,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Stability COMmander">
-    <meta itemprop="description" content="Stability COMmander is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints.">
+    <meta itemprop="description" content="Stability COMmander is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–load center of mass in real time and evaluates it against the machine’s support polygon to predict and prevent tip-over, rather than relying on the fixed load charts and static safety margins that traditional systems use.">
     <meta itemprop="datePublished" content="2026-05-08T12:00:00-07:00">
     
 
@@ -335,7 +341,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     
@@ -347,26 +353,40 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p><strong>Stability COMmander</strong> is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints.</p>
+        <p><strong>Stability COMmander</strong> is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–load center of mass in real time and evaluates it against the machine’s support polygon to predict and prevent tip-over, rather than relying on the fixed load charts and static safety margins that traditional systems use.</p>
+
+<h2 id="it-didnt-start-here">It didn’t start here</h2>
+
+<p>The project spent its first semester as something else entirely. In ENGR 696 (Fall 2025) we cycled through several ideas — mold detection, single-cell particle separation, a battery-swapping system for electric vehicles — before settling on a <strong>modular battery swapping system</strong> for port and yard vehicles: a boom crane with hydraulic actuation, swapping standardized battery packs in under 90 seconds so electric equipment could run 24/7 without charging downtime. We built out a full design package around it that semester — team charter, design specs, an IRA funding request, a six-week Gantt chart for a hydraulic boom-crane prototype.</p>
+
+<p>Early in ENGR 697GW (Spring 2026), that concept started to strain: it had grown into a broad, multi-subsystem idea — batteries, a crane, a transport vehicle — and demonstrating the <em>concept</em> would have meant building several sub-projects at once. After our first meeting that semester, Sam proposed reframing the goal entirely: instead of executing the swap, use the same crane/telehandler chassis to solve a narrower, more tangible problem — calculating a vehicle’s center of mass on the fly to predict loss of stability before it tips, rather than relying on fixed safety margins or after-the-fact alarms. We framed it as a “predictive stability management system for mobile industrial vehicles.” It simplified the scope significantly and gave the team a much clearer, more measurable goal to build toward — Stability COMmander.</p>
+
+<h2 id="team-roles">Team roles</h2>
+
+<p>Per our team charter (updated for the second semester once our working style had settled):</p>
+
+<ul>
+  <li><strong>Leonard (me) — Mechanical Design and Scheduling Lead:</strong> CAD development, physical system layout, material selection, and coordinating timelines/task assignments</li>
+  <li><strong>Sam — Simulation, Electronics, and Embedded Systems:</strong> Simulink plant and hardware-in-the-loop models, circuit hardware, embedded programming, STM32 integration</li>
+  <li><strong>Ben — Documentation, Presentation, and Design Support:</strong> stakeholder presentations, videos, and project communication, plus CAD support as needed</li>
+  <li><strong>Mohammed — Testing and Integration Support:</strong> flexible support across testing, validation, and subsystem integration</li>
+</ul>
 
 <h2 id="my-contribution">My contribution</h2>
 
-<p>My largest contribution was the <strong>hardware</strong> side of the project. I was responsible for hardware selection, 3D CAD design, fabrication, and geometry validation of the physical prototype.</p>
+<p>My work centered on the physical prototype: the boom’s structural design and validation, and the hardware that let the stability concept be tested against real mechanical constraints instead of staying purely theoretical.</p>
 
-<p>I selected components based on operating voltage, required torque, actuator motion requirements, and overall project budget. I also designed the boom and mounting geometry in CAD so the actuators could achieve the desired range of motion while accurately representing telehandler behavior.</p>
+<p>For the structural analysis, I was assigned the boom’s free body diagram, bending moment and shear force calculations, max stress estimation, actuator force vs. required lift torque, and factor-of-safety justification — worked by hand via analytical beam theory, then cross-checked with a 3D chassis CAD model and FEA for load, stress, and weight distribution in Fusion 360.</p>
 
-<p>The physical prototype mattered because it turned the project from a purely digital simulation into a system that could be tested against real hardware constraints.</p>
+<p>On the hardware side, I selected components based on operating voltage, required torque, actuator motion, and budget, and designed the boom and mounting geometry so the actuators could achieve the desired range of motion while representing telehandler kinematics. This is a <strong>scale model</strong> — Actuonix linear actuators (not full hydraulic cylinders), a load cell on the fork, and a 12 V supply, sized to fit lab budget and safety constraints rather than a full-size machine.</p>
 
-<h2 id="key-responsibilities">Key responsibilities</h2>
+<h2 id="engineering-challenge">Engineering challenge</h2>
 
-<ul>
-  <li>Selected motors, actuators, drivers, and mechanical components based on voltage, torque, cost, and system requirements</li>
-  <li>Designed the boom structure and actuator mounting points in 3D CAD</li>
-  <li>Fabricated and assembled the physical prototype</li>
-  <li>Validated boom geometry to confirm the actuators could reach the desired range of motion</li>
-  <li>Supported integration between the physical prototype, embedded control logic, and simulation model</li>
-  <li>Identified mechanical limitations that affected system stability and actuator performance</li>
-</ul>
+<p>Getting the <strong>boom geometry</strong> right was the hardest mechanical part: actuator stroke length, mounting position, and linkage geometry all had to work together for the boom to reach its full intended range of motion without hitting mechanical limits. Small changes in actuator placement significantly changed how the boom moved, so I iterated the CAD design — and the Ackermann steering geometry for the drive base — until it worked.</p>
+
+<h2 id="design-issue-and-lesson-learned">Design issue and lesson learned</h2>
+
+<p>During testing, the selected actuators turned out to be <strong>backdriveable</strong>: the load required to approach a tipping condition exceeded their static holding capability, so the boom could move when it was supposed to stay fixed. Fixing this properly would mean active position maintenance (closed-loop actuator control), which we couldn’t fully implement within the project timeline. The lesson: for stability-critical mechanical systems, actuator holding force and backdrivability matter as much as motion capability.</p>
 
 <h2 id="technical-highlights">Technical highlights</h2>
 
@@ -377,42 +397,12 @@
   <li>Support polygon stability evaluation</li>
   <li>1 cm stability margin for safety enforcement</li>
   <li>Python/Pygame visualization of vehicle motion, boom position, COM location, and stability boundaries</li>
-  <li>Physical prototype used to validate geometry and system assumptions</li>
+  <li>Physical scale-model prototype used to validate geometry and system assumptions</li>
 </ul>
-
-<h2 id="engineering-challenge">Engineering challenge</h2>
-
-<p>One of the hardest parts of the project was getting the <strong>boom geometry</strong> right. Actuator stroke length, mounting position, and linkage geometry all had to work together so the boom could achieve the full desired range of motion.</p>
-
-<p>Small changes in actuator placement significantly affected how the boom moved, so I iterated on the CAD design until the mechanism could extend and rotate properly without hitting mechanical limits.</p>
-
-<h2 id="design-issue-and-lesson-learned">Design issue and lesson learned</h2>
-
-<p>During testing, we discovered that the selected actuators were <strong>backdriveable</strong>. The load required to approach a tipping condition exceeded the actuators’ static holding capability, so the boom could move when it was supposed to remain fixed.</p>
-
-<p>Addressing this would have required <strong>active position maintenance</strong> (for example closed-loop actuator control), which we could not fully implement within the project timeline.</p>
-
-<p>This was an important lesson: for stability-critical mechanical systems, <strong>actuator holding force and backdrivability</strong> matter as much as motion capability.</p>
-
-<h2 id="star-experience">STAR experience</h2>
-
-<p><strong>Situation</strong><br />
-Our team was developing a stability control system for a telehandler, but simulation alone would not fully capture real-world mechanical constraints.</p>
-
-<p><strong>Task</strong><br />
-My task was to design and build a physical prototype that accurately represented the boom geometry and allowed the stability control concept to be validated beyond a purely theoretical model.</p>
-
-<p><strong>Action</strong><br />
-I selected hardware based on voltage, torque, actuator motion, cost, and system compatibility. I designed the boom and actuator mounting geometry in CAD, fabricated the assembly, and validated that the actuators achieved the intended range of motion. When we found the actuators were backdriveable under higher loads, I helped identify the cause and concluded that active position maintenance would be needed for future work.</p>
-
-<p><strong>Result</strong><br />
-The prototype moved the project beyond digital simulation and gave the team a physical platform for validating geometry, actuation limits, and stability assumptions. The hardware work made the control system more realistic and highlighted practical challenges in safety-critical control on real equipment.</p>
 
 <h2 id="impact">Impact</h2>
 
-<p>Without the physical prototype, the project would have stayed a theoretical simulation. The hardware made it possible to evaluate real-world constraints such as actuator placement, boom range of motion, fabrication tolerances, and load-holding limitations.</p>
-
-<p>The project strengthened my experience in mechanical design, hardware selection, CAD modeling, fabrication, embedded systems integration, and engineering tradeoff analysis.</p>
+<p>Without the physical prototype, this would have stayed a theoretical simulation. Building it surfaced real-world constraints — actuator placement, boom range of motion, fabrication tolerances, and the load-holding limitation above — that the digital model alone wouldn’t have caught. The project as a whole strengthened my mechanical design, hardware selection, CAD modeling, fabrication, embedded-systems integration, and engineering tradeoff analysis — and the mid-project pivot was its own lesson in scoping a capstone project down to something a small team can actually finish.</p>
 
 <h2 id="skills">Skills</h2>
 
@@ -420,6 +410,7 @@ The prototype moved the project beyond digital simulation and gave the team a ph
   <li>3D CAD design</li>
   <li>Hardware selection</li>
   <li>Mechanical fabrication</li>
+  <li>Analytical beam theory / structural analysis</li>
   <li>Geometry validation</li>
   <li>Actuator sizing</li>
   <li>Embedded systems</li>
@@ -463,14 +454,12 @@ The prototype moved the project beyond digital simulation and gave the team a ph
 <h2 id="links">Links</h2>
 
 <ul>
-  <li><strong>GitHub:</strong> <em>[repository URL — add when ready]</em></li>
-  <li><strong>Demo video:</strong> <em>[link — add when ready]</em></li>
-  <li><strong>Portfolio / resume:</strong> <em>[optional link — add when ready]</em></li>
+  <li><strong>GitHub:</strong> <a href="https://github.com/dairyking98/Team-O-Matic-2025">Team-O-Matic-2025</a></li>
 </ul>
 
 <hr />
 
-<p><em>Capstone project — hardware focus: boom prototype, integration, and mechanical validation.</em></p>
+<p><em>Capstone project — hardware focus: boom prototype, structural analysis, and mechanical validation.</em></p>
 
         
       </section>

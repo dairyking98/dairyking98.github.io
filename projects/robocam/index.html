@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2026-07-05T00:06:17-07:00">
+  <meta property="article:published_time" content="2026-08-01T01:06:20-07:00">
 
 
 
@@ -146,6 +146,12 @@
               >Collection</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/contact/"
                 
                 
@@ -180,7 +186,7 @@
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="RoboCam">
     <meta itemprop="description" content="RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. FluorCam and StentorCam are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of Stentor coeruleus.">
-    <meta itemprop="datePublished" content="2026-07-05T00:06:17-07:00">
+    <meta itemprop="datePublished" content="2026-08-01T01:06:20-07:00">
     
 
     <div class="page__inner-wrap">
@@ -198,6 +204,13 @@
       
 
       <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc" aria-label="Table of contents">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu"><li><a href="#platform-overview">Platform Overview</a></li><li><a href="#fluorcam">FluorCam</a></li><li><a href="#stentorcam">StentorCam</a></li><li><a href="#recent-development">Recent Development</a></li><li><a href="#hardware">Hardware</a></li><li><a href="#experimental-data">Experimental Data</a></li><li><a href="#origins--version-history">Origins &amp; Version History</a></li><li><a href="#repository">Repository</a></li></ul>
+            </nav>
+          </aside>
         
         <p>RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. <strong>FluorCam</strong> and <strong>StentorCam</strong> are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of <em>Stentor coeruleus</em>.</p>
 
@@ -220,6 +233,130 @@
 <h2 id="stentorcam">StentorCam</h2>
 
 <p>StentorCam adapts RoboCam for well-plate behavioral imaging of <em>Stentor coeruleus</em>, adding well-plate motion profiles, dark-field optics with infrared illumination, and automated tracking/stimulation experiments. It has been used in NSF-funded training programs and team research projects for high-throughput biological imaging.</p>
+
+<h2 id="recent-development">Recent Development</h2>
+
+<p>RoboCam3.1 has moved fast since it was first written up here. Highlights from the last several dozen commits:</p>
+
+<p><strong>GUI &amp; workflow</strong></p>
+<ul>
+  <li>A dedicated <strong>Motion Profiles tab</strong> for tuning Marlin feed-rate, acceleration, and jerk directly from the GUI instead of hand-editing firmware config</li>
+  <li><strong>Demo Mode</strong>: a fullscreen preview with keyboard-shortcut well navigation and laser control, for showing the rig off without touching the full calibration/experiment workflow</li>
+  <li>A <strong>well crosshair overlay</strong> on the live camera preview, plus Setup-panel state (camera, connection, layout) now persists and reloads across sessions</li>
+  <li><strong>ETA accuracy and auto-homing safety</strong> fixes for the Experiment tab, plus verbose Setup-panel logging during Marlin connect</li>
+  <li><strong>Exposure and Target FPS decoupled</strong> in the Calibration tab — target FPS now snaps to what’s actually achievable after exposure changes, instead of silently drifting</li>
+</ul>
+
+<p><strong>Camera &amp; capture</strong></p>
+<ul>
+  <li><strong>Multi-camera selection</strong>: the Setup panel enumerates every connected Pi camera by model/index, and PlayerOne cameras blocked by USB permissions get an in-app udev-rule installer instead of a silent failure</li>
+  <li>The <strong>raw-burst capture path was rebuilt for real throughput</strong>: acquisition and disk-writing now run on separate threads connected by a bounded queue, so encoding/disk I/O can never stall the capture loop — every frame is still guaranteed written, even on <code class="language-plaintext highlighter-rouge">stop()</code></li>
+  <li>The Pi camera path now opens a genuine <strong>video+raw stream configuration</strong>, so <code class="language-plaintext highlighter-rouge">get_raw_frame()</code> returns true 10/12-bit Bayer sensor data instead of ISP-processed greyscale</li>
+</ul>
+
+<p><strong>Klipper support</strong></p>
+<ul>
+  <li>Motion and laser/stimulus control can now run through a <strong>Klipper-based printer controller</strong> via G-code (<code class="language-plaintext highlighter-rouge">SET_PIN</code>) as an alternative to wiring a dedicated Raspberry Pi GPIO output — aimed at newer hardware builds using Klipper controllers instead of Marlin-only boards. (Implemented, not yet exercised against real Klipper hardware — see Known Issues in <code class="language-plaintext highlighter-rouge">docs/recording_modes.md</code>.)</li>
+</ul>
+
+<p><strong>Processing pipeline</strong></p>
+<ul>
+  <li>A new <strong>Processing tab</strong> batch-converts raw <code class="language-plaintext highlighter-rouge">.npy</code> bursts into PNG/JPEG image sequences and video (constant-fps MP4 for presentation, VFR MKV with accurate per-frame timing for archival), with an <strong>auto-process after experiment</strong> option that kicks off the moment a run finishes</li>
+</ul>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>RoboCam repurposes a stock FDM 3D printer’s XY(Z) motion system as a precision positioning stage — the print head is replaced with a camera/illumination carriage, and the bed becomes the imaging stage for well plates or samples.</p>
+
+<!-- PHOTO NEEDED: full rig on the printer bed, well-plate loaded.
+Save as assets/img/2026/robocam/rig-overview.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/robocam/rig-overview.jpg"
+       alt="RoboCam rig on the 3D printer bed"><figcaption>
+      RoboCam’s camera/illumination carriage mounted on the printer’s XY(Z) stage.
+
+    </figcaption></figure>
+
+-->
+
+<!-- PHOTO NEEDED: close-up of the laser/IR illumination and optics mount.
+Save as assets/img/2026/robocam/optics-mount.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/robocam/optics-mount.jpg"
+       alt="RoboCam laser and optics mount"><figcaption>
+      GPIO/Klipper-controlled laser and dark-field optics mount, 3D-printed.
+
+    </figcaption></figure>
+
+-->
+
+<!-- PHOTO NEEDED: side-by-side or swap shot of the two camera options (Player One astro camera vs. Raspberry Pi camera module).
+Save as assets/img/2026/robocam/camera-comparison.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/robocam/camera-comparison.jpg"
+       alt="PlayerOne and Raspberry Pi camera options"><figcaption>
+      Interchangeable imaging heads: PlayerOne monochrome astronomy camera vs. Raspberry Pi camera module.
+
+    </figcaption></figure>
+
+-->
+
+<h2 id="experimental-data">Experimental Data</h2>
+
+<p>Every experiment captures <strong>raw sensor bursts</strong> rather than encoded video — frames are written as fast as possible with per-frame timestamps (<code class="language-plaintext highlighter-rouge">time.perf_counter()</code>), and video/images are produced afterward in a separate post-processing step. That keeps the time-critical capture loop free of encoding overhead and preserves full sensor bit depth for downstream analysis. Captures are stacked into one memory-mapped <code class="language-plaintext highlighter-rouge">.npy</code> array per well plus a JSON sidecar of per-frame timing and laser events, then converted by the Processing tab into PNG/JPEG stacks, a presentation MP4, and/or a lossless VFR MKV for archival.</p>
+
+<p>Real measurement from a 3-well capture (Mars 662M mono, 8-bit, 1280×960, 908 frames, 2026-07-29) shows how the export formats compare against the raw data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Total size</th>
+      <th>% of raw</th>
+      <th>Lossless?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Raw <code class="language-plaintext highlighter-rouge">.npy</code></td>
+      <td>1,064.0 MiB</td>
+      <td>100%</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>PNG stack</td>
+      <td>743.6 MiB</td>
+      <td>69.9%</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>VFR (ffv1)</td>
+      <td>673.6 MiB</td>
+      <td>63.3%</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>JPEG stack (q95)</td>
+      <td>469.8 MiB</td>
+      <td>44.2%</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>MP4 (libx264, presentation)</td>
+      <td>225.9 MiB</td>
+      <td>21.2%</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- PHOTO NEEDED: a representative captured frame or plate montage from a real experiment (StentorCam dark-field well or FluorCam fluorescence shot).
+Save as assets/img/2026/robocam/sample-capture.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/robocam/sample-capture.jpg"
+       alt="Sample RoboCam capture frame"><figcaption>
+      A representative captured frame from a well-plate imaging run.
+
+    </figcaption></figure>
+
+Note: there are old candidate frames in the archived RoboCam repos on disk, but I couldn't confirm they're actually representative captures rather than unrelated test shots — worth reviewing yourself before using one here rather than guessing.
+-->
 
 <h2 id="origins--version-history">Origins &amp; Version History</h2>
 
@@ -252,7 +389,7 @@
         
 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-05T00:06:17-07:00">July 5, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-01T01:06:20-07:00">August 1, 2026</time></p>
 
 
       </footer>

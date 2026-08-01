@@ -1,0 +1,646 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Voltmeter Clock: Operation Guide - Leonard Chau</title>
+<meta name="description" content="Quick reference for operating the Analog Voltmeter Clock.">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Voltmeter Clock: Operation Guide">
+<meta property="og:url" content="https://leonardchau.com/vmeter-clock/operation-guide/">
+
+
+  <meta property="og:description" content="Quick reference for operating the Analog Voltmeter Clock.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/vmeter-clock/operation-guide/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/typewriter-collection/"
+                
+                
+              >Collection</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Voltmeter Clock: Operation Guide">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/vmeter-clock/operation-guide/" itemprop="url">Voltmeter Clock: Operation Guide
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="quick-start">Quick Start</h2>
+
+<h3 id="power-on">Power On</h3>
+<ol>
+  <li>Connect power to Arduino</li>
+  <li>Wait for sensors to initialize (~2 seconds)</li>
+  <li>Device starts in <strong>Time Mode</strong> by default</li>
+</ol>
+
+<hr />
+
+<h2 id="normal-operation">Normal Operation</h2>
+
+<h3 id="viewing-time-default-mode">Viewing Time (Default Mode)</h3>
+<ul>
+  <li><strong>Three voltmeters display</strong>:
+    <ul>
+      <li><strong>Left</strong>: Hours (0-12, 12-hour format)</li>
+      <li><strong>Middle</strong>: Minutes (0-60)</li>
+      <li><strong>Right</strong>: Seconds (0-60)</li>
+    </ul>
+  </li>
+  <li><strong>LEDs</strong>: Hour, Minute, Second LEDs are ON (solid)</li>
+  <li><strong>Behavior</strong>: Second hand moves smoothly with quarter-second interpolation</li>
+</ul>
+
+<h3 id="viewing-environmental-data-pth-mode">Viewing Environmental Data (PTH Mode)</h3>
+<ol>
+  <li><strong>Press button briefly</strong> (&lt; 0.5 seconds)</li>
+  <li><strong>Voltmeters switch to display</strong>:
+    <ul>
+      <li><strong>Left</strong>: Pressure (950-1030 hPa)</li>
+      <li><strong>Middle</strong>: Temperature (40-100°F)</li>
+      <li><strong>Right</strong>: Humidity (0-100% RH)</li>
+    </ul>
+  </li>
+  <li><strong>LED</strong>: PTH LED turns ON</li>
+  <li><strong>Return to time</strong>: Press button again briefly</li>
+</ol>
+
+<hr />
+
+<h2 id="time-adjustment-procedure">Time Adjustment Procedure</h2>
+
+<h3 id="entering-adjustment-mode">Entering Adjustment Mode</h3>
+<ol>
+  <li><strong>Hold button</strong> for more than 0.5 seconds (long press)</li>
+  <li>Device enters adjustment mode</li>
+  <li><strong>Hour LED starts blinking</strong></li>
+</ol>
+
+<h3 id="adjusting-hours">Adjusting Hours</h3>
+<ol>
+  <li><strong>Rotate encoder</strong> clockwise/counter-clockwise</li>
+  <li><strong>Left voltmeter</strong> shows current hour value (0-11)</li>
+  <li><strong>Hour LED blinks</strong> to indicate active adjustment</li>
+  <li><strong>Press button</strong> to confirm and move to minutes</li>
+</ol>
+
+<h3 id="adjusting-minutes">Adjusting Minutes</h3>
+<ol>
+  <li><strong>Rotate encoder</strong> to set minutes (0-59)</li>
+  <li><strong>Middle voltmeter</strong> shows current minute value</li>
+  <li><strong>Minute LED blinks</strong> to indicate active adjustment</li>
+  <li><strong>Press button</strong> to confirm and move to seconds</li>
+</ol>
+
+<h3 id="adjusting-seconds">Adjusting Seconds</h3>
+<ol>
+  <li><strong>Rotate encoder</strong> to set seconds (0-59)</li>
+  <li><strong>Right voltmeter</strong> shows current second value</li>
+  <li><strong>Second LED blinks</strong> to indicate active adjustment</li>
+  <li><strong>Press button</strong> to finish adjustment</li>
+  <li>Device exits adjustment mode and enters PTH mode</li>
+  <li><strong>Press button briefly</strong> to return to time mode</li>
+</ol>
+
+<hr />
+
+<h2 id="visual-indicators">Visual Indicators</h2>
+
+<h3 id="led-status-meanings">LED Status Meanings</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>LED State</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hour/Min/Sec LEDs ON (solid)</td>
+      <td>Time mode active</td>
+    </tr>
+    <tr>
+      <td>PTH LED ON (solid)</td>
+      <td>PTH mode active</td>
+    </tr>
+    <tr>
+      <td>Hour LED blinking</td>
+      <td>Adjusting hours</td>
+    </tr>
+    <tr>
+      <td>Minute LED blinking</td>
+      <td>Adjusting minutes</td>
+    </tr>
+    <tr>
+      <td>Second LED blinking</td>
+      <td>Adjusting seconds</td>
+    </tr>
+    <tr>
+      <td>All LEDs OFF</td>
+      <td>Adjustment mode (other steps)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="voltmeter-behavior">Voltmeter Behavior</h3>
+
+<h4 id="time-mode">Time Mode</h4>
+<ul>
+  <li><strong>Smooth continuous movement</strong> of all three hands</li>
+  <li><strong>Second hand</strong> has quarter-second interpolation for fluid motion</li>
+  <li><strong>Hour hand</strong> includes fractional hours based on minutes</li>
+  <li><strong>Minute hand</strong> includes fractional minutes based on seconds</li>
+</ul>
+
+<h4 id="pth-mode">PTH Mode</h4>
+<ul>
+  <li><strong>Real-time updates</strong> of environmental data</li>
+  <li><strong>Pressure</strong>: Higher pressure = higher voltage (right side of scale)</li>
+  <li><strong>Temperature</strong>: Higher temperature = higher voltage (right side of scale)</li>
+  <li><strong>Humidity</strong>: Higher humidity = higher voltage (right side of scale)</li>
+</ul>
+
+<h4 id="adjustment-mode">Adjustment Mode</h4>
+<ul>
+  <li><strong>Only the active voltmeter</strong> shows the adjustment value</li>
+  <li><strong>Other voltmeters</strong> are at zero</li>
+  <li><strong>Value updates</strong> as you rotate the encoder</li>
+</ul>
+
+<hr />
+
+<h2 id="button-functions">Button Functions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Duration</th>
+      <th>Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Short Press</td>
+      <td>&lt; 0.5 seconds</td>
+      <td>Toggle between Time and PTH modes</td>
+    </tr>
+    <tr>
+      <td>Long Press</td>
+      <td>&gt; 0.5 seconds</td>
+      <td>Enter time adjustment mode</td>
+    </tr>
+    <tr>
+      <td>Press (in adjustment)</td>
+      <td>Any duration</td>
+      <td>Confirm current step, move to next</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="rotary-encoder-functions">Rotary Encoder Functions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rotate Clockwise</td>
+      <td>Increase value</td>
+    </tr>
+    <tr>
+      <td>Rotate Counter-clockwise</td>
+      <td>Decrease value</td>
+    </tr>
+    <tr>
+      <td>Value Range</td>
+      <td>Depends on adjustment step (Hours: 0-11, Minutes: 0-59, Seconds: 0-59)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="typical-usage-scenarios">Typical Usage Scenarios</h2>
+
+<h3 id="scenario-1-daily-time-display">Scenario 1: Daily Time Display</h3>
+<ol>
+  <li>Power on device</li>
+  <li>Device automatically shows time</li>
+  <li>No interaction needed</li>
+  <li>Watch the smooth analog movement</li>
+</ol>
+
+<h3 id="scenario-2-check-weather-conditions">Scenario 2: Check Weather Conditions</h3>
+<ol>
+  <li>Press button briefly</li>
+  <li>Observe PTH readings on voltmeters</li>
+  <li>Press button again to return to time</li>
+</ol>
+
+<h3 id="scenario-3-set-time-after-power-loss">Scenario 3: Set Time After Power Loss</h3>
+<ol>
+  <li>Long press button to enter adjustment</li>
+  <li>Set hours using encoder, press button</li>
+  <li>Set minutes using encoder, press button</li>
+  <li>Set seconds using encoder, press button</li>
+  <li>Press button to finish</li>
+  <li>Press button briefly to return to time mode</li>
+</ol>
+
+<h3 id="scenario-4-quick-time-check">Scenario 4: Quick Time Check</h3>
+<ul>
+  <li>Just look at the voltmeters - no button press needed</li>
+  <li>LEDs indicate you’re in time mode</li>
+</ul>
+
+<hr />
+
+<h2 id="troubleshooting-quick-reference">Troubleshooting Quick Reference</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>Solution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Voltmeters not moving</td>
+      <td>Check power, verify PWM pin connections</td>
+    </tr>
+    <tr>
+      <td>Wrong time</td>
+      <td>Enter adjustment mode and reset time</td>
+    </tr>
+    <tr>
+      <td>Can’t switch modes</td>
+      <td>Check button connection to pin 4</td>
+    </tr>
+    <tr>
+      <td>Encoder not working</td>
+      <td>Verify pins 2 and 3 connections</td>
+    </tr>
+    <tr>
+      <td>LEDs not lighting</td>
+      <td>Check LED connections and resistors</td>
+    </tr>
+    <tr>
+      <td>Sensors not reading</td>
+      <td>Verify sensor wiring and power</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="tips-for-best-experience">Tips for Best Experience</h2>
+
+<ol>
+  <li><strong>Calibration</strong>: Ensure voltmeters are properly calibrated for accurate readings</li>
+  <li><strong>Lighting</strong>: Position LEDs where they’re visible but not distracting</li>
+  <li><strong>Placement</strong>: Keep sensors away from heat sources for accurate readings</li>
+  <li><strong>Power</strong>: Use stable power supply for consistent voltmeter readings</li>
+  <li><strong>Serial Monitor</strong>: Enable debug mode to see sensor readings and system status</li>
+</ol>
+
+<hr />
+
+<h2 id="mode-summary">Mode Summary</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────┐
+│  TIME MODE (Default)                    │
+│  - Voltmeters: Hours, Minutes, Seconds  │
+│  - LEDs: Hour, Min, Sec ON              │
+│  - Action: Short press → PTH Mode       │
+└─────────────────────────────────────────┘
+              ↓ (Short Press)
+┌─────────────────────────────────────────┐
+│  PTH MODE                                │
+│  - Voltmeters: Pressure, Temp, Humidity │
+│  - LED: PTH ON                           │
+│  - Action: Short press → Time Mode      │
+└─────────────────────────────────────────┘
+              ↓ (Long Press)
+┌─────────────────────────────────────────┐
+│  ADJUSTMENT MODE                        │
+│  - Step 0: Adjust Hours (LED blinks)    │
+│  - Step 1: Adjust Minutes (LED blinks)  │
+│  - Step 2: Adjust Seconds (LED blinks)  │
+│  - Action: Press to confirm each step   │
+└─────────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="quick-command-reference">Quick Command Reference</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>What You Want</th>
+      <th>What To Do</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>View time</td>
+      <td>Do nothing (default mode)</td>
+    </tr>
+    <tr>
+      <td>View weather</td>
+      <td>Short press button</td>
+    </tr>
+    <tr>
+      <td>Set time</td>
+      <td>Long press button, then follow steps</td>
+    </tr>
+    <tr>
+      <td>Increase value</td>
+      <td>Rotate encoder clockwise</td>
+    </tr>
+    <tr>
+      <td>Decrease value</td>
+      <td>Rotate encoder counter-clockwise</td>
+    </tr>
+    <tr>
+      <td>Confirm setting</td>
+      <td>Press button</td>
+    </tr>
+    <tr>
+      <td>Exit adjustment</td>
+      <td>Complete all 3 steps (hours, minutes, seconds)</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

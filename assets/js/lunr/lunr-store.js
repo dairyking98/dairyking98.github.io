@@ -24,7 +24,7 @@ var store = [{
         "teaser": "/assets/img/mingkwai-symposium.jpg"
       },{
         "title": "Stability COMmander",
-        "excerpt":"Stability COMmander is a real-time telehandler stability control project designed to prevent tip-over by tracking the vehicle–load center of mass and evaluating it against the machine’s support polygon. The system combines embedded control logic, dynamic simulation, and a physical prototype to validate stability behavior under realistic mechanical constraints. My contribution...","categories": ["School","Projects"],
+        "excerpt":"Stability COMmander is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–load center of mass in real time and evaluates it against the machine’s support polygon to predict and prevent tip-over, rather than relying on the fixed load charts and static...","categories": ["School","Projects"],
         "tags": ["school-project","capstone","mechanical-engineering","embedded-systems","control-systems","cad","fabrication","stm32","matlab","simulink","python","hardware-in-the-loop","simulation"],
         "url": "/blog/2026/stability-commander/",
         "teaser": "/assets/img/2026/stability-commander/cad-assembly.png"
@@ -72,7 +72,7 @@ var store = [{
         "teaser": "/assets/img/12.jpg"
       },{
         "title": "Stability COMmander",
-        "excerpt":"Capstone-style project: prevent tip-over by tracking vehicle–load center of mass against the support polygon, with embedded control, simulation, and a physical linkage prototype.          CAD used to iterate boom geometry and actuator mounts before fabrication.        Read the full write-up with images and technical detail on the blog »  ","categories": ["school-project"],
+        "excerpt":"Capstone project (Team-o-Matic): prevent tip-over by tracking vehicle–load center of mass against the support polygon, with embedded control, simulation, and a fabricated scale-model boom. Started Fall 2025 as a different project — a modular EV battery-swapping system — before pivoting to stability control in Spring 2026. CAD used to iterate...","categories": ["school-project"],
         "tags": [],
         "url": "/projects/stability-commander/",
         "teaser": "/assets/img/2026/stability-commander/cad-assembly.png"
@@ -81,5 +81,5 @@ var store = [{
         "excerpt":"Since 2022 I’ve been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical “golf balls,” vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision...","categories": ["3d type elements"],
         "tags": [],
         "url": "/projects/type-elements/",
-        "teaser": "/assets/img/12.jpg"
+        "teaser": "/assets/img/2026/type-elements/hammond-split-shuttle.png"
       }]

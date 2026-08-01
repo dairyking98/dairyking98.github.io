@@ -1,0 +1,815 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Voltmeter Clock: Documentation - Leonard Chau</title>
+<meta name="description" content="Hardware, pin configuration, and functionality reference for the Analog Voltmeter Clock.">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Voltmeter Clock: Documentation">
+<meta property="og:url" content="https://leonardchau.com/vmeter-clock/documentation/">
+
+
+  <meta property="og:description" content="Hardware, pin configuration, and functionality reference for the Analog Voltmeter Clock.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/vmeter-clock/documentation/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/typewriter-collection/"
+                
+                
+              >Collection</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Voltmeter Clock: Documentation">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/vmeter-clock/documentation/" itemprop="url">Voltmeter Clock: Documentation
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="overview">Overview</h2>
+
+<p>The <strong>Voltmeter Clock</strong> is an Arduino-based project that displays time and environmental data using analog voltmeters. The device uses three voltmeters to show either:</p>
+<ul>
+  <li><strong>Time Mode</strong>: Hours, minutes, and seconds</li>
+  <li><strong>PTH Mode</strong>: Pressure, Temperature, and Humidity</li>
+</ul>
+
+<p>The voltmeters are controlled via PWM (Pulse Width Modulation) signals, where the voltage level corresponds to the displayed value. The device features a real-time clock (RTC) for accurate timekeeping and multiple sensors for environmental monitoring.</p>
+
+<hr />
+
+<h2 id="hardware-components">Hardware Components</h2>
+
+<h3 id="microcontroller">Microcontroller</h3>
+<ul>
+  <li><strong>Arduino</strong> (compatible board)</li>
+</ul>
+
+<h3 id="sensors">Sensors</h3>
+<ol>
+  <li><strong>BMP180</strong> - Barometric pressure and temperature sensor
+    <ul>
+      <li>Pressure range: 950-1030 hPa</li>
+      <li>Temperature: Celsius readings</li>
+    </ul>
+  </li>
+  <li><strong>DHT22</strong> - Humidity and temperature sensor
+    <ul>
+      <li>Humidity range: 0-100% RH</li>
+      <li>Temperature: Fahrenheit readings</li>
+    </ul>
+  </li>
+  <li><strong>DS1307 RTC</strong> (via uRTCLib) - Real-time clock module
+    <ul>
+      <li>Maintains accurate time even when power is off</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="display-components">Display Components</h3>
+<ul>
+  <li><strong>3 Analog Voltmeters</strong> - Used as display devices
+    <ul>
+      <li>Hour voltmeter (PWM pin 9)</li>
+      <li>Minute voltmeter (PWM pin 5)</li>
+      <li>Second voltmeter (PWM pin 6)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="input-components">Input Components</h3>
+<ul>
+  <li><strong>Rotary Encoder</strong> (Limit Switch) - For time adjustment
+    <ul>
+      <li>Pin A: Digital pin 2 (interrupt-enabled)</li>
+      <li>Pin B: Digital pin 3 (interrupt-enabled)</li>
+    </ul>
+  </li>
+  <li><strong>Button</strong> - For mode switching and time adjustment
+    <ul>
+      <li>Digital pin 4 (with internal pull-up)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="indicator-leds">Indicator LEDs</h3>
+<ul>
+  <li><strong>Hour LED</strong> (Pin 8) - Indicates hour display/adjustment</li>
+  <li><strong>Minute LED</strong> (Pin 10) - Indicates minute display/adjustment</li>
+  <li><strong>Second LED</strong> (Pin 11) - Indicates second display/adjustment</li>
+  <li><strong>PTH LED</strong> (Pin 12) - Indicates PTH mode active</li>
+</ul>
+
+<hr />
+
+<h2 id="pin-configuration">Pin Configuration</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Pin</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hour Voltmeter</td>
+      <td>9</td>
+      <td>PWM Output</td>
+      <td>Displays hours or pressure</td>
+    </tr>
+    <tr>
+      <td>Minute Voltmeter</td>
+      <td>5</td>
+      <td>PWM Output</td>
+      <td>Displays minutes or temperature</td>
+    </tr>
+    <tr>
+      <td>Second Voltmeter</td>
+      <td>6</td>
+      <td>PWM Output</td>
+      <td>Displays seconds or humidity</td>
+    </tr>
+    <tr>
+      <td>Button</td>
+      <td>4</td>
+      <td>Digital Input</td>
+      <td>Mode toggle and time adjustment</td>
+    </tr>
+    <tr>
+      <td>DHT22 Sensor</td>
+      <td>7</td>
+      <td>Digital Input</td>
+      <td>Humidity/temperature sensor</td>
+    </tr>
+    <tr>
+      <td>Hour LED</td>
+      <td>8</td>
+      <td>Digital Output</td>
+      <td>Hour indicator</td>
+    </tr>
+    <tr>
+      <td>Minute LED</td>
+      <td>10</td>
+      <td>Digital Output</td>
+      <td>Minute indicator</td>
+    </tr>
+    <tr>
+      <td>Second LED</td>
+      <td>11</td>
+      <td>Digital Output</td>
+      <td>Second indicator</td>
+    </tr>
+    <tr>
+      <td>PTH LED</td>
+      <td>12</td>
+      <td>Digital Output</td>
+      <td>PTH mode indicator</td>
+    </tr>
+    <tr>
+      <td>Rotary Encoder A</td>
+      <td>2</td>
+      <td>Digital Input (Interrupt)</td>
+      <td>Encoder signal A</td>
+    </tr>
+    <tr>
+      <td>Rotary Encoder B</td>
+      <td>3</td>
+      <td>Digital Input (Interrupt)</td>
+      <td>Encoder signal B</td>
+    </tr>
+    <tr>
+      <td>BMP180</td>
+      <td>I2C</td>
+      <td>I2C Bus</td>
+      <td>Pressure/temperature sensor</td>
+    </tr>
+    <tr>
+      <td>RTC (DS1307)</td>
+      <td>I2C (0x68)</td>
+      <td>I2C Bus</td>
+      <td>Real-time clock</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="software-architecture">Software Architecture</h2>
+
+<h3 id="libraries-used">Libraries Used</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Arduino.h</code> - Core Arduino functionality</li>
+  <li><code class="language-plaintext highlighter-rouge">uRTCLib.h</code> - Real-time clock library for DS1307</li>
+  <li><code class="language-plaintext highlighter-rouge">Adafruit_Sensor.h</code> - Sensor abstraction layer</li>
+  <li><code class="language-plaintext highlighter-rouge">Adafruit_BMP085_U.h</code> - BMP180 pressure sensor library</li>
+  <li><code class="language-plaintext highlighter-rouge">DHT.h</code> - DHT22 humidity sensor library</li>
+</ul>
+
+<h3 id="key-variables">Key Variables</h3>
+
+<h4 id="display-values">Display Values</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hrVal</code>, <code class="language-plaintext highlighter-rouge">minVal</code>, <code class="language-plaintext highlighter-rouge">secVal</code> - PWM values (0-255) for each voltmeter</li>
+  <li><code class="language-plaintext highlighter-rouge">displayMode</code> - Current mode (0 = Time, 1 = PTH)</li>
+</ul>
+
+<h4 id="time-variables">Time Variables</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">quarterSecVal</code> - Sub-second PWM adjustment for smooth second hand movement</li>
+  <li><code class="language-plaintext highlighter-rouge">currentSec</code> - Current second value for quarter-second tracking</li>
+</ul>
+
+<h4 id="sensor-data">Sensor Data</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pressure</code> - Pressure in hPa (from BMP180)</li>
+  <li><code class="language-plaintext highlighter-rouge">temperature</code> - Temperature in °C (from BMP180)</li>
+  <li><code class="language-plaintext highlighter-rouge">humidity</code> - Humidity in % RH (from DHT22)</li>
+  <li><code class="language-plaintext highlighter-rouge">dhtTemperature</code> - Temperature in °F (from DHT22)</li>
+</ul>
+
+<h4 id="adjustment-variables">Adjustment Variables</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">counter</code> - Rotary encoder counter value</li>
+  <li><code class="language-plaintext highlighter-rouge">isAdjustingTime</code> - Flag indicating time adjustment mode</li>
+  <li><code class="language-plaintext highlighter-rouge">currentAdjustmentStep</code> - Current adjustment step (0=Hour, 1=Minute, 2=Second)</li>
+</ul>
+
+<hr />
+
+<h2 id="functionality">Functionality</h2>
+
+<h3 id="display-modes">Display Modes</h3>
+
+<h4 id="mode-0-time-display">Mode 0: Time Display</h4>
+<p>The voltmeters display the current time:</p>
+<ul>
+  <li><strong>Hour Voltmeter</strong>: Shows hours (0-12, 12-hour format)
+    <ul>
+      <li>Formula: <code class="language-plaintext highlighter-rouge">(hour % 12 + minute / 60.0) * 255.0 / 12</code></li>
+      <li>Includes fractional hour based on minutes</li>
+    </ul>
+  </li>
+  <li><strong>Minute Voltmeter</strong>: Shows minutes (0-60)
+    <ul>
+      <li>Formula: <code class="language-plaintext highlighter-rouge">(minute + second / 60.0) * 255.0 / 60</code></li>
+      <li>Includes fractional minute based on seconds</li>
+    </ul>
+  </li>
+  <li><strong>Second Voltmeter</strong>: Shows seconds (0-60)
+    <ul>
+      <li>Formula: <code class="language-plaintext highlighter-rouge">map(second, 0, 60, 0, 255) + quarterSecVal</code></li>
+      <li>Includes quarter-second interpolation for smooth movement</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="mode-1-pth-display-pressure-temperature-humidity">Mode 1: PTH Display (Pressure, Temperature, Humidity)</h4>
+<p>The voltmeters display environmental data:</p>
+<ul>
+  <li><strong>Hour Voltmeter</strong>: Pressure (950-1030 hPa mapped to 0-255)</li>
+  <li><strong>Minute Voltmeter</strong>: Temperature (40-100°F mapped to 0-255)</li>
+  <li><strong>Second Voltmeter</strong>: Humidity (0-100% RH mapped to 0-255)</li>
+</ul>
+
+<h3 id="time-adjustment-mode">Time Adjustment Mode</h3>
+
+<p>To adjust the time:</p>
+<ol>
+  <li><strong>Long Press</strong> the button (hold for &gt;500ms) to enter adjustment mode</li>
+  <li>The device cycles through three adjustment steps:
+    <ul>
+      <li><strong>Step 0</strong>: Adjust hours (0-11)</li>
+      <li><strong>Step 1</strong>: Adjust minutes (0-59)</li>
+      <li><strong>Step 2</strong>: Adjust seconds (0-59)</li>
+    </ul>
+  </li>
+  <li>Use the <strong>rotary encoder</strong> to change values</li>
+  <li><strong>Press the button</strong> to confirm and move to the next step</li>
+  <li>After setting seconds, adjustment mode exits automatically</li>
+</ol>
+
+<h3 id="led-indicators">LED Indicators</h3>
+
+<h4 id="normal-operation">Normal Operation</h4>
+<ul>
+  <li><strong>Time Mode (Mode 0)</strong>:
+    <ul>
+      <li>Hour, Minute, Second LEDs: ON</li>
+      <li>PTH LED: OFF</li>
+    </ul>
+  </li>
+  <li><strong>PTH Mode (Mode 1)</strong>:
+    <ul>
+      <li>Hour, Minute, Second LEDs: OFF</li>
+      <li>PTH LED: ON</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="time-adjustment-mode-1">Time Adjustment Mode</h4>
+<ul>
+  <li>The LED corresponding to the current adjustment step <strong>blinks</strong> (500ms interval)</li>
+  <li>Other LEDs are OFF</li>
+</ul>
+
+<h3 id="rotary-encoder">Rotary Encoder</h3>
+
+<p>The rotary encoder uses interrupt-driven quadrature decoding:</p>
+<ul>
+  <li><strong>Clockwise rotation</strong>: Increments counter</li>
+  <li><strong>Counter-clockwise rotation</strong>: Decrements counter</li>
+  <li>Counter is constrained based on current adjustment step:
+    <ul>
+      <li>Hours: 0-11</li>
+      <li>Minutes: 0-59</li>
+      <li>Seconds: 0-59</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="quarter-second-interpolation">Quarter-Second Interpolation</h3>
+
+<p>For smooth second hand movement, the code implements quarter-second interpolation:</p>
+<ul>
+  <li>Divides each second into 4 quarters (0-250ms, 250-500ms, 500-750ms, 750-1000ms)</li>
+  <li>Adds incremental PWM values during each quarter</li>
+  <li>Provides smooth analog movement between second ticks</li>
+</ul>
+
+<hr />
+
+<h2 id="operation-guide">Operation Guide</h2>
+
+<h3 id="initial-setup">Initial Setup</h3>
+
+<ol>
+  <li><strong>Upload the code</strong> to your Arduino board</li>
+  <li><strong>Connect all components</strong> according to the pin configuration</li>
+  <li><strong>Power on</strong> the device</li>
+  <li>The device will initialize sensors and start displaying time</li>
+</ol>
+
+<h3 id="normal-operation-1">Normal Operation</h3>
+
+<h4 id="viewing-time">Viewing Time</h4>
+<ul>
+  <li>By default, the device displays time on the three voltmeters</li>
+  <li>Hour, Minute, and Second LEDs are lit to indicate time mode</li>
+  <li>The second hand moves smoothly with quarter-second interpolation</li>
+</ul>
+
+<h4 id="viewing-environmental-data">Viewing Environmental Data</h4>
+<ol>
+  <li><strong>Short press</strong> the button to switch to PTH mode</li>
+  <li>The PTH LED lights up</li>
+  <li>Voltmeters now display:
+    <ul>
+      <li>Pressure (left voltmeter)</li>
+      <li>Temperature (middle voltmeter)</li>
+      <li>Humidity (right voltmeter)</li>
+    </ul>
+  </li>
+  <li><strong>Short press</strong> again to return to time mode</li>
+</ol>
+
+<h3 id="adjusting-time">Adjusting Time</h3>
+
+<ol>
+  <li><strong>Long press</strong> the button (hold for more than 0.5 seconds)</li>
+  <li>The Hour LED starts blinking, indicating hour adjustment mode</li>
+  <li><strong>Rotate the encoder</strong> to set the desired hour (0-11)</li>
+  <li><strong>Press the button</strong> to confirm and move to minute adjustment</li>
+  <li>The Minute LED blinks</li>
+  <li><strong>Rotate the encoder</strong> to set minutes (0-59)</li>
+  <li><strong>Press the button</strong> to confirm and move to second adjustment</li>
+  <li>The Second LED blinks</li>
+  <li><strong>Rotate the encoder</strong> to set seconds (0-59)</li>
+  <li><strong>Press the button</strong> to finish adjustment</li>
+  <li>The device returns to normal operation (starts in PTH mode, press button to return to time)</li>
+</ol>
+
+<h3 id="serial-monitor-optional">Serial Monitor (Optional)</h3>
+
+<p>If <code class="language-plaintext highlighter-rouge">debug_println</code> is enabled, the serial monitor (9600 baud) will display:</p>
+<ul>
+  <li>Current time (in Time mode)</li>
+  <li>Pressure, Temperature, Humidity (in PTH mode)</li>
+  <li>Debug information about button presses, encoder movements, etc.</li>
+</ul>
+
+<hr />
+
+<h2 id="technical-details">Technical Details</h2>
+
+<h3 id="pwm-mapping">PWM Mapping</h3>
+
+<h4 id="time-display">Time Display</h4>
+<ul>
+  <li><strong>Hours</strong>: 12-hour format mapped to 0-255 PWM
+    <ul>
+      <li>0 = 12:00 AM/PM</li>
+      <li>127.5 = 6:00 AM/PM</li>
+      <li>255 = 12:00 AM/PM (wrap-around)</li>
+    </ul>
+  </li>
+  <li><strong>Minutes</strong>: 0-60 minutes mapped to 0-255 PWM
+    <ul>
+      <li>Linear mapping with fractional seconds included</li>
+    </ul>
+  </li>
+  <li><strong>Seconds</strong>: 0-60 seconds mapped to 0-255 PWM
+    <ul>
+      <li>Includes quarter-second interpolation for smoothness</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="pth-display">PTH Display</h4>
+<ul>
+  <li><strong>Pressure</strong>: 950-1030 hPa → 0-255 PWM
+    <ul>
+      <li>Linear mapping</li>
+      <li>Values outside range are constrained</li>
+    </ul>
+  </li>
+  <li><strong>Temperature</strong>: 40-100°F → 0-255 PWM
+    <ul>
+      <li>Linear mapping</li>
+      <li>Values outside range are constrained</li>
+    </ul>
+  </li>
+  <li><strong>Humidity</strong>: 0-100% RH → 0-255 PWM
+    <ul>
+      <li>Linear mapping</li>
+      <li>Direct percentage to PWM conversion</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="sensor-reading-intervals">Sensor Reading Intervals</h3>
+
+<ul>
+  <li>Sensors are read continuously in the main loop</li>
+  <li>Serial output updates every 500ms (blink interval)</li>
+  <li>RTC data is refreshed every loop iteration</li>
+</ul>
+
+<h3 id="error-handling">Error Handling</h3>
+
+<ul>
+  <li><strong>BMP180</strong>: Returns -1 for pressure/temperature if read fails</li>
+  <li><strong>DHT22</strong>: Returns -1 for humidity/temperature if read fails</li>
+  <li>Sensor initialization failures halt execution with error message</li>
+</ul>
+
+<hr />
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="voltmeters-not-moving">Voltmeters Not Moving</h3>
+<ul>
+  <li>Check PWM pin connections (9, 5, 6)</li>
+  <li>Verify voltmeters are properly calibrated</li>
+  <li>Check power supply to voltmeters</li>
+</ul>
+
+<h3 id="time-not-accurate">Time Not Accurate</h3>
+<ul>
+  <li>Verify RTC module is connected and powered</li>
+  <li>Check I2C connections (SDA/SCL)</li>
+  <li>Ensure RTC has backup battery</li>
+</ul>
+
+<h3 id="sensors-not-reading">Sensors Not Reading</h3>
+<ul>
+  <li><strong>BMP180</strong>: Check I2C connections and power</li>
+  <li><strong>DHT22</strong>: Verify pin 7 connection and power</li>
+  <li>Check sensor wiring and pull-up resistors</li>
+</ul>
+
+<h3 id="button-not-responding">Button Not Responding</h3>
+<ul>
+  <li>Verify button is connected to pin 4</li>
+  <li>Check internal pull-up is working</li>
+  <li>Test button continuity</li>
+</ul>
+
+<h3 id="rotary-encoder-not-working">Rotary Encoder Not Working</h3>
+<ul>
+  <li>Verify pins 2 and 3 connections</li>
+  <li>Check interrupt functionality</li>
+  <li>Ensure encoder has proper power and ground</li>
+</ul>
+
+<h3 id="leds-not-indicating">LEDs Not Indicating</h3>
+<ul>
+  <li>Check LED pin connections (8, 10, 11, 12)</li>
+  <li>Verify LED polarity and current-limiting resistors</li>
+  <li>Test LED pins individually</li>
+</ul>
+
+<hr />
+
+<h2 id="future-enhancements">Future Enhancements</h2>
+
+<p>The code includes a placeholder for brightness adjustment (step 3 in adjustment mode), but this feature is not yet implemented. The <code class="language-plaintext highlighter-rouge">maxCounter</code> is set to 20 for this step, but the functionality is not active.</p>
+
+<hr />
+
+<h2 id="code-structure">Code Structure</h2>
+
+<h3 id="main-functions">Main Functions</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">setup()</code> - Initializes pins, sensors, interrupts, and serial communication</li>
+  <li><code class="language-plaintext highlighter-rouge">loop()</code> - Main program loop handling button input, time adjustment, and display updates</li>
+  <li><code class="language-plaintext highlighter-rouge">updateTimeDisplay()</code> - Calculates and outputs PWM values for time display</li>
+  <li><code class="language-plaintext highlighter-rouge">updatePTH()</code> - Calculates and outputs PWM values for environmental data</li>
+  <li><code class="language-plaintext highlighter-rouge">adjustTime()</code> - Handles time adjustment mode logic</li>
+  <li><code class="language-plaintext highlighter-rouge">displayAdjustment()</code> - Shows current adjustment value on voltmeters</li>
+  <li><code class="language-plaintext highlighter-rouge">updateEncoderA()</code> / <code class="language-plaintext highlighter-rouge">updateEncoderB()</code> - Interrupt handlers for rotary encoder</li>
+  <li><code class="language-plaintext highlighter-rouge">readPressure()</code> - Reads BMP180 sensor data</li>
+  <li><code class="language-plaintext highlighter-rouge">readHumidity()</code> - Reads DHT22 sensor data</li>
+  <li><code class="language-plaintext highlighter-rouge">toggleDisplayMode()</code> - Switches between time and PTH modes</li>
+  <li><code class="language-plaintext highlighter-rouge">controlLEDsBasedOnDisplayMode()</code> - Controls LED indicators</li>
+  <li><code class="language-plaintext highlighter-rouge">blinkPin()</code> - Blinks LED at specified interval</li>
+  <li><code class="language-plaintext highlighter-rouge">handleQuarterSec()</code> - Implements quarter-second interpolation</li>
+  <li><code class="language-plaintext highlighter-rouge">blinkDisplaySerial()</code> - Outputs serial data at intervals</li>
+</ul>
+
+<hr />
+
+<h2 id="license">License</h2>
+
+<p>This project is provided as-is for educational and personal use.</p>
+
+<hr />
+
+<h2 id="author-notes">Author Notes</h2>
+
+<p>This voltmeter clock project combines analog display aesthetics with modern sensor technology, creating a unique timepiece that also serves as an environmental monitoring station. The smooth analog movement of the voltmeters provides a classic watch-like experience while displaying both time and real-time environmental conditions.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

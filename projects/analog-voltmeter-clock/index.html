@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2026-07-05T00:06:17-07:00">
+  <meta property="article:published_time" content="2026-08-01T01:06:20-07:00">
 
 
 
@@ -146,6 +146,12 @@
               >Collection</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/contact/"
                 
                 
@@ -180,7 +186,7 @@
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Analog Voltmeter Clock">
     <meta itemprop="description" content="This project was completed for Assignment 4 in Fall 2024, under Professor Jonathan Song. The challenge was to design and build a device that displays time using analog voltmeters, with the added functionality of monitoring pressure, temperature, and humidity.">
-    <meta itemprop="datePublished" content="2026-07-05T00:06:17-07:00">
+    <meta itemprop="datePublished" content="2026-08-01T01:06:20-07:00">
     
 
     <div class="page__inner-wrap">
@@ -322,66 +328,37 @@
 
 <ul>
   <li><a href="/projects/school-project/vmeter-clock/vmeter-clock.ino">Arduino Clock Code v1</a> - Original Arduino source code (v1)</li>
-  <li><a href="/projects/school-project/vmeter-clock/vmeter-clock-v2.ino">Arduino Clock Code v2</a> - Enhanced version with play mode (v2)</li>
+  <li><a href="/projects/school-project/vmeter-clock/vmeter-clock-v2.ino">Arduino Clock Code v2</a> - Play Mode version (v2) — code-complete, never flashed or tested on hardware</li>
 </ul>
 
 <h3 id="documentation">Documentation</h3>
 
 <ul>
-  <li><a href="/vmeter-clock/documentation/">Complete Documentation</a> - Complete project documentation including hardware setup, pin configuration, and functionality</li>
-  <li><a href="/vmeter-clock/operation-guide/">Operation Guide</a> - Quick reference guide for operating the voltmeter clock</li>
-  <li><a href="/vmeter-clock/technical/">Technical Documentation</a> - Detailed technical documentation including code architecture, algorithms, and implementation details</li>
-  <li><a href="/vmeter-clock/code/">Arduino Code Documentation</a> - Complete Arduino source code with detailed comments</li>
+  <li><a href="/vmeter-clock/documentation/">Complete Documentation</a> - Hardware setup, pin configuration, and functionality reference (v1)</li>
+  <li><a href="/vmeter-clock/operation-guide/">Operation Guide</a> - Quick reference guide for operating the voltmeter clock (v1)</li>
+  <li><a href="/vmeter-clock/technical/">Technical Documentation</a> - Code architecture, algorithms, and implementation details (v1)</li>
 </ul>
 
 <hr />
 
-<h2 id="version-2-improvements-november-16-2025">Version 2 Improvements (November 16, 2025)</h2>
+<h2 id="version-2-written-never-tested">Version 2 (Written, Never Tested)</h2>
 
-<p>The voltmeter clock has been enhanced with several new features in version 2:</p>
-
-<h3 id="play-mode">Play Mode</h3>
-
-<p>A new interactive “Play Mode” has been added that transforms the voltmeter clock into an interactive display:</p>
+<p>After the original build, I wrote a full “Play Mode” enhancement to <code class="language-plaintext highlighter-rouge">vmeter-clock-v2.ino</code> — the code is complete and detailed, but it was <strong>never flashed to the Arduino or tested on real hardware</strong>. Everything below describes what the code does, not a verified feature of the physical clock:</p>
 
 <ul>
-  <li><strong>Triple-Click Activation</strong>: Quickly triple-click the button to enter play mode</li>
-  <li><strong>Interactive Voltmeter Control</strong>: Use the rotary encoder to manually control any of the three voltmeters through their full PWM range (0-255)</li>
-  <li><strong>Voltmeter Selection</strong>: Press the button while in play mode to cycle through which voltmeter is active (Hour → Minute → Second)</li>
-  <li><strong>Dynamic LED Patterns</strong>: All four LEDs cycle through binary patterns (0-15), displaying all possible combinations in a mesmerizing visual effect</li>
-  <li><strong>Automatic Timeout</strong>: Play mode automatically exits after 15 seconds of inactivity, returning to normal time display</li>
+  <li><strong>Triple-Click Activation</strong>: a <code class="language-plaintext highlighter-rouge">detectTripleClick()</code> routine watches the last three button-press timestamps and enters play mode if all three land within a 500ms window</li>
+  <li><strong>Interactive Voltmeter Control</strong>: the rotary encoder drives whichever voltmeter is active through its full PWM range (0-255) via <code class="language-plaintext highlighter-rouge">updatePlayModeVoltmeters()</code></li>
+  <li><strong>Voltmeter Selection</strong>: each button press in play mode cycles the active voltmeter (Hour → Minute → Second) via <code class="language-plaintext highlighter-rouge">handlePlayModeButton()</code></li>
+  <li><strong>Dynamic LED Patterns</strong>: <code class="language-plaintext highlighter-rouge">updatePlayModeLEDs()</code> cycles all four LEDs through the 16 binary combinations of a 4-bit pattern, updating every 300ms</li>
+  <li><strong>Automatic Timeout</strong>: tracks button presses and encoder movement as activity; exits back to normal time display after 15 seconds of inactivity</li>
+  <li><strong>Time-adjustment priority</strong>: a long press still exits play mode and enters time adjustment, so the two modes can’t conflict</li>
 </ul>
 
-<h3 id="enhanced-user-experience">Enhanced User Experience</h3>
-
-<ul>
-  <li><strong>Activity Detection</strong>: Play mode tracks both button presses and encoder movements to reset the inactivity timer</li>
-  <li><strong>Seamless Mode Switching</strong>: Time adjustment mode takes priority over play mode, allowing you to adjust the time even while in play mode</li>
-  <li><strong>Improved Encoder Handling</strong>: Enhanced encoder counter management for play mode’s full PWM range</li>
-</ul>
-
-<h3 id="technical-improvements">Technical Improvements</h3>
-
-<ul>
-  <li><strong>Triple-Click Detection</strong>: Sophisticated algorithm that detects three button presses within a 500ms window</li>
-  <li><strong>LED Pattern Cycling</strong>: Efficient binary pattern generation that cycles through all 16 possible LED combinations</li>
-  <li><strong>Non-Blocking Timeouts</strong>: All timing operations use millis() for non-blocking delays, ensuring smooth operation</li>
-</ul>
-
-<h3 id="use-cases">Use Cases</h3>
-
-<p>Play mode is perfect for:</p>
-
-<ul>
-  <li><strong>Demonstrations</strong>: Show off the voltmeter movement and PWM control</li>
-  <li><strong>Calibration</strong>: Manually test voltmeter response across the full range</li>
-  <li><strong>Interactive Displays</strong>: Create custom visual effects with the LED patterns</li>
-  <li><strong>Educational Purposes</strong>: Demonstrate PWM control and voltmeter behavior</li>
-</ul>
+<p>The rest of the sketch — sensor reading, RTC handling, quarter-second time interpolation, PTH display — is identical to v1; play mode is purely additive. All timing in both the original code and the play mode addition uses non-blocking <code class="language-plaintext highlighter-rouge">millis()</code> comparisons, not <code class="language-plaintext highlighter-rouge">delay()</code>.</p>
 
 <hr />
 
-<p><em>This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework. Version 2 improvements were added on November 16, 2025.</em></p>
+<p><em>This project was completed in December 2024 for Assignment 4 (Professor Jonathan Song) as part of my academic coursework.</em></p>
 
         
       </section>
@@ -398,7 +375,7 @@
         
 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-05T00:06:17-07:00">July 5, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-01T01:06:20-07:00">August 1, 2026</time></p>
 
 
       </footer>
