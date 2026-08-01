@@ -14,7 +14,7 @@
     { key: 'awg', label: 'AWG (Wire)', table: awgGauge },
     { key: 'usstd', label: 'US Standard', table: usStdGauge },
   ];
-  let enabledGaugeSystems = ['steel', 'awg'];
+  let enabledGaugeSystems = [];
 
   // Build comprehensive fraction lookup
   const fractionLookup = new Map();
