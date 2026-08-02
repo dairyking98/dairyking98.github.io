@@ -16,6 +16,12 @@ toc_sticky: true
 
 RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. **FluorCam** and **StentorCam** are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of *Stentor coeruleus*.
 
+<div class="notice--info">
+  <strong>Official documentation:</strong> RoboCam3.1 is developed in the Esquerra Lab (E-Lab) at SFSU, with collaborators at UC Santa Cruz and Knox College through the Center for Cellular Construction. The lab keeps a full documentation site at
+  <a href="https://e-lab-sfsu.github.io/RoboCam3.1/" target="_blank" rel="noopener noreferrer">e-lab-sfsu.github.io/RoboCam3.1</a> &mdash; feature list, hardware BOM and assembly steps, a real-capture gallery, roadmap/known issues, and full team credits &mdash; alongside the
+  <a href="https://github.com/E-Lab-SFSU/RoboCam3.1" target="_blank" rel="noopener noreferrer">E-Lab-SFSU/RoboCam3.1</a> repo. What's below is my own write-up of the platform and my role building it; the lab site is the actively-maintained group reference for the rest of the team and anyone looking to build one.
+</div>
+
 ## Platform Overview
 
 - **Motion Control**: 3D printer (Marlin/Klipper) driven over serial/G-code for precise, repeatable positioning
@@ -56,9 +62,16 @@ RoboCam3.1 has moved fast since it was first written up here. Highlights from th
 **Processing pipeline**
 - A new **Processing tab** batch-converts raw `.npy` bursts into PNG/JPEG image sequences and video (constant-fps MP4 for presentation, VFR MKV with accurate per-frame timing for archival), with an **auto-process after experiment** option that kicks off the moment a run finishes
 
+**Hardware**
+- Compute moved from a Raspberry Pi 4 + microSD to a **Raspberry Pi 5 with an M.2 HAT+ and 512GB NVMe SSD**, for faster, higher-capacity raw-burst capture
+- A **Player One Uranus M** camera is under evaluation as an alternative to the Mars 662M
+- Dark-field mask geometry is now documented as three tuned parameters — mask stop diameter, well height above the mask, and mask thickness — rather than fixed dimensions; see the [hardware page](https://e-lab-sfsu.github.io/RoboCam3.1/hardware.html) for the full writeup
+
 ## Hardware {#hardware}
 
 RoboCam repurposes a stock FDM 3D printer's XY(Z) motion system as a precision positioning stage — the print head is replaced with a camera/illumination carriage, and the bed becomes the imaging stage for well plates or samples.
+
+Full bill of materials, assembly steps, and hardware photos (rig overview, optics mount, camera options) are on the [official hardware page](https://e-lab-sfsu.github.io/RoboCam3.1/hardware.html).
 
 <!-- PHOTO NEEDED: full rig on the printer bed, well-plate loaded.
 Save as assets/img/2026/robocam/rig-overview.jpg, then uncomment:
@@ -89,6 +102,8 @@ Real measurement from a 3-well capture (Mars 662M mono, 8-bit, 1280×960, 908 fr
 | JPEG stack (q95) | 469.8 MiB | 44.2% | No |
 | MP4 (libx264, presentation) | 225.9 MiB | 21.2% | No |
 
+Real capture examples — a dark-field well plate under baseline and green-laser-stimulus conditions, plus the resulting *Stentor* swimming-speed traces — are in the [gallery](https://e-lab-sfsu.github.io/RoboCam3.1/gallery.html).
+
 <!-- PHOTO NEEDED: a representative captured frame or plate montage from a real experiment (StentorCam dark-field well or FluorCam fluorescence shot).
 Save as assets/img/2026/robocam/sample-capture.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/robocam/sample-capture.jpg" alt="Sample RoboCam capture frame" caption="A representative captured frame from a well-plate imaging run." %}
@@ -107,4 +122,4 @@ RoboCam builds on prior work in the same lab and open-source community rather th
 
 ## Repository
 
-The current, actively developed version is [RoboCam3.1](https://github.com/dairyking98/RoboCam3.1). Earlier stages of the project are preserved in [RoboCam-Suite2.0](https://github.com/dairyking98/RoboCam-Suite2.0) and [RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite).
+The current, actively developed version is [RoboCam3.1](https://github.com/dairyking98/RoboCam3.1), kept in sync with the lab-side [E-Lab-SFSU/RoboCam3.1](https://github.com/E-Lab-SFSU/RoboCam3.1) repo, which also hosts the [full documentation site](https://e-lab-sfsu.github.io/RoboCam3.1/). Earlier stages of the project are preserved in [RoboCam-Suite2.0](https://github.com/dairyking98/RoboCam-Suite2.0) and [RoboCam-Suite](https://github.com/dairyking98/RoboCam-Suite).
