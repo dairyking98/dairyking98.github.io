@@ -11,8 +11,16 @@
 // listing (archive layout). That leaves them narrower than they need to
 // be. Only reserve the gutter when a `.sidebar` actually precedes the
 // content element in markup.
-#main .page,
-#main .archive {
+//
+// The :not(:has(...)) guard below is load-bearing, not decorative: without
+// it this rule zeroes the gutter on EVERY .page, including ones that do
+// render a sidebar (toc_sticky: true pages like /projects/type-elements/
+// and /projects/robocam/) - which was silently undoing the theme's own
+// space reservation for the sticky TOC, letting it float with nothing
+// stopping it from overlapping body text once scrolled past its original
+// position in the flow.
+#main .page:not(:has(.sidebar__right)),
+#main .archive:not(:has(.sidebar__right)) {
   float: none;
   width: 100%;
   padding-inline-end: 0;
