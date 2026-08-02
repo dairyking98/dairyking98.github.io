@@ -20,7 +20,10 @@ The first type element I ever attempted, done in collaboration with **Brent Cart
 
 The result: brand-new typewheels for Blickensderfer models 5, 6, 7, 8, 9, and the Home Blick, in both DHIATENSOR and QWERTY layouts, including typefaces never previously available for these machines — Steile Zierschrift, Goudy italic, and Script/Vogue. The project was [featured on Typewriter Revolution](https://typewriterrevolution.com/new-typewheels-for-the-blickensderfer-typewriter/).
 
-{% include figure image_path="/assets/img/2026/type-elements/blickensderfer.png" alt="Blickensderfer typewheel OpenSCAD render" caption="v4-generated Blickensderfer typewheel." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/blickensderfer.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Blickensderfer typewheel — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a real printed Blickensderfer typewheel, ideally installed in a machine.
 Save as assets/img/2026/type-elements/blickensderfer-printed.jpg, then uncomment:
@@ -41,7 +44,10 @@ The second attempt, starting with a Fusion 360 prototype — then shelved after 
 
 That became a fully remote collaboration: I designed in OpenSCAD and generated STL files from the US, he printed and tested them in Finland, and we iterated on fitment and character quality through photos and feedback with neither of us having direct access to the other's hardware. Once dialed in for the Composer, the system was generalized to work for standard Selectrics too — fully parametric, accepting any keyboard layout, any font, and any key arrangement.
 
-{% include figure image_path="/assets/img/2026/type-elements/ibm-selectric-composer.png" alt="IBM Selectric Composer typeball OpenSCAD render" caption="v4-generated Selectric Composer typeball — the machine that started this whole collaboration." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/selectric-composer.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Selectric Composer typeball — the machine that started this whole collaboration. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a real printed IBM Selectric typeball, ideally installed and typed with.
 Save as assets/img/2026/type-elements/ibm-selectric-printed.jpg, then uncomment:
@@ -89,7 +95,10 @@ Hammond typewriters print from a curved **shuttle** — a die-cast type bar arra
 
 This directory covers both the Model 1 split shuttle and the conventional standard shuttle used from the Multiplex onward, plus the index variant and a Glagolitic shuttle for the old Slavic script. I own two Hammond Multiplex machines myself, including one still waiting on a mathematical shuttle.
 
-{% include figure image_path="/assets/img/2026/type-elements/hammond-split-shuttle.png" alt="Hammond Model 1 split shuttle OpenSCAD render" caption="Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/hammond-split-shuttle.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 {% include figure image_path="/assets/img/2026/type-elements/hammond-shuttle.png" alt="Conventional Hammond shuttle OpenSCAD render" caption="The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above." %}
 
@@ -105,7 +114,10 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The AEG Mignon (models 2/3/4) is an index typewriter — instead of a keyboard, you guide a pointer over a printed character index and press a lever to print. The cylindrical index element supports 32+ languages through a shared layout system, so a new language is a matter of generating a new index rather than redesigning the mechanism.
 
-{% include figure image_path="/assets/img/2026/type-elements/mignon.png" alt="Mignon index element OpenSCAD render" caption="v4-generated Mignon index cylinder." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/mignon.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Mignon index cylinder — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Mignon index cylinder, ideally installed in the machine.
 Save as assets/img/2026/type-elements/mignon-printed.jpg, then uncomment:
@@ -200,3 +212,13 @@ Three things that don't show up in the finished part but drive most of the actua
 All of these use the same basic workflow: parametric modeling in OpenSCAD, high-precision resin 3D printing, and iterative fitment testing against the real mechanism — either in person or, for the Selectric Composer and Helios Klimax, entirely over email with collaborators on other continents.
 
 For inquiries about custom type elements or collaboration, reach out via email or [Instagram (@blick_elements)](https://instagram.com/blick_elements).
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="{{ '/assets/js/stl-viewer.js' | relative_url }}"></script>
