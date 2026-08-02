@@ -18,8 +18,8 @@ RoboCam is a robotic imaging platform that repurposes a 3D printer as a precisio
 
 <div class="notice--info">
   <strong>Official documentation:</strong> RoboCam3.1 is developed in the Esquerra Lab (E-Lab) at SFSU, with collaborators at UC Santa Cruz and Knox College through the Center for Cellular Construction. The lab keeps a full documentation site at
-  <a href="https://e-lab-sfsu.github.io/RoboCam3.1/" target="_blank" rel="noopener noreferrer">e-lab-sfsu.github.io/RoboCam3.1</a> &mdash; feature list, hardware BOM and assembly steps, a real-capture gallery, roadmap/known issues, and full team credits &mdash; alongside the
-  <a href="https://github.com/E-Lab-SFSU/RoboCam3.1" target="_blank" rel="noopener noreferrer">E-Lab-SFSU/RoboCam3.1</a> repo. What's below is my own write-up of the platform and my role building it; the lab site is the actively-maintained group reference for the rest of the team and anyone looking to build one.
+  <a href="https://e-lab-sfsu.github.io/RoboCam3.1/">e-lab-sfsu.github.io/RoboCam3.1</a> &mdash; feature list, hardware BOM and assembly steps, a real-capture gallery, roadmap/known issues, and full team credits &mdash; alongside the
+  <a href="https://github.com/E-Lab-SFSU/RoboCam3.1">E-Lab-SFSU/RoboCam3.1</a> repo. What's below is my own write-up of the platform and my role building it; the lab site is the actively-maintained group reference for the rest of the team and anyone looking to build one.
 </div>
 
 ## Platform Overview

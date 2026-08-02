@@ -16,7 +16,7 @@ Since 2022 I've been designing replacement type elements for antique typewriters
 
 <div class="notice--info">
   <strong>Technical documentation:</strong> the full engineering write-up — architecture, the Minkowski draft pipeline, per-machine build history, setup instructions — lives at
-  <a href="https://type-elements.leonardchau.com" target="_blank" rel="noopener noreferrer">type-elements.leonardchau.com</a>. What's below is the project story: collaborators, real prints, and the machines themselves.
+  <a href="https://type-elements.leonardchau.com">type-elements.leonardchau.com</a>. What's below is the project story: collaborators, real prints, and the machines themselves.
 </div>
 
 ## Blickensderfer Typewheels {#blickensderfer}

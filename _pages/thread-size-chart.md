@@ -78,9 +78,9 @@ author_profile: false
 
 <div class="notice--info">
   <strong>Data Sources:</strong> Thread diameters, TPI/pitch, and tap drill sizes are cross-checked against
-  <a href="https://www.sizes.com/tools/thread_american.htm" target="_blank" rel="noopener noreferrer">American Thread Standards</a> and
-  <a href="https://www.sizes.com/tools/thread_metric.htm" target="_blank" rel="noopener noreferrer">Metric Thread Standards</a>
-  on <a href="https://www.sizes.com" target="_blank" rel="noopener noreferrer">sizes.com</a>, which cover sizes up to 1" (American) and 30&nbsp;mm (metric); larger sizes use standard machinist references instead.
+  <a href="https://www.sizes.com/tools/thread_american.htm">American Thread Standards</a> and
+  <a href="https://www.sizes.com/tools/thread_metric.htm">Metric Thread Standards</a>
+  on <a href="https://www.sizes.com">sizes.com</a>, which cover sizes up to 1" (American) and 30&nbsp;mm (metric); larger sizes use standard machinist references instead.
   No ASME/ISO standard we could access directly tabulates tap-drill selection for UN threads (ASME B1.1 defines thread geometry
   &mdash; including the basic minor diameter D1 in Tables 6/7 &mdash; but no drill-selection table, and ASME B94.9's tap drill table
   covers pipe taps only), so tap drills above 1" are computed from that same B1.1 geometry: each one sits at a constant offset above
