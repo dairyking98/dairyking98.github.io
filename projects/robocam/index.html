@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2026-08-01T17:01:19-07:00">
+  <meta property="article:published_time" content="2026-08-01T17:43:40-07:00">
 
 
 
@@ -186,7 +186,7 @@
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="RoboCam">
     <meta itemprop="description" content="RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. FluorCam and StentorCam are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of Stentor coeruleus.">
-    <meta itemprop="datePublished" content="2026-08-01T17:01:19-07:00">
+    <meta itemprop="datePublished" content="2026-08-01T17:43:40-07:00">
     
 
     <div class="page__inner-wrap">
@@ -213,6 +213,12 @@
           </aside>
         
         <p>RoboCam is a robotic imaging platform that repurposes a 3D printer as a precision XY(Z) positioning stage for camera hardware, turning it into an automated microscopy/imaging system. <strong>FluorCam</strong> and <strong>StentorCam</strong> are both applications built on top of this same platform, not separate systems — FluorCam adapts it for fluorescence microscopy, and StentorCam adapts it for behavioral dark-field imaging of <em>Stentor coeruleus</em>.</p>
+
+<div class="notice--info">
+  <strong>Official documentation:</strong> RoboCam3.1 is developed in the Esquerra Lab (E-Lab) at SFSU, with collaborators at UC Santa Cruz and Knox College through the Center for Cellular Construction. The lab keeps a full documentation site at
+  <a href="https://e-lab-sfsu.github.io/RoboCam3.1/" target="_blank" rel="noopener noreferrer">e-lab-sfsu.github.io/RoboCam3.1</a> &mdash; feature list, hardware BOM and assembly steps, a real-capture gallery, roadmap/known issues, and full team credits &mdash; alongside the
+  <a href="https://github.com/E-Lab-SFSU/RoboCam3.1" target="_blank" rel="noopener noreferrer">E-Lab-SFSU/RoboCam3.1</a> repo. What's below is my own write-up of the platform and my role building it; the lab site is the actively-maintained group reference for the rest of the team and anyone looking to build one.
+</div>
 
 <h2 id="platform-overview">Platform Overview</h2>
 
@@ -264,9 +270,18 @@
   <li>A new <strong>Processing tab</strong> batch-converts raw <code class="language-plaintext highlighter-rouge">.npy</code> bursts into PNG/JPEG image sequences and video (constant-fps MP4 for presentation, VFR MKV with accurate per-frame timing for archival), with an <strong>auto-process after experiment</strong> option that kicks off the moment a run finishes</li>
 </ul>
 
+<p><strong>Hardware</strong></p>
+<ul>
+  <li>Compute moved from a Raspberry Pi 4 + microSD to a <strong>Raspberry Pi 5 with an M.2 HAT+ and 512GB NVMe SSD</strong>, for faster, higher-capacity raw-burst capture</li>
+  <li>A <strong>Player One Uranus M</strong> camera is under evaluation as an alternative to the Mars 662M</li>
+  <li>Dark-field mask geometry is now documented as three tuned parameters — mask stop diameter, well height above the mask, and mask thickness — rather than fixed dimensions; see the <a href="https://e-lab-sfsu.github.io/RoboCam3.1/hardware.html">hardware page</a> for the full writeup</li>
+</ul>
+
 <h2 id="hardware">Hardware</h2>
 
 <p>RoboCam repurposes a stock FDM 3D printer’s XY(Z) motion system as a precision positioning stage — the print head is replaced with a camera/illumination carriage, and the bed becomes the imaging stage for well plates or samples.</p>
+
+<p>Full bill of materials, assembly steps, and hardware photos (rig overview, optics mount, camera options) are on the <a href="https://e-lab-sfsu.github.io/RoboCam3.1/hardware.html">official hardware page</a>.</p>
 
 <!-- PHOTO NEEDED: full rig on the printer bed, well-plate loaded.
 Save as assets/img/2026/robocam/rig-overview.jpg, then uncomment:
@@ -347,6 +362,8 @@ Save as assets/img/2026/robocam/camera-comparison.jpg, then uncomment:
   </tbody>
 </table>
 
+<p>Real capture examples — a dark-field well plate under baseline and green-laser-stimulus conditions, plus the resulting <em>Stentor</em> swimming-speed traces — are in the <a href="https://e-lab-sfsu.github.io/RoboCam3.1/gallery.html">gallery</a>.</p>
+
 <!-- PHOTO NEEDED: a representative captured frame or plate montage from a real experiment (StentorCam dark-field well or FluorCam fluorescence shot).
 Save as assets/img/2026/robocam/sample-capture.jpg, then uncomment:
 <figure class=""><img src="/assets/img/2026/robocam/sample-capture.jpg"
@@ -372,7 +389,7 @@ Note: there are old candidate frames in the archived RoboCam repos on disk, but 
 
 <h2 id="repository">Repository</h2>
 
-<p>The current, actively developed version is <a href="https://github.com/dairyking98/RoboCam3.1">RoboCam3.1</a>. Earlier stages of the project are preserved in <a href="https://github.com/dairyking98/RoboCam-Suite2.0">RoboCam-Suite2.0</a> and <a href="https://github.com/dairyking98/RoboCam-Suite">RoboCam-Suite</a>.</p>
+<p>The current, actively developed version is <a href="https://github.com/dairyking98/RoboCam3.1">RoboCam3.1</a>, kept in sync with the lab-side <a href="https://github.com/E-Lab-SFSU/RoboCam3.1">E-Lab-SFSU/RoboCam3.1</a> repo, which also hosts the <a href="https://e-lab-sfsu.github.io/RoboCam3.1/">full documentation site</a>. Earlier stages of the project are preserved in <a href="https://github.com/dairyking98/RoboCam-Suite2.0">RoboCam-Suite2.0</a> and <a href="https://github.com/dairyking98/RoboCam-Suite">RoboCam-Suite</a>.</p>
 
         
       </section>
@@ -389,7 +406,7 @@ Note: there are old candidate frames in the archived RoboCam repos on disk, but 
         
 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-01T17:01:19-07:00">August 1, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-01T17:43:40-07:00">August 1, 2026</time></p>
 
 
       </footer>
