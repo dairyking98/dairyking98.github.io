@@ -49,6 +49,11 @@ That became a fully remote collaboration: I designed in OpenSCAD and generated S
 </div>
 <p class="model-viewer-hint"><em>v4-generated Selectric Composer typeball — the machine that started this whole collaboration. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/selectric-standard.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated standard Selectric typeball — the same generator, generalized from the Composer to any keyboard layout, font, and key arrangement. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
 <!-- PHOTO NEEDED (nice-to-have upgrade): a real printed IBM Selectric typeball, ideally installed and typed with.
 Save as assets/img/2026/type-elements/ibm-selectric-printed.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/type-elements/ibm-selectric-printed.jpg" alt="Printed IBM Selectric typeball" caption="Resin-printed Selectric typeball, installed and tested." %}
@@ -66,7 +71,10 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The third project, and a different challenge from the previous two: Bennett Pocket Typewriters (c. 1910) use type elements made of vulcanized rubber, which is fragile and prone to cracking with age — original elements are scarce and often too damaged to use. Getting the geometry right took many OpenSCAD iterations, since the Bennett's construction differs significantly from both the Blickensderfer and Selectric designs. The resin-printed result ended up more durable than the original rubber elements.
 
-{% include figure image_path="/assets/img/2026/type-elements/bennett.png" alt="Bennett type element OpenSCAD render" caption="v4-generated Bennett type element." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/bennett.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Bennett type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Bennett rubber-replacement type element, ideally next to a cracked/damaged original for contrast.
 Save as assets/img/2026/type-elements/bennett-printed.jpg, then uncomment:
@@ -85,7 +93,10 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The fourth, done for a collector friend in Germany rather than my own collection. The Helios Klimax is an unusual and rare German typewriter with its own mechanical quirks, so this was another back-and-forth collaboration — he supplied measurements, photos, and fitment feedback on his damaged original, and I iterated the OpenSCAD model remotely until it fit and printed correctly on his end.
 
-{% include figure image_path="/assets/img/2026/type-elements/helios-klimax-render.png" alt="Helios Klimax type element OpenSCAD render, with the SVG logo engraved on the top face" caption="v4-generated Helios Klimax type element, with the original logo engraved on the top face — a v4-only addition ported from the machine's v1 SVG artwork." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/helios-klimax.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Helios Klimax type element, with the original logo engraved on the top face — a v4-only addition ported from the machine's v1 SVG artwork. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 {% include figure image_path="/assets/img/2026/type-elements/helios-klimax.png" alt="Helios Klimax logo" caption="The logo from the original element, as source artwork." %}
 
@@ -100,7 +111,10 @@ This directory covers both the Model 1 split shuttle and the conventional standa
 </div>
 <p class="model-viewer-hint"><em>Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-{% include figure image_path="/assets/img/2026/type-elements/hammond-shuttle.png" alt="Conventional Hammond shuttle OpenSCAD render" caption="The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/hammond-shuttle.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 {% assign hammonds = site.data.typewriters | where: "manufacturer", "Hammond" %}
 {% if hammonds.size > 0 %}
@@ -136,7 +150,10 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 A calibrated element for the Postal No. 3 (c. 1901–08) — one of which is in my own collection.
 
-{% include figure image_path="/assets/img/2026/type-elements/postal.png" alt="Postal No. 3 type element OpenSCAD render" caption="v4-generated Postal No. 3 type element." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/postal.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Postal No. 3 type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Postal No. 3 type element, ideally installed in the machine.
 Save as assets/img/2026/type-elements/postal-printed.jpg, then uncomment:
@@ -157,7 +174,22 @@ A different, smaller thing from everything above: a **type slug** is the individ
 
 This whole family dates back to v1 and was never carried into v2 at all, so porting it into v4 meant treating v1 as ground truth rather than diffing against a v2 file like every other machine here.
 
-{% include figure image_path="/assets/img/2026/type-elements/oliver-slug.png" alt="Oliver typewriter slug OpenSCAD render" caption="v4-generated Oliver Slug — replica of a real Oliver typewriter type slug." %}
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/type-slug.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated generic Type Slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/vogue-slug.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Vogue Slug — replica of a real 2-piece "Vogue Foundry" mark, modeled from real drawings. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/oliver-slug.stl' | relative_url }}">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Oliver Slug — replica of a real Oliver typewriter type slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+<!-- STL NEEDED: Gauge Slug and Lumi Slug aren't exported yet -- both still described in prose above with no model or image. -->
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Oliver Slug, ideally next to the real Oliver No. 3's own slug for comparison.
 Save as assets/img/2026/type-elements/oliver-slug-printed.jpg, then uncomment:
