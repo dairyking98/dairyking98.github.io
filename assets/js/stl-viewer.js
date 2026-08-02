@@ -73,6 +73,13 @@ function initViewer(container) {
   loader.load(
     src,
     (geometry) => {
+      // These STLs come from OpenSCAD/CAD/slicer tooling, which use a
+      // Z-up convention (Z is "up," matching the printer's build
+      // direction). three.js's world is Y-up. Without this rotation the
+      // geometry loads exactly as exported (correct data) but reads as
+      // tipped over, since the renderer and the file disagree on which
+      // axis is "up."
+      geometry.rotateX(-Math.PI / 2);
       geometry.computeBoundingBox();
       geometry.computeVertexNormals();
 
