@@ -25,7 +25,7 @@ The first type element I ever attempted, done in collaboration with **Brent Cart
 
 The result: brand-new typewheels for Blickensderfer models 5, 6, 7, 8, 9, and the Home Blick, in both DHIATENSOR and QWERTY layouts, including typefaces never previously available for these machines — Steile Zierschrift, Goudy italic, and Script/Vogue. The project was [featured on Typewriter Revolution](https://typewriterrevolution.com/new-typewheels-for-the-blickensderfer-typewriter/).
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/blickensderfer.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/blickensderfer.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Blickensderfer typewheel — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -49,12 +49,12 @@ The second attempt, starting with a Fusion 360 prototype — then shelved after 
 
 That became a fully remote collaboration: I designed in OpenSCAD and generated STL files from the US, he printed and tested them in Finland, and we iterated on fitment and character quality through photos and feedback with neither of us having direct access to the other's hardware. Once dialed in for the Composer, the system was generalized to work for standard Selectrics too — fully parametric, accepting any keyboard layout, any font, and any key arrangement.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/selectric-composer.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/selectric-composer.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Selectric Composer typeball — the machine that started this whole collaboration. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/selectric-standard.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/selectric-standard.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated standard Selectric typeball — the same generator, generalized from the Composer to any keyboard layout, font, and key arrangement. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -76,7 +76,7 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The third project, and a different challenge from the previous two: Bennett Pocket Typewriters (c. 1910) use type elements made of vulcanized rubber, which is fragile and prone to cracking with age — original elements are scarce and often too damaged to use. Getting the geometry right took many OpenSCAD iterations, since the Bennett's construction differs significantly from both the Blickensderfer and Selectric designs. The resin-printed result ended up more durable than the original rubber elements.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/bennett.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/bennett.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Bennett type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -98,7 +98,7 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The fourth, done for a collector friend in Germany rather than my own collection. The Helios Klimax is an unusual and rare German typewriter with its own mechanical quirks, so this was another back-and-forth collaboration — he supplied measurements, photos, and fitment feedback on his damaged original, and I iterated the OpenSCAD model remotely until it fit and printed correctly on his end.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/helios-klimax.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/helios-klimax.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Helios Klimax type element, with the original logo engraved on the top face — a v4-only addition ported from the machine's v1 SVG artwork. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -111,12 +111,12 @@ Hammond typewriters print from a curved **shuttle** — a die-cast type bar arra
 
 This directory covers both the Model 1 split shuttle and the conventional standard shuttle used from the Multiplex onward, plus the index variant and a Glagolitic shuttle for the old Slavic script. I own two Hammond Multiplex machines myself, including one still waiting on a mathematical shuttle.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/hammond-split-shuttle.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/hammond-split-shuttle.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/hammond-shuttle.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/hammond-shuttle.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -133,7 +133,7 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 The AEG Mignon (models 2/3/4) is an index typewriter — instead of a keyboard, you guide a pointer over a printed character index and press a lever to print. The cylindrical index element supports 32+ languages through a shared layout system, so a new language is a matter of generating a new index rather than redesigning the mechanism.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/mignon.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/mignon.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Mignon index cylinder — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -155,7 +155,7 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 A calibrated element for the Postal No. 3 (c. 1901–08) — one of which is in my own collection.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/postal.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/postal.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Postal No. 3 type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
@@ -179,17 +179,17 @@ A different, smaller thing from everything above: a **type slug** is the individ
 
 This whole family dates back to v1 and was never carried into v2 at all, so porting it into v4 meant treating v1 as ground truth rather than diffing against a v2 file like every other machine here.
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/type-slug.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/type-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated generic Type Slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/vogue-slug.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/vogue-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Vogue Slug — replica of a real 2-piece "Vogue Foundry" mark, modeled from real drawings. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-<div class="model-viewer-3d" data-model-src="{{ '/assets/models/type-elements/oliver-slug.stl' | relative_url }}">
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/oliver-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Oliver Slug — replica of a real Oliver typewriter type slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
