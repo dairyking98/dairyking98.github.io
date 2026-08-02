@@ -12,7 +12,7 @@ toc_label: "Machines"
 toc_sticky: true
 ---
 
-Since 2022 I've been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical "golf balls," vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision resin, with per-machine dimensions and calibration values tracked in the [Type-Elements repository](https://github.com/dairyking98/Type-Elements). Machines below, roughly in the order I tackled them.
+Since 2022 I've been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical "golf balls," vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision resin, with per-machine dimensions and calibration values tracked in the [Type-Elements repository](https://github.com/dairyking98/Type-Elements). Machines below, roughly in the order I tackled them. For the engineering deep-dive — architecture, build history, setup instructions — see [type-elements.leonardchau.com](https://type-elements.leonardchau.com).
 
 ## Blickensderfer Typewheels {#blickensderfer}
 
