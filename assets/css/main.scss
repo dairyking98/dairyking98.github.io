@@ -1,6 +1,14 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+// Overrides a Sass !default variable, so this must come before both
+// imports below. Widens the overall site column site-wide (every page,
+// not just ones with a sidebar) - the theme's stock 1280px cap left
+// toc_sticky pages' actual text column cramped (1280px - 300px sidebar
+// gutter - padding) once the #main .page fix further down correctly
+// stopped zeroing that gutter reservation out for pages that do have one.
+$max-width: 1600px;
+
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
