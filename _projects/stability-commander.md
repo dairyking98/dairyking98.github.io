@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Stability COMmander
-description: Hardware-validated stability control for a scale telehandler prototype — STM32 embedded logic, Simulink HIL, Pygame visualization, and a fabricated boom for real-world geometry checks.
+description: Capstone team project on hardware-validated stability control for a scale telehandler prototype — my contribution was the boom's structural design, fabrication, and geometry validation.
 header:
   teaser: /assets/img/2026/stability-commander/cad-assembly.png
 importance: 2
