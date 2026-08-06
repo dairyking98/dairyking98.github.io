@@ -243,13 +243,17 @@ Three things that don't show up in the finished part but drive most of the actua
 
 **The Minkowski draft sweep.** Every struck character needs a slight taper — wider at the root than at the tip — so it releases cleanly during printing and molding instead of undercutting itself. Nothing real gets built without one; a die-cast or molded part with zero draft can't release from its tool at all. That taper is generated with a real Minkowski sum (dilating the character solid by a draft cone via `manifold3d`), not a cheaper per-vertex outline offset — the offset approach was tried first and abandoned after it self-intersected on narrow features (the gap inside an 'H', the diagonal junctions in a 'k' or 'm'). A true Minkowski sum can't produce that failure on any input topology, at the cost of being slower to compute.
 
-{% include figure image_path="/assets/img/2026/type-elements/minkowski-undrafted.png" alt="A single character before the Minkowski draft sweep, straight walls" caption="Before: flat, undrafted walls." %}
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/glyph_A_no_minkowski.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Blickensderfer 'A', before the Minkowski draft sweep — flat, undrafted walls. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-{% include figure image_path="/assets/img/2026/type-elements/minkowski-drafted.png" alt="The same character after the Minkowski draft sweep, tapered walls" caption="After: the same character, Minkowski-summed with a draft cone — visibly wider at the root." %}
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/glyph_A_minkowski.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Blickensderfer 'A', after the Minkowski draft sweep — the same character, Minkowski-summed with a draft cone, visibly wider at the root. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 **Custom-coded resin supports.** Rather than leaving support placement to a slicer's auto-support algorithm — which has no idea which faces are struck characters that need to stay clean — every machine has its own hand-coded `ResinSupport()` geometry, positioned around the element's real anchoring points and unioned with the body into one print-ready mesh. It's a genuinely different scheme per machine family (a Hammond split shuttle's supports have nothing in common with a Blickensderfer typewheel's), tuned against real print failures rather than generic defaults.
-
-{% include figure image_path="/assets/img/2026/type-elements/resin-supports.png" alt="Standalone render of a Blickensderfer element's resin support structure" caption="A Blickensderfer element's resin support structure on its own — support rods plus breakaway ring, before being unioned with the printed part." %}
 
 Three machines' support schemes side by side, as interactive meshes rather than a single still:
 
