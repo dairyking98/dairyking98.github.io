@@ -30,13 +30,16 @@ function initViewer(container) {
   controls.dampingFactor = 0.08;
   controls.screenSpacePanning = true;
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const key = new THREE.DirectionalLight(0xffffff, 4);
   key.position.set(1, 1.4, 1);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.5);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.66);
   fill.position.set(-1, -0.5, -1);
   scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 4);
+  rim.position.set(0, 2, -2);
+  scene.add(rim);
 
   function sizeToContainer() {
     const width = container.clientWidth;
@@ -85,8 +88,8 @@ function initViewer(container) {
 
       const material = new THREE.MeshStandardMaterial({
         color: 0x8c877c,
-        roughness: 0.65,
-        metalness: 0.05,
+        roughness: 0.59,
+        metalness: 0.56,
       });
       const mesh = new THREE.Mesh(geometry, material);
 
