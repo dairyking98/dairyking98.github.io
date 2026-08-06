@@ -236,7 +236,10 @@ Three things that don't show up in the finished part but drive most of the actua
 
 **Inner shaft design.** Every cylindrical element (Blickensderfer, Postal, Bennett, Mignon, Helios) mounts by slipping over a central spindle inside the typewriter — so the bore running through the middle has to be a precise slip fit, not just "roughly round." Resin shrinks slightly as it cures, so the bore's as-printed diameter isn't the same as its as-designed diameter, and that offset has to be found empirically per resin/printer combination rather than assumed. A small calibration print (the "Shaft Gauge Test set") exists specifically to dial in that offset before committing to a full element.
 
-{% include figure image_path="/assets/img/2026/type-elements/inner-shaft-cutaway.png" alt="Cutaway of a Blickensderfer element showing the inner shaft bore" caption="Cutaway of a Blickensderfer element — the knurled center post is the precision slip-fit shaft interface, surrounded by the drive-pin holes it aligns against." %}
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/blickensderfer_xsection.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated cutaway of a Blickensderfer element — the knurled center post is the precision slip-fit shaft interface, surrounded by the drive-pin holes it aligns against. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
 **The Minkowski draft sweep.** Every struck character needs a slight taper — wider at the root than at the tip — so it releases cleanly during printing and molding instead of undercutting itself. Nothing real gets built without one; a die-cast or molded part with zero draft can't release from its tool at all. That taper is generated with a real Minkowski sum (dilating the character solid by a draft cone via `manifold3d`), not a cheaper per-vertex outline offset — the offset approach was tried first and abandoned after it self-intersected on narrow features (the gap inside an 'H', the diagonal junctions in a 'k' or 'm'). A true Minkowski sum can't produce that failure on any input topology, at the cost of being slower to compute.
 
