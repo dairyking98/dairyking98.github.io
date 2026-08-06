@@ -248,6 +248,23 @@ Three things that don't show up in the finished part but drive most of the actua
 
 {% include figure image_path="/assets/img/2026/type-elements/resin-supports.png" alt="Standalone render of a Blickensderfer element's resin support structure" caption="A Blickensderfer element's resin support structure on its own — support rods plus breakaway ring, before being unioned with the printed part." %}
 
+Three machines' support schemes side by side, as interactive meshes rather than a single still:
+
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/resin_support_renders/blickensderfer_supports.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Blickensderfer resin-support structure — the same geometry shown in the render above, as an interactive mesh. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/resin_support_renders/hammond_split_supports.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Hammond split shuttle resin-support structure — a completely different scheme from the Blickensderfer's, built around the split shuttle's own telescoping-tube anchoring points. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+<div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/resin_support_renders/selectric12_supports.stl">
+  <div class="model-viewer-status">Loading model&hellip;</div>
+</div>
+<p class="model-viewer-hint"><em>v4-generated Selectric I/II resin-support structure — a third distinct scheme, built for the spherical typeball's own anchoring geometry. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
 ## Process
 
 All of these use the same basic workflow: parametric modeling in OpenSCAD, high-precision resin 3D printing, and iterative fitment testing against the real mechanism — either in person or, for the Selectric Composer and Helios Klimax, entirely over email with collaborators on other continents.
