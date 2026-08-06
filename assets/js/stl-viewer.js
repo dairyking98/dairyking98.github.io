@@ -84,7 +84,7 @@ function initViewer(container) {
       geometry.computeVertexNormals();
 
       const material = new THREE.MeshStandardMaterial({
-        color: 0xd8d3c6,
+        color: 0x8c877c,
         roughness: 0.65,
         metalness: 0.05,
       });

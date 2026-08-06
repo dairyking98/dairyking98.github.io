@@ -30,6 +30,8 @@ The result: brand-new typewheels for Blickensderfer models 5, 6, 7, 8, 9, and th
 </div>
 <p class="model-viewer-hint"><em>v4-generated Blickensderfer typewheel — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/blickensderfer.png" alt="Static render of the Blickensderfer typewheel" caption="Static render of the same model shown interactively above." %}
+
 <!-- PHOTO NEEDED (nice-to-have upgrade): a real printed Blickensderfer typewheel, ideally installed in a machine.
 Save as assets/img/2026/type-elements/blickensderfer-printed.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/type-elements/blickensderfer-printed.jpg" alt="Printed Blickensderfer typewheel" caption="Resin-printed Blickensderfer typewheel, installed." %}
@@ -54,10 +56,14 @@ That became a fully remote collaboration: I designed in OpenSCAD and generated S
 </div>
 <p class="model-viewer-hint"><em>v4-generated Selectric Composer typeball — the machine that started this whole collaboration. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/ibm-selectric-composer.png" alt="Static render of the Selectric Composer typeball" caption="Static render of the same model shown interactively above." %}
+
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/selectric-standard.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated standard Selectric typeball — the same generator, generalized from the Composer to any keyboard layout, font, and key arrangement. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/ibm-selectric-standard.png" alt="Static render of the standard Selectric typeball" caption="Static render of the same model shown interactively above." %}
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a real printed IBM Selectric typeball, ideally installed and typed with.
 Save as assets/img/2026/type-elements/ibm-selectric-printed.jpg, then uncomment:
@@ -81,6 +87,8 @@ The third project, and a different challenge from the previous two: Bennett Pock
 </div>
 <p class="model-viewer-hint"><em>v4-generated Bennett type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/bennett.png" alt="Static render of the Bennett type element" caption="Static render of the same model shown interactively above." %}
+
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Bennett rubber-replacement type element, ideally next to a cracked/damaged original for contrast.
 Save as assets/img/2026/type-elements/bennett-printed.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/type-elements/bennett-printed.jpg" alt="Printed Bennett type element" caption="Resin-printed Bennett type element, next to an original vulcanized-rubber element for comparison." %}
@@ -103,6 +111,8 @@ The fourth, done for a collector friend in Germany rather than my own collection
 </div>
 <p class="model-viewer-hint"><em>v4-generated Helios Klimax type element, with the original logo engraved on the top face — a v4-only addition ported from the machine's v1 SVG artwork. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/helios-klimax-render.png" alt="Static render of the Helios Klimax type element" caption="Static render of the same model shown interactively above." %}
+
 {% include figure image_path="/assets/img/2026/type-elements/helios-klimax.png" alt="Helios Klimax logo" caption="The logo from the original element, as source artwork." %}
 
 ## Hammond Shuttles & Index {#hammond}
@@ -114,12 +124,20 @@ This directory covers both the Model 1 split shuttle and the conventional standa
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/hammond-split-shuttle.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
-<p class="model-viewer-hint"><em>Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+<p class="model-viewer-hint"><em>v4-generated Hammond Model 1 split shuttle — the original two-piece telescoping-tube mechanism, superseded by the conventional one-piece shuttle used from the Multiplex onward. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/hammond-split-shuttle.png" alt="Static render of the Hammond Model 1 split shuttle" caption="Static render of the same model shown interactively above." %}
+
+The split shuttle's mechanism doesn't end at the printed part. Reproducing it means fabricating and assembling a set of precision telescoping tubes separately from the resin print — four pieces total: a central shaft, a left tube and a right tube that telescope over it, and a fourth part built into the machine itself that surrounds all three. Every one of those interfaces needs a precision tight sliding fit, and the tube lengths are just as critical as their diameters. Four pins tie the assembly together. To bond each tube to its printed housing, the tube seat is ringed with a glue groove and injection holes, so adhesive can be worked all the way around the joint once the tube is seated, rather than relying on a bead applied before assembly.
 
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/hammond-shuttle.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
-<p class="model-viewer-hint"><em>The conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+<p class="model-viewer-hint"><em>v4-generated conventional one-piece shuttle used from the Multiplex onward — a single curved die-cast bar, versus the split shuttle's two-piece telescoping assembly above. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/hammond-shuttle.png" alt="Static render of the conventional Hammond shuttle" caption="Static render of the same model shown interactively above." %}
+
+The conventional shuttle has its own fabrication requirement outside the resin print: a laser-cut metal plate with a brass insert, currently designed in Fusion 360. It's also a candidate for FDM printing instead of laser-cutting — faster and cheaper to produce, at the cost of being more wear-prone, which actually suits it well as a replaceable, consumable part for rapid testing rather than a permanent metal original.
 
 {% assign hammonds = site.data.typewriters | where: "manufacturer", "Hammond" %}
 {% if hammonds.size > 0 %}
@@ -137,6 +155,8 @@ The AEG Mignon (models 2/3/4) is an index typewriter — instead of a keyboard, 
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Mignon index cylinder — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/mignon.png" alt="Static render of the Mignon index cylinder" caption="Static render of the same model shown interactively above." %}
 
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Mignon index cylinder, ideally installed in the machine.
 Save as assets/img/2026/type-elements/mignon-printed.jpg, then uncomment:
@@ -160,6 +180,8 @@ A calibrated element for the Postal No. 3 (c. 1901–08) — one of which is in 
 </div>
 <p class="model-viewer-hint"><em>v4-generated Postal No. 3 type element — the actual mesh, not a still render. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/postal.png" alt="Static render of the Postal No. 3 type element" caption="Static render of the same model shown interactively above." %}
+
 <!-- PHOTO NEEDED (nice-to-have upgrade): a printed Postal No. 3 type element, ideally installed in the machine.
 Save as assets/img/2026/type-elements/postal-printed.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/type-elements/postal-printed.jpg" alt="Printed Postal No. 3 type element" caption="Resin-printed Postal No. 3 type element, installed." %}
@@ -182,17 +204,23 @@ This whole family dates back to v1 and was never carried into v2 at all, so port
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/type-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
-<p class="model-viewer-hint"><em>v4-generated generic Type Slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+<p class="model-viewer-hint"><em>v4-generated generic Type Slug — the base slug design shared across the family. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/type-slug.png" alt="Static render of the generic Type Slug" caption="Static render of the same model shown interactively above." %}
 
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/vogue-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Vogue Slug — replica of a real 2-piece "Vogue Foundry" mark, modeled from real drawings. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
+{% include figure image_path="/assets/img/2026/type-elements/vogue-slug.png" alt="Static render of the Vogue Slug" caption="Static render of the same model shown interactively above." %}
+
 <div class="model-viewer-3d" data-model-src="https://type-elements.leonardchau.com/assets/models/oliver-slug.stl">
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Oliver Slug — replica of a real Oliver typewriter type slug. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+{% include figure image_path="/assets/img/2026/type-elements/oliver-slug.png" alt="Static render of the Oliver Slug" caption="Static render of the same model shown interactively above." %}
 
 <!-- STL NEEDED: Gauge Slug and Lumi Slug aren't exported yet -- both still described in prose above with no model or image. -->
 
