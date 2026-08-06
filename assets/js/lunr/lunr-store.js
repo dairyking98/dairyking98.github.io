@@ -81,5 +81,5 @@ var store = [{
         "excerpt":"Since 2022 I’ve been designing replacement type elements for antique typewriters — the small, precise components (typewheels, spherical “golf balls,” vulcanized rubber elements) that are frequently missing, damaged, or were never available in a given typeface to begin with. Each is modeled parametrically in OpenSCAD and 3D printed in high-precision...","categories": ["3d type elements"],
         "tags": [],
         "url": "/projects/type-elements/",
-        "teaser": "/assets/img/2026/type-elements/hammond-split-shuttle.png"
+        "teaser": "https://type-elements.leonardchau.com/assets/thumbnails/hammond-split-shuttle.png"
       }]
