@@ -127,10 +127,7 @@ The conventional shuttle has its own fabrication requirement outside the resin p
 
 Hammond also gets a generated legend (`generate_legend.py`), optionally installable on the machine for whenever a shuttle's own key legends don't match the characters actually mounted — a mathematical shuttle on a machine with QWERTY-labeled keys, for instance.
 
-<!-- PHOTO NEEDED: a generated Hammond legend card (generate_legend.py output).
-Save as assets/img/2026/type-elements/hammond-legend.png, then uncomment:
-{% include figure image_path="/assets/img/2026/type-elements/hammond-legend.png" alt="Generated Hammond legend card" caption="A generated Hammond legend card, optionally installed on the machine when the shuttle's characters don't match its key labels." %}
--->
+{% include figure image_path="https://type-elements.leonardchau.com/assets/legends/hammond-legend.svg" alt="Generated Hammond legend card" caption="A generated Hammond legend card, optionally installed on the machine when the shuttle's characters don't match its key labels." %}
 
 {% assign hammonds = site.data.typewriters | where: "manufacturer", "Hammond" %}
 {% if hammonds.size > 0 %}
@@ -161,10 +158,7 @@ Since the index cylinder alone carries no visible character map once it's mounte
 </div>
 <p class="model-viewer-hint"><em>Mignon index legend holder — a Fusion 360-designed accessory (not part of the parametric pipeline), with a slot for the legend card and a mount that pops into the machine alongside the printed element. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
 
-<!-- PHOTO NEEDED: a generated Mignon legend card (generate_legend.py output).
-Save as assets/img/2026/type-elements/mignon-legend.png, then uncomment:
-{% include figure image_path="/assets/img/2026/type-elements/mignon-legend.png" alt="Generated Mignon legend card" caption="A generated Mignon legend card — shows which character sits at which drum position, matched to the printed index element above." %}
--->
+{% include figure image_path="https://type-elements.leonardchau.com/assets/legends/mignon-legend.svg" alt="Generated Mignon legend card" caption="A generated Mignon legend card — shows which character sits at which drum position, matched to the printed index element above." %}
 
 {% assign mignons = site.data.typewriters | where: "manufacturer", "Mignon" %}
 {% if mignons.size > 0 %}
