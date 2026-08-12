@@ -1,7 +1,7 @@
 ---
 layout: single
 title: 3D-Printed Type Elements
-description: Parametric OpenSCAD type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, Postal, and a set of standalone type slug replicas.
+description: Parametric type elements, 3D-printed in resin to restore and extend antique typewriters — Blickensderfer, IBM Selectric, Bennett, Helios Klimax, Hammond, Mignon, Postal, and a set of standalone type slug replicas. Originally OpenSCAD, now a Python pipeline covering 15 machines.
 header:
   teaser: https://type-elements.leonardchau.com/assets/thumbnails/hammond-split-shuttle.png
 importance: 1
@@ -228,7 +228,7 @@ Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_u
 
 ## Engineering Details {#engineering-details}
 
-Three things that don't show up in the finished part but drive most of the actual design work:
+Four things that don't show up in the finished part but drive most of the actual design work:
 
 **Inner shaft design.** Every cylindrical element (Blickensderfer, Postal, Bennett, Mignon, Helios) mounts by slipping over a central spindle inside the typewriter — so the bore running through the middle has to be a precise slip fit, not just "roughly round." Resin shrinks slightly as it cures, so the bore's as-printed diameter isn't the same as its as-designed diameter, and that offset has to be found empirically per resin/printer combination rather than assumed. A small calibration print (the "Shaft Gauge Test set") exists specifically to dial in that offset before committing to a full element.
 
@@ -248,6 +248,14 @@ Three things that don't show up in the finished part but drive most of the actua
   <div class="model-viewer-status">Loading model&hellip;</div>
 </div>
 <p class="model-viewer-hint"><em>v4-generated Blickensderfer 'A', after the Minkowski draft sweep — the same character, Minkowski-summed with a draft cone, visibly wider at the root. Drag to rotate, scroll/pinch to zoom, right-click or two-finger drag to pan.</em></p>
+
+**Getting the characters right, from the original catalogs.** A type element is only correct if the right character sits at the right position — and for a machine that hasn't been manufactured in a century, "the right character" is a historical question, not a design decision. Hammond and Blickensderfer both published type catalogs listing every shuttle and typewheel they sold, printed as literal specimens: three rows of characters, exactly as that element would type them. Those catalogs are the primary source, and layouts are transcribed from scans of them rather than reconstructed from a modern keyboard.
+
+Doing that carefully turned up two genuine errors that had been carried in the code since 2022 — each one silently dropping a letter the machine obviously needed. Hammond's Ideal layout had a `d` where the catalog clearly prints a `b`, leaving `b` absent from the element entirely and `d` duplicated. Blickensderfer's CHARIENSTU layout ended its capital row in `U` instead of `Y`, dropping `Y`. Both were found the same cheap way: compare the lowercase row's letters against the uppercase row's, and a duplicated letter alongside a missing one falls straight out. Neither would have produced an error at print time — just a wrong part, discovered at the typewriter.
+
+The other thing the catalogs make obvious is how much of the variety is *typeface* rather than *layout*. Roughly eighty Hammond entries collapse to a handful of genuinely distinct character arrangements; "Small Roman," "Large Gothic," "Clarendon," "Vertical Script" and "Caps and Small Caps" are all the same key positions in a different face. That distinction matters practically — it's the difference between needing a new font and needing new geometry — and it's why the generator treats them as separate axes.
+
+The per-language shuttles are the interesting tail: Hammond's 1915 catalog is organised by language rather than by part number, and includes Dutch, Spanish, Croatian, Danish, Portuguese, Polish, Roumanian, Russian, Servian and more, each with its own accented character set. Those are transcribed as they're verified, character by character — the [full transcription record](https://type-elements.leonardchau.com/layout-transcription/) documents which are done, which are still ambiguous in the scans, and the reasoning behind every judgement call.
 
 **Custom-coded resin supports.** Rather than leaving support placement to a slicer's auto-support algorithm — which has no idea which faces are struck characters that need to stay clean — every machine has its own hand-coded `ResinSupport()` geometry, positioned around the element's real anchoring points and unioned with the body into one print-ready mesh. It's a genuinely different scheme per machine family (a Hammond split shuttle's supports have nothing in common with a Blickensderfer typewheel's), tuned against real print failures rather than generic defaults.
 
@@ -290,6 +298,7 @@ v4 also brought a shared pipeline with common glyph handling, logging, and tooli
 - **`tune.py`** (the interactive calibration/preview GUI) got a reworked machine picker — Cylinders/Shuttles/Spheres grouped into their own columns instead of one long collapsible tree — plus a real Layout tab for the Selectric family and per-machine config scratch copies so edits to one machine's settings can't bleed into another's
 - **Resin selection notes** — documented tradeoffs between glyph fidelity and toughness across resin types, from real print testing
 - **Unified console logging** (`lib/build_log.py`) across every machine script, replacing ad hoc `print()` calls with consistent per-character and mesh-summary output
+- **Catalog-derived layouts** — every machine's keyboard layouts moved into one shared module and cross-checked against the manufacturers' own printed type catalogs, which corrected two long-standing character errors and added the per-language Hammond shuttles (see [the transcription record](https://type-elements.leonardchau.com/layout-transcription/))
 
 <script type="importmap">
 {
