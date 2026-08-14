@@ -84,19 +84,19 @@ var store = [{
         "teaser": "https://type-elements.leonardchau.com/assets/thumbnails/hammond-split-shuttle.png"
       },{
         "title": "Blickensderfer No. 5",
-        "excerpt":"The machine that started the type element project. A Blickensderfer No. 5 from 1909, on Blickensderfer’s own DHIATENSOR keyboard rather than QWERTY. ManufacturerBlickensderferModelno. 5Year1909Serial No.133130SizePortableDriveManualColorBlackPitch10LayoutDHIATENSOR Why this one Second in my own ranking of the collection, for the printed elements, the uniqueness, and the age. The Blickensderfer is a genuinely...","categories": [],
+        "excerpt":"A 1909 Blickensderfer No. 5 on Blickensderfer’s own DHIATENSOR keyboard rather than QWERTY. It is a genuinely different machine rather than a variation on the standard theme, and it has fewer parts than almost anything else of its period. ManufacturerBlickensderferModelno. 5Year1909Serial No.133130SizePortableDriveManualColorBlackPitch10LayoutDHIATENSOR No typebars Instead of a basket of typebars,...","categories": [],
         "tags": [],
         "url": "/collections/typewriters/blickensderfer-no-5-133130/",
         "teaser": null
       },{
         "title": "Hammond Model 1",
-        "excerpt":"The oldest machine in the collection, and the one that has done the most work for the type element project. It arrived complete in the ways that matter: original split shuttle, wood base, and wood top, all intact. ManufacturerHammondModelModel 1Year1890Serial No.15058SizeStandardDriveManualLayoutQWERTYAcquired15 September 2024 The uncommon part: a QWERTY keyboard The...","categories": [],
+        "excerpt":"The oldest machine in the collection, and one of the machines behind the type element project. It arrived complete in the ways that matter: original split shuttle, wood base, and wood cover, all intact. ManufacturerHammondModelModel 1Year1890Serial No.15058SizeStandardDriveManualLayoutQWERTYStatusOriginal, uncleaned, fully functionalAcquired15 September 2024 The uncommon part: a QWERTY keyboard The obvious...","categories": [],
         "tags": [],
         "url": "/collections/typewriters/hammond-model-1-15058/",
         "teaser": null
       },{
         "title": "Royal Quiet De Luxe — Vogue",
-        "excerpt":"My favourite machine in the collection, and the one I’d grab first. A 1939 Royal Quiet De Luxe, unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY Why this one In my own ranking of the collection this sits at number...","categories": [],
+        "excerpt":"A 1939 Royal Quiet De Luxe — unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY The Vogue typeface The Quiet De Luxe is a good portable on its own merits — a genuinely quiet escapement for its era, Royal’s glass-topped...","categories": [],
         "tags": [],
         "url": "/collections/typewriters/royal-quiet-de-luxe-a-873792/",
         "teaser": null
