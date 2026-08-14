@@ -89,12 +89,6 @@ var store = [{
         "url": "/collections/typewriters/blickensderfer-no-5-133130/",
         "teaser": null
       },{
-        "title": "Hammond Model 1",
-        "excerpt":"     ManufacturerHammondModelModel 1Year1890Serial No.15058SizeStandardDriveManualLayoutQWERTY   Why this one     Type sample     Restoration     Gallery    ","categories": [],
-        "tags": [],
-        "url": "/collections/typewriters/hammond-model-1-15058/",
-        "teaser": null
-      },{
         "title": "Royal Quiet De Luxe — Vogue",
         "excerpt":"My favourite machine in the collection, and the one I’d grab first. A 1939 Royal Quiet De Luxe, unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY Why this one In my own ranking of the collection this sits at number...","categories": [],
         "tags": [],
@@ -102,7 +96,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Sun No. 2 Standard",
-        "excerpt":"One of the oldest machines in the collection, and the one that has taken the most of my own machining work. ManufacturerSunModelNo. 2 StandardYear1901-07Serial No.8278SizePortableDriveManualColorBlackTypefaceStandardPitch10Layout3 Bank Why this one Sixth in my own ranking, for its age and its uniqueness. The Sun Typewriter Company built small, cheap machines aimed at...","categories": [],
+        "excerpt":"A cheap machine, built to be cheap, and much more interesting for it. The Sun Typewriter Company sold the No. 2 at a price the big standards couldn’t touch — the original advertising I have puts it at $40 in 1901 — and nearly every design decision in it follows...","categories": [],
         "tags": [],
         "url": "/collections/typewriters/sun-no-2-standard-8278/",
         "teaser": null
