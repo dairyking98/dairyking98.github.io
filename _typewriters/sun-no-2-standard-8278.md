@@ -36,6 +36,19 @@ again took a machine shop, a packet of obsolete screws, and a new ink roller.
 
 {% include machine-spec.html %}
 
+## Condition
+
+**Cleaned and restored, and fully functional.** It has had the most work of
+anything here — a fractured casting repaired at a machine shop, obsolete screws
+replaced, the ink roller assembly rebuilt, new rubber.
+
+That's the opposite of how the [Hammond Model 1]({{ '/collections/typewriters/hammond-model-1-15058/' | relative_url }})
+was treated, and deliberately so. The Hammond arrived working, so it was left
+original and uncleaned; original is a condition you can only lose once. The Sun
+arrived with a broken shift casting and would not work at all. Once a machine is
+already apart to fix something structural, there's no argument for putting it
+back dirty.
+
 ## Gallery
 
 <!-- Add entries to the `gallery` array above, then uncomment:
