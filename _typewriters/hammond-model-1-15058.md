@@ -65,6 +65,11 @@ The originals appear to be **vulcanised rubber**, which explains both the crispn
 of the type and the failure mode — vulcanised rubber embrittles with age, so a
 shuttle that has survived 135 years intact has been lucky as much as careful.
 
+How the shuttles were actually made is described in
+**[*Scientific American*, Vol. 74, No. 10, 7 March 1896](https://www.jstor.org/stable/e26116597)**,
+which is close to contemporary with this machine — six years after it left the
+factory, while the Model 1 was still in production.
+
 <!-- PHOTO NEEDED: the original split shuttle out of the machine, both halves,
 against a plain background. Ideally a second shot showing the type detail close
 enough to see why it's hard to reproduce.
@@ -102,10 +107,17 @@ Save as .../specimen.jpg, then uncomment:
 
 ## Period documentation
 
+The contemporary source on how these shuttles were manufactured is
+*Scientific American*, **Vol. 74, No. 10, dated 7 March 1896** — the issue is
+[catalogued on JSTOR](https://www.jstor.org/stable/e26116597).
+
+<!-- TODO: once you have the article to hand, summarise what it actually says
+about the process. I've cited the issue but not read it, so nothing above
+paraphrases its contents — and the "vulcanised rubber" line in the shuttle
+section is an inference from how the material behaves, not from this source.
+Confirm or correct it from the article. -->
+
 <!-- TODO: Leonard may have original Hammond Model 1 advertising — to confirm.
-There is also a Scientific American reference to chase down; the note is
-currently just "scientific american" and needs pinning to an issue and date
-before it goes on the page.
 Save scans as .../advert-01.jpg etc, then uncomment:
 {% include figure image_path="/assets/img/2026/typewriters/hammond-model-1-15058/advert-01.jpg" alt="Period advertisement for the Hammond typewriter" caption="" %}
 -->
