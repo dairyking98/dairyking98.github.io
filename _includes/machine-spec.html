@@ -28,13 +28,18 @@
 {%- if m -%}
 <table class="machine-spec">
   <tbody>
-    {%- assign rows = "manufacturer:Manufacturer,model:Model,year:Year,serial_number:Serial No.,body_size:Size,drive:Drive,color:Color,typeface:Typeface,pitch:Pitch,layout:Layout" | split: "," -%}
+    {%- assign rows = "manufacturer:Manufacturer,model:Model,year:Year,serial_number:Serial No.,body_size:Size,drive:Drive,color:Color,typeface:Typeface,pitch:Pitch,layout:Layout,acquired:Acquired" | split: "," -%}
     {%- for def in rows -%}
       {%- assign parts = def | split: ":" -%}
       {%- assign key = parts[0] -%}
       {%- assign val = m[key] -%}
       {%- if val and val != "" -%}
-      <tr><th scope="row">{{ parts[1] }}</th><td>{{ val }}</td></tr>
+      <tr><th scope="row">{{ parts[1] }}</th><td>
+        {%- comment %} `acquired` is stored ISO in the ledger; render it
+        readably. Only the date is public — who it came from is not.
+        {% endcomment -%}
+        {%- if key == "acquired" -%}{{ val | date: "%-d %B %Y" }}{%- else -%}{{ val }}{%- endif -%}
+      </td></tr>
       {%- endif -%}
     {%- endfor -%}
   </tbody>

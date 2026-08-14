@@ -9,6 +9,7 @@
   serial_number: '15058'
   year: '1890'
   layout: QWERTY
+  acquired: '2024-09-15'
 - manufacturer: Sun
   model: No. 2 Standard
   body_size: Portable
@@ -19,6 +20,7 @@
   pitch: '10'
   typeface: Standard
   layout: 3 Bank
+  acquired: '2022-07-01'
 - manufacturer: Postal
   model: No. 3
   body_size: Standard
