@@ -1,0 +1,135 @@
+# Display-only inventory for the "Other Machines" collection page —
+# everything mechanical that isn't a typewriter or a pocket watch.
+# Purchase/sale price, valuation, source, and repair notes are intentionally
+# excluded from this public data file (same policy as _data/typewriters.yml).
+#
+# Structure: one top-level key per category, each holding a list. The page
+# renders one section + table per category, and each section's columns are
+# defined on the page (_pages/machine-collection.md), not here.
+#
+# TO ADD A CATEGORY: add a key here, then add a matching section on the page.
+# TO PROMOTE A CATEGORY TO ITS OWN PAGE (once it outgrows a section): move
+# the list into its own _data/<name>.yml, copy the section into a new page
+# under /collections/<name>/, and add a card to _pages/collections.md. The
+# table markup itself is shared via _includes/collection-table.html, so
+# nothing has to be rewritten.
+#
+# Common fields across every category — all optional except `manufacturer`;
+# anything omitted renders as an em dash:
+#   manufacturer, model, year, serial_number, condition, notes, image
+#   image → /assets/img/2026/machine-collection/<slug>.jpg
+#
+# Keys must never be named `size`, `first`, or `last` — Liquid treats those
+# as command methods. See the note in _includes/collection-table.html.
+#
+# Every entry below is a PLACEHOLDER showing the shape of the data. Delete
+# them as real entries go in — none of these are machines actually owned.
+
+# ---------------------------------------------------------------------------
+# Adding machines & calculators
+# Extra fields: mechanism (Comptometer / pinwheel / stepped drum / printing
+# adder / electronic), capacity (digit capacity, e.g. "8 columns"), keyboard
+# (Full-keyboard / 10-key)
+# ---------------------------------------------------------------------------
+adding_machines:
+  - manufacturer: PLACEHOLDER — replace me
+    model: Comptometer Model J
+    year: "1926"
+    mechanism: Comptometer
+    keyboard: Full-keyboard
+    capacity: 8 columns
+    serial_number: "000000"
+    condition: Working
+
+  - manufacturer: PLACEHOLDER — replace me
+    model: Curta Type I
+    year: "1954"
+    mechanism: Stepped drum
+    keyboard: Setting slides
+    capacity: 8 columns
+    serial_number: "00000"
+    condition: Needs service
+
+# ---------------------------------------------------------------------------
+# Sewing machines
+# Extra fields: drive (Treadle / Hand-crank / Electric), stitch (Straight /
+# Zigzag), bed (Flatbed / Cylinder), cabinet (Treadle cabinet / Bentwood case
+# / Head only)
+# ---------------------------------------------------------------------------
+sewing_machines:
+  - manufacturer: PLACEHOLDER — replace me
+    model: 66 Redeye
+    year: "1917"
+    drive: Treadle
+    stitch: Straight
+    bed: Flatbed
+    cabinet: Treadle cabinet
+    serial_number: "G0000000"
+    condition: Working
+
+  - manufacturer: PLACEHOLDER — replace me
+    model: Featherweight 221
+    year: "1951"
+    drive: Electric
+    stitch: Straight
+    bed: Flatbed
+    cabinet: Bentwood case
+    serial_number: "AL000000"
+    condition: Working
+
+# ---------------------------------------------------------------------------
+# Electric fans
+# Extra fields: blades (blade count), speeds, cage_diameter, finish (Brass /
+# Japanned steel / Painted), oscillating ("Yes" when it oscillates — leave off
+# otherwise rather than writing "No")
+# ---------------------------------------------------------------------------
+fans:
+  - manufacturer: PLACEHOLDER — replace me
+    model: Type AOU
+    year: "1919"
+    blades: "4"
+    speeds: "3"
+    cage_diameter: 12 in
+    finish: Brass
+    oscillating: "Yes"
+    serial_number: "000000"
+    condition: Working
+
+  - manufacturer: PLACEHOLDER — replace me
+    model: Whirlwind
+    year: "1935"
+    blades: "4"
+    speeds: "1"
+    cage_diameter: 10 in
+    finish: Japanned steel
+    serial_number: "000000"
+    condition: Needs rewire
+
+# ---------------------------------------------------------------------------
+# Cameras
+# Extra fields: format (35mm / 120 / 4x5 / 8mm), body_type (SLR / TLR /
+# Folding / Rangefinder / Box), lens, shutter, mount
+#
+# Cameras are the most likely category to outgrow this page — if it does, see
+# the "TO PROMOTE A CATEGORY" note at the top.
+# ---------------------------------------------------------------------------
+cameras:
+  - manufacturer: PLACEHOLDER — replace me
+    model: Rolleiflex 3.5F
+    year: "1960"
+    format: "120"
+    body_type: TLR
+    lens: 75mm f/3.5 Planar
+    shutter: Synchro-Compur
+    serial_number: "0000000"
+    condition: Working
+
+  - manufacturer: PLACEHOLDER — replace me
+    model: Speed Graphic
+    year: "1947"
+    format: 4x5
+    body_type: Press
+    lens: 127mm f/4.7 Ektar
+    shutter: Focal plane + Supermatic
+    serial_number: "000000"
+    condition: Working

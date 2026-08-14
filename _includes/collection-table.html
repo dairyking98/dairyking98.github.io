@@ -1,0 +1,86 @@
+{% comment %}
+  Shared inventory-table renderer for the /collections/ pages.
+
+  Parameters
+  ----------
+  items    (required) An array of hashes — e.g. site.data.typewriters, or
+           site.data.machines.sewing_machines.
+  columns  (required) Comma-separated "key:Label" pairs, in display order.
+           The key is looked up on each item; the label is the <th> text.
+           A bare "key" with no colon uses the key itself as the label.
+  alt_keys (optional) Comma-separated keys joined with a space to build the
+           alt text for the thumbnail image. Omit for alt="".
+  empty    (optional) Placeholder for a missing value. Defaults to an em dash.
+
+  Optional per-row linking to a detail page. All four must be given together;
+  a row links only when a matching document exists, so machines without a
+  written-up page stay plain text and nothing 404s:
+  link_docs      A document collection, e.g. site.typewriters
+  link_data_key  Key on the data item to match on, e.g. "serial_number"
+  link_doc_key   Front-matter key on the document to match, e.g. "serial"
+  link_column    Which column becomes the link, e.g. "model"
+
+  A leading thumbnail column is added automatically if — and only if — at
+  least one item has an `image` field, so a collection with no photos yet
+  degrades to a plain table rather than a column of empty cells.
+
+  NOTE ON KEY NAMES: never name a data key `size`, `first`, or `last`.
+  Liquid treats those three as command methods, so when an item happens to
+  *omit* that key, `item["size"]` silently returns the number of keys in the
+  hash instead of nil — rendering e.g. "8" where a dash belongs. This is why
+  typewriters use `body_size` and pocket watches use `watch_size`.
+{% endcomment %}
+{%- assign col_defs = include.columns | split: "," -%}
+{%- assign placeholder = include.empty | default: "—" -%}
+{%- assign has_images = false -%}
+{%- for item in include.items -%}
+  {%- if item.image -%}{%- assign has_images = true -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+<table class="collection-table">
+  <thead>
+    <tr>
+      {%- if has_images %}<th scope="col"><span class="sr-only">Photo</span></th>{% endif -%}
+      {%- for def in col_defs -%}
+        {%- assign parts = def | split: ":" -%}
+        {%- assign label = parts[1] | default: parts[0] -%}
+        <th scope="col">{{ label | strip }}</th>
+      {%- endfor -%}
+    </tr>
+  </thead>
+  <tbody>
+    {%- for item in include.items -%}
+    {%- assign doc = nil -%}
+    {%- if include.link_docs and include.link_data_key and include.link_doc_key and include.link_column -%}
+      {%- assign match_val = item[include.link_data_key] -%}
+      {%- if match_val and match_val != "" -%}
+        {%- assign doc = include.link_docs | where: include.link_doc_key, match_val | first -%}
+      {%- endif -%}
+    {%- endif -%}
+    <tr>
+      {%- if has_images -%}
+      <td>
+        {%- if item.image -%}
+          {%- assign alt = "" -%}
+          {%- if include.alt_keys -%}
+            {%- assign alt_defs = include.alt_keys | split: "," -%}
+            {%- for ak in alt_defs -%}
+              {%- assign akey = ak | strip -%}
+              {%- assign apart = item[akey] -%}
+              {%- if apart -%}{%- assign alt = alt | append: apart | append: " " -%}{%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          <img src="{{ item.image | relative_url }}" alt="{{ alt | strip }}" width="60" loading="lazy">
+        {%- endif -%}
+      </td>
+      {%- endif -%}
+      {%- for def in col_defs -%}
+        {%- assign key = def | split: ":" | first | strip -%}
+        {%- assign value = item[key] -%}
+        {%- assign is_link_col = false -%}
+        {%- if doc and key == include.link_column -%}{%- assign is_link_col = true -%}{%- endif -%}
+        <td>{% if value and value != "" %}{% if is_link_col %}<a href="{{ doc.url | relative_url }}">{{ value }}</a>{% else %}{{ value }}{% endif %}{% else %}{{ placeholder }}{% endif %}</td>
+      {%- endfor -%}
+    </tr>
+    {%- endfor -%}
+  </tbody>
+</table>

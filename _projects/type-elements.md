@@ -37,7 +37,7 @@ Save as assets/img/2026/type-elements/blickensderfer-printed.jpg, then uncomment
 
 {% assign blickensderfers = site.data.typewriters | where: "manufacturer", "Blickensderfer" %}
 {% if blickensderfers.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in blickensderfers %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -66,7 +66,7 @@ Save as assets/img/2026/type-elements/ibm-selectric-printed.jpg, then uncomment:
 
 {% assign ibm_selectrics = site.data.typewriters | where_exp: "tw", "tw.model contains 'Selectric'" %}
 {% if ibm_selectrics.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in ibm_selectrics %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -88,7 +88,7 @@ Save as assets/img/2026/type-elements/bennett-printed.jpg, then uncomment:
 
 {% assign bennetts = site.data.typewriters | where: "manufacturer", "Bennett" %}
 {% if bennetts.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in bennetts %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -131,7 +131,7 @@ Hammond also gets a generated legend (`generate_legend.py`), optionally installa
 
 {% assign hammonds = site.data.typewriters | where: "manufacturer", "Hammond" %}
 {% if hammonds.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in hammonds %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -162,7 +162,7 @@ Since the index cylinder alone carries no visible character map once it's mounte
 
 {% assign mignons = site.data.typewriters | where: "manufacturer", "Mignon" %}
 {% if mignons.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in mignons %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -184,7 +184,7 @@ Save as assets/img/2026/type-elements/postal-printed.jpg, then uncomment:
 
 {% assign postals = site.data.typewriters | where: "manufacturer", "Postal" %}
 {% if postals.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in postals %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
@@ -220,7 +220,7 @@ Save as assets/img/2026/type-elements/oliver-slug-printed.jpg, then uncomment:
 
 {% assign olivers = site.data.typewriters | where: "manufacturer", "Oliver" %}
 {% if olivers.size > 0 %}
-Related typewriters in my [collection]({{ '/typewriter-collection/' | relative_url }}):
+Related typewriters in my [collection]({{ '/collections/typewriters/' | relative_url }}):
 {% for tw in olivers %}
 - {{ tw.year }} {{ tw.manufacturer }} {{ tw.model }}{% if tw.serial_number %} (Serial: {{ tw.serial_number }}){% endif %}
 {% endfor %}
