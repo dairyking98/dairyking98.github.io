@@ -185,6 +185,8 @@
   pitch: '10'
   typeface: Royal Vogue
   layout: QWERTY
+  status: Cleaned, serviced and detailed, fully functional
+  acquired: '2022-03-14'
 - manufacturer: Remington
   model: '17'
   body_size: Standard
