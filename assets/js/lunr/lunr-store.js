@@ -89,6 +89,12 @@ var store = [{
         "url": "/collections/typewriters/blickensderfer-no-5-133130/",
         "teaser": null
       },{
+        "title": "Hammond Model 1",
+        "excerpt":"The oldest machine in the collection, and the one that has done the most work for the type element project. It arrived complete in the ways that matter: original split shuttle, wood base, and wood top, all intact. ManufacturerHammondModelModel 1Year1890Serial No.15058SizeStandardDriveManualLayoutQWERTYAcquired15 September 2024 The uncommon part: a QWERTY keyboard The...","categories": [],
+        "tags": [],
+        "url": "/collections/typewriters/hammond-model-1-15058/",
+        "teaser": null
+      },{
         "title": "Royal Quiet De Luxe — Vogue",
         "excerpt":"My favourite machine in the collection, and the one I’d grab first. A 1939 Royal Quiet De Luxe, unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY Why this one In my own ranking of the collection this sits at number...","categories": [],
         "tags": [],
