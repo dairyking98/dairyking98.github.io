@@ -15,8 +15,8 @@
 <meta charset="utf-8">
 
 
-<!-- begin _includes/seo.html --><title>Wavelength / Color Chart - Leonard Chau</title>
-<meta name="description" content="Interactive visible-light wavelength to color chart, built from real CIE 1931 color-matching data">
+<!-- begin _includes/seo.html --><title>Pocket Watch Collection - Leonard Chau</title>
+<meta name="description" content="A running list of the antique pocket watches in my collection, catalogued by movement grade, size, and jewel count.">
 
 
   <meta name="author" content="Leonard Chau">
@@ -26,14 +26,11 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Leonard Chau">
-<meta property="og:title" content="Wavelength / Color Chart">
-<meta property="og:url" content="https://leonardchau.com/wavelength-color-chart/">
+<meta property="og:title" content="Pocket Watch Collection">
+<meta property="og:url" content="https://leonardchau.com/collections/pocket-watches/">
 
 
-  <meta property="og:description" content="Interactive visible-light wavelength to color chart, built from real CIE 1931 color-matching data">
-
-
-
+  <meta property="og:description" content="A running list of the antique pocket watches in my collection, catalogued by movement grade, size, and jewel count.">
 
 
 
@@ -45,7 +42,10 @@
 
 
 
-<link rel="canonical" href="https://leonardchau.com/wavelength-color-chart/">
+
+
+
+<link rel="canonical" href="https://leonardchau.com/collections/pocket-watches/">
 
 
 
@@ -177,7 +177,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Wavelength / Color Chart">
+    <meta itemprop="headline" content="Pocket Watch Collection">
     
     
     
@@ -186,7 +186,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://leonardchau.com/wavelength-color-chart/" itemprop="url">Wavelength / Color Chart
+            <a href="https://leonardchau.com/collections/pocket-watches/" itemprop="url">Pocket Watch Collection
 </a>
           </h1>
           
@@ -198,45 +198,57 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <div id="wavelength-chart-wrap">
-  <div style="text-align: center; margin-bottom: 1.5rem;">
-    <div id="wavelength-swatch"></div>
-    <div id="wavelength-label" style="font-size: 2rem; font-weight: bold; margin-top: 0.75rem;">555 nm</div>
-    <div id="wavelength-region" style="opacity: 0.7;">Green</div>
-    <div id="wavelength-codes" style="margin-top: 0.5rem; font-family: monospace; font-size: 1.1rem; opacity: 0.85;">
-      <span id="wavelength-hex">#3dc300</span>
-      &nbsp;&middot;&nbsp;
-      <span id="wavelength-rgb">RGB(61, 195, 0)</span>
-    </div>
-  </div>
+        <p>American pocket watches, catalogued the way collectors index them — by the <strong>movement</strong>, not the case. The two were sold separately for most of this era: a jeweller would fit a customer’s chosen movement into a chosen case, so the movement serial is what dates a watch and identifies its grade. Case serials, where a case is original and marked, are logged separately.</p>
 
-  <div id="wavelength-slider-wrap">
-    <div id="wavelength-track-stack">
-      <div id="wavelength-gradient-bar"></div>
-      <input type="range" id="wavelength-slider" min="380" max="750" step="1" value="555" aria-label="Wavelength in nanometers" />
-    </div>
-    <div id="wavelength-ticks"></div>
-  </div>
-</div>
+<p>Missing years, serial numbers, and photos mean I haven’t logged that detail yet — this list reflects what I’ve catalogued so far, not the full extent of what I own.</p>
 
-<script src="/assets/js/wavelength-colors.js"></script>
+<p>Part of the wider <a href="/collections/">collections</a>.</p>
 
-<script src="/assets/js/wavelength-color-chart.js"></script>
+<!-- FEATURED WATCHES: restore this heading once the first photo below is uncommented — an empty heading with no photos under it renders as a blank gap.
+## Featured Watches
+-->
 
-<div class="notice--info">
-  <strong>Data Sources:</strong> Colors are computed from the real <strong>CIE 1931 2&deg; standard observer</strong> color-matching
-  functions at native 1&nbsp;nm resolution (no interpolation), using the Stockman &amp; Sharpe compilation hosted by the Color
-  and Vision Research Laboratory (CVRL, UCL) &mdash; the standard reference dataset for this data, not an analytic approximation.
-  Each wavelength's XYZ value is converted to linear sRGB via the standard D65 matrix (IEC 61966-2-1), out-of-gamut components are
-  clipped to zero, and the whole spectrum is scaled by a single global factor (not per-wavelength) so relative brightness between
-  wavelengths is preserved before sRGB gamma encoding. That's why violet and deep red genuinely look dim near the ends of the bar
-  rather than fully saturated &mdash; that dimming is physically correct human luminous sensitivity, not a rendering shortfall, and
-  it's the main thing most "rainbow gradient" wavelength charts get wrong by normalizing each color independently.
-  <br /><br />
-  380&ndash;750&nbsp;nm is used as the visible range; unlike the color math itself, the exact cutoffs and the named color-region
-  boundaries (violet/blue/cyan/green/yellow/orange/red) are common convention, not a fixed standard &mdash; visual sensitivity fades
-  gradually rather than stopping at a sharp edge, and different sources place these boundaries tens of nm apart.
-</div>
+<!-- PHOTO NEEDED: the oldest watch in the collection, dial side.
+Save as assets/img/2026/pocket-watch-collection/oldest-dial.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/pocket-watch-collection/oldest-dial.jpg"
+       alt="Oldest pocket watch in the collection"><figcaption>
+      The oldest watch in the collection.
+
+    </figcaption></figure>
+
+-->
+
+<!-- PHOTO NEEDED: a movement shot with the case back open — the damascened plates and jewel settings are the whole appeal, and no dial photo conveys them.
+Save as assets/img/2026/pocket-watch-collection/movement-detail.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/pocket-watch-collection/movement-detail.jpg"
+       alt="Damascened pocket watch movement with jewel settings visible"><figcaption>
+      Movement detail — damascening and jewel settings.
+
+    </figcaption></figure>
+
+-->
+
+<!-- PHOTO NEEDED: a railroad-grade watch showing its Montgomery dial (bold outer minute numerals) — the visual signature of the railroad standard.
+Save as assets/img/2026/pocket-watch-collection/montgomery-dial.jpg, then uncomment:
+<figure class=""><img src="/assets/img/2026/pocket-watch-collection/montgomery-dial.jpg"
+       alt="Railroad-grade pocket watch with a Montgomery dial"><figcaption>
+      Montgomery dial on a railroad-grade movement.
+
+    </figcaption></figure>
+
+-->
+
+<h2 id="full-inventory">Full Inventory</h2>
+
+<p>Size is given in Lancashire watch sizes (18s is the large classic railroad case; 12s is a dress watch). <strong>Lever set</strong> means the crystal and bezel must come off and a lever pulled before the hands will move — a railroad requirement, since a pendant-set watch can be knocked out of time in a pocket.</p>
+
+<table class="collection-table">
+  <thead>
+    <tr><th scope="col">Year</th><th scope="col">Manufacturer</th><th scope="col">Grade</th><th scope="col">Size</th><th scope="col">Jewels</th><th scope="col">Movement No.</th><th scope="col">Case No.</th><th scope="col">Setting</th><th scope="col">Adjustments</th><th scope="col">Case</th><th scope="col">Dial</th><th scope="col">RR Grade</th><th scope="col">Condition</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
 
         
       </section>

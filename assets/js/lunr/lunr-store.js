@@ -82,4 +82,28 @@ var store = [{
         "tags": [],
         "url": "/projects/type-elements/",
         "teaser": "https://type-elements.leonardchau.com/assets/thumbnails/hammond-split-shuttle.png"
+      },{
+        "title": "Blickensderfer No. 5",
+        "excerpt":"The machine that started the type element project. A Blickensderfer No. 5 from 1909, on Blickensderfer’s own DHIATENSOR keyboard rather than QWERTY. ManufacturerBlickensderferModelno. 5Year1909Serial No.133130SizePortableDriveManualColorBlackPitch10LayoutDHIATENSOR Why this one Second in my own ranking of the collection, for the printed elements, the uniqueness, and the age. The Blickensderfer is a genuinely...","categories": [],
+        "tags": [],
+        "url": "/collections/typewriters/blickensderfer-no-5/",
+        "teaser": null
+      },{
+        "title": "Hammond Model 1",
+        "excerpt":"     ManufacturerHammondModelModel 1Year1890Serial No.15058SizeStandardDriveManualLayoutQWERTY   Why this one     Type sample     Restoration     Gallery    ","categories": [],
+        "tags": [],
+        "url": "/collections/typewriters/hammond-model-1/",
+        "teaser": null
+      },{
+        "title": "Royal Quiet De Luxe — Vogue",
+        "excerpt":"My favourite machine in the collection, and the one I’d grab first. A 1939 Royal Quiet De Luxe, unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY Why this one In my own ranking of the collection this sits at number...","categories": [],
+        "tags": [],
+        "url": "/collections/typewriters/royal-quiet-de-luxe-vogue/",
+        "teaser": null
+      },{
+        "title": "Sun No. 2 Standard",
+        "excerpt":"One of the oldest machines in the collection, and the one that has taken the most of my own machining work. ManufacturerSunModelNo. 2 StandardYear1901-07Serial No.8278SizePortableDriveManualColorBlackTypefaceStandardPitch10Layout3 Bank Why this one Sixth in my own ranking, for its age and its uniqueness. The Sun Typewriter Company built small, cheap machines aimed at...","categories": [],
+        "tags": [],
+        "url": "/collections/typewriters/sun-no-2/",
+        "teaser": null
       }]
