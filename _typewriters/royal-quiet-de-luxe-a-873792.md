@@ -93,6 +93,12 @@ very likely have missed it otherwise.
 A widow was selling her late husband's machines, found in his office. My
 impression is that they had been on display rather than in use.
 
+She asked less than I paid. I knew what the machine was and she didn't, and I
+had only hundreds on me, so I told her to keep the difference. Even then it was
+far below what a Vogue-equipped machine is worth — which is the part that sits
+oddly. Knowing more than the person selling to you is an advantage you can
+choose not to take all of.
+
 ## Condition
 
 **Cleaned, serviced and detailed by me, and fully functional.** It came with its
