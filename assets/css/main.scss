@@ -48,54 +48,97 @@ $max-width: 1600px;
   }
 }
 
-// /typewriter-collection/ — Full Inventory table.
-// Fixed column widths so one long value (a typeface name, a color note)
-// can't balloon its whole column — nth-last-child so these hold steady
-// whether or not the leading image column (added at the front) exists.
-// The theme sets `table { display: block }` (its own horizontal-scroll
-// trick), which makes `table-layout` unreliable — override display back
-// to `table` here and let this div's own overflow-x:auto handle scroll.
-#inventory-table table {
+// /collections/ — the inventory tables (see _includes/collection-table.html).
+//
+// These rules used to be keyed to #inventory-table with :nth-last-child()
+// column selectors, which broke silently the moment the markup moved to a
+// shared include and gained/lost a column. Every cell now carries
+// data-col="<key>", so a column is addressed by name and adding one to the
+// Liquid `columns` string can't quietly shift the widths of its neighbours.
+//
+// The theme sets `table { display: block }` as its own horizontal-scroll
+// trick, which makes `table-layout: fixed` unreliable — override display back
+// to `table` and let .collection-table-wrap own the scrolling instead.
+.collection-table-wrap {
+  overflow-x: auto;
+  margin-inline: auto;
+  max-width: 1100px;
+}
+.collection-table {
   display: table;
   table-layout: fixed;
+  width: 100%;
+  margin-inline: auto;
 }
-#inventory-table th,
-#inventory-table td {
+.collection-table th,
+.collection-table td {
   vertical-align: top;
-  white-space: nowrap; // default: short/controlled-vocabulary values never break mid-word
+  white-space: nowrap; // short controlled-vocabulary values never break mid-word
 }
-// free-text columns that can genuinely run long: wrap at word boundaries only
-#inventory-table th:nth-last-child(9), #inventory-table td:nth-last-child(9), // Manufacturer
-#inventory-table th:nth-last-child(8), #inventory-table td:nth-last-child(8), // Model
-#inventory-table th:nth-last-child(5), #inventory-table td:nth-last-child(5), // Color
-#inventory-table th:nth-last-child(3), #inventory-table td:nth-last-child(3), // Typeface
-#inventory-table th:nth-last-child(2), #inventory-table td:nth-last-child(2)  // Layout
-{
+// Free-text columns that can genuinely run long: wrap at word boundaries only.
+.collection-table [data-col="manufacturer"],
+.collection-table [data-col="model"],
+.collection-table [data-col="body_size"], // "Ultra Portable" overflows nowrap
+.collection-table [data-col="color"],
+.collection-table [data-col="typeface"],
+.collection-table [data-col="layout"],
+.collection-table [data-col="grade"],
+.collection-table [data-col="lens"],
+.collection-table [data-col="dial"],
+.collection-table [data-col="case_material"],
+.collection-table [data-col="adjustments"] {
   white-space: normal;
   overflow-wrap: break-word;
 }
-#inventory-table th:nth-last-child(10),
-#inventory-table td:nth-last-child(10) { width: 6%; }  // Year
-#inventory-table th:nth-last-child(9),
-#inventory-table td:nth-last-child(9) { width: 11%; }  // Manufacturer
-#inventory-table th:nth-last-child(8),
-#inventory-table td:nth-last-child(8) { width: 13%; }  // Model
-#inventory-table th:nth-last-child(7),
-#inventory-table td:nth-last-child(7) { width: 8%; }   // Size
-#inventory-table th:nth-last-child(6),
-#inventory-table td:nth-last-child(6) { width: 7%; }   // Drive
-#inventory-table th:nth-last-child(5),
-#inventory-table td:nth-last-child(5) { width: 9%; }   // Color
-#inventory-table th:nth-last-child(4),
-#inventory-table td:nth-last-child(4) { width: 11%; }  // Serial No.
-#inventory-table th:nth-last-child(3),
-#inventory-table td:nth-last-child(3) { width: 17%; }  // Typeface
-#inventory-table th:nth-last-child(2),
-#inventory-table td:nth-last-child(2) { width: 12%; }  // Layout
-#inventory-table th:nth-last-child(1),
-#inventory-table td:nth-last-child(1) { width: 6%; }   // Pitch
-#inventory-table th:nth-last-child(11),
-#inventory-table td:nth-last-child(11) { width: 6%; }  // image, once photos exist
+// Widths for the typewriter inventory, its widest table. Columns absent from
+// a given table simply don't match, so the watch and machine tables fall back
+// to auto layout without needing their own block.
+.collection-table [data-col="image"]         { width: 6%; }
+.collection-table [data-col="year"]          { width: 7%; }
+.collection-table [data-col="manufacturer"]  { width: 12%; }
+.collection-table [data-col="model"]         { width: 14%; }
+.collection-table [data-col="body_size"]     { width: 9%; }
+.collection-table [data-col="drive"]         { width: 7%; }
+.collection-table [data-col="color"]         { width: 9%; }
+.collection-table [data-col="serial_number"] { width: 11%; }
+.collection-table [data-col="typeface"]      { width: 15%; }
+.collection-table [data-col="pitch"]         { width: 6%; }
+
+// Sortable headers. The <th> keeps the theme's background; the button is a
+// transparent full-width target so the whole header cell is clickable, not
+// just the word. Cursor and arrow only appear once JS has attached, so a
+// no-JS reader isn't invited to click something inert.
+.collection-table__sort {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  width: 100%;
+  font: inherit;
+  font-weight: bold;
+}
+.collection-table.is-sort-ready .collection-table__sort {
+  cursor: pointer;
+}
+.collection-table__sort:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+// Arrow: neutral double-headed until sorted, then pointing. Drawn in CSS so
+// there's no icon-font dependency.
+.collection-table.is-sort-ready .collection-table__arrow::after {
+  content: "\2195"; // up-down arrow
+  opacity: 0.35;
+  font-weight: normal;
+}
+.collection-table th[aria-sort="ascending"] .collection-table__arrow::after {
+  content: "\2191";
+  opacity: 1;
+}
+.collection-table th[aria-sort="descending"] .collection-table__arrow::after {
+  content: "\2193";
+  opacity: 1;
+}
 
 // Shared by #chart-container on /machinist-conversion-chart/ and
 // /thread-size-chart/. Sticky headers stuck relative to the *page* scroll

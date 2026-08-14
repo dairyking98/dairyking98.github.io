@@ -11,6 +11,7 @@
   alt_keys (optional) Comma-separated keys joined with a space to build the
            alt text for the thumbnail image. Omit for alt="".
   empty    (optional) Placeholder for a missing value. Defaults to an em dash.
+  sortable (optional) "false" to render plain headers. Sorting is on by default.
 
   Optional per-row linking to a detail page. All four must be given together;
   a row links only when a matching document exists, so machines without a
@@ -19,6 +20,11 @@
   link_data_key  Key on the data item to match on, e.g. "serial_number"
   link_doc_key   Front-matter key on the document to match, e.g. "serial"
   link_column    Which column becomes the link, e.g. "model"
+
+  Every cell carries data-col="<key>", which is how main.scss targets columns
+  for width and wrapping. The previous markup was targeted with
+  :nth-last-child(), which silently broke the moment a column was added or the
+  optional image column appeared.
 
   A leading thumbnail column is added automatically if — and only if — at
   least one item has an `image` field, so a collection with no photos yet
@@ -36,14 +42,24 @@
 {%- for item in include.items -%}
   {%- if item.image -%}{%- assign has_images = true -%}{%- break -%}{%- endif -%}
 {%- endfor -%}
-<table class="collection-table">
+{%- assign sortable = true -%}
+{%- if include.sortable == "false" -%}{%- assign sortable = false -%}{%- endif -%}
+<div class="collection-table-wrap">
+<table class="collection-table{% if sortable %} is-sortable{% endif %}">
   <thead>
     <tr>
-      {%- if has_images %}<th scope="col"><span class="sr-only">Photo</span></th>{% endif -%}
+      {%- if has_images %}<th scope="col" data-col="image"><span class="sr-only">Photo</span></th>{% endif -%}
       {%- for def in col_defs -%}
         {%- assign parts = def | split: ":" -%}
+        {%- assign key = parts[0] | strip -%}
         {%- assign label = parts[1] | default: parts[0] -%}
-        <th scope="col">{{ label | strip }}</th>
+        <th scope="col" data-col="{{ key }}"{% if sortable %} aria-sort="none"{% endif %}>
+          {%- if sortable -%}
+            <button type="button" class="collection-table__sort">{{ label | strip }}<span class="collection-table__arrow" aria-hidden="true"></span></button>
+          {%- else -%}
+            {{ label | strip }}
+          {%- endif -%}
+        </th>
       {%- endfor -%}
     </tr>
   </thead>
@@ -58,7 +74,7 @@
     {%- endif -%}
     <tr>
       {%- if has_images -%}
-      <td>
+      <td data-col="image">
         {%- if item.image -%}
           {%- assign alt = "" -%}
           {%- if include.alt_keys -%}
@@ -78,9 +94,17 @@
         {%- assign value = item[key] -%}
         {%- assign is_link_col = false -%}
         {%- if doc and key == include.link_column -%}{%- assign is_link_col = true -%}{%- endif -%}
-        <td>{% if value and value != "" %}{% if is_link_col %}<a href="{{ doc.url | relative_url }}">{{ value }}</a>{% else %}{{ value }}{% endif %}{% else %}{{ placeholder }}{% endif %}</td>
+        <td data-col="{{ key }}">{% if value and value != "" %}{% if is_link_col %}<a href="{{ doc.url | relative_url }}">{{ value }}</a>{% else %}{{ value }}{% endif %}{% else %}{{ placeholder }}{% endif %}</td>
       {%- endfor -%}
     </tr>
     {%- endfor -%}
   </tbody>
 </table>
+</div>
+{%- if sortable and collection_table_js == nil -%}
+  {%- comment %} Liquid variables assigned in an include share the page's
+  scope, so this emits the script once per page however many tables there
+  are. {% endcomment -%}
+  {%- assign collection_table_js = true -%}
+  <script src="{{ '/assets/js/collection-table.js' | relative_url }}" defer></script>
+{%- endif -%}
