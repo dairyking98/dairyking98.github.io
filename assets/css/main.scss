@@ -395,3 +395,12 @@ $wavelength-bar-height: clamp(40px, 7vw, 60px);
   font-size: 0.8rem;
   opacity: 0.6;
 }
+
+// A YouTube Short is vertical, but the theme's video include forces a 16:9
+// responsive box — left alone, a portrait clip renders as a thin strip between
+// two black bars the full content width. Capping the wrapper's width keeps the
+// pillarboxing to something proportionate instead.
+.video--portrait {
+  max-width: 420px;
+  margin-inline: auto;
+}

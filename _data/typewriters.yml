@@ -9,6 +9,7 @@
   serial_number: '15058'
   year: '1890'
   layout: QWERTY
+  status: Original, uncleaned, fully functional
   acquired: '2024-09-15'
 - manufacturer: Sun
   model: No. 2 Standard
@@ -20,6 +21,7 @@
   pitch: '10'
   typeface: Standard
   layout: 3 Bank
+  status: Repaired, fully functional
   acquired: '2022-07-01'
 - manufacturer: Postal
   model: No. 3

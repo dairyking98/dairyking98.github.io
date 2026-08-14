@@ -132,17 +132,19 @@ Save as .../cover-on.jpg and .../cover-off.jpg, then uncomment:
 
 New feed rollers and feet, **3D printed in TPU**. Original rubber on a machine
 this age is invariably hardened past use, and TPU is a workable substitute at the
-sizes involved — see [3D-Printed Type Elements]({{ '/projects/type-elements/' | relative_url }})
-for the rest of the printed-parts work.
+sizes involved.
+
+These aren't type elements — they're ordinary consumable rubber parts that happen
+to be easier to print than to source. There's a growing pile of printed typewriter
+parts like these that has nothing to do with type, and may get written up
+separately one day.
 
 ## In operation
 
-<!-- VIDEO: you have footage of this machine running on YouTube. Drop the video
-ID in and uncomment — this is worth having on the page, since a ribbonless
-machine with a bouncing ink roller is much easier to understand moving than
-described.
-{% include video id="VIDEO_ID_HERE" provider="youtube" %}
--->
+A ribbonless machine with a bouncing ink roller is much easier to understand
+moving than described.
+
+{% include video id="Y26Trx7jtZM" provider="youtube" %}
 
 ## Original advertising
 
@@ -151,10 +153,3 @@ giving the $40 price.
 Save as .../advert-01.jpg, then uncomment:
 {% include figure image_path="/assets/img/2026/typewriters/sun-no-2-standard-8278/advert-01.jpg" alt="Period advertisement for the Sun typewriter" caption="Period advertising for the Sun — $40 in 1901." %}
 -->
-
-## Why this one
-
-Sixth in my own ranking of the collection, for its age and its uniqueness. It's
-the oldest machine here that I've had substantially rebuilt rather than merely
-cleaned, and the design is genuinely odd rather than just early: no ribbon, no
-universal bar, sheet metal where everything else of the period is castings.

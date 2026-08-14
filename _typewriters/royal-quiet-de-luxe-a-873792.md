@@ -4,18 +4,16 @@ serial: "A-873792"
 excerpt: "A 1939 Quiet De Luxe carrying Royal's Vogue typeface — the machine I'd grab first."
 ---
 
-My favourite machine in the collection, and the one I'd grab first. A 1939 Royal
-Quiet De Luxe, unremarkable as a body, carrying the thing that actually matters:
-Royal's **Vogue** typeface.
+A 1939 Royal Quiet De Luxe — unremarkable as a body, carrying the thing that
+actually matters: Royal's **Vogue** typeface.
 
 {% include machine-spec.html %}
 
-## Why this one
+## The Vogue typeface
 
-In my own ranking of the collection this sits at number one, for two reasons —
-the typeface and the body style. The Quiet De Luxe is a good portable on its own
-merits, with a genuinely quiet escapement for its era and Royal's glass-topped
-keys, but a Vogue-equipped example is a different proposition entirely.
+The Quiet De Luxe is a good portable on its own merits — a genuinely quiet
+escapement for its era, Royal's glass-topped keys — but a Vogue-equipped example
+is a different proposition entirely.
 
 Vogue is an Art Deco face Royal offered as a factory option in the 1930s. It has
 no true lowercase — what reads as lowercase is a set of small capitals — so

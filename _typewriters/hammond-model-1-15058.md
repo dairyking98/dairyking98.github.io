@@ -1,12 +1,12 @@
 ---
 title: "Hammond Model 1"
 serial: "15058"
-excerpt: "An 1890 Hammond Model 1 — QWERTY rather than the usual Ideal keyboard, with its original split shuttle, wood base, and wood top intact."
+excerpt: "An 1890 Hammond Model 1 — QWERTY rather than the usual Ideal keyboard, with its original split shuttle, wood base, and wood cover intact."
 toc: true
 toc_label: "On this machine"
 toc_sticky: true
 
-# MAIN PHOTO — the machine with its wood top off, split shuttle visible.
+# MAIN PHOTO — the machine with its wood cover off, split shuttle visible.
 # header:
 #   image: /assets/img/2026/typewriters/hammond-model-1-15058/main.jpg
 #   teaser: /assets/img/2026/typewriters/hammond-model-1-15058/main.jpg
@@ -15,7 +15,7 @@ toc_sticky: true
 # gallery:
 #   - url: /assets/img/2026/typewriters/hammond-model-1-15058/gallery-01.jpg
 #     image_path: /assets/img/2026/typewriters/hammond-model-1-15058/gallery-01.jpg
-#     alt: "Hammond Model 1 with its wood top in place"
+#     alt: "Hammond Model 1 with its wood cover in place"
 #   - url: /assets/img/2026/typewriters/hammond-model-1-15058/gallery-02.jpg
 #     image_path: /assets/img/2026/typewriters/hammond-model-1-15058/gallery-02.jpg
 #     alt: "QWERTY keyboard of the Hammond Model 1"
@@ -24,10 +24,10 @@ toc_sticky: true
 #     alt: "Hammond Model 1 on its wood base"
 ---
 
-The oldest machine in the collection, and the one that has done the most work
-for the [type element project]({{ '/projects/type-elements/' | relative_url }}).
-It arrived complete in the ways that matter: **original split shuttle, wood base,
-and wood top**, all intact.
+The oldest machine in the collection, and one of the machines behind the
+[type element project]({{ '/projects/type-elements/' | relative_url }}). It
+arrived complete in the ways that matter: **original split shuttle, wood base,
+and wood cover**, all intact.
 
 {% include machine-spec.html %}
 
@@ -35,8 +35,8 @@ and wood top**, all intact.
 
 The obvious oddity here is the keyboard. Most Model 1s came with Hammond's own
 **Ideal** layout — a curved two-row keyboard arranged to Hammond's argument about
-letter frequency — and were sold installed in a decorative wooden cabinet. This
-one is **QWERTY**, on the wood base and top rather than a cabinet.
+letter frequency — and were sold in a decorative wooden cabinet. This one is
+**QWERTY**, on a wood base with a wood cover rather than in a cabinet.
 
 That combination is what made it worth buying. An Ideal-keyboard Model 1 in a
 cabinet is the configuration you expect to find; this isn't.
@@ -79,7 +79,7 @@ Save as .../split-shuttle.jpg and .../split-shuttle-detail.jpg, then uncomment:
 
 ## Reference machine for the printed shuttles
 
-This machine is the one I designed and iterated the
+This machine is one of those I designed and iterated the
 [3D-printed Hammond Model 1 type elements]({{ '/projects/type-elements/' | relative_url }})
 against. Having an intact original to measure, fit, and compare against is the
 difference between a part that drops in and a part that nearly does — and since
@@ -89,6 +89,51 @@ reference is worth more than a spare.
 The printed replacements are the practical answer to a part that can't be bought,
 can't easily be repaired once cracked, and was made from a material that was
 never going to last indefinitely.
+
+## Condition
+
+**Original and uncleaned, and fully functional as it stands.** It did not need
+cleaning to work — it worked when it arrived, which is not the usual way these
+turn up. All the roller rubber is original and intact.
+
+That's a deliberate position rather than a backlog. A machine that already works
+is a machine there is no good argument for stripping down, and "original,
+uncleaned" is a condition you can only lose once.
+
+## The feet
+
+The one thing that did need doing was the feet.
+
+The machine sits on its wood base in countersunk holes, and the rubber feet set
+its height in those holes — get that wrong and the machine sits too low and
+**fouls its own mechanisms**. When it arrived the original rubber was squashed
+flat, with extra padding underneath that may or may not have been original. Even
+with the padding it still sat too low and interfered.
+
+New rubber feet, cut to set it at the correct height in the countersinks, fixed
+it. That is the entire extent of what has been changed on this machine.
+
+<!-- PHOTO NEEDED: the underside showing a foot seated in its countersunk hole in
+the wood base — the detail that explains why height matters here. If you kept the
+squashed originals and the mystery padding, they belong in the same shot.
+Save as .../feet.jpg, then uncomment:
+{% include figure image_path="/assets/img/2026/typewriters/hammond-model-1-15058/feet.jpg" alt="Rubber foot seated in a countersunk hole in the wood base" caption="The feet set the machine's height in the countersunk holes; too low and it fouls its own mechanisms." %}
+-->
+
+## The shuttle in operation
+
+The shuttle's motion is the part that doesn't survive description. It has to
+rotate to the right character and be struck from behind, once per keystroke, at
+typing speed — which is also why a part this fine-sectioned fails as often as it
+does.
+
+{% include video id="8nj-XAZH-K0" provider="youtube" %}
+
+{% include video id="t1GcE-zD5nU" provider="youtube" %}
+
+<div class="video--portrait" markdown="0">
+{% include video id="O3N_HscY23k" provider="youtube" %}
+</div>
 
 ## Type specimen
 

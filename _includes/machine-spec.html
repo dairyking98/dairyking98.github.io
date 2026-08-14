@@ -28,7 +28,7 @@
 {%- if m -%}
 <table class="machine-spec">
   <tbody>
-    {%- assign rows = "manufacturer:Manufacturer,model:Model,year:Year,serial_number:Serial No.,body_size:Size,drive:Drive,color:Color,typeface:Typeface,pitch:Pitch,layout:Layout,acquired:Acquired" | split: "," -%}
+    {%- assign rows = "manufacturer:Manufacturer,model:Model,year:Year,serial_number:Serial No.,body_size:Size,drive:Drive,color:Color,typeface:Typeface,pitch:Pitch,layout:Layout,status:Status,acquired:Acquired" | split: "," -%}
     {%- for def in rows -%}
       {%- assign parts = def | split: ":" -%}
       {%- assign key = parts[0] -%}
