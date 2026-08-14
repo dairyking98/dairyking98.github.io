@@ -96,7 +96,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Royal Quiet De Luxe — Vogue",
-        "excerpt":"A 1939 Royal Quiet De Luxe — unremarkable as a body, carrying the thing that actually matters: Royal’s Vogue typeface. ManufacturerRoyalModelQuiet De LuxeYear1939Serial No.A-873792SizePortableDriveManualColorBlackTypefaceRoyal VoguePitch10LayoutQWERTY The Vogue typeface The Quiet De Luxe is a good portable on its own merits — a genuinely quiet escapement for its era, Royal’s glass-topped...","categories": [],
+        "excerpt":"A 1939 Royal Quiet De Luxe carrying Vogue — Royal’s own name for the typeface, and the reason this machine gets a page. Vogue is uncommon on any machine. On a Quiet De Luxe it is more uncommon still; where you normally find it is on a Royal Model P....","categories": [],
         "tags": [],
         "url": "/collections/typewriters/royal-quiet-de-luxe-a-873792/",
         "teaser": null
