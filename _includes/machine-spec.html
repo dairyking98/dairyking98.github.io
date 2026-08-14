@@ -1,0 +1,46 @@
+{% comment %}
+  Spec block for a single machine page (_typewriters/*.md).
+
+  Reads the machine's specs out of _data/typewriters.yml rather than
+  duplicating them in the page's front matter, so the inventory table and the
+  machine page can never disagree. The page only carries prose.
+
+  Front matter on the page must set ONE of:
+    serial: "133130"          — matched against serial_number (preferred)
+    match_model: "Model 5N"   — matched against model, for machines whose
+                                serial is unknown; combine with match_maker
+    match_maker: "Woodstock"
+
+  If nothing matches, the block renders a visible note rather than failing
+  silently — a typo'd serial should be obvious, not invisible.
+{% endcomment %}
+{%- assign m = nil -%}
+{%- if page.serial -%}
+  {%- assign m = site.data.typewriters | where: "serial_number", page.serial | first -%}
+{%- elsif page.match_model -%}
+  {%- assign candidates = site.data.typewriters | where: "model", page.match_model -%}
+  {%- if page.match_maker -%}
+    {%- assign m = candidates | where: "manufacturer", page.match_maker | first -%}
+  {%- else -%}
+    {%- assign m = candidates | first -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if m -%}
+<table class="machine-spec">
+  <tbody>
+    {%- assign rows = "manufacturer:Manufacturer,model:Model,year:Year,serial_number:Serial No.,body_size:Size,drive:Drive,color:Color,typeface:Typeface,pitch:Pitch,layout:Layout" | split: "," -%}
+    {%- for def in rows -%}
+      {%- assign parts = def | split: ":" -%}
+      {%- assign key = parts[0] -%}
+      {%- assign val = m[key] -%}
+      {%- if val and val != "" -%}
+      <tr><th scope="row">{{ parts[1] }}</th><td>{{ val }}</td></tr>
+      {%- endif -%}
+    {%- endfor -%}
+  </tbody>
+</table>
+{%- else -%}
+<p class="notice--warning"><strong>No inventory match.</strong> This page sets
+{% if page.serial %}<code>serial: "{{ page.serial }}"</code>{% elsif page.match_model %}<code>match_model: "{{ page.match_model }}"</code>{% else %}neither <code>serial</code> nor <code>match_model</code>{% endif %},
+which doesn't correspond to any entry in <code>_data/typewriters.yml</code>. Fix the front matter or add the machine to the data file.</p>
+{%- endif -%}

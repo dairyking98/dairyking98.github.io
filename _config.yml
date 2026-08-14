@@ -77,6 +77,7 @@ include:
   - .htaccess
   - _pages
 exclude:
+  - bin
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor
@@ -121,6 +122,12 @@ collections:
   projects:
     output: true
     permalink: /projects/:path/
+  # One page per machine, for the machines worth writing about. Not every
+  # machine needs one — the inventory table links to a page only when a file
+  # here matches that machine's serial. See _includes/machine-spec.html.
+  typewriters:
+    output: true
+    permalink: /collections/typewriters/:path/
 
 # -----------------------------------------------------------------------------
 # Defaults
@@ -152,6 +159,17 @@ defaults:
       layout: single
       author_profile: false
       share: false
+  # _typewriters
+  - scope:
+      path: ""
+      type: typewriters
+    values:
+      layout: single
+      author_profile: false
+      share: false
+      toc: true
+      toc_label: "On this machine"
+      toc_sticky: true
 
 # -----------------------------------------------------------------------------
 # Sass/SCSS
