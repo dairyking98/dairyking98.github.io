@@ -7,7 +7,7 @@ author_profile: true
 
 The best way to reach me is by email.
 
-**Email:** [leonard.chau@yahoo.com](mailto:leonard.chau@yahoo.com)
+**Email:** [contact@leonardchau.com](mailto:contact@leonardchau.com)
 
 I'm also on [GitHub](https://github.com/dairyking98) and [LinkedIn](https://linkedin.com/in/leonardchau).
 

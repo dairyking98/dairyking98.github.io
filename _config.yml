@@ -40,7 +40,7 @@ author:
   avatar: "/assets/img/leonard.jpg"
   bio: "B.S. Mechanical Engineering (SFSU '26). Maker and researcher building things at the intersection of hardware, optics, and software."
   location: "San Francisco Bay Area, CA"
-  email: "leonard.chau@yahoo.com"
+  email: "contact@leonardchau.com"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -56,7 +56,7 @@ author:
       url: "https://youtube.com/@dairyking98"
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
-      url: "mailto:leonard.chau@yahoo.com"
+      url: "mailto:contact@leonardchau.com"
 
 # -----------------------------------------------------------------------------
 # Footer

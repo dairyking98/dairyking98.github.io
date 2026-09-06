@@ -280,7 +280,7 @@ Three machines' support schemes side by side, as interactive meshes rather than 
 
 All of these use the same basic workflow: parametric modeling in OpenSCAD, high-precision resin 3D printing, and iterative fitment testing against the real mechanism — either in person or, for the Selectric Composer and Helios Klimax, entirely over email with collaborators on other continents.
 
-For inquiries about custom type elements or collaboration, reach out via email or [Instagram (@blick_elements)](https://instagram.com/blick_elements).
+For inquiries about custom type elements or collaboration, reach out at [elements@leonardchau.com](mailto:elements@leonardchau.com) or on [Instagram (@blick_elements)](https://instagram.com/blick_elements).
 
 ## Licensing {#licensing}
 
