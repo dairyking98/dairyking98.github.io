@@ -29,6 +29,12 @@ var store = [{
         "url": "/blog/2026/stability-commander/",
         "teaser": "/assets/img/2026/stability-commander/cad-assembly.png"
       },{
+        "title": "Type Elements, Now in Your Browser",
+        "excerpt":"Type Elements makes replacement type elements for antique typewriters: Blickensderfer typewheels, IBM Selectric and Composer typeballs, Hammond shuttles and more, generated from any font and printed in resin. As of this week, the whole thing runs in a web browser: type-elements.leonardchau.com/app: pick a machine and a font, arrange the layout,...","categories": ["Projects"],
+        "tags": ["typewriters","type-elements","3d-printing","resin","python","webassembly","pyodide","manifold3d","open-source"],
+        "url": "/blog/2026/type-elements-in-the-browser/",
+        "teaser": "https://type-elements.leonardchau.com/assets/og/type-elements-card.png"
+      },{
         "title": "3D-Cam",
         "excerpt":"3D-Cam is a depth-imaging platform developed at the E-Lab at San Francisco State University. The system uses a single camera and mirror geometry to perform z-height reconstruction without requiring dual-camera hardware, making 3D imaging more accessible and cost-effective. Project Overview 3D-Cam provides a novel approach to depth imaging: Single Camera...","categories": ["school-project"],
         "tags": [],

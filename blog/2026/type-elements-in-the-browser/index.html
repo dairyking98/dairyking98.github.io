@@ -1,0 +1,736 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Type Elements, Now in Your Browser - Leonard Chau</title>
+<meta name="description" content="The Type Elements pipeline now runs entirely in a web browser. Pick a machine and a font, tune the element, preview it in 3D and download a printable STL, with Python and manifold3d compiled to WebAssembly and the slow Minkowski sums spread across every core.">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+  <meta property="article:author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Type Elements, Now in Your Browser">
+<meta property="og:url" content="https://leonardchau.com/blog/2026/type-elements-in-the-browser/">
+
+
+  <meta property="og:description" content="The Type Elements pipeline now runs entirely in a web browser. Pick a machine and a font, tune the element, preview it in 3D and download a printable STL, with Python and manifold3d compiled to WebAssembly and the slow Minkowski sums spread across every core.">
+
+
+
+  <meta property="og:image" content="https://type-elements.leonardchau.com/assets/og/type-elements-card.png">
+  
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-10-20T00:00:00-07:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/blog/2026/type-elements-in-the-browser/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/collections/"
+                
+                
+              >Collections</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://leonardchau.com/">
+        <img src="/assets/img/leonard.jpg" alt="Leonard Chau" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://leonardchau.com/" itemprop="url">Leonard Chau</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>B.S. Mechanical Engineering (SFSU ‘26). Maker and researcher building things at the intersection of hardware, optics, and software.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-location-dot" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco Bay Area, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/typemealetter" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+          
+            <li><a href="https://youtube.com/@dairyking98" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i><span class="label">YouTube</span></a></li>
+          
+        
+          
+            <li><a href="mailto:contact@leonardchau.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:contact@leonardchau.com" rel="me" class="u-email">
+            <meta itemprop="email" content="contact@leonardchau.com" />
+            <i class="fas fa-fw fa-square-envelope" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Type Elements, Now in Your Browser">
+    <meta itemprop="description" content="Type Elements makes replacement type elements for antique typewriters: Blickensderfer typewheels, IBM Selectric and Composer typeballs, Hammond shuttles and more, generated from any font and printed in resin. As of this week, the whole thing runs in a web browser:">
+    <meta itemprop="datePublished" content="2026-10-20T00:00:00-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/blog/2026/type-elements-in-the-browser/" itemprop="url">Type Elements, Now in Your Browser
+</a>
+          </h1>
+          
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2026-10-20T00:00:00-07:00">October 20, 2026</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p><a href="/projects/type-elements/">Type Elements</a> makes replacement type elements for antique typewriters: Blickensderfer typewheels, IBM Selectric and Composer typeballs, Hammond shuttles and more, generated from any font and printed in resin. As of this week, the whole thing runs in a web browser:</p>
+
+<div class="notice--success">
+  <strong><a href="https://type-elements.leonardchau.com/app/">type-elements.leonardchau.com/app</a></strong>: pick a machine and a font, arrange the layout, preview the element in 3D and download the STL.
+</div>
+
+<p><img src="https://type-elements.leonardchau.com/assets/og/type-elements-card.png" alt="Type Elements: any font, cut into a working typeball, wheel or shuttle" /></p>
+
+<h2 id="why-a-web-app">Why a web app</h2>
+
+<p>Until now, making an element meant cloning the repository, setting up a Python environment, and driving a terminal UI (<code class="language-plaintext highlighter-rouge">tune.py</code>). That’s fine for me, and it’s a real barrier for most people who need one part: someone with a Blickensderfer and no typewheel, or a Hammond whose shuttle is cracked. The project exists so those machines get used again, and every install step was losing people before they got to a print.</p>
+
+<p>So the goal for v5 was simple to state: open a link, get an element.</p>
+
+<h2 id="what-it-does">What it does</h2>
+
+<ul>
+  <li><strong>10 machines plus the type slugs:</strong> Blickensderfer, Postal, Mignon, Bennett, Helios Klimax, Hammond, the Hammond Model 1 split shuttle, Selectric I/II, Selectric III and the Selectric Composer.</li>
+  <li><strong>Any font:</strong> use a font installed on your computer (in browsers that allow it), upload a font file, or start from the bundled ones.</li>
+  <li><strong>The layouts from the catalogs:</strong> the keyboard and language presets transcribed from the manufacturers’ own type catalogs, editable character by character.</li>
+  <li><strong>Every dimension tunable,</strong> with a live 3D preview. Your settings are saved in the browser between visits.</li>
+  <li><strong>The tools, not just the element:</strong> type tests, Hammond and Mignon index legends, font coverage checks, and calibration sweeps for dialing in a new printer or resin.</li>
+  <li><strong>Downloads that say what they are,</strong> e.g. <code class="language-plaintext highlighter-rouge">selectric12_FreeMono_10pt_2026-10-20_1432.stl</code>, so a folder of test prints stays readable.</li>
+</ul>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>The app doesn’t send anything to a server. It loads Python itself, compiled to WebAssembly via <a href="https://pyodide.org/">Pyodide</a>, along with <code class="language-plaintext highlighter-rouge">numpy</code>, <code class="language-plaintext highlighter-rouge">shapely</code>, <code class="language-plaintext highlighter-rouge">fontTools</code> and <a href="https://github.com/elalish/manifold"><code class="language-plaintext highlighter-rouge">manifold3d</code></a>, the geometry kernel the desktop pipeline already uses. Then it runs the same v4 code that <code class="language-plaintext highlighter-rouge">tune.py</code> runs. There’s no separate browser port that could slowly drift away from the desktop version: one engine, two front ends.</p>
+
+<p>The expensive step is the draft taper. Every character gets a real Minkowski sum with a cone so it releases cleanly from the print and the mold, and a full typeball is around 88 of them. On the desktop that’s one core grinding through them in a loop. In the browser:</p>
+
+<ol>
+  <li>The first pass places every character and <em>records</em> each Minkowski sum instead of computing it.</li>
+  <li>The recorded sums go out to a pool of workers, one per CPU core, and run in parallel.</li>
+  <li>A second pass assembles the element from the results.</li>
+</ol>
+
+<p>The results are cached by the exact geometry that went into them. Change the supports, the body diameter or the shaft fit, and the characters haven’t changed, so the re-render skips straight to assembly. In testing, a re-render dropped from about 27 seconds to 10, with the same mesh down to the vertex.</p>
+
+<p>A few smaller things took longer than expected to get right. The progress bar learns how long each stage of a job took last time and fills in at this run’s pace, instead of racing through the characters and then sitting still. The engine ships as one packed file that downloads while Python starts up. And because GitHub Pages caches pages for ten minutes, the app checks whether a newer version is live and reloads itself once.</p>
+
+<h2 id="whats-next">What’s next</h2>
+
+<p>The defaults are tuned for the printer I’ve been using. A Formlabs Form Studio 1 arrives in January, and I’ll be printing and testing every machine on it and folding what I learn back into the defaults. Several things are still open, listed honestly on the <a href="https://type-elements.leonardchau.com/limitations/">limitations page</a>: the Hammond index legend doesn’t show the math row yet, and the split shuttle has no math version until I can measure a real one.</p>
+
+<p>As always, it’s free to use and the pipeline is <a href="https://github.com/dairyking98/Type-Elements">open source</a>. Print a wheel for your own machine, or for someone in your restoration club. If something breaks, or you have a machine that isn’t covered, <a href="https://github.com/dairyking98/Type-Elements/issues">open an issue</a> or get in touch.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-10-20T00:00:00-07:00">October 20, 2026</time></p>
+
+
+      </footer>
+
+      
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/blog/2026/stability-commander/" class="pagination--pager" title="Stability COMmander">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/2026/stability-commander/cad-assembly.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/blog/2026/stability-commander/" rel="permalink">Stability COMmander
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2026-05-08T12:00:00-07:00">May 8, 2026</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">Stability COMmander is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–l...</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/mingkwai-symposium.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/typewriters/history/events/mingkwai-rediscovered-symposium/" rel="permalink">MingKwai, Rediscovered - A Symposium on the Revolutionary Chinese Typewriter
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-12-02T07:00:00-08:00">December 2, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">
+      
+
+    
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/9.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/general/phd-applications/" rel="permalink">My PhD Application Journey
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-11-24T02:00:00-08:00">November 24, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">I’m currently in the midst of applying to PhD programs, and I wanted to share a bit about my experience so far. This process has been both challenging and en...</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/img/9.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+      
+        <a class="u-url" href="/projects/hpwriter-project/" rel="permalink">HPWriter - An Idea for a Silent Digital Typewriter
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-11-20T02:00:00-08:00">November 20, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt p-summary" itemprop="description">I’ve been kicking around an idea called HPWriter — a silent digital typewriter that would print on plain paper, possibly using an HP45 inkjet cartridge. Noth...</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

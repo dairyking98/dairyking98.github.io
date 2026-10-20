@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://leonardchau.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://leonardchau.com/" rel="alternate" type="text/html" /><updated>2026-10-20T00:32:05-07:00</updated><id>https://leonardchau.com/feed.xml</id><title type="html">Leonard Chau</title><subtitle>Mechanical Engineer, Maker &amp; Researcher — SF Bay Area</subtitle><author><name>Leonard Chau</name><email>contact@leonardchau.com</email></author><entry><title type="html">Stability COMmander</title><link href="https://leonardchau.com/blog/2026/stability-commander/" rel="alternate" type="text/html" title="Stability COMmander" /><published>2026-05-08T12:00:00-07:00</published><updated>2026-05-08T12:00:00-07:00</updated><id>https://leonardchau.com/blog/2026/stability-commander</id><content type="html" xml:base="https://leonardchau.com/blog/2026/stability-commander/"><![CDATA[<p><strong>Stability COMmander</strong> is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–load center of mass in real time and evaluates it against the machine’s support polygon to predict and prevent tip-over, rather than relying on the fixed load charts and static safety margins that traditional systems use.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://leonardchau.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://leonardchau.com/" rel="alternate" type="text/html" /><updated>2026-10-20T00:36:25-07:00</updated><id>https://leonardchau.com/feed.xml</id><title type="html">Leonard Chau</title><subtitle>Mechanical Engineer, Maker &amp; Researcher — SF Bay Area</subtitle><author><name>Leonard Chau</name><email>contact@leonardchau.com</email></author><entry><title type="html">Type Elements, Now in Your Browser</title><link href="https://leonardchau.com/blog/2026/type-elements-in-the-browser/" rel="alternate" type="text/html" title="Type Elements, Now in Your Browser" /><published>2026-10-20T00:00:00-07:00</published><updated>2026-10-20T00:00:00-07:00</updated><id>https://leonardchau.com/blog/2026/type-elements-in-the-browser</id><content type="html" xml:base="https://leonardchau.com/blog/2026/type-elements-in-the-browser/"><![CDATA[<p><a href="/projects/type-elements/">Type Elements</a> makes replacement type elements for antique typewriters: Blickensderfer typewheels, IBM Selectric and Composer typeballs, Hammond shuttles and more, generated from any font and printed in resin. As of this week, the whole thing runs in a web browser:</p>
+
+<div class="notice--success">
+  <strong><a href="https://type-elements.leonardchau.com/app/">type-elements.leonardchau.com/app</a></strong>: pick a machine and a font, arrange the layout, preview the element in 3D and download the STL.
+</div>
+
+<p><img src="https://type-elements.leonardchau.com/assets/og/type-elements-card.png" alt="Type Elements: any font, cut into a working typeball, wheel or shuttle" /></p>
+
+<h2 id="why-a-web-app">Why a web app</h2>
+
+<p>Until now, making an element meant cloning the repository, setting up a Python environment, and driving a terminal UI (<code class="language-plaintext highlighter-rouge">tune.py</code>). That’s fine for me, and it’s a real barrier for most people who need one part: someone with a Blickensderfer and no typewheel, or a Hammond whose shuttle is cracked. The project exists so those machines get used again, and every install step was losing people before they got to a print.</p>
+
+<p>So the goal for v5 was simple to state: open a link, get an element.</p>
+
+<h2 id="what-it-does">What it does</h2>
+
+<ul>
+  <li><strong>10 machines plus the type slugs:</strong> Blickensderfer, Postal, Mignon, Bennett, Helios Klimax, Hammond, the Hammond Model 1 split shuttle, Selectric I/II, Selectric III and the Selectric Composer.</li>
+  <li><strong>Any font:</strong> use a font installed on your computer (in browsers that allow it), upload a font file, or start from the bundled ones.</li>
+  <li><strong>The layouts from the catalogs:</strong> the keyboard and language presets transcribed from the manufacturers’ own type catalogs, editable character by character.</li>
+  <li><strong>Every dimension tunable,</strong> with a live 3D preview. Your settings are saved in the browser between visits.</li>
+  <li><strong>The tools, not just the element:</strong> type tests, Hammond and Mignon index legends, font coverage checks, and calibration sweeps for dialing in a new printer or resin.</li>
+  <li><strong>Downloads that say what they are,</strong> e.g. <code class="language-plaintext highlighter-rouge">selectric12_FreeMono_10pt_2026-10-20_1432.stl</code>, so a folder of test prints stays readable.</li>
+</ul>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>The app doesn’t send anything to a server. It loads Python itself, compiled to WebAssembly via <a href="https://pyodide.org/">Pyodide</a>, along with <code class="language-plaintext highlighter-rouge">numpy</code>, <code class="language-plaintext highlighter-rouge">shapely</code>, <code class="language-plaintext highlighter-rouge">fontTools</code> and <a href="https://github.com/elalish/manifold"><code class="language-plaintext highlighter-rouge">manifold3d</code></a>, the geometry kernel the desktop pipeline already uses. Then it runs the same v4 code that <code class="language-plaintext highlighter-rouge">tune.py</code> runs. There’s no separate browser port that could slowly drift away from the desktop version: one engine, two front ends.</p>
+
+<p>The expensive step is the draft taper. Every character gets a real Minkowski sum with a cone so it releases cleanly from the print and the mold, and a full typeball is around 88 of them. On the desktop that’s one core grinding through them in a loop. In the browser:</p>
+
+<ol>
+  <li>The first pass places every character and <em>records</em> each Minkowski sum instead of computing it.</li>
+  <li>The recorded sums go out to a pool of workers, one per CPU core, and run in parallel.</li>
+  <li>A second pass assembles the element from the results.</li>
+</ol>
+
+<p>The results are cached by the exact geometry that went into them. Change the supports, the body diameter or the shaft fit, and the characters haven’t changed, so the re-render skips straight to assembly. In testing, a re-render dropped from about 27 seconds to 10, with the same mesh down to the vertex.</p>
+
+<p>A few smaller things took longer than expected to get right. The progress bar learns how long each stage of a job took last time and fills in at this run’s pace, instead of racing through the characters and then sitting still. The engine ships as one packed file that downloads while Python starts up. And because GitHub Pages caches pages for ten minutes, the app checks whether a newer version is live and reloads itself once.</p>
+
+<h2 id="whats-next">What’s next</h2>
+
+<p>The defaults are tuned for the printer I’ve been using. A Formlabs Form Studio 1 arrives in January, and I’ll be printing and testing every machine on it and folding what I learn back into the defaults. Several things are still open, listed honestly on the <a href="https://type-elements.leonardchau.com/limitations/">limitations page</a>: the Hammond index legend doesn’t show the math row yet, and the split shuttle has no math version until I can measure a real one.</p>
+
+<p>As always, it’s free to use and the pipeline is <a href="https://github.com/dairyking98/Type-Elements">open source</a>. Print a wheel for your own machine, or for someone in your restoration club. If something breaks, or you have a machine that isn’t covered, <a href="https://github.com/dairyking98/Type-Elements/issues">open an issue</a> or get in touch.</p>]]></content><author><name>Leonard Chau</name><email>contact@leonardchau.com</email></author><category term="Projects" /><category term="typewriters" /><category term="type-elements" /><category term="3d-printing" /><category term="resin" /><category term="python" /><category term="webassembly" /><category term="pyodide" /><category term="manifold3d" /><category term="open-source" /><summary type="html"><![CDATA[The Type Elements pipeline now runs entirely in a web browser. Pick a machine and a font, tune the element, preview it in 3D and download a printable STL, with Python and manifold3d compiled to WebAssembly and the slow Minkowski sums spread across every core.]]></summary></entry><entry><title type="html">Stability COMmander</title><link href="https://leonardchau.com/blog/2026/stability-commander/" rel="alternate" type="text/html" title="Stability COMmander" /><published>2026-05-08T12:00:00-07:00</published><updated>2026-05-08T12:00:00-07:00</updated><id>https://leonardchau.com/blog/2026/stability-commander</id><content type="html" xml:base="https://leonardchau.com/blog/2026/stability-commander/"><![CDATA[<p><strong>Stability COMmander</strong> is a senior capstone project (Team-o-Matic: Ben Grimes, Mohammed Azam, Samuel Zimmerickers, and me) that tracks a telehandler’s vehicle–load center of mass in real time and evaluates it against the machine’s support polygon to predict and prevent tip-over, rather than relying on the fixed load charts and static safety margins that traditional systems use.</p>
 
 <h2 id="it-didnt-start-here">It didn’t start here</h2>
 
