@@ -2,7 +2,7 @@
 layout: single
 title: Type Elements, Now in Your Browser
 subtitle: Any font, cut into a printable typeball, typewheel or shuttle, with nothing to install
-date: 2026-10-20 12:00:00 -0700
+date: 2026-10-20 00:00:00 -0700
 permalink: /blog/2026/type-elements-in-the-browser/
 description: The Type Elements pipeline now runs entirely in a web browser. Pick a machine and a font, tune the element, preview it in 3D and download a printable STL, with Python and manifold3d compiled to WebAssembly and the slow Minkowski sums spread across every core.
 tags: typewriters type-elements 3d-printing resin python webassembly pyodide manifold3d open-source
