@@ -1,0 +1,422 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Clearance Hole Chart - Leonard Chau</title>
+<meta name="description" content="Inch and metric screw clearance holes in close, normal, and loose fits, with a GD&amp;T positional tolerance calculator">
+
+
+  <meta name="author" content="Leonard Chau">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Leonard Chau">
+<meta property="og:title" content="Clearance Hole Chart">
+<meta property="og:url" content="https://leonardchau.com/clearance-hole-chart/">
+
+
+  <meta property="og:description" content="Inch and metric screw clearance holes in close, normal, and loose fits, with a GD&amp;T positional tolerance calculator">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://leonardchau.com/clearance-hole-chart/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Leonard Chau Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          Leonard Chau
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/blog/"
+                
+                
+              >Blog</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cv/"
+                
+                
+              >CV</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tools/"
+                
+                
+              >Tools</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/collections/"
+                
+                
+              >Collections</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/photography/"
+                
+                
+              >Photography</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/contact/"
+                
+                
+              >Contact</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Clearance Hole Chart">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://leonardchau.com/clearance-hole-chart/" itemprop="url">Clearance Hole Chart
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Clearance hole sizes for inch and metric bolts and screws in all three fit classes, plus a calculator that turns a
+clearance hole into the positional tolerance it can carry (and back).</p>
+
+<div id="chart-controls" style="margin-bottom: 2rem;">
+  <h3>Clearance Holes</h3>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+    <label for="chart-system-select">Select System:</label>
+    <select id="chart-system-select" style="padding: 0.5rem;">
+      <option value="inch">Inch (ASME B18.2.8)</option>
+      <option value="metric">Metric (ISO 273)</option>
+    </select>
+  </div>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+      <input type="checkbox" id="cb-fit-close" checked="" />
+      <span>Close</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+      <input type="checkbox" id="cb-fit-normal" checked="" />
+      <span>Normal</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+      <input type="checkbox" id="cb-fit-loose" checked="" />
+      <span>Loose</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+      <input type="checkbox" id="cb-show-converted" />
+      <span id="cb-show-converted-label">Show Millimeters</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+      <input type="checkbox" id="cb-show-position" />
+      <span>Show Position Tolerance</span>
+    </label>
+  </div>
+</div>
+
+<div id="chart-container" style="overflow-x: auto;">
+  <table id="clearance-chart">
+    <thead id="chart-header"></thead>
+    <tbody id="chart-body"></tbody>
+  </table>
+</div>
+
+<div id="clearance-calc">
+  <h3>Positional Tolerance Calculator</h3>
+  <p>
+    Pick a screw and a fit to fill in F and H, or type your own values. Results use the formulas in ASME Y14.5
+    Appendix B and assume both the hole and the fastener are at MMC.
+  </p>
+
+  <div class="clearance-calc__grid">
+    <label for="calc-system-select">System</label>
+    <select id="calc-system-select">
+      <option value="inch">Inch</option>
+      <option value="metric">Metric</option>
+    </select>
+
+    <label for="calc-size-select">Screw size</label>
+    <select id="calc-size-select"></select>
+
+    <label for="calc-fit-select">Fit</label>
+    <select id="calc-fit-select">
+      <option value="close">Close</option>
+      <option value="normal" selected="">Normal</option>
+      <option value="loose">Loose</option>
+      <option value="custom">Custom hole</option>
+    </select>
+
+    <label for="calc-fastener">F, fastener max &Oslash;</label>
+    <span><input type="number" id="calc-fastener" step="any" min="0" /> <span class="calc-unit">in</span></span>
+
+    <label for="calc-hole">H, hole min &Oslash;</label>
+    <span><input type="number" id="calc-hole" step="any" min="0" /> <span class="calc-unit">in</span></span>
+
+    <label for="calc-t1">T&#8321;, clearance part (optional)</label>
+    <span><input type="number" id="calc-t1" step="any" min="0" /> <span class="calc-unit">in</span></span>
+  </div>
+
+  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-top: 1rem;">
+    <input type="checkbox" id="cb-calc-tilt" />
+    <span>No projected tolerance zone on the tapped hole (allow for tilt)</span>
+  </label>
+  <div id="calc-tilt-inputs" class="clearance-calc__grid" style="display: none; margin-top: 0.5rem;">
+    <label for="calc-p">P, max part thickness</label>
+    <span><input type="number" id="calc-p" step="any" min="0" /> <span class="calc-unit">in</span></span>
+
+    <label for="calc-d">D, min thread engagement</label>
+    <span><input type="number" id="calc-d" step="any" min="0" /> <span class="calc-unit">in</span></span>
+  </div>
+
+  <h4>Position tolerance this hole allows</h4>
+  <div id="calc-results"></div>
+
+  <h4>Hole needed for a position tolerance</h4>
+  <div class="clearance-calc__grid">
+    <label for="calc-target">Target T, each part</label>
+    <span><input type="number" id="calc-target" step="any" min="0" /> <span class="calc-unit">in</span></span>
+  </div>
+  <div id="calc-reverse-results"></div>
+</div>
+
+<script src="/assets/js/clearance-hole-chart.js"></script>
+
+<div class="notice--info">
+  <p><strong>How to read it:</strong> the drill is the nominal hole size, and the min–max range is the hole tolerance that the
+standard applies: ISO 286 <strong>H12</strong> for close, <strong>H13</strong> for normal and <strong>H14</strong> for loose. Normal is the usual default.
+Use close where parts locate off the screws or the pattern is tight, and loose for weldments and stacked tolerances.</p>
+
+  <p><strong>Floating vs. fixed fasteners:</strong> a <em>floating</em> fastener passes through clearance holes in every part (bolt and
+nut), so each part can use the full <code class="language-plaintext highlighter-rouge">T = H − F</code>. A <em>fixed</em> fastener is held in one part (screw in a tapped hole,
+or a stud), so the same clearance is shared between both parts and each gets <code class="language-plaintext highlighter-rouge">T = (H − F) / 2</code>. You can also
+split it unequally, <code class="language-plaintext highlighter-rouge">H = F + T₁ + T₂</code>. These formulas assume a projected tolerance zone on the tapped hole. Without
+one, the tapped hole’s axis can tilt, and Y14.5 uses <code class="language-plaintext highlighter-rouge">H = F + T₁ + T₂(1 + 2P/D)</code> instead, where P is the maximum
+thickness of the part with the clearance hole and D is the minimum thread engagement.</p>
+
+  <p><strong>About F:</strong> the calculator and the chart’s position tolerance line default F to the screw’s nominal diameter.
+A real screw’s maximum major diameter is a little smaller (1/4-20 UNC-2A is 0.2489 in, M6×1 6g is
+5.974 mm), so nominal is slightly conservative. Enter the actual maximum major diameter for exact figures.</p>
+</div>
+
+<div class="notice--info">
+  <strong>Data Sources:</strong> Hole sizes are transcribed directly from <strong>ASME B18.2.8-1999</strong>,
+  <em>Clearance Holes for Bolts, Screws, and Studs</em>: Table 2 for inch fasteners (#0 through 1-1/2 in, the
+  standard's full stated scope) and Table 3 for metric fasteners (M1.6 through M100). The standard states that its
+  metric holes agree with <strong>ISO 273</strong>, whose fine, medium and coarse series match the close, normal and
+  loose fits here; ISO 273 also lists intermediate sizes (such as M3.5, M18 and M22) and sizes up to M150, which
+  this chart leaves out rather than estimating them. Hole tolerances are per ISO 286 (H12/H13/H14), as B18.2.8
+  Sec. 3.3 specifies.
+  <br /><br />
+  Positional tolerance formulas are from <strong>ASME Y14.5-2009</strong>, Nonmandatory Appendix B: floating
+  fastener (B.3), fixed fastener with a projected tolerance zone (B.4), and the tilt allowance when no projected
+  tolerance zone is used (B.5).
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dairyking98" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/leonardchau" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://leonardchau.com">Leonard Chau</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
