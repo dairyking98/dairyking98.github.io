@@ -1,0 +1,756 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../richardson-after-pinch/">
+      
+      
+        <link rel="next" href="../candidates/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>How Richardson's 1896 machine works - Richardson selection on bead chain</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-richardsons-1896-machine-works" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Richardson selection on bead chain" class="md-header__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Richardson selection on bead chain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How Richardson's 1896 machine works
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Richardson selection on bead chain" class="md-nav__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Richardson selection on bead chain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D and more views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-after-pinch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Richardson's 1896 machine works
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Richardson's 1896 machine works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-levers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key levers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escapement-and-the-third-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escapement and the third bar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shift-and-capitals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shift and capitals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-wed-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we'd use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-drawings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The drawings
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../candidates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The three candidates, animated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-levers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key levers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escapement-and-the-third-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escapement and the third bar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shift-and-capitals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shift and capitals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-wed-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we'd use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-drawings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The drawings
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="how-richardsons-1896-machine-works">How Richardson's 1896 machine works<a class="headerlink" href="#how-richardsons-1896-machine-works" title="Permanent link">&para;</a></h1>
+<p>A plain reading of James Richardson's <a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>, filed 1893 and issued 18 February 1896. The patent's text is an imperfect scan, so a few details may need checking against the drawings.</p>
+<p>Everything runs from one key stroke. Each key is a free lever that touches four separate swinging members, and each member does one job.</p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it's moved by</th>
+<th>Job</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two selection plates, on opposed frames</td>
+<td>Each key, by its own pair of steps</td>
+<td>Turn the type wheel to the letter, then lock it</td>
+</tr>
+<tr>
+<td>Press frame</td>
+<td>Every key, by the full stroke</td>
+<td>Ink the type, and store energy for the print</td>
+</tr>
+<tr>
+<td>Spacing plate (the "third bar")</td>
+<td>Every key, by its own step</td>
+<td>Feed the paper by that letter's width</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key-levers">Key levers<a class="headerlink" href="#key-levers" title="Permanent link">&para;</a></h2>
+<p>All the key levers are the same in function: bell-cranks on one common rod, separated by washers, passing through a comb with a spring under each. In front of the comb they fan out to the keytops (Fig. 1). Below the rod, their working edges are vertical and "all in the same plane". What makes each key different is cut into the plates, not the lever.</p>
+<h2 id="selection">Selection<a class="headerlink" href="#selection" title="Permanent link">&para;</a></h2>
+<p>Two rectangular frames hang from a shaft and a sleeve around it. Each carries a plate with a stepped edge, one just above the other. A rod from each frame pulls an arm of a gear sector, so one frame goes forward as the other comes back. The sector turns a long pinion on the upright shaft carrying the type shell.</p>
+<p>A key pushes whichever plate is nearer until the other arrives and pinches it. The sum of the two movements equals the full throw less what's cut from the edges, so the position is the same wherever the plates started. There is no home position. Releasing the key changes nothing, and the wheel stays put until the next key.</p>
+<p>His worked example: one word takes 5 spaces of wheel travel, against 104 for a rotating wheel and 126 for one returning home each time.</p>
+<h2 id="inking">Inking<a class="headerlink" href="#inking" title="Permanent link">&para;</a></h2>
+<p>Richardson uses an ink pad, with no ribbon.</p>
+<ol>
+<li>As the key goes down, the press frame draws a rod that lifts the pad's bar through a pawl and arm.</li>
+<li>The pad rises in front of the type, and a bend at the top of its slot presses it against the face.</li>
+<li>A small inking roller keeps the pad supplied, and a ratchet turns it a little each stroke.</li>
+</ol>
+<h2 id="impression">Impression<a class="headerlink" href="#impression" title="Permanent link">&para;</a></h2>
+<p>The wheel stays still and the paper strikes it, driven by a spring the finger has already wound.</p>
+<ol>
+<li>Lifting the pad stretches a spring. Near the end of the rise, a screw trips the pawl and the spring snaps the pad back down.</li>
+<li>On the way down, a pin on the pad's bar hits a pawl on the rock shaft under the paper carriage. That pawl swings aside on the way up but acts as a cam on the way down, rocking the shaft and throwing the paper into the type.</li>
+<li>A second spring rocks the shaft back.</li>
+<li>A solid surface inside the type shell, with a small anti-friction roller, takes the blow.</li>
+</ol>
+<p>The print force doesn't depend on how hard the key is pressed, and the pinched key holds the wheel locked throughout.</p>
+<h2 id="escapement-and-the-third-bar">Escapement and the third bar<a class="headerlink" href="#escapement-and-the-third-bar" title="Permanent link">&para;</a></h2>
+<p>There's no escapement wheel and no mainspring. A pawl engages a rack on the back of the paper carriage. Pressing a key draws the pawl back. Releasing it lets a spring pull the pawl forward by that same distance, pushing the carriage along. A stop pin clamps the pawl to the rack so the carriage can't overrun.</p>
+<p>The distance comes from the third bar, the spacing plate. Its edge is mostly straight, with a few changes:</p>
+<ul>
+<li><strong>Projections</strong> for <code>m</code> and <code>w</code>, which swing it furthest, for the widest feed.</li>
+<li><strong>Notches</strong> for <code>f</code>, <code>i</code>, <code>j</code>, <code>l</code> and <code>t</code>, for the narrowest.</li>
+<li><strong>Straight edge</strong> for the rest, such as <code>n</code>, <code>o</code> and <code>s</code>.</li>
+</ul>
+<p>So it's a proportionally spaced machine, using ordinary printer's type at full width. A turnbuckle adjusts the overall spacing. The space bar acts only on this frame, and pressing it partway makes a shorter space, for justifying lines. A separate key lifts the feed pawl so the carriage can be moved freely.</p>
+<h2 id="shift-and-capitals">Shift and capitals<a class="headerlink" href="#shift-and-capitals" title="Permanent link">&para;</a></h2>
+<p>The type shell has three rows: lower case at the top, capitals at the bottom, and figures and punctuation in the middle. Two thumb keys lift the shaft by a fork until the wanted row is at the print line, and a sliding bar can lock them down.</p>
+<p>Capitals are wider, so the capital key also moves a pin along an inclined slot in the feed linkage, which increases the feed. It's a single extra amount for all capitals, not one per letter, and the patent describes it only for capitals.</p>
+<h2 id="what-wed-use">What we'd use<a class="headerlink" href="#what-wed-use" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The third bar's principle:</strong> one bar every key pushes, with an edge that gives each key its own motion. Our universal bail can be built this way, laser-cut, to even out the three rows' different swings and set each key's trip point.</li>
+<li><strong>Stored-energy print,</strong> fired by a trip, so print force doesn't depend on the finger.</li>
+<li><strong>Feed on the key's return,</strong> for both the carriage and the ribbon.</li>
+<li><strong>Ribbon instead of the pad.</strong> Fixed pitch for now, though the proportional spacing is worth a future look.</li>
+</ul>
+<h2 id="the-drawings">The drawings<a class="headerlink" href="#the-drawings" title="Permanent link">&para;</a></h2>
+<p><img alt="Sheet 1: plan of the machine, keys fanning to the rod" src="https://patentimages.storage.googleapis.com/75/38/73/1ee1e64ce766e8/US554730-drawings-page-1.png" /></p>
+<p><img alt="Sheet 2: underside, with the rods and sector" src="https://patentimages.storage.googleapis.com/fb/4c/1f/bf9fbfeb35738f/US554730-drawings-page-2.png" /></p>
+<p><img alt="Sheet 3: sections through the machine" src="https://patentimages.storage.googleapis.com/50/8b/30/e3bcfe1cdda057/US554730-drawings-page-3.png" /></p>
+<p><img alt="Sheet 4: the frames and stepped plates" src="https://patentimages.storage.googleapis.com/ab/f7/5c/98b700d2563c91/US554730-drawings-page-4.png" /></p>
+<p><img alt="Sheet 5" src="https://patentimages.storage.googleapis.com/37/54/5e/0eaa0428172cfa/US554730-drawings-page-5.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
