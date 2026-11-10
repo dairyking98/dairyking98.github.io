@@ -793,6 +793,7 @@
 .lcr-kb div:nth-child(2) { margin-left:14px; } .lcr-kb div:nth-child(3) { margin-left:28px; }
 .lcr-kb button { width:30px; height:28px; border:1px solid var(--md-default-fg-color--lighter); border-radius:4px; cursor:pointer; color:var(--md-default-fg-color); background:var(--md-default-bg-color); font:600 .72rem var(--md-code-font-family); }
 .lcr-kb button.on { background:var(--s1); color:#fff; border-color:var(--s1); }
+#r-side { max-width:600px; }
 .lcr-read { font-family:var(--md-code-font-family); font-size:.72rem; min-height:3em; margin:.4em 0 0; }
 </style>
 
@@ -800,11 +801,14 @@
 <div class="lcr-kb" id="r-kb"></div>
 <div class="lcr-ctl"><label><input type="checkbox" id="r-slow"> Slow motion</label><label>Key depth <input type="range" id="r-r" min="0" max="1000" value="0"></label></div>
 <svg id="r-side" viewBox="0 0 760 760" role="img" aria-label="Side view of a key lever pushing two stacked plates on frames tied to a bead chain"></svg>
+<p class="lcr-read" id="r-t2">Pick a key.</p>
 </div>
 
 <h2 id="plan-view-and-chain">Plan view and chain<a class="headerlink" href="#plan-view-and-chain" title="Permanent link">&para;</a></h2>
-<p>Same keys as above, and both views move together. The two plates are really stacked, and are pulled apart here so both are visible at every key. Press several keys in a row: the plates go straight from one letter to the next, with no return to home. The chain loop is drawn larger than scale.</p>
+<p>This view has its own keyboard, and both views stay in step. The two plates are really stacked, and are pulled apart here so both are visible at every key. Press several keys in a row: the plates go straight from one letter to the next, with no return to home. The chain loop is drawn larger than scale.</p>
 <div class="lcr">
+<div class="lcr-kb" id="r-kb2"></div>
+<div class="lcr-ctl"><label><input type="checkbox" id="r-slow2"> Slow motion</label><label>Key depth <input type="range" id="r-r2" min="0" max="1000" value="0"></label></div>
 <svg id="r-plan" viewBox="0 0 900 600" role="img" aria-label="Plan view of two stepped plates moving in opposite directions, tied to a bead chain loop that turns the element"></svg>
 <p class="lcr-read" id="r-t">Pick a key.</p>
 </div>
@@ -929,21 +933,22 @@
   function draw() {
     const u = depth / DIP; push(tipT(key, u)); Sv(); Pl();
     const mv = Math.abs(s - start);
-    $("r-t").textContent = `Key "${key.ch}" (${key.rowName} row)${prev ? `, coming from "${prev}"` : ""}. Depth ${depth.toFixed(1)} mm. Plates moved ${mv.toFixed(2)} mm this stroke (${(mv / MM).toFixed(1)} columns), chain ${(mv * 3).toFixed(1)} mm.`;
+    $("r-t").textContent = $("r-t2").textContent = `Key "${key.ch}" (${key.rowName} row)${prev ? `, coming from "${prev}"` : ""}. Depth ${depth.toFixed(1)} mm. Plates moved ${mv.toFixed(2)} mm this stroke (${(mv / MM).toFixed(1)} columns), chain ${(mv * 3).toFixed(1)} mm.`;
   }
-  const range = $("r-r"), slow = $("r-slow"), btn = {};
-  ["qwertyuiop", "asdfghjkl.", "zxcvbnm,"].forEach(r => { const d = document.createElement("div"); [...r].forEach(ch => { const b = document.createElement("button"); b.type = "button"; b.textContent = ch; b.onclick = () => pick(ch); btn[ch] = b; d.appendChild(b); }); $("r-kb").appendChild(d); });
-  const mark = () => { for (const c in btn) btn[c].classList.toggle("on", c === key.ch); };
+  const ranges = [$("r-r"), $("r-r2")], slows = [$("r-slow"), $("r-slow2")], btns = [];
+  ["r-kb", "r-kb2"].forEach((id, i) => { const btn = {}; ["qwertyuiop", "asdfghjkl.", "zxcvbnm,"].forEach(r => { const d = document.createElement("div"); [...r].forEach(ch => { const b = document.createElement("button"); b.type = "button"; b.textContent = ch; b.onclick = () => pick(ch, i); btn[ch] = b; d.appendChild(b); }); $(id).appendChild(d); }); btns.push(btn); });
+  const mark = () => btns.forEach(btn => { for (const c in btn) btn[c].classList.toggle("on", c === key.ch); });
+  const setRange = v => ranges.forEach(r => { r.value = v; });
   let tok = 0;
-  range.oninput = () => { tok++; depth = DIP * range.value / 1000; draw(); };
+  ranges.forEach(r => { r.oninput = () => { tok++; setRange(r.value); depth = DIP * r.value / 1000; draw(); }; });
   function select(ch) { if (ch !== key.ch) prev = key.ch; key = byCh[ch]; start = s; mark(); }
-  function pick(ch) {
+  function pick(ch, i) {
     select(ch);
-    const me = ++tok, T = slow.checked ? 5 : 1, p = 450 * T, h = 350 * T, t0 = performance.now();
-    (function f(now) { if (me !== tok) return; const e = now - t0, u = e < p ? e / p : e < p + h ? 1 : e < 2 * p + h ? 1 - (e - p - h) / p : 0; depth = DIP * u; range.value = u * 1000; draw(); if (e < 2 * p + h) requestAnimationFrame(f); })(t0);
+    const me = ++tok, T = slows[i].checked ? 5 : 1, p = 450 * T, h = 350 * T, t0 = performance.now();
+    (function f(now) { if (me !== tok) return; const e = now - t0, u = e < p ? e / p : e < p + h ? 1 : e < 2 * p + h ? 1 - (e - p - h) / p : 0; depth = DIP * u; setRange(u * 1000); draw(); if (e < 2 * p + h) requestAnimationFrame(f); })(t0);
   }
   mark(); draw();
-  window.lcR = (ch, u) => { tok++; select(ch); depth = DIP * u; range.value = u * 1000; draw(); };
+  window.lcR = (ch, u) => { tok++; select(ch); depth = DIP * u; setRange(u * 1000); draw(); };
 })();
 </script>
 
