@@ -1,0 +1,1052 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="richardson-views/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Richardson selection on bead chain</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#model-1-selection-richardsons-opposed-plates-on-bead-chain-i-060" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Richardson selection on bead chain" class="md-header__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Richardson selection on bead chain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Richardson selection on bead chain" class="md-nav__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Richardson selection on bead chain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-richardson-did" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Richardson did
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#side-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Side view
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-view-and-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan view and chain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parts-list-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parts list so far
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-costs-the-finger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs the finger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-forces-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the forces go
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test first
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="richardson-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D and more views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="richardson-after-pinch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-richardson-did" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Richardson did
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#side-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Side view
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-view-and-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan view and chain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parts-list-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parts list so far
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-costs-the-finger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs the finger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-forces-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the forces go
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test first
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="model-1-selection-richardsons-opposed-plates-on-bead-chain-i-060">Model 1 selection: Richardson's opposed plates on bead chain (I-060)<a class="headerlink" href="#model-1-selection-richardsons-opposed-plates-on-bead-chain-i-060" title="Permanent link">&para;</a></h1>
+<p>The current direction for Model 1 selection (2026-11-09), replacing the two bails and shuttle. It starts from James Richardson's <a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a> (1896), and swaps his rods, gear sector and pinion for one closed bead-chain loop.</p>
+<p><strong>Status:</strong> first layout. Every dimension, mass and force here is a hand estimate, with no CAD or test behind it yet. <a href="richardson-views/">More views</a>: 3D model, wheel travel, plate shapes, tolerance stack. <a href="richardson-after-pinch/">Motion after the pinch</a>: lock pin, hammer trip and dwell options.</p>
+<h2 id="what-richardson-did">What Richardson did<a class="headerlink" href="#what-richardson-did" title="Permanent link">&para;</a></h2>
+<p>From the patent text and Figs. 2 to 7:</p>
+<ul>
+<li><strong>The key levers are free bell-cranks,</strong> "without positive connection with any other part" except their pivot. Pressing one swings its lower arm against two plates.</li>
+<li><strong>Two rectangular frames hang from a shaft and a sleeve around it.</strong> Each carries a plate, and the plates are stacked one just above the other (Fig. 5). Each frame is one bent U of sheet (Fig. 7).</li>
+<li><strong>The plate edges are stepped</strong> along oblique lines (Fig. 6). Each key has its own pair of steps, and the plates are interchangeable.</li>
+<li><strong>A rod from each frame pulls one arm of a gear sector,</strong> so one frame goes forward as the other comes back. The sector turns a long pinion on the upright type shaft.</li>
+<li><strong>The key pushes whichever plate is nearer until the other arrives.</strong> "Its motion is stopped by the opposing action of the plates." The patent's rule is that the sum of the movements equals the frames' throw less the amount cut from the edges.</li>
+<li><strong>There is no home position.</strong> The wheel goes "forward or back to any position from any other", and "releasing the key has no effect". In his worked example one word takes 5 spaces of wheel travel, against 104 for a rotating wheel and 126 for one that returns home each time.</li>
+<li><strong>The pinched key locks the wheel</strong> in both directions for as long as it stays down.</li>
+</ul>
+<h2 id="what-changes">What changes<a class="headerlink" href="#what-changes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>1896</th>
+<th>Model 1</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two rods, a gear sector and a long pinion</td>
+<td><strong>One closed bead-chain loop.</strong> Frame 1 clamps to one run and frame 2 to the other</td>
+<td>The two runs of a loop already move in opposite directions, so the chain is both the opposing link and the drive. Two wraps instead of six, and no gear backlash</td>
+</tr>
+<tr>
+<td>Pull rods</td>
+<td>Short drag link from each frame arm to its chain clamp</td>
+<td>Keeps the clamp moving along the run as the arm swings (R-014)</td>
+</tr>
+<tr>
+<td>One lever pivot, so key dip differs by row</td>
+<td><strong>Three pivot rods stacked under the contact line,</strong> with a riser length for each row</td>
+<td>Every row gets the same 18 mm dip and the same tip travel</td>
+</tr>
+<tr>
+<td>Cast or filed parts</td>
+<td>Laser-cut levers and plates from generated DXF, with both plate edges cut in one setup from the same datum</td>
+<td>Each plate's edges locate from its own holes, and new layouts are a new file</td>
+</tr>
+<tr>
+<td>Bare lever edge on bare plate</td>
+<td>Small replaceable pad on each lever tip</td>
+<td>Softens the pick-up impact. Both plates compress it equally, so it doesn't move the letter</td>
+</tr>
+<tr>
+<td>The pinch is the only lock</td>
+<td>Pinch sets the position, and the tapered pin still takes the strike</td>
+<td>The strike load must never reach the chain (D-0001)</td>
+</tr>
+<tr>
+<td>Plain bearings</td>
+<td>Ball bearings at the frames, levers, chain wheels and element</td>
+<td>About 45 in all</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-numbers">The numbers<a class="headerlink" href="#the-numbers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keys</td>
+<td>28, levers parallel at 7.33 mm, 2 mm sheet</td>
+</tr>
+<tr>
+<td>Key dip</td>
+<td>18 mm at every row</td>
+</tr>
+<tr>
+<td>Front arm, top / home / bottom row</td>
+<td>70 / 89 / 108 mm, so 14.7 / 11.6 / 9.5° of swing</td>
+</tr>
+<tr>
+<td>Riser height, top / home / bottom row</td>
+<td>50.2 / 63.8 / 77.4 mm, so every tip travels 12.9 mm</td>
+</tr>
+<tr>
+<td>Tip slide on the plate</td>
+<td>about 0.4 mm of arc under load, so a roller isn't needed</td>
+</tr>
+<tr>
+<td>Plate throw</td>
+<td>±5.5 mm, 0.407 mm per column</td>
+</tr>
+<tr>
+<td>Rest clearance</td>
+<td>1.9 mm, tips clear the plates at any plate position</td>
+</tr>
+<tr>
+<td>Plates</td>
+<td>two stacked 2 mm aluminium sheets, about 235 × 25 mm, about 20 g each after lightening</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>swing radius to plate 35 mm, about ±9°. Ears outside the key bank, so no shaft crosses the levers</td>
+</tr>
+<tr>
+<td>Chain arm</td>
+<td>tie point at 105 mm, a 3:1 step-up. The arms sit in the 22 mm gap between the two key halves, one on each chain run</td>
+</tr>
+<tr>
+<td>Chain</td>
+<td>#2 bead, 12-groove Ø10.9 spline, 1.22 mm per column, ±16.5 mm. Loop about 200 mm, with the idler forward of the arms' sweep</td>
+</tr>
+<tr>
+<td>Wraps</td>
+<td>2 (element spline and one idler in a tension slot)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Laser tolerance:</strong> position depends on half the difference between a key's two edges, so ±0.08 mm on each edge gives at most ±0.08 mm of plate movement, or ±0.2 column. The tapered pin can correct ±0.4. Frame pivots, drag links and chain pitch add to that, and the chain needs measuring.</p>
+<h2 id="side-view">Side view<a class="headerlink" href="#side-view" title="Permanent link">&para;</a></h2>
+<p>To scale, one key at a time. The levers are drawn without the clearance cut-outs around the other rows' rods. Plate 1 is the upper one.</p>
+<style>
+.lcr { --s1:#2a78d6; --s2:#eb6834; margin:1em 0; }
+[data-md-color-scheme="slate"] .lcr { --s1:#3987e5; --s2:#d95926; }
+.lcr svg { width:100%; height:auto; border:1px solid var(--md-default-fg-color--lighter); border-radius:6px; background:var(--md-default-bg-color); display:block; }
+.lcr svg text { fill:var(--md-default-fg-color); font-size:12px; }
+.lcr svg text.m { fill:var(--md-default-fg-color--light); font-size:11px; }
+.lcr-ctl { display:flex; flex-wrap:wrap; gap:.8em; align-items:center; margin:.4em 0; font-size:.72rem; }
+.lcr-ctl input[type=range] { width:220px; }
+.lcr-kb { margin:.3em 0; }
+.lcr-kb div { display:flex; gap:3px; margin-bottom:3px; }
+.lcr-kb div:nth-child(2) { margin-left:14px; } .lcr-kb div:nth-child(3) { margin-left:28px; }
+.lcr-kb button { width:30px; height:28px; border:1px solid var(--md-default-fg-color--lighter); border-radius:4px; cursor:pointer; color:var(--md-default-fg-color); background:var(--md-default-bg-color); font:600 .72rem var(--md-code-font-family); }
+.lcr-kb button.on { background:var(--s1); color:#fff; border-color:var(--s1); }
+.lcr-read { font-family:var(--md-code-font-family); font-size:.72rem; min-height:3em; margin:.4em 0 0; }
+</style>
+
+<div class="lcr">
+<div class="lcr-kb" id="r-kb"></div>
+<div class="lcr-ctl"><label><input type="checkbox" id="r-slow"> Slow motion</label><label>Key depth <input type="range" id="r-r" min="0" max="1000" value="0"></label></div>
+<svg id="r-side" viewBox="0 0 760 760" role="img" aria-label="Side view of a key lever pushing two stacked plates on frames tied to a bead chain"></svg>
+</div>
+
+<h2 id="plan-view-and-chain">Plan view and chain<a class="headerlink" href="#plan-view-and-chain" title="Permanent link">&para;</a></h2>
+<p>Same keys as above, and both views move together. The two plates are really stacked, and are pulled apart here so both are visible at every key. Press several keys in a row: the plates go straight from one letter to the next, with no return to home. The chain loop is drawn larger than scale.</p>
+<div class="lcr">
+<svg id="r-plan" viewBox="0 0 900 600" role="img" aria-label="Plan view of two stepped plates moving in opposite directions, tied to a bead chain loop that turns the element"></svg>
+<p class="lcr-read" id="r-t">Pick a key.</p>
+</div>
+
+<script>
+(function () {
+  const NS = "http://www.w3.org/2000/svg", FG = "var(--md-default-fg-color)", BG = "var(--md-default-bg-color)", S1 = "var(--s1)", S2 = "var(--s2)";
+  const $ = id => document.getElementById(id);
+  const el = (p, t, a) => { const e = document.createElementNS(NS, t); for (const k in a || {}) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const txt = (p, x, y, s, a) => { const t = el(p, "text", Object.assign({ x, y }, a || {})); t.textContent = s; return t; };
+  const set = (e, a) => { for (const k in a) e.setAttribute(k, a[k]); };
+  const RAW = [["a","L",12],["q","L",9],["z","L",6],["s","L",3],["w","L",14],["x","L",11],["d","L",8],["e","L",5],["c","L",2],["f","L",13],["r","L",10],["v","L",7],["g","L",4],["t","L",1],["y","R",1],["h","R",4],["b","R",7],["u","R",10],["j","R",13],["n","R",2],["i","R",5],["k","R",8],["m","R",11],["o","R",14],["l","R",3],[",","R",6],["p","R",9],[".","R",12]];
+  const MM = 5.5 / 13.5, COL = 360 / 28, DIP = 18, TIP = 12.9;
+  const ROWS = { top: { arm: 70, R: 50.2, zk: -30 }, home: { arm: 89, R: 63.8, zk: -39 }, bottom: { arm: 108, R: 77.4, zk: -48 } };
+  const rowOf = c => "qwertyuiop".includes(c) ? "top" : "asdfghjkl.".includes(c) ? "home" : "bottom";
+  const lev = c => c % 3 === 1 ? (c - 1) / 3 : c % 3 === 2 ? 5 + (c - 2) / 3 : 10 + (c - 3) / 3;
+  const KEYS = RAW.map(([ch, side, c]) => { const sgn = side === "L" ? -1 : 1, idx = side === "L" ? 14 - c : 13 + c; return { ch, side, c, sgn, idx, row: ROWS[rowOf(ch)], rowName: rowOf(ch), i: lev(c), sk: (idx - 13.5) * MM }; });
+  const byCh = Object.fromEntries(KEYS.map(k => [k.ch, k]));
+  let key = byCh.d, s = key.sk, start = s, prev = null, depth = 0;
+  const tipT = (k, u) => { const th = DIP / k.row.arm, R = k.row.R; return R * Math.sin(u * th - th / 2) - R * Math.sin(th / 2); };
+  function push(T) { if (T > -key.sk + s) s = T + key.sk; if (T > key.sk - s) s = key.sk - T; }
+  // ---------- side
+  const Sv = (function () {
+    const svg = $("r-side"), K = 3, X0 = 70, Z0 = 430, sx = y => X0 + K * y, sy = z => Z0 - K * z, YR = 108, YE = YR - 6.45, YP = 84, ZC = 70;
+    txt(svg, 14, 22, "SIDE VIEW (to scale), front on the left", { style: "font-weight:600" });
+    Object.values(ROWS).forEach(r => el(svg, "circle", { cx: sx(YR), cy: sy(-r.R), r: 5, fill: BG, stroke: FG, "stroke-width": 1.5, "stroke-opacity": .5 }));
+    txt(svg, sx(YR) + 12, sy(-64), "three pivot rods", { class: "m" });
+    const chainY = sy(ZC);
+    el(svg, "line", { x1: sx(58), x2: sx(142), y1: chainY, y2: chainY, stroke: FG, "stroke-width": 3, "stroke-dasharray": "0 8", "stroke-linecap": "round" });
+    el(svg, "circle", { cx: sx(58), cy: chainY, r: K * 5.45, fill: "none", stroke: FG, "stroke-opacity": .5 });
+    txt(svg, sx(58) - 12, chainY - 22, "idler", { class: "m" });
+    el(svg, "rect", { x: sx(142) - K * 18, y: sy(122), width: K * 36, height: K * 44, fill: FG, "fill-opacity": .12, stroke: FG });
+    el(svg, "circle", { cx: sx(142), cy: chainY, r: K * 5.45, fill: "none", stroke: FG, "stroke-opacity": .7 });
+    txt(svg, sx(142), sy(122) - 8, "element, upright shaft", { "text-anchor": "middle", class: "m" });
+    txt(svg, sx(142) - 24, chainY + 34, "spline", { class: "m" });
+    txt(svg, sx(88), chainY - 34, "bead chain", { class: "m" });
+    const arm1 = el(svg, "line", { stroke: S1, "stroke-width": 4, "stroke-opacity": .7 }), arm2 = el(svg, "line", { stroke: S2, "stroke-width": 4, "stroke-opacity": .7 });
+    const dl1 = el(svg, "line", { stroke: S1, "stroke-width": 2 }), dl2 = el(svg, "line", { stroke: S2, "stroke-width": 2 });
+    const cl1 = el(svg, "rect", { width: 14, height: 10, rx: 2, fill: S1 }), cl2 = el(svg, "rect", { width: 14, height: 10, rx: 2, fill: S2 });
+    [[2.5, S1], [-2.5, S2]].forEach(([d]) => el(svg, "circle", { cx: sx(YP), cy: sy(d - 35), r: 4.5, fill: BG, stroke: FG, "stroke-width": 1.5 }));
+    txt(svg, sx(YP) - 68, sy(-35) + 16, "frame pivots", { class: "m" });
+    const pl1 = el(svg, "rect", { height: K * 2, fill: S1, "fill-opacity": .8 }), pl2 = el(svg, "rect", { height: K * 2, fill: S2, "fill-opacity": .8 });
+    const pl1L = txt(svg, 0, 0, "plate 1", { class: "m" }), pl2L = txt(svg, 0, 0, "plate 2", { class: "m" });
+    const lever = el(svg, "polyline", { fill: "none", stroke: FG, "stroke-opacity": .28, "stroke-width": K * 6, "stroke-linejoin": "round" });
+    const pad = el(svg, "rect", { fill: S1 });
+    const piv = el(svg, "circle", { r: 5.5, fill: BG, stroke: FG, "stroke-width": 2 });
+    const kt = el(svg, "rect", { width: K * 14, height: 7, rx: 2, fill: FG, "fill-opacity": .6 });
+    const GX = 70, GW = 620, GY = 716, gNow = el(svg, "line", { y1: GY - 3, y2: GY + 15, stroke: FG, "stroke-width": 3 });
+    el(svg, "rect", { x: GX, y: GY, width: GW, height: 12, fill: S1, opacity: .25 });
+    for (let m = 0; m <= 18; m += 2) txt(svg, GX + GW * m / DIP, GY + 28, m, { "text-anchor": "middle", class: "m" });
+    txt(svg, GX + GW + 8, GY + 28, "mm", { class: "m" });
+    txt(svg, GX, GY - 7, "key depth", { class: "m" });
+    return function () {
+      const k = key, u = depth / DIP, th = DIP / k.row.arm, ph = u * th - th / 2, R = k.row.R, A = k.row.arm, zr = -R;
+      const P = (y, z) => [YR + y * Math.cos(ph) - z * Math.sin(ph), zr + y * Math.sin(ph) + z * Math.cos(ph)];
+      const h = k.row.zk - zr, pts = [[-A, h], [-A + 8, h - 2], [-20, 6], [0, 0], [0, R - 4]].map(p => P(p[0], p[1]));
+      set(lever, { points: pts.map(p => sx(p[0]) + "," + sy(p[1])).join(" ") });
+      const t = P(0, R), rrod = P(0, 0), kk = P(-A, h);
+      set(pad, { x: sx(t[0]) - K * 2, y: sy(5), width: K * 2, height: K * 10 });
+      set(piv, { cx: sx(rrod[0]), cy: sy(rrod[1]) });
+      set(kt, { x: sx(kk[0]) - K * 7, y: sy(kk[1]) - 7 });
+      const yE = t[0] - tipT(k, u) - K * 0, face1 = YE - (-k.sk + s), face2 = YE - (k.sk - s);
+      set(pl1, { x: sx(face1 - 25), y: sy(3.5), width: K * 25 }); set(pl2, { x: sx(face2 - 25), y: sy(-1.5), width: K * 25 });
+      set(pl1L, { x: sx(face1 - 25) - 44, y: sy(3.5) + 6 }); set(pl2L, { x: sx(face2 - 25) - 44, y: sy(-1.5) + 12 });
+      const a1 = Math.asin(s / 35), a2 = -a1;
+      [[arm1, dl1, cl1, a1, 2.5, 1], [arm2, dl2, cl2, a2, -2.5, -1]].forEach(([ar, dl, cl, a, d, sg]) => {
+        const zp = d - 35, ty = YP - 105 * Math.sin(a), tz = zp + 105 * Math.cos(a), cy = ty + 12;
+        set(ar, { x1: sx(YP), y1: sy(zp), x2: sx(ty), y2: sy(tz) });
+        set(dl, { x1: sx(ty), y1: sy(tz), x2: sx(cy), y2: chainY });
+        set(cl, { x: sx(cy) - 7, y: chainY - 5 });
+      });
+      set(gNow, { x1: GX + GW * u, x2: GX + GW * u });
+    };
+  })();
+  // ---------- plan
+  const Pl = (function () {
+    const svg = $("r-plan"), K = 2.9, CX = 450, YE = 215, cxs = k => CX + k.sgn * (11 + k.i * 7.33) * K;
+    txt(svg, 14, 22, "PLAN VIEW (plates to scale), rear at the top", { style: "font-weight:600" });
+    const gA = el(svg, "g"), gB = el(svg, "g");
+    el(gA, "rect", { x: 120, y: 52, width: 660, height: 12, rx: 3, fill: S1, "fill-opacity": .75 });
+    el(gB, "rect", { x: 120, y: 100, width: 660, height: 12, rx: 3, fill: S2, "fill-opacity": .75 });
+    KEYS.forEach(k => {
+      el(gA, "rect", { x: cxs(k) - 9, y: 64, width: 9, height: YE + K * k.sk - 64, fill: S1, "fill-opacity": .45 });
+      el(gB, "rect", { x: cxs(k), y: 112, width: 9, height: YE - K * k.sk - 112, fill: S2, "fill-opacity": .45 });
+    });
+    txt(gA, 72, 62, "plate 1", { class: "m" }); txt(gB, 72, 110, "plate 2", { class: "m" });
+    el(svg, "line", { x1: 120, x2: 780, y1: YE, y2: YE, stroke: FG, "stroke-dasharray": "4 4", "stroke-opacity": .4 });
+    txt(svg, 788, YE + 4, "pinch line", { class: "m" });
+    const R = 3.5 * K, tips = {}, lbl = {};
+    KEYS.forEach(k => {
+      el(svg, "line", { x1: cxs(k), x2: cxs(k), y1: 272, y2: 338, stroke: FG, "stroke-opacity": .18, "stroke-width": 2 });
+      tips[k.ch] = el(svg, "circle", { cx: cxs(k), r: R, fill: BG, stroke: FG, "stroke-opacity": .5, "stroke-width": 1.5 });
+      lbl[k.ch] = txt(svg, cxs(k), 356, k.ch, { "text-anchor": "middle", style: "font-size:13px;font-weight:600" });
+    });
+    const LY1 = 466, LY2 = 524, LX1 = 170, LX2 = 610, RR = 29;
+    const loop = el(svg, "path", { d: `M${LX1},${LY1} L${LX2},${LY1} A${RR},${RR} 0 0 1 ${LX2},${LY2} L${LX1},${LY2} A${RR},${RR} 0 0 1 ${LX1},${LY1}`, fill: "none", stroke: FG, "stroke-width": 5, "stroke-linecap": "round", "stroke-dasharray": "0 11" });
+    el(svg, "circle", { cx: LX1, cy: (LY1 + LY2) / 2, r: RR - 7, fill: "none", stroke: FG, "stroke-opacity": .5 });
+    txt(svg, LX1 - 12, (LY1 + LY2) / 2 + 4, "idler", { class: "m" });
+    const sp = el(svg, "g");
+    el(sp, "circle", { cx: LX2, cy: (LY1 + LY2) / 2, r: RR - 7, fill: "none", stroke: FG, "stroke-opacity": .7 });
+    el(sp, "line", { x1: LX2, y1: (LY1 + LY2) / 2, x2: LX2, y2: (LY1 + LY2) / 2 - RR + 7, stroke: FG, "stroke-width": 2 });
+    txt(svg, LX2 - 16, LY2 + 46, "spline", { class: "m" });
+    txt(svg, 170, 420, "bead-chain loop: plate 1 clamps to one run, plate 2 to the other", { class: "m" });
+    const c1 = el(svg, "rect", { width: 26, height: 18, rx: 3, fill: S1, y: LY1 - 9 }), c2 = el(svg, "rect", { width: 26, height: 18, rx: 3, fill: S2, y: LY2 - 9 });
+    const WX = 790, WY = 490, WR = 72, W = el(svg, "g"), wl = {};
+    el(svg, "circle", { cx: WX, cy: WY, r: WR, fill: "none", stroke: FG, "stroke-opacity": .45, "stroke-width": 1.5 });
+    KEYS.forEach(k => { wl[k.ch] = txt(W, WX, WY - WR + 15, k.ch, { "text-anchor": "middle", transform: `rotate(${(k.idx - 13.5) * COL} ${WX} ${WY})`, style: "font-size:12px;font-weight:600" }); });
+    el(svg, "polygon", { points: `${WX - 7},${WY - WR - 14} ${WX + 7},${WY - WR - 14} ${WX},${WY - WR - 3}`, fill: S2 });
+    txt(svg, WX, WY + WR + 18, "element", { "text-anchor": "middle", class: "m" });
+    return function () {
+      const T = tipT(key, depth / DIP);
+      set(gA, { transform: `translate(0 ${-K * s})` }); set(gB, { transform: `translate(0 ${K * s})` });
+      KEYS.forEach(k => { const on = k.ch === key.ch, t = on ? T : -TIP; set(tips[k.ch], { cy: YE - K * t + R }); tips[k.ch].style.fill = on ? S1 : ""; lbl[k.ch].style.opacity = on ? 1 : .55; });
+      const g = 27, m = (LX1 + LX2) / 2, ang = -(s / MM) * COL;
+      set(c1, { x: m - 13 - s * g }); set(c2, { x: m - 13 + s * g });
+      loop.style.strokeDashoffset = s * g;
+      set(sp, { transform: `rotate(${ang} ${LX2} ${(LY1 + LY2) / 2})` });
+      set(W, { transform: `rotate(${ang} ${WX} ${WY})` });
+      for (const c in wl) { wl[c].style.fill = c === key.ch ? S1 : ""; wl[c].style.opacity = c === key.ch ? 1 : .5; }
+    };
+  })();
+  function draw() {
+    const u = depth / DIP; push(tipT(key, u)); Sv(); Pl();
+    const mv = Math.abs(s - start);
+    $("r-t").textContent = `Key "${key.ch}" (${key.rowName} row)${prev ? `, coming from "${prev}"` : ""}. Depth ${depth.toFixed(1)} mm. Plates moved ${mv.toFixed(2)} mm this stroke (${(mv / MM).toFixed(1)} columns), chain ${(mv * 3).toFixed(1)} mm.`;
+  }
+  const range = $("r-r"), slow = $("r-slow"), btn = {};
+  ["qwertyuiop", "asdfghjkl.", "zxcvbnm,"].forEach(r => { const d = document.createElement("div"); [...r].forEach(ch => { const b = document.createElement("button"); b.type = "button"; b.textContent = ch; b.onclick = () => pick(ch); btn[ch] = b; d.appendChild(b); }); $("r-kb").appendChild(d); });
+  const mark = () => { for (const c in btn) btn[c].classList.toggle("on", c === key.ch); };
+  let tok = 0;
+  range.oninput = () => { tok++; depth = DIP * range.value / 1000; draw(); };
+  function select(ch) { if (ch !== key.ch) prev = key.ch; key = byCh[ch]; start = s; mark(); }
+  function pick(ch) {
+    select(ch);
+    const me = ++tok, T = slow.checked ? 5 : 1, p = 450 * T, h = 350 * T, t0 = performance.now();
+    (function f(now) { if (me !== tok) return; const e = now - t0, u = e < p ? e / p : e < p + h ? 1 : e < 2 * p + h ? 1 - (e - p - h) / p : 0; depth = DIP * u; range.value = u * 1000; draw(); if (e < 2 * p + h) requestAnimationFrame(f); })(t0);
+  }
+  mark(); draw();
+  window.lcR = (ch, u) => { tok++; select(ch); depth = DIP * u; range.value = u * 1000; draw(); };
+})();
+</script>
+
+<h2 id="parts-list-so-far">Parts list so far<a class="headerlink" href="#parts-list-so-far" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Qty</th>
+<th>How it's made</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key lever, one per key</td>
+<td>28</td>
+<td>laser-cut 2 mm sheet, unique riser and clearance cut-outs</td>
+</tr>
+<tr>
+<td>Lever pivot bearing, 683ZZ</td>
+<td>28</td>
+<td>retained in the lever on 3 mm rods with spacers</td>
+</tr>
+<tr>
+<td>Pivot rods</td>
+<td>3</td>
+<td>3 mm ground rod</td>
+</tr>
+<tr>
+<td>Plates</td>
+<td>2</td>
+<td>laser-cut 2 mm aluminium, swappable for a new layout</td>
+</tr>
+<tr>
+<td>Frame ears and central chain arms</td>
+<td>2 sets</td>
+<td>laser-cut, bolted to the plates, so nothing is bent by hand (R-012)</td>
+</tr>
+<tr>
+<td>Frame pivots</td>
+<td>4 × 688ZZ or 625ZZ</td>
+<td>stub shafts outside the key bank</td>
+</tr>
+<tr>
+<td>Drag links</td>
+<td>2</td>
+<td>laser-cut, 683ZZ at each end</td>
+</tr>
+<tr>
+<td>Chain loop, 2 clamps, idler in a slot</td>
+<td>1 set</td>
+<td>#2 bead chain</td>
+</tr>
+<tr>
+<td>Element</td>
+<td>1</td>
+<td>the thin cup with a 12-groove spline (I-029, I-058)</td>
+</tr>
+<tr>
+<td>Tip pads</td>
+<td>28</td>
+<td>moulded or printed, replaceable</td>
+</tr>
+</tbody>
+</table>
+<p>The tapered lock pin and universal bail carry over from the earlier designs, and their layout is still to do.</p>
+<h2 id="what-it-costs-the-finger">What it costs the finger<a class="headerlink" href="#what-it-costs-the-finger" title="Permanent link">&para;</a></h2>
+<p>Mass felt at the keytop, estimated with the thin cup element:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Mass at keytop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element</td>
+<td>about 219 g</td>
+</tr>
+<tr>
+<td>Two frames with plates and chain arms</td>
+<td>about 36 g</td>
+</tr>
+<tr>
+<td>Chain and clamps (they move 3× the plate speed)</td>
+<td>about 31 g</td>
+</tr>
+<tr>
+<td>Lever and keytop</td>
+<td>about 7 g</td>
+</tr>
+<tr>
+<td><strong>Total, on every move</strong></td>
+<td><strong>about 290 g</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That's more than the 235 g in the report, because the report didn't include the chain and step-up arm. With a 25 g solid element it would be about 950 g, so <strong>the cup element is essential to this design</strong>.</p>
+<p>The mass is the same near or far, but most moves are short because there's no return home. Grouping common letters together on the wheel, as Richardson suggests, shortens them further.</p>
+<p><strong>Pick-up impact is the main concern.</strong> At a 0.25 m/s keystroke the tip picks up a stationary load of about 0.55 kg effective mass. With a hard tip (3 ms contact) that's about 24 N at the keytop, and with a soft pad (8 ms) about 9 N. A similar impact happens when the second plate arrives, about 9 mJ each.</p>
+<h2 id="how-the-forces-go">How the forces go<a class="headerlink" href="#how-the-forces-go" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Selecting:</strong> the tip pushes one plate, and the frame arm pulls one chain run. The loop drives the spline and draws the other frame back.</li>
+<li><strong>At the pinch:</strong> the tip presses both plates the same way, so both runs pull equally and the element gets no torque. Chain stretch doesn't move the letter, and the load goes into the spline and idler bearings.</li>
+<li><strong>Bottom of the stroke:</strong> a hard stop on the universal bail, just past the pinch, keeps a heavy finger from loading the chain.</li>
+<li><strong>Printing:</strong> the tapered pin locks the element, so the strike stays out of the chain.</li>
+</ul>
+<h2 id="open">Open<a class="headerlink" href="#open" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Plate sag and twist:</strong> the chain tie is at the centre and the tips reach ±106 mm. The plate is stiff in its own plane, but this needs checking in CAD.</li>
+<li><strong>Plate 1 needs a slot</strong> for plate 2's chain arm to pass through, about 6 × 30 mm near the centre.</li>
+<li><strong>Clearance cut-outs:</strong> home- and bottom-row risers pass the other rods, so each needs a slot about 8 mm wide and a riser about 14 mm wide.</li>
+<li><strong>Universal bail:</strong> the rows swing through different angles, so each lug needs its own radius (about 25, 32 and 39 mm).</li>
+<li><strong>Pad or lead-in:</strong> I've drawn a soft pad, which keeps the plate edges free of ramps. A short lead-in on the plate edges would be the alternative.</li>
+<li><strong>Rollover:</strong> a second key pressed while the first is down hits plates that are already pinched. Richardson's pawl lets the next key start early, and I haven't worked that out here.</li>
+<li><strong>Lever pivots:</strong> bearings add about 28 parts for roughly 1% less force. A plain rod with spacers is a fair first build.</li>
+</ul>
+<h2 id="test-first">Test first<a class="headerlink" href="#test-first" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Pinch rig:</strong> one lever, two plates, a dummy inertia of about 0.55 kg effective at the tip. Measure rebound, noise and force with hard and soft tips. Pass: rebound under ±0.2 column.</li>
+<li><strong>Chain loop:</strong> two clamps, one spline, an idler in a slot. Measure backlash at the element with both runs loaded, and with one.</li>
+<li><strong>Edge accuracy:</strong> measure step positions on a laser-cut sample plate from the shop you'd use.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "toc.follow"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

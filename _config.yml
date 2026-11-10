@@ -133,6 +133,11 @@ collections:
 # Defaults
 # -----------------------------------------------------------------------------
 defaults:
+  # unlisted share pages: kept out of the sitemap
+  - scope:
+      path: "share"
+    values:
+      sitemap: false
   # _posts
   - scope:
       path: ""
