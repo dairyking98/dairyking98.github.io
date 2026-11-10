@@ -1,0 +1,1219 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../candidates/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Research report - Richardson selection on bead chain</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#roll-one-bar-under-notched-levers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Richardson selection on bead chain" class="md-header__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Richardson selection on bead chain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Research report
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Richardson selection on bead chain" class="md-nav__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Richardson selection on bead chain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D and more views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-after-pinch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-machine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Richardson's 1896 machine works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../candidates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The three candidates, animated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research report
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inertia-not-bearing-friction-sets-the-keytop-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inertia, not bearing friction, sets the keytop load
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nine-families-cover-the-record-and-few-keep-a-slide-out-of-the-load-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nine families cover the record, and few keep a slide out of the load path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-owners-record-closes-four-doors-and-leaves-two-ajar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The owner's record closes four doors and leaves two ajar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#three-candidates-can-go-into-creo-now-and-the-rolling-bar-leads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three candidates can go into Creo now, and the rolling bar leads
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Three candidates can go into Creo now, and the rolling bar leads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rank-1-candidate-a-one-rolling-bar-a-slot-in-every-lever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 1, candidate A: one rolling bar, a slot in every lever
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-2-candidate-b-five-rocking-code-bails-and-a-pivot-only-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 2, candidate B: five rocking code bails and a pivot-only tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-3-candidate-c-richardsons-opposed-plates-positive-and-homeless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 3, candidate C: Richardson's opposed plates, positive and homeless
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-the-three-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the three compare
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inertia-not-bearing-friction-sets-the-keytop-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inertia, not bearing friction, sets the keytop load
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nine-families-cover-the-record-and-few-keep-a-slide-out-of-the-load-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nine families cover the record, and few keep a slide out of the load path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-owners-record-closes-four-doors-and-leaves-two-ajar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The owner's record closes four doors and leaves two ajar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#three-candidates-can-go-into-creo-now-and-the-rolling-bar-leads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three candidates can go into Creo now, and the rolling bar leads
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Three candidates can go into Creo now, and the rolling bar leads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rank-1-candidate-a-one-rolling-bar-a-slot-in-every-lever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 1, candidate A: one rolling bar, a slot in every lever
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-2-candidate-b-five-rocking-code-bails-and-a-pivot-only-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 2, candidate B: five rocking code bails and a pivot-only tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-3-candidate-c-richardsons-opposed-plates-positive-and-homeless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 3, candidate C: Richardson's opposed plates, positive and homeless
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-the-three-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the three compare
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="roll-one-bar-under-notched-levers">Roll one bar under notched levers<a class="headerlink" href="#roll-one-bar-under-notched-levers" title="Permanent link">&para;</a></h1>
+<p>The best clean-sheet Model 1 selector found in the library is a single free-rolling bar on a swinging frame, driven by a unique closed slot cut into each laser-cut key lever, then a gear sector to a long pinion on a thin cup element. Hammond disclosed the rolling bar in 1880 (<a href="https://leonardchau.com/typewriters-patents/patents/US224183/" title="Hammond, James B. · 1880 · Type Writing Machine">US224183</a>) and Schuckers the slot with a straight locking extension (<a href="https://leonardchau.com/typewriters-patents/patents/US529810/" title="Schuckers, Jacobs W. · 1894 · Type-Writing Machine">US529810</a>); I found no patent combining them with ball-bearing pivots throughout. It removes the idle-side coupling problem outright, because both halves of the keyboard drive one member, and it needs no chain, no linear rail and no spring in the positioning path. My first estimate of the mass seen at the keytop is about 127 g on the worst key and about 21 g frequency-weighted with a cup element. The same sum is about 420 g with the project's 25 g element estimate, so the element matters more than the bearings. A pivot-only tree of five rocking code bails ranks second, and Richardson's opposed swinging plates third. Stored-energy selection gives the lightest touch of all but stays unproposed, because the owner rejected it. This matters because the library's anti-friction parts are sparse and no patent balls every joint: bearings alone cannot deliver the brief, and every force and mass figure below is my own estimate, since <strong>the library contains no measured key forces for the machines in question</strong>. The owner's recorded 15 to 20 mm stroke and the brief's "short strokes" genuinely conflict; I sized everything at 18 mm as the recorded decision and show below what a shorter stroke costs, leaving the choice to the owner.</p>
+<h2 id="inertia-not-bearing-friction-sets-the-keytop-load">Inertia, not bearing friction, sets the keytop load<a class="headerlink" href="#inertia-not-bearing-friction-sets-the-keytop-load" title="Permanent link">&para;</a></h2>
+<p>Two figures that motivate this clean sheet need a plain label. <strong>The abandoned design's 304 g shuttle mass and its six bead-chain wraps are calculations made in this research session from the generator's numbers; neither figure is recorded in the repository under those words.</strong> Only the 4× motion ratio could be confirmed from the published constants: 2:1 tackle, 0.61 mm of bail and 2.443 mm of shuttle per column (selection.md). Reflected mass goes with the square of the ratio, so 304 g at 4× is about 4.9 kg at the bail, before the key-to-bail ratio. That number is a session calculation too, and it is not like-for-like with the keytop figures below.</p>
+<p><strong>The library holds no measured key force, dip or typing speed for Blickensderfer, Hammond, Commercial Visible or Bennett, and the Selectric appears by name only.</strong> The real measurements are Hildebrand's typebar figures: finger or key speed of 40 to 50 cm/s and 30 to 43 ms from key start to impact (Hildebrand 1954, 1955). Single-element evidence is qualitative. Reinecke calls keyboard type-wheel machines unsatisfactory in speed and impression force because of "the large mass of the type wheel to be moved" and the long key travel (Reinecke 1953). No patent gives a before-and-after key force for any anti-friction part. Project keytop budgets of 6.0 and 11.8 N against a limit of 8 N are estimates for a different machine (comb-no1/mechanism.md).</p>
+<p>Inertia is what the inventors themselves worried about. Blickensderfer wrote that "the lighter the wheel the greater the ease with which its inertia will be overcome" (<a href="https://leonardchau.com/typewriters-patents/patents/US432296/" title="Blickensderfer, George C. · 1890 · Type-Wheel For Type-Writing Machines">US432296</a>). Gardner gave the design rule that a sleeve "avoids the momentum of the segment" but "involves a greater angular motion" (<a href="https://leonardchau.com/typewriters-patents/patents/US463860/" title="Gardner, John · 1891 · Type-Writing Machine">US463860</a>). What the finger feels is J·(dθ/dx)². On a full 28-column wheel the worst key must turn the element 173.6° in one direction, so the only free variables are element inertia J and the selecting length of the stroke.</p>
+<p><strong>All numbers in this table are my estimates, not sources.</strong> A cup element here means a 1.2 mm resin wall on Ø36 mm with type, perforated web, aluminium pinion and steel shaft: about 23 g in total and J about 1.4×10⁻⁶ kg·m². The "25 g solid" column takes the project's element estimate (I-039) with an assumed 15 mm radius of gyration, J about 5.6×10⁻⁶ kg·m². Force assumes a constant key speed of 0.25 m/s and 20% blends at each end of the motion.</p>
+<table>
+<thead>
+<tr>
+<th>Key stroke, selecting length (estimates)</th>
+<th>Element reflected mass, worst key, cup</th>
+<th>Same, 25 g solid</th>
+<th>Peak inertial force, worst key, cup</th>
+<th>Same, 25 g solid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8 mm, 5 mm ("short stroke")</td>
+<td>514 g</td>
+<td>2,065 g</td>
+<td>50 N</td>
+<td>200 N</td>
+</tr>
+<tr>
+<td>15 mm, 9 mm</td>
+<td>159 g</td>
+<td>637 g</td>
+<td>8.6 N</td>
+<td>35 N</td>
+</tr>
+<tr>
+<td><strong>18 mm, 11.5 mm (recorded decision, used below)</strong></td>
+<td><strong>97 g</strong></td>
+<td><strong>390 g</strong></td>
+<td><strong>4.1 N</strong></td>
+<td><strong>17 N</strong></td>
+</tr>
+<tr>
+<td>20 mm, 13.5 mm</td>
+<td>70 g</td>
+<td>283 g</td>
+<td>2.5 N</td>
+<td>10 N</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Here is the conflict the brief leaves open.</strong> The owner recorded "15-20 mm", 18 mm at every key, trip at about 17.7 mm (I-046 revised); the brief asks for short strokes. A key-driven selector cannot have both at low force: reflected mass scales with 1/S² and blend force with 1/S³, so 8 mm costs five times the 18 mm mass and twelve times the force. At a measured-typebar finger speed of 0.5 m/s the 18 mm cup figure quadruples to about 16 N, so the far columns will not be taken at full speed, as the period machines' reputation already suggests. <a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a> got 2 to 3 mm keys only "through the automatic setting ... by means of the driving force of the paper cart" (<a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a>), which is stored energy. Short strokes therefore require either reopening stored energy or changing the element layout (see the conclusion). I did not choose between them; the candidates are sized at 18 mm because that is the recorded decision. The 15 and 20 mm rows are the sensitivity.</p>
+<p>Grading softens this. Reflected mass in a graded design goes with column offset squared, so the mean across 28 keys is 36% of the worst key, and about 11% if frequent letters sit nearest home, a period practice (<a href="https://leonardchau.com/typewriters-patents/patents/US253475/" title="Hammond, James B. · 1882 · Type-Writer">US253475</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US463464/" title="Spiro, Charles · 1891 · Type-Writing Machine">US463464</a>). The 11% uses standard English letter frequencies, which are my assumption and not in the library.</p>
+<h2 id="nine-families-cover-the-record-and-few-keep-a-slide-out-of-the-load-path">Nine families cover the record, and few keep a slide out of the load path<a class="headerlink" href="#nine-families-cover-the-record-and-few-keep-a-slide-out-of-the-load-path" title="Permanent link">&para;</a></h2>
+<p>The library's patents split on one question: where does the key-specific displacement come from? Grouped that way there are nine families. The table states what each does about friction and mass in the patent text; the fit column is my judgement against the brief and the audit. Sources were read as OCR or machine-translated passages, mostly not cover to cover, and no drawings were viewed.</p>
+<table>
+<thead>
+<tr>
+<th>Family and generator</th>
+<th>Patents and machines</th>
+<th>Friction handling</th>
+<th>Effective mass</th>
+<th>Fit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Incline or cam per key, on a common actuator or cut in the key</td>
+<td>Hammond 1880 notched levers on a rolling bar (<a href="https://leonardchau.com/typewriters-patents/patents/US224183/" title="Hammond, James B. · 1880 · Type Writing Machine">US224183</a>); Schuckers inclined slot straddling one lever (<a href="https://leonardchau.com/typewriters-patents/patents/US423576/" title="Schuckers, Jacobs W. · 1890 · Type-Writing Machine">US423576</a>) and plates on the wheel shaft (<a href="https://leonardchau.com/typewriters-patents/patents/US441257/" title="Schuckers, Jacobs W. · 1890 · Type-Writing Machine">US441257</a>); Armstrong (<a href="https://leonardchau.com/typewriters-patents/patents/US693208/" title="Armstrong, Frank H. · 1902 · Type-Writer">US693208</a>); <a href="https://leonardchau.com/typewriters-patents/patents/DE200880/" title="1907 · ~Schreibmaschine mit gegen die Papierwalze schwingbarem Typenrad">DE200880</a> key rollers in grooves (<a href="https://leonardchau.com/typewriters-patents/patents/DE200880/" title="1907 · ~Schreibmaschine mit gegen die Papierwalze schwingbarem Typenrad">DE200880</a>); McCool (<a href="https://leonardchau.com/typewriters-patents/patents/US964045/" title="McCool, William A. · 1910 · Type-Writer">US964045</a>)</td>
+<td>Sliding along the whole motion, except Hammond's rolling bar and <a href="https://leonardchau.com/typewriters-patents/patents/DE200880/" title="1907 · ~Schreibmaschine mit gegen die Papierwalze schwingbarem Typenrad">DE200880</a>'s rollers; Helios used long steep flanks for light touch (Martin 1934)</td>
+<td>Graded from zero: home keys near nothing, outer keys highest</td>
+<td><strong>Best, in rolling form only</strong></td>
+</tr>
+<tr>
+<td>2. Lever-arm position or height gap</td>
+<td>Clerk (<a href="https://leonardchau.com/typewriters-patents/patents/US438430/" title="Clerk, Charles R. · 1890 · Type-Writing Machine">US438430</a>); Moore (<a href="https://leonardchau.com/typewriters-patents/patents/US398646/" title="Moore, N. Grier · 1889 · Type-Writing Machine">US398646</a>); Paulson and Simpson sheet rock plates (<a href="https://leonardchau.com/typewriters-patents/patents/US1150382/" title="Paulson - Simpson, Charles J. - James E. · 1915 · Type-Writing Machine">US1150382</a>); Blanchard collar heights (<a href="https://leonardchau.com/typewriters-patents/patents/US373637/" title="Blanchard, Virgil W. · 1887 · Type-Writing Machine">US373637</a>); Sears (<a href="https://leonardchau.com/typewriters-patents/patents/US606814/" title="Sears, Charles · 1898 · Key-Actuated Equalizing-Bar">US606814</a>)</td>
+<td>Pivots plus one key contact; cone-point and needle pivots appear</td>
+<td>Lever-arm grading is 1/r; height gaps give every key the full ratio</td>
+<td>Sound, but carries the 1/r error the project already criticised</td>
+</tr>
+<tr>
+<td>3. Gear or rack on each key</td>
+<td>Spiro (<a href="https://leonardchau.com/typewriters-patents/patents/US463464/" title="Spiro, Charles · 1891 · Type-Writing Machine">US463464</a>); Lamb (<a href="https://leonardchau.com/typewriters-patents/patents/US492812/" title="Lamb, Nathan H. · 1893 · Type-Writing Machine">US492812</a>); Ferguson (<a href="https://leonardchau.com/typewriters-patents/patents/US667433/" title="Ferguson, Arthur C. · 1901 · Type-Writer">US667433</a>)</td>
+<td>Rolling mesh, no bail, no rock shaft; direct gearing in a hand-lever machine reduces "the number of parts and the friction" (Ferris <a href="https://leonardchau.com/typewriters-patents/patents/US384142/" title="Ferris, George L. · 1888 · Type-Writing Machine">US384142</a>)</td>
+<td>Low train mass; tooth load and clearance at every key</td>
+<td>Poor for laser cut: 28 fine racks</td>
+</tr>
+<tr>
+<td>4. Common driver runs to a key-set stop</td>
+<td>Quentell, linked to Postal 5 (<a href="https://leonardchau.com/typewriters-patents/patents/US611146/" title="Quentell, William P. · 1898 · Type-Writing Machine">US611146</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US717506/" title="Quentell, William P. · 1902 · Type-Writing Machine">US717506</a>, <a href="https://leonardchau.com/typewriters-patents/machines/postal-5/">Postal 5</a>); Bennett (<a href="https://leonardchau.com/typewriters-patents/patents/US670889/" title="Bennett, Charles A. · 1901 · Type-Writing Machine">US670889</a>); Foothorap, ball races (<a href="https://leonardchau.com/typewriters-patents/patents/US1146148/" title="Foothorap, Harry A. · 1915 · Type-Writing Machine">US1146148</a>); Peeters four-bars (<a href="https://leonardchau.com/typewriters-patents/patents/DE461444/" title="Peeters, Henri · 1928 · Key typewriter with a striking type cylinder">DE461444</a>)</td>
+<td>Often pivots and gears, but stop pins and racks slide; impact at the stop</td>
+<td>Every key drives at full ratio; stop racks and second segments add mass</td>
+<td>Weak: mass and arrival shock</td>
+</tr>
+<tr>
+<td>5. Opposed pair or difference of two motions</td>
+<td>Blickensderfer racks (<a href="https://leonardchau.com/typewriters-patents/patents/US459093/" title="Blickensderfer, George C. · 1891 · Type-Writing Machine">US459093</a>); Heath (<a href="https://leonardchau.com/typewriters-patents/patents/US773567/" title="Heath, Frank E. · 1904 · Type-Writer">US773567</a>); Gardner two quadrants (<a href="https://leonardchau.com/typewriters-patents/patents/US505547/" title="Gardner, John · 1893 · Type-Writing Machine">US505547</a>); Hunt (<a href="https://leonardchau.com/typewriters-patents/patents/US709152/" title="Hunt, Wilfred · 1902 · Type-Writer">US709152</a>); Tower (<a href="https://leonardchau.com/typewriters-patents/patents/US542179/" title="Tower, Daniel L. · 1895 · Mechanical Movement">US542179</a>); Peterson on hangers (<a href="https://leonardchau.com/typewriters-patents/patents/US634183/" title="Peterson, Charles E. · 1899 · Type-Writer">US634183</a>); Richardson swinging plates (<a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>); boundary case Uhlig, Commercial Visible (<a href="https://leonardchau.com/typewriters-patents/patents/US593789/" title="Uhlig, Richard W. · 1897 · Type-Writing Machine">US593789</a>)</td>
+<td>Peterson: "the entire frictional resistance ... is converted into forces acting in opposite directions on the pinion", with hangers in place of guides; Richardson has straight-edge contacts only</td>
+<td>Opposed trains add parallel moving parts; Richardson runs at constant ratio</td>
+<td>Richardson good; Peterson too close to the abandoned two opposing bails</td>
+</tr>
+<tr>
+<td>6. Code and sum</td>
+<td>Series stacks <a href="https://leonardchau.com/typewriters-patents/patents/DE41676/" title="1887 · typewriter">DE41676</a>, <a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a> (<a href="https://leonardchau.com/typewriters-patents/patents/DE41676/" title="1887 · typewriter">DE41676</a>, <a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a>); slot series Carmona (<a href="https://leonardchau.com/typewriters-patents/patents/US661849/" title="Carmona, Manuel S. · 1900 · Type-Writing Machine">US661849</a>); wedge Strauss (<a href="https://leonardchau.com/typewriters-patents/patents/DE683955/" title="Strauss, Emil · 1939 · Typewriter Like. With a type carrier movable in two directions at right angles &hellip;">DE683955</a>); band path-sum (<a href="https://leonardchau.com/typewriters-patents/patents/US638092/" title="Carmona, Manuel S. · 1899 · Type-Writing Machine">US638092</a>, <a href="https://leonardchau.com/typewriters-patents/patents/DE701607/" title="Adams, Arthur Herman · 1941 · ~In the case of these known arrangements">DE701607</a>); rigid tree Willers (<a href="https://leonardchau.com/typewriters-patents/patents/DE745913/" title="Willers, Hans Bodo · 1944 · Waehlwerk fuer Ferndrucker">DE745913</a>), Palmer outside the library (<a href="https://patents.google.com/patent/US2919002/en">US2919002</a>)</td>
+<td>Trees and rocking code rods can be near all pivots; stacks all slide</td>
+<td>Binary does not cut the element term; it adds bars and tree on top</td>
+<td>Good on pivots, costly in parts</td>
+</tr>
+<tr>
+<td>7. Two-axis element</td>
+<td>Hall (<a href="https://leonardchau.com/typewriters-patents/patents/US364343/" title="Hall, George W. · 1887 · Type-Writing Machine">US364343</a>); Stover (<a href="https://leonardchau.com/typewriters-patents/patents/US409073/" title="Stover, Daniel C. · 1889 · Type-Writing Machine">US409073</a>); Lambert (<a href="https://leonardchau.com/typewriters-patents/patents/US640208/" title="Lambert, Frank · 1900 · Type-Writer">US640208</a>); Burridge (<a href="https://leonardchau.com/typewriters-patents/patents/US634285/" title="Burridge, Lee S. · 1899 · Type-Writing Machine">US634285</a>); Seifried, Munson and Chicago (<a href="https://leonardchau.com/typewriters-patents/patents/US411066/" title="Seifried, Samuel J. · 1889 · Type-Writing Machine">US411066</a>, <a href="https://leonardchau.com/typewriters-patents/machines/munson-1/">Munson</a>, <a href="https://leonardchau.com/typewriters-patents/machines/chicago-1/">Chicago</a>); Crandall (<a href="https://leonardchau.com/typewriters-patents/patents/US251338/" title="Crandall, Lucien S. · 1881 · Type Writing Machine">US251338</a>); Moya (<a href="https://leonardchau.com/typewriters-patents/patents/US752795/" title="Moya, Hidalgo · 1904 · Type-Writer">US752795</a>)</td>
+<td>Frame forms pivot throughout; sleeves slide</td>
+<td>Lowest: excursion falls, and mass with its square; Schuckers' 90 to 150° segment is the single-axis cousin</td>
+<td>Strong idea, but conflicts with 28 × 3</td>
+</tr>
+<tr>
+<td>8. Stored energy released by the key</td>
+<td>Spring: Myers, Mercury 3 (<a href="https://leonardchau.com/typewriters-patents/patents/US419209/" title="Myers, Frederick · 1890 · Type-Writing Machine">US419209</a>, <a href="https://leonardchau.com/typewriters-patents/machines/mercury-3/">Mercury 3</a>); Moore pre-set pins (<a href="https://leonardchau.com/typewriters-patents/patents/US549523/" title="Moore, Charles T. · 1895 · Type-Writing Machine">US549523</a>); Richardson (<a href="https://leonardchau.com/typewriters-patents/patents/US448996/" title="Richardson, James · 1891 · Type-Writing Machine">US448996</a>). Power: Jarvis (<a href="https://leonardchau.com/typewriters-patents/patents/US819998/" title="Jarvis, Harold · 1906 · Type-Writing Machine">US819998</a>); Soblik (<a href="https://leonardchau.com/typewriters-patents/machines/soblik-pneumatic/">Soblik Pneumatic</a>)</td>
+<td>Key only trips a latch; Jarvis claims "the mere weight of the fingers"</td>
+<td>Element inertia off the finger altogether, but every letter's energy is thrown away at a stop</td>
+<td><strong>Rejected by owner; not proposed</strong></td>
+</tr>
+<tr>
+<td>9. Lighten or swing the carrier</td>
+<td>Hammond shuttle on an anvil, "only a fraction of an ounce" (<a href="https://leonardchau.com/typewriters-patents/patents/US825968/" title="Hammond, James Bartlett · 1906 · Type-Writer Shuttle and Driving Mechanism">US825968</a>); Arnold thin steel (<a href="https://leonardchau.com/typewriters-patents/patents/US410629/" title="Arnold, Horace L. · 1889 · Type-Writing Machine">US410629</a>); Richardson shell on an interior support (<a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>); slit leaves Hiett, Pratt (<a href="https://leonardchau.com/typewriters-patents/patents/US547146/" title="Hiett, De Kerniea J. T. · 1895 · Type-Writing Machine">US547146</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US620959/" title="Pratt, John · 1899 · Type-Writing Machine">US620959</a>); Quentell rocking keyboard (<a href="https://leonardchau.com/typewriters-patents/patents/US433820/" title="Quentell, William P. · 1890 · Type-Writing Machine">US433820</a>)</td>
+<td>Hammond's is a slide in series; a fixed interior backing touches only at the blow</td>
+<td>Directly reduces J</td>
+<td>Adopt with any candidate</td>
+</tr>
+</tbody>
+</table>
+<p>Three findings reshape the choice. <strong>I found no single-element patent with ball bearings at every joint of the selection train</strong>: balls appear at element axes and shuttles, single rollers at one contact, and caged balls on selector slides only in <a href="https://leonardchau.com/typewriters-patents/patents/DE234683/" title="1909 · ~Character wheel setting device for typewriters">DE234683</a>. Second, a one-way contact between key and shared actuator is unavoidable in every layout, so the realistic goal is a contact that rolls or barely moves, not its removal. Third, the patents accept a loose drive and correct it late. IBM states it outright: the detent "insures accuracy while permitting looseness in the drive system" (<a href="https://patents.google.com/patent/US2895584/en">US2895584</a>). That is what makes a light, slightly loose, all-bearing train viable at all.</p>
+<p>Two corrections to the project's own record bear on family 6 and 8. <a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a>, cited beside a whiffletree in I-040, is a series lost-motion stack of tube sections; the nearest whiffletree precedent is <a href="https://leonardchau.com/typewriters-patents/patents/DE745913/" title="Willers, Hans Bodo · 1944 · Waehlwerk fuer Ferndrucker">DE745913</a>, then Palmer. And the Wagner patents read are key-driven (<a href="https://leonardchau.com/typewriters-patents/patents/US393318/" title="Wagner, Franz X. · 1888 · Type-Writing Machine">US393318</a>), not the spring-driven family I-052 assumes.</p>
+<h2 id="the-owners-record-closes-four-doors-and-leaves-two-ajar">The owner's record closes four doors and leaves two ajar<a class="headerlink" href="#the-owners-record-closes-four-doors-and-leaves-two-ajar" title="Permanent link">&para;</a></h2>
+<p>The candidates must respect what ideas.md records. It has no status field, so the status words are the audit's reading of its "supersedes" notes and logs.</p>
+<table>
+<thead>
+<tr>
+<th>Recorded position</th>
+<th>What it forbids</th>
+<th>How the candidates respect it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Not tension-based"; "Spring-loaded is not positive"; "tension costs precision" (I-036, I-052, log)</td>
+<td>Spring-positioned or spring-driven selection</td>
+<td><strong>Family 8 is not proposed.</strong> No candidate has a spring in the positioning path at print. Steel-band couplings (<a href="https://leonardchau.com/typewriters-patents/patents/DE200880/" title="1907 · ~Schreibmaschine mit gegen die Papierwalze schwingbarem Typenrad">DE200880</a>) are also left out, as they are preloaded tension drives</td>
+</tr>
+<tr>
+<td>Idle side back-driven into resting keys (I-036 option 3, I-039, I-044)</td>
+<td>Rigidly linked seesaws and rotating bails</td>
+<td>A has one actuator, so no idle side. B's bails swing away from resting lugs. C keeps resting tips outside the plate sweep</td>
+</tr>
+<tr>
+<td>Pushers and pawls "overcomplicated" (I-043, on I-042)</td>
+<td>Pawl-pusher drives</td>
+<td>None used, so Hammond's two driving levers around a stop-arm (<a href="https://leonardchau.com/typewriters-patents/patents/US290419/" title="Hammond, James B. · 1883 · Type Writing Machine">US290419</a>) are noted but not put forward</td>
+</tr>
+<tr>
+<td>Ramp friction "seems like a source of issue" (build-sel-rig.md)</td>
+<td>Sliding ramps and wedges</td>
+<td><strong>Candidate A reopens the incline, and says so.</strong> What changed: the follower rolls. The project's own analysis gives about 0.5 efficiency sliding and about 0.96 rolling on a 683ZZ</td>
+</tr>
+<tr>
+<td>1/r grading amplifies stop error up to 2.8× (I-055 review of I-047)</td>
+<td>End-pivoted lever-arm grading</td>
+<td>Rules out family 2 as a lead. A and C have constant-ratio actuators. B uses fixed bit strokes</td>
+</tr>
+<tr>
+<td>Binary bars: "no verdict" (I-040)</td>
+<td>Nothing, but noted home at the wheel end and play worst on the 16-bar</td>
+<td>Candidate B reopens it with a signed top bit and rocking bails, no chain</td>
+</tr>
+</tbody>
+</table>
+<p>Also fixed, and honoured below: 28 keys with CAP and FIG, 28 columns by 3 rows, a stationary rear-struck element that only rotates and shifts, a tapered lock that takes the blow, arrival within ±0.4 column before that lock, and no more than two adjustments (element-interface.md, requirements.md, hypotheses.md). The interface drawing is itself provisional, and the Ø36 mm and 12-groove values disagree with later ideas at Ø40 and Ø21.8 with no D-record settling them. I used Ø36 mm throughout. Replacing the spline with a long pinion needs a D-record.</p>
+<h2 id="three-candidates-can-go-into-creo-now-and-the-rolling-bar-leads">Three candidates can go into Creo now, and the rolling bar leads<a class="headerlink" href="#three-candidates-can-go-into-creo-now-and-the-rolling-bar-leads" title="Permanent link">&para;</a></h2>
+<p>All three share an output and a lock, described once. A sheet gear sector drives an elongated pinion, as in Richardson (<a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>), so the ±5 mm row shift never disengages the drive. The cup element runs on two 688ZZ on a shift carrier hung from parallel links, borrowing the "jointed rectangle" that Lambert used to support a key (<a href="https://leonardchau.com/typewriters-patents/patents/US607270/" title="Pastre - Lambert, Eugène - Frank · 1898 · Type-Writing Machine">US607270</a>), so shift needs no slide. An interior fixed backing carries the blow, after Richardson and Arnold (<a href="https://leonardchau.com/typewriters-patents/patents/US448996/" title="Richardson, James · 1891 · Type-Writing Machine">US448996</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US410629/" title="Arnold, Horace L. · 1889 · Type-Writing Machine">US410629</a>); the cup never touches it during selection. A universal bail on 688ZZ bearings drives a tapered pin into one of 28 countersinks, on the carrier so it seats in every row, as already planned in I-029. Gardner, McCool and Bennett all lock late like this (<a href="https://leonardchau.com/typewriters-patents/patents/US537606/" title="Gardner, John · 1895 · Type-Writing Machine">US537606</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US964045/" title="McCool, William A. · 1910 · Type-Writer">US964045</a>, <a href="https://leonardchau.com/typewriters-patents/patents/US810024/" title="Bennett, Charles A. · 1906 · Type-Wheel Alinement">US810024</a>). Strike load goes to the lock, never into the train.</p>
+<p>Unless stated, <strong>every dimension and mass below is a first estimate of mine, unverified by CAD or test.</strong> Levers follow the project's working values: 70 mm keytop to pivot, 18 mm stroke equal to 14.7°, 2 mm sheet, 7.33 mm pitch (selection.md).</p>
+<h3 id="rank-1-candidate-a-one-rolling-bar-a-slot-in-every-lever">Rank 1, candidate A: one rolling bar, a slot in every lever<a class="headerlink" href="#rank-1-candidate-a-one-rolling-bar-a-slot-in-every-lever" title="Permanent link">&para;</a></h3>
+<p><strong>Layout.</strong> Twenty-eight levers lie side by side. A hardened bar runs across their tails on a three-hanger frame that swings on one rock shaft, like Hammond's: "The bar e is preferably cylindrical in form, is pivoted, and rolls to save sliding friction", fixed in the arms of a "vibratory frame" (<a href="https://leonardchau.com/typewriters-patents/patents/US224183/" title="Hammond, James B. · 1880 · Type Writing Machine">US224183</a>). At rest every tail sits below the bar's plane, the clearance idea of I-046. A pressed tail rises, takes the bar into its own closed slot, and the slot's inclination carries the bar fore or aft. A straight final extension parallel to the tail's path then holds the bar still while the key finishes, Schuckers's "straight extension" in which the frame is "stationary and locked" (<a href="https://leonardchau.com/typewriters-patents/patents/US529810/" title="Schuckers, Jacobs W. · 1894 · Type-Writing Machine">US529810</a>). The frame carries the sector.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>First estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stroke phases at keytop</td>
+<td>0 to 3.1 mm clearance; 3.1 to 14.6 selecting; 14.6 to 18 dwell, lock enters by about 16.5, trip at 17.7</td>
+</tr>
+<tr>
+<td>Slot contact radius</td>
+<td>45 mm behind pivot, so tail rises 11.6 mm in 18 mm of keytop</td>
+</tr>
+<tr>
+<td>Bar travel</td>
+<td>±7.5 mm, 0.556 mm per column; ±0.4 column capture is ±0.22 mm at the bar</td>
+</tr>
+<tr>
+<td>Bar</td>
+<td>Three coaxial Ø6×0.5 hardened tube segments of about 68 mm, MR105ZZ at each end, spanning about 205 mm, about 15 g; deflection about 0.01 mm at 10 N</td>
+</tr>
+<tr>
+<td>Swing frame</td>
+<td>Arm 30 mm, ±14.3°, bar lifts 0.93 mm at the extremes, absorbed in the CAD-generated slot; three hangers, about 15 g</td>
+</tr>
+<tr>
+<td>Sector, pinion</td>
+<td>Sector radius 85 mm in 1.5 mm aluminium, about 5 g; m1, 14-tooth aluminium pinion, elongated 15 mm, ratio about 12:1</td>
+</tr>
+<tr>
+<td>Slot</td>
+<td>6.06 mm wide in 2 mm stainless; steepest flank about 45° mean, 51° peak with blends; shallowest about 2° at column 0.5; contact about 250 MPa at 10 N</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Joint</th>
+<th>Creo connection</th>
+<th>Count</th>
+<th>Hardware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lever on row rod</td>
+<td>Pin</td>
+<td>28</td>
+<td>683ZZ or 688ZZ pair, on 22 mm rod spacing per row</td>
+</tr>
+<tr>
+<td>Bar segment on hanger</td>
+<td>Pin</td>
+<td>3</td>
+<td>MR105ZZ × 6</td>
+</tr>
+<tr>
+<td>Frame on rock shaft</td>
+<td>Pin</td>
+<td>1</td>
+<td>688ZZ × 4</td>
+</tr>
+<tr>
+<td>Bar in slot</td>
+<td>Slot connection, then Cam-Follower for loads</td>
+<td>28, one active</td>
+<td>Rolling contact, no extra parts</td>
+</tr>
+<tr>
+<td>Sector to pinion</td>
+<td>Gear pair</td>
+<td>1</td>
+<td>Laser-cut sector, stock pinion</td>
+</tr>
+<tr>
+<td>Element on carrier</td>
+<td>Pin</td>
+<td>1</td>
+<td>688ZZ × 2</td>
+</tr>
+<tr>
+<td>Carrier parallel links</td>
+<td>Pin</td>
+<td>4</td>
+<td>683ZZ × 8</td>
+</tr>
+<tr>
+<td>Universal bail, lock rocker, home detent rocker</td>
+<td>Pin</td>
+<td>3</td>
+<td>688ZZ or 683ZZ × 6</td>
+</tr>
+</tbody>
+</table>
+<p>That is about 85 bearings, all off the shelf, in line with R-013. All 28 levers are unique, which the owner has accepted: "I can use unique cams on all parts" (I-037), "the keylever is the pin and the cam, ideally laser cut metal or flat stock" (I-047).</p>
+<p><strong>What still slides, and why.</strong> Gear flanks slide inside the mesh, because a teeth-free drive would have meant a tensioned band; the late lock tolerates the backlash. The lock pin wedges into its countersink over a fraction of a pitch, and that wedging is the job. The pinion moves axially in the sector during a shift only, and without selection load. The slot itself should roll, but this is the assumption everything depends on: near-home flanks at 2 to 14° are exactly where the project's analysis finds a sliding pin self-locks (below about 14°). They are only usable because the bar turns.</p>
+<p><strong>Mass (estimates, cup element).</strong> Element 97 g, bar 6 g plus about 5 g for its spin, frame 2 g, sector 9 g, lever and keytop about 8 g. Worst key about <strong>127 g</strong>; uniform mean about 51 g; frequency-weighted about <strong>21 g</strong>; column 0.5 about 8 g. With the 25 g solid element the worst key is about 420 g. The blends cost peak slope but remove the impact of a sudden start, the idea behind Twiss's slow start (<a href="https://leonardchau.com/typewriters-patents/patents/US408150/" title="Twiss, Freeman L. · 1889 · Cam-Motion for Type-Writing Machines">US408150</a>) and Blickensderfer's variable leverage (<a href="https://leonardchau.com/typewriters-patents/patents/US459094/" title="Blickensderfer, George C. · 1891 · Type-Writing Machine">US459094</a>).</p>
+<p><strong>Both halves and home.</strong> Slots lean forward for one half, rearward for the other, as Hammond's opposed notches and Schuckers's opposite inclinations do (<a href="https://leonardchau.com/typewriters-patents/patents/US423576/" title="Schuckers, Jacobs W. · 1890 · Type-Writing Machine">US423576</a>). There is one actuator, so no idle side and no interlock. Return is positive: the closed slot draws the bar home as the key rises, the arrangement of I-048. A light roller detent in a shallow V, in the spirit of <a href="https://leonardchau.com/typewriters-patents/patents/US734044/" title="Cantelo, John L. · 1903 · Type-Writing Machine">US734044</a> and <a href="https://leonardchau.com/typewriters-patents/patents/US505547/" title="Gardner, John · 1893 · Type-Writing Machine">US505547</a>, holds the bar at home between strokes, about 0.5 N and not in the print path. Overbanking is impossible by construction, because the bar is captured at every depth and the dwell makes the bottom stop irrelevant to position.</p>
+<p><strong>Registration.</strong> The slot sets the coarse position, with a stack of about 0.1 column of gear backlash, about 0.15 column of slot profile at ±0.08 mm, and pivots. The tapered pin then corrects within ±0.4 column. The slot's dwell holds position until the pin is in.</p>
+<p><strong>Test first.</strong> Build one lever, one bar segment and one hanger with a force gauge, and run the shallowest flank (2°) and steepest flank (51°) at 1 to 10 N. Does the bar actually roll on a laser-cut edge, or skid? Then a 10⁵-cycle run for edge damage and recast flaking on stainless, then the cup under a real hammer blow against the fixed backing. Rollover is the known weak point, since a second key's slot mouth can only enter if the bar is back at home. Reinecke records that wheel machines cannot overlap strokes in any case.</p>
+<h3 id="rank-2-candidate-b-five-rocking-code-bails-and-a-pivot-only-tree">Rank 2, candidate B: five rocking code bails and a pivot-only tree<a class="headerlink" href="#rank-2-candidate-b-five-rocking-code-bails-and-a-pivot-only-tree" title="Permanent link">&para;</a></h3>
+<p><strong>Layout.</strong> Each lever has laser-cut lugs under the bails of its code, the coded-frame idea of <a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a> and Palmer's interposer projections (<a href="https://leonardchau.com/typewriters-patents/patents/DE271253/" title="1913 · ~Typewriters with an electric drive are not necessary">DE271253</a>, <a href="https://patents.google.com/patent/US2919002/en">US2919002</a>). Five bails rock on bearings; Palmer used pivoted crank rods rather than sliding bars. Their outputs sum in a rigid tree of floating levers (<a href="https://leonardchau.com/typewriters-patents/patents/DE745913/" title="Willers, Hans Bodo · 1944 · Waehlwerk fuer Ferndrucker">DE745913</a>, Palmer) to one output crank, then the shared sector. Weights are +1, +2, +4, +8 and <strong>−16</strong>, Carmona's signed top bit (<a href="https://leonardchau.com/typewriters-patents/patents/US661849/" title="Carmona, Manuel S. · 1900 · Type-Writing Machine">US661849</a>), so the rest state is one printing column and the longest move is 14 columns rather than the 27 that I-040 worried about. Palmer's complement link is the precedent for reversing a tree branch.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>First estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bail stroke</td>
+<td>6 mm at 15 mm lug radius, 0.4 rad, between two hard stops</td>
+</tr>
+<tr>
+<td>Tree output</td>
+<td>0.5 mm per column; ±7 mm to a 28 mm crank; same 85 mm sector ratio</td>
+</tr>
+<tr>
+<td>Bails</td>
+<td>About 12 g each across 205 mm, 5 bails on 10 × 688ZZ</td>
+</tr>
+<tr>
+<td>Tree</td>
+<td>4 floating levers, 17 to 20 pivots counted in the research notes, about double that in bearings if paired</td>
+</tr>
+<tr>
+<td>Error budget</td>
+<td>w × δ/s; 16-bit at δ 0.05 mm is 0.13 column; all bits worst case 0.26 column plus joint play</td>
+</tr>
+<tr>
+<td>Adjusters</td>
+<td>Eccentrics on the 16 and 8 bits only, keeping to R-012's limit of two</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Joint</th>
+<th>Creo connection</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lever on row rod</td>
+<td>Pin</td>
+<td>28</td>
+</tr>
+<tr>
+<td>Bail on frame</td>
+<td>Pin</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Lug on bail</td>
+<td>Cam-Follower</td>
+<td>Up to 5 per lever, unilateral</td>
+</tr>
+<tr>
+<td>Bail stops</td>
+<td>Contact or limits</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Tree levers and links</td>
+<td>Pin</td>
+<td>17 to 20</td>
+</tr>
+<tr>
+<td>Output crank, sector to pinion</td>
+<td>Pin, Gear pair</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Element, carrier, lock</td>
+<td>As candidate A</td>
+<td>As candidate A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What still slides.</strong> Each lug slips slightly on its bail through arc mismatch; a roller on the bail removes it. Stops are impacts. Palmer's floating links slide in vertical slots, and my layout replaces those with swing links or stops the lever lifts away from, an inference that no patent confirms. Gear and lock as in A.</p>
+<p><strong>Mass (estimates).</strong> Element about 104 g for a 14-column move, up to about 25 g for active bails and tree, 8 g for the lever: worst key about <strong>137 g</strong>, frequency-weighted about 30 g. Binary coding does not reduce the element term; it only makes bail stroke uniform.</p>
+<p><strong>Both halves and home.</strong> The sign bit makes the two directions; resting lugs never drive idle bails, because a pressed bail swings away from all of them, which disposes of the I-036 problem without a plane trick. Bails return against rest stops on light springs. Springs do not position anything, since each bail is held by a hard stop at print, but a chosen character's force varies with how many bits it has, and the owner asked that key force not vary across the keyboard (I-039).</p>
+<p><strong>Registration.</strong> As in A, and more dependent on it: the patents correct trees with detents and hard-stopped bits (<a href="https://leonardchau.com/typewriters-patents/patents/DE701607/" title="Adams, Arthur Herman · 1941 · ~In the case of these known arrangements">DE701607</a>, <a href="https://leonardchau.com/typewriters-patents/patents/DE745913/" title="Willers, Hans Bodo · 1944 · Waehlwerk fuer Ferndrucker">DE745913</a>).</p>
+<p><strong>Test first.</strong> Model the tree in Creo dynamics and measure the reaction on non-selected bails during element deceleration. By my statics, the idle input is held on its stop during acceleration but is lifted off during deceleration, resisted only by its spring; nothing in the library addresses this. If the required preload exceeds a few tenths of a newton per bail, B loses its key-force argument. A three-bit bench tree in laser-cut sheet then measures real accumulated play.</p>
+<h3 id="rank-3-candidate-c-richardsons-opposed-plates-positive-and-homeless">Rank 3, candidate C: Richardson's opposed plates, positive and homeless<a class="headerlink" href="#rank-3-candidate-c-richardsons-opposed-plates-positive-and-homeless" title="Permanent link">&para;</a></h3>
+<p><strong>Layout.</strong> Two frames swing on a shaft and a concentric sleeve, each with an interchangeable graduated edge plate. Both are linked to one sector, so one goes forward as the other comes back. A key tip meets both plates, and "the sum of the movements caused by any key is equal to the extreme throw of the frames, diminished by the amount cut from the edges", after which the key is "stopped by the opposing action of the plates" (<a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>). The element goes "forward or back to any position from any other", with no home at all. Richardson's worked example is 5 spaces for a word against 104 or 126 for rotating and oscillating wheels.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>First estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key tip</td>
+<td>Riser with a 683ZZ roller, 50 mm above pivot, about 12.9 mm forward in 14.7°</td>
+</tr>
+<tr>
+<td>Plate throw</td>
+<td>±5.5 mm, 0.41 mm per column; ±0.4 column is ±0.16 mm at the edge, the tightest of the three</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>Two, about 12 g each across 205 mm</td>
+</tr>
+<tr>
+<td>Sector arms</td>
+<td>22 mm, ±0.25 rad, same sector ratio as A</td>
+</tr>
+<tr>
+<td>Free travel</td>
+<td>About half the stroke must clear the plates' full sweep before contact</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Joint</th>
+<th>Creo connection</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lever on row rod</td>
+<td>Pin</td>
+<td>28</td>
+</tr>
+<tr>
+<td>Frames on shaft and sleeve</td>
+<td>Pin</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Connecting rods, both ends</td>
+<td>Pin</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Sector on frame, sector to pinion</td>
+<td>Pin, Gear pair</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Tip on plate edges</td>
+<td>Cam-Follower</td>
+<td>2 per active key</td>
+</tr>
+<tr>
+<td>Element, carrier, lock</td>
+<td>As candidate A</td>
+<td>As candidate A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What still slides.</strong> The tip rises about 0.5 mm along the plate while pushing, the "rubs up the wall" complaint of the I-055 review; the 683 roller handles it. There is no ramp at all, which is its strongest answer to the owner's objections. Gear and lock as in A.</p>
+<p><strong>Mass (estimates).</strong> Because the whole 347° range must fit in about 16 mm of stroke, element reflected mass is about 200 g on <strong>every</strong> move, about 235 g with frames, sector and lever, or about 800 g with a 25 g solid element. Shortest-path motion helps time and distance but not ratio. First contact is also an impact: at 0.25 m/s and an assumed 3 ms contact, peak force is about 20 N, far above the blended drive of A.</p>
+<p><strong>Both halves and home.</strong> The plate edges encode direction, so halves need no separate treatment, and there is no return. Resting keys stay clear only because of the free travel. That is why tips cannot use I-046's plane clearance here: a no-home plate can sit anywhere when a key rises, so the plane trick would need a home return and would give up the patent's main advantage.</p>
+<p><strong>Registration.</strong> The pinch positions the sector without any spring or backlash upstream of it (my reading, not Richardson's words); the late lock still applies at the element.</p>
+<p><strong>Test first.</strong> A single-lever impact bench with two plates and a dummy sector inertia: measure rebound and noise at the pinch, with polymer and bare tips. If rebound stays below ±0.2 column without buffers, C becomes the simplest machine of the three despite its mass.</p>
+<h3 id="how-the-three-compare">How the three compare<a class="headerlink" href="#how-the-three-compare" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterion (estimates)</th>
+<th>A: rolling bar</th>
+<th>B: code tree</th>
+<th>C: opposed plates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worst-key mass, cup</td>
+<td>127 g</td>
+<td>137 g</td>
+<td>235 g, all keys</td>
+</tr>
+<tr>
+<td>Frequency-weighted mass</td>
+<td>21 g</td>
+<td>30 g</td>
+<td>235 g while moving</td>
+</tr>
+<tr>
+<td>Rolling or pivot joints in load path</td>
+<td>All but gear and lock</td>
+<td>All but gear and lock</td>
+<td>All but gear and lock, with impacts</td>
+</tr>
+<tr>
+<td>Spring near position path</td>
+<td>Home detent only</td>
+<td>Bail returns</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Bearings</td>
+<td>About 85</td>
+<td>About 110 to 130</td>
+<td>About 85</td>
+</tr>
+<tr>
+<td>Unique laser parts</td>
+<td>28 levers</td>
+<td>28 levers, tree</td>
+<td>28 levers, 2 plates</td>
+</tr>
+<tr>
+<td>Largest unknown</td>
+<td>Does it roll on a cut edge?</td>
+<td>Idle bail lift-off</td>
+<td>Pinch impact</td>
+</tr>
+</tbody>
+</table>
+<p>Candidates not ranked, and why: Peterson's cam bars on pivoted hangers have the best friction argument in the text (<a href="https://leonardchau.com/typewriters-patents/patents/US634183/" title="Peterson, Charles E. · 1899 · Type-Writer">US634183</a>), but they are functionally the two opposing bails being abandoned, so only their hanger idea is reused in A's frame. Paulson's sheet plates (<a href="https://leonardchau.com/typewriters-patents/patents/US1150382/" title="Paulson - Simpson, Charles J. - James E. · 1915 · Type-Writing Machine">US1150382</a>) are attractive for sheet work, with sectors "normally disengaged from the pinion" so the idle side does not move; they carry the 1/r error, a spring return and the risk of a tooth meeting a tooth on engagement.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The research changes the question. Clean-sheet effort should go first to element inertia and only then to the joints, because at 18 mm the cup element alone contributes about three quarters of candidate A's worst-key mass, and the bearings' contribution to keytop load has no measured value at all. Build the rolling-bar test first: it answers in a day whether the 1880 idea survives laser-cut edges and shallow flanks, and a failure there sends the design straight to B.</p>
+<p>The owner has three decisions to make. The first is the stroke, since "15 to 20 mm" and "short" cannot both hold with a key-driven element. The second is whether a cup with a fixed interior backing is acceptable under R-003 and the strike path. The third is the one route to a real short stroke that does not touch stored energy: a 14-column sector with six rows and a bank shift, in the manner of Moya and Schuckers's short segment, cuts the worst-key excursion to ±83.6° and the element term to about 23% (22 g instead of 97 g at 18 mm), or allows a stroke of about 9 to 10 mm at the current mass. It conflicts with the recorded 28-by-3 layout and needs a taller element and a second axis, so it needs a D-record before it can be drawn; I have not proposed it as a candidate.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

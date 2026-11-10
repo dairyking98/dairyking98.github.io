@@ -1,0 +1,944 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../richardson-machine/">
+      
+      
+        <link rel="next" href="../research-report/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>The three candidates, animated - Richardson selection on bead chain</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#selection-candidates-animated" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Richardson selection on bead chain" class="md-header__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Richardson selection on bead chain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The three candidates, animated
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Richardson selection on bead chain" class="md-nav__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Richardson selection on bead chain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D and more views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-after-pinch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-machine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Richardson's 1896 machine works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The three candidates, animated
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The three candidates, animated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rank-1-one-rolling-bar-a-slot-in-every-lever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 1: one rolling bar, a slot in every lever
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-2-five-code-bails-summed-by-a-lever-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 2: five code bails summed by a lever tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-3-richardsons-opposed-plates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 3: Richardson's opposed plates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-each-one-costs-the-finger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each one costs the finger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-shorter-stroke-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a shorter stroke costs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rank-1-one-rolling-bar-a-slot-in-every-lever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 1: one rolling bar, a slot in every lever
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-2-five-code-bails-summed-by-a-lever-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 2: five code bails summed by a lever tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-3-richardsons-opposed-plates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank 3: Richardson's opposed plates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-each-one-costs-the-finger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each one costs the finger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-shorter-stroke-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a shorter stroke costs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="selection-candidates-animated">Selection candidates, animated<a class="headerlink" href="#selection-candidates-animated" title="Permanent link">&para;</a></h1>
+<p>The three mechanisms from <a href="../research-report/">the research report</a>, so you can see them move. Click a key to play a stroke, or drag the slider to hold it at any depth.</p>
+<p><strong>Every number here is a first estimate, not CAD or test.</strong> The rolling bar's slot is computed from its motion, so the slot you see is the one that key would need. The code tree is a schematic. The opposed plates are drawn to scale in plan, with the two plates pulled apart so both are visible.</p>
+<style>
+.lcv { --s1:#2a78d6; --s2:#eb6834; margin:1em 0; position:relative; }
+[data-md-color-scheme="slate"] .lcv { --s1:#3987e5; --s2:#d95926; }
+.lcv svg { width:100%; height:auto; border:1px solid var(--md-default-fg-color--lighter); border-radius:6px; background:var(--md-default-bg-color); display:block; }
+.lcv svg text { fill:var(--md-default-fg-color); font-size:12px; }
+.lcv svg text.m { fill:var(--md-default-fg-color--light); font-size:11px; }
+.lcv-ctl { display:flex; flex-wrap:wrap; gap:.8em; align-items:center; margin:.4em 0; font-size:.72rem; }
+.lcv-ctl input[type=range] { width:220px; }
+.lcv-kb { margin:.3em 0; }
+.lcv-kb div { display:flex; gap:3px; margin-bottom:3px; }
+.lcv-kb div:nth-child(2) { margin-left:14px; } .lcv-kb div:nth-child(3) { margin-left:28px; }
+.lcv-kb button { width:30px; height:28px; border:1px solid var(--md-default-fg-color--lighter); border-radius:4px; cursor:pointer; color:var(--md-default-fg-color); background:var(--md-default-bg-color); font:600 .72rem var(--md-code-font-family); }
+.lcv-kb button.on { background:var(--s1); color:#fff; border-color:var(--s1); }
+.lcv-read { font-family:var(--md-code-font-family); font-size:.72rem; min-height:3em; margin:.4em 0 0; }
+.lcv-leg { display:flex; gap:1.2em; font-size:.7rem; margin:.3em 0; }
+.lcv-leg i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:.35em; vertical-align:-1px; }
+.lcv-tip { position:absolute; pointer-events:none; display:none; background:var(--md-default-bg-color); color:var(--md-default-fg-color); border:1px solid var(--md-default-fg-color--lighter); border-radius:4px; padding:.25em .5em; font-size:.68rem; white-space:nowrap; z-index:5; }
+</style>
+
+<h2 id="rank-1-one-rolling-bar-a-slot-in-every-lever">Rank 1: one rolling bar, a slot in every lever<a class="headerlink" href="#rank-1-one-rolling-bar-a-slot-in-every-lever" title="Permanent link">&para;</a></h2>
+<p>Side view, to scale, of one lever. The tail rises and takes the bar into its slot. The slot's lean carries the bar forward or back on its hanger, and the straight end of the slot holds it still while the lock goes in. Try <code>t</code> (shallowest slot) and <code>w</code> (steepest). Left-hand keys lean one way and right-hand keys the other, and both drive the same bar, so there is no idle side.</p>
+<div class="lcv" id="va">
+<div class="lcv-kb" id="va-kb"></div>
+<div class="lcv-ctl"><label><input type="checkbox" id="va-slow"> Slow motion</label><label>Key depth <input type="range" id="va-r" min="0" max="1000" value="0"></label></div>
+<svg id="va-s" viewBox="0 0 900 600" role="img" aria-label="Side view of a key lever with a slot driving a rolling bar on a hanger"></svg>
+<p class="lcv-read" id="va-t">Pick a key.</p>
+</div>
+
+<p><strong>Two things the drawing exposed that the report doesn't settle:</strong></p>
+<ul>
+<li><strong>One radius only fits one row.</strong> The report puts the slot 45 mm behind every lever's pivot, but your three keytop rows have pivots 19 mm apart and one bar sits at one place. Either all 28 levers share one pivot rod with different front lengths, or each row gets its own slot radius (about 60, 79 and 98 mm on the current layout) and a longer tail rise. This view shows the 45 mm case.</li>
+<li><strong>The element is drawn end-on here, and that may not be how it mounts.</strong> A sector on a horizontal rock shaft meshes with a pinion on a horizontal axis. Your current design has the element on an upright shaft, so a real layout needs a right-angle step, such as a crank and link or a bevel pair.</li>
+</ul>
+<h2 id="rank-2-five-code-bails-summed-by-a-lever-tree">Rank 2: five code bails summed by a lever tree<a class="headerlink" href="#rank-2-five-code-bails-summed-by-a-lever-tree" title="Permanent link">&para;</a></h2>
+<p>Schematic. Each key's lugs push some of the five bails, shown as filled chips. Four floating levers add the bails, weighted 1, 2, 4, 8 and minus 16, into one output, so a key's code directly gives the columns to move. The rest position is a printing column, and the longest move is 14 columns. Every lever in the tree is free to float, and nothing slides in the summing path.</p>
+<div class="lcv" id="vb">
+<div class="lcv-kb" id="vb-kb"></div>
+<div class="lcv-ctl"><label><input type="checkbox" id="vb-slow"> Slow motion</label><label>Key depth <input type="range" id="vb-r" min="0" max="1000" value="0"></label></div>
+<svg id="vb-s" viewBox="0 0 900 430" role="img" aria-label="Schematic of five code bails summed by four floating levers into one output turning the element"></svg>
+<p class="lcv-read" id="vb-t">Pick a key.</p>
+</div>
+
+<h2 id="rank-3-richardsons-opposed-plates">Rank 3: Richardson's opposed plates<a class="headerlink" href="#rank-3-richardsons-opposed-plates" title="Permanent link">&para;</a></h2>
+<p>Plan view, rear at the top, based on <a href="https://leonardchau.com/typewriters-patents/patents/US554730/" title="Richardson, James · 1896 · Type-Writing Machine">US554730</a>. Two plates are linked so one goes back as the other comes forward. A key tip pushes whichever plate is nearer until the other arrives, and the two pinch the tip. Each key's pair of notches sets where that happens. There is no home position, so press a few keys in a row and watch it go straight from one letter to the next.</p>
+<div class="lcv" id="vc">
+<div class="lcv-kb" id="vc-kb"></div>
+<div class="lcv-ctl"><label><input type="checkbox" id="vc-slow"> Slow motion</label><label>Key depth <input type="range" id="vc-r" min="0" max="1000" value="0"></label></div>
+<svg id="vc-s" viewBox="0 0 900 410" role="img" aria-label="Plan view of two opposed graduated plates pinching a key tip"></svg>
+<p class="lcv-read" id="vc-t">Pick a key.</p>
+</div>
+
+<h2 id="what-each-one-costs-the-finger">What each one costs the finger<a class="headerlink" href="#what-each-one-costs-the-finger" title="Permanent link">&para;</a></h2>
+<p>Mass felt at the keytop on the worst key, with the thin cup element. In all three, the element is most of the load.</p>
+<div class="lcv" id="vm">
+<div class="lcv-leg"><span><i style="background:var(--s1)"></i>Type element</span><span><i style="background:var(--s2)"></i>Everything else (bar or bails, frame, sector, lever)</span></div>
+<svg id="vm-s" viewBox="0 0 760 170" role="img" aria-label="Stacked bars of worst-key mass: rolling bar 127 grams, code tree 137 grams, opposed plates 235 grams"></svg>
+<div class="lcv-tip" id="vm-tip"></div>
+</div>
+
+<h2 id="what-a-shorter-stroke-costs">What a shorter stroke costs<a class="headerlink" href="#what-a-shorter-stroke-costs" title="Permanent link">&para;</a></h2>
+<p>The element's share of the mass on the worst key, against key stroke. Peak force climbs faster still: about 4 N at 18 mm and 50 N at 8 mm with the cup. The figures are in <a href="../research-report/">the report's table</a>.</p>
+<div class="lcv" id="vs">
+<div class="lcv-leg"><span><i style="background:var(--s1)"></i>Thin cup element</span><span><i style="background:var(--s2)"></i>25 g solid element</span></div>
+<svg id="vs-s" viewBox="0 0 760 320" role="img" aria-label="Line chart: element mass at the keytop falls steeply as stroke grows from 8 to 20 millimetres"></svg>
+<div class="lcv-tip" id="vs-tip"></div>
+</div>
+
+<script>
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const FG = "var(--md-default-fg-color)", BG = "var(--md-default-bg-color)", S1 = "var(--s1)", S2 = "var(--s2)";
+  const $ = id => document.getElementById(id);
+  const el = (p, t, a) => { const e = document.createElementNS(NS, t); for (const k in a || {}) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const txt = (p, x, y, s, a) => { const t = el(p, "text", Object.assign({ x, y }, a || {})); t.textContent = s; return t; };
+  const smooth = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+  const KEYS = [["a","L",12],["q","L",9],["z","L",6],["s","L",3],["w","L",14],["x","L",11],["d","L",8],["e","L",5],["c","L",2],["f","L",13],["r","L",10],["v","L",7],["g","L",4],["t","L",1],["y","R",1],["h","R",4],["b","R",7],["u","R",10],["j","R",13],["n","R",2],["i","R",5],["k","R",8],["m","R",11],["o","R",14],["l","R",3],[",","R",6],["p","R",9],[".","R",12]].map(([ch, side, c]) => ({ ch, side, c, sgn: side === "L" ? -1 : 1 }));
+  const byCh = Object.fromEntries(KEYS.map(k => [k.ch, k]));
+  const COL = 360 / 28;
+  function keyboard(id, onPick) {
+    const root = $(id), btn = {};
+    ["qwertyuiop", "asdfghjkl.", "zxcvbnm,"].forEach(r => {
+      const d = document.createElement("div");
+      [...r].forEach(ch => { const b = document.createElement("button"); b.textContent = ch; b.type = "button"; b.onclick = () => onPick(byCh[ch]); btn[ch] = b; d.appendChild(b); });
+      root.appendChild(d);
+    });
+    return ch => { for (const c in btn) btn[c].classList.toggle("on", c === ch); };
+  }
+  function timeline(pre, draw) {
+    const slow = $(pre + "-slow"), r = $(pre + "-r");
+    let tok = 0;
+    r.oninput = () => { tok++; draw(r.value / 1000); };
+    return {
+      set(u) { tok++; r.value = u * 1000; draw(u); },
+      run() {
+        const me = ++tok, T = slow.checked ? 5 : 1, p = 450 * T, h = 350 * T, t0 = performance.now();
+        (function f(now) {
+          if (me !== tok) return;
+          const e = now - t0, u = e < p ? e / p : e < p + h ? 1 : e < 2 * p + h ? 1 - (e - p - h) / p : 0;
+          r.value = u * 1000; draw(u);
+          if (e < 2 * p + h) requestAnimationFrame(f);
+        })(t0);
+      }
+    };
+  }
+  function wheel(p, cx, cy, r, items) {
+    el(p, "circle", { cx, cy, r, fill: "none", stroke: FG, "stroke-opacity": .45, "stroke-width": 1.5 });
+    const g = el(p, "g"), label = {};
+    items.forEach(it => { const t = txt(g, cx, cy - r + 16, it.ch, { "text-anchor": "middle", transform: `rotate(${it.a} ${cx} ${cy})`, style: "font-size:13px;font-weight:600" }); label[it.ch] = t; });
+    el(p, "polygon", { points: `${cx - 7},${cy - r - 15} ${cx + 7},${cy - r - 15} ${cx},${cy - r - 3}`, fill: S2 });
+    txt(p, cx, cy - r - 20, "print point", { "text-anchor": "middle", class: "m" });
+    return {
+      angle(d) { g.setAttribute("transform", `rotate(${d} ${cx} ${cy})`); },
+      mark(ch) { for (const c in label) { label[c].style.fill = c === ch ? S1 : ""; label[c].style.opacity = c === ch ? 1 : .5; } }
+    };
+  }
+  // ---------- A: rolling bar
+  (function () {
+    const svg = $("va-s"), K = 4, X0 = 342, Z0 = 420, sx = y => X0 + K * y, sy = z => Z0 - K * z;
+    const L = 70, ST = 18, ZB = 15, YB = 45, RS = -15, ARM = 30, D0 = 3.1, D1 = 14.6;
+    const posOf = (k, d) => { const p = k.sgn * (k.c - .5) * .556 * smooth((d - D0) / (D1 - D0)), f = Math.asin(p / ARM); return { p, f, y: YB + p, z: RS + ARM * Math.cos(f) }; };
+    const inLever = (b, th) => [b.y * Math.cos(th) + b.z * Math.sin(th), -b.y * Math.sin(th) + b.z * Math.cos(th)];
+    txt(svg, 14, 22, "SIDE VIEW (to scale), front on the left", { style: "font-weight:600" });
+    const sec = el(svg, "g");
+    const S = [sx(YB), sy(RS)], R = K * 85, a0 = 16 * Math.PI / 180;
+    el(sec, "path", { d: `M${S[0] - R * Math.sin(a0)},${S[1] - R * Math.cos(a0)} A${R},${R} 0 0 1 ${S[0] + R * Math.sin(a0)},${S[1] - R * Math.cos(a0)}`, fill: "none", stroke: S2, "stroke-width": 5 });
+    for (let a = -16; a <= 16; a += 2) { const t = a * Math.PI / 180; el(sec, "line", { x1: S[0] + R * Math.sin(t), y1: S[1] - R * Math.cos(t), x2: S[0] + (R + 7) * Math.sin(t), y2: S[1] - (R + 7) * Math.cos(t), stroke: S2, "stroke-width": 1.5 }); }
+    [-16, 16].forEach(a => { const t = a * Math.PI / 180; el(sec, "line", { x1: S[0], y1: S[1], x2: S[0] + R * Math.sin(t), y2: S[1] - R * Math.cos(t), stroke: S2, "stroke-width": 2, "stroke-opacity": .55 }); });
+    const pc = [S[0], S[1] - K * 92], pin = el(svg, "g");
+    el(pin, "circle", { cx: pc[0], cy: pc[1], r: K * 7, fill: BG, stroke: S2, "stroke-width": 2 });
+    el(pin, "line", { x1: pc[0], y1: pc[1], x2: pc[0], y2: pc[1] - K * 7, stroke: S2, "stroke-width": 2 });
+    txt(svg, pc[0] + 36, pc[1] - 4, "pinion", { class: "m" });
+    txt(sec, S[0] - R * Math.sin(a0) - 74, S[1] - R * Math.cos(a0) + 8, "gear sector", { class: "m" });
+    const hang = el(svg, "line", { stroke: S1, "stroke-width": 5, "stroke-opacity": .6 });
+    el(svg, "circle", { cx: S[0], cy: S[1], r: 7, fill: BG, stroke: FG, "stroke-width": 2 });
+    txt(svg, S[0] + 14, S[1] + 18, "rock shaft (the hanger swings on it)", { class: "m" });
+    const lev = el(svg, "g");
+    const pts = [[-74, -3], [-74, 7], [-66, 7], [-66, 3], [30, 3], [30, 11], [60, 11], [60, -7], [30, -7], [30, -3]];
+    el(lev, "polygon", { points: pts.map(([y, z]) => `${sx(y)},${sy(z)}`).join(" "), fill: FG, "fill-opacity": .16, stroke: FG, "stroke-width": 1.5 });
+    const slot = el(lev, "path", { fill: "none", stroke: BG, "stroke-width": K * 6.06, "stroke-linecap": "round", "stroke-linejoin": "round" });
+    el(svg, "circle", { cx: sx(0), cy: sy(0), r: 7, fill: BG, stroke: FG, "stroke-width": 2 });
+    txt(svg, sx(0) - 34, sy(0) + 28, "lever pivot", { class: "m" });
+    txt(svg, sx(-70) - 20, sy(0) - 40, "keytop", { class: "m" });
+    const bar = el(svg, "circle", { r: K * 3, fill: S1, "fill-opacity": .85, stroke: S1 });
+    const tick = el(svg, "line", { stroke: BG, "stroke-width": 2 });
+    txt(svg, sx(72), sy(36), "bar, rolls", { class: "m" });
+    const barL = el(svg, "line", { x1: sx(71), y1: sy(36) - 3, stroke: S1, "stroke-opacity": .5 });
+    const items = KEYS.map(k => ({ ch: k.ch, a: k.sgn * (k.c - .5) * COL }));
+    const W = wheel(svg, 805, 125, 80, items);
+    txt(svg, 805, 228, "element, end-on", { "text-anchor": "middle", class: "m" });
+    const GX = 60, GW = 780, GY = 548;
+    [[0, D0, "clear", .2], [D0, D1, "selecting", .55], [D1, ST, "dwell, lock goes in", .3]].forEach(([a, b, s, o]) => {
+      el(svg, "rect", { x: GX + GW * a / ST + 1, y: GY, width: GW * (b - a) / ST - 2, height: 12, fill: S1, opacity: o });
+      txt(svg, GX + GW * (a + b) / 2 / ST, GY - 6, s, { "text-anchor": "middle", class: "m" });
+    });
+    for (let m = 0; m <= 18; m += 2) txt(svg, GX + GW * m / ST, GY + 28, m, { "text-anchor": "middle", class: "m" });
+    txt(svg, GX + GW + 6, GY + 28, "mm", { class: "m" });
+    const now = el(svg, "line", { y1: GY - 3, y2: GY + 15, stroke: FG, "stroke-width": 3 });
+    let key = byCh.o, path = [];
+    function build() {
+      path = []; let d = "", len = 0, q0 = null;
+      for (let i = 0; i <= 72; i++) {
+        const de = i / 4, q = inLever(posOf(key, de), de / L);
+        if (q0) len += Math.hypot(q[0] - q0[0], q[1] - q0[1]);
+        q0 = q; path.push(len);
+        d += (i ? "L" : "M") + sx(q[0]) + "," + sy(q[1]);
+      }
+      slot.setAttribute("d", d);
+      W.mark(key.ch);
+    }
+    function draw(u) {
+      const de = ST * u, th = de / L, b = posOf(key, de);
+      lev.setAttribute("transform", `rotate(${-th * 180 / Math.PI} ${sx(0)} ${sy(0)})`);
+      const x = sx(b.y), y = sy(b.z), i = Math.min(71, Math.floor(de * 4)), rot = -key.sgn * (path[i] + (path[i + 1] - path[i]) * (de * 4 - i)) / 3;
+      bar.setAttribute("cx", x); bar.setAttribute("cy", y);
+      tick.setAttribute("x1", x); tick.setAttribute("y1", y); tick.setAttribute("x2", x + K * 3 * Math.cos(rot)); tick.setAttribute("y2", y + K * 3 * Math.sin(rot));
+      barL.setAttribute("x2", x); barL.setAttribute("y2", y);
+      hang.setAttribute("x1", S[0]); hang.setAttribute("y1", S[1]); hang.setAttribute("x2", x); hang.setAttribute("y2", y);
+      sec.setAttribute("transform", `rotate(${b.f * 180 / Math.PI} ${S[0]} ${S[1]})`);
+      const prog = key.c - .5 ? b.p / (key.sgn * (key.c - .5) * .556) : 0, ang = -key.sgn * (key.c - .5) * COL * prog;
+      pin.setAttribute("transform", `rotate(${ang} ${pc[0]} ${pc[1]})`);
+      W.angle(ang);
+      now.setAttribute("x1", GX + GW * de / ST); now.setAttribute("x2", GX + GW * de / ST);
+      const f = (key.c - .5) / 13.5, m = 8 + 119 * f * f;
+      $("va-t").textContent = `Key "${key.ch}": ${(key.c - .5).toFixed(1)} columns ${key.sgn > 0 ? "rearward" : "forward"} from home. Depth ${de.toFixed(1)} mm, bar at ${b.p.toFixed(2)} mm of ${(key.sgn * (key.c - .5) * .556).toFixed(2)} mm, element ${ang.toFixed(0)} deg. Estimated mass at the keytop for this key: ${m.toFixed(0)} g.`;
+    }
+    const tl = timeline("va", draw), mark = keyboard("va-kb", k => { key = k; mark(k.ch); build(); tl.run(); });
+    mark(key.ch); build(); tl.set(0);
+    window.lcViz = { a(ch, u) { key = byCh[ch]; mark(ch); build(); tl.set(u); } };
+  })();
+  // ---------- B: code tree
+  (function () {
+    const svg = $("vb-s"), AMP = 44, ROW = [70, 130, 190, 250, 310], X = [290, 365, 440, 515], W_ = [1, 2, 4, 8, 16];
+    const offsetOf = k => k.side === "R" ? k.c - 1 : -k.c;
+    const bits = n => { const m = (n + 32) % 32; return [0, 1, 2, 3, 4].map(i => (m >> i) & 1); };
+    txt(svg, 14, 22, "SCHEMATIC, five bails summed by four floating levers", { style: "font-weight:600" });
+    const chips = [], rods = [];
+    ["+1", "+2", "+4", "+8", "-16"].forEach((s, i) => {
+      txt(svg, 16, ROW[i] + 4, "bail " + s);
+      chips.push(el(svg, "rect", { x: 92, y: ROW[i] - 9, width: 18, height: 18, rx: 3, fill: "none", stroke: S1, "stroke-width": 1.5 }));
+      rods.push(el(svg, "line", { x1: 118, y1: ROW[i], y2: ROW[i], stroke: S1, "stroke-width": 3 }));
+    });
+    txt(svg, 118, ROW[4] + 26, "reversed link: pressing this bail subtracts", { class: "m" });
+    const levers = [0, 1, 2, 3].map(() => el(svg, "line", { stroke: FG, "stroke-width": 5, "stroke-linecap": "round", "stroke-opacity": .75 }));
+    const links = [0, 1, 2, 3].map(() => el(svg, "line", { stroke: S2, "stroke-width": 3 }));
+    const nodes = [0, 1, 2, 3].map(() => el(svg, "circle", { r: 5, fill: S2 }));
+    txt(svg, 300, 44, "floating levers: each adds the one before to the next bail", { class: "m" });
+    const outL = txt(svg, 0, 0, "output", { class: "m" });
+    const GX = 150, GW = 480, GY = 385, pos = n => GX + GW * (n + 16) / 31;
+    el(svg, "line", { x1: GX, x2: GX + GW, y1: GY, y2: GY, stroke: FG, "stroke-opacity": .4 });
+    for (let n = -16; n <= 15; n++) el(svg, "line", { x1: pos(n), x2: pos(n), y1: GY - (n % 4 ? 3 : 7), y2: GY + (n % 4 ? 3 : 7), stroke: FG, "stroke-opacity": .5 });
+    [-16, -8, 0, 8, 15].forEach(n => txt(svg, pos(n), GY + 24, (n > 0 ? "+" : "") + n, { "text-anchor": "middle", class: "m" }));
+    txt(svg, GX, GY - 14, "columns from rest", { class: "m" });
+    const ptr = el(svg, "polygon", { fill: S2 });
+    const items = KEYS.map(k => ({ ch: k.ch, a: offsetOf(k) * COL }));
+    const W = wheel(svg, 775, 190, 95, items);
+    txt(svg, 775, 310, "element", { "text-anchor": "middle", class: "m" });
+    let key = byCh.m;
+    function draw(u0) {
+      const u = smooth(u0 / .8), n = offsetOf(key), b = bits(n), e = b.map(v => v * u);
+      e[4] = 1 - e[4];
+      chips.forEach((c, i) => c.setAttribute("fill", b[i] ? S1 : "none"));
+      const px = v => v * AMP;
+      let v = e[0], y = ROW[0], w = 1;
+      for (let i = 0; i < 4; i++) {
+        const bv = e[i + 1], by = ROW[i + 1], f = W_[i + 1] / (w + W_[i + 1]), nv = v + (bv - v) * f, ny = y + (by - y) * f;
+        levers[i].setAttribute("x1", X[i] + px(v)); levers[i].setAttribute("y1", y); levers[i].setAttribute("x2", X[i] + px(bv)); levers[i].setAttribute("y2", by);
+        nodes[i].setAttribute("cx", X[i] + px(nv)); nodes[i].setAttribute("cy", ny);
+        const nx = i < 3 ? X[i + 1] + px(nv) : 612;
+        links[i].setAttribute("x1", X[i] + px(nv)); links[i].setAttribute("y1", ny); links[i].setAttribute("x2", nx + (i < 3 ? 0 : px(nv))); links[i].setAttribute("y2", ny);
+        if (i === 3) { outL.setAttribute("x", nx + px(nv) + 6); outL.setAttribute("y", ny + 4); }
+        v = nv; y = ny; w += W_[i + 1];
+      }
+      [0, 1, 2, 3, 4].forEach(i => rods[i].setAttribute("x2", (i === 0 ? X[0] : X[i - 1]) + px(e[i])));
+      const cur = v * 31 - 16, xp = pos(cur);
+      ptr.setAttribute("points", `${xp - 7},${GY - 22} ${xp + 7},${GY - 22} ${xp},${GY - 8}`);
+      W.angle(-cur * COL); W.mark(key.ch);
+      const sum = b.map((x, i) => x ? (i === 4 ? "-16" : "+" + W_[i]) : "").filter(Boolean).join(" ") || "no bails";
+      $("vb-t").textContent = `Key "${key.ch}": ${sum} = ${n > 0 ? "+" : ""}${n} columns. Output now at ${cur.toFixed(1)} columns, element ${(-cur * COL).toFixed(0)} deg. The worst key is about 137 g at the keytop (estimate).`;
+    }
+    const tl = timeline("vb", draw), mark = keyboard("vb-kb", k => { key = k; mark(k.ch); tl.run(); });
+    mark(key.ch); tl.set(0);
+    window.lcViz.b = (ch, u) => { key = byCh[ch]; mark(ch); tl.set(u); };
+  })();
+  // ---------- C: opposed plates
+  (function () {
+    const svg = $("vc-s"), K = 2.9, CX = 340, YE = 215, MM = 5.5 / 13.5;
+    const lever = k => k.c % 3 === 1 ? (k.c - 1) / 3 : k.c % 3 === 2 ? 5 + (k.c - 2) / 3 : 10 + (k.c - 3) / 3;
+    const idxOf = k => k.side === "L" ? 14 - k.c : 13 + k.c;
+    const pk = KEYS.map(k => Object.assign({}, k, { sx: CX + k.sgn * (11 + lever(k) * 7.33) * K, sk: (idxOf(k) - 13.5) * MM }));
+    const pBy = Object.fromEntries(pk.map(k => [k.ch, k]));
+    txt(svg, 14, 22, "PLAN VIEW (to scale), rear at the top", { style: "font-weight:600" });
+    const gA = el(svg, "g"), gB = el(svg, "g");
+    el(gA, "rect", { x: 20, y: 52, width: 640, height: 12, rx: 3, fill: S1, "fill-opacity": .75 });
+    el(gB, "rect", { x: 20, y: 100, width: 640, height: 12, rx: 3, fill: S2, "fill-opacity": .75 });
+    pk.forEach(k => {
+      el(gA, "rect", { x: k.sx - 9, y: 64, width: 9, height: YE + K * k.sk - 64, fill: S1, "fill-opacity": .45 });
+      el(gB, "rect", { x: k.sx, y: 112, width: 9, height: YE - K * k.sk - 112, fill: S2, "fill-opacity": .45 });
+    });
+    txt(gA, 668, 62, "plate 1", { class: "m" }); txt(gB, 668, 110, "plate 2", { class: "m" });
+    el(svg, "line", { x1: 20, x2: 660, y1: YE, y2: YE, stroke: FG, "stroke-dasharray": "4 4", "stroke-opacity": .4 });
+    txt(svg, 668, YE + 4, "pinch line", { class: "m" });
+    const R = 3.5 * K, T0 = -12.9;
+    const tips = {}, lbl = {};
+    pk.forEach(k => {
+      el(svg, "line", { x1: k.sx, x2: k.sx, y1: 275, y2: 343, stroke: FG, "stroke-opacity": .18, "stroke-width": 2 });
+      tips[k.ch] = el(svg, "circle", { cx: k.sx, r: R, fill: BG, stroke: FG, "stroke-opacity": .5, "stroke-width": 1.5 });
+      lbl[k.ch] = txt(svg, k.sx, 361, k.ch, { "text-anchor": "middle", style: "font-size:13px;font-weight:600" });
+    });
+    txt(svg, 20, 391, "key tips, in lever order. The tip stays clear until a plate's notch reaches it.", { class: "m" });
+    const W = wheel(svg, 790, 215, 90, pk.map(k => ({ ch: k.ch, a: (idxOf(k) - 13.5) * COL })));
+    txt(svg, 790, 325, "element", { "text-anchor": "middle", class: "m" });
+    let key = pBy.d, s = 0, prev = null, moved = 0, start = 0;
+    function draw(u) {
+      const T = T0 * (1 - u), tipY = t => YE - K * t + R;
+      if (T > -key.sk + s) s = T + key.sk;
+      if (T > key.sk - s) s = key.sk - T;
+      gA.setAttribute("transform", `translate(0 ${-K * s})`);
+      gB.setAttribute("transform", `translate(0 ${K * s})`);
+      pk.forEach(k => { const on = k.ch === key.ch; tips[k.ch].setAttribute("cy", tipY(on ? T : T0)); tips[k.ch].style.fill = on ? S1 : ""; lbl[k.ch].style.opacity = on ? 1 : .55; });
+      const ang = -(s / MM) * COL;
+      W.angle(ang); W.mark(key.ch);
+      moved = Math.abs(s - start);
+      $("vc-t").textContent = `Key "${key.ch}"${prev ? `, coming from "${prev}"` : ""}: plates have moved ${moved.toFixed(2)} mm this stroke, or ${(moved / MM).toFixed(1)} columns. Element at ${ang.toFixed(0)} deg. Every move is about 235 g at the keytop (estimate), near or far.`;
+    }
+    const tl = timeline("vc", draw), mark = keyboard("vc-kb", k => { prev = key.ch; key = pBy[k.ch]; start = s; mark(k.ch); tl.run(); });
+    mark(key.ch); s = key.sk; start = s; tl.set(0);
+    window.lcViz.c = (ch, u) => { prev = key.ch; key = pBy[ch]; start = s; mark(ch); tl.set(u); };
+  })();
+  // ---------- charts
+  function hover(boxId, tipId, node, html) {
+    const box = $(boxId), tip = $(tipId);
+    node.addEventListener("mousemove", e => { const r = box.getBoundingClientRect(); tip.style.display = "block"; tip.innerHTML = html; tip.style.left = (e.clientX - r.left + 12) + "px"; tip.style.top = (e.clientY - r.top - 34) + "px"; });
+    node.addEventListener("mouseleave", () => { tip.style.display = "none"; });
+  }
+  (function () {
+    const svg = $("vm-s"), X0 = 150, XW = 540, MAX = 250, sc = v => XW * v / MAX;
+    const DATA = [["Rolling bar", 97, 30], ["Code tree", 104, 33], ["Opposed plates", 200, 35]];
+    for (let v = 0; v <= MAX; v += 50) {
+      el(svg, "line", { x1: X0 + sc(v), x2: X0 + sc(v), y1: 10, y2: 136, stroke: FG, "stroke-opacity": .1 });
+      txt(svg, X0 + sc(v), 154, v + (v === MAX ? " g" : ""), { "text-anchor": "middle", class: "m" });
+    }
+    DATA.forEach(([n, a, b], i) => {
+      const y = 18 + i * 40, H = 26, w1 = sc(a), w2 = sc(b), x2 = X0 + w1 + 2, r = 4;
+      txt(svg, X0 - 10, y + 18, n, { "text-anchor": "end" });
+      const s1 = el(svg, "rect", { x: X0, y, width: w1, height: H, fill: S1 });
+      const s2 = el(svg, "path", { d: `M${x2},${y} h${w2 - r} a${r},${r} 0 0 1 ${r},${r} v${H - 2 * r} a${r},${r} 0 0 1 ${-r},${r} h${-(w2 - r)} z`, fill: S2 });
+      txt(svg, x2 + w2 + 8, y + 18, (a + b) + " g", { style: "font-weight:600" });
+      hover("vm", "vm-tip", s1, `${n}: element ${a} g`);
+      hover("vm", "vm-tip", s2, `${n}: everything else ${b} g`);
+    });
+  })();
+  (function () {
+    const svg = $("vs-s"), X0 = 70, XW = 590, Y0 = 280, YH = 255, MAXY = 2200, sx = v => X0 + XW * (v - 6) / 16, sy = v => Y0 - YH * v / MAXY;
+    const D = [[8, 514, 2065], [15, 159, 637], [18, 97, 390], [20, 70, 283]];
+    for (let v = 0; v <= MAXY; v += 500) { el(svg, "line", { x1: X0, x2: X0 + XW, y1: sy(v), y2: sy(v), stroke: FG, "stroke-opacity": .1 }); txt(svg, X0 - 8, sy(v) + 4, v + (v ? "" : " g"), { "text-anchor": "end", class: "m" }); }
+    D.forEach(([s]) => txt(svg, sx(s), Y0 + 20, s + " mm", { "text-anchor": "middle", class: "m" }));
+    el(svg, "line", { x1: sx(18), x2: sx(18), y1: 18, y2: Y0, stroke: FG, "stroke-dasharray": "4 4", "stroke-opacity": .45 });
+    txt(svg, sx(18), 14, "your recorded stroke", { "text-anchor": "middle", class: "m" });
+    [[1, S1, "Cup"], [2, S2, "25 g solid"]].forEach(([c, col, name]) => {
+      el(svg, "polyline", { points: D.map(d => `${sx(d[0])},${sy(d[c])}`).join(" "), fill: "none", stroke: col, "stroke-width": 2 });
+      D.forEach(d => { el(svg, "circle", { cx: sx(d[0]), cy: sy(d[c]), r: 4.5, fill: col, stroke: BG, "stroke-width": 2 }); hover("vs", "vs-tip", el(svg, "circle", { cx: sx(d[0]), cy: sy(d[c]), r: 15, fill: "transparent" }), `${name}, ${d[0]} mm stroke: ${d[c]} g`); });
+      txt(svg, sx(8) + 10, sy(D[0][c]) - 8, D[0][c] + " g");
+      txt(svg, sx(18) + 8, sy(D[2][c]) - 8, D[2][c] + " g");
+    });
+  })();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
