@@ -1,0 +1,811 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../richardson-views/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Motion after the pinch - Richardson selection on bead chain</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#richardson-selection-motion-after-the-pinch" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Richardson selection on bead chain" class="md-header__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Richardson selection on bead chain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Motion after the pinch
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Richardson selection on bead chain" class="md-nav__button md-logo" aria-label="Richardson selection on bead chain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Richardson selection on bead chain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../richardson-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D and more views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion after the pinch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-an-arc-on-the-riser-cant-hold-the-plates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why an arc on the riser can't hold the plates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-version-that-does-work-a-two-piece-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The version that does work: a two-piece key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-same-key-in-3d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The same key in 3D
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-simpler-answer-fire-the-pin-inside-its-capture-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The simpler answer: fire the pin inside its capture range
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing them
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-an-arc-on-the-riser-cant-hold-the-plates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why an arc on the riser can't hold the plates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-version-that-does-work-a-two-piece-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The version that does work: a two-piece key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-same-key-in-3d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The same key in 3D
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-simpler-answer-fire-the-pin-inside-its-capture-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The simpler answer: fire the pin inside its capture range
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing them
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="richardson-selection-motion-after-the-pinch">Richardson selection: motion after the pinch<a class="headerlink" href="#richardson-selection-motion-after-the-pinch" title="Permanent link">&para;</a></h1>
+<p>How to get the lock pin, hammer trip and other actions out of the key stroke once the plates have stopped. Everything here is a first estimate, with no CAD or test behind it.</p>
+<p><strong>A correction first.</strong> I suggested cutting an arc, centred on the pivot rod, into the top of each lever's riser. That doesn't work where the riser is, and the first section shows why. A real cam dwell is possible, but it needs a second part per key. There's also a simpler answer that needs no dwell at all.</p>
+<style>
+.lcp { --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; margin:1em 0; position:relative; }
+[data-md-color-scheme="slate"] .lcp { --s1:#3987e5; --s2:#d95926; --s3:#199e70; }
+.lcp svg { width:100%; height:auto; border:1px solid var(--md-default-fg-color--lighter); border-radius:6px; background:var(--md-default-bg-color); display:block; }
+.lcp svg text { fill:var(--md-default-fg-color); font-size:12px; }
+.lcp svg text.m { fill:var(--md-default-fg-color--light); font-size:11px; }
+.lcp-ctl { display:flex; flex-wrap:wrap; gap:.8em; align-items:center; margin:.4em 0; font-size:.72rem; }
+.lcp-ctl input[type=range] { width:240px; }
+.lcp-ctl button { border:1px solid var(--md-default-fg-color--lighter); border-radius:4px; cursor:pointer; color:var(--md-default-fg-color); background:var(--md-default-bg-color); padding:.25em .7em; font-size:.72rem; }
+.lcp-ctl button.on { background:var(--s1); border-color:var(--s1); color:#fff; }
+.lcp-read { font-family:var(--md-code-font-family); font-size:.72rem; min-height:1.6em; margin:.4em 0 0; }
+#p3d { width:100%; aspect-ratio:16/10; border:1px solid var(--md-default-fg-color--lighter); border-radius:6px; overflow:hidden; cursor:grab; touch-action:none; background:var(--md-default-bg-color); }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" referrerpolicy="no-referrer"></script>
+
+<h2 id="why-an-arc-on-the-riser-cant-hold-the-plates">Why an arc on the riser can't hold the plates<a class="headerlink" href="#why-an-arc-on-the-riser-cant-hold-the-plates" title="Permanent link">&para;</a></h2>
+<p>An arc centred on the pivot can only resist a push that points straight at the pivot, because that's the direction the arc's surface faces. On the left is our riser: the plate moves across the top of the lever, at right angles to that direction, so it would slide along the arc with nothing stopping it. On the right is the arrangement an arc needs, with the follower moving along a line through the pivot. Drag through the last 2 mm and watch it hold.</p>
+<div class="lcp">
+<div class="lcp-ctl"><label>Key depth <input type="range" id="a-r" min="0" max="1000" value="950"></label><span id="a-v"></span></div>
+<svg id="a-s" viewBox="0 0 900 440" role="img" aria-label="Two panels: an arc at the top of the riser cannot stop a plate moving across it; an arc with a follower moving toward the pivot holds it"></svg>
+</div>
+
+<h2 id="the-version-that-does-work-a-two-piece-key">The version that does work: a two-piece key<a class="headerlink" href="#the-version-that-does-work-a-two-piece-key" title="Permanent link">&para;</a></h2>
+<p>To dwell, the key lever needs a cam that pushes along a line through its own pivot. So the key becomes two parts: a <strong>key lever</strong> with the cam, and a <strong>selector</strong> carrying the riser and a roller. The cam's rising part turns the selector until the plates pinch at 18 mm. Its concentric arc then holds the selector still while the key lever carries on to 20 mm, and the universal bail goes on moving with it.</p>
+<p>Top row shown, to scale. Pick a move size, then scrub through.</p>
+<div class="lcp">
+<div class="lcp-ctl"><span>Move:</span><button type="button" data-n="1">1 column</button><button type="button" data-n="7">7</button><button type="button" data-n="14" class="on">14</button><button type="button" data-n="27">27</button><button type="button" id="b-play">Play</button><label>Key depth <input type="range" id="b-r" min="0" max="1000" value="0"></label></div>
+<svg id="b-s" viewBox="0 0 760 480" role="img" aria-label="Side view of a two-piece key: a key lever with a cam face drives a selector with a roller and riser against two plates"></svg>
+<p class="lcp-read" id="b-t"></p>
+</div>
+
+<h2 id="the-same-key-in-3d">The same key in 3D<a class="headerlink" href="#the-same-key-in-3d" title="Permanent link">&para;</a></h2>
+<p>Drag to orbit. The slider and buttons above drive this view too. Blue is the key lever with its cam, grey is the selector, and the orange bar is the universal bail, which keeps moving through the dwell.</p>
+<div class="lcp">
+<div id="p3d"></div>
+</div>
+
+<h2 id="the-simpler-answer-fire-the-pin-inside-its-capture-range">The simpler answer: fire the pin inside its capture range<a class="headerlink" href="#the-simpler-answer-fire-the-pin-inside-its-capture-range" title="Permanent link">&para;</a></h2>
+<p>You may not need a dwell at all. The tapered lock pin can correct ±0.4 column, which is the last 0.23 mm of key depth. So if the universal bail releases a spring-loaded pin at about 17.9 mm, the wheel is already inside the capture range for <strong>every</strong> move, long or short, because the plates are tied to the key tip. The pin then finishes the job and, once seated, trips the hammer itself. The hammer can't fire until the pin is home, at any typing speed.</p>
+<p>All the energy is stored by the bail during the stroke, which is how Richardson does it. Drag the key speed: the order never changes. Pin and hammer flight times are my guesses.</p>
+<div class="lcp">
+<div class="lcp-ctl"><label>Key speed <input type="range" id="c-r" min="20" max="500" value="250"></label><span id="c-v"></span></div>
+<svg id="c-s" viewBox="0 0 760 240" role="img" aria-label="Timeline from the trip point: key reaches the pinch, lock pin flies and seats, hammer flies and strikes"></svg>
+</div>
+
+<h2 id="comparing-them">Comparing them<a class="headerlink" href="#comparing-them" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Arc on the riser</th>
+<th>Two-piece key with a cam</th>
+<th>Fire the pin inside capture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Works?</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Key dip</td>
+<td></td>
+<td>20 mm</td>
+<td>18 mm</td>
+</tr>
+<tr>
+<td>Added parts</td>
+<td></td>
+<td>28 selectors, 28 rollers, more bearings and return springs</td>
+<td>One pin spring and a trip</td>
+</tr>
+<tr>
+<td>What it costs</td>
+<td></td>
+<td>Moving mass, and a roller load of about 3× the tip force</td>
+<td>Trip point must repeat within about ±0.1 mm of key depth, so one adjuster</td>
+</tr>
+<tr>
+<td>Motion available after the plates stop</td>
+<td></td>
+<td>2 mm of key depth</td>
+<td>None needed, because the actions are spring-fired</td>
+</tr>
+<tr>
+<td>Failure if it's wrong</td>
+<td></td>
+<td>Cam wear</td>
+<td>Pin misses if the trip is set too early</td>
+</tr>
+</tbody>
+</table>
+<p><strong>My recommendation is to fire the pin inside its capture range first,</strong> because it adds almost nothing and needs no change to the levers. The two-piece cam is the fallback if the trip proves too fussy, or if you later want real motion after the pinch.</p>
+<script>
+(function () {
+  const NS = "http://www.w3.org/2000/svg", FG = "var(--md-default-fg-color)", BG = "var(--md-default-bg-color)", S1 = "var(--s1)", S2 = "var(--s2)", S3 = "var(--s3)";
+  const $ = id => document.getElementById(id);
+  const el = (p, t, a) => { const e = document.createElementNS(NS, t); for (const k in a || {}) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const txt = (p, x, y, s, a) => { const t = el(p, "text", Object.assign({ x, y }, a || {})); t.textContent = s; return t; };
+  const set = (e, a) => { for (const k in a) e.setAttribute(k, a[k]); };
+  const arrow = (p, c) => { const g = el(p, "g"), l = el(g, "line", { stroke: c, "stroke-width": 2.5 }), h = el(g, "polygon", { fill: c }); return (x1, y1, x2, y2) => { set(l, { x1, y1, x2, y2 }); const a = Math.atan2(y2 - y1, x2 - x1), s = 9; set(h, { points: `${x2},${y2} ${x2 - s * Math.cos(a - .4)},${y2 - s * Math.sin(a - .4)} ${x2 - s * Math.cos(a + .4)},${y2 - s * Math.sin(a + .4)}` }); }; };
+  const R = 50.2, ARM = 70, TH = 18 / ARM, MM = 5.5 / 13.5;
+  const rot = (y, z, p) => [y * Math.cos(p) - z * Math.sin(p), y * Math.sin(p) + z * Math.cos(p)];
+  const smooth = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+  // ---------- A
+  (function () {
+    const svg = $("a-s"), K = 12, CX1 = 240, BY = 205;
+    el(svg, "line", { x1: 450, x2: 450, y1: 30, y2: 410, stroke: FG, "stroke-opacity": .15 });
+    txt(svg, 20, 24, "Our riser: arc at the top, plate moves across it", { style: "font-weight:600" });
+    txt(svg, 470, 24, "What an arc needs: follower moves toward the pivot", { style: "font-weight:600" });
+    const lv = el(svg, "polygon", { fill: FG, "fill-opacity": .18, stroke: FG, "stroke-width": 1.5 });
+    const arcL = el(svg, "polyline", { fill: "none", stroke: S2, "stroke-width": 4 });
+    const pl = el(svg, "rect", { height: K * 2, fill: S1, "fill-opacity": .8 });
+    const a1 = arrow(svg, S3), a2 = arrow(svg, S2);
+    const lab1 = txt(svg, 20, 392, "", { class: "m" });
+    txt(svg, 20, 410, "Green: the only direction the arc can resist (toward the pivot).", { class: "m" });
+    txt(svg, 20, 428, "Orange: the way the plate wants to move. Nothing opposes it.", { class: "m" });
+    const CX2 = 680, CY2 = 395, RC = 240;
+    const shape = ang => ang < -16 ? 216 : ang < -5 ? 216 + 24 * (ang + 16) / 11 : 240;
+    const arc2 = el(svg, "polygon", { fill: FG, "fill-opacity": .18, stroke: FG, "stroke-width": 1.5 });
+    el(svg, "circle", { cx: CX2, cy: CY2, r: 6, fill: BG, stroke: FG, "stroke-width": 2 });
+    txt(svg, CX2 + 12, CY2 + 4, "pivot", { class: "m" });
+    const fol = el(svg, "rect", { x: CX2 - 12, width: 24, height: 70, fill: S1, "fill-opacity": .8 });
+    const a3 = arrow(svg, S3);
+    const lab2 = txt(svg, 470, 420, "", { class: "m" });
+    txt(svg, CX2 - 40, 44, "follower", { class: "m" });
+    function draw(d) {
+      const q = Math.min(d, 18) / 18 * TH - TH / 2, ph = d / ARM - TH / 2, yE = -R * Math.sin(TH / 2), Zc = R * Math.cos(TH / 2), yF = -R * Math.sin(q);
+      const sx = y => CX1 + K * (y - yE), sy = z => BY - K * (z - Zc), arc = [];
+      for (let i = 0; i <= 24; i++) { const p = TH / 2 + i / 24 * 2 / ARM; arc.push([yE * Math.cos(p) + Zc * Math.sin(p), -yE * Math.sin(p) + Zc * Math.cos(p)]); }
+      const top = arc.map(p => rot(p[0], p[1], ph));
+      const loc = [[0, R - 13], ...arc, [arc[24][0] + 3, arc[24][1] - .15], [arc[24][0] + 3, R - 13]].map(p => rot(p[0], p[1], ph));
+      set(lv, { points: loc.map(p => sx(p[0]) + "," + sy(p[1])).join(" ") });
+      set(arcL, { points: top.map(p => sx(p[0]) + "," + sy(p[1])).join(" ") });
+      const face = Math.min(yF, 1e9), cz = Zc;
+      set(pl, { x: sx(yF) - K * 16, y: sy(cz + 1), width: K * 16 });
+      const cx = sx(yF), cy = sy(cz);
+      a1(cx, cy, cx, cy + 92); a2(cx, cy - 34, cx + 96, cy - 34);
+      lab1.textContent = d > 18 ? "Past 18 mm: the arc no longer pushes, but it can't hold the plate either." : "Up to 18 mm: the riser pushes the plate forward.";
+      const ang = 22 * (d / 20) - 18, pts = [];
+      for (let a = -22; a <= 30; a += 1) { const b = (a - ang) , r = shape(b - 0), t = a * Math.PI / 180; pts.push([CX2 + r * Math.sin(t), CY2 - r * Math.cos(t)]); }
+      const poly = [...pts, [CX2 + 60 * Math.sin(30 * Math.PI / 180), CY2 - 60 * Math.cos(30 * Math.PI / 180)], [CX2 + 60 * Math.sin(-22 * Math.PI / 180), CY2 - 60 * Math.cos(-22 * Math.PI / 180)]];
+      set(arc2, { points: poly.map(p => p.join(",")).join(" ") });
+      const rr = shape(-ang);
+      set(fol, { y: CY2 - rr - 70 });
+      a3(CX2 + 34, CY2 - rr - 64, CX2 + 34, CY2 - rr - 8);
+      lab2.textContent = d > 15 ? "On the arc: the follower can't be pushed back, and it stays put." : "On the rising part: the cam lifts the follower.";
+      $("a-v").textContent = d.toFixed(1) + " mm";
+    }
+    const r = $("a-r"); r.oninput = () => draw(20 * r.value / 1000); draw(19);
+  })();
+  // ---------- B geometry
+  const A = 18, B = 30, RR = 3.5, YKEY = -70, ZKEY = 20.2;
+  const phi = d => Math.min(d, 18) / 18 * TH - TH / 2, F = d => { const p = phi(d); return [-A * Math.cos(p), -A * Math.sin(p)]; };
+  const pe = TH / 2, Fe = F(18), tn = [Math.sin(pe), -Math.cos(pe)], OK = [Fe[0] - B * tn[0], Fe[1] - B * tn[1]], LK = OK[0] - YKEY, gam = d => d / LK;
+  const C = d => { const f = F(d), g = gam(d), y = f[0] - OK[0], z = f[1] - OK[1]; return rot(y, z, -g); };
+  const CURVE = []; for (let i = 0; i <= 200; i++) CURVE.push(C(i / 10));
+  const SURF = CURVE.map((c, i) => { const a = CURVE[Math.max(0, i - 1)], b = CURVE[Math.min(200, i + 1)], tx = b[0] - a[0], tz = b[1] - a[1], L = Math.hypot(tx, tz) || 1; let n = [-tz / L, tx / L]; if (n[0] * -c[0] + n[1] * -c[1] < 0) n = [-n[0], -n[1]]; return [c[0] + RR * n[0], c[1] + RR * n[1], n[0], n[1]]; });
+  let maxP = 0; for (let i = 2; i <= 178; i += 2) { const s = SURF[i], g = gam(i / 10), n = rot(s[2], s[3], g), p0 = phi(i / 10), t = [Math.sin(p0), -Math.cos(p0)], c = Math.abs(n[0] * t[0] + n[1] * t[1]); maxP = Math.max(maxP, Math.acos(Math.min(1, c)) * 180 / Math.PI); }
+  const hK = ZKEY - OK[1];
+  const keyShape = (() => { const s = SURF.filter((_, i) => i % 4 === 0).map(p => [p[0], p[1]]), a = s[0], b = s[s.length - 1]; return [...s, [b[0] - 4, b[1] + 8], [-LK * .55, hK * .55 - 5], [-LK, hK - 3], [-LK, hK + 3], [-LK * .55, hK * .55 + 5], [-9, 8], [8, 8], [a[0] + 4, a[1] + 8]]; })();
+  const selShape = [[-A - 7, -4.5], [-A - 7, 4.5], [-3, 4.5], [-3, R], [3, R], [3, -4.5]];
+  let bDepth = 0, bN = 14, bCb = () => {};
+  const tipT = d => { const p = phi(d); return R * Math.sin(p) - R * Math.sin(TH / 2); };
+  const moved = d => Math.max(0, bN * MM + tipT(d));
+  (function () {
+    const svg = $("b-s"), K = 5, X0 = 465, Z0 = 340, sx = y => X0 + K * y, sy = z => Z0 - K * z, P = pts => pts.map(p => sx(p[0]) + "," + sy(p[1])).join(" ");
+    txt(svg, 14, 22, "SIDE VIEW (to scale), front on the left", { style: "font-weight:600" });
+    const pl1 = el(svg, "rect", { height: K * 2, fill: S1, "fill-opacity": .8 }), pl2 = el(svg, "rect", { height: K * 2, fill: S2, "fill-opacity": .8 });
+    txt(svg, sx(-92), sy(R) + 4, "plates", { class: "m" });
+    const sel = el(svg, "polygon", { fill: FG, "fill-opacity": .22, stroke: FG, "stroke-width": 1.5 });
+    el(svg, "circle", { cx: sx(0), cy: sy(0), r: 6, fill: BG, stroke: FG, "stroke-width": 2 });
+    txt(svg, sx(0) + 12, sy(0) + 16, "selector pivot", { class: "m" });
+    const key = el(svg, "polygon", { fill: S1, "fill-opacity": .25, stroke: S1, "stroke-width": 1.5 });
+    const arcL = el(svg, "polyline", { fill: "none", stroke: S2, "stroke-width": 3.5 });
+    el(svg, "circle", { cx: sx(OK[0]), cy: sy(OK[1]), r: 6, fill: BG, stroke: S1, "stroke-width": 2 });
+    txt(svg, sx(OK[0]) + 12, sy(OK[1]) - 8, "key lever pivot", { class: "m" });
+    const rol = el(svg, "circle", { r: K * RR, fill: BG, stroke: S3, "stroke-width": 2.5 });
+    const tp = el(svg, "rect", { width: K * 13, height: 8, rx: 2, fill: S1 });
+    const bail = el(svg, "rect", { width: 70, height: 9, rx: 2, fill: S2 });
+    const bailL = txt(svg, 0, 0, "universal bail", { class: "m" });
+    const bar = el(svg, "line", { stroke: S2, "stroke-width": 1, "stroke-opacity": .4 });
+    txt(svg, 14, 42, "Orange edge on the key lever: the concentric arc, the dwell. The key lever runs beside the selector.", { class: "m" });
+    const GX = 60, GW = 640, GY = 425;
+    [[0, 18, "plates move", .55], [18, 20, "dwell", .95]].forEach(([a, b, s, o]) => { el(svg, "rect", { x: GX + GW * a / 20 + 1, y: GY, width: GW * (b - a) / 20 - 2, height: 12, fill: a ? S2 : S1, opacity: o }); txt(svg, GX + GW * (a + b) / 40, GY - 6, s, { "text-anchor": "middle", class: "m" }); });
+    for (let m = 0; m <= 20; m += 2) txt(svg, GX + GW * m / 20, GY + 28, m, { "text-anchor": "middle", class: "m" });
+    txt(svg, GX + GW + 8, GY + 28, "mm", { class: "m" });
+    const now = el(svg, "line", { y1: GY - 3, y2: GY + 15, stroke: FG, "stroke-width": 3 });
+    const arcS = SURF.slice(180).map(p => [p[0], p[1]]);
+    function draw() {
+      const d = bDepth, p = phi(d), g = gam(d), ro = pts => pts.map(q => { const v = rot(q[0], q[1], g); return [OK[0] + v[0], OK[1] + v[1]]; });
+      set(sel, { points: P(selShape.map(q => rot(q[0], q[1], p))) });
+      set(key, { points: P(ro(keyShape)) }); set(arcL, { points: P(ro(arcS)) });
+      const f = F(d); set(rol, { cx: sx(f[0]), cy: sy(f[1]) });
+      const kt = ro([[-LK, hK + 3]])[0]; set(tp, { x: sx(kt[0]) - K * 6.5, y: sy(kt[1]) - 8 });
+      const bp = ro([[-16, -6]])[0]; set(bail, { x: sx(bp[0]) - 35, y: sy(bp[1]) }); set(bailL, { x: sx(bp[0]) - 118, y: sy(bp[1]) + 9 });
+      const m = moved(d), yE = -R * Math.sin(TH / 2), n = bN * MM, near = -n + m, far = n - m;
+      set(pl1, { x: sx(yE - near) - K * 34, y: sy(R + 3.5), width: K * 34 }); set(pl2, { x: sx(yE - far) - K * 34, y: sy(R - 1.5), width: K * 34 });
+      set(now, { x1: GX + GW * d / 20, x2: GX + GW * d / 20 });
+      $("b-t").textContent = `Depth ${d.toFixed(1)} mm. Selector at ${((p + TH / 2) * 180 / Math.PI).toFixed(1)}°, key lever at ${(g * 180 / Math.PI).toFixed(1)}°. Plate movement ${m.toFixed(2)} mm. Steepest cam angle ${maxP.toFixed(0)}°.${d > 18 ? " In the dwell: selector and plates are still." : ""}`;
+    }
+    const r = $("b-r");
+    let tok = 0;
+    function go() { draw(); bCb(); }
+    r.oninput = () => { tok++; bDepth = 20 * r.value / 1000; go(); };
+    document.querySelectorAll("[data-n]").forEach(b => { b.onclick = () => { bN = +b.dataset.n; document.querySelectorAll("[data-n]").forEach(x => x.classList.toggle("on", x === b)); go(); }; });
+    $("b-play").onclick = () => { const me = ++tok, p = 1400, h = 500, t0 = performance.now(); (function f(now) { if (me !== tok) return; const e = now - t0, u = e < p ? e / p : e < p + h ? 1 : e < 2 * p + h ? 1 - (e - p - h) / p : 0; bDepth = 20 * u; r.value = u * 1000; go(); if (e < 2 * p + h) requestAnimationFrame(f); })(t0); };
+    go();
+    window.lcP = d => { tok++; bDepth = d; r.value = d * 50; go(); };
+  })();
+  // ---------- 3D
+  (function () {
+    const host = $("p3d"), T = window.THREE;
+    if (!T) { host.textContent = "The 3D library could not load, which needs an internet connection the first time."; return; }
+    const r3 = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); r3.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); host.appendChild(r3.domElement);
+    const sc = new T.Scene(), cam = new T.PerspectiveCamera(26, 1.6, 5, 3000); cam.up.set(0, 0, 1);
+    sc.add(new T.HemisphereLight(0xffffff, 0x777788, .85)); const dl = new T.DirectionalLight(0xffffff, .75); dl.position.set(-200, -300, 500); sc.add(dl);
+    const mat = (c, o) => new T.MeshStandardMaterial(Object.assign({ color: c, metalness: .15, roughness: .55 }, o || {}));
+    const toYZ = g => { g.applyMatrix4(new T.Matrix4().makeBasis(new T.Vector3(0, 1, 0), new T.Vector3(0, 0, 1), new T.Vector3(1, 0, 0))); return g; };
+    const ext = (pts, w) => { const s = new T.Shape(); pts.forEach((p, i) => i ? s.lineTo(p[0], p[1]) : s.moveTo(p[0], p[1])); s.closePath(); const g = toYZ(new T.ExtrudeGeometry(s, { depth: w, bevelEnabled: false })); g.translate(-w / 2, 0, 0); return g; };
+    const cylX = (r, l, m) => { const g = new T.CylinderGeometry(r, r, l, 28); g.rotateZ(Math.PI / 2); return new T.Mesh(g, m); };
+    const sel = new T.Mesh(ext(selShape, 2), mat(0xa8adb3)); sc.add(sel);
+    const key = new T.Group(); key.position.set(2.6, OK[0], OK[1]); key.add(new T.Mesh(ext(keyShape, 2), mat(0x2a78d6)));
+    const top = new T.Mesh(new T.BoxGeometry(13, 13, 3), mat(0x2a78d6)); top.position.set(0, -LK, hK + 5); key.add(top); sc.add(key);
+    const rollerShift = 2.6;
+    const roll = cylX(RR, 3, mat(0x1baf7a)); sc.add(roll);
+    const pin = cylX(1.5, 7, mat(0x777b80)); sc.add(pin);
+    const rodA = cylX(1.5, 34, mat(0x777b80)); sc.add(rodA);
+    const rodB = cylX(1.5, 34, mat(0x777b80)); rodB.position.set(0, OK[0], OK[1]); sc.add(rodB);
+    const bail = new T.Mesh(new T.BoxGeometry(30, 7, 3), mat(0xeb6834)); sc.add(bail);
+    const p1 = new T.Mesh(new T.BoxGeometry(26, 34, 2), mat(0x2a78d6)), p2 = new T.Mesh(new T.BoxGeometry(26, 34, 2), mat(0xeb6834)); sc.add(p1); sc.add(p2);
+    let az = -.75, el_ = .32, dist = 270; const target = new T.Vector3(0, -22, 20);
+    const render = () => { cam.position.set(target.x + dist * Math.cos(el_) * Math.sin(az), target.y - dist * Math.cos(el_) * Math.cos(az), target.z + dist * Math.sin(el_)); cam.lookAt(target); r3.render(sc, cam); };
+    function size() { const w = host.clientWidth || 800; r3.setSize(w, w / 1.6); cam.aspect = 1.6; cam.updateProjectionMatrix(); render(); }
+    bCb = function () {
+      const d = bDepth, p = phi(d), g = gam(d), f = F(d); sel.rotation.x = p; key.rotation.x = g;
+      roll.position.set(rollerShift, f[0], f[1]); pin.position.set(rollerShift, f[0], f[1]);
+      const b = rot(-16, -6, g); bail.position.set(0, OK[0] + b[0], OK[1] + b[1] - 1.5);
+      const m = moved(d), yE = -R * Math.sin(TH / 2), n = bN * MM;
+      p1.position.set(0, yE - (-n + m) - 17, R + 2.5); p2.position.set(0, yE - (n - m) - 17, R - 2.5);
+      render();
+    };
+    let drag = null;
+    host.addEventListener("pointerdown", e => { drag = [e.clientX, e.clientY]; host.setPointerCapture(e.pointerId); });
+    host.addEventListener("pointermove", e => { if (!drag) return; az -= (e.clientX - drag[0]) * .008; el_ = Math.max(-.3, Math.min(1.54, el_ + (e.clientY - drag[1]) * .008)); drag = [e.clientX, e.clientY]; render(); });
+    host.addEventListener("pointerup", () => { drag = null; });
+    size(); bCb();
+    if (window.ResizeObserver) new ResizeObserver(size).observe(host);
+  })();
+  // ---------- C timeline
+  (function () {
+    const svg = $("c-s"), r = $("c-r"), TRIP = 17.9, PIN = 3, HAM = 8;
+    function draw() {
+      svg.textContent = "";
+      const v = +r.value / 1000, tp = (18 - TRIP) / v, X0 = 110, XW = 600, MAX = Math.max(14, tp * 1.15), sx = t => X0 + XW * t / MAX;
+      $("c-v").textContent = v.toFixed(2) + " m/s at the keytop";
+      const tick = MAX <= 16 ? 2 : MAX <= 40 ? 5 : 10;
+      for (let t = 0; t <= MAX; t += tick) { el(svg, "line", { x1: sx(t), x2: sx(t), y1: 18, y2: 184, stroke: FG, "stroke-opacity": .1 }); txt(svg, sx(t), 202, t, { "text-anchor": "middle", class: "m" }); }
+      txt(svg, X0 + XW, 222, "milliseconds after the trip", { "text-anchor": "end", class: "m" });
+      const rows = [["Key tip", 0, tp, S1, "reaches the pinch"], ["Lock pin", 0, PIN, S2, "seats"], ["Hammer", PIN, PIN + HAM, S3, "strikes"]];
+      rows.forEach(([n, a, b, c, s], i) => {
+        const y = 28 + i * 54, H = 26, w = Math.max(3, sx(b) - sx(a));
+        txt(svg, X0 - 12, y + 18, n, { "text-anchor": "end" });
+        el(svg, "rect", { x: sx(a), y, width: w, height: H, rx: 4, fill: c });
+        txt(svg, Math.min(sx(a) + w + 8, 640), y + 18, `${s}, ${b.toFixed(1)} ms`, {});
+      });
+      const left = Math.max(0, (18 - TRIP - v * PIN)) * .717 / MM;
+      txt(svg, X0, 14, left > 0 ? `When the pin seats, it has pulled the wheel the last ${left.toFixed(2)} column (limit 0.40).` : "The wheel is already at the pinch before the pin seats.", { style: "font-weight:600" });
+    }
+    r.oninput = draw; draw();
+    window.lcC = v => { r.value = v * 1000; draw(); };
+  })();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
